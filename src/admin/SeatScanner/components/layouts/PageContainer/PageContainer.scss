@@ -1,0 +1,15 @@
+.stsp-page-container {
+
+    display: flex;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+    min-height: 75dvh;
+
+}
+
+@media all and (max-width: 782px) {
+    .stsp-page-container {
+        margin-top: 50px;
+    }
+}

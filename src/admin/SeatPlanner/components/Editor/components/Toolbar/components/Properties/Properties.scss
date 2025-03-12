@@ -1,0 +1,12 @@
+.stsp-tooltip-properties {
+    width: 100%;
+    height: 100%;
+    box-sizing: border-box;
+    position: relative;
+
+    select,
+    input[type='text'] {
+        background-color: var(--stsp-toolbar-input-background-color, red);
+    }
+
+}

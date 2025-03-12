@@ -1,0 +1,5 @@
+*** Stachethemes Seat Planner Lite Changelog ***
+
+2025-03-10 - version 1.0.4
+
+* Added - Lite version released.

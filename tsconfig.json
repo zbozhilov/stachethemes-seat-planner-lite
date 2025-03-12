@@ -1,0 +1,27 @@
+{
+  "compilerOptions": {
+    "baseUrl": "./",
+    "paths": {
+      "@src/*": [
+        "src/*"
+      ],
+    },
+    "jsx": "react-jsx",
+    "module": "ESNext",
+    "target": "ESNext",
+    "moduleResolution": "node",
+    "strict": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true
+  },
+  "include": [
+    "src/**/*.ts",
+    "src/**/*.tsx",
+    "src/**/*.test.ts",
+    "webpack.config.js"
+  ],
+  "exclude": [
+    "node_modules"
+  ]
+}

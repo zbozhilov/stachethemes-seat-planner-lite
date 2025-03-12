@@ -1,0 +1,29 @@
+.stsp-screen {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+    box-sizing: border-box;
+
+    &-label {
+        position: absolute;
+        left: 0;
+        right: 0;
+        text-align: center;
+        z-index: 1;
+    }
+
+    .stsp-screen-persepective {
+        perspective: 500px;
+        width: inherit;
+        height: inherit;
+
+        .stsp-screen-vis {
+            width: inherit;
+            height: inherit;
+            transform: rotateX(-45deg);
+            width: 100%;
+            height: 100%;
+        }
+    }
+}

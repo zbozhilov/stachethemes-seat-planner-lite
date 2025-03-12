@@ -1,0 +1,40 @@
+.stsp-screen-too-small {
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: -1;
+
+    span {
+        padding: 20px;
+        background-color: #777;
+        border-radius: 5px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        color: #fff;
+        text-align: center;
+        font-size: 16px;
+        line-height: 1.5;
+        font-weight: bold;
+        max-width: 80dvw;
+    }
+}
+
+@media (max-width: 768px) {
+
+    .stsp-top {
+        justify-content: center !important;
+
+        >div:not(.stsp-top-button) {
+            display: none !important;
+        }
+    }
+
+
+    .stsp-editor-workspace {
+        display: none !important;
+    }
+
+    .stsp-screen-too-small {
+        display: flex;
+        margin-top: 20px;
+    }
+}

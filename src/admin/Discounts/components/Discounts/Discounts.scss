@@ -1,0 +1,18 @@
+.st-seat-planner-discounts {
+    padding: 1em 1.5em;
+    box-sizing: border-box;
+
+    .st-seat-planner-discounts-head {
+        margin: 0 !important;
+    }
+
+    ul {
+        margin: 20px 0;
+        padding: 0;
+        list-style-type: none;
+    }
+
+    .stsp-discount-page-button {
+        filter: saturate(0)
+    }
+}

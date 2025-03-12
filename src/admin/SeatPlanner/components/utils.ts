@@ -1,0 +1,1 @@
+export const isCtrlKey = (e: KeyboardEvent | MouseEvent) => e.ctrlKey || e.metaKey;

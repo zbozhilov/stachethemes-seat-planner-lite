@@ -1,0 +1,77 @@
+.stsp-workflow-settings {
+    
+    margin-bottom: 20px;
+
+    >div {
+
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+
+        &:not(:first-child) {
+            margin-top: 20px;
+        }
+
+        input[type="color"] {
+            padding: 2px 4px;
+            height: 35px;
+            min-width: 100px;
+        }
+    }
+
+    .stsp-workflow-settings-background-image {
+        width: 100px;
+        height: 100px;
+        cursor: pointer;
+        position: relative;
+
+        img {
+            width: inherit;
+            height: inherit;
+            border: 1px solid #8c8f94;
+            padding: 6px;
+            box-sizing: border-box;
+            border-radius: 4px;
+        }
+
+        .stsp-workflow-settings-background-image-placeholder {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #fff;
+            width: inherit;
+            height: inherit;
+            border: 1px solid #8c8f94;
+            padding: 6px;
+            box-sizing: border-box;
+            border-radius: 4px;
+            font-weight: 500;
+            font-size: 12px;
+            cursor: pointer;
+
+            &:hover {
+                background-color: #f3f4f7;
+            }
+        }
+
+        &-remove {
+            position: absolute;
+            right: 7px;
+            top: 7px;
+            color: #fff;
+            background: #ff3b3b;
+            border-radius: 3px;
+            width: 30px;
+            height: 30px;
+            display: none;
+            align-items: center;
+            justify-content: center;
+        }
+
+        &:hover {
+            .stsp-workflow-settings-background-image-remove {
+                display: flex;
+            }
+        }
+    }
+}

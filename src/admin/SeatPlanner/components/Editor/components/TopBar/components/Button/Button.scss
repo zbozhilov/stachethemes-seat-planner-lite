@@ -1,0 +1,20 @@
+.stsp-top-button {
+    color: var(--stsp-top-button-color, red);
+    background-color: var(--stsp-top-button-background-color, red);
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    float: left;
+    cursor: pointer;
+
+    svg {
+        font-size: 30px;
+    }
+
+    &:hover {
+        background-color: var(--stsp-top-button-hover-background-color, red);
+        color: var(--stsp-top-button-hover-color, red);
+    }
+}

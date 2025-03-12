@@ -1,0 +1,24 @@
+.stsp-movable {
+    position: absolute;
+    z-index: 0;
+}
+
+.stsp-selectable {
+    cursor: pointer;
+    user-select: none;
+
+    &.selected {
+        z-index: 100;
+
+        &:after {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            background-color: var(--stsp-selectable-color, red);
+            border: 2px solid var(--stsp-selectable-border-color, red);
+        }
+    }
+}

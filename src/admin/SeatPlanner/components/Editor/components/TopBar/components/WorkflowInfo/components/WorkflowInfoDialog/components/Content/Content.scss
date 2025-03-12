@@ -1,0 +1,28 @@
+.stsp-workflow-info-dialog-content {
+
+    &-line {
+        display: flex;
+        align-items: center;
+        padding: 15px;
+        gap: 20px;
+        
+        &:not(:last-child) {
+            border-bottom: 1px solid #ccc;
+        }
+
+        &-keystroke {
+            flex: 1;
+            font-weight: bold;
+            color: #333;
+            white-space: nowrap;
+        }
+
+        &-description {
+            flex: 1;
+            color: #666;
+        }
+    }
+
+
+
+}

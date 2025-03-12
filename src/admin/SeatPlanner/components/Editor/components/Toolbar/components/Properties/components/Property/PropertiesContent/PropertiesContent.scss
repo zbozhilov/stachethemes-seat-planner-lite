@@ -1,0 +1,8 @@
+.stsp-tooltip-properties {
+
+    &-content {
+        max-height: calc(100dvh - 135px);
+        overflow: auto;
+        padding-bottom: 20px;
+    }
+}

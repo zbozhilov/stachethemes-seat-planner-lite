@@ -1,0 +1,51 @@
+@use './components/Objects/Objects.scss';
+
+.stsp-workflow-wrapper {
+    display: block;
+    max-width: calc(100dvw - 380px);
+    max-height: calc(100dvh - 50px);
+    width: auto;
+    height: auto;
+    overflow: auto;
+    position: relative;
+}
+
+.stsp-workflow {
+    width: 900px;
+    height: 600px;
+    position: relative;
+    user-select: none;
+    overflow: hidden;
+}
+
+.stsp-marquee {
+    position: absolute;
+    z-index: 1000;
+    background-color: var(--stsp-marquee-color, red);
+    border: 1px solid var(--stsp-marquee-border-color, red);
+}
+
+.stsp-workflow-overlay {
+    position: absolute;
+    left: 0;
+    top: 0;
+    background-size: cover;
+    background-position: 50% 50%;
+}
+
+.stsp-seat-display-label-tag {
+    position: absolute;
+    z-index: 2000;
+    background-color: var(--stsp-seat-display-label-tag-bg-color, #fff);
+    border: 1px solid var(--stsp-seat-display-label-tag-border-color, #000);
+    border-radius: 3px;
+    padding: 2px 5px;
+    font-size: 12px;
+    font-weight: bold;
+    color: var(--stsp-seat-display-label-tag-color, #000);
+    text-align: center;
+    cursor: pointer;
+    top: 5px;
+    left: 5px;
+    user-select: none;
+}

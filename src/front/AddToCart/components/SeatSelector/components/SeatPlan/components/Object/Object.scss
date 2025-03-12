@@ -1,0 +1,67 @@
+.stsp-object {
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    user-select: none;
+
+    &-seat {
+
+        cursor: pointer;
+
+        &.disabled {
+            cursor: default;
+            color: var(--stsp-object-seat-disabled-color, #fff) !important;
+            background-color: var(--stsp-object-seat-disabled-bg-color, #777777) !important;
+        }
+
+        &.taken {
+            cursor: default;
+            color: var(--stsp-object-seat-taken-color, #fff) !important;
+            background-color: var(--stsp-object-seat-taken-bg-color, #eb6651) !important;
+        }
+
+        &.selected {
+            color: var(--stsp-object-seat-selected-color, #fff) !important;
+            background-color: var(--stsp-object-seat-selected-bg-color, #f79a3e) !important;
+        }
+
+
+        &:hover {
+            &:not(.disabled):not(.taken):not(.selected) {
+                filter: brightness(1.2);
+            }
+        }
+    }
+}
+
+.stsp-object-type-screen {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+    box-sizing: border-box;
+
+    &-label {
+        position: absolute;
+        left: 0;
+        right: 0;
+        text-align: center;
+        z-index: 1;
+    }
+
+    .stsp-screen-persepective {
+        perspective: 500px;
+        width: inherit;
+        height: inherit;
+
+        .stsp-screen-vis {
+            width: inherit;
+            height: inherit;
+            transform: rotateX(-45deg);
+            width: 100%;
+            height: 100%;
+        }
+    }
+}

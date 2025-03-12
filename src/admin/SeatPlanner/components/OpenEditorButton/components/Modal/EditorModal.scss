@@ -1,0 +1,30 @@
+body.stsp-sesat-planner-editor-portal-open {
+    > * {
+        &:not(.stsp-sesat-planner-editor-portal-wrapper) {
+            display: none;
+        }
+    }
+}
+
+.stsp-sesat-planner-editor-portal {
+    position: fixed;
+    width: 100dvw;
+    height: 100dvh;
+    left:0;
+    top:0;
+    z-index: 99999;
+    background-color: var(--stsp-editor-background-color, red);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    animation: spPortalAnimation 0.2s ease-out;
+}
+
+@keyframes spPortalAnimation {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}

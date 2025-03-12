@@ -1,0 +1,46 @@
+.stsp-toolbar-item {
+    background-color: var(--stsp-toolbar-item-background-color, red);
+    color: var(--stsp-toolbar-item-color, red);
+    width: 100%;
+    height: 100px;
+    cursor: pointer;
+    user-select: none;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 3px;
+
+    &-icon {
+        font-size: 40px;
+        margin-top: -10px;
+
+        svg {
+            font-size: inherit;
+        }
+    }
+
+    &-label {
+        position: absolute;
+        bottom: 10px;
+        left: 0;
+        right: 0;
+        font-size: 14px;
+        font-weight: 500;
+        text-align: center;
+    }
+
+    &:hover,
+    &.stsp-toolbar-item-dragging {
+
+        background-color: var(--stsp-toolbar-item-hover-background-color, red);
+        color: var(--stsp-toolbar-item-hover-color, red);
+
+        .stsp-toolbar-item-label,
+        .stsp-toolbar-item-icon {
+            color: var(--stsp-toolbar-item-hover-color, red);
+        }
+
+        box-shadow: 0 10px 10px rgba(0, 0, 0, 0.1);
+    }
+}

@@ -1,0 +1,43 @@
+.stsp-modal-open {
+    overflow: hidden;
+}
+
+.stsp-seat-planner-portal {
+    position: fixed;
+    width: 100dvw;
+    height: 100dvh;
+    left:0;
+    top:0;
+    z-index: 99999;
+    background-color: var(--stsp-modal-background-color, rgba(0, 0, 0, 0.25));
+    backdrop-filter: blur(10px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    animation: spPortalAnimation 0.2s ease;
+
+    // prevent touch zoom 
+    touch-action: none;
+
+    .react-transform-wrapper {
+        animation: spPortalAnimationScale 0.2s ease;
+    }
+}
+
+@keyframes spPortalAnimation {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes spPortalAnimationScale {
+    from {
+        transform: scale(0.9);
+    }
+    to {
+        transform: scale(1);
+    }
+}

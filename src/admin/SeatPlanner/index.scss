@@ -1,0 +1,60 @@
+body {
+
+    &.admin-color {
+
+        &-fresh {
+            --wp-admin-theme-color: #007cba;
+            --wp-admin-theme-color-darker-10: #006ba1;
+        }
+
+        &-light {
+            --wp-admin-theme-color: #0085ba;
+            --wp-admin-theme-color-darker-10: #0073a1;
+        }
+
+        &-modern {
+            --wp-admin-theme-color: #3858e9;
+            --wp-admin-theme-color-darker-10: #2145e6;
+        }
+
+        &-blue {
+            --wp-admin-theme-color: #096484;
+            --wp-admin-theme-color-darker-10: #07526c;
+        }
+
+        &-coffee {
+            --wp-admin-theme-color: #46403c;
+            --wp-admin-theme-color-darker-10: #383330;
+        }
+
+        &-ectoplasm {
+            --wp-admin-theme-color: #523f6d;
+            --wp-admin-theme-color-darker-10: #46365d;
+        }
+
+        &-midnight {
+            --wp-admin-theme-color: #e14d43;
+            --wp-admin-theme-color-darker-10: #dd382d;
+        }
+
+        &-ocean {
+            --wp-admin-theme-color: #627c83;
+            --wp-admin-theme-color-darker-10: #576e74;
+        }
+
+        &-sunrise {
+            --wp-admin-theme-color: #dd823b;
+            --wp-admin-theme-color-darker-10: #d97426;
+        }
+
+    }
+
+}
+
+
+#st-seat-planner-editor {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 50px auto;
+}

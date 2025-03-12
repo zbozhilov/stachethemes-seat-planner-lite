@@ -1,0 +1,19 @@
+.stsp-top {
+    height: 50px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    .stsp-top-right {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+
+        &-divider {
+            width: 1px;
+            height: 25px;
+            background-color: var(--stsp-toolbar-item-background-color);
+        }
+    };
+}
