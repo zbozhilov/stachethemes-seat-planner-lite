@@ -265,7 +265,9 @@ class Auditorium_Product_Filters {
     public static function save_custom_fields($post_id) {
 
         // Check if nonce is set.
-        if (!isset($_POST['woocommerce_meta_nonce']) || !wp_verify_nonce($_POST['woocommerce_meta_nonce'], 'woocommerce_save_data')) {
+        $nonce_value = isset($_POST['woocommerce_meta_nonce']) ? wp_unslash($_POST['woocommerce_meta_nonce']) : ''; // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
+
+        if (!wp_verify_nonce($nonce_value, 'woocommerce_save_data')) {
             return;
         }
 
