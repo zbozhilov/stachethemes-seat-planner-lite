@@ -264,6 +264,11 @@ class Auditorium_Product_Filters {
 
     public static function save_custom_fields($post_id) {
 
+        // Check if nonce is set.
+        if (!isset($_POST['woocommerce_meta_nonce']) || !wp_verify_nonce($_POST['woocommerce_meta_nonce'], 'woocommerce_save_data')) {
+            return;
+        }
+
         // Save force out of stock
         update_post_meta($post_id, '_stsp_force_out_of_stock', filter_input(INPUT_POST, '_stsp_force_out_of_stock', FILTER_SANITIZE_FULL_SPECIAL_CHARS));
 
