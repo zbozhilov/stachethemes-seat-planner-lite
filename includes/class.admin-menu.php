@@ -45,7 +45,7 @@ class Admin_Menu {
 
     public static function register_menu() {
         add_submenu_page(
-            'woocommerce',
+            'woocommerce', // Extends the WooCommerce menu as per requirements by WooCommerce review team
             esc_html__('Seat Scanner', 'stachethemes-seat-planner-lite'),
             esc_html__('Seat Scanner', 'stachethemes-seat-planner-lite'),
             'manage_woocommerce',
