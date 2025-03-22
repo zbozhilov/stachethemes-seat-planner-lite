@@ -9,60 +9,65 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2025-03-12T20:09:01+00:00\n"
+"POT-Creation-Date: 2025-03-22T17:32:06+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.11.0\n"
 "X-Domain: stachethemes-seat-planner-lite\n"
 
 #. Plugin Name of the plugin
-#: index.php
+#: stachethemes-seat-planner-lite.php
 msgid "Stachethemes Seat Planner Lite"
 msgstr ""
 
 #. Plugin URI of the plugin
-#: index.php
+#: stachethemes-seat-planner-lite.php
 msgid "https://woocommerce.com/products/stachethemes-seat-planner/"
 msgstr ""
 
 #. Description of the plugin
-#: index.php
+#: stachethemes-seat-planner-lite.php
 msgid "A WooCommerce extension that adds a custom product type for selecting seats with a drag & drop seat planner. Easily create and manage seating arrangements for events, venues, or any seat-based products."
 msgstr ""
 
 #. Author of the plugin
-#: index.php
+#: stachethemes-seat-planner-lite.php
 msgid "Stachethemes"
 msgstr ""
 
 #. Author URI of the plugin
-#: index.php
+#: stachethemes-seat-planner-lite.php
 msgid "https://woocommerce.com/vendor/stachethemes/"
 msgstr ""
 
-#: includes/ajax/class.ajax.php:25
-#: includes/ajax/class.ajax.php:63
+#: includes/ajax/class.ajax.php:23
+#: includes/ajax/class.ajax.php:65
+msgid "Invalid nonce"
+msgstr ""
+
+#: includes/ajax/class.ajax.php:30
+#: includes/ajax/class.ajax.php:72
 msgid "Product ID not specified"
 msgstr ""
 
-#: includes/ajax/class.ajax.php:32
+#: includes/ajax/class.ajax.php:37
 msgid "Product not found"
 msgstr ""
 
-#: includes/ajax/class.ajax.php:71
+#: includes/ajax/class.ajax.php:80
 #: includes/translation/class.translation.php:111
 msgid "No seats selected"
 msgstr ""
 
-#: includes/ajax/class.ajax.php:97
+#: includes/ajax/class.ajax.php:106
 msgid "Seats added to cart"
 msgstr ""
 
-#: includes/ajax/class.ajax.php:104
+#: includes/ajax/class.ajax.php:113
 msgid "No action specified"
 msgstr ""
 
-#: includes/class.admin-menu.php:49
 #: includes/class.admin-menu.php:50
+#: includes/class.admin-menu.php:51
 #: includes/translation/class.translation.php:11
 msgid "Seat Scanner"
 msgstr ""
@@ -424,54 +429,54 @@ msgstr ""
 msgid "Seat %s is already taken. Please remove it from your cart and select a different seat."
 msgstr ""
 
-#: includes/woocommerce/product/class.auditorium-product-filters.php:133
-#: includes/woocommerce/product/class.auditorium-product-filters.php:138
+#: includes/woocommerce/product/class.auditorium-product-filters.php:132
+#: includes/woocommerce/product/class.auditorium-product-filters.php:137
 msgid "Auditorium Product"
 msgstr ""
 
-#: includes/woocommerce/product/class.auditorium-product-filters.php:156
+#: includes/woocommerce/product/class.auditorium-product-filters.php:155
 msgid "General"
 msgstr ""
 
-#: includes/woocommerce/product/class.auditorium-product-filters.php:163
+#: includes/woocommerce/product/class.auditorium-product-filters.php:162
 msgid "Seat Planner"
 msgstr ""
 
-#: includes/woocommerce/product/class.auditorium-product-filters.php:170
+#: includes/woocommerce/product/class.auditorium-product-filters.php:169
 msgid "Discounts"
 msgstr ""
 
-#: includes/woocommerce/product/class.auditorium-product-filters.php:209
+#: includes/woocommerce/product/class.auditorium-product-filters.php:208
 msgid "Stock Keeping Unit"
 msgstr ""
 
-#: includes/woocommerce/product/class.auditorium-product-filters.php:209
+#: includes/woocommerce/product/class.auditorium-product-filters.php:208
 msgid "SKU"
 msgstr ""
 
-#: includes/woocommerce/product/class.auditorium-product-filters.php:211
+#: includes/woocommerce/product/class.auditorium-product-filters.php:210
 msgid "SKU refers to a Stock-keeping unit, a unique identifier for each distinct product and service that can be purchased."
 msgstr ""
 
-#: includes/woocommerce/product/class.auditorium-product-filters.php:221
+#: includes/woocommerce/product/class.auditorium-product-filters.php:220
 msgid "Out of stock"
 msgstr ""
 
-#: includes/woocommerce/product/class.auditorium-product-filters.php:223
+#: includes/woocommerce/product/class.auditorium-product-filters.php:222
 msgid "Set product status to out of stock"
 msgstr ""
 
-#: includes/woocommerce/product/class.auditorium-product-filters.php:230
+#: includes/woocommerce/product/class.auditorium-product-filters.php:229
 msgid "Stop Date"
 msgstr ""
 
-#: includes/woocommerce/product/class.auditorium-product-filters.php:233
+#: includes/woocommerce/product/class.auditorium-product-filters.php:232
 msgid "The date ( Server Time ) on which the product will become unavailable."
 msgstr ""
 
-#: includes/woocommerce/product/class.auditorium-product-filters.php:371
-#: includes/woocommerce/product/class.auditorium-product-filters.php:402
-#: includes/woocommerce/product/class.auditorium-product-filters.php:415
+#: includes/woocommerce/product/class.auditorium-product-filters.php:381
+#: includes/woocommerce/product/class.auditorium-product-filters.php:411
+#: includes/woocommerce/product/class.auditorium-product-filters.php:423
 msgid "Seat ID"
 msgstr ""
 
@@ -519,7 +524,7 @@ msgstr ""
 msgid "The time in minutes that a seat will be reserved in the cart."
 msgstr ""
 
-#: includes/woocommerce/product/class.slot-reservation.php:149
+#: includes/woocommerce/product/class.slot-reservation.php:153
 msgid "This seat was just added to another cart. Please select another seat or try again later."
 msgstr ""
 
@@ -527,26 +532,26 @@ msgstr ""
 msgid "This product is currently out of stock and unavailable."
 msgstr ""
 
-#: index.php:47
+#: stachethemes-seat-planner-lite.php:46
 msgid "Get Full Version"
 msgstr ""
 
-#: index.php:64
+#: stachethemes-seat-planner-lite.php:59
 msgid "Thank you for purchasing the full version of Stachethemes Seat Planner!"
 msgstr ""
 
-#: index.php:65
+#: stachethemes-seat-planner-lite.php:60
 msgid "Deactivate Lite Version"
 msgstr ""
 
-#: index.php:80
+#: stachethemes-seat-planner-lite.php:75
 msgid "Stachethemes Seat Planner Lite requires WooCommerce to be installed and activated."
 msgstr ""
 
-#: index.php:88
+#: stachethemes-seat-planner-lite.php:83
 msgid "Activate WooCommerce"
 msgstr ""
 
-#: index.php:94
+#: stachethemes-seat-planner-lite.php:89
 msgid "Get WooCommerce"
 msgstr ""
