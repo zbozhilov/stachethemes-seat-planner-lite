@@ -27,30 +27,25 @@ define('STACHETHEMES_SEAT_PLANNER_LITE_PLUGIN_URL', plugin_dir_url(__FILE__));
 define('STACHETHEMES_SEAT_PLANNER_LITE_PLUGIN_BASENAME', plugin_basename(__FILE__));
 define('STACHETHEMES_SEAT_PLANNER_LITE_PLUGIN_FILE', __FILE__);
 
-class Main {
+class Stachethemes_Seat_Planner_Lite {
 
     private static $instance;
 
-    public static function instance(): Main {
-        if (!isset(self::$instance) && !(self::$instance instanceof Main)) {
-            self::$instance = new Main();
+    public static function instance(): Stachethemes_Seat_Planner_Lite {
+        if (!isset(self::$instance) && !(self::$instance instanceof Stachethemes_Seat_Planner_Lite)) {
+            self::$instance = new Stachethemes_Seat_Planner_Lite();
         }
         return self::$instance;
     }
 
     public function __construct() {
 
-        add_action('plugins_loaded', [$this, 'load_textdomain']);
         add_action('init', [$this, 'init']);
 
         add_filter('plugin_action_links_' . plugin_basename(__FILE__), function ($links) {
             $links[] = '<a href="https://woocommerce.com/products/stachethemes-seat-planner/" target="_self" style="color: green; font-weight: bold;">' . esc_html__('Get Full Version', 'stachethemes-seat-planner-lite') . '</a>';
             return $links;
         });
-    }
-
-    public function load_textdomain(): void {
-        load_plugin_textdomain('stachethemes-seat-planner-lite', false, dirname(plugin_basename(__FILE__)) . '/languages/');
     }
 
     public function init(): void {
@@ -103,4 +98,4 @@ class Main {
     }
 }
 
-Main::instance();
+Stachethemes_Seat_Planner_Lite::instance();
