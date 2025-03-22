@@ -89,7 +89,7 @@ const Properties = () => {
     const propertiesContent = getPropertiesByType(theObjects);
 
     return (
-        <div className='stsp-tooltip-properties'>
+        <div className='stachesepl-tooltip-properties'>
             {propertiesContent}
             <SelectedCount />
         </div>

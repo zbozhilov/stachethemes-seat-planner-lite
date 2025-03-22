@@ -59,9 +59,9 @@ const Price = (props: {
 
     return (
 
-        <div className='stsp-toolbar-properties-price'>
-            <label htmlFor='stsp-toolbar-properties-price'>{__('PRICE')}</label>
-            <input id='stsp-toolbar-properties-price' type="text" placeholder={__('PRICE')} value={displayPrice} onChange={(e) => {
+        <div className='stachesepl-toolbar-properties-price'>
+            <label htmlFor='stachesepl-toolbar-properties-price'>{__('PRICE')}</label>
+            <input id='stachesepl-toolbar-properties-price' type="text" placeholder={__('PRICE')} value={displayPrice} onChange={(e) => {
                 handlePriceChange(e.target.value)
             }} />
         </div>

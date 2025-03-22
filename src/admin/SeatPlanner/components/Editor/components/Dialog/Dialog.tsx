@@ -28,26 +28,26 @@ const Dialog = (props: DialogProps) => {
     }, [props]);
 
     return (
-        <dialog className='stsp-dialog' onClick={handleOverlayClick}>
-            <div className='stsp-dialog-container' style={{
+        <dialog className='stachesepl-dialog' onClick={handleOverlayClick}>
+            <div className='stachesepl-dialog-container' style={{
                 maxWidth: props.maxWidth ? `${props.maxWidth}px` : 'auto'
             }} onClick={handleContainerClick}>
 
-                <div className='stsp-dialog-title'>
+                <div className='stachesepl-dialog-title'>
                     <span>{props.title}</span>
                 </div>
 
-                <div className='stsp-dialog-content'>
+                <div className='stachesepl-dialog-content'>
                     {props.children}
                 </div>
 
-                <div className='stsp-dialog-actions'>
+                <div className='stachesepl-dialog-actions'>
                     {
-                        !props.overrideActions && <div className='stsp-dialog-actions-button' onClick={props.onClose}>{__('CLOSE')}</div>
+                        !props.overrideActions && <div className='stachesepl-dialog-actions-button' onClick={props.onClose}>{__('CLOSE')}</div>
                     }
                     {
                         !!props.overrideActions && props.overrideActions.map((action, index) => {
-                            return <div key={index} className='stsp-dialog-actions-button' onClick={action.onClick}>{action.text}</div>
+                            return <div key={index} className='stachesepl-dialog-actions-button' onClick={action.onClick}>{action.text}</div>
                         })
                     }
                 </div>

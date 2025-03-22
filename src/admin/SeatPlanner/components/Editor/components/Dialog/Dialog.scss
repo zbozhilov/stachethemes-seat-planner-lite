@@ -1,13 +1,13 @@
-body.stsp-dialog-open {
+body.stachesepl-dialog-open {
     overflow: hidden;
 }
 
-.stsp-dialog {
+.stachesepl-dialog {
     border: none;
     width: 100dvw;
     height: 100dvh;
     position: fixed;
-    background-color: var(--stsp-dialog-overlay, red);
+    background-color: var(--stachesepl-dialog-overlay, red);
     z-index: 1000;
     box-sizing: border-box;
     display: block;
@@ -20,7 +20,7 @@ body.stsp-dialog-open {
     &-container {
         width: 600px;
         height: auto;
-        background-color: var(--stsp-dialog-background-color, red);
+        background-color: var(--stachesepl-dialog-background-color, red);
         box-shadow: 0 0 30px rgba(0, 0, 0, 0.5);
         border-radius: 3px;
         overflow: hidden;
@@ -32,8 +32,8 @@ body.stsp-dialog-open {
 
     &-title {
         font-size: 20px;
-        background-color: var(--stsp-dialog-header-background-color, red);
-        color: var(--stsp-dialog-header-color, red);
+        background-color: var(--stachesepl-dialog-header-background-color, red);
+        color: var(--stachesepl-dialog-header-color, red);
         padding: 20px;
         box-sizing: border-box;
 
@@ -56,7 +56,7 @@ body.stsp-dialog-open {
         box-sizing: border-box;
 
         label {
-            color: var(--stsp-dialog-label-color, red);
+            color: var(--stachesepl-dialog-label-color, red);
             font-size: 14px;
             display: inline-block;
         }
@@ -68,11 +68,11 @@ body.stsp-dialog-open {
             padding: 10px;
             border: none;
             border-radius: 3px;
-            background-color: var(--stsp-dialog-input-background-color, red);
-            color: var(--stsp-dialog-input-color, red);
+            background-color: var(--stachesepl-dialog-input-background-color, red);
+            color: var(--stachesepl-dialog-input-color, red);
 
             &::placeholder {
-                color: var(--stsp-dialog-input-placeholder-color, red);
+                color: var(--stachesepl-dialog-input-placeholder-color, red);
             }
         }
     }
@@ -87,8 +87,8 @@ body.stsp-dialog-open {
         gap: 10px;
 
         &-button {
-            background-color: var(--stsp-dialog-button-close-background-color, red);
-            color: var(--stsp-dialog-button-close-color, red);
+            background-color: var(--stachesepl-dialog-button-close-background-color, red);
+            color: var(--stachesepl-dialog-button-close-color, red);
             display: inline-block;
             padding: 8px 16px; /* Reduce height */
             box-sizing: border-box;
@@ -100,8 +100,8 @@ body.stsp-dialog-open {
             font-weight: 500;
 
             &:hover {
-                background-color: var(--stsp-dialog-button-close-hover-background-color, red);
-                color: var(--stsp-dialog-button-close-hover-color, red);
+                background-color: var(--stachesepl-dialog-button-close-hover-background-color, red);
+                color: var(--stachesepl-dialog-button-close-hover-color, red);
             }
         }
 

@@ -1,5 +1,5 @@
 .wrap {
-    .stsp-page-header {
+    .stachesepl-page-header {
         background: #fff;
         box-sizing: border-box;
         padding: 0;
@@ -28,7 +28,7 @@
 
 @media (max-width: 960px) {
     .wrap {
-        .stsp-page-header {
+        .stachesepl-page-header {
             width: calc(100% - 36px);
             left: 36px;
         }
@@ -37,7 +37,7 @@
 
 @media (max-width: 782px) {
     .wrap {
-        .stsp-page-header {
+        .stachesepl-page-header {
             padding: 0 16px;
             top: 46px;
             width: 100%;

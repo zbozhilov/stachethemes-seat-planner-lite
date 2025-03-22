@@ -43,10 +43,10 @@ const Object = (props: {
             const { backgroundColor, ...baseStyle } = style;
 
             return (
-                <div className="stsp-object stsp-object-type-screen" style={baseStyle}>
-                    <div className="stsp-object-type-screen-label">{props.data.label}</div>
-                    <div className="stsp-screen-persepective">
-                        <div className="stsp-screen-vis" style={{
+                <div className="stachesepl-object stachesepl-object-type-screen" style={baseStyle}>
+                    <div className="stachesepl-object-type-screen-label">{props.data.label}</div>
+                    <div className="stachesepl-screen-persepective">
+                        <div className="stachesepl-screen-vis" style={{
                             backgroundColor: backgroundColor
                         }}></div>
                     </div>
@@ -58,7 +58,7 @@ const Object = (props: {
 
             const isSelected = selectedSeats.includes(props.data.seatId);
 
-            const classNameArray = ['stsp-object', 'stsp-object-seat'];
+            const classNameArray = ['stachesepl-object', 'stachesepl-object-seat'];
 
             if (isSelected) {
                 classNameArray.push('selected');
@@ -92,7 +92,7 @@ const Object = (props: {
 
         case 'text': {
 
-            const classNameArray = ['stsp-object','stsp-object-text'];
+            const classNameArray = ['stachesepl-object','stachesepl-object-text'];
 
             return (
                 <div
@@ -106,7 +106,7 @@ const Object = (props: {
 
         case 'generic': {
 
-            const classNameArray = ['stsp-object','stsp-object-generic'];
+            const classNameArray = ['stachesepl-object','stachesepl-object-generic'];
 
             return (
                 <div

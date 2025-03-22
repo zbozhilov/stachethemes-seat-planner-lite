@@ -6,7 +6,7 @@ const Button = (props: {
     children: React.ReactNode
 }) => {
     return (
-        <div className='stsp-discount-page-button' onClick={props.onClick}>
+        <div className='stachesepl-discount-page-button' onClick={props.onClick}>
             {props.children}
         </div>
     )

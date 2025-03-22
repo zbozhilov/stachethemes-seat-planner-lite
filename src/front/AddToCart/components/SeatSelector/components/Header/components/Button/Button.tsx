@@ -7,7 +7,7 @@ const Button = (props: {
     children: React.ReactNode,
 }) => {
     return (
-        <button className={`stsp-seat-planner-header-button ${props.className || ''}`} onClick={props.onClick}>{props.children}</button>
+        <button className={`stachesepl-seat-planner-header-button ${props.className || ''}`} onClick={props.onClick}>{props.children}</button>
     )
 }
 

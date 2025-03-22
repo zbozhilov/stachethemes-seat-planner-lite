@@ -37,7 +37,7 @@ class Auditorium_Product extends \WC_Product {
 
     public function has_stop_date_passed() {
 
-        $stop_date = get_post_meta($this->id, '_stsp_stop_date', true); // datetime-local value
+        $stop_date = get_post_meta($this->id, '_stachesepl_stop_date', true); // datetime-local value
 
         if (! $stop_date) {
             return false;
@@ -58,7 +58,7 @@ class Auditorium_Product extends \WC_Product {
 
     public function is_in_stock() {
 
-        $is_forced_out_of_stock = 'yes' === get_post_meta($this->id, '_stsp_force_out_of_stock', true);
+        $is_forced_out_of_stock = 'yes' === get_post_meta($this->id, '_stachesepl_force_out_of_stock', true);
 
         if ($is_forced_out_of_stock) {
             return false;
@@ -89,8 +89,8 @@ class Auditorium_Product extends \WC_Product {
 
     public function get_price_html($context = 'view') {
 
-        $min = (float) get_post_meta($this->id, '_stsp_price_min', true);
-        $max = (float) get_post_meta($this->id, '_stsp_price_max', true);
+        $min = (float) get_post_meta($this->id, '_stachesepl_price_min', true);
+        $max = (float) get_post_meta($this->id, '_stachesepl_price_max', true);
 
         if ($min === $max) {
 
@@ -133,7 +133,7 @@ class Auditorium_Product extends \WC_Product {
 
     public function get_seat_plan_data($context = 'raw') {
 
-        $data = get_post_meta($this->id, '_stsp_seat_planner_data', true);
+        $data = get_post_meta($this->id, '_stachesepl_seat_planner_data', true);
 
         switch ($context) {
 
@@ -226,11 +226,11 @@ class Auditorium_Product extends \WC_Product {
             'seat_data'     => $seat_data
         ];
 
-        apply_filters('stsp_before_add_to_cart', $this, $seat_id);
+        apply_filters('stachesepl_before_add_to_cart', $this, $seat_id);
 
         $cart_item_key = $cart->add_to_cart($this->get_id(), 1, 0, [], $cart_item_data, $cart_item_key);
 
-        apply_filters('stsp_after_add_to_cart', $this, $seat_id, $cart_item_key, $cart);
+        apply_filters('stachesepl_after_add_to_cart', $this, $seat_id, $cart_item_key, $cart);
 
         return $cart_item_key;
     }
@@ -253,7 +253,7 @@ class Auditorium_Product extends \WC_Product {
         }, $taken_seats);
     
         // Applying filter so that Slot Reservation class can add its own reserved seats to the list
-        $taken_seats = array_unique(apply_filters('stsp_get_taken_seats', $seat_ids, $this));
+        $taken_seats = array_unique(apply_filters('stachesepl_get_taken_seats', $seat_ids, $this));
     
         // Retrieve seat plan data
         $seat_plan = $this->get_seat_plan_data('object');

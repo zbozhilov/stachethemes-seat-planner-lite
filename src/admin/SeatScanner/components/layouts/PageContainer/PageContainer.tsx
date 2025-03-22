@@ -5,7 +5,7 @@ const PageContainer = (props: {
     children: React.ReactNode
 }) => {
     return (
-        <div className='stsp-page-container'>
+        <div className='stachesepl-page-container'>
             {props.children}
         </div>
     )

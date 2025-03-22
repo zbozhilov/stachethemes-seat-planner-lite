@@ -12,7 +12,7 @@ const Overlay = (props: {
 
     const imageReady = useImageReady(seatPlanData.workflowProps.backgroundImage);
 
-    return <div className='stsp-workflow-overlay' style={{
+    return <div className='stachesepl-workflow-overlay' style={{
         opacity: imageReady ? (seatPlanData.workflowProps.backgroundOpacity ?? 1) : 0,
         backgroundImage: imageReady ? `url(${seatPlanData.workflowProps.backgroundImage})` : 'none',
     }} />
@@ -37,7 +37,7 @@ const Workflow = (props: {
     }
 
     return (
-        <div className='stsp-workflow' style={style}>
+        <div className='stachesepl-workflow' style={style}>
             <Overlay seatPlanData={seatPlanData} />
             {
                 props.children

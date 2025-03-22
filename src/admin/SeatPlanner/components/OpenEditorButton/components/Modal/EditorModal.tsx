@@ -14,15 +14,15 @@ const EditorModal = (props: {
     useEffect(() => {
 
         if (props.open) {
-            document.body.classList.add('stsp-sesat-planner-editor-portal-open');
+            document.body.classList.add('stachesepl-sesat-planner-editor-portal-open');
             document.body.style.overflow = 'hidden';
 
             if (containerRef.current) {
-                containerRef.current?.parentElement?.classList.add('stsp-sesat-planner-editor-portal-wrapper');
+                containerRef.current?.parentElement?.classList.add('stachesepl-sesat-planner-editor-portal-wrapper');
             }
 
         } else {
-            document.body.classList.remove('stsp-sesat-planner-editor-portal-open');
+            document.body.classList.remove('stachesepl-sesat-planner-editor-portal-open');
             document.body.style.overflow = 'auto';
 
             setTimeout(() => {
@@ -42,7 +42,7 @@ const EditorModal = (props: {
         <Portal>
             <Toaster />
 
-            <div ref={containerRef} className='stsp-sesat-planner-editor-portal'>
+            <div ref={containerRef} className='stachesepl-sesat-planner-editor-portal'>
 
                 <Editor onClose={props.onClose} />
             </div>

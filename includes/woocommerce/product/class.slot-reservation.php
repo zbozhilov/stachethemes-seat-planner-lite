@@ -14,7 +14,7 @@ class Slot_Reservation {
 
     public static function init() {
 
-        self::$reserve_time = max(0, (int) apply_filters('stsp_reserve_time', get_option('stsp_reserve_time', 24 * 60)));
+        self::$reserve_time = max(0, (int) apply_filters('stachesepl_reserve_time', get_option('stachesepl_reserve_time', 24 * 60)));
 
         // WooCommerce Settings > Products
         add_filter('woocommerce_get_settings_products', [__CLASS__, 'add_settings'], 10, 1);
@@ -24,9 +24,9 @@ class Slot_Reservation {
             return; // No need to continue if reservation time is 0
         }
 
-        add_filter('stsp_before_add_to_cart', [__CLASS__, 'verify_seat_not_reserved'], 10, 2);
-        add_filter('stsp_after_add_to_cart', [__CLASS__, 'reserve_seat'], 10, 4);
-        add_filter('stsp_get_taken_seats', [__CLASS__, 'attach_reserved_seats_to_taken_seats'], 10, 2);
+        add_filter('stachesepl_before_add_to_cart', [__CLASS__, 'verify_seat_not_reserved'], 10, 2);
+        add_filter('stachesepl_after_add_to_cart', [__CLASS__, 'reserve_seat'], 10, 4);
+        add_filter('stachesepl_get_taken_seats', [__CLASS__, 'attach_reserved_seats_to_taken_seats'], 10, 2);
         add_action('woocommerce_remove_cart_item', [__CLASS__, 'remove_reserved_seat'], 10, 2);
     }
 
@@ -36,13 +36,13 @@ class Slot_Reservation {
             'title' => esc_html__('Seat Reservation', 'stachethemes-seat-planner-lite'),
             'type'  => 'title',
             'desc'  => '',
-            'id'    => 'stsp_seat_reservation',
+            'id'    => 'stachesepl_seat_reservation',
         ];
 
         $settings[] = [
             'title'    => esc_html__('Seat Reservation Time', 'stachethemes-seat-planner-lite'),
             'desc'     => esc_html__('The time in minutes that a seat will be reserved in the cart.', 'stachethemes-seat-planner-lite'),
-            'id'       => 'stsp_reserve_time',
+            'id'       => 'stachesepl_reserve_time',
             'type'     => 'number',
             'default'  => self::$reserve_time,
             'desc_tip' => true,
@@ -50,7 +50,7 @@ class Slot_Reservation {
 
         $settings[] = [
             'type' => 'sectionend',
-            'id'   => 'stsp_seat_reservation',
+            'id'   => 'stachesepl_seat_reservation',
         ];
 
         return $settings;
@@ -68,9 +68,9 @@ class Slot_Reservation {
             return;
         }
 
-        $reserve_time = isset($_POST['stsp_reserve_time']) ? (int) $_POST['stsp_reserve_time'] : 0;
+        $reserve_time = isset($_POST['stachesepl_reserve_time']) ? (int) $_POST['stachesepl_reserve_time'] : 0;
 
-        update_option('stsp_reserve_time', max(0, $reserve_time));
+        update_option('stachesepl_reserve_time', max(0, $reserve_time));
     }
 
     private static function get_seats_in_cart($product_id) {
@@ -111,7 +111,7 @@ class Slot_Reservation {
                  AND timeout.option_value > %d",
                 $wpdb->options,
                 $wpdb->options,
-                $wpdb->esc_like("_transient_stsp_reserved_seat_{$product_id}_") . '%',
+                $wpdb->esc_like("_transient_stachesepl_reserved_seat_{$product_id}_") . '%',
                 $current_time
             )
         );
@@ -155,7 +155,7 @@ class Slot_Reservation {
     }
 
     public static function is_seat_reserved($product_id, $seat_id) {
-        $result     = get_transient("stsp_reserved_seat_{$product_id}_{$seat_id}");
+        $result     = get_transient("stachesepl_reserved_seat_{$product_id}_{$seat_id}");
         return $result;
     }
 
@@ -184,11 +184,11 @@ class Slot_Reservation {
     }
 
     public static function release_transient($product_id, $seat_id) {
-        delete_transient("stsp_reserved_seat_{$product_id}_{$seat_id}");
+        delete_transient("stachesepl_reserved_seat_{$product_id}_{$seat_id}");
     }
 
     public static function insert_transient($product_id, $seat_id) {
-        set_transient("stsp_reserved_seat_{$product_id}_{$seat_id}", $seat_id, self::$reserve_time * 60);
+        set_transient("stachesepl_reserved_seat_{$product_id}_{$seat_id}", $seat_id, self::$reserve_time * 60);
     }
 }
 

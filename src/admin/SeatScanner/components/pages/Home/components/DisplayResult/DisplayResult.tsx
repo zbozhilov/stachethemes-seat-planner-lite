@@ -86,7 +86,7 @@ const DisplayResult = (props: {
     }
 
     return (
-        <div className={`stsp-scan-home-content-result ${getValidClass()}`}>
+        <div className={`stachesepl-scan-home-content-result ${getValidClass()}`}>
 
             <div className="result-valid">
                 {getValidIcon()}

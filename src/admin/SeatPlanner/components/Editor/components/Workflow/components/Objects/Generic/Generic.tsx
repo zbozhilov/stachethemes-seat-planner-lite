@@ -4,7 +4,7 @@ import { GenericObjectProps } from './types';
 
 const Generic = (props: GenericObjectProps) => {
 
-    const workflowObjectProps = useWorkflowObject(props, 'stsp-generic');
+    const workflowObjectProps = useWorkflowObject(props, 'stachesepl-generic');
 
     return (
         <div {...workflowObjectProps}>{ props.label }</div>

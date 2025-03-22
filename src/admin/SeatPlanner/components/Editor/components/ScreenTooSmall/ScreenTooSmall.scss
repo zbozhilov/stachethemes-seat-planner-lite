@@ -1,4 +1,4 @@
-.stsp-screen-too-small {
+.stachesepl-screen-too-small {
     display: none;
     justify-content: center;
     align-items: center;
@@ -20,20 +20,20 @@
 
 @media (max-width: 768px) {
 
-    .stsp-top {
+    .stachesepl-top {
         justify-content: center !important;
 
-        >div:not(.stsp-top-button) {
+        >div:not(.stachesepl-top-button) {
             display: none !important;
         }
     }
 
 
-    .stsp-editor-workspace {
+    .stachesepl-editor-workspace {
         display: none !important;
     }
 
-    .stsp-screen-too-small {
+    .stachesepl-screen-too-small {
         display: flex;
         margin-top: 20px;
     }

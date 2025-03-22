@@ -1,6 +1,6 @@
-.stsp-top-button {
-    color: var(--stsp-top-button-color, red);
-    background-color: var(--stsp-top-button-background-color, red);
+.stachesepl-top-button {
+    color: var(--stachesepl-top-button-color, red);
+    background-color: var(--stachesepl-top-button-background-color, red);
     width: 40px;
     height: 40px;
     display: flex;
@@ -14,7 +14,7 @@
     }
 
     &:hover {
-        background-color: var(--stsp-top-button-hover-background-color, red);
-        color: var(--stsp-top-button-hover-color, red);
+        background-color: var(--stachesepl-top-button-hover-background-color, red);
+        color: var(--stachesepl-top-button-hover-color, red);
     }
 }

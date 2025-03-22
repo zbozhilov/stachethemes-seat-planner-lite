@@ -1,4 +1,4 @@
-    .stsp-toolbar-properties-move {
+    .stachesepl-toolbar-properties-move {
         display: flex;
         align-items: center;
         justify-content: space-between;
@@ -12,7 +12,7 @@
             flex: 1;
 
             label {
-                color: var(--stsp-toolbar-label-color, red);
+                color: var(--stachesepl-toolbar-label-color, red);
                 font-size: 14px;
                 margin-bottom: 5px;
             }

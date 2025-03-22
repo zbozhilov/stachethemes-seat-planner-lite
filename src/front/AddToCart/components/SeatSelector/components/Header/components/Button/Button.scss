@@ -1,7 +1,7 @@
-.stsp-seat-planner-header-button {
+.stachesepl-seat-planner-header-button {
 
-    background-color: var(--stsp-header-button-background-color, #333);
-    color: var(--stsp-header-button-color, #fff);
+    background-color: var(--stachesepl-header-button-background-color, #333);
+    color: var(--stachesepl-header-button-color, #fff);
     border: none;
     outline: none;
     border-radius: 3px;
@@ -17,17 +17,17 @@
     }
 
     &:hover {
-        background-color: var(--stsp-header-button-hover-background-color, #1c1c1c);
-        color: var(--stsp-header-button-hover-color, #fff);
+        background-color: var(--stachesepl-header-button-hover-background-color, #1c1c1c);
+        color: var(--stachesepl-header-button-hover-color, #fff);
     }
 
     &.secondary {
-        background-color: var(--stsp-header-button-secondary-background-color, #eeeeee);
-        color: var(--stsp-header-button-secondary-color, #202020);
+        background-color: var(--stachesepl-header-button-secondary-background-color, #eeeeee);
+        color: var(--stachesepl-header-button-secondary-color, #202020);
 
         &:hover {
-            background-color: var(--stsp-header-button-hover-background-color, #d5d5d5);
-            color: var(--stsp-header-button-hover-color, #202020);
+            background-color: var(--stachesepl-header-button-hover-background-color, #d5d5d5);
+            color: var(--stachesepl-header-button-hover-color, #202020);
         }
         
     }

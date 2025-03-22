@@ -1,4 +1,4 @@
-.stsp-object {
+.stachesepl-object {
     position: absolute;
     display: flex;
     align-items: center;
@@ -12,19 +12,19 @@
 
         &.disabled {
             cursor: default;
-            color: var(--stsp-object-seat-disabled-color, #fff) !important;
-            background-color: var(--stsp-object-seat-disabled-bg-color, #777777) !important;
+            color: var(--stachesepl-object-seat-disabled-color, #fff) !important;
+            background-color: var(--stachesepl-object-seat-disabled-bg-color, #777777) !important;
         }
 
         &.taken {
             cursor: default;
-            color: var(--stsp-object-seat-taken-color, #fff) !important;
-            background-color: var(--stsp-object-seat-taken-bg-color, #eb6651) !important;
+            color: var(--stachesepl-object-seat-taken-color, #fff) !important;
+            background-color: var(--stachesepl-object-seat-taken-bg-color, #eb6651) !important;
         }
 
         &.selected {
-            color: var(--stsp-object-seat-selected-color, #fff) !important;
-            background-color: var(--stsp-object-seat-selected-bg-color, #f79a3e) !important;
+            color: var(--stachesepl-object-seat-selected-color, #fff) !important;
+            background-color: var(--stachesepl-object-seat-selected-bg-color, #f79a3e) !important;
         }
 
 
@@ -36,7 +36,7 @@
     }
 }
 
-.stsp-object-type-screen {
+.stachesepl-object-type-screen {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -51,12 +51,12 @@
         z-index: 1;
     }
 
-    .stsp-screen-persepective {
+    .stachesepl-screen-persepective {
         perspective: 500px;
         width: inherit;
         height: inherit;
 
-        .stsp-screen-vis {
+        .stachesepl-screen-vis {
             width: inherit;
             height: inherit;
             transform: rotateX(-45deg);

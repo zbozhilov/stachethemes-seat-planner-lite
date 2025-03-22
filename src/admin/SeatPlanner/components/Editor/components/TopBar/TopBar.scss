@@ -1,10 +1,10 @@
-.stsp-top {
+.stachesepl-top {
     height: 50px;
     display: flex;
     justify-content: space-between;
     align-items: center;
 
-    .stsp-top-right {
+    .stachesepl-top-right {
         display: flex;
         align-items: center;
         justify-content: center;
@@ -13,7 +13,7 @@
         &-divider {
             width: 1px;
             height: 25px;
-            background-color: var(--stsp-toolbar-item-background-color);
+            background-color: var(--stachesepl-toolbar-item-background-color);
         }
     };
 }

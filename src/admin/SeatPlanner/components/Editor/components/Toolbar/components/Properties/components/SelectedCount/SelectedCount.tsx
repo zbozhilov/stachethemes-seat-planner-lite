@@ -8,7 +8,7 @@ const SelectedCount = () => {
     const selectedCount = selectedObjects.length;
 
     return (
-        <div className='stsp-tooltip-properties-selectedcount'>
+        <div className='stachesepl-tooltip-properties-selectedcount'>
             {__('SELECTED_ITEMS')}: {selectedCount}
         </div>
     )

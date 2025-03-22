@@ -1,8 +1,8 @@
-.stsp-seat-planner-header {
+.stachesepl-seat-planner-header {
     font-size: 0.875rem;
     z-index: 100;
-    background-color: var(--stsp-header-background-color, #fff);
-    color: var(--stsp-header-color, #333);
+    background-color: var(--stachesepl-header-background-color, #fff);
+    color: var(--stachesepl-header-color, #333);
     font-weight: 600;
     padding: 0.75em 1.25em;
     position: absolute;
@@ -16,21 +16,21 @@
     gap: 1.25rem;
     min-height: 3.813rem;
     box-shadow: 0 10px 10px rgba(0, 0, 0, 0.1);
-    animation: stsp-seat-planner-header-animation 0.2s ease;
+    animation: stachesepl-seat-planner-header-animation 0.2s ease;
     box-sizing: border-box;
 
-    .stsp-seat-planner-header-label {
+    .stachesepl-seat-planner-header-label {
         font-size: 1rem;
         white-space: nowrap;
     }
 
-    .stsp-seat-planner-header-buttons {
+    .stachesepl-seat-planner-header-buttons {
 
     }
 }
 
 @media (min-width: 768px) {
-    .stsp-seat-planner-header {
+    .stachesepl-seat-planner-header {
         width: 37.5rem;
         left: auto;
         right: auto;
@@ -39,7 +39,7 @@
     }
 }
 
-@keyframes stsp-seat-planner-header-animation {
+@keyframes stachesepl-seat-planner-header-animation {
     from {
         transform: translateY(-100%);
     }

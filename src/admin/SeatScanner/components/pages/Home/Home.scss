@@ -1,8 +1,8 @@
-.stsp-scan-home {
+.stachesepl-scan-home {
     width: calc(100% - 160px);
 }
 
-.stsp-scan-home-content {
+.stachesepl-scan-home-content {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -11,7 +11,7 @@
     max-width: 100%;
     gap: 10px;
 
-    .stsp-scan-home-content-start {
+    .stachesepl-scan-home-content-start {
 
         text-align: center;
 
@@ -38,14 +38,14 @@
         }
     }
 
-    .stsp-button {
+    .stachesepl-button {
         filter: saturate(0);
     }
 
 }
 
 @media all and (max-width: 960px) {
-    .stsp-scan-home {
+    .stachesepl-scan-home {
         width: 100%;
     }
 }

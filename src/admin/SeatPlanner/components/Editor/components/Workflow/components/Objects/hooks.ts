@@ -22,7 +22,7 @@ export const useDraggable = (
         if (!parentContainer) return [];
 
         const siblings = Array.from(parentContainer.children).filter(
-            (sibling) => sibling !== element && sibling.classList.contains('stsp-movable')
+            (sibling) => sibling !== element && sibling.classList.contains('stachesepl-movable')
         ) as HTMLElement[];
 
         return siblings.filter((sibling) =>
@@ -196,7 +196,7 @@ export const useDraggable = (
     }, [elementRef, gridGap, isDragging, selectedObjects, setObjects]);
 
     return {
-        className: 'stsp-movable',
+        className: 'stachesepl-movable',
     }
 
 };
@@ -260,7 +260,7 @@ export const useSelectable = (id: number) => {
     }
 
     return {
-        className: isSelected ? 'stsp-selectable selected' : 'stsp-selectable',
+        className: isSelected ? 'stachesepl-selectable selected' : 'stachesepl-selectable',
         onMouseDown: handleMouseDown,
         onMouseUp: handleMouseUp
     }

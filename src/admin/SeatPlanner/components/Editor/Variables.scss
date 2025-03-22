@@ -1,87 +1,87 @@
 :root {
 
-    --stsp-top-button-color: #d4d4d4;
-    --stsp-top-button-background-color: transparent;
-    --stsp-top-button-hover-background-color: transparent;
-    --stsp-top-button-hover-color: #fff;
+    --stachesepl-top-button-color: #d4d4d4;
+    --stachesepl-top-button-background-color: transparent;
+    --stachesepl-top-button-hover-background-color: transparent;
+    --stachesepl-top-button-hover-color: #fff;
 
-    --stsp-editor-background-color: #292929;
-    --stsp-tooltip-properties-header-background-color: #535353;
-    --stsp-tooltip-properties-header-color: #f4f4f4;
-    --stsp-toolbar-background-color: #333;
-    --stsp-toolbar-input-background-color: #f3f4f7;
-    --stsp-toolbar-label-color: #f4f4f4;
-    --stsp-tooltip-items-count-color: #999;
+    --stachesepl-editor-background-color: #292929;
+    --stachesepl-tooltip-properties-header-background-color: #535353;
+    --stachesepl-tooltip-properties-header-color: #f4f4f4;
+    --stachesepl-toolbar-background-color: #333;
+    --stachesepl-toolbar-input-background-color: #f3f4f7;
+    --stachesepl-toolbar-label-color: #f4f4f4;
+    --stachesepl-tooltip-items-count-color: #999;
 
-    --stsp-toolbar-item-background-color: #535353;
-    --stsp-toolbar-item-color: #f4f4f4;
+    --stachesepl-toolbar-item-background-color: #535353;
+    --stachesepl-toolbar-item-color: #f4f4f4;
 
-    --stsp-toolbar-item-hover-background-color: #f0f0f0;
-    --stsp-toolbar-item-hover-color: #202020;
+    --stachesepl-toolbar-item-hover-background-color: #f0f0f0;
+    --stachesepl-toolbar-item-hover-color: #202020;
 
-    --stsp-dialog-overlay: rgba(255, 255, 255, 0.3);
-    --stsp-dialog-header-background-color: #292929;
-    --stsp-dialog-header-color: #f4f4f4;
-    --stsp-dialog-background-color: #fff;
-    --stsp-dialog-button-close-background-color: #ddd;
-    --stsp-dialog-button-close-color: #202020;
-    --stsp-dialog-button-close-hover-background-color: #ccc;
-    --stsp-dialog-button-close-hover-color: #202020;
-    --stsp-dialog-input-background-color: #f3f4f7;
-    --stsp-dialog-input-color: #292929;
-    --stsp-dialog-input-placeholder-color: #52565e;;
-    --stsp-dialog-label-color: #292929;
+    --stachesepl-dialog-overlay: rgba(255, 255, 255, 0.3);
+    --stachesepl-dialog-header-background-color: #292929;
+    --stachesepl-dialog-header-color: #f4f4f4;
+    --stachesepl-dialog-background-color: #fff;
+    --stachesepl-dialog-button-close-background-color: #ddd;
+    --stachesepl-dialog-button-close-color: #202020;
+    --stachesepl-dialog-button-close-hover-background-color: #ccc;
+    --stachesepl-dialog-button-close-hover-color: #202020;
+    --stachesepl-dialog-input-background-color: #f3f4f7;
+    --stachesepl-dialog-input-color: #292929;
+    --stachesepl-dialog-input-placeholder-color: #52565e;;
+    --stachesepl-dialog-label-color: #292929;
 
-    --stsp-marquee-color: rgba(0, 100, 255, 0.3);
-    --stsp-marquee-border-color: rgb(0, 100, 255);
+    --stachesepl-marquee-color: rgba(0, 100, 255, 0.3);
+    --stachesepl-marquee-border-color: rgb(0, 100, 255);
 
-    --stsp-selectable-color: rgba(0, 100, 255, 0.3);
-    --stsp-selectable-border-color: rgb(0, 100, 255);
+    --stachesepl-selectable-color: rgba(0, 100, 255, 0.3);
+    --stachesepl-selectable-border-color: rgb(0, 100, 255);
 }
 
-.stsp-theme-light {
-    --stsp-top-button-color: #333;
-    --stsp-top-button-background-color: transparent;
-    --stsp-top-button-hover-background-color: transparent;
-    --stsp-top-button-hover-color: #000;
+.stachesepl-theme-light {
+    --stachesepl-top-button-color: #333;
+    --stachesepl-top-button-background-color: transparent;
+    --stachesepl-top-button-hover-background-color: transparent;
+    --stachesepl-top-button-hover-color: #000;
 
-    --stsp-editor-background-color: #f1f1f1;
-    --stsp-tooltip-properties-header-background-color: #202020;
-    --stsp-tooltip-properties-header-color: #f4f4f4;
-    --stsp-toolbar-background-color: #fff;
-    --stsp-toolbar-input-background-color: #f3f4f7;
-    --stsp-toolbar-label-color: #202020;
-    --stsp-tooltip-items-count-color: #545454;
+    --stachesepl-editor-background-color: #f1f1f1;
+    --stachesepl-tooltip-properties-header-background-color: #202020;
+    --stachesepl-tooltip-properties-header-color: #f4f4f4;
+    --stachesepl-toolbar-background-color: #fff;
+    --stachesepl-toolbar-input-background-color: #f3f4f7;
+    --stachesepl-toolbar-label-color: #202020;
+    --stachesepl-tooltip-items-count-color: #545454;
 
-    --stsp-toolbar-item-background-color: #ececec;
-    --stsp-toolbar-item-color: #202020;
+    --stachesepl-toolbar-item-background-color: #ececec;
+    --stachesepl-toolbar-item-color: #202020;
 
-    --stsp-toolbar-item-hover-background-color: #ccc;
-    --stsp-toolbar-item-hover-color: #202020;
+    --stachesepl-toolbar-item-hover-background-color: #ccc;
+    --stachesepl-toolbar-item-hover-color: #202020;
 
-    --stsp-dialog-overlay: rgba(255, 255, 255, 0.3);
-    --stsp-dialog-header-background-color: #292929;
-    --stsp-dialog-header-color: #f4f4f4;
-    --stsp-dialog-background-color: #fff;
-    --stsp-dialog-button-close-background-color: #ddd;
-    --stsp-dialog-button-close-color: #202020;
-    --stsp-dialog-button-close-hover-background-color: #ccc;
-    --stsp-dialog-button-close-hover-color: #202020;
-    --stsp-dialog-input-background-color: #f3f4f7;
-    --stsp-dialog-input-color: #292929;
-    --stsp-dialog-input-placeholder-color: #52565e;;
-    --stsp-dialog-label-color: #292929;
+    --stachesepl-dialog-overlay: rgba(255, 255, 255, 0.3);
+    --stachesepl-dialog-header-background-color: #292929;
+    --stachesepl-dialog-header-color: #f4f4f4;
+    --stachesepl-dialog-background-color: #fff;
+    --stachesepl-dialog-button-close-background-color: #ddd;
+    --stachesepl-dialog-button-close-color: #202020;
+    --stachesepl-dialog-button-close-hover-background-color: #ccc;
+    --stachesepl-dialog-button-close-hover-color: #202020;
+    --stachesepl-dialog-input-background-color: #f3f4f7;
+    --stachesepl-dialog-input-color: #292929;
+    --stachesepl-dialog-input-placeholder-color: #52565e;;
+    --stachesepl-dialog-label-color: #292929;
 
-    --stsp-marquee-color: rgba(0, 100, 255, 0.1);
-    --stsp-marquee-border-color: rgb(0, 100, 255);
+    --stachesepl-marquee-color: rgba(0, 100, 255, 0.1);
+    --stachesepl-marquee-border-color: rgb(0, 100, 255);
 
-    --stsp-selectable-color: rgba(0, 100, 255, 0.1);
-    --stsp-selectable-border-color: rgb(0, 100, 255);
+    --stachesepl-selectable-color: rgba(0, 100, 255, 0.1);
+    --stachesepl-selectable-border-color: rgb(0, 100, 255);
 
-    .stsp-toolbar-properties-round input,
-    .stsp-toolbar-properties-handicap input,
-    .stsp-toolbar-properties-bgcolor input,
-    .stsp-toolbar-properties-color input {
+    .stachesepl-toolbar-properties-round input,
+    .stachesepl-toolbar-properties-handicap input,
+    .stachesepl-toolbar-properties-bgcolor input,
+    .stachesepl-toolbar-properties-color input {
         border:1px solid #a6a6a6;
     }
 }

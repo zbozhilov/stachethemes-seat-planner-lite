@@ -95,7 +95,7 @@ const AddToCartButton = () => {
                 if (seatsCount === 1) {
                     toast.success(
                         <span
-                            className="stsp-toast-added-to-cart"
+                            className="stachesepl-toast-added-to-cart"
                             dangerouslySetInnerHTML={{
                                 __html:
                                     [
@@ -109,7 +109,7 @@ const AddToCartButton = () => {
 
                 toast.success(
                     <span
-                        className="stsp-toast-added-to-cart"
+                        className="stachesepl-toast-added-to-cart"
                         dangerouslySetInnerHTML={{
                             __html:
                                 [
@@ -135,7 +135,7 @@ const AddToCartButton = () => {
 
     }
 
-    const classNameArray = ['stsp-add-to-cart-button'];
+    const classNameArray = ['stachesepl-add-to-cart-button'];
 
     if (loading) {
         classNameArray.push('loading');

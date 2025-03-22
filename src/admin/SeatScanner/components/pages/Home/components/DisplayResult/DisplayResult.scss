@@ -1,4 +1,4 @@
-.stsp-scan-home-content-result {
+.stachesepl-scan-home-content-result {
     box-sizing: border-box;
     width: 500px;
     max-width: 100%;
@@ -8,7 +8,7 @@
     padding: 30px;
     padding-top: 0;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    animation: stsp-display-result-fade-in 0.3s ease;
+    animation: stachesepl-display-result-fade-in 0.3s ease;
 
     .result-valid {
         padding: 30px;
@@ -105,7 +105,7 @@
     }
 }
 
-@keyframes stsp-display-result-fade-in {
+@keyframes stachesepl-display-result-fade-in {
     from {
         opacity: 0;
         transform: scale(0.9);

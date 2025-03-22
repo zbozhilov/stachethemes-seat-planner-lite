@@ -9,9 +9,9 @@ const ThemeSwitchButton = () => {
     useEffect(() => {
 
         if (theme === 'light') {
-            document.body.classList.add('stsp-theme-light');
+            document.body.classList.add('stachesepl-theme-light');
         } else {
-            document.body.classList.remove('stsp-theme-light');
+            document.body.classList.remove('stachesepl-theme-light');
         }
 
     }, [theme]);
@@ -23,7 +23,7 @@ const ThemeSwitchButton = () => {
     const Icon = theme === 'light' ? Brightness4 : Brightness7;
 
     return (
-        <div className='stsp-top-button' title={__('TOGGLE_THEME')}>
+        <div className='stachesepl-top-button' title={__('TOGGLE_THEME')}>
             <Icon onClick={handleThemeSwitch} />
         </div>
     )

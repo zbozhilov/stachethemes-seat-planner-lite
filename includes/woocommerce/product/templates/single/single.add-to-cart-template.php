@@ -20,7 +20,7 @@ if (!$product->is_in_stock()) {
 }
 
 ?>
-<div class="stsp-single-add-to-cart-button-wrapper">
+<div class="stachesepl-single-add-to-cart-button-wrapper">
     <?php do_action('woocommerce_before_add_to_cart_button'); ?>
     <p>
         <button type="button" data-product_id="<?php echo esc_attr($product->get_id()); ?>" class="product_type_auditorium add_to_cart_button single_add_to_cart_button button alt<?php echo esc_attr(wc_wp_theme_get_element_class_name('button') ? ' ' . wc_wp_theme_get_element_class_name('button') : ''); ?>">

@@ -1,26 +1,26 @@
-type Stspi18nItem = {
+type Stachesepli18nItem = {
     [key: string]: string;
 };
 
 declare global {
     interface Window {
-        stspi18n: Stspi18nItem;
+        stachesepli18n: Stachesepli18nItem;
     }
 }
 
 export const __ = (text: string): string => {
 
-    if (!window.stspi18n) {
+    if (!window.stachesepli18n) {
         return text;
     }
 
-    return window.stspi18n[text] || text;
+    return window.stachesepli18n[text] || text;
 
 };
 
 declare global {
     interface Window {
-        stspGetFormattedPrice: (price: number) => string;
+        stacheseplGetFormattedPrice: (price: number) => string;
     }
 }
 

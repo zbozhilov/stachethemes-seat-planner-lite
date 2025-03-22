@@ -4,7 +4,7 @@ import { ButtonProps } from './types';
 
 const Button = (props: ButtonProps) => {
     return (
-        <div className='stsp-top-button' title={props?.title} onClick={props.onClick}>
+        <div className='stachesepl-top-button' title={props?.title} onClick={props.onClick}>
             <SvgIcon component={props.icon} />
         </div>
     )

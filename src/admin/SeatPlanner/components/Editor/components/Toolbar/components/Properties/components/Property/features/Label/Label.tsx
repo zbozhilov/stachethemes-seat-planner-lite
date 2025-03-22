@@ -46,10 +46,10 @@ const Label = (props: {
 
     return (
 
-        <div className='stsp-toolbar-properties-label'>
+        <div className='stachesepl-toolbar-properties-label'>
 
-            <label htmlFor='stsp-toolbar-properties-label'>{__('LABEL')}</label>
-            <input id='stsp-toolbar-properties-label' type="text" placeholder={__('LABEL')} value={displayLabel} onChange={(e) => {
+            <label htmlFor='stachesepl-toolbar-properties-label'>{__('LABEL')}</label>
+            <input id='stachesepl-toolbar-properties-label' type="text" placeholder={__('LABEL')} value={displayLabel} onChange={(e) => {
                 handleValueChange(e.target.value)
             }} />
 

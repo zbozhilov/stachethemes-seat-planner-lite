@@ -21,7 +21,7 @@ const OpenEditorButton = () => {
         <>
             <EditorModal open={open} onClose={handleClose} />
 
-            <div className='stsp-open-editor-button' onClick={handleOpen}>
+            <div className='stachesepl-open-editor-button' onClick={handleOpen}>
                 <SvgIcon component={BorderClearIcon} />
                 <span>{__('OPEN_SEAT_PLANNER')}</span>
             </div>

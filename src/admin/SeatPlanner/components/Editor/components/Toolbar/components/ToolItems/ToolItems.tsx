@@ -5,7 +5,7 @@ import './ToolItems.scss'
 const ToolItems = () => {
 
     return (
-        <div className='stsp-toolbar-items'>
+        <div className='stachesepl-toolbar-items'>
             {
                 tools.map(tool => {
                     return (

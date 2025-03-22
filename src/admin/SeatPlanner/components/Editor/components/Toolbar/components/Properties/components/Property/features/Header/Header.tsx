@@ -5,7 +5,7 @@ const Header = (props: {
 }) => {
 
     return (
-        <div className='stsp-tooltip-properties-header'>{props.label}</div>
+        <div className='stachesepl-tooltip-properties-header'>{props.label}</div>
     )
 }
 

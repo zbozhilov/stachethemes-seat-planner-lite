@@ -40,11 +40,11 @@ const Workflow = () => {
     }
 
     return (
-        <div className='stsp-workflow-wrapper' style={{
+        <div className='stachesepl-workflow-wrapper' style={{
             backgroundColor: workflowProps.backgroundColor
         }}>
 
-            <div className='stsp-workflow-overlay'
+            <div className='stachesepl-workflow-overlay'
                 style={{
                     ...workflowStyle,
                     backgroundImage: `url(${workflowProps.backgroundImage ?? ''})`,
@@ -54,12 +54,12 @@ const Workflow = () => {
             ></div>
 
             {
-                seatDisplayLabel !== 'label' && <div className='stsp-seat-display-label-tag'>
+                seatDisplayLabel !== 'label' && <div className='stachesepl-seat-display-label-tag'>
                     {__('DISPLAY_LABEL')}: {getDisplayLabel(seatDisplayLabel)}                
                 </div>
             }
 
-            <div className='stsp-workflow' ref={workflowRef} style={workflowStyle}>
+            <div className='stachesepl-workflow' ref={workflowRef} style={workflowStyle}>
                 {
                     objects.map(object => {
 

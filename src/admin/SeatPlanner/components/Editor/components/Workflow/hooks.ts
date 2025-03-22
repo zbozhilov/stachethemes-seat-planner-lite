@@ -55,8 +55,8 @@ export const useMarquee = (workflowRef: React.RefObject<HTMLDivElement | null>) 
              */
             workflowRectRef.current = workflow.getBoundingClientRect();
 
-            if (workflowRef?.current?.querySelector('.stsp-marquee')) {
-                workflowRef?.current?.querySelector('.stsp-marquee')?.remove();
+            if (workflowRef?.current?.querySelector('.stachesepl-marquee')) {
+                workflowRef?.current?.querySelector('.stachesepl-marquee')?.remove();
             }
 
             initialPoint.current.x = e.clientX - workflowRectRef.current.left;
@@ -64,7 +64,7 @@ export const useMarquee = (workflowRef: React.RefObject<HTMLDivElement | null>) 
 
             const marqueHtml = document.createElement('div');
 
-            marqueHtml.classList.add('stsp-marquee');
+            marqueHtml.classList.add('stachesepl-marquee');
             marqueHtml.style.left = `${initialPoint.current.x}px`;
             marqueHtml.style.top = `${initialPoint.current.y}px`;
 

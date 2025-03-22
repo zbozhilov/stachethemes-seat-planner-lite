@@ -74,22 +74,22 @@ const Settings = () => {
     const backgroundImageSource = hasBackgroundImage(workflowProps) ? workflowProps.backgroundImage : '';
 
     return (
-        <div className='stsp-workflow-settings'>
+        <div className='stachesepl-workflow-settings'>
 
             <div>
-                <label htmlFor='stsp-workflow-settings-width'>{__('WIDTH')}</label>
-                <input id='stsp-workflow-settings-width' type='text' value={width} onChange={handleWidthChange} />
+                <label htmlFor='stachesepl-workflow-settings-width'>{__('WIDTH')}</label>
+                <input id='stachesepl-workflow-settings-width' type='text' value={width} onChange={handleWidthChange} />
             </div>
 
             <div>
-                <label htmlFor='stsp-workflow-settings-height'>{__('HEIGHT')}</label>
-                <input id='stsp-workflow-settings-heught' type='text' value={height} onChange={handleHeightChange} />
+                <label htmlFor='stachesepl-workflow-settings-height'>{__('HEIGHT')}</label>
+                <input id='stachesepl-workflow-settings-heught' type='text' value={height} onChange={handleHeightChange} />
             </div>
 
             <div>
-                <label htmlFor='stsp-workflow-settings-background-color'>{__('BACKGROUND_COLOR')}</label>
+                <label htmlFor='stachesepl-workflow-settings-background-color'>{__('BACKGROUND_COLOR')}</label>
                 <input
-                    id='stsp-workflow-settings-background-color'
+                    id='stachesepl-workflow-settings-background-color'
                     type='color'
                     value={bgColor}
                     onChange={(e) => {
@@ -101,22 +101,22 @@ const Settings = () => {
 
             <div>
                 <label>{__('BACKGROUND_IMAGE')}</label>
-                <div className='stsp-workflow-settings-background-image' onClick={handleBackgroundImageChange}>
+                <div className='stachesepl-workflow-settings-background-image' onClick={handleBackgroundImageChange}>
                     {!!backgroundImageSource && <>
-                        <div className="stsp-workflow-settings-background-image-remove" onClick={handleBackgroundImageClear}>
+                        <div className="stachesepl-workflow-settings-background-image-remove" onClick={handleBackgroundImageClear}>
                             <Close />
                         </div>
                         <img src={backgroundImageSource} alt='' />
                     </>}
 
-                    {!backgroundImageSource && <div className='stsp-workflow-settings-background-image-placeholder'>{__('ADD_IMAGE')}</div>}
+                    {!backgroundImageSource && <div className='stachesepl-workflow-settings-background-image-placeholder'>{__('ADD_IMAGE')}</div>}
                 </div>
             </div>
 
             <div>
-                <label htmlFor='stsp-workflow-settings-background-opacity'>{__('BACKGROUND_OPACITY')}</label>
+                <label htmlFor='stachesepl-workflow-settings-background-opacity'>{__('BACKGROUND_OPACITY')}</label>
                 <input
-                    id='stsp-workflow-settings-background-opacity'
+                    id='stachesepl-workflow-settings-background-opacity'
                     type='number'
                     step={0.1}
                     min={0}

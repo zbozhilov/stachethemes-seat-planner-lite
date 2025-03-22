@@ -1,4 +1,4 @@
-.stsp-workflow-settings {
+.stachesepl-workflow-settings {
     
     margin-bottom: 20px;
 
@@ -19,7 +19,7 @@
         }
     }
 
-    .stsp-workflow-settings-background-image {
+    .stachesepl-workflow-settings-background-image {
         width: 100px;
         height: 100px;
         cursor: pointer;
@@ -34,7 +34,7 @@
             border-radius: 4px;
         }
 
-        .stsp-workflow-settings-background-image-placeholder {
+        .stachesepl-workflow-settings-background-image-placeholder {
             display: flex;
             align-items: center;
             justify-content: center;
@@ -69,7 +69,7 @@
         }
 
         &:hover {
-            .stsp-workflow-settings-background-image-remove {
+            .stachesepl-workflow-settings-background-image-remove {
                 display: flex;
             }
         }

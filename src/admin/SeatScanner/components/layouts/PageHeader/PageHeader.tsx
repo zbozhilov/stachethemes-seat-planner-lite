@@ -28,8 +28,8 @@ const PageHeader = (props: {
     }, []);
 
     return (
-        <div ref={containerRef} className='stsp-page-header'>
-            <h1 className='stsp-page-header-title'>{props.title}</h1>
+        <div ref={containerRef} className='stachesepl-page-header'>
+            <h1 className='stachesepl-page-header-title'>{props.title}</h1>
         </div>
     )
 }

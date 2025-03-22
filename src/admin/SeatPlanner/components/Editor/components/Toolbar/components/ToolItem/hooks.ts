@@ -88,7 +88,7 @@ export const useDraggableToolItem = ({
 
         const isCloneOverWorkflow = (cloneRect: DOMRect) => {
 
-            const workflow = editor.querySelector('.stsp-workflow');
+            const workflow = editor.querySelector('.stachesepl-workflow');
 
             if (!workflow) {
                 return false;
@@ -113,7 +113,7 @@ export const useDraggableToolItem = ({
             const clone = item.cloneNode(true) as HTMLDivElement;
 
             clone.style.position = 'absolute';
-            clone.classList.add('stsp-toolbar-item-dragging');
+            clone.classList.add('stachesepl-toolbar-item-dragging');
             clone.style.width = item.offsetWidth + 'px';
             clone.style.height = item.offsetHeight + 'px';
             clone.style.left = e.clientX - item.offsetWidth / 2 + 'px';
@@ -141,7 +141,7 @@ export const useDraggableToolItem = ({
                 return;
             }
 
-            const workflow = editor.querySelector('.stsp-workflow');
+            const workflow = editor.querySelector('.stachesepl-workflow');
 
             if (!workflow) {
                 return;

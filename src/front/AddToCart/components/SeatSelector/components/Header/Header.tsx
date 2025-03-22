@@ -26,8 +26,8 @@ const Header = () => {
     }
 
     return (
-        <div className='stsp-seat-planner-header'>
-            <div className='stsp-seat-planner-header-label'>
+        <div className='stachesepl-seat-planner-header'>
+            <div className='stachesepl-seat-planner-header-label'>
                 {
                     selectedSeatsCount > 0 ?
 
@@ -39,7 +39,7 @@ const Header = () => {
                 }
             </div>
 
-            <div className='stsp-seat-planner-header-buttons'>
+            <div className='stachesepl-seat-planner-header-buttons'>
                 {renderButton()}
             </div>
         </div>

@@ -6,7 +6,7 @@ import { SeatObjectProps } from './types';
 
 const Seat = (props: SeatObjectProps) => {
 
-    const workflowObjectProps = useWorkflowObject(props, 'stsp-sesat');
+    const workflowObjectProps = useWorkflowObject(props, 'stachesepl-sesat');
     const { seatDisplayLabel } = useEditorSeatDisplayLabel();
 
     const getDisplayLabel = () => {

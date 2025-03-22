@@ -216,16 +216,16 @@ class Auditorium_Product_Filters {
 
             woocommerce_wp_checkbox(
                 array(
-                    'id'            => '_stsp_force_out_of_stock',
+                    'id'            => '_stachesepl_force_out_of_stock',
                     'label'         => esc_html__('Out of stock', 'stachethemes-seat-planner-lite'),
-                    'value'         => get_post_meta(get_the_ID(), '_stsp_force_out_of_stock', true),
+                    'value'         => get_post_meta(get_the_ID(), '_stachesepl_force_out_of_stock', true),
                     'description'   => esc_html__('Set product status to out of stock', 'stachethemes-seat-planner-lite'),
                 )
             );
 
             woocommerce_wp_text_input(
                 array(
-                    'id'          => '_stsp_stop_date',
+                    'id'          => '_stachesepl_stop_date',
                     'label'       => esc_html__('Stop Date', 'stachethemes-seat-planner-lite'),
                     'placeholder' => '',
                     'desc_tip'    => true,
@@ -245,7 +245,7 @@ class Auditorium_Product_Filters {
                 <input
                     id="st-seat-planner-editor-data"
                     type="hidden"
-                    name="stsp_seat_planner_data"
+                    name="stachesepl_seat_planner_data"
                     value="<?php echo esc_attr($seat_planner_data); ?>">
             </div>
         </div>
@@ -275,16 +275,16 @@ class Auditorium_Product_Filters {
         }
 
         // Save force out of stock
-        update_post_meta($post_id, '_stsp_force_out_of_stock', filter_input(INPUT_POST, '_stsp_force_out_of_stock', FILTER_SANITIZE_FULL_SPECIAL_CHARS));
+        update_post_meta($post_id, '_stachesepl_force_out_of_stock', filter_input(INPUT_POST, '_stachesepl_force_out_of_stock', FILTER_SANITIZE_FULL_SPECIAL_CHARS));
 
         // Save stop date
-        update_post_meta($post_id, '_stsp_stop_date', filter_input(INPUT_POST, '_stsp_stop_date', FILTER_SANITIZE_FULL_SPECIAL_CHARS));
+        update_post_meta($post_id, '_stachesepl_stop_date', filter_input(INPUT_POST, '_stachesepl_stop_date', FILTER_SANITIZE_FULL_SPECIAL_CHARS));
 
         // Save sku
         update_post_meta($post_id, '_sku', filter_input(INPUT_POST, '_stmp_sku', FILTER_SANITIZE_FULL_SPECIAL_CHARS));
 
         // Save seat planner data ( if any and is a valid json )
-        $seat_planner_data = isset($_POST['stsp_seat_planner_data']) ? sanitize_text_field(wp_unslash($_POST['stsp_seat_planner_data'])) : '';
+        $seat_planner_data = isset($_POST['stachesepl_seat_planner_data']) ? sanitize_text_field(wp_unslash($_POST['stachesepl_seat_planner_data'])) : '';
 
         if (!$seat_planner_data) {
             return;
@@ -297,7 +297,7 @@ class Auditorium_Product_Filters {
         }
 
         // Save seat planner data
-        update_post_meta($post_id, '_stsp_seat_planner_data', $seat_planner_data);
+        update_post_meta($post_id, '_stachesepl_seat_planner_data', $seat_planner_data);
 
         // Save min and max price ranges for the product based on the seat planner data
         $objects = json_decode($seat_planner_data)->objects;
@@ -325,8 +325,8 @@ class Auditorium_Product_Filters {
             return $carry;
         }, ['min' => INF, 'max' => 0]);
 
-        update_post_meta($post_id, '_stsp_price_min', $min_max_price['min']);
-        update_post_meta($post_id, '_stsp_price_max', $min_max_price['max']);
+        update_post_meta($post_id, '_stachesepl_price_min', $min_max_price['min']);
+        update_post_meta($post_id, '_stachesepl_price_max', $min_max_price['max']);
     }
 
     public static function insert_single_add_to_cart_template() {

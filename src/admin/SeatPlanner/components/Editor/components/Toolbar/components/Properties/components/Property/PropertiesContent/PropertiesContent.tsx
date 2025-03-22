@@ -2,7 +2,7 @@ import { useWorkflowProps } from '@src/admin/SeatPlanner/components/Editor/hooks
 import './PropertiesContent.scss';
 
 /**
- * This is the .stsp-tooltip-properties-content container that holds the content of the properties.
+ * This is the .stachesepl-tooltip-properties-content container that holds the content of the properties.
  * It is a scrollable container that will adjust its height based on the height of the workflow.
  */
 const PropertiesContent = (props: {
@@ -17,7 +17,7 @@ const PropertiesContent = (props: {
 
     return (
         <>
-            <div className="stsp-tooltip-properties-content" style={style}>
+            <div className="stachesepl-tooltip-properties-content" style={style}>
                 {props.children}
             </div>
         </>

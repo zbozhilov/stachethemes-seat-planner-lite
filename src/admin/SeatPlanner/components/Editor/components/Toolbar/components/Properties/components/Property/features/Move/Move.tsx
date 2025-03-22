@@ -19,7 +19,7 @@ const Move = (props: {
 
     // Get the editor's bounding rectangle
     const editorRefRect = editorRef?.current
-        ?.querySelector('.stsp-workflow')
+        ?.querySelector('.stachesepl-workflow')
         ?.getBoundingClientRect();
 
     const handleMoveXY = (value: string, direction: 'x' | 'y') => {
@@ -64,18 +64,18 @@ const Move = (props: {
 
     return (
 
-        <div className='stsp-toolbar-properties-move'>
+        <div className='stachesepl-toolbar-properties-move'>
 
             <div>
-                <label htmlFor='stsp-toolbar-properties-move-width'>{__('LEFT')}</label>
-                <input id='stsp-toolbar-properties-move-width' type="text" placeholder="X" value={smallestX} onChange={(e) => {
+                <label htmlFor='stachesepl-toolbar-properties-move-width'>{__('LEFT')}</label>
+                <input id='stachesepl-toolbar-properties-move-width' type="text" placeholder="X" value={smallestX} onChange={(e) => {
                     handleMoveXY(e.target.value, 'x')
                 }} />
             </div>
 
             <div>
-                <label htmlFor='stsp-toolbar-properties-move-height'>{__('TOP')}</label>
-                <input id='stsp-toolbar-properties-move-height' type="text" placeholder="Y" value={smallestY} onChange={(e) => {
+                <label htmlFor='stachesepl-toolbar-properties-move-height'>{__('TOP')}</label>
+                <input id='stachesepl-toolbar-properties-move-height' type="text" placeholder="Y" value={smallestY} onChange={(e) => {
                     handleMoveXY(e.target.value, 'y')
                 }} />
             </div>

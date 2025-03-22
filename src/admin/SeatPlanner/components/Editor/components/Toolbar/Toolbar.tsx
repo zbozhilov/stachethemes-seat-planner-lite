@@ -10,7 +10,7 @@ const Toolbar = () => {
     const DisplaySection = hasSelectedObjects ? Properties : ToolItems;
 
     return (
-        <div className='stsp-toolbar'>
+        <div className='stachesepl-toolbar'>
             <DisplaySection />
         </div>
     )

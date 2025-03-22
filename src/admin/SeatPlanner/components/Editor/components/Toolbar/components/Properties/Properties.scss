@@ -1,4 +1,4 @@
-.stsp-tooltip-properties {
+.stachesepl-tooltip-properties {
     width: 100%;
     height: 100%;
     box-sizing: border-box;
@@ -6,7 +6,7 @@
 
     select,
     input[type='text'] {
-        background-color: var(--stsp-toolbar-input-background-color, red);
+        background-color: var(--stachesepl-toolbar-input-background-color, red);
     }
 
 }

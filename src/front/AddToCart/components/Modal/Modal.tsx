@@ -32,16 +32,16 @@ const Modal = (props: {
         if (open) {
             window.history.pushState(null, '', window.location.href);
             window.addEventListener('popstate', handlePopState);
-            document.body.classList.add('stsp-modal-open');
+            document.body.classList.add('stachesepl-modal-open');
         } else {
             window.removeEventListener('popstate', handlePopState);
-            document.body.classList.remove('stsp-modal-open');
+            document.body.classList.remove('stachesepl-modal-open');
         }
 
         document.addEventListener('keydown', handleEscape);
 
         return () => {
-            document.body.classList.remove('stsp-modal-open');
+            document.body.classList.remove('stachesepl-modal-open');
             window.removeEventListener('popstate', handlePopState);
             document.removeEventListener('keydown', handleEscape);
         }
@@ -54,7 +54,7 @@ const Modal = (props: {
 
     return (
         <Portal>
-            <div ref={containerRef} className='stsp-seat-planner-portal'>
+            <div ref={containerRef} className='stachesepl-seat-planner-portal'>
                 {props.children}
             </div>
         </Portal>

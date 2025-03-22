@@ -1,4 +1,4 @@
-.stsp-screen {
+.stachesepl-screen {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -13,12 +13,12 @@
         z-index: 1;
     }
 
-    .stsp-screen-persepective {
+    .stachesepl-screen-persepective {
         perspective: 500px;
         width: inherit;
         height: inherit;
 
-        .stsp-screen-vis {
+        .stachesepl-screen-vis {
             width: inherit;
             height: inherit;
             transform: rotateX(-45deg);

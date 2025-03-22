@@ -15,11 +15,11 @@ const ToolItem = (props: ToolItemProps) => {
     });
 
     return (
-        <div className='stsp-toolbar-item' ref={itemRef}>
-            <div className='stsp-toolbar-item-icon'>
+        <div className='stachesepl-toolbar-item' ref={itemRef}>
+            <div className='stachesepl-toolbar-item-icon'>
                 <SvgIcon component={props.icon} />
             </div>
-            <div className='stsp-toolbar-item-label'>
+            <div className='stachesepl-toolbar-item-label'>
                 {props.label}
             </div>
         </div>

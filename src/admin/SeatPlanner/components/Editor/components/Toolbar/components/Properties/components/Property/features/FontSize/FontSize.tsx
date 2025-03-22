@@ -32,11 +32,11 @@ const FontSize = (props: {
 
     return (
 
-        <div className='stsp-toolbar-properties-fontsize'>
+        <div className='stachesepl-toolbar-properties-fontsize'>
 
-            <label htmlFor='stsp-toolbar-properties-fontsize'>{__('FONT_SIZE')}</label>
+            <label htmlFor='stachesepl-toolbar-properties-fontsize'>{__('FONT_SIZE')}</label>
 
-            <select id='stsp-toolbar-properties-fontsize' value={displayValue} onChange={e => {
+            <select id='stachesepl-toolbar-properties-fontsize' value={displayValue} onChange={e => {
                 handleLabelChange(e.target.value as 'small' | 'medium' | 'large')
             }}>
                 <option value='' disabled>{__('SELECT_FONT_SIZE')}</option>

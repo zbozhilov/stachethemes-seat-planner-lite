@@ -10,11 +10,11 @@ const Line = (props: LineProps) => {
 
     return (
 
-        <div className='stsp-workflow-info-dialog-content-line'>
-            <div className='stsp-workflow-info-dialog-content-line-keystroke'>
+        <div className='stachesepl-workflow-info-dialog-content-line'>
+            <div className='stachesepl-workflow-info-dialog-content-line-keystroke'>
                 {props.keystroke}
             </div>
-            <div className='stsp-workflow-info-dialog-content-line-description'>
+            <div className='stachesepl-workflow-info-dialog-content-line-description'>
                 {props.description}
             </div>
         </div>
@@ -74,7 +74,7 @@ const Content = () => {
 
 
     return (
-        <div className='stsp-workflow-info-dialog-content'>
+        <div className='stachesepl-workflow-info-dialog-content'>
             {
 
                 lines.map(line => <Line key={line.keystroke} keystroke={line.keystroke} description={line.description} />)

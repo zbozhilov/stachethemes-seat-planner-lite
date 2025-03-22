@@ -1,11 +1,11 @@
 @use "./Variables.scss" as *;
 
-.stsp-editor {
+.stachesepl-editor {
 
     padding-right: 10px;
     padding-bottom: 10px;
     box-sizing: border-box;
-    background-color: var(--stsp-editor-background-color, red);
+    background-color: var(--stachesepl-editor-background-color, red);
     max-height: 100%;
 
     &-workspace {

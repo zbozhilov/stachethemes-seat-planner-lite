@@ -47,10 +47,10 @@ const SeatId = (props: {
 
     return (
 
-        <div className='stsp-toolbar-properties-seatid'>
+        <div className='stachesepl-toolbar-properties-seatid'>
 
-            <label htmlFor='stsp-toolbar-properties-seatid'>{__('SEAT_ID')}</label>
-            <input id='stsp-toolbar-properties-seatid' type="text" placeholder={__('SEAT_ID')} value={displayValue} onChange={(e) => {
+            <label htmlFor='stachesepl-toolbar-properties-seatid'>{__('SEAT_ID')}</label>
+            <input id='stachesepl-toolbar-properties-seatid' type="text" placeholder={__('SEAT_ID')} value={displayValue} onChange={(e) => {
                 handleValueChange(e.target.value)
             }} />
 

@@ -9,8 +9,8 @@ const TransformControls = () => {
     const { zoomIn, zoomOut, resetTransform } = useControls();
 
     return (
-        <div className="stsp-seat-planner-portal-container-transform-controls">
-            <div className='stsp-seat-planner-portal-container-transform-controls-buttons'>
+        <div className="stachesepl-seat-planner-portal-container-transform-controls">
+            <div className='stachesepl-seat-planner-portal-container-transform-controls-buttons'>
                 <button type='button' aria-label="Zoom In" onClick={() => zoomIn()}>{__('ZOOM_IN')}</button>
                 <button type='button' aria-label="Zoom Out" onClick={() => zoomOut()}>{__('ZOOM_OUT')}</button>
                 <button type='button' aria-label="Reset Zoom" onClick={() => resetTransform()}>{__('ZOOM_RESET')}</button>
@@ -71,7 +71,7 @@ const Container = ({ children }: { children: React.ReactNode }) => {
     };
 
     return (
-        <div className='stsp-seat-planner-portal-container'>
+        <div className='stachesepl-seat-planner-portal-container'>
             <TransformWrapper {...transformSettings}>
                 <TransformControls />
                 <TransformComponent>

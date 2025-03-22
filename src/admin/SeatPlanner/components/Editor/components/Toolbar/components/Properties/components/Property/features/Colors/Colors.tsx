@@ -9,7 +9,7 @@ const Colors = (props: {
     objects: AcceptType[]
 }) => {
     return (
-        <div className='stsp-toolbar-properties-colors'>
+        <div className='stachesepl-toolbar-properties-colors'>
 
             <Color objects={props.objects} />
             <BackgroundColor objects={props.objects} />

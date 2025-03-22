@@ -37,7 +37,7 @@ class Admin_Menu {
 
         wp_localize_script(
             'seat-scanner',
-            'stspi18n',
+            'stachesepli18n',
             Translation::get_scanner_strings()
         );
 
@@ -49,14 +49,14 @@ class Admin_Menu {
             esc_html__('Seat Scanner', 'stachethemes-seat-planner-lite'),
             esc_html__('Seat Scanner', 'stachethemes-seat-planner-lite'),
             'manage_woocommerce',
-            'stachethemes-seat-planner-scanner',
+            'stachesepl_scanner',
             [__CLASS__, 'render_seat_scanner']
         );
     }
 
     public static function render_seat_scanner() {
         echo '<div class="wrap"><h1></h1>';
-        echo '  <div id="stsp-scanner"></div>';
+        echo '  <div id="stachesepl-scanner"></div>';
         echo '</wrap>';
     }
 }

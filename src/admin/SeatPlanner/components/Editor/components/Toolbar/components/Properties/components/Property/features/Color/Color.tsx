@@ -39,11 +39,11 @@ const Color = (props: {
 
     return (
 
-        <div className='stsp-toolbar-properties-color'>
+        <div className='stachesepl-toolbar-properties-color'>
 
-            <label htmlFor='stsp-toolbar-properties-color'>{__('COLOR')}</label>
+            <label htmlFor='stachesepl-toolbar-properties-color'>{__('COLOR')}</label>
             <input
-                id='stsp-toolbar-properties-color'
+                id='stachesepl-toolbar-properties-color'
                 type="color"
                 placeholder={__('COLOR')}
                 value={displayValue}

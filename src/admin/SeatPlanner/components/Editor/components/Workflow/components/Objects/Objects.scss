@@ -1,9 +1,9 @@
-.stsp-movable {
+.stachesepl-movable {
     position: absolute;
     z-index: 0;
 }
 
-.stsp-selectable {
+.stachesepl-selectable {
     cursor: pointer;
     user-select: none;
 
@@ -17,8 +17,8 @@
             right: 0;
             bottom: 0;
             left: 0;
-            background-color: var(--stsp-selectable-color, red);
-            border: 2px solid var(--stsp-selectable-border-color, red);
+            background-color: var(--stachesepl-selectable-color, red);
+            border: 2px solid var(--stachesepl-selectable-border-color, red);
         }
     }
 }

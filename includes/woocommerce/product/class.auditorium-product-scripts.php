@@ -65,7 +65,7 @@ class Auditorium_Product_Scripts {
         // This is common for both scripts
         wp_localize_script(
             'seat-planner',
-            'stspi18n',
+            'stachesepli18n',
             Translation::get_admin_strings()
         );
     }
@@ -104,7 +104,7 @@ class Auditorium_Product_Scripts {
 
         wp_localize_script(
             'seat-planner-add-to-cart',
-            'stspi18n',
+            'stachesepli18n',
             Translation::get_front_strings()
         );
     }

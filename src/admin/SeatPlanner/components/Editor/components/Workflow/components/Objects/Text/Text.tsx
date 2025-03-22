@@ -4,7 +4,7 @@ import { TextObjectProps } from './types';
 
 const Text = (props: TextObjectProps) => {
 
-    const workflowObjectProps = useWorkflowObject(props, 'stsp-text');
+    const workflowObjectProps = useWorkflowObject(props, 'stachesepl-text');
 
     return (
         <div {...workflowObjectProps}>{props.label}</div>

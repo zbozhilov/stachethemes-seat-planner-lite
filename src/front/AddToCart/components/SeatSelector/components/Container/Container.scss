@@ -1,4 +1,4 @@
-.stsp-seat-planner-portal-container {
+.stachesepl-seat-planner-portal-container {
     max-width: 100dvw;
     max-height: 100dvh;
     box-sizing: border-box;
@@ -13,7 +13,7 @@
         height: 2.75rem;
         z-index: 100;
 
-        animation: stsp-seat-planner-portal-container-controls-animation 0.2s ease;
+        animation: stachesepl-seat-planner-portal-container-controls-animation 0.2s ease;
 
         &-buttons {
             overflow: auto;
@@ -27,8 +27,8 @@
                 border-radius: 0;
                 height: 2.75rem;
                 border: none;
-                background-color: var(--stsp-zoom-control-button-background-color, #f4f4f4);
-                color: var(--stsp-zoom-control-button-color, #333);
+                background-color: var(--stachesepl-zoom-control-button-background-color, #f4f4f4);
+                color: var(--stachesepl-zoom-control-button-color, #333);
                 outline: none;
                 width: 100%;
                 white-space: nowrap;
@@ -39,11 +39,11 @@
                 cursor: pointer;
 
                 &:hover {
-                    background-color: var(--stsp-zoom-control-button-hover-background-color, #fff);
+                    background-color: var(--stachesepl-zoom-control-button-hover-background-color, #fff);
                 }
 
                 &:active {
-                    background-color: var(--stsp-zoom-control-button-active-background-color, #f4f4f4);
+                    background-color: var(--stachesepl-zoom-control-button-active-background-color, #f4f4f4);
                 }
             }
         }
@@ -66,7 +66,7 @@
 }
 
 @media (min-width: 48em) {
-    .stsp-seat-planner-portal-container {
+    .stachesepl-seat-planner-portal-container {
 
         &-transform-controls {
             width: 31.25rem;
@@ -80,7 +80,7 @@
 }
 
 @media (max-width: 768px) {
-    .stsp-seat-planner-portal-container {
+    .stachesepl-seat-planner-portal-container {
         .react-transform-wrapper {
             max-height: calc(100dvh - 5.5rem);
             top: 1.063rem;
@@ -95,7 +95,7 @@
 
 }
 
-@keyframes stsp-seat-planner-portal-container-controls-animation {
+@keyframes stachesepl-seat-planner-portal-container-controls-animation {
     from {
         transform: translateY(100%);
     }

@@ -30,11 +30,11 @@ const Handicap = (props: {
 
     return (
 
-        <div className='stsp-toolbar-properties-handicap'>
+        <div className='stachesepl-toolbar-properties-handicap'>
 
-            <label htmlFor='stsp-toolbar-properties-handicap'>{__('HANDICAP_SEAT')}</label>
+            <label htmlFor='stachesepl-toolbar-properties-handicap'>{__('HANDICAP_SEAT')}</label>
             <input
-                id='stsp-toolbar-properties-handicap'
+                id='stachesepl-toolbar-properties-handicap'
                 type="checkbox"
                 checked={displayValue}
                 onChange={(e) => {

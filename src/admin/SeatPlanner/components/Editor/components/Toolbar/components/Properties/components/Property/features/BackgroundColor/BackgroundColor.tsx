@@ -40,11 +40,11 @@ const BackgroundColor = (props: {
 
     return (
 
-        <div className='stsp-toolbar-properties-bgcolor'>
+        <div className='stachesepl-toolbar-properties-bgcolor'>
 
-            <label htmlFor='stsp-toolbar-properties-bgcolor'>{__('BACKGROUND_COLOR')}</label>
+            <label htmlFor='stachesepl-toolbar-properties-bgcolor'>{__('BACKGROUND_COLOR')}</label>
             <input
-                id='stsp-toolbar-properties-bgcolor'
+                id='stachesepl-toolbar-properties-bgcolor'
                 type="color"
                 placeholder={__('BACKGROUND_COLOR')}
                 value={displayValue}

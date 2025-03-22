@@ -72,7 +72,7 @@ const EditorContent = (props: {
 
             <TopBar onEditorClose={handleClose} />
 
-            <div className='stsp-editor-workspace'>
+            <div className='stachesepl-editor-workspace'>
                 <Toolbar />
                 <Workflow />
             </div>
@@ -90,7 +90,7 @@ const Editor = (props: {
     const editorRef = useRef<HTMLDivElement>(null);
 
     return (
-        <div className='stsp-editor' ref={editorRef}>
+        <div className='stachesepl-editor' ref={editorRef}>
 
             <EditorProvider editorRef={editorRef}>
                 <EditorContent onClose={props.onClose} />

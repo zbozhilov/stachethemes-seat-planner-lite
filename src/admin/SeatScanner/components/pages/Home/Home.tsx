@@ -10,15 +10,15 @@ const Home = () => {
 
     return (
 
-        <div className='stsp-scan-home'>
+        <div className='stachesepl-scan-home'>
 
             <Toaster />
 
             <PageHeader title={__('SEAT_SCANNER')} />
 
             <PageContainer>
-                <div className='stsp-scan-home-content'>
-                    <div className='stsp-scan-home-content-start'>
+                <div className='stachesepl-scan-home-content'>
+                    <div className='stachesepl-scan-home-content-start'>
                         <h2>{__('QR_CODE_SCANNER')}</h2>
                         <p>{__('SCAN_THE_QR_CODE_TO_GET_SEAT_DETAILS')}</p>
                         <Button onClick={() => {

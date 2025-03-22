@@ -11,17 +11,17 @@ const TopBar = (props: {
 }) => {
 
     return (
-        <div className='stsp-top'>
+        <div className='stachesepl-top'>
             <WorkflowCloseButton onClick={props.onEditorClose} />
-            <div className='stsp-top-right'>
+            <div className='stachesepl-top-right'>
                 <ThemeSwitchButton />
-                <div className='stsp-top-right-divider' />
+                <div className='stachesepl-top-right-divider' />
                 <ImportDataButton />
-                <div className='stsp-top-right-divider' />
+                <div className='stachesepl-top-right-divider' />
                 <ExportDataButton />
-                <div className='stsp-top-right-divider' />
+                <div className='stachesepl-top-right-divider' />
                 <WorkflowInfoButton />
-                <div className='stsp-top-right-divider' />
+                <div className='stachesepl-top-right-divider' />
                 <WorkflowSettingsButton />
             </div>
         </div>

@@ -31,11 +31,11 @@ const Round = (props: {
 
     return (
 
-        <div className='stsp-toolbar-properties-round'>
+        <div className='stachesepl-toolbar-properties-round'>
 
-            <label htmlFor='stsp-toolbar-properties-round'>{__('ROUND_CORNERS')}</label>
+            <label htmlFor='stachesepl-toolbar-properties-round'>{__('ROUND_CORNERS')}</label>
             <input
-                id='stsp-toolbar-properties-round'
+                id='stachesepl-toolbar-properties-round'
                 type="checkbox"
                 checked={displayValue}
                 onChange={(e) => {

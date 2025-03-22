@@ -40,18 +40,18 @@ const Size = (props: {
     }
 
     return (
-        <div className='stsp-toolbar-properties-size'>
+        <div className='stachesepl-toolbar-properties-size'>
 
             <div>
-                <label htmlFor='stsp-toolbar-properties-size-width'>{__('WIDTH')}</label>
-                <input id='stsp-toolbar-properties-size-width' type="text" placeholder={__('WIDTH')} value={displayWidth} onChange={(e) => {
+                <label htmlFor='stachesepl-toolbar-properties-size-width'>{__('WIDTH')}</label>
+                <input id='stachesepl-toolbar-properties-size-width' type="text" placeholder={__('WIDTH')} value={displayWidth} onChange={(e) => {
                     handleResize(e.target.value, 'width')
                 }} />
             </div>
 
             <div>
-                <label htmlFor='stsp-toolbar-properties-size-height'>{__('HEIGHT')}</label>
-                <input id='stsp-toolbar-properties-size-height' type="text" placeholder={__('HEIGHT')} value={displayHeight} onChange={(e) => {
+                <label htmlFor='stachesepl-toolbar-properties-size-height'>{__('HEIGHT')}</label>
+                <input id='stachesepl-toolbar-properties-size-height' type="text" placeholder={__('HEIGHT')} value={displayHeight} onChange={(e) => {
                     handleResize(e.target.value, 'height')
                 }} />
             </div>
