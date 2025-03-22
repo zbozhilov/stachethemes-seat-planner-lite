@@ -2,7 +2,7 @@
 
 **Tags:** WooCommerce, Seat, Planner, Theatre, Cinema  
 **Requires:** 6.7  
-**Tested up to:** 6.7.1  
+**Tested up to:** 6.7
 **Requires PHP:** 8.0  
 **Stable tag:** 1.0.4  
 **License:** GPLv2 or later  
