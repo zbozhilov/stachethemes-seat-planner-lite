@@ -11,7 +11,7 @@ const EditorContent = (props: {
     onClose: () => void;
 }) => {
 
-    const inputData = document.getElementById('stachesepl--planner-editor-data') as HTMLInputElement;
+    const inputData = document.getElementById('stachesepl-planner-editor-data') as HTMLInputElement;
     const { workflowProps, setWorkflowProps } = useWorkflowProps();
     const { objects, setObjects } = useEditorObjects();
     const loaded = useRef(false);
@@ -38,7 +38,7 @@ const EditorContent = (props: {
             return;
         }
 
-        const inputData = document.getElementById('stachesepl--planner-editor-data') as HTMLInputElement;
+        const inputData = document.getElementById('stachesepl-planner-editor-data') as HTMLInputElement;
 
         if (inputData.value) {
 
