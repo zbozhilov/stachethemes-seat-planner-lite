@@ -121,7 +121,6 @@ class Auditorium_Product_Filters {
             // Lets release the seat from reserve transient because the order is finalized
             // This is done because if the order, for some reason is reverted, the transient will still keep the seat reserved
             Slot_Reservation::release_transient($product_id, $seat_id);
-
         }
     }
 
@@ -265,7 +264,7 @@ class Auditorium_Product_Filters {
     public static function save_custom_fields($post_id) {
 
         // Check if nonce is set.
-        $nonce_value = isset($_POST['woocommerce_meta_nonce']) ? wp_unslash($_POST['woocommerce_meta_nonce']) : ''; // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
+        $nonce_value = isset($_POST['woocommerce_meta_nonce']) ? sanitize_text_field(wp_unslash($_POST['woocommerce_meta_nonce'])) : '';
 
         if (!wp_verify_nonce($nonce_value, 'woocommerce_save_data')) {
             return;
@@ -285,7 +284,7 @@ class Auditorium_Product_Filters {
         update_post_meta($post_id, '_sku', filter_input(INPUT_POST, '_stmp_sku', FILTER_SANITIZE_FULL_SPECIAL_CHARS));
 
         // Save seat planner data ( if any and is a valid json )
-        $seat_planner_data = filter_input(INPUT_POST, 'stsp_seat_planner_data', FILTER_DEFAULT);
+        $seat_planner_data = isset($_POST['stsp_seat_planner_data']) ? sanitize_text_field(wp_unslash($_POST['stsp_seat_planner_data'])) : '';
 
         if (!$seat_planner_data) {
             return;
@@ -412,7 +411,6 @@ class Auditorium_Product_Filters {
         if ($seat_data) {
             echo '<div><strong>' . esc_html__('Seat ID', 'stachethemes-seat-planner-lite') . ':</strong> ' . esc_html($seat_data->seatId) . '</div>';
         }
-
     }
 
     public static function order_item_meta_end($item_id, $item, $order) {
@@ -424,7 +422,6 @@ class Auditorium_Product_Filters {
         }
 
         echo '<div><strong>' . esc_html__('Seat ID', 'stachethemes-seat-planner-lite') . ':</strong> ' . esc_html($seat_data->seatId) . '</div>';
-      
     }
 
     public static function order_status_changed($id, $status_transition_from, $status_transition_to, $that) {

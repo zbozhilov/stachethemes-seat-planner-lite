@@ -58,7 +58,7 @@ class Slot_Reservation {
 
     public static function save_settings($settings) {
 
-        $nonce_value = isset($_POST['_wpnonce']) ? wp_unslash($_POST['_wpnonce']) : ''; // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
+        $nonce_value = isset($_POST['_wpnonce']) ? sanitize_text_field(wp_unslash($_POST['_wpnonce'])) : '';
 
         if (!wp_verify_nonce($nonce_value, 'woocommerce-settings')) {
             return;
