@@ -49,7 +49,7 @@ class Admin_Menu {
             esc_html__('Seat Scanner', 'stachethemes-seat-planner-lite'),
             esc_html__('Seat Scanner', 'stachethemes-seat-planner-lite'),
             'manage_woocommerce',
-            'st-seat-scanner',
+            'stachethemes-seat-planner-scanner',
             [__CLASS__, 'render_seat_scanner']
         );
     }
