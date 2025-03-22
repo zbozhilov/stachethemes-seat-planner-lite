@@ -18,13 +18,6 @@ export const __ = (text: string): string => {
 
 };
 
-declare global {
-    interface Window {
-        stacheseplGetFormattedPrice: (price: number) => string;
-    }
-}
-
-
 export const getFormattedPrice = (price: number): string => {
 
     const {
