@@ -271,6 +271,10 @@ class Auditorium_Product_Filters {
             return;
         }
 
+        if (!current_user_can('edit_post', $post_id)) {
+            return;
+        }
+
         // Save force out of stock
         update_post_meta($post_id, '_stsp_force_out_of_stock', filter_input(INPUT_POST, '_stsp_force_out_of_stock', FILTER_SANITIZE_FULL_SPECIAL_CHARS));
 
