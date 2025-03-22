@@ -87,16 +87,16 @@ class Auditorium_Product_Scripts {
         $inline_script = sprintf(
             'var seat_planner_add_to_cart = %s;',
             wp_json_encode([
-                'cart_url'           => wc_get_cart_url(),
-                'ajax_url'           => admin_url('admin-ajax.php'),
+                'cart_url'           => esc_url(wc_get_cart_url()),
+                'ajax_url'           => esc_url(admin_url('admin-ajax.php')),
                 'nonce'              => wp_create_nonce('stachethemes_seat_planner'),
-                'currency'           => get_woocommerce_currency(),
-                'currency_symbol'    => get_woocommerce_currency_symbol(),
-                'currency_format'    => get_woocommerce_price_format(),
-                'currency_decimals'  => wc_get_price_decimals(),
-                'symbol_position'    => get_option('woocommerce_currency_pos'),
-                'decimals_separator' => wc_get_price_decimal_separator(),
-                'thousand_separator' => wc_get_price_thousand_separator()
+                'currency'           => esc_html(get_woocommerce_currency()),
+                'currency_symbol'    => esc_html(get_woocommerce_currency_symbol()),
+                'currency_format'    => esc_html(get_woocommerce_price_format()),
+                'currency_decimals'  => absint(wc_get_price_decimals()),
+                'symbol_position'    => esc_html(get_option('woocommerce_currency_pos')),
+                'decimals_separator' => esc_html(wc_get_price_decimal_separator()),
+                'thousand_separator' => esc_html(wc_get_price_thousand_separator())
             ])
         );
 
