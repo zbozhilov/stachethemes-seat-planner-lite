@@ -403,7 +403,6 @@ class Auditorium_Product_Filters {
         $order->update_meta_data('has_auditorium_product', true);
     }
 
-
     public static function after_order_itemmeta($item_id, $item, $null) {
 
         $seat_data = $item->get_meta('seat_data');
