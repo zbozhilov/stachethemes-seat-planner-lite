@@ -14,7 +14,8 @@ class Admin_Menu {
 
         $screen = get_current_screen();
 
-        if ($screen->id !== 'woocommerce_page_st-seat-scanner') {
+
+        if ($screen->id !== 'woocommerce_page_stachesepl_scanner') {
             return;
         }
 

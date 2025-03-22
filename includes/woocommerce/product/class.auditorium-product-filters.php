@@ -241,9 +241,9 @@ class Auditorium_Product_Filters {
 
         <div id="st_seat_planner_editor_options" class="panel woocommerce_options_panel hidden">
             <div class="options_group">
-                <div id="st-seat-planner-editor"></div>
+                <div id="stachesepl-seat-planner-editor"></div>
                 <input
-                    id="st-seat-planner-editor-data"
+                    id="stachesepl-seat-planner-editor-data"
                     type="hidden"
                     name="stachesepl_seat_planner_data"
                     value="<?php echo esc_attr($seat_planner_data); ?>">
@@ -252,7 +252,7 @@ class Auditorium_Product_Filters {
 
         <div id="st_seat_planner_discounts_options" class="panel woocommerce_options_panel hidden">
             <div class="options_group">
-                <div id="st-seat-planner-discounts"></div>
+                <div id="stachesepl-seat-planner-discounts"></div>
             </div>
         </div>
 
