@@ -3,7 +3,7 @@ import './index.scss';
 import Home from './components/pages/Home/Home';
 import React from 'react';
 
-const appInstance = document.getElementById('stachethemes-seat-planner-scanner') as HTMLDivElement;
+const appInstance = document.getElementById('stsp-scanner') as HTMLDivElement;
 
 const app = createRoot(appInstance);
 
