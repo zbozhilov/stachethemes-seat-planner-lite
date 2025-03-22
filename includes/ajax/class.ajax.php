@@ -47,7 +47,6 @@ class Ajax {
                             $seat->taken = in_array($seat->seatId, $taken_seats);
 
                             return $seat;
-
                         }, $seat_plan_data->objects);
 
                         wp_send_json_success($seat_plan_data);
@@ -56,6 +55,11 @@ class Ajax {
                     }
 
                 case 'add_seats_to_cart': {
+
+                        if (!check_ajax_referer('seat_planner_add_to_cart', 'nonce', false)) {
+                            wp_send_json_error(['error' => esc_html__('Invalid nonce', 'stachethemes-seat-planner-lite')]);
+                            return;
+                        }
 
                         $product_id = filter_input(INPUT_POST, 'product_id', FILTER_VALIDATE_INT);
 
@@ -77,7 +81,7 @@ class Ajax {
                         foreach ($seats_object as $seat_data) {
 
                             $seat_id       = $seat_data->seatId;
-                            
+
                             $auditorium_product->add_to_cart($seat_id);
                         }
 
