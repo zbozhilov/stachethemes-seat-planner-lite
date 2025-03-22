@@ -56,7 +56,7 @@ class Admin_Menu {
 
     public static function render_seat_scanner() {
         echo '<div class="wrap"><h1></h1>';
-        echo '  <div id="stsp-scanner"></div>';
+        echo '  <div id="stachethemes-seat-planner-scanner"></div>';
         echo '</wrap>';
     }
 }
