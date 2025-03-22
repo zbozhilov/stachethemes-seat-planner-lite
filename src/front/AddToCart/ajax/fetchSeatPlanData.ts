@@ -40,6 +40,7 @@ const fetchSeatPlanData = async ({ productId, signal }: {
             action: 'seatplanner',
             task: 'get_seat_plan_data',
             product_id: productId.toString(),
+            nonce: window.seat_planner_add_to_cart.nonce
         }),
         signal,
     });

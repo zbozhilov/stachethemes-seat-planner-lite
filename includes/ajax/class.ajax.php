@@ -19,6 +19,11 @@ class Ajax {
 
                 case 'get_seat_plan_data': {
 
+                        if (!check_ajax_referer('stachethemes_seat_planner', 'nonce', false)) {
+                            wp_send_json_error(['error' => esc_html__('Invalid nonce', 'stachethemes-seat-planner-lite')]);
+                            return;
+                        }
+
                         $product_id = filter_input(INPUT_POST, 'product_id', FILTER_VALIDATE_INT);
 
                         if (!$product_id) {
@@ -56,7 +61,7 @@ class Ajax {
 
                 case 'add_seats_to_cart': {
 
-                        if (!check_ajax_referer('seat_planner_add_to_cart', 'nonce', false)) {
+                        if (!check_ajax_referer('stachethemes_seat_planner', 'nonce', false)) {
                             wp_send_json_error(['error' => esc_html__('Invalid nonce', 'stachethemes-seat-planner-lite')]);
                             return;
                         }

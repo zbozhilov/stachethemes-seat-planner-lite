@@ -89,7 +89,7 @@ class Auditorium_Product_Scripts {
             wp_json_encode([
                 'cart_url'           => wc_get_cart_url(),
                 'ajax_url'           => admin_url('admin-ajax.php'),
-                'nonce'              => wp_create_nonce('seat_planner_add_to_cart'),
+                'nonce'              => wp_create_nonce('stachethemes_seat_planner'),
                 'currency'           => get_woocommerce_currency(),
                 'currency_symbol'    => get_woocommerce_currency_symbol(),
                 'currency_format'    => get_woocommerce_price_format(),
