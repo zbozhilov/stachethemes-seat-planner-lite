@@ -64,6 +64,10 @@ class Slot_Reservation {
             return;
         }
 
+        if (!current_user_can('manage_woocommerce')) {
+            return;
+        }
+
         $reserve_time = isset($_POST['stsp_reserve_time']) ? (int) $_POST['stsp_reserve_time'] : 0;
 
         update_option('stsp_reserve_time', max(0, $reserve_time));
