@@ -203,7 +203,7 @@ class Auditorium_Product_Filters {
             if (wc_product_sku_enabled()) {
                 woocommerce_wp_text_input(
                     array(
-                        'id'          => '_stmp_sku',
+                        'id'          => '_stachesepl_sku',
                         'value'       => $product->get_sku('edit'),
                         'label'       => '<abbr title="' . esc_attr__('Stock Keeping Unit', 'stachethemes-seat-planner-lite') . '">' . esc_html__('SKU', 'stachethemes-seat-planner-lite') . '</abbr>',
                         'desc_tip'    => true,
@@ -281,7 +281,7 @@ class Auditorium_Product_Filters {
         update_post_meta($post_id, '_stachesepl_stop_date', filter_input(INPUT_POST, '_stachesepl_stop_date', FILTER_SANITIZE_FULL_SPECIAL_CHARS));
 
         // Save sku
-        update_post_meta($post_id, '_sku', filter_input(INPUT_POST, '_stmp_sku', FILTER_SANITIZE_FULL_SPECIAL_CHARS));
+        update_post_meta($post_id, '_sku', filter_input(INPUT_POST, '_stachesepl_sku', FILTER_SANITIZE_FULL_SPECIAL_CHARS));
 
         // Save seat planner data ( if any and is a valid json )
         $seat_planner_data = isset($_POST['stachesepl_seat_planner_data']) ? sanitize_text_field(wp_unslash($_POST['stachesepl_seat_planner_data'])) : '';
