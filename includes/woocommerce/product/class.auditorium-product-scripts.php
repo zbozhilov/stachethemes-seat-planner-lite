@@ -86,7 +86,7 @@ class Auditorium_Product_Scripts {
 
         $inline_script = sprintf(
             'var seat_planner_add_to_cart = %s;',
-            json_encode([
+            wp_json_encode([
                 'cart_url'           => wc_get_cart_url(),
                 'ajax_url'           => admin_url('admin-ajax.php'),
                 'currency'           => get_woocommerce_currency(),
