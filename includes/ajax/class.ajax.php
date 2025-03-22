@@ -73,7 +73,7 @@ class Ajax {
                             return;
                         }
 
-                        $seats_string = filter_input(INPUT_POST, 'selected_seats', FILTER_UNSAFE_RAW);
+                        $seats_string = isset($_POST['selected_seats']) ? sanitize_text_field(wp_unslash($_POST['selected_seats'])) : '';
                         $seats_object = json_decode($seats_string);
 
                         if (!$seats_object) {
@@ -85,7 +85,7 @@ class Ajax {
 
                         foreach ($seats_object as $seat_data) {
 
-                            $seat_id       = $seat_data->seatId;
+                            $seat_id = $seat_data->seatId;
 
                             $auditorium_product->add_to_cart($seat_id);
                         }
