@@ -11,11 +11,11 @@ const Discounts = () => {
     }
 
     return (
-        <div className='st-seat-planner-discounts'>
+        <div className='stachesepl--planner-discounts'>
 
             <Toaster />
 
-            <h4 className='st-seat-planner-discounts-head'>{__('MANAGE_DISCOUNTS')}</h4>
+            <h4 className='stachesepl--planner-discounts-head'>{__('MANAGE_DISCOUNTS')}</h4>
 
             <ul></ul>
 

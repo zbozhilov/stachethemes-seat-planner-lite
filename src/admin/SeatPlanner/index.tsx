@@ -3,7 +3,7 @@ import React from 'react';
 import OpenEditorButton from './components/OpenEditorButton/OpenEditorButton';
 import './index.scss';
 
-const appInstance = document.getElementById('st-seat-planner-editor') as HTMLDivElement;
+const appInstance = document.getElementById('stachesepl--planner-editor') as HTMLDivElement;
 
 const app = createRoot(appInstance);
 
