@@ -5,6 +5,7 @@ declare global {
     interface Window {
         seat_planner_add_to_cart: {
             ajax_url: string;
+            nonce: string;
             cart_url: string;
             currency: string;
             currency_symbol: string;

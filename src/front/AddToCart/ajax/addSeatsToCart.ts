@@ -30,6 +30,7 @@ const addSeatsToCart = async ({ productId, selectedSeatsData, signal }: {
             task: 'add_seats_to_cart',
             selected_seats: JSON.stringify(selectedSeatsData),
             product_id: productId.toString(),
+            nonce: window.seat_planner_add_to_cart.nonce
         }),
         signal,
     });
