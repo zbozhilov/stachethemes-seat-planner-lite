@@ -40,6 +40,9 @@ Easily create and manage seating arrangements for events, venues, or any seat-ba
 - [React Hot Toast](https://react-hot-toast.com/)
 - [React Zoom Pan Pinch](https://www.npmjs.com/package/react-zoom-pan-pinch)
 
+### Source repository
+https://github.com/zbozhilov/stachethemes-seat-planner-lite
+
 ## Changelog
 
 ### 1.0.4

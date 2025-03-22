@@ -28,6 +28,9 @@ Easily create and manage seating arrangements for events, venues, or any seat-ba
 2. Visit **Plugins**.
 3. Activate the Stachethemes Seat Planner Lite plugin.
 
+== Source Repository == 
+https://github.com/zbozhilov/stachethemes-seat-planner-lite
+
 == Credits ==
 https://mui.com/material-ui/material-icons/
 https://react-hot-toast.com/
