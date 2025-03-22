@@ -2,6 +2,10 @@
 
 namespace Stachethemes\SeatPlannerLite;
 
+if (! defined('ABSPATH')) {
+    exit;
+}
+
 class Ajax {
 
     public static function init() {

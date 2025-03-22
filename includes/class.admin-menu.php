@@ -2,6 +2,10 @@
 
 namespace Stachethemes\SeatPlannerLite;
 
+if (! defined('ABSPATH')) {
+    exit;
+}
+
 class Admin_Menu {
 
     public static function init() {

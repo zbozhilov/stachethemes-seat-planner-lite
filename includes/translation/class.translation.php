@@ -2,6 +2,9 @@
 
 namespace Stachethemes\SeatPlannerLite;
 
+if (! defined('ABSPATH')) {
+    exit;
+}
 
 class Translation {
 

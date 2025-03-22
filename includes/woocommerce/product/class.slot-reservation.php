@@ -2,6 +2,10 @@
 
 namespace Stachethemes\SeatPlannerLite;
 
+if (! defined('ABSPATH')) {
+    exit;
+}
+
 /**
  * Slot Reservation class
  * This class is responsible for reserving seats in the cart for a certain amount of time
