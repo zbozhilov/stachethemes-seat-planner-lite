@@ -32,6 +32,16 @@
         
     }
 
+    &.stachesepl-add-to-cart-button {
+        background-color: var(--stachesepl-header-button-add-to-cart-background-color, #4CAF50);
+        color: var(--stachesepl-header-button--add-to-cart-color, #fff);
+
+        &:hover {
+            background-color: var(--stachesepl-header-button-add-to-cart-hover-background-color, #45a049);
+            color: var(--stachesepl-header-button-add-to-cart-hover-color, #fff);
+        }
+    }
+
     &.loading {
         color: rgba(0, 0, 0, 0) !important;
 

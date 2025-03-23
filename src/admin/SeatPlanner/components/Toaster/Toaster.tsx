@@ -9,7 +9,7 @@ const Toaster = () => {
                 }}
                  toastOptions={{
                      duration: 2000,
-                     className: 'strsai-toast',
+                     className: 'stachesepl-toast',
                      style: {
                          background: '#1e1e1e',
                          color: '#fff',
