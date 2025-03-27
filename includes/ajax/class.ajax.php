@@ -17,10 +17,17 @@ class Ajax {
 
         if (!check_ajax_referer('stachethemes_seat_planner', 'nonce', false)) {
             wp_send_json_error(['error' => esc_html__('Invalid nonce', 'stachethemes-seat-planner-lite')]);
-            return;
+            wp_die();
         }
 
-        $task = filter_input(INPUT_POST, 'task', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+        $task = isset($_POST['task']) ? sanitize_key($_POST['task']) : '';
+
+        $allowed_tasks = ['get_seat_plan_data', 'add_seats_to_cart'];
+
+        if (empty($task) || !in_array($task, $allowed_tasks, true)) {
+            wp_send_json_error(['error' => esc_html__('Invalid task', 'stachethemes-seat-planner-lite')]);
+            wp_die();
+        }
 
         try {
 
