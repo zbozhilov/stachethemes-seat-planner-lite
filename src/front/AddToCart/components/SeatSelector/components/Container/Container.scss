@@ -54,7 +54,7 @@
         max-height: 100dvh;
         width: 100dvw;
         height: 100dvh;
-        top: 0;
+        top: 0.5rem;
 
     }
 
@@ -83,7 +83,7 @@
     .stachesepl-seat-planner-portal-container {
         .react-transform-wrapper {
             max-height: calc(100dvh - 5.5rem);
-            top: 1.063rem;
+            top: 0.55rem;
         }
 
         .react-transform-component {
