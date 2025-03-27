@@ -116,7 +116,7 @@ class Ajax {
             wp_send_json_error(array('error' => $e->getMessage()));
         }
 
-        exit;
+        wp_die();
     }
 }
 
