@@ -5,15 +5,19 @@
     border: none;
     outline: none;
     border-radius: 3px;
-    padding: 0.5rem 1rem;
+    padding: 0.75rem 1rem;
     cursor: pointer;
     display: flex;
     align-items: center;
     justify-content: center;
     gap: 5px;
+    line-height: 1;
+    font-size: 1rem;
 
     svg {
-        font-size: 1.2rem;
+        font-size: 1rem;
+        position: relative;
+        top: 0.063rem;
     }
 
     &:hover {
@@ -30,6 +34,16 @@
             color: var(--stachesepl-header-button-hover-color, #202020);
         }
         
+    }
+
+    &.stachesepl-add-to-cart-button {
+        background-color: var(--stachesepl-header-button-add-to-cart-background-color, #4CAF50);
+        color: var(--stachesepl-header-button--add-to-cart-color, #fff);
+
+        &:hover {
+            background-color: var(--stachesepl-header-button-add-to-cart-hover-background-color, #45a049);
+            color: var(--stachesepl-header-button-add-to-cart-hover-color, #fff);
+        }
     }
 
     &.loading {
