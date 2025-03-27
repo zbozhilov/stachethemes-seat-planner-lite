@@ -128,8 +128,6 @@ class Ajax {
             }
         } catch (\Exception $e) {
 
-            error_log($e->getMessage()); // Log the error
-
             // do not expose getMessage() to the user
             wp_send_json_error(array('error' => esc_html__('Sorry, something went wrong.', 'stachethemes-seat-planner-lite')));
         }
