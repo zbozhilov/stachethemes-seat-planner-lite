@@ -60,5 +60,8 @@ Upgrade to **Stachethemes Seat Planner Premium** for advanced features:
 
 == Changelog ==
 
+= 1.0.5 =
+- Add to cart seat validation improvements
+
 = 1.0.4 =
 - Initial public release with core seat selection features.
