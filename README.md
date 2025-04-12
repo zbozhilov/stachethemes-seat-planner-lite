@@ -4,10 +4,10 @@
 **Requires:** 6.7  
 **Tested up to:** 6.7
 **Requires PHP:** 8.0  
-**Stable tag:** 1.0.4  
+**Stable tag:** 1.0.5  
 **License:** GPLv2 or later  
 **WC requires at least:** 9.5  
-**WC tested up to:** 9.7  
+**WC tested up to:** 9.8  
 
 A WooCommerce extension for creating and managing seat-based products with a drag & drop seat planner.
 
