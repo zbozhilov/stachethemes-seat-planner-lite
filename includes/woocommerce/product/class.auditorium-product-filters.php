@@ -2,8 +2,6 @@
 
 namespace Stachethemes\SeatPlannerLite;
 
-use Automattic\WooCommerce\StoreApi\Exceptions\InvalidCartException;
-
 if (!defined('ABSPATH')) {
     exit;
 }
@@ -76,20 +74,16 @@ class Auditorium_Product_Filters {
 
             if ($product->is_seat_taken($seat_id)) {
 
-                $error_message = sprintf(
-                    // translators: %s: seat id
-                    esc_html__(
-                        'Seat %s is already taken. Please remove it from your cart and select a different seat.',
-                        'stachethemes-seat-planner-lite'
+                wc_add_notice(
+                    sprintf(
+                        // translators: %s is the seat id
+                        esc_html__(
+                            'Seat %s is already taken. Please remove it from your cart and select a different seat.',
+                            'stachethemes-seat-planner-lite'
+                        ),
+                        esc_html($seat_id)
                     ),
-                    esc_html($seat_id)
-                );
-
-                throw new InvalidCartException(
-                    'woocommerce_cart_error',
-                    // phpcs:ignore WordPress.Security.EscapeOutput.ExceptionNotEscaped                  
-                    new \WP_Error('woocommerce_cart_error', $error_message),
-                    400
+                    'error'
                 );
             }
         }
@@ -471,6 +465,7 @@ class Auditorium_Product_Filters {
             return;
         }
 
+        /** @var \WC_Order_Item_Product[] $items */
         $items = $order->get_items();
 
         foreach ($items as $item) {
