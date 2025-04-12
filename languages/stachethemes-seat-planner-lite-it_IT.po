@@ -1,0 +1,615 @@
+# Copyright (C) 2025 Stachethemes
+# This file is distributed under the GNU General Public License v2 or later.
+msgid ""
+msgstr ""
+"Project-Id-Version: Stachethemes Seat Planner Lite 1.0.5\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/stachethemes-seat-"
+"planner-lite\n"
+"Last-Translator: Stachethemes\n"
+"Language-Team: Italian\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"POT-Creation-Date: 2025-04-12T20:43:42+00:00\n"
+"PO-Revision-Date: 2025-04-12 20:49+0000\n"
+"X-Generator: Loco https://localise.biz/\n"
+"X-Domain: stachethemes-seat-planner-lite\n"
+"Language: it_IT\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Loco-Version: 2.7.2; wp-6.7.2"
+
+#. translators: %d: number of objects imported
+#: includes/translation/class.translation.php:97
+msgid "%d Objects Imported"
+msgstr "%d Oggetti Importati"
+
+#. translators: %d: number of seats
+#: includes/translation/class.translation.php:125
+msgid "%d Seat added to cart."
+msgstr "%d Posto aggiunto al carrello."
+
+#. translators: %d: number of seats
+#: includes/translation/class.translation.php:121
+msgid "%d Seat selected"
+msgstr "%d Posto selezionato"
+
+#. translators: %d: number of seats
+#: includes/translation/class.translation.php:127
+msgid "%d Seats added to cart."
+msgstr "%d Posti aggiunti al carrello."
+
+#. translators: %d: number of seats
+#: includes/translation/class.translation.php:123
+msgid "%d Seats selected"
+msgstr "%d Posti selezionati"
+
+#. Description of the plugin
+#: stachethemes-seat-planner-lite.php
+msgid ""
+"A WooCommerce extension that adds a custom product type for selecting seats "
+"with a drag & drop seat planner. Easily create and manage seating "
+"arrangements for events, venues, or any seat-based products."
+msgstr ""
+"Un'estensione WooCommerce che aggiunge un tipo di prodotto personalizzato "
+"per la selezione dei posti con un pianificatore di posti drag & drop. Crea e "
+"gestisci facilmente disposizioni dei posti per eventi, luoghi o qualsiasi "
+"prodotto basato su posti."
+
+#: stachethemes-seat-planner-lite.php:83
+msgid "Activate WooCommerce"
+msgstr "Attiva WooCommerce"
+
+#: includes/translation/class.translation.php:90
+msgid "Add Discount"
+msgstr "Aggiungi Sconto"
+
+#: includes/translation/class.translation.php:79
+msgid "Add Image"
+msgstr "Aggiungi Immagine"
+
+#: includes/translation/class.translation.php:81
+msgid "Add Selected Image"
+msgstr "Aggiungi Immagine Selezionata"
+
+#: includes/translation/class.translation.php:116
+msgid "Add to Cart"
+msgstr "Aggiungi al Carrello"
+
+#. translators: %s: product name
+#: includes/woocommerce/product/class.auditorium-product.php:114
+msgid "Add to cart: &ldquo;%s&rdquo;"
+msgstr "Aggiungi al carrello: “%s”"
+
+#: includes/woocommerce/product/class.auditorium-product-filters.php:126
+#: includes/woocommerce/product/class.auditorium-product-filters.php:131
+msgid "Auditorium Product"
+msgstr "Prodotto Auditorium"
+
+#: includes/translation/class.translation.php:75
+msgid "Back to Edit Product Page"
+msgstr "Torna alla Pagina di Modifica Prodotto"
+
+#: includes/translation/class.translation.php:52
+msgid "Background Color"
+msgstr "Colore di Sfondo"
+
+#: includes/translation/class.translation.php:78
+msgid "Background Image"
+msgstr "Immagine di Sfondo"
+
+#: includes/translation/class.translation.php:82
+msgid "Background Image Opacity"
+msgstr "Opacità Immagine di Sfondo"
+
+#: includes/translation/class.translation.php:18
+#: includes/translation/class.translation.php:72
+#: includes/translation/class.translation.php:115
+msgid "Close"
+msgstr "Chiudi"
+
+#: includes/translation/class.translation.php:51
+msgid "Color"
+msgstr "Colore"
+
+#: stachethemes-seat-planner-lite.php:60
+msgid "Deactivate Lite Version"
+msgstr "Disattiva Versione Lite"
+
+#: includes/translation/class.translation.php:69
+msgid "Decrease Grid Size"
+msgstr "Diminuisci Dimensione Griglia"
+
+#: includes/translation/class.translation.php:65
+msgid "Deselect All Objects"
+msgstr "Deseleziona Tutti gli Oggetti"
+
+#: includes/translation/class.translation.php:36
+msgctxt "Direction"
+msgid "Left"
+msgstr "Sinistra"
+
+#: includes/translation/class.translation.php:37
+msgctxt "Direction"
+msgid "Top"
+msgstr "Alto"
+
+#: includes/woocommerce/product/class.auditorium-product-filters.php:163
+msgid "Discounts"
+msgstr "Sconti"
+
+#: includes/translation/class.translation.php:88
+msgid "Discounts are not available in the LITE version."
+msgstr "Gli sconti non sono disponibili nella versione LITE."
+
+#: includes/translation/class.translation.php:40
+msgid "Display Label"
+msgstr "Etichetta di Visualizzazione"
+
+#: includes/translation/class.translation.php:106
+msgid ""
+"Dynamic pricing is not supported in the LITE version. Price will be applied "
+"to all seats"
+msgstr ""
+"La tariffazione dinamica non è supportata nella versione LITE. Il prezzo "
+"sarà applicato a tutti i posti."
+
+#: includes/translation/class.translation.php:85
+msgid "Export feature is not available in the LITE version."
+msgstr "La funzione di esportazione non è disponibile nella versione LITE."
+
+#: includes/translation/class.translation.php:98
+msgid "Export Seat Data"
+msgstr "Esporta Dati Posti"
+
+#: includes/translation/class.translation.php:99
+msgid "Exporting Data"
+msgstr "Esportazione Dati"
+
+#: includes/ajax/class.ajax.php:100
+msgid "Failed to add seat to cart"
+msgstr "Impossibile aggiungere il posto al carrello"
+
+#: includes/translation/class.translation.php:74
+msgid "Failed to add seats to cart."
+msgstr "Impossibile aggiungere i posti al carrello."
+
+#: includes/translation/class.translation.php:130
+msgid "Failed to fetch seat plan data."
+msgstr "Impossibile recuperare i dati del piano posti."
+
+#: includes/ajax/class.ajax.php:109
+msgid "Failed to generate mini cart"
+msgstr "Impossibile generare il mini carrello"
+
+#: includes/ajax/class.ajax.php:48
+msgid "Failed to retrieve seat plan data"
+msgstr "Impossibile recuperare i dati del piano posti"
+
+#: includes/ajax/class.ajax.php:54
+msgid "Failed to retrieve taken seats"
+msgstr "Impossibile recuperare i posti occupati"
+
+#: includes/translation/class.translation.php:46
+msgid "Font Size"
+msgstr "Dimensione del Carattere"
+
+#: includes/woocommerce/product/class.auditorium-product.php:98
+msgid "Free"
+msgstr "Gratuito"
+
+#: includes/woocommerce/product/class.auditorium-product-filters.php:149
+msgid "General"
+msgstr "Generale"
+
+#: includes/translation/class.translation.php:58
+msgid "Generic Properties"
+msgstr "Proprietà Generiche"
+
+#: stachethemes-seat-planner-lite.php:46
+msgid "Get Full Version"
+msgstr "Ottieni Versione Completa"
+
+#: stachethemes-seat-planner-lite.php:89
+msgid "Get WooCommerce"
+msgstr "Ottieni WooCommerce"
+
+#: includes/translation/class.translation.php:68
+msgid "Grid Color"
+msgstr "Colore della Griglia"
+
+#: includes/translation/class.translation.php:67
+msgid "Grid Contrast"
+msgstr "Contrasto della Griglia"
+
+#: includes/translation/class.translation.php:53
+msgid "Handicap Seat"
+msgstr "Posto per Disabili"
+
+#: includes/translation/class.translation.php:39
+msgid "Height"
+msgstr "Altezza"
+
+#. Plugin URI of the plugin
+#: stachethemes-seat-planner-lite.php
+msgid "https://woocommerce.com/products/stachethemes-seat-planner/"
+msgstr "https://woocommerce.com/products/stachethemes-seat-planner/"
+
+#. Author URI of the plugin
+#: stachethemes-seat-planner-lite.php
+msgid "https://woocommerce.com/vendor/stachethemes/"
+msgstr "https://woocommerce.com/vendor/stachethemes/"
+
+#: includes/translation/class.translation.php:94
+msgid "Import"
+msgstr "Importa"
+
+#: includes/translation/class.translation.php:84
+msgid "Import feature is not available in the LITE version."
+msgstr "La funzione di importazione non è disponibile nella versione LITE."
+
+#: includes/translation/class.translation.php:92
+msgid "Import Seat Plan"
+msgstr "Importa Piano dei Posti"
+
+#: includes/translation/class.translation.php:70
+msgid "Increase Grid Size"
+msgstr "Aumenta Dimensione Griglia"
+
+#: includes/translation/class.translation.php:29
+msgid "Incremental Pattern Applied"
+msgstr "Modello Incrementale Applicato"
+
+#: includes/ajax/class.ajax.php:36 includes/ajax/class.ajax.php:75
+msgid "Invalid product ID"
+msgstr "ID prodotto non valido"
+
+#: includes/ajax/class.ajax.php:82
+msgid "Invalid seat data format"
+msgstr "Formato dati posto non valido"
+
+#: includes/ajax/class.ajax.php:94
+msgid "Invalid seat ID"
+msgstr "ID posto non valido"
+
+#: includes/ajax/class.ajax.php:25
+msgid "Invalid task"
+msgstr "Compito non valido"
+
+#: includes/translation/class.translation.php:64
+msgid "Invert Selection"
+msgstr "Inverti Selezione"
+
+#: includes/translation/class.translation.php:60
+msgid "Keystroke Actions"
+msgstr "Azioni da Tastiera"
+
+#: includes/translation/class.translation.php:44
+msgid "Label"
+msgstr "Etichetta"
+
+#: includes/translation/class.translation.php:49
+msgid "Large"
+msgstr "Grande"
+
+#: includes/translation/class.translation.php:89
+msgid "Manage Discounts"
+msgstr "Gestisci Sconti"
+
+#: includes/translation/class.translation.php:48
+msgid "Medium"
+msgstr "Medio"
+
+#: includes/ajax/class.ajax.php:86
+#: includes/translation/class.translation.php:114
+msgid "No seats selected"
+msgstr "Nessun posto selezionato"
+
+#: includes/translation/class.translation.php:34
+msgid "Object"
+msgstr "Oggetto"
+
+#: includes/translation/class.translation.php:27
+msgid "Objects Copied"
+msgstr "Oggetti Copiati"
+
+#: includes/translation/class.translation.php:28
+msgid "Objects Pasted"
+msgstr "Oggetti Incollati"
+
+#: includes/translation/class.translation.php:31
+msgid "Open Seat Planner"
+msgstr "Apri Pianificatore Posti"
+
+#: includes/woocommerce/product/class.auditorium-product-filters.php:214
+msgid "Out of stock"
+msgstr "Esaurito"
+
+#: includes/translation/class.translation.php:50
+msgid "Price"
+msgstr "Prezzo"
+
+#: includes/ajax/class.ajax.php:42
+msgid "Product not found"
+msgstr "Prodotto non trovato"
+
+#: includes/translation/class.translation.php:55
+msgid "Properties"
+msgstr "Proprietà"
+
+#: includes/translation/class.translation.php:17
+msgid "QR Code Scanner"
+msgstr "Scanner QR Code"
+
+#: includes/translation/class.translation.php:19
+msgid "QR Code Scanner is not available the in LITE version."
+msgstr "Lo scanner QR Code non è disponibile nella versione LITE."
+
+#: includes/woocommerce/product/class.auditorium-product.php:124
+msgid "Read more"
+msgstr "Leggi di più"
+
+#. translators: %s: product name
+#: includes/woocommerce/product/class.auditorium-product.php:114
+msgid "Read more about &ldquo;%s&rdquo;"
+msgstr "Leggi di più su “%s”"
+
+#: includes/translation/class.translation.php:62
+msgid "Redo"
+msgstr "Ripeti"
+
+#: includes/translation/class.translation.php:77
+msgid "Round Corners"
+msgstr "Angoli Arrotondati"
+
+#: includes/translation/class.translation.php:16
+msgid "Scan Now"
+msgstr "Scansiona Ora"
+
+#: includes/translation/class.translation.php:15
+msgid "Scan the QR code to validate your ticket"
+msgstr "Scansiona il codice QR per convalidare il tuo biglietto"
+
+#: includes/translation/class.translation.php:32
+msgid "Screen"
+msgstr "Schermo"
+
+#: includes/translation/class.translation.php:57
+msgid "Screen Properties"
+msgstr "Proprietà Schermo"
+
+#: includes/translation/class.translation.php:33
+msgid "Seat"
+msgstr "Posto"
+
+#. translators: %s: seat id
+#: includes/woocommerce/product/class.auditorium-product.php:206
+msgid "Seat %s is already taken"
+msgstr "Il posto %s è già occupato"
+
+#. translators: %s is the seat id
+#: includes/woocommerce/product/class.auditorium-product-filters.php:80
+msgid ""
+"Seat %s is already taken. Please remove it from your cart and select a "
+"different seat."
+msgstr ""
+"Il posto %s è già occupato. Rimuovilo dal tuo carrello e seleziona un posto "
+"diverso."
+
+#: includes/woocommerce/product/class.auditorium-product-filters.php:375
+#: includes/woocommerce/product/class.auditorium-product-filters.php:405
+#: includes/woocommerce/product/class.auditorium-product-filters.php:417
+msgid "Seat ID"
+msgstr "ID Posto"
+
+#: includes/translation/class.translation.php:41
+msgid "Seat Id"
+msgstr "Id Posto"
+
+#: includes/translation/class.translation.php:42
+msgid "Seat Label"
+msgstr "Etichetta Posto"
+
+#: includes/woocommerce/product/class.auditorium-product.php:212
+msgid "Seat not found"
+msgstr "Posto non trovato"
+
+#: includes/woocommerce/product/class.auditorium-product-filters.php:156
+msgid "Seat Planner"
+msgstr "Pianificatore Posti"
+
+#: includes/translation/class.translation.php:43
+msgid "Seat Price"
+msgstr "Prezzo Posto"
+
+#: includes/translation/class.translation.php:56
+msgid "Seat Properties"
+msgstr "Proprietà Posto"
+
+#: includes/woocommerce/product/class.slot-reservation.php:40
+msgid "Seat Reservation"
+msgstr "Prenotazione Posto"
+
+#: includes/woocommerce/product/class.slot-reservation.php:47
+msgid "Seat Reservation Time"
+msgstr "Tempo di Prenotazione Posto"
+
+#: includes/class.admin-menu.php:54 includes/class.admin-menu.php:55
+#: includes/translation/class.translation.php:14
+msgid "Seat Scanner"
+msgstr "Scanner Posti"
+
+#: includes/ajax/class.ajax.php:121
+msgid "Seats added to cart"
+msgstr "Posti aggiunti al carrello"
+
+#: includes/translation/class.translation.php:93
+msgid "Select a CSV file to import a seat plan."
+msgstr "Seleziona un file CSV per importare un piano dei posti."
+
+#: includes/translation/class.translation.php:63
+msgid "Select All Objects"
+msgstr "Seleziona Tutti gli Oggetti"
+
+#: includes/translation/class.translation.php:80
+msgid "Select Background Image"
+msgstr "Seleziona Immagine di Sfondo"
+
+#: includes/translation/class.translation.php:45
+msgid "Select Font Size"
+msgstr "Seleziona Dimensione Font"
+
+#: includes/woocommerce/product/class.auditorium-product.php:124
+#: includes/woocommerce/product/class.auditorium-product.php:130
+msgid "Select Seat"
+msgstr "Seleziona Posto"
+
+#: includes/translation/class.translation.php:54
+msgid "Selected Items"
+msgstr "Elementi Selezionati"
+
+#: includes/woocommerce/product/class.auditorium-product-filters.php:216
+msgid "Set product status to out of stock"
+msgstr "Imposta lo stato del prodotto su esaurito"
+
+#: includes/woocommerce/product/class.auditorium-product-filters.php:202
+msgid "SKU"
+msgstr "SKU"
+
+#: includes/woocommerce/product/class.auditorium-product-filters.php:204
+msgid ""
+"SKU refers to a Stock-keeping unit, a unique identifier for each distinct "
+"product and service that can be purchased."
+msgstr ""
+"SKU si riferisce a un'unità di gestione delle scorte, un identificatore "
+"unico per ciascun prodotto e servizio distinto che può essere acquistato."
+
+#: includes/translation/class.translation.php:47
+msgid "Small"
+msgstr "Piccolo"
+
+#: includes/ajax/class.ajax.php:132
+msgid "Sorry, something went wrong."
+msgstr "Spiacente, qualcosa è andato storto."
+
+#: includes/translation/class.translation.php:129
+msgid "Sorry, something went wrong. Please try again."
+msgstr "Spiacente, qualcosa è andato storto. Per favore riprova."
+
+#: includes/translation/class.translation.php:76
+msgid ""
+"Sorry, the editor is optimized for desktop devices with larger screens only."
+msgstr ""
+"Spiacente, l'editor è ottimizzato solo per dispositivi desktop con schermi "
+"più grandi."
+
+#. Author of the plugin
+#: stachethemes-seat-planner-lite.php
+msgid "Stachethemes"
+msgstr "Stachethemes"
+
+#. Plugin Name of the plugin
+#: stachethemes-seat-planner-lite.php
+msgid "Stachethemes Seat Planner Lite"
+msgstr "Stachethemes Seat Planner Lite"
+
+#: stachethemes-seat-planner-lite.php:75
+msgid ""
+"Stachethemes Seat Planner Lite requires WooCommerce to be installed and "
+"activated."
+msgstr ""
+"Stachethemes Seat Planner Lite richiede che WooCommerce sia installato e "
+"attivato."
+
+#: includes/woocommerce/product/class.auditorium-product-filters.php:202
+msgid "Stock Keeping Unit"
+msgstr "Unità di gestione delle scorte"
+
+#: includes/woocommerce/product/class.auditorium-product-filters.php:223
+msgid "Stop Date"
+msgstr "Data di Fine"
+
+#: includes/translation/class.translation.php:35
+msgid "Text"
+msgstr "Testo"
+
+#: includes/translation/class.translation.php:59
+msgid "Text Properties"
+msgstr "Proprietà del Testo"
+
+#: stachethemes-seat-planner-lite.php:59
+msgid "Thank you for purchasing the full version of Stachethemes Seat Planner!"
+msgstr ""
+"Grazie per aver acquistato la versione completa di Stachethemes Seat Planner!"
+
+#: includes/woocommerce/product/class.auditorium-product-filters.php:226
+msgid "The date ( Server Time ) on which the product will become unavailable."
+msgstr "La data (Ora del Server) in cui il prodotto diventerà non disponibile."
+
+#. translators: %d: number of objects
+#: includes/translation/class.translation.php:102
+msgid "The maximum allowed objects in the LITE version are %d"
+msgstr "Il numero massimo di oggetti consentiti nella versione LITE è %d"
+
+#. translators: %d: number of seats
+#: includes/translation/class.translation.php:104
+msgid "The maximum allowed seats in the LITE version are %d"
+msgstr "Il numero massimo di posti consentiti nella versione LITE è %d"
+
+#: includes/woocommerce/product/class.slot-reservation.php:48
+msgid "The time in minutes that a seat will be reserved in the cart."
+msgstr "Il tempo in minuti in cui un posto sarà riservato nel carrello."
+
+#: includes/woocommerce/product/templates/single/single.add-to-cart-template.php:16
+msgid "This product is currently out of stock and unavailable."
+msgstr "Questo prodotto è attualmente esaurito e non disponibile."
+
+#: includes/woocommerce/product/class.slot-reservation.php:157
+msgid ""
+"This seat was just added to another cart. Please select another seat or try "
+"again later."
+msgstr ""
+"Questo posto è stato appena aggiunto a un altro carrello. Si prega di "
+"selezionare un altro posto o riprovare più tardi."
+
+#: includes/translation/class.translation.php:71
+msgid "Toggle Editor Seat Text Display (Label, Price, Seat ID)"
+msgstr ""
+"Attiva/disattiva la visualizzazione del testo del posto nell'editor "
+"(Etichetta, Prezzo, ID Posto)"
+
+#: includes/translation/class.translation.php:66
+msgid "Toggle Grid"
+msgstr "Attiva/disattiva la Griglia"
+
+#: includes/translation/class.translation.php:30
+msgid "Toggle Theme"
+msgstr "Attiva/disattiva il Tema"
+
+#: includes/translation/class.translation.php:61
+msgid "Undo"
+msgstr "Annulla"
+
+#: includes/translation/class.translation.php:128
+#: includes/translation/class.translation.php:132
+msgid "View Cart"
+msgstr "Visualizza Carrello"
+
+#: includes/translation/class.translation.php:38
+msgid "Width"
+msgstr "Larghezza"
+
+#: includes/translation/class.translation.php:73
+msgid "Workflow Settings"
+msgstr "Impostazioni del Flusso di Lavoro"
+
+#: includes/translation/class.translation.php:117
+msgid "Zoom In +"
+msgstr "Zoom In +"
+
+#: includes/translation/class.translation.php:118
+msgid "Zoom Out -"
+msgstr "Zoom Out -"
+
+#: includes/translation/class.translation.php:119
+msgid "Zoom Reset"
+msgstr "Ripristina Zoom"
