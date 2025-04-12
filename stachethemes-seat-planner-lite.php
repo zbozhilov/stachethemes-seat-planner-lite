@@ -7,9 +7,9 @@
  * Author: Stachethemes
  * Author URI:  https://woocommerce.com/vendor/stachethemes/
  * Version: 1.0.5
- * domain Path: /languages
  * License: GNU General Public License v2 or later
  * License URI: http://www.gnu.org/licenses/gpl-2.0.html
+ * Domain Path: /languages
  * Text Domain: stachethemes-seat-planner-lite
  * Requires at least: 6.7
  * Requires PHP: 8.2
