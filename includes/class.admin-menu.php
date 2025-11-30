@@ -193,7 +193,6 @@ class Admin_Menu {
 			}
         }
 
-        $android_apk_download_url = 'https://stachethemes.com/plugins//wp-content/uploads/android/stachethemes-seat-planner.apk';
 		$current_key = get_option('stachesepl_app_secret_key', '');
 		$current_enabled = get_option('stachesepl_app_enabled', 'yes');
 		$enabled_checked_attr = ($current_enabled === 'yes') ? ' checked="checked"' : '';
@@ -208,7 +207,8 @@ class Admin_Menu {
 
 		// Android app download section
 		echo '<h2>' . esc_html__('Android App', 'stachethemes-seat-planner-lite') . '</h2>';
-		echo '<p><a class="button button-secondary" href="' . esc_url($android_apk_download_url) . '" target="_self" rel="noopener">' . esc_html__('Download Android APK', 'stachethemes-seat-planner-lite') . '</a></p>';
+		echo '<p><a class="button button-secondary" disabled="disabled" href="javascript:void(0);" target="_self" rel="noopener">' . esc_html__('Download Android APK', 'stachethemes-seat-planner-lite') . '</a></p>';
+        echo '<p class="description">' . esc_html__('Android app is not available in Lite version.', 'stachethemes-seat-planner-lite') . '</p>';
 
         echo '<form method="post" action="">';
         wp_nonce_field('stachesepl_app_settings');
