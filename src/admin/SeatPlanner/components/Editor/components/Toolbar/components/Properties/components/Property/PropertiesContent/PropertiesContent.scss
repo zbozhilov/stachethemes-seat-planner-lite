@@ -4,5 +4,10 @@
         max-height: calc(100dvh - 135px);
         overflow: auto;
         padding-bottom: 20px;
+
+        > .stachesepl-toolbar-properties-color {
+            padding: 10px;
+            box-sizing: border-box;
+        }
     }
 }

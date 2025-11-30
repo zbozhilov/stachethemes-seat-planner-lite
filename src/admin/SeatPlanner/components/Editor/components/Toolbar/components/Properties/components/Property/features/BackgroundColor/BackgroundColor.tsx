@@ -1,8 +1,8 @@
-import { useState } from "react";
-import { __ } from '@src/utils';
-import './BackgroundColor.scss';
 import { BaseObjectProps } from "@src/admin/SeatPlanner/components/Editor/components/Workflow/components/Objects/types";
 import { useEditorObjects } from "@src/admin/SeatPlanner/components/Editor/hooks";
+import { __ } from '@src/utils';
+import InputColor from "../InputColor/InputColor";
+import './BackgroundColor.scss';
 
 type AcceptType = BaseObjectProps & { backgroundColor: string };
 
@@ -16,11 +16,10 @@ const BackgroundColor = (props: {
     const { backgroundColor } = firstObject;
     const areSameBGColor = props.objects.every(object => object.backgroundColor === backgroundColor);
     const displayValue = areSameBGColor ? backgroundColor : '';
-    const [updateBGColor, setUpdateBGColor] = useState(displayValue);
 
-    const handleLabelChange = () => {
+    const handleColorChange = (color: string) => {
 
-        if (updateBGColor === displayValue) {
+        if (color === displayValue) {
             return;
         }
 
@@ -32,7 +31,7 @@ const BackgroundColor = (props: {
 
                 return {
                     ...object,
-                    backgroundColor: updateBGColor
+                    backgroundColor: color
                 }
             })
         });
@@ -43,7 +42,13 @@ const BackgroundColor = (props: {
         <div className='stachesepl-toolbar-properties-bgcolor'>
 
             <label htmlFor='stachesepl-toolbar-properties-bgcolor'>{__('BACKGROUND_COLOR')}</label>
-            <input
+
+            <InputColor
+                value={displayValue}
+                onChange={handleColorChange}
+            />
+
+            {/* <input
                 id='stachesepl-toolbar-properties-bgcolor'
                 type="color"
                 placeholder={__('BACKGROUND_COLOR')}
@@ -53,7 +58,7 @@ const BackgroundColor = (props: {
                 }}
 
                 onBlur={handleLabelChange}
-            />
+            /> */}
 
         </div>
     )

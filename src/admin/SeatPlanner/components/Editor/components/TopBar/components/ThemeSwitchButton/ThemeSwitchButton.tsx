@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Brightness4, Brightness7 } from '@mui/icons-material'
+import { Brightness7, ModeNight } from '@mui/icons-material'
 import { __ } from "@src/utils";
 
 const ThemeSwitchButton = () => {
@@ -20,7 +20,7 @@ const ThemeSwitchButton = () => {
         setTheme(theme === 'light' ? 'dark' : 'light');
     }
 
-    const Icon = theme === 'light' ? Brightness4 : Brightness7;
+    const Icon = theme === 'light' ? ModeNight : Brightness7;
 
     return (
         <div className='stachesepl-top-button' title={__('TOGGLE_THEME')}>

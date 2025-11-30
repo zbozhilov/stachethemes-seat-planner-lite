@@ -1,19 +1,21 @@
-import { East as ArrowRight } from '@mui/icons-material';
-import addSeatsToCart from "@src/front/AddToCart/ajax/addSeatsToCart";
-import { useModalState, useProductId, useSeatPlanData, useSelectedSeats, useShowViewCartButton } from "@src/front/AddToCart/components/context/hooks";
+import { useDiscounts, useModalState, useProductId, useSeatPlanData, useSelectedDate, useSelectedSeats, useShowViewCartButton } from "@src/front/AddToCart/components/context/hooks";
 import { __ } from "@src/utils";
 import { useState } from "react";
 import toast from "react-hot-toast";
 import Button from "../Button/Button";
+import { East as ArrowRight } from '@mui/icons-material';
+import addSeatsToCart from "@src/front/AddToCart/ajax/addSeatsToCart";
 
 const AddToCartButton = () => {
 
     const { productId } = useProductId();
     const { selectedSeats } = useSelectedSeats();
+    const { selectedDate } = useSelectedDate();
     const { setModalOpen } = useModalState();
     const { setShowViewCartButton } = useShowViewCartButton();
 
     const { seatPlanData } = useSeatPlanData();
+    const { discounts, hasDiscounts } = useDiscounts();
 
     const [loading, setLoading] = useState(false);
 
@@ -32,7 +34,7 @@ const AddToCartButton = () => {
 
 
     const getSelectedSeatsData = () => {
-        const selectedSeatsData: { seatId: string }[] = [];
+        const selectedSeatsData: { seatId: string, discountId: string }[] = [];
 
         const seatPlanSeats = seatPlanData?.objects.filter((object) => object.type === 'seat');
 
@@ -42,13 +44,20 @@ const AddToCartButton = () => {
 
         selectedSeats.forEach((seatId) => {
             const seatData = seatPlanSeats.find((seat) => seat.seatId === seatId);
-            
+
             if (!seatData) {
                 return;
             }
 
+            let seatDiscount = '';
+
+            if (hasDiscounts && seatData.discount) {
+                seatDiscount = discounts.some((discount) => discount.name === seatData.discount) ? seatData.discount : '';
+            }
+
             selectedSeatsData.push({
-                seatId: seatData.seatId
+                seatId: seatData.seatId,
+                discountId: seatDiscount
             });
         });
 
@@ -75,6 +84,7 @@ const AddToCartButton = () => {
             const result = await addSeatsToCart({
                 productId: productId,
                 selectedSeatsData: selectedSeatsData,
+                selectedDate: selectedDate,
                 signal: new AbortController().signal
             });
 
@@ -91,8 +101,8 @@ const AddToCartButton = () => {
 
                 const seatsCount = selectedSeats.length;
 
-
                 if (seatsCount === 1) {
+
                     toast.success(
                         <span
                             className="stachesepl-toast-added-to-cart"
@@ -103,20 +113,32 @@ const AddToCartButton = () => {
                                         __('A__VIEW_CART')
                                     ].join(' ')
                             }} />);
-                    return;
+
+                } else {
+
+                    toast.success(
+                        <span
+                            className="stachesepl-toast-added-to-cart"
+                            dangerouslySetInnerHTML={{
+                                __html:
+                                    [
+                                        __('D_SEATS_ADDED_TO_CART').replace('%d', seatsCount.toString()),
+                                        __('A__VIEW_CART')
+                                    ].join(' ')
+                            }} />);
+
                 }
 
+                if (
+                    window.seat_planner_add_to_cart &&
+                    window.seat_planner_add_to_cart.cart_redirect_after_add === 'yes' &&
+                    typeof window.seat_planner_add_to_cart.cart_redirect_url === 'string'
+                ) {
+                    setTimeout(() => {
+                        window.location.href = window.seat_planner_add_to_cart.cart_redirect_url;
+                    }, 50);
+                }
 
-                toast.success(
-                    <span
-                        className="stachesepl-toast-added-to-cart"
-                        dangerouslySetInnerHTML={{
-                            __html:
-                                [
-                                    __('D_SEATS_ADDED_TO_CART').replace('%d', seatsCount.toString()),
-                                    __('A__VIEW_CART')
-                                ].join(' ')
-                        }} />);
                 return;
 
             }
@@ -125,8 +147,6 @@ const AddToCartButton = () => {
             toast.error(result.data.error || __('GENERIC_ERROR_MESSAGE'));
 
         } catch (e) {
-
-            console.log('Error', e);
 
             setLoading(false);
 

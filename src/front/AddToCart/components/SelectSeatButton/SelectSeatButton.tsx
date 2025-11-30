@@ -1,12 +1,12 @@
 import { __ } from "@src/utils";
-import React from "react";
-import { useModalState, useProductId, useSelectedSeats, useShowViewCartButton } from "../context/hooks";
+import React, { useEffect, useState } from "react";
+import { Toaster } from "react-hot-toast";
+import { Portal } from "react-portal";
+import { useModalState, useProductId, useSelectedDate, useSelectedSeats, useShowViewCartButton } from "../context/hooks";
 import Modal from "../Modal/Modal";
 import SeatSelector from "../SeatSelector/SeatSelector";
 import { useButtonLabel, useProductSeatPlan } from "./hooks";
 import { hasSeatPlanData } from "./utils";
-import { Toaster } from "react-hot-toast";
-import { Portal } from "react-portal";
 
 const SelectSeatButton = (props: {
     buttonAttribs: {
@@ -17,13 +17,15 @@ const SelectSeatButton = (props: {
 }) => {
 
     const { productId } = useProductId();
+    const { selectedDate } = useSelectedDate();
     const { modalOpen, setModalOpen } = useModalState();
     const { showViewCartButton } = useShowViewCartButton();
     const { selectedSeats } = useSelectedSeats();
 
     const { data, dataState } = useProductSeatPlan({
         productId: productId,
-        disabled: !modalOpen
+        disabled: !modalOpen,
+        selectedDate: selectedDate
     });
 
     const handleButtonClick = (e: React.MouseEvent) => {

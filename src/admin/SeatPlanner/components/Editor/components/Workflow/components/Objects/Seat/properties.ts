@@ -6,6 +6,7 @@ export const seatProperties: SeatObjectProps = {
     id: 0,
     type: 'seat',
     label: 'Seat',
+    group: '',
     move: {
         x: 0,
         y: 0
@@ -19,5 +20,6 @@ export const seatProperties: SeatObjectProps = {
     price: 0,
     color: '#000000',
     backgroundColor: '#f4f4f4',
-    fontSize: 'medium'
+    fontSize: 'medium',
+    zIndex: 0
 }

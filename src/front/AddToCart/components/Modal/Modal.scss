@@ -1,15 +1,15 @@
 .stachesepl-modal-open {
-    overflow: hidden;
+    // overflow: hidden;
 }
 
 .stachesepl-seat-planner-portal {
     position: fixed;
     width: 100dvw;
     height: 100dvh;
-    left:0;
-    top:0;
+    left: 0;
+    top: 0;
     z-index: 99999;
-    background-color: var(--stachesepl-modal-background-color, rgba(0, 0, 0, 0.25));
+    background-color: var(--stachesepl-modal-background-color, rgba(0, 0, 0, 0.5));
     backdrop-filter: blur(10px);
     display: flex;
     align-items: center;
@@ -28,6 +28,7 @@
     from {
         opacity: 0;
     }
+
     to {
         opacity: 1;
     }
@@ -37,6 +38,7 @@
     from {
         transform: scale(0.9);
     }
+
     to {
         transform: scale(1);
     }

@@ -1,0 +1,139 @@
+.stachesepl-check-double-booking-form {
+    margin: 20px 0;
+}
+
+.stachesepl-results {
+    margin-top: 20px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    padding: 15px;
+    background-color: #fff;
+}
+
+.stachesepl-result-item {
+    margin-bottom: 10px;
+    border: 1px solid #e5e5e5;
+    border-radius: 3px;
+}
+
+.stachesepl-result-header {
+    background-color: #f9f9f9;
+    padding: 10px 15px;
+    cursor: pointer;
+    user-select: none;
+
+    h4 {
+        margin: 0;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+}
+
+.stachesepl-duplicate-badge {
+    margin-left: 10px;
+    background-color: #ca4a1f;
+    color: white;
+    padding: 3px 8px;
+    border-radius: 10px;
+    font-size: 12px;
+    font-weight: normal;
+}
+
+.stachesepl-no-duplicate-badge {
+    margin-left: 10px;
+    background-color: #2e7d32;
+    color: white;
+    padding: 3px 8px;
+    border-radius: 10px;
+    font-size: 12px;
+    font-weight: normal;
+}
+
+.stachesepl-expand-icon {
+    margin-left: auto;
+    position: relative;
+    top: 2px;
+}
+
+.stachesepl-duplicate-details {
+    padding: 15px;
+
+    table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+
+    th {
+        text-align: left;
+        background-color: #f1f1f1;
+    }
+
+    td,
+    th {
+        padding: 8px;
+        border: 1px solid #e5e5e5;
+    }
+
+    a {
+        color: #2271b1;
+        text-decoration: none;
+
+        &:hover {
+            color: #135e96;
+            text-decoration: underline;
+        }
+    }
+}
+
+.stachesepl-no-duplicates {
+    padding: 15px;
+    color: #2e7d32;
+}
+
+.stachesepl-loading {
+    margin-top: 15px;
+    padding: 10px;
+    background-color: #f5f5f5;
+    border-left: 4px solid #2271b1;
+}
+
+.stachesepl-cancel-button {
+    margin-top: 10px !important;
+    background-color: #f0f0f1 !important;
+    color: #d63638 !important;
+    border-color: #d63638 !important;
+    
+    &:hover {
+        background-color: #f6f7f7 !important;
+    }
+}
+
+.stachesepl-progress-bar {
+    width: 100%;
+    height: 15px;
+    background-color: #e0e0e0;
+    border-radius: 3px;
+    margin-top: 10px;
+    overflow: hidden;
+}
+
+.stachesepl-progress {
+    height: 100%;
+    background-color: #2271b1;
+    transition: width 0.3s ease;
+}
+
+.stachesepl-check-complete {
+    margin-top: 15px;
+    padding: 10px;
+    background-color: #edf7ed;
+    border-left: 4px solid #2e7d32;
+}
+
+.stachesepl-error {
+    margin-top: 15px;
+    padding: 10px;
+    background-color: #fdeeee;
+    border-left: 4px solid #ca4a1f;
+}

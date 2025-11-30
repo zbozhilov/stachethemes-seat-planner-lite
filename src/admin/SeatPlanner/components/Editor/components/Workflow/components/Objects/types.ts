@@ -23,6 +23,7 @@ export interface BaseObjectProps {
     fontSize: 'small' | 'medium' | 'large',
     label: string,
     color: string,
+    zIndex?: number,
 }
 
 export function hasBackgroundColor(object: WorkflowObject): object is (GenericObjectProps | ScreenObjectProps | SeatObjectProps) {

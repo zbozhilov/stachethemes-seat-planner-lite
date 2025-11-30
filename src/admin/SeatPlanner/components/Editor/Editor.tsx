@@ -10,7 +10,7 @@ import { useEditorObjects, useWorkflowProps } from './hooks';
 const EditorContent = (props: {
     onClose: () => void;
 }) => {
-    
+
     const inputData = document.getElementById('stachesepl-seat-planner-editor-data') as HTMLInputElement;
     const { workflowProps, setWorkflowProps } = useWorkflowProps();
     const { objects, setObjects } = useEditorObjects();

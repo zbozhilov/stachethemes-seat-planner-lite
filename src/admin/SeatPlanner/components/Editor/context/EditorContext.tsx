@@ -19,10 +19,10 @@ interface EditorContextProps {
     gridGap: number;
     setGridGap: (gap: number | ((prev: number) => number)) => void;
 
-    seatDisplayLabel: 'label'|'price'|'seatid';
-    setSeatDisplayLabel: (label: 'label'|'price'|'seatid' | ((prev: 'label'|'price'|'seatid') => 'label'|'price'|'seatid')) => void;
+    seatDisplayLabel: 'label' | 'price' | 'seatid' | 'group' | 'status';
+    setSeatDisplayLabel: (label: 'label' | 'price' | 'seatid' | 'status' | ((prev: 'label' | 'price' | 'seatid' | 'group' | 'status') => 'label' | 'price' | 'seatid' | 'group' | 'status')) => void;
 
-    editorRef: React.RefObject<HTMLDivElement|null>;
+    editorRef: React.RefObject<HTMLDivElement | null>;
 }
 
 const EditorContext = createContext<EditorContextProps | undefined>(undefined);

@@ -7,6 +7,7 @@ import Move from "../features/Move/Move"
 import Size from "../features/Size/Size"
 import { ScreenObjectProps } from "@src/admin/SeatPlanner/components/Editor/components/Workflow/components/Objects/Screen/types"
 import PropertiesContent from "../PropertiesContent/PropertiesContent"
+import Zindex from "../features/Zindex/Zindex"
 
 const ScreenProperties = (props: {
     objects: ScreenObjectProps[]
@@ -17,6 +18,7 @@ const ScreenProperties = (props: {
             <PropertiesContent>
                 <Move objects={props.objects} />
                 <Size objects={props.objects} />
+                <Zindex objects={props.objects} />
                 <Label objects={props.objects} />
                 <FontSize objects={props.objects} />
                 <Colors objects={props.objects} />

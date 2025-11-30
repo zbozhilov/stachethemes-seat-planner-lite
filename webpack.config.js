@@ -24,10 +24,16 @@ const commonConfig = {
           options: {
             presets: [
               '@babel/preset-env',
-              '@babel/preset-react',
             ],
           },
         },
+      },
+      {
+        test: /\.css$/,
+        use: [
+          MiniCssExtractPlugin.loader,
+          'css-loader',
+        ],
       },
       {
         test: /\.scss$/,
@@ -49,6 +55,7 @@ const commonConfig = {
     new ForkTsCheckerWebpackPlugin(),
     new MiniCssExtractPlugin({
       filename: '[name].css', // Output CSS file name
+      chunkFilename: '[name].[contenthash].css',
     }),
     new DependencyExtractionWebpackPlugin({
       combineAssets: false,
@@ -64,6 +71,9 @@ const commonConfig = {
     'react': 'React',
     'react-dom': 'ReactDOM',
     'react-dom/client': 'ReactDOM',
+  },
+  watchOptions: {
+    ignored: ['**/node_modules/**', '**/assets/**'],
   },
 };
 
@@ -92,30 +102,45 @@ module.exports = (env, argv) => {
     return {
       ...productionConfig,
       entry: {
+        'admin/check_double_booking/index': './src/admin/CheckDoubleBooking/index.tsx',
+        'admin/reserved_seats/index': './src/admin/ReservedSeats/index.tsx',
         'admin/discounts/index': './src/admin/Discounts/index.tsx',
+        'admin/dates/index': './src/admin/Dates/index.tsx',
+        'admin/export_bookings/index': './src/admin/ExportBookings/index.tsx',
         'admin/seat_scanner/index': './src/admin/SeatScanner/index.tsx',
         'admin/seat_planner/index': './src/admin/SeatPlanner/index.tsx',
         'front/add_to_cart/add-to-cart': './src/front/AddToCart/index.tsx',
+        'front/cart_timer/cart-timer': './src/front/CartTimer/index.js',
       },
       output: {
         path: path.resolve(__dirname, 'assets'),
         filename: '[name].bundle.js',
-        chunkFilename: '[name].bundle.js',
+        chunkFilename: '[name].[contenthash].bundle.js',
+        uniqueName: 'stachesepl',
+        publicPath: 'auto'
+
       },
     };
   } else {
     return {
       ...developmentConfig,
       entry: {
+        'admin/check_double_booking/index': './src/admin/CheckDoubleBooking/index.tsx',
+        'admin/reserved_seats/index': './src/admin/ReservedSeats/index.tsx',
+        'admin/dates/index': './src/admin/Dates/index.tsx',
         'admin/discounts/index': './src/admin/Discounts/index.tsx',
+        'admin/export_bookings/index': './src/admin/ExportBookings/index.tsx',
         'admin/seat_scanner/index': './src/admin/SeatScanner/index.tsx',
         'admin/seat_planner/index': './src/admin/SeatPlanner/index.tsx',
         'front/add_to_cart/add-to-cart': './src/front/AddToCart/index.tsx',
+        'front/cart_timer/cart-timer': './src/front/CartTimer/index.js',
       },
       output: {
         path: path.resolve(__dirname, 'assets'),
         filename: '[name].bundle.js',
         chunkFilename: '[name].bundle.js',
+        uniqueName: 'stachesepl',
+        publicPath: 'auto'
       },
     };
   }

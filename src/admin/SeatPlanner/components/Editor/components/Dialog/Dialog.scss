@@ -16,8 +16,11 @@ body.stachesepl-dialog-open {
     display: flex;
     align-items: center;
     justify-content: center;
+    transition: opacity .2s ease;
+    
 
     &-container {
+        transition: opacity 0.2s ease, transform 0.2s ease;
         width: 600px;
         height: auto;
         background-color: var(--stachesepl-dialog-background-color, red);
@@ -105,5 +108,15 @@ body.stachesepl-dialog-open {
             }
         }
 
+    }
+}
+
+@starting-style {
+    .stachesepl-dialog {
+        opacity: 0;
+    }
+    .stachesepl-dialog-container {
+        opacity: 0;
+        transform: scale(0.9);
     }
 }

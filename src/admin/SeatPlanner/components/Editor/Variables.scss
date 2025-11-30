@@ -29,7 +29,8 @@
     --stachesepl-dialog-button-close-hover-color: #202020;
     --stachesepl-dialog-input-background-color: #f3f4f7;
     --stachesepl-dialog-input-color: #292929;
-    --stachesepl-dialog-input-placeholder-color: #52565e;;
+    --stachesepl-dialog-input-placeholder-color: #52565e;
+    ;
     --stachesepl-dialog-label-color: #292929;
 
     --stachesepl-marquee-color: rgba(0, 100, 255, 0.3);
@@ -37,6 +38,15 @@
 
     --stachesepl-selectable-color: rgba(0, 100, 255, 0.3);
     --stachesepl-selectable-border-color: rgb(0, 100, 255);
+
+    --rcp-background-color: #292929;
+    .rcp-root {
+        // Color picker
+        --rcp-background-color: #292929;
+        --rcp-field-input-color: #fff;
+        --rcp-field-input-border-color: #ddd;
+        --rcp-field-label-color: #545454;
+    }
 }
 
 .stachesepl-theme-light {
@@ -69,7 +79,8 @@
     --stachesepl-dialog-button-close-hover-color: #202020;
     --stachesepl-dialog-input-background-color: #f3f4f7;
     --stachesepl-dialog-input-color: #292929;
-    --stachesepl-dialog-input-placeholder-color: #52565e;;
+    --stachesepl-dialog-input-placeholder-color: #52565e;
+    
     --stachesepl-dialog-label-color: #292929;
 
     --stachesepl-marquee-color: rgba(0, 100, 255, 0.1);
@@ -82,6 +93,15 @@
     .stachesepl-toolbar-properties-handicap input,
     .stachesepl-toolbar-properties-bgcolor input,
     .stachesepl-toolbar-properties-color input {
-        border:1px solid #a6a6a6;
+        border: 1px solid #a6a6a6;
+    }
+
+    --rcp-background-color: #fff;
+    .rcp-root {
+        // Color picker
+        --rcp-background-color: #fff;
+        --rcp-field-input-color: #202020;
+        --rcp-field-input-border-color: #ddd;
+        --rcp-field-label-color: #545454;
     }
 }

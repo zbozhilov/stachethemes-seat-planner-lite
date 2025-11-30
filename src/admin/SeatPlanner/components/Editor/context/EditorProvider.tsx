@@ -17,7 +17,7 @@ const EditorProvider = ({
     const [workflowStates, setWorkflowStates] = useState<WorkflowObject[][]>([[]]);
     const [workflowStateIndex, setWorkflowStateIndex] = useState<number>(0);
     const [gridGap, setGridGap] = useState<number>(25);
-    const [seatDisplayLabel, setSeatDisplayLabel] = useState<'label'|'price'|'seatid'>('label');
+    const [seatDisplayLabel, setSeatDisplayLabel] = useState<'label'|'price'|'seatid' | 'group' | 'status'>('label');
 
     return (
         <EditorContext.Provider value={{

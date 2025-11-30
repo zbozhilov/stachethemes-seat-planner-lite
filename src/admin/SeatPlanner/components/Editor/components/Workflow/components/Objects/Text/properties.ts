@@ -15,5 +15,6 @@ export const textProperties: TextObjectProps = {
         height: 50
     },
     color: '#ffffff',
-    fontSize: 'medium'
+    fontSize: 'medium',
+    zIndex: 0
 }

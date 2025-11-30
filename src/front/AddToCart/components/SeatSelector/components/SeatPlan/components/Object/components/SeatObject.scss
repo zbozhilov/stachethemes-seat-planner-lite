@@ -1,0 +1,86 @@
+.stachesepl-object {
+
+    &-seat {
+
+        cursor: pointer;
+
+        &.disabled {
+            cursor: default;
+            color: var(--stachesepl-object-seat-disabled-color, #fff) !important;
+            background-color: var(--stachesepl-object-seat-disabled-bg-color, #777777) !important;
+        }
+
+        &.taken {
+            cursor: default;
+            color: var(--stachesepl-object-seat-taken-color, #fff) !important;
+            background-color: var(--stachesepl-object-seat-taken-bg-color, #eb6651) !important;
+        }
+
+        &.selected {
+            color: var(--stachesepl-object-seat-selected-color, #fff) !important;
+            background-color: var(--stachesepl-object-seat-selected-bg-color, #f79a3e) !important;
+        }
+
+
+        &:hover {
+            &:not(.disabled):not(.taken):not(.selected) {
+                filter: brightness(1.2);
+            }
+        }
+    }
+}
+
+.stachesepl-modal-message {
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    padding: 20px;
+    box-sizing: border-box;
+    background-color: #fff;
+    border-radius: 12px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+
+    p {
+        margin: 0;
+        font-size: 1.2rem;
+        line-height: 1.5;
+        color: var(--stachesepl-modal-message-text-color, #202020);
+        font-weight: 500;
+        text-align: center;
+    }
+
+    button {
+        margin-top: 20px;
+        padding: 10px 20px;
+        background-color: var(--stachesepl-modal-message-button-background-color, #eeeeee);
+        color: var(--stachesepl-modal-message-button-color, #202020);
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+        font-size: 0.875rem;
+        font-weight: 500;
+
+        &:hover {
+            background-color: var(--stachesepl-modal-message-button-background-hover, #d5d5d5);
+        }
+
+    }
+}
+
+@starting-style {
+    .stachesepl-modal-message {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+}
+
+@media screen and (max-width: 768px) {
+     .stachesepl-modal-message {
+        width: 100dvw;
+        height: 100dvh;
+        border-radius: 0;
+     }
+}

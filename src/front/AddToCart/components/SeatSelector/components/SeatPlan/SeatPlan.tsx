@@ -8,12 +8,6 @@ const SeatPlan = () => {
     const { seatPlanData } = useSeatPlanData();
     const { selectedSeats, setSelectedSeats } = useSelectedSeats();
 
-    if (!seatPlanData) {
-        return null;
-    }
-
-    const { objects } = seatPlanData;
-
     // Remove seats from "selected" if these seats are flagged as taken by someone else
     useLayoutEffect(() => {
 
@@ -26,7 +20,14 @@ const SeatPlan = () => {
             return seat && !seat.taken;
         }));
 
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [seatPlanData]);
+
+    if (!seatPlanData) {
+        return null;
+    }
+
+    const { objects } = seatPlanData;
 
     return (
         <Workflow>

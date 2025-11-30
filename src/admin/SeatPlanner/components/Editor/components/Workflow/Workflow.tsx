@@ -10,7 +10,7 @@ import { __ } from '@src/utils';
 
 const Workflow = () => {
 
-    const { objects } = useEditorObjects();
+    const { objects, getSeatsWithDuplicateSeatIds } = useEditorObjects();
     const workflowRef = useRef<HTMLDivElement | null>(null);
     const { workflowProps } = useWorkflowProps();
 
@@ -28,16 +28,20 @@ const Workflow = () => {
         height: workflowProps.height,
     }
 
-    const getDisplayLabel = (seatDisplayLabel: "label" | "price" | "seatid") => {
+    const getDisplayLabel = (seatDisplayLabel: "label" | "price" | "seatid" | "group" | "status") => {
 
         switch (seatDisplayLabel) {
             case 'label': return __('SEAT_LABEL')
             case 'price': return __('SEAT_PRICE')
             case 'seatid': return __('SEAT_ID')
+            case 'group': return __('SEAT_GROUP')
+            case 'status': return __('SEAT_STATUS')
             default: ''
         }
 
     }
+
+    const seatsWithErrors = getSeatsWithDuplicateSeatIds();
 
     return (
         <div className='stachesepl-workflow-wrapper' style={{
@@ -55,7 +59,7 @@ const Workflow = () => {
 
             {
                 seatDisplayLabel !== 'label' && <div className='stachesepl-seat-display-label-tag'>
-                    {__('DISPLAY_LABEL')}: {getDisplayLabel(seatDisplayLabel)}                
+                    {__('DISPLAY_LABEL')}: {getDisplayLabel(seatDisplayLabel)}
                 </div>
             }
 
@@ -66,7 +70,7 @@ const Workflow = () => {
                         switch (object.type) {
 
                             case 'seat':
-                                return <Seat key={object.id} {...object} />
+                                return <Seat key={object.id} {...object} outlineError={seatsWithErrors.includes(object.seatId)} />
 
                             case 'generic':
                                 return <Generic key={object.id} {...object} />

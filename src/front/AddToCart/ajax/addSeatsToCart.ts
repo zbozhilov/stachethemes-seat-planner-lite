@@ -11,11 +11,35 @@ type fetchResult = {
     } 
 }
 
-const addSeatsToCart = async ({ productId, selectedSeatsData, signal }: {
+/**
+ * addSeatsToCart
+ *
+ * Sends a request to add one or more selected seats for an Auditorium product
+ * to the WooCommerce cart via the plugin's AJAX endpoint.
+ *
+ * Params:
+ * - productId: number
+ * - selectedSeatsData: Array<{ seatId: string; discountId: string }>
+ *   Each item represents a seat ID (string) and an optional discount ID.
+ * - signal: AbortSignal used to cancel the request if needed.
+ *
+ * Behavior:
+ * - POSTs to the `seatplanner` action with task `add_seats_to_cart`, passing the
+ *   product ID, JSON-encoded seat data, and security nonce.
+ * - Expects a JSON response shaped as { success: boolean, data: { message?, error?, cart_fragments? } }.
+ * - Throws an Error if the HTTP response is not ok (e.g., network/server error).
+ *
+ * Returns:
+ * - A Promise resolving to the parsed JSON (`fetchResult`). When `success` is true,
+ *   `data.cart_fragments` may include DOM fragments to refresh the mini cart UI.
+ */
+const addSeatsToCart = async ({ productId, selectedSeatsData, selectedDate, signal }: {
     productId: number
     selectedSeatsData: {
-        seatId: string
+        seatId: string,
+        discountId: string,
     }[],
+    selectedDate: string | null,
     signal: AbortSignal
 }): Promise<fetchResult> => {
     const adminAjaxUrl = window.seat_planner_add_to_cart.ajax_url;
@@ -30,6 +54,7 @@ const addSeatsToCart = async ({ productId, selectedSeatsData, signal }: {
             task: 'add_seats_to_cart',
             selected_seats: JSON.stringify(selectedSeatsData),
             product_id: productId.toString(),
+            selected_date: selectedDate || '',
             nonce: window.seat_planner_add_to_cart.nonce
         }),
         signal,

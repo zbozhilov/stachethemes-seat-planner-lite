@@ -1,22 +1,21 @@
-type Stachesepli18nItem = {
-    [key: string]: string;
-};
-
-declare global {
-    interface Window {
-        stachesepli18n: Stachesepli18nItem;
-    }
-}
-
 export const __ = (text: string): string => {
 
-    if (!window.stachesepli18n) {
+    if (!window.stachesepl_i18n) {
         return text;
     }
 
-    return window.stachesepli18n[text] || text;
+    return window.stachesepl_i18n[text] || text;
 
 };
+
+export const sprintf = (format: string, ...args: any[]): string => {
+    return format.replace(/%(\d+)\$d/g, (match, number) => {
+        return typeof args[number - 1] !== 'undefined' ? args[number - 1] : match;
+    }).replace(/%d/g, (match) => {
+        return typeof args[0] !== 'undefined' ? args.shift() : match;
+    });
+};
+
 
 export const getFormattedPrice = (price: number): string => {
 
@@ -78,5 +77,58 @@ export const getPriceWithSymbol = (price: number): string => {
             return price.toString();
 
     }
+
+}
+
+const phpToMoment = (format: string): string => {
+    const map: Record<string, string> = {
+        // months
+        'F': 'MMMM',
+        'M': 'MMM',
+        'm': 'MM',
+        'n': 'M',
+
+        // days
+        'd': 'DD',
+        'j': 'D',
+
+        // years
+        'Y': 'YYYY',
+        'y': 'YY',
+
+        // hours
+        'H': 'HH',
+        'G': 'H',
+        'h': 'hh',
+        'g': 'h',
+
+        // minutes/seconds
+        'i': 'mm',
+        's': 'ss',
+
+        // am/pm
+        'A': 'A',
+        'a': 'a'
+    };
+
+    return format.replace(/\\?([a-zA-Z])/g, (match, token) => {
+        // keep escaped chars like \t or \.
+        if (match.startsWith('\\')) return token;
+
+        return map[token] || token;
+    });
+};
+
+
+export const getFormattedDateTime = (dateTime: string): string => {
+
+    const dateFormat = phpToMoment(window.stachesepl_date_format.date_format);
+    const timeFormat = phpToMoment(window.stachesepl_date_format.time_format);
+
+    if (typeof window.moment === 'undefined') {
+        return dateTime;
+    }
+
+    return window.moment(dateTime).format(`${dateFormat} ${timeFormat}`);
 
 }

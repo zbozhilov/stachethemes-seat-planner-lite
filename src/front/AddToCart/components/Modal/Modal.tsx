@@ -6,6 +6,7 @@ const Modal = (props: {
     open: boolean;
     onClose: () => void;
     children: React.ReactNode;
+    onOutsideClick?: () => void;
 }) => {
 
     const { open, onClose } = props;
@@ -13,9 +14,21 @@ const Modal = (props: {
 
     useEffect(() => {
 
+        // Check for modal stack and close only if the current modal is the last one
+        const onCloseCheck = () => {
+            const modals = document.querySelectorAll('.stachesepl-seat-planner-portal');
+
+            if (modals.length > 1) {
+                const isLastModal = containerRef.current === modals[modals.length - 1];
+                if (!isLastModal) return;
+            }
+
+            onClose();
+        }
+
         const handlePopState = (e: PopStateEvent) => {
             e.preventDefault();
-            onClose();
+            onCloseCheck();
         };
 
         const handleEscape = (e: KeyboardEvent) => {
@@ -25,7 +38,7 @@ const Modal = (props: {
             }
 
             if (e.key === 'Escape') {
-                onClose();
+                onCloseCheck();
             }
         }
 
@@ -54,8 +67,12 @@ const Modal = (props: {
 
     return (
         <Portal>
-            <div ref={containerRef} className='stachesepl-seat-planner-portal'>
-                {props.children}
+            <div ref={containerRef} className='stachesepl-seat-planner-portal' onMouseDown={props.onOutsideClick}>
+                <div style={{
+                    display: 'contents'
+                }}>
+                    {props.children}
+                </div>
             </div>
         </Portal>
     )

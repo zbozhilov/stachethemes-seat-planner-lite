@@ -8,6 +8,7 @@ import { GenericObjectProps } from "@src/admin/SeatPlanner/components/Editor/com
 import FontSize from "../features/FontSize/FontSize"
 import Round from "../features/Round/Round"
 import PropertiesContent from "../PropertiesContent/PropertiesContent"
+import Zindex from "../features/Zindex/Zindex"
 
 const GenericProperties = (props: {
     objects: GenericObjectProps[]
@@ -18,6 +19,7 @@ const GenericProperties = (props: {
             <PropertiesContent>
                 <Move objects={props.objects} />
                 <Size objects={props.objects} />
+                <Zindex objects={props.objects} />
                 <Round objects={props.objects} />
                 <Label objects={props.objects} />
                 <FontSize objects={props.objects} />

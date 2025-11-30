@@ -11,6 +11,9 @@ import SeatId from "../features/SeatId/SeatId"
 import Size from "../features/Size/Size"
 import Round from "../features/Round/Round"
 import PropertiesContent from "../PropertiesContent/PropertiesContent"
+import Status from "../features/Status/Status"
+import DiscountGroup from "../features/DiscountGroup/DiscountGroup"
+import Zindex from "../features/Zindex/Zindex"
 
 
 const SeatProperties = (props: {
@@ -22,11 +25,14 @@ const SeatProperties = (props: {
             <PropertiesContent>
                 <Move objects={props.objects} />
                 <Size objects={props.objects} />
+                <Zindex objects={props.objects} />
                 <Round objects={props.objects} />
+                <Status objects={props.objects} />
                 <SeatId objects={props.objects} />
                 <Label objects={props.objects} />
                 <FontSize objects={props.objects} />
                 <Price objects={props.objects} />
+                <DiscountGroup objects={props.objects} />
                 <Colors objects={props.objects} />
                 <Handicap objects={props.objects} />
             </PropertiesContent>

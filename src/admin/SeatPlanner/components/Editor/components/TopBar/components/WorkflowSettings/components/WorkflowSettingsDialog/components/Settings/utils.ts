@@ -1,11 +1,5 @@
 import { WorkflowProps } from "@src/admin/SeatPlanner/components/Editor/components/Workflow/types";
 
-declare global {
-    interface Window {
-        wp: any;
-    }
-}
-
 export interface MediaFrameImageProps {
     id: number;
     sizes: {

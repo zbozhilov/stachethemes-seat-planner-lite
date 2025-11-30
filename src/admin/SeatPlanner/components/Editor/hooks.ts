@@ -49,7 +49,7 @@ export const useEditorObjects = () => {
             ? (valueOrUpdater as (prev: WorkflowObject[]) => WorkflowObject[])(objects)
             : valueOrUpdater;
 
-        const maxAllowedObjects = 1000;
+        const maxAllowedObjects = window.stacheseplFilterMaxAllowedObjects || 2000;
 
         if (theNewObjects.length > maxAllowedObjects) {
             console.warn(`Max allowed objects is ${maxAllowedObjects}`);
@@ -80,10 +80,18 @@ export const useEditorObjects = () => {
         setIndex(index => Math.min(states.length - 1, index + 1));
     };
 
+    const getSeatsWithDuplicateSeatIds = () => {
+        const seats = objects.filter(object => object.type === 'seat');
+        const seatIds = seats.filter(seat => seat.seatId !== '').map(seat => seat.seatId);
+        const duplicateSeatIds = seatIds.filter((seatId, index) => seatIds.indexOf(seatId) !== index);
+        return duplicateSeatIds;
+    }
+
     return {
         objects,
         setObjects,
         resetState,
+        getSeatsWithDuplicateSeatIds,
         index,
         undo: goBack,
         redo: goForward,

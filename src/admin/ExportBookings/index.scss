@@ -1,0 +1,10 @@
+#stachesepl-export-bookings {
+}
+
+.stachesepl_export_bookings_options {
+    a {
+        &:before {
+            content: "\f495" !important;
+        }
+    }
+}

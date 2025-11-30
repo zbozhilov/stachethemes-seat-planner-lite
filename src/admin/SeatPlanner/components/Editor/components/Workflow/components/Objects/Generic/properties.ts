@@ -16,5 +16,6 @@ export const genericProperties: GenericObjectProps = {
     },
     color: '#000000',
     backgroundColor: '#f4f4f4',
-    fontSize: 'medium'
+    fontSize: 'medium',
+    zIndex: 0
 }

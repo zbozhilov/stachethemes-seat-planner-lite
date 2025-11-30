@@ -73,8 +73,21 @@ document.addEventListener('click', (event: MouseEvent) => {
         return {
             Tag,
             attributes,
-            children,
+            children
         }
+
+    }
+
+    const getDateSelector = (): HTMLSelectElement | HTMLInputElement | null => {
+
+        const dateSelector = target.closest('.stachesepl-product-actions')
+            ?.querySelector('.stachesepl-date-selector-input');
+
+        if (!dateSelector) {
+            return null;
+        }
+
+        return dateSelector as HTMLSelectElement | HTMLInputElement;
 
     }
 
@@ -82,7 +95,7 @@ document.addEventListener('click', (event: MouseEvent) => {
 
     app.render(
         <React.StrictMode>
-            <AddToCartProvider productId={productId}>
+            <AddToCartProvider productId={productId} dateSelector={getDateSelector()}>
                 <LazySelectSeatButton buttonAttribs={getButtonAttribs()} />
             </AddToCartProvider>
         </React.StrictMode>

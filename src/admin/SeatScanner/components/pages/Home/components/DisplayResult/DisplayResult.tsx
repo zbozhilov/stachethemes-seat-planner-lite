@@ -27,11 +27,19 @@ const DisplayResult = (props: {
         let state = 0;
 
         if (hasOrderId && isCompleted && hasSeatId) {
-            state = 1;
+            state = 1; // valid
         }
 
         if (wasScanned) {
-            state = 2;
+            state = 2; // used
+        }
+
+        if (data.date_time_timestamp && data.date_time_timestamp < Math.floor(Date.now() / 1000)) {
+            state = 3; // expired
+        }
+
+        if (!isCompleted) {
+            return 0; // invalid
         }
 
         return state;
@@ -50,6 +58,10 @@ const DisplayResult = (props: {
             return 'used';
         }
 
+        if (validState === 3) {
+            return 'expired';
+        }
+
         return 'invalid';
 
     }
@@ -63,7 +75,17 @@ const DisplayResult = (props: {
         }
 
         if (validState === 2) {
-            return __('TICKET_IS_USED');
+
+            if (!hasData || (!data.scan_author && !data.scan_date)) {
+                return __('TICKET_IS_USED');
+            }
+
+            return __('TICKET_SCANNED_BY__S__ON__S__').replace('%1$s', data.scan_author).replace('%2$s', data.scan_date);
+
+        }
+
+        if (validState === 3) {
+            return __('TICKET_IS_EXPIRED');
         }
 
         return __('TICKET_IS_INVALID');
@@ -78,6 +100,10 @@ const DisplayResult = (props: {
         }
 
         if (validState === 2) {
+            return <Warning />;
+        }
+
+        if (validState === 3) {
             return <Warning />;
         }
 
@@ -102,7 +128,7 @@ const DisplayResult = (props: {
 
             <div className="result-row">
                 <span>{__('ORDER_STATUS')}:</span>
-                <span>{hasData ? data.order_status : __('N/A')}</span>
+                <span>{hasData ? data.order_display_status : __('N/A')}</span>
             </div>
 
             <div className="result-row">
@@ -114,6 +140,13 @@ const DisplayResult = (props: {
                 <span>{__('SEAT_ID')}:</span>
                 <span>{hasData ? data.seat_id : __('N/A')}</span>
             </div>
+
+            {hasData && data.date_time && (
+                <div className="result-row">
+                    <span>{__('DATE')}:</span>
+                    <span>{data.date_time}</span>
+                </div>
+            )}
 
         </div>
     )

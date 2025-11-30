@@ -6,6 +6,9 @@ export interface AddToCartContextProps {
     productId: number,
     setProductId: (id: number) => void
 
+    selectedDate: string | null,
+    setSelectedDate: (date: string | null) => void
+
     modalOpen: boolean,
     setModalOpen: (open: boolean) => void
 

@@ -10,8 +10,8 @@ import GenericProperties from './components/Property/GenericProperties/GenericPr
 import ScreenProperties from './components/Property/ScreenProperties/ScreenProperties';
 import SeatProperties from './components/Property/SeatProperties/SeatProperties';
 import TextProperties from './components/Property/TextProperties/TextProperties';
-import './Properties.scss';
 import SelectedCount from './components/SelectedCount/SelectedCount';
+import './Properties.scss';
 
 const Properties = () => {
 

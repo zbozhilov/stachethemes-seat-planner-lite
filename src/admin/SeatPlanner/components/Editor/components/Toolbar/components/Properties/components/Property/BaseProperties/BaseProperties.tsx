@@ -7,6 +7,7 @@ import Label from "../features/Label/Label"
 import Move from "../features/Move/Move"
 import Size from "../features/Size/Size"
 import PropertiesContent from "../PropertiesContent/PropertiesContent"
+import Zindex from "../features/Zindex/Zindex"
 
 const BaseProperties = (props: {
     objects: BaseObjectProps[]
@@ -17,6 +18,7 @@ const BaseProperties = (props: {
             <PropertiesContent>
                 <Move objects={props.objects} />
                 <Size objects={props.objects} />
+                <Zindex objects={props.objects} />
                 <Label objects={props.objects} />
                 <FontSize objects={props.objects} />
                 <Color objects={props.objects} />

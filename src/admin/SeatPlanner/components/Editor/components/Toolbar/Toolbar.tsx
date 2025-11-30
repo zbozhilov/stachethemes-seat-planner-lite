@@ -1,6 +1,6 @@
 import { useSelectObjects } from '@src/admin/SeatPlanner/components/Editor/hooks';
-import Properties from './components/Properties/Properties';
 import ToolItems from './components/ToolItems/ToolItems';
+import Properties from './components/Properties/Properties';
 import './Toolbar.scss';
 
 const Toolbar = () => {

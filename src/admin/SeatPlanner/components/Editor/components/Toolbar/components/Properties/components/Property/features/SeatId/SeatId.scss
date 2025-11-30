@@ -1,21 +1,58 @@
-    .stachesepl-toolbar-properties-seatid {
-        gap: 10px;
-        box-sizing: border-box;
+.stachesepl-toolbar-properties-seatid {
+    gap: 10px;
+    box-sizing: border-box;
+    width: 100%;
+    padding: 10px;
+
+
+    label {
+        color: var(--stachesepl-toolbar-label-color, red);
+        font-size: 14px;
+        margin-bottom: 5px;
+    }
+
+    input {
         width: 100%;
-        padding: 10px;
+        box-sizing: border-box;
+        border: none;
+        padding: 5px 10px;
+        border-radius: 3px;
+    }
 
-
-        label {
-            color: var(--stachesepl-toolbar-label-color, red);
+    .stachesepl-toolbar-properties-input-error {
+        color: #d32f2f;
+        background-color: #ffebee;
+        border: 1px solid #ffcdd2;
+        border-radius: 4px;
+        font-size: 12px;
+        padding: 8px 12px;
+        margin-top: 5px;
+        margin-bottom: 5px;
+        font-weight: 500;
+        display: flex;
+        align-items: center;
+        position: relative;
+        box-shadow: 0 1px 3px rgba(211, 47, 47, 0.1);
+        
+        &::before {
+            content: "⚠";
+            margin-right: 6px;
             font-size: 14px;
-            margin-bottom: 5px;
+            color: #d32f2f;
         }
-
-        input {
-            width: 100%;
-            box-sizing: border-box;
-            border: none;
-            padding: 10px;
-            border-radius: 3px;
+        
+        &:hover {
+            background-color: #fce4ec;
+            border-color: #f8bbd9;
+        }
+        
+        /* Transition for smooth animation */
+        transition: opacity 0.3s ease-out, transform 0.3s ease-out;
+        
+        /* Starting style for entry animation */
+        @starting-style {
+            opacity: 0;
+            transform: translateY(-10px);
         }
     }
+}

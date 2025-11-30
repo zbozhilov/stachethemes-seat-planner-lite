@@ -4,13 +4,13 @@ import React, { useState } from "react";
 import './Settings.scss';
 import { hasBackgroundImage, mediaFrame } from "./utils";
 import { Close } from '@mui/icons-material';
+import InputColor from "@src/admin/SeatPlanner/components/Editor/components/Toolbar/components/Properties/components/Property/features/InputColor/InputColor";
 
 
 const Settings = () => {
 
     const { workflowProps, setWorkflowProps } = useWorkflowProps();
     const { width, height, backgroundColor, backgroundOpacity = '1' } = workflowProps;
-    const [bgColor, setBgColor] = useState(backgroundColor);
     const [bgImageOpacity, setBgImageOpacity] = useState(backgroundOpacity);
 
     const handleWidthChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -27,10 +27,10 @@ const Settings = () => {
         }))
     }
 
-    const handleBackgroundColorChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const handleBackgroundColorChange = (color: string) => {
         setWorkflowProps(prev => ({
             ...prev,
-            backgroundColor: e.target.value
+            backgroundColor: color
         }))
     }
 
@@ -88,14 +88,9 @@ const Settings = () => {
 
             <div>
                 <label htmlFor='stachesepl-workflow-settings-background-color'>{__('BACKGROUND_COLOR')}</label>
-                <input
-                    id='stachesepl-workflow-settings-background-color'
-                    type='color'
-                    value={bgColor}
-                    onChange={(e) => {
-                        setBgColor(e.target.value);
-                    }}
-                    onBlur={handleBackgroundColorChange}
+                <InputColor
+                    value={backgroundColor}
+                    onChange={handleBackgroundColorChange}
                 />
             </div>
 

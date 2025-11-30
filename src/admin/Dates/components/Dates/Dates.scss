@@ -1,0 +1,95 @@
+.stachesepl-seat-planner-dates {
+    padding: 1em 1.5em;
+    box-sizing: border-box;
+
+    .stachesepl-seat-planner-dates-head {
+        margin: 0 !important;
+    }
+
+    .stachesepl-seat-planner-dates-subtitle {
+        margin: 0 !important;
+        padding: 0 !important;
+        font-size: 0.75rem;
+        color: #545454;
+    }
+
+    ul {
+        margin: 20px 0;
+        padding: 0;
+        list-style-type: none;
+
+        li {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 10px;
+
+            label {
+                margin: 0;
+                width: 100%;
+                display: flex;
+                align-self: flex-start;
+                align-items: flex-start;
+                flex-direction: column;
+                gap: 5px;
+
+            }
+
+            input[type="datetime-local"] {
+                width: 100%;
+                margin-right: 10px;
+                padding: 5px 10px;
+                border: 1px solid #ccc;
+                border-radius: 4px;
+            }
+
+            .MuiSvgIcon-root {
+                cursor: pointer;
+                color: #202020;
+                font-size: 20px;
+                margin-top: 19px;
+
+                &:hover {
+                    color: #fc636b;
+                }
+            }
+        }
+    }
+
+    .stachesepl-seat-planner-dates-note {
+        margin: 20px 0;
+        padding: 10px;
+        background-color: #f9f9f9;
+        border-radius: 4px;
+        border: 1px solid #ccc;
+        font-size: 14px;
+
+        p {
+            margin: 0;
+            font-size: 14px;
+            color: #333;
+        }
+    }
+}
+
+@media (max-width: 782px) {
+    .stachesepl-seat-planner-dates {
+
+        ul {
+            li {
+                position: relative;
+                flex-direction: column;
+                margin-bottom: 40px;
+                padding-bottom: 40px;
+                border-bottom: 1px solid #ccc;
+
+                svg {
+                    margin-top: 0 !important;
+                    position: absolute;
+                    top: 0;
+                    right: 0;
+                }
+            }
+        }
+    }
+}

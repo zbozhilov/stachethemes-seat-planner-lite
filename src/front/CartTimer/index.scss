@@ -1,0 +1,35 @@
+/* Default cart timer styling; site owners can override these in their own CSS. */
+.stachesepl-cart-timer {
+    color: var(--stachesepl-cart-timer-color, #fb8a2e);
+    line-height: 1;
+    border-radius: 4px;
+    font-size: 0.875rem;
+    font-weight: bold;
+    margin: 0;
+    padding: 0;
+    white-space: nowrap;
+}
+
+.stachesepl-cart-timer-row {
+    display: inline-flex !important;
+    line-height: 1;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 14px;
+    border-radius: 3px;
+    margin-top: 10px;
+    background: var(--stachesepl-cart-timer-background-color, #32373c);
+    color: var(--stachesepl-cart-timer-text-color, #fff);
+}
+
+.stachesepl-cart-timer-label {
+    font-size: 0.625rem;
+    font-weight: bold;
+}
+
+/* Below 1 minute, switch to a "critical" style. This can also be overridden. */
+.stachesepl-cart-timer--critical {
+    color: var(--stachesepl-cart-timer-critical-color, #ff6c5f);
+}

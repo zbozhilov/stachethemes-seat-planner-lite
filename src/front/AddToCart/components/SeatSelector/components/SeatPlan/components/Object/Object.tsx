@@ -1,7 +1,7 @@
-import { Accessible } from '@mui/icons-material';
-import { useSelectedSeats } from '@src/front/AddToCart/components/context/hooks';
+import { useSeatPlanData, useSelectedSeats } from '@src/front/AddToCart/components/context/hooks';
 import React from 'react';
 import { FrontWorkflowObject } from 'src/front/AddToCart/types';
+import SeatObject from './components/SeatObject';
 import './Object.scss';
 import { getFontSizeByType, hasBackgroundColor, isRounded } from './utils';
 
@@ -9,6 +9,8 @@ const Object = (props: {
     data: FrontWorkflowObject,
 }) => {
 
+    const { seatPlanData } = useSeatPlanData();
+    const maxSeatsRequired = seatPlanData?.maxSeatsPerPurchase || 0;
     const { selectedSeats, setSelectedSeats } = useSelectedSeats();
 
     const style: React.CSSProperties = {
@@ -18,6 +20,7 @@ const Object = (props: {
         height: props.data.size.height,
         color: props.data.color,
         fontSize: getFontSizeByType(props.data.fontSize),
+        zIndex: props.data.zIndex ?? 0,
         backgroundColor: hasBackgroundColor(props.data) ? props.data.backgroundColor : 'transparent',
         borderRadius: isRounded(props.data) ? '50%' : undefined
     }
@@ -27,6 +30,11 @@ const Object = (props: {
         if (selectedSeats.includes(seatId)) {
             setSelectedSeats(selectedSeats.filter((id) => id !== seatId));
         } else {
+
+            if (maxSeatsRequired > 0 && selectedSeats.length >= maxSeatsRequired) {
+                return;
+            }
+            
             setSelectedSeats([...selectedSeats, seatId]);
         }
 
@@ -56,43 +64,18 @@ const Object = (props: {
 
         case 'seat': {
 
-            const isSelected = selectedSeats.includes(props.data.seatId);
+            return <SeatObject
+                data={props.data}
+                selectedSeats={selectedSeats}
+                style={style}
+                handleSeatSelectToggle={handleSeatSelectToggle}
+            />
 
-            const classNameArray = ['stachesepl-object', 'stachesepl-object-seat'];
-
-            if (isSelected) {
-                classNameArray.push('selected');
-            }
-
-            if (!props.data.seatId) {
-                classNameArray.push('disabled');
-            }
-
-            if (props.data.taken) {
-                classNameArray.push('taken');
-            }
-
-            return (
-                <div
-                    className={classNameArray.join(' ')}
-                    style={style}
-                    onMouseDown={disablePanning}
-                    onClick={(e) => {
-
-                        if (props.data.type === 'seat' && props.data.seatId && !props.data.taken) {
-                            handleSeatSelectToggle(props.data.seatId);
-                        }
-
-                    }}>
-                    {props.data.isHandicap && <Accessible />}
-                    {!props.data.isHandicap && props.data.label}
-                </div>
-            )
         }
 
         case 'text': {
 
-            const classNameArray = ['stachesepl-object','stachesepl-object-text'];
+            const classNameArray = ['stachesepl-object', 'stachesepl-object-text'];
 
             return (
                 <div
@@ -106,7 +89,7 @@ const Object = (props: {
 
         case 'generic': {
 
-            const classNameArray = ['stachesepl-object','stachesepl-object-generic'];
+            const classNameArray = ['stachesepl-object', 'stachesepl-object-generic'];
 
             return (
                 <div

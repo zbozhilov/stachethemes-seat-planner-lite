@@ -280,6 +280,10 @@ export const useToggleSeatLabelDisplay = () => {
                         case 'seatid':
                             return 'price';
                         case 'price':
+                            return 'group';
+                        case 'group':
+                            return 'status';
+                        case 'status':
                             return 'label';
                         default:
                             return 'seatid';
@@ -358,32 +362,11 @@ export const useCopyPaste = () => {
 
             });
 
-            setObjects(prev => {
-
-                const newState = [...prev, ...newObjects];
-
-                const maxAllowemoObjects = 100;
-                const maxAllowedSeats = 60;
-    
-                if (newState.length > maxAllowemoObjects) {
-                    toast.error(__('MAX_ALLOWED_OBJECTS_IS_D').replace('%d', maxAllowemoObjects.toString()));
-                    return prev;
-                }
-    
-                const seats = newState.filter(obj => obj.type === "seat");
-    
-                if (seats.length > maxAllowedSeats) {
-                    toast.error(__('MAX_ALLOWED_SEATS_IS_D').replace('%d', maxAllowedSeats.toString()));
-                    return prev;
-                }
-
-                toast.success(__('OBJECTS_PASTED'));
-
-                return newState;
-                
-            });
+            setObjects(prev => [...prev, ...newObjects]);
 
             setSelectedObjects(newObjects.map(object => object.id));
+
+            toast.success(__('OBJECTS_PASTED'));
 
             disable.current = true;
 

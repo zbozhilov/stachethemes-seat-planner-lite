@@ -5,6 +5,7 @@ import { useSeatPlanData, useSelectedSeats } from "../context/hooks";
 export const useProductSeatPlan = (props: {
     productId: number;
     disabled: boolean;
+    selectedDate: string | null;
 }) => {
 
     const { seatPlanData, setSeatPlanData } = useSeatPlanData();
@@ -22,6 +23,7 @@ export const useProductSeatPlan = (props: {
 
                 const seatPlanData = await fetchSeatPlanData({
                     productId: props.productId,
+                    selectedDate: props.selectedDate,
                     signal: controller.signal,
                 });
 
@@ -49,7 +51,7 @@ export const useProductSeatPlan = (props: {
             controller.abort();
         }
 
-    }, [props.disabled, props.productId, setSeatPlanData]);
+    }, [props.disabled, props.productId, setSeatPlanData, props.selectedDate]);
 
     return {
         data: seatPlanData,

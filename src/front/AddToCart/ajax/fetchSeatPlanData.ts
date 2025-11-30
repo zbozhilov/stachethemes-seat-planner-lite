@@ -1,23 +1,6 @@
 import { __ } from "@src/utils";
 import { SeatPlanDataProps } from "../types";
 
-declare global {
-    interface Window {
-        seat_planner_add_to_cart: {
-            ajax_url: string;
-            nonce: string;
-            cart_url: string;
-            currency: string;
-            currency_symbol: string;
-            currency_format: string;
-            currency_decimals: number;
-            symbol_position: 'left' | 'right' | 'left_space' | 'right_space';
-            decimals_separator: string;
-            thousand_separator: string;
-        };
-    }
-}
-
 type fetchResult = {
     success: boolean;
     data: SeatPlanDataProps | {
@@ -25,8 +8,9 @@ type fetchResult = {
     };
 }
 
-const fetchSeatPlanData = async ({ productId, signal }: {
-    productId: number
+const fetchSeatPlanData = async ({ productId, selectedDate, signal }: {
+    productId: number,
+    selectedDate: string | null,
     signal: AbortSignal
 }): Promise<SeatPlanDataProps> => {
     const adminAjaxUrl = window.seat_planner_add_to_cart.ajax_url;
@@ -40,7 +24,8 @@ const fetchSeatPlanData = async ({ productId, signal }: {
             action: 'seatplanner',
             task: 'get_seat_plan_data',
             product_id: productId.toString(),
-            nonce: window.seat_planner_add_to_cart.nonce
+            selected_date: selectedDate || '',
+            nonce: window.seat_planner_add_to_cart.nonce,
         }),
         signal,
     });

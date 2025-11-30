@@ -1,8 +1,8 @@
-import { useState } from "react";
 import { BaseObjectProps } from "@src/admin/SeatPlanner/components/Editor/components/Workflow/components/Objects/types";
 import { useEditorObjects } from "@src/admin/SeatPlanner/components/Editor/hooks";
 
 import { __ } from '@src/utils';
+import InputColor from "../InputColor/InputColor";
 import './Color.scss';
 
 const Color = (props: {
@@ -15,11 +15,10 @@ const Color = (props: {
     const { color } = firstObject;
     const areSameColor = props.objects.every(object => object.color === color);
     const displayValue = areSameColor ? color : '';
-    const [updateColor, setUpdateColor] = useState(displayValue);
 
-    const handleColorChange = () => {
+    const handleColorChange = (color: string) => {
 
-        if (updateColor === displayValue) {
+        if (color === displayValue) {
             return;
         }
 
@@ -31,7 +30,7 @@ const Color = (props: {
 
                 return {
                     ...object,
-                    color: updateColor
+                    color: color
                 }
             })
         });
@@ -42,7 +41,13 @@ const Color = (props: {
         <div className='stachesepl-toolbar-properties-color'>
 
             <label htmlFor='stachesepl-toolbar-properties-color'>{__('COLOR')}</label>
-            <input
+
+            <InputColor
+                value={displayValue}
+                onChange={handleColorChange}
+            />
+
+            {/* <input
                 id='stachesepl-toolbar-properties-color'
                 type="color"
                 placeholder={__('COLOR')}
@@ -50,7 +55,7 @@ const Color = (props: {
                 onChange={e => {
                     setUpdateColor(e.target.value)
                 }}
-                onBlur={handleColorChange} />
+                onBlur={handleColorChange} /> */}
 
         </div>
     )
