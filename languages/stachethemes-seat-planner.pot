@@ -9,7 +9,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2025-11-30T15:16:04+00:00\n"
+"POT-Creation-Date: 2025-11-30T15:22:22+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.11.0\n"
 "X-Domain: stachethemes-seat-planner-lite\n"
@@ -133,7 +133,7 @@ msgstr ""
 
 #: includes/class.admin-menu.php:134
 #: includes/class.admin-menu.php:135
-#: includes/class.admin-menu.php:203
+#: includes/class.admin-menu.php:202
 msgid "Seat Planner App Settings"
 msgstr ""
 
@@ -149,16 +149,20 @@ msgstr ""
 msgid "Settings saved."
 msgstr ""
 
-#: includes/class.admin-menu.php:204
+#: includes/class.admin-menu.php:203
 msgid "Use this tool to set up the Seat Planner app."
 msgstr ""
 
-#: includes/class.admin-menu.php:210
+#: includes/class.admin-menu.php:209
 msgid "Android App"
 msgstr ""
 
-#: includes/class.admin-menu.php:211
+#: includes/class.admin-menu.php:210
 msgid "Download Android APK"
+msgstr ""
+
+#: includes/class.admin-menu.php:211
+msgid "Android app is not available in Lite version."
 msgstr ""
 
 #: includes/class.admin-menu.php:219
@@ -233,22 +237,6 @@ msgstr ""
 msgid "QR code for seat %1$s was scanned by %2$s."
 msgstr ""
 
-#: includes/rest/class.rest.php:23
-msgid "Seat Planner app access is disabled."
-msgstr ""
-
-#: includes/rest/class.rest.php:30
-msgid "Invalid secret key."
-msgstr ""
-
-#: includes/rest/class.rest.php:78
-msgid "Missing qrcode."
-msgstr ""
-
-#: includes/rest/class.rest.php:86
-msgid "Invalid QR code."
-msgstr ""
-
 #: includes/shortcodes/stachesepl_add_to_cart.php:30
 #: includes/woocommerce/product/templates/single/single.add-to-cart-template.php:16
 msgid "This product is currently out of stock and unavailable."
@@ -290,8 +278,8 @@ msgstr ""
 #: includes/translation/class.translation.php:23
 #: includes/translation/class.translation.php:61
 #: includes/woocommerce/product/filters/class.auditorium-product-order-itemmeta.php:40
-#: includes/woocommerce/product/filters/class.auditorium-product-order-itemmeta.php:84
-#: includes/woocommerce/product/filters/class.auditorium-product-order-itemmeta.php:131
+#: includes/woocommerce/product/filters/class.auditorium-product-order-itemmeta.php:57
+#: includes/woocommerce/product/filters/class.auditorium-product-order-itemmeta.php:101
 msgid "Seat ID"
 msgstr ""
 
@@ -1230,21 +1218,16 @@ msgstr ""
 msgid "Discount for seat %s is not valid. Please remove it from your cart and select a different discount."
 msgstr ""
 
-#: includes/woocommerce/product/filters/class.auditorium-product-order-itemmeta.php:63
-#: includes/woocommerce/product/filters/class.auditorium-product-order-itemmeta.php:185
-msgid "Discount"
-msgstr ""
-
-#: includes/woocommerce/product/filters/class.auditorium-product-order-itemmeta.php:98
+#: includes/woocommerce/product/filters/class.auditorium-product-order-itemmeta.php:69
 msgid "This ticket has already been scanned."
 msgstr ""
 
 #. translators: %2$s: scan date
-#: includes/woocommerce/product/filters/class.auditorium-product-order-itemmeta.php:106
+#: includes/woocommerce/product/filters/class.auditorium-product-order-itemmeta.php:77
 msgid "This ticket has already been scanned by %1$s on %2$s."
 msgstr ""
 
-#: includes/woocommerce/product/filters/class.auditorium-product-order-itemmeta.php:117
+#: includes/woocommerce/product/filters/class.auditorium-product-order-itemmeta.php:87
 msgid "Unscan Ticket"
 msgstr ""
 

@@ -45,6 +45,11 @@ https://github.com/zbozhilov/stachethemes-seat-planner-lite
 
 ## Changelog
 
+### 1.0.28
+
+- Minor fixes & improvements
+- Enabled option to Scan QR Codes from the Dashboard
+
 ### 1.0.5
 
 - Add to cart seat validation improvements

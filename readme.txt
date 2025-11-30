@@ -60,6 +60,10 @@ Upgrade to **Stachethemes Seat Planner Premium** for advanced features:
 
 == Changelog ==
 
+= 1.0.28 =
+- Minor fixes & improvements
+- Enabled option to Scan QR Codes from the Dashboard
+
 = 1.0.5 =
 - Add to cart seat validation improvements
 
