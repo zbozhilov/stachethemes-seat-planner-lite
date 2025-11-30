@@ -362,6 +362,13 @@ export const useCopyPaste = () => {
 
             });
 
+            const limit = 100;
+
+            if (newObjects.length + objects.length > limit) {
+                toast.error(__('MAX_OBJECTS_LIMIT_REACHED'));
+                return;
+            }
+
             setObjects(prev => [...prev, ...newObjects]);
 
             setSelectedObjects(newObjects.map(object => object.id));
