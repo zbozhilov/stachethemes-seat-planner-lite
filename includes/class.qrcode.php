@@ -149,8 +149,7 @@ class QRCode {
             // Add "note" to the order that the QR code was scanned
             $order->add_order_note(sprintf(
                 // Translators: %1$s - seat ID, %2$s - user name
-                esc_html__('QR code for seat %1$s was scanned by %2$s.', 'stachethemes-seat-planner-lite')
-,
+                esc_html__('QR code for seat %1$s was scanned by %2$s.', 'stachethemes-seat-planner-lite'),
                 esc_html($seat_data['seatId']),
                 esc_html(self::get_qr_code_scan_author($seat_data['qr_code_scanned_author'] ?? 0))
             ));

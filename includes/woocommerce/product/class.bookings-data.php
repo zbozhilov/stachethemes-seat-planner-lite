@@ -11,8 +11,7 @@ class Bookings_Data {
         $product = wc_get_product($product_id);
 
         if (! $product || ! $product->is_type('auditorium')) {
-            throw new \Exception(esc_html__('Invalid product ID or product is not an auditorium type.', 'stachethemes-seat-planner-lite')
-);
+            throw new \Exception(esc_html__('Invalid product ID or product is not an auditorium type.', 'stachethemes-seat-planner-lite'));
         }
 
         $this->product = $product;
@@ -89,51 +88,6 @@ class Bookings_Data {
         }
 
         return $orders_with_this_product_id;
-    }
-
-    public function get_bookings() {
-
-        $orders = $this->get_orders();
-        $data   = [];
-
-        foreach ($orders as $order) {
-
-            $seats_in_order = [];
-
-            $order_items = self::get_order_items($order, $this->product->get_id());
-
-            foreach ($order_items as $item) {
-                if (!isset($item['seat_id'])) {
-                    continue; // Skip items without seat_id
-                }
-
-                $seats_in_order[] = [
-                    'seat_id'    => $item['seat_id'],
-                    'price'   => $item['price'],
-                    'date_time' => $item['date_time'],
-                ];
-            }
-
-            $general_data = [
-                'order_id'       => $order->get_id(),
-                'order_date'     => $order->get_date_created() ? $order->get_date_created()->date_i18n('Y-m-d H:i:s') : '',
-                'order_status'   => $order->get_status() ? wc_get_order_status_name($order->get_status()) : '',
-                'customer_name'  => $order->get_billing_first_name() . ' ' . $order->get_billing_last_name(),
-                'customer_email' => $order->get_billing_email(),
-                'product_name'   => $this->product->get_name(),
-                'product_note'   => $this->product->get_purchase_note()
-            ];
-
-            foreach ($seats_in_order as $seat_id) {
-                $data[] = array_merge($general_data, [
-                    'seat_id'    => $seat_id['seat_id'],
-                    'seat_price' => $seat_id['price'],
-                    'date_time'  => $seat_id['date_time'],
-                ]);
-            }
-        }
-
-        return $data;
     }
 
     public function get_orders_with_seat($seat_id, $selected_date = '') {

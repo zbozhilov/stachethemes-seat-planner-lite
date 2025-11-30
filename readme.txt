@@ -1,12 +1,12 @@
 === Stachethemes Seat Planner Lite ===
 Tags: WooCommerce, Seat, Planner, Tickets, Event
 Requires: 6.7
-Tested up to: 6.7
+Tested up to: 6.8
 Requires PHP: 8.2
-Stable tag: 1.0.5
+Stable tag: 1.0.28
 License: GPLv2 or later
 WC requires at least: 9.5
-WC tested up to: 9.7
+WC tested up to: 10
 
 A WooCommerce extension for creating and managing seat-based products with a drag & drop seat planner.
 

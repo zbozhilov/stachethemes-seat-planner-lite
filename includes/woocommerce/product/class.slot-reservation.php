@@ -49,18 +49,15 @@ class Slot_Reservation {
     public static function add_settings($settings) {
 
         $settings[] = [
-            'title' => esc_html__('Seat Reservation', 'stachethemes-seat-planner-lite')
-,
+            'title' => esc_html__('Seat Reservation', 'stachethemes-seat-planner-lite'),
             'type'  => 'title',
             'desc'  => '',
             'id'    => 'stachesepl_seat_reservation',
         ];
 
         $settings[] = [
-            'title'    => esc_html__('Seat Reservation Time', 'stachethemes-seat-planner-lite')
-,
-            'desc'     => esc_html__('The time in minutes that a seat will be reserved in the cart.', 'stachethemes-seat-planner-lite')
-,
+            'title'    => esc_html__('Seat Reservation Time', 'stachethemes-seat-planner-lite'),
+            'desc'     => esc_html__('The time in minutes that a seat will be reserved in the cart.', 'stachethemes-seat-planner-lite'),
             'id'       => 'stachesepl_reserve_time',
             'type'     => 'number',
             'default'  => self::$reserve_time,
@@ -68,10 +65,8 @@ class Slot_Reservation {
         ];
 
         $settings[] = [
-            'title'    => esc_html__('Cart Timer', 'stachethemes-seat-planner-lite')
-,
-            'desc'     => esc_html__('Display seat reservation timer for each reserved seat in the cart.', 'stachethemes-seat-planner-lite')
-,
+            'title'    => esc_html__('Cart Timer', 'stachethemes-seat-planner-lite'),
+            'desc'     => esc_html__('Display seat reservation timer for each reserved seat in the cart.', 'stachethemes-seat-planner-lite'),
             'id'       => 'stachesepl_cart_timer',
             'type'     => 'checkbox',
             'default'  => 'yes',
@@ -104,8 +99,7 @@ class Slot_Reservation {
         $product_id = $product->get_id();
 
         if (self::is_seat_reserved($product_id, $seat_id, $selected_date)) {
-            throw new \Exception(esc_html__('This seat was just added to another cart. Please select another seat or try again later.', 'stachethemes-seat-planner-lite')
-);
+            throw new \Exception(esc_html__('This seat was just added to another cart. Please select another seat or try again later.', 'stachethemes-seat-planner-lite'));
         }
     }
 

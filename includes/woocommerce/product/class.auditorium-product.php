@@ -145,8 +145,7 @@ class Auditorium_Product extends \WC_Product {
         if ($min === $max) {
 
             if (! $min) {
-                return esc_html__('Free', 'stachethemes-seat-planner-lite')
-;
+                return esc_html__('Free', 'stachethemes-seat-planner-lite');
             }
 
             return wc_price($min);
@@ -162,9 +161,7 @@ class Auditorium_Product extends \WC_Product {
 
     public function add_to_cart_description() {
         /* translators: %s: product name */
-        $text = $this->is_purchasable() && $this->is_in_stock() ? esc_html__('Add to cart: &ldquo;%s&rdquo;', 'stachethemes-seat-planner-lite')
- : esc_html__('Read more about &ldquo;%s&rdquo;', 'stachethemes-seat-planner-lite')
-;
+        $text = $this->is_purchasable() && $this->is_in_stock() ? esc_html__('Add to cart: &ldquo;%s&rdquo;', 'stachethemes-seat-planner-lite') : esc_html__('Read more about &ldquo;%s&rdquo;', 'stachethemes-seat-planner-lite');
         return apply_filters('woocommerce_product_add_to_cart_description', sprintf($text, $this->get_name()), $this);
     }
 
@@ -174,16 +171,13 @@ class Auditorium_Product extends \WC_Product {
 
     public function add_to_cart_text() {
 
-        $text = $this->is_purchasable() && $this->is_in_stock() ? esc_html__('Select Seat', 'stachethemes-seat-planner-lite')
- : esc_html__('Read more', 'stachethemes-seat-planner-lite')
-;
+        $text = $this->is_purchasable() && $this->is_in_stock() ? esc_html__('Select Seat', 'stachethemes-seat-planner-lite') : esc_html__('Read more', 'stachethemes-seat-planner-lite');
 
         return apply_filters('woocommerce_product_add_to_cart_text', $text, $this);
     }
 
     public function single_add_to_cart_text() {
-        $text = esc_html__('Select Seat', 'stachethemes-seat-planner-lite')
-;
+        $text = esc_html__('Select Seat', 'stachethemes-seat-planner-lite');
         return apply_filters('woocommerce_product_single_add_to_cart_text', $text, $this);
     }
 
@@ -283,8 +277,7 @@ class Auditorium_Product extends \WC_Product {
 
         if ($this->is_seat_taken($seat_id, $selected_date)) {
             // translators: %s: seat id
-            throw new \Exception(sprintf(esc_html__('Seat %s is already taken', 'stachethemes-seat-planner-lite')
-, esc_html($seat_id)));
+            throw new \Exception(sprintf(esc_html__('Seat %s is already taken', 'stachethemes-seat-planner-lite'), esc_html($seat_id)));
         }
 
         $seat_data = $this->get_seat_data($seat_id);
@@ -293,19 +286,16 @@ class Auditorium_Product extends \WC_Product {
 
         if ($seat_status === 'unavailable') {
             // translators: %s: seat id
-            throw new \Exception(sprintf(esc_html__('Seat %s is unavailable', 'stachethemes-seat-planner-lite')
-, esc_html($seat_id)));
+            throw new \Exception(sprintf(esc_html__('Seat %s is unavailable', 'stachethemes-seat-planner-lite'), esc_html($seat_id)));
         }
 
         if ($seat_status === 'on-site') {
             // translators: %s: seat id
-            throw new \Exception(sprintf(esc_html__('Seat %s can only be purchased at the venue.', 'stachethemes-seat-planner-lite')
-, esc_html($seat_id)));
+            throw new \Exception(sprintf(esc_html__('Seat %s can only be purchased at the venue.', 'stachethemes-seat-planner-lite'), esc_html($seat_id)));
         }
 
         if (!$seat_data) {
-            throw new \Exception(esc_html__('Seat not found', 'stachethemes-seat-planner-lite')
-);
+            throw new \Exception(esc_html__('Seat not found', 'stachethemes-seat-planner-lite'));
         }
 
         $cart = WC()->cart;
@@ -398,145 +388,23 @@ class Auditorium_Product extends \WC_Product {
     }
 
     public function get_dates_data() {
-
-        // Expects a data in the following format:
-        // Array
-        // (
-        //     [0] => 2025-11-28T10:00 [1] => 2025-11-29T10:00 [2] 
-        // )
-
-        $data = $this->get_auditorium_meta_value('_stachesepl_seat_planner_dates_data', true);
-
-        if (!is_array($data)) {
-            return [];
-        }
-
-        return $data;
+        return [];
     }
 
-    /**
-     * Returns the available dates for the product
-     * @return array|false
-     * Returns false if the product does not have option to Select Dates
-     * Returns an array of available dates if the product has option to Select Dates
-     * The array is in the following format:
-     * Array
-     * (
-     *     [0] => 2025-11-28T10:00 [1] => 2025-11-29T10:00 [2] 
-     * )
-     */
     public function get_available_dates() {
-        $date_now = new \DateTime('now');
-        $dates    = $this->get_dates_data();
-
-        if (empty($dates)) {
-            return false; // Does not have option to Select Dates
-        }
-
-        $available_dates = [];
-
-        foreach ($dates as $date) {
-            $date_object = \DateTime::createFromFormat('Y-m-d\TH:i', $date);
-
-            if ($date_object > $date_now) {
-                $available_dates[] = $date_object->format('Y-m-d\TH:i');
-            }
-        }
-
-        sort($available_dates);
-
-        return $available_dates;
+        return false;
     }
 
     public function get_discounts_data() {
-
-        // Expects a data in the following format:
-        // Array
-        // (
-        //     [0] => stdClass Object
-        //         (
-        //             [group] => string
-        //             [name] => string
-        //             [type] => percentage | fixed
-        //             [value] => float
-        //         )
-        // )
-
-        $data = $this->get_auditorium_meta_value('_stachesepl_seat_planner_discounts_data', true);
-
-        if (!is_array($data)) {
-            return [];
-        }
-
-        return $data;
+        return [];
     }
 
     public function get_discount_by_name($name): array|false {
-
-        if (empty($name)) {
-            return false;
-        }
-
-        $discounts = $this->get_discounts_data();
-
-        if (empty($discounts)) {
-            return false;
-        }
-
-        // Find the discount by name
-        $found = array_filter($discounts, function ($discount) use ($name) {
-            return isset($discount->name) && $discount->name === $name;
-        });
-
-        if (empty($found)) {
-            return false;
-        }
-
-        // Get the first matching discount
-        $discount = reset($found);
-
-        return [
-            'group' => $discount->group ?? '',
-            'name'  => $discount->name,
-            'value' => max(0, (float)$discount->value),
-            'type'  => $discount->type
-        ];
+        return false;
     }
 
     public function validate_cart_item_discount($cart_item): bool {
-        $cart_item_discount = $cart_item['seat_discount'] ?? false;
-
-        // If no discount in cart item, it's valid
-        if (!$cart_item_discount) {
-            return true;
-        }
-
-        // Get the current discount data from product
-        $discount = $this->get_discount_by_name($cart_item_discount['name']);
-
-        // If discount no longer exists, cart item is invalid
-        if (!$discount) {
-            return false;
-        }
-
-        // Validate that discount details match
-        if (
-            $cart_item_discount['value'] !== $discount['value'] ||
-            $cart_item_discount['type'] !== $discount['type'] ||
-            $cart_item_discount['group'] !== $discount['group']
-        ) {
-            return false;
-        }
-
-        // If no discount group specified, no further validation needed
-        if (empty($cart_item_discount['group'])) {
-            return true;
-        }
-
-        // Validate that seat belongs to the correct discount group
-        $seat_group = $cart_item['seat_data']->group ?? '';
-
-        return $cart_item_discount['group'] === $seat_group;
+        return true;
     }
 
     public function get_seat_status($seat_id) {

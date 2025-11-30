@@ -77,7 +77,10 @@ class Translation {
             'ZINDEX'                         => esc_html__('Z-Index', 'stachethemes-seat-planner-lite'), 
             'OBJECTS_COPIED'                 => esc_html__('Objects Copied', 'stachethemes-seat-planner-lite'),
             'OBJECTS_PASTED'                 => esc_html__('Objects Pasted', 'stachethemes-seat-planner-lite'),
-            'MAX_OBJECTS_LIMIT_REACHED'      => esc_html__('Sorry, the Lite version supports up to 100 objects', 'stachethemes-seat-planner-lite'),
+            'MAX_OBJECTS_LIMIT_REACHED'      => esc_html__('Lite version supports up to 100 objects', 'stachethemes-seat-planner-lite'),
+            'IMPORT_DATA_NOT_AVAILABLE_FOR_LITE_VERSION' => esc_html__('Import data is not available for the Lite version', 'stachethemes-seat-planner-lite'),
+            'EXPORT_DATA_NOT_AVAILABLE_FOR_LITE_VERSION' => esc_html__('Export data is not available for the Lite version', 'stachethemes-seat-planner-lite'),
+            'EXPORT_BOOKINGS_NOT_AVAILABLE_FOR_LITE_VERSION' => esc_html__('Export bookings is not available for the Lite version', 'stachethemes-seat-planner-lite'),
             'PATTERN_APPLIED'                => esc_html__('Incremental Pattern Applied', 'stachethemes-seat-planner-lite'),
             'TOGGLE_THEME'                   => esc_html__('Toggle Light/Dark Mode', 'stachethemes-seat-planner-lite'),
             'OPEN_SEAT_PLANNER'              => esc_html__('Open Seat Planner', 'stachethemes-seat-planner-lite'),
@@ -150,6 +153,7 @@ class Translation {
             'REPEAT_LETTERS_WITH_CYCLING_NUMBERS' => esc_html__('Repeat letters with cycling numbers', 'stachethemes-seat-planner-lite'),
 
             // Discounts
+            'DISCOUNTS_NOT_AVAILABLE_FOR_LITE_VERSION' => esc_html__('Discounts are not available for the Lite version', 'stachethemes-seat-planner-lite'),
             'UNIQUE_DISCOUNT_NAME'           => esc_html__('Discount name must be unique.', 'stachethemes-seat-planner-lite'),
             'GROUP'                          => esc_html__('Group', 'stachethemes-seat-planner-lite'),
             'GROUP_NAME'                     => esc_html__('Group Name', 'stachethemes-seat-planner-lite'),
@@ -202,15 +206,18 @@ class Translation {
             'EXPORT_BOOKINGS_SUCCESS_NO_DATA' => esc_html__('No bookings found for this product.', 'stachethemes-seat-planner-lite'),
             
             // Field selection for export
-            'SELECT_FIELDS_TO_EXPORT_DESCRIPTION' => esc_html__('Select the fields you want to include in the export file. You can select multiple fields.', 'stachethemes-seat-planner-lite'),
-            'SELECT_FIELDS_TO_EXPORT'             => esc_html__('Select Fields to Export', 'stachethemes-seat-planner-lite'),
-            'SELECT_ALL'                          => esc_html__('Select All', 'stachethemes-seat-planner-lite'),
-            'DESELECT_ALL'                        => esc_html__('Deselect All', 'stachethemes-seat-planner-lite'),
-            'PLEASE_SELECT_AT_LEAST_ONE_FIELD'    => esc_html__('Please select at least one field to export.', 'stachethemes-seat-planner-lite'),
-            'MANAGE_DATES_AND_TIMES'              => esc_html__('Manage Dates and Times', 'stachethemes-seat-planner-lite'),
-            'MANAGE_DATES_AND_TIMES_DESC'         => esc_html__('If this product should be available on multiple dates and times, add them here. If not, leave this field empty.', 'stachethemes-seat-planner-lite'),
-            'ADD_DATE_AND_TIME'                   => esc_html__('Add Date and Time', 'stachethemes-seat-planner-lite'),
-            'DATE_AND_TIME'                       => esc_html__('Date and Time', 'stachethemes-seat-planner-lite'),
+            'SELECT_FIELDS_TO_EXPORT_DESCRIPTION'  => esc_html__('Select the fields you want to include in the export file. You can select multiple fields.', 'stachethemes-seat-planner-lite'),
+            'SELECT_FIELDS_TO_EXPORT'              => esc_html__('Select Fields to Export', 'stachethemes-seat-planner-lite'),
+            'SELECT_ALL'                           => esc_html__('Select All', 'stachethemes-seat-planner-lite'),
+            'DESELECT_ALL'                         => esc_html__('Deselect All', 'stachethemes-seat-planner-lite'),
+            'PLEASE_SELECT_AT_LEAST_ONE_FIELD'     => esc_html__('Please select at least one field to export.', 'stachethemes-seat-planner-lite'),
+            
+            // Dates
+            'MANAGE_DATES_AND_TIMES'               => esc_html__('Manage Dates and Times', 'stachethemes-seat-planner-lite'),
+            'MANAGE_DATES_AND_TIMES_DESC'          => esc_html__('If this product should be available on multiple dates and times, add them here. If not, leave this field empty.', 'stachethemes-seat-planner-lite'),
+            'ADD_DATE_AND_TIME'                    => esc_html__('Add Date and Time', 'stachethemes-seat-planner-lite'),
+            'DATE_AND_TIME'                        => esc_html__('Date and Time', 'stachethemes-seat-planner-lite'),
+            'DATES_NOT_AVAILABLE_FOR_LITE_VERSION' => esc_html__('Dates are not available for the Lite version', 'stachethemes-seat-planner-lite'),
         ];
     }
 

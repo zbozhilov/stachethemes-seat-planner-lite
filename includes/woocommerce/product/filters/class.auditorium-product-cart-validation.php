@@ -89,8 +89,7 @@ class Auditorium_Product_Cart_Validation {
                 wc_add_notice(
                     sprintf(
                         // translators: %s: product id
-                        esc_html__('Product %s is not found', 'stachethemes-seat-planner-lite')
-,
+                        esc_html__('Product %s is not found', 'stachethemes-seat-planner-lite'),
                         esc_html($product_id)
                     ),
                     'error'
@@ -116,8 +115,7 @@ class Auditorium_Product_Cart_Validation {
                 wc_add_notice(
                     sprintf(
                         // translators: %s: seat id
-                        esc_html__('Seat %s is unavailable', 'stachethemes-seat-planner-lite')
-,
+                        esc_html__('Seat %s is unavailable', 'stachethemes-seat-planner-lite'),
                         esc_html($seat_id)
                     ),
                     'error'
@@ -126,9 +124,11 @@ class Auditorium_Product_Cart_Validation {
 
             if ($seat_status === 'on-site') {
                 wc_add_notice(
-                    // translators: %s: seat id
-                    sprintf(esc_html__('Seat %s can only be purchased at the venue.', 'stachethemes-seat-planner-lite')
-, esc_html($seat_id)),
+                    sprintf(
+                        // translators: %s: seat id
+                        esc_html__('Seat %s can only be purchased at the venue.', 'stachethemes-seat-planner-lite'),
+                        esc_html($seat_id)
+                    ),
                     'error'
                 );
             }
@@ -137,8 +137,7 @@ class Auditorium_Product_Cart_Validation {
                 wc_add_notice(
                     sprintf(
                         // translators: %s: seat id
-                        esc_html__('Seat %s is already taken. Please remove it from your cart and select a different seat.', 'stachethemes-seat-planner-lite')
-,
+                        esc_html__('Seat %s is already taken. Please remove it from your cart and select a different seat.', 'stachethemes-seat-planner-lite'),
                         esc_html($seat_id)
                     ),
                     'error'
@@ -150,8 +149,7 @@ class Auditorium_Product_Cart_Validation {
                     sprintf(
                         // translators: %1$s: selected date
                         // translators: %2$s: product name
-                        esc_html__('The date "%1$s" for "%2$s" is no longer available', 'stachethemes-seat-planner-lite')
-,
+                        esc_html__('The date "%1$s" for "%2$s" is no longer available', 'stachethemes-seat-planner-lite'),
                         esc_html(Utils::get_formatted_date_time($selected_date)),
                         esc_html($product->get_name()),
                     ),
@@ -163,8 +161,7 @@ class Auditorium_Product_Cart_Validation {
                 wc_add_notice(
                     sprintf(
                         // translators: %s: seat id
-                        esc_html__('Discount for seat %s is not valid. Please remove it from your cart and select a different discount.', 'stachethemes-seat-planner-lite')
-,
+                        esc_html__('Discount for seat %s is not valid. Please remove it from your cart and select a different discount.', 'stachethemes-seat-planner-lite'),
                         esc_html($seat_id)
                     ),
                     'error'
@@ -182,90 +179,12 @@ class Auditorium_Product_Cart_Validation {
                     wc_add_notice(
                         sprintf(
                             // translators: %s: product id
-                            esc_html__('Product %s is not found', 'stachethemes-seat-planner-lite')
-,
+                            esc_html__('Product %s is not found', 'stachethemes-seat-planner-lite'),
                             esc_html($product_id)
                         ),
                         'error'
                     );
                     continue;
-                }
-
-                $min_seats_per_purchase = (int) $product->get_meta('_stachesepl_min_seats_per_purchase', true);
-                $max_seats_per_purchase = (int) $product->get_meta('_stachesepl_max_seats_per_purchase', true);
-                $unique_seats_in_cart   = count($seat_ids_map);
-                $product_name           = $product->get_name();
-
-                if ($min_seats_per_purchase > 0 && $unique_seats_in_cart < $min_seats_per_purchase) {
-
-                    if ($selected_date) {
-                        wc_add_notice(
-                            sprintf(
-                                // translators: %1$d: minimum seats per purchasem %2$s: product name, %3$s: selected date
-                                _n(
-                                    'You need to purchase at least %1$d seat per order for “%2$s” on %3$s.',
-                                    'You need to purchase at least %1$d seats per order for “%2$s” on %3$s.',
-                                    $min_seats_per_purchase,
-                                    'stachethemes-seat-planner-lite'
-                                ),
-                                $min_seats_per_purchase,
-                                $product_name,
-                                esc_html(Utils::get_formatted_date_time($selected_date))
-                            ),
-                            'error'
-                        );
-                    } else {
-                        wc_add_notice(
-                            sprintf(
-                                // translators: %1$d: minimum seats per purchase, %2$s: product name
-                                _n(
-                                    'You need to purchase at least %1$d seat per order for “%2$s”.',
-                                    'You need to purchase at least %1$d seats per order for “%2$s”.',
-                                    $min_seats_per_purchase,
-                                    'stachethemes-seat-planner-lite'
-                                ),
-                                $min_seats_per_purchase,
-                                $product_name
-                            ),
-                            'error'
-                        );
-                    }
-                }
-
-                if ($max_seats_per_purchase > 0 && $unique_seats_in_cart > $max_seats_per_purchase) {
-
-                    if ($selected_date) {
-                        wc_add_notice(
-                            sprintf(
-                                // translators: %1$d: maximum seats per purchase, %2$s: product name, %3$s: selected date
-                                _n(
-                                    'You can only purchase up to %1$d seat per order for “%2$s” on %3$s.',
-                                    'You can only purchase up to %1$d seats per order for “%2$s” on %3$s.',
-                                    $max_seats_per_purchase,
-                                    'stachethemes-seat-planner-lite'
-                                ),
-                                $max_seats_per_purchase,
-                                $product_name,
-                                esc_html(Utils::get_formatted_date_time($selected_date))
-                            ),
-                            'error'
-                        );
-                    } else {
-                        wc_add_notice(
-                            sprintf(
-                                // translators: %1$d: maximum seats per purchase, %2$s: product name
-                                _n(
-                                    'You can only purchase up to %1$d seat per order for “%2$s”.',
-                                    'You can only purchase up to %1$d seats per order for “%2$s”.',
-                                    $max_seats_per_purchase,
-                                    'stachethemes-seat-planner-lite'
-                                ),
-                                $max_seats_per_purchase,
-                                $product_name,
-                            ),
-                            'error'
-                        );
-                    }
                 }
             }
         }

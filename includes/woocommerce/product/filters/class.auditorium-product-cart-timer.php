@@ -67,7 +67,7 @@ class Auditorium_Product_Cart_Timer {
 
         $asset = [
             'dependencies' => [],
-            'version'      => STACHETHEMES_SEAT_PLANNER_VERSION,
+            'version'      => STACHETHEMES_SEAT_PLANNER_LITE_VERSION,
         ];
 
         if (file_exists($asset_path)) {

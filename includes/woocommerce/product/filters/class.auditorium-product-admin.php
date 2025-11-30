@@ -187,6 +187,9 @@ class Auditorium_Product_Admin {
                             'step' => '1',
                         ],
                         'value'             => $product->get_meta('_stachesepl_min_seats_per_purchase', true),
+                        'custom_attributes' => [
+                            'disabled' => 'disabled'
+                        ],
                     ]
                 );
 
@@ -205,6 +208,9 @@ class Auditorium_Product_Admin {
                             'step' => '1',
                         ],
                         'value'             => $product->get_meta('_stachesepl_max_seats_per_purchase', true),
+                        'custom_attributes' => [
+                            'disabled' => 'disabled'
+                        ],
                     ]
                 );
                 ?>
@@ -326,35 +332,8 @@ class Auditorium_Product_Admin {
         }
 
         $product = wc_get_product($post_id);
-
         $product->update_meta_data('_stachesepl_force_out_of_stock', filter_input(INPUT_POST, '_stachesepl_force_out_of_stock', FILTER_SANITIZE_FULL_SPECIAL_CHARS));
         $product->update_meta_data('_stachesepl_stop_date', filter_input(INPUT_POST, '_stachesepl_stop_date', FILTER_SANITIZE_FULL_SPECIAL_CHARS));
-
-        $min_seats_per_purchase_raw = filter_input(INPUT_POST, '_stachesepl_min_seats_per_purchase', FILTER_SANITIZE_NUMBER_INT);
-        $max_seats_per_purchase_raw = filter_input(INPUT_POST, '_stachesepl_max_seats_per_purchase', FILTER_SANITIZE_NUMBER_INT);
-
-        $min_seats_per_purchase = max(0, (int) $min_seats_per_purchase_raw);
-        $max_seats_per_purchase = max(0, (int) $max_seats_per_purchase_raw);
-
-        $adjusted_max_seats = false;
-        if ($max_seats_per_purchase > 0 && $min_seats_per_purchase > 0 && $max_seats_per_purchase < $min_seats_per_purchase) {
-            $max_seats_per_purchase = $min_seats_per_purchase;
-            $adjusted_max_seats = true;
-        }
-
-        $product->update_meta_data('_stachesepl_min_seats_per_purchase', $min_seats_per_purchase);
-        $product->update_meta_data('_stachesepl_max_seats_per_purchase', $max_seats_per_purchase);
-
-        if ($adjusted_max_seats && is_admin() && class_exists('\WC_Admin_Meta_Boxes')) {
-            \WC_Admin_Meta_Boxes::add_error(
-                sprintf(
-                    // translators: %d: maximum seats per purchase
-                    esc_html__('Maximum seats per purchase was less than the minimum and has been set to %d.', 'stachethemes-seat-planner-lite')
-,
-                    $max_seats_per_purchase
-                )
-            );
-        }
 
         $product->set_sku(filter_input(INPUT_POST, '_stachesepl_sku', FILTER_SANITIZE_FULL_SPECIAL_CHARS));
 
@@ -374,38 +353,6 @@ class Auditorium_Product_Admin {
                 }
             }
         }
-
-        $dates_data = isset($_POST['stachesepl_seat_planner_dates_data']) ? sanitize_text_field(wp_unslash($_POST['stachesepl_seat_planner_dates_data'])) : '';
-        if ($dates_data) {
-            $dates_data_decoded = json_decode($dates_data);
-            if (is_array($dates_data_decoded)) {
-                // Remove duplicates while preserving array keys
-                $dates_data_decoded = array_values(array_unique($dates_data_decoded, SORT_STRING));
-                $product->update_meta_data('_stachesepl_seat_planner_dates_data', $dates_data_decoded);
-            }
-        }
-
-        $discounts_data         = isset($_POST['stachesepl_seat_planner_discounts_data']) ? sanitize_text_field(wp_unslash($_POST['stachesepl_seat_planner_discounts_data'])) : '';
-        $discounts_data_decoded = json_decode($discounts_data);
-
-        if (is_array($discounts_data_decoded)) {
-            $used_names = [];
-            foreach ($discounts_data_decoded as $key => $discount) {
-                $discount_name = $discount->name;
-                if (isset($used_names[$discount_name])) {
-                    $suffix    = 1;
-                    $base_name = $discount_name;
-                    while (isset($used_names[$base_name . '-' . $suffix])) {
-                        $suffix++;
-                    }
-                    $discount_name = $base_name . '-' . $suffix;
-                    $discounts_data_decoded[$key]->name = $discount_name;
-                }
-                $used_names[$discount_name] = true;
-            }
-        }
-
-        $product->update_meta_data('_stachesepl_seat_planner_discounts_data', $discounts_data_decoded);
 
         $seat_planner_data = isset($_POST['stachesepl_seat_planner_data']) ? sanitize_text_field(wp_unslash($_POST['stachesepl_seat_planner_data'])) : '';
         if (!$seat_planner_data) {
