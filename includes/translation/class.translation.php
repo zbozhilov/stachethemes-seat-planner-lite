@@ -105,36 +105,6 @@ class Translation {
         ];
     }
 
-    // Translates the strings used for checking double booking (Tools -> Double Booking Checker)
-    public static function get_check_double_booking_strings() {
-        return [
-            'CHECK_FOR_DOUBLE_BOOKING'       => esc_html__('Check Now', 'stachethemes-seat-planner-lite'),
-            'CHECKING'                       => esc_html__('Checking...', 'stachethemes-seat-planner-lite'),
-            'CANCEL'                         => esc_html__('Cancel', 'stachethemes-seat-planner-lite'),
-            // translators: %1$d - number of products being checked, %2$d - total number of products
-            'CHECKING_PRODUCTS'              => esc_html__('Checking for double bookings... %1$d of %2$d products', 'stachethemes-seat-planner-lite'),
-            'PREPARING_TO_CHECK'             => esc_html__('Preparing to check for double bookings...', 'stachethemes-seat-planner-lite'),
-            'ERROR_OCCURRED'                 => esc_html__('An error occurred while checking for double bookings.', 'stachethemes-seat-planner-lite'),
-            'TRY_AGAIN'                      => esc_html__('Try Again', 'stachethemes-seat-planner-lite'),
-            'RESULTS'                        => esc_html__('Results', 'stachethemes-seat-planner-lite'),
-            // translators: %1$d - number of products with duplicates, %2$d - total number of products checked
-            'RESULTS_COUNT'                  => esc_html__('Results (%1$d of %2$d products checked)', 'stachethemes-seat-planner-lite'),
-            'NO_DUPLICATES'                  => esc_html__('No duplicates', 'stachethemes-seat-planner-lite'),
-            'ONE_DUPLICATE'                  => esc_html__('1 duplicate', 'stachethemes-seat-planner-lite'),
-            // translators: %d - number of duplicates
-            'MULTIPLE_DUPLICATES'            => esc_html__('%d duplicates', 'stachethemes-seat-planner-lite'),
-            'SEAT_ID'                        => esc_html__('Seat ID', 'stachethemes-seat-planner-lite'),
-            'BOOKING_COUNT'                  => esc_html__('Booking Count', 'stachethemes-seat-planner-lite'),
-            'ORDER_IDS'                      => esc_html__('Order IDs', 'stachethemes-seat-planner-lite'),
-            'NO_DUPLICATE_BOOKINGS'          => esc_html__('No duplicate bookings found for this product.', 'stachethemes-seat-planner-lite'),
-            // translators: %d - number of products with duplicate bookings (plural)
-            'CHECK_COMPLETE'                 => esc_html__('Check complete. %d products have duplicate bookings.', 'stachethemes-seat-planner-lite'),
-            // translators: For when only one product has duplicate bookings
-            'CHECK_COMPLETE_SINGULAR'        => esc_html__('Check complete. 1 product has duplicate bookings.', 'stachethemes-seat-planner-lite'),
-            'NO_PRODUCTS_FOUND'              => esc_html__('No products found to check.', 'stachethemes-seat-planner-lite'),
-        ];
-    }
-
     // Translates the admin javascript strings
     public static function get_admin_strings() {
 

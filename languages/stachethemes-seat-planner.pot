@@ -2,14 +2,14 @@
 # This file is distributed under the GNU General Public License v2 or later.
 msgid ""
 msgstr ""
-"Project-Id-Version: Stachethemes Seat Planner Lite 1.0.28\n"
+"Project-Id-Version: Stachethemes Seat Planner Lite 1.0.32\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/stachethemes-seat-planner-lite\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2025-11-30T15:22:22+00:00\n"
+"POT-Creation-Date: 2025-12-04T21:29:56+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.11.0\n"
 "X-Domain: stachethemes-seat-planner-lite\n"
@@ -39,173 +39,191 @@ msgstr ""
 msgid "https://woocommerce.com/vendor/stachethemes/"
 msgstr ""
 
-#: includes/ajax/class.ajax.php:32
+#: includes/ajax/class.ajax.php:35
 msgid "Invalid task"
 msgstr ""
 
-#: includes/ajax/class.ajax.php:45
-#: includes/ajax/class.ajax.php:135
-#: includes/ajax/class.ajax.php:319
+#: includes/ajax/class.ajax.php:48
+#: includes/ajax/class.ajax.php:138
+#: includes/ajax/class.ajax.php:321
+#: includes/ajax/class.ajax.php:342
+#: includes/ajax/class.ajax.php:365
+#: includes/ajax/class.ajax.php:397
 msgid "Invalid product ID"
 msgstr ""
 
-#: includes/ajax/class.ajax.php:52
-#: includes/ajax/class.ajax.php:56
-#: includes/ajax/class.ajax.php:153
+#: includes/ajax/class.ajax.php:55
+#: includes/ajax/class.ajax.php:59
+#: includes/ajax/class.ajax.php:156
 msgid "Product not found"
 msgstr ""
 
-#: includes/ajax/class.ajax.php:63
+#: includes/ajax/class.ajax.php:66
 msgid "Invalid date"
 msgstr ""
 
-#: includes/ajax/class.ajax.php:70
+#: includes/ajax/class.ajax.php:73
 msgid "Failed to retrieve seat plan data"
 msgstr ""
 
-#: includes/ajax/class.ajax.php:82
+#: includes/ajax/class.ajax.php:85
 msgid "Failed to retrieve taken seats"
 msgstr ""
 
-#: includes/ajax/class.ajax.php:142
+#: includes/ajax/class.ajax.php:145
 msgid "Invalid seat data format"
 msgstr ""
 
-#: includes/ajax/class.ajax.php:146
-#: includes/translation/class.translation.php:228
+#: includes/ajax/class.ajax.php:149
+#: includes/translation/class.translation.php:303
 msgid "No seats selected"
 msgstr ""
 
-#: includes/ajax/class.ajax.php:161
+#: includes/ajax/class.ajax.php:164
 msgid "The selected date is not available"
 msgstr ""
 
-#: includes/ajax/class.ajax.php:165
+#: includes/ajax/class.ajax.php:168
 msgid "The selected date is no longer available"
 msgstr ""
 
-#: includes/ajax/class.ajax.php:175
-#: includes/ajax/class.ajax.php:216
+#: includes/ajax/class.ajax.php:177
+#: includes/ajax/class.ajax.php:218
+#: includes/ajax/class.ajax.php:369
 msgid "Invalid seat ID"
 msgstr ""
 
-#: includes/ajax/class.ajax.php:220
+#: includes/ajax/class.ajax.php:222
 msgid "Failed to add seat to cart"
 msgstr ""
 
-#: includes/ajax/class.ajax.php:229
+#: includes/ajax/class.ajax.php:231
 msgid "Failed to generate mini cart"
 msgstr ""
 
-#: includes/ajax/class.ajax.php:241
+#: includes/ajax/class.ajax.php:243
 msgid "Seats added to cart"
 msgstr ""
 
-#: includes/ajax/class.ajax.php:255
+#: includes/ajax/class.ajax.php:257
 msgid "You do not have the required permissions to access QR code details. Please contact the site administrator if you believe this is an error."
 msgstr ""
 
-#: includes/ajax/class.ajax.php:262
+#: includes/ajax/class.ajax.php:264
 msgid "QR string not specified"
 msgstr ""
 
-#: includes/ajax/class.ajax.php:280
-#: includes/ajax/class.ajax.php:295
-#: includes/ajax/class.ajax.php:312
+#: includes/ajax/class.ajax.php:282
+#: includes/ajax/class.ajax.php:297
+#: includes/ajax/class.ajax.php:314
+#: includes/ajax/class.ajax.php:335
+#: includes/ajax/class.ajax.php:356
+#: includes/ajax/class.ajax.php:388
 msgid "You do not have the required permissions to access this feature."
 msgstr ""
 
-#: includes/ajax/class.ajax.php:330
+#: includes/ajax/class.ajax.php:376
+msgid "Seat has been marked as taken."
+msgstr ""
+
+#: includes/ajax/class.ajax.php:379
+msgid "Failed to fix ghost booking."
+msgstr ""
+
+#: includes/ajax/class.ajax.php:409
 msgid "No action specified"
 msgstr ""
 
+#: includes/class.admin-menu.php:117
 #: includes/class.admin-menu.php:118
-#: includes/class.admin-menu.php:119
 #: includes/translation/class.translation.php:18
 msgid "Seat Scanner"
 msgstr ""
 
+#: includes/class.admin-menu.php:125
 #: includes/class.admin-menu.php:126
-#: includes/class.admin-menu.php:127
-#: includes/class.admin-menu.php:151
-msgid "Double Booking Checker"
+msgid "Seat Planner Booking Integrity Checker"
 msgstr ""
 
+#: includes/class.admin-menu.php:133
 #: includes/class.admin-menu.php:134
-#: includes/class.admin-menu.php:135
-#: includes/class.admin-menu.php:202
+#: includes/class.admin-menu.php:200
 msgid "Seat Planner App Settings"
 msgstr ""
 
-#: includes/class.admin-menu.php:152
-msgid "Use this tool to check for double bookings in your auditorium products."
+#: includes/class.admin-menu.php:149
+msgid "Booking Integrity Checker"
 msgstr ""
 
-#: includes/class.admin-menu.php:177
+#: includes/class.admin-menu.php:150
+msgid "Use this tool to check for booking data inconsistencies in your auditorium products."
+msgstr ""
+
+#: includes/class.admin-menu.php:175
 msgid "Secret key must be at least 8 characters long."
 msgstr ""
 
-#: includes/class.admin-menu.php:190
+#: includes/class.admin-menu.php:188
 msgid "Settings saved."
 msgstr ""
 
-#: includes/class.admin-menu.php:203
+#: includes/class.admin-menu.php:201
 msgid "Use this tool to set up the Seat Planner app."
 msgstr ""
 
-#: includes/class.admin-menu.php:209
+#: includes/class.admin-menu.php:207
 msgid "Android App"
 msgstr ""
 
-#: includes/class.admin-menu.php:210
+#: includes/class.admin-menu.php:208
 msgid "Download Android APK"
 msgstr ""
 
-#: includes/class.admin-menu.php:211
+#: includes/class.admin-menu.php:209
 msgid "Android app is not available in Lite version."
 msgstr ""
 
-#: includes/class.admin-menu.php:219
+#: includes/class.admin-menu.php:217
 msgid "REST API Base URL"
 msgstr ""
 
-#: includes/class.admin-menu.php:222
+#: includes/class.admin-menu.php:220
 msgid "Copy"
 msgstr ""
 
-#: includes/class.admin-menu.php:223
+#: includes/class.admin-menu.php:221
 msgid "Your REST URL for API integrations."
 msgstr ""
 
-#: includes/class.admin-menu.php:227
+#: includes/class.admin-menu.php:225
 msgid "Enable/Disable"
 msgstr ""
 
-#: includes/class.admin-menu.php:230
+#: includes/class.admin-menu.php:228
 msgid "Enable access"
 msgstr ""
 
-#: includes/class.admin-menu.php:232
+#: includes/class.admin-menu.php:230
 msgid "Uncheck to temporarily disable access."
 msgstr ""
 
-#: includes/class.admin-menu.php:236
+#: includes/class.admin-menu.php:234
 msgid "App Secret Key"
 msgstr ""
 
-#: includes/class.admin-menu.php:239
+#: includes/class.admin-menu.php:237
 msgid "Generate"
 msgstr ""
 
-#: includes/class.admin-menu.php:240
+#: includes/class.admin-menu.php:238
 msgid "Minimum 8 characters. Store this securely; changing it may invalidate existing tokens."
 msgstr ""
 
-#: includes/class.admin-menu.php:247
+#: includes/class.admin-menu.php:245
 msgid "Save Changes"
 msgstr ""
 
-#: includes/class.admin-menu.php:291
+#: includes/class.admin-menu.php:289
 msgid "Copied!"
 msgstr ""
 
@@ -271,12 +289,13 @@ msgid "Scan New Ticket"
 msgstr ""
 
 #: includes/translation/class.translation.php:22
-#: includes/translation/class.translation.php:193
+#: includes/translation/class.translation.php:265
+#: includes/translation/class.translation.php:340
 msgid "Order ID"
 msgstr ""
 
 #: includes/translation/class.translation.php:23
-#: includes/translation/class.translation.php:61
+#: includes/translation/class.translation.php:55
 #: includes/woocommerce/product/filters/class.auditorium-product-order-itemmeta.php:40
 #: includes/woocommerce/product/filters/class.auditorium-product-order-itemmeta.php:57
 #: includes/woocommerce/product/filters/class.auditorium-product-order-itemmeta.php:101
@@ -284,7 +303,8 @@ msgid "Seat ID"
 msgstr ""
 
 #: includes/translation/class.translation.php:24
-#: includes/translation/class.translation.php:197
+#: includes/translation/class.translation.php:269
+#: includes/translation/class.translation.php:338
 msgid "Order Status"
 msgstr ""
 
@@ -326,8 +346,8 @@ msgid "Scan QR code to validate ticket"
 msgstr ""
 
 #: includes/translation/class.translation.php:35
-#: includes/translation/class.translation.php:127
-#: includes/translation/class.translation.php:229
+#: includes/translation/class.translation.php:163
+#: includes/translation/class.translation.php:304
 msgid "Close"
 msgstr ""
 
@@ -336,681 +356,948 @@ msgid "Error"
 msgstr ""
 
 #: includes/translation/class.translation.php:37
-#: includes/translation/class.translation.php:247
+#: includes/translation/class.translation.php:322
 msgid "Sorry, something went wrong. Please try again."
 msgstr ""
 
 #: includes/translation/class.translation.php:38
-#: includes/translation/class.translation.php:53
+#: includes/translation/class.translation.php:51
 msgid "Try Again"
 msgstr ""
 
 #: includes/translation/class.translation.php:39
+#: includes/translation/class.translation.php:339
 msgid "Date"
 msgstr ""
 
-#: includes/translation/class.translation.php:46
+#: includes/translation/class.translation.php:47
 msgid "Check Now"
 msgstr ""
 
-#: includes/translation/class.translation.php:47
+#: includes/translation/class.translation.php:48
 msgid "Checking..."
 msgstr ""
 
-#: includes/translation/class.translation.php:48
+#: includes/translation/class.translation.php:49
+#: includes/translation/class.translation.php:218
 msgid "Cancel"
 msgstr ""
 
-#. translators: %1$d - number of products being checked, %2$d - total number of products
 #: includes/translation/class.translation.php:50
-msgid "Checking for double bookings... %1$d of %2$d products"
-msgstr ""
-
-#: includes/translation/class.translation.php:51
-msgid "Preparing to check for double bookings..."
+msgid "Preparing to check..."
 msgstr ""
 
 #: includes/translation/class.translation.php:52
-msgid "An error occurred while checking for double bookings."
-msgstr ""
-
-#: includes/translation/class.translation.php:54
 msgid "Results"
 msgstr ""
 
-#. translators: %1$d - number of products with duplicates, %2$d - total number of products checked
-#: includes/translation/class.translation.php:56
+#. translators: %1$d - number of products checked, %2$d - total number of products
+#: includes/translation/class.translation.php:54
 msgid "Results (%1$d of %2$d products checked)"
 msgstr ""
 
+#: includes/translation/class.translation.php:56
+msgid "Order IDs"
+msgstr ""
+
 #: includes/translation/class.translation.php:57
-msgid "No duplicates"
+msgid "No products found to check."
 msgstr ""
 
 #: includes/translation/class.translation.php:58
+msgid "Actions"
+msgstr ""
+
+#: includes/translation/class.translation.php:59
+#: includes/translation/class.translation.php:88
+msgid "No issues"
+msgstr ""
+
+#: includes/translation/class.translation.php:62
+msgid "Select Check Type"
+msgstr ""
+
+#: includes/translation/class.translation.php:63
+msgid "Double Booking Check"
+msgstr ""
+
+#: includes/translation/class.translation.php:64
+msgid "Ghost Booking Check"
+msgstr ""
+
+#: includes/translation/class.translation.php:65
+msgid "Find seats that have been booked multiple times (same seat appears in multiple orders)."
+msgstr ""
+
+#: includes/translation/class.translation.php:66
+msgid "Find seats that appear free on the front-end but have existing orders (data inconsistency)."
+msgstr ""
+
+#. translators: %1$d - number of products being checked, %2$d - total number of products
+#: includes/translation/class.translation.php:70
+msgid "Checking for double bookings... %1$d of %2$d products"
+msgstr ""
+
+#: includes/translation/class.translation.php:71
+msgid "An error occurred while checking for double bookings."
+msgstr ""
+
+#: includes/translation/class.translation.php:72
+msgid "No duplicates"
+msgstr ""
+
+#: includes/translation/class.translation.php:73
 msgid "1 duplicate"
 msgstr ""
 
 #. translators: %d - number of duplicates
-#: includes/translation/class.translation.php:60
+#: includes/translation/class.translation.php:75
 msgid "%d duplicates"
 msgstr ""
 
-#: includes/translation/class.translation.php:62
+#: includes/translation/class.translation.php:76
 msgid "Booking Count"
 msgstr ""
 
-#: includes/translation/class.translation.php:63
-msgid "Order IDs"
-msgstr ""
-
-#: includes/translation/class.translation.php:64
+#: includes/translation/class.translation.php:77
 msgid "No duplicate bookings found for this product."
 msgstr ""
 
 #. translators: %d - number of products with duplicate bookings (plural)
-#: includes/translation/class.translation.php:66
+#: includes/translation/class.translation.php:79
 msgid "Check complete. %d products have duplicate bookings."
 msgstr ""
 
 #. translators: For when only one product has duplicate bookings
-#: includes/translation/class.translation.php:68
+#: includes/translation/class.translation.php:81
 msgid "Check complete. 1 product has duplicate bookings."
 msgstr ""
 
-#: includes/translation/class.translation.php:69
-msgid "No products found to check."
-msgstr ""
-
-#: includes/translation/class.translation.php:77
-msgid "Z-Index"
-msgstr ""
-
-#: includes/translation/class.translation.php:78
-msgid "Objects Copied"
-msgstr ""
-
-#: includes/translation/class.translation.php:79
-msgid "Objects Pasted"
-msgstr ""
-
-#: includes/translation/class.translation.php:80
-msgid "Lite version supports up to 100 objects"
-msgstr ""
-
-#: includes/translation/class.translation.php:81
-msgid "Import data is not available for the Lite version"
-msgstr ""
-
 #: includes/translation/class.translation.php:82
-msgid "Export data is not available for the Lite version"
+msgid "Check complete. No duplicate bookings found."
 msgstr ""
 
-#: includes/translation/class.translation.php:83
-msgid "Export bookings is not available for the Lite version"
-msgstr ""
-
-#: includes/translation/class.translation.php:84
-msgid "Incremental Pattern Applied"
-msgstr ""
-
-#: includes/translation/class.translation.php:85
-msgid "Toggle Light/Dark Mode"
-msgstr ""
-
+#. translators: %1$d - number of products being checked, %2$d - total number of products
 #: includes/translation/class.translation.php:86
-msgid "Open Seat Planner"
+msgid "Checking for ghost bookings... %1$d of %2$d products"
 msgstr ""
 
 #: includes/translation/class.translation.php:87
-msgid "Screen"
-msgstr ""
-
-#: includes/translation/class.translation.php:88
-#: includes/translation/class.translation.php:250
-msgid "Seat"
+msgid "An error occurred while checking for ghost bookings."
 msgstr ""
 
 #: includes/translation/class.translation.php:89
+msgid "1 ghost seat"
+msgstr ""
+
+#. translators: %d - number of ghost seats
+#: includes/translation/class.translation.php:91
+msgid "%d ghost seats"
+msgstr ""
+
+#: includes/translation/class.translation.php:92
+msgid "Event Date"
+msgstr ""
+
+#: includes/translation/class.translation.php:93
+msgid "Order Count"
+msgstr ""
+
+#: includes/translation/class.translation.php:94
+msgid "No ghost bookings found for this product."
+msgstr ""
+
+#. translators: %d - number of products with ghost bookings (plural)
+#: includes/translation/class.translation.php:96
+msgid "Check complete. %d products have ghost bookings."
+msgstr ""
+
+#. translators: For when only one product has ghost bookings
+#: includes/translation/class.translation.php:98
+msgid "Check complete. 1 product has ghost bookings."
+msgstr ""
+
+#: includes/translation/class.translation.php:99
+msgid "Check complete. No ghost bookings found."
+msgstr ""
+
+#: includes/translation/class.translation.php:100
+msgid "Mark as Taken"
+msgstr ""
+
+#: includes/translation/class.translation.php:101
+msgid "Fixing..."
+msgstr ""
+
+#: includes/translation/class.translation.php:102
+msgid "Fixed"
+msgstr ""
+
+#: includes/translation/class.translation.php:103
+msgid "Fix failed"
+msgstr ""
+
+#: includes/translation/class.translation.php:104
+msgid "No specific date"
+msgstr ""
+
+#: includes/translation/class.translation.php:112
+msgid "Click to change display label"
+msgstr ""
+
+#: includes/translation/class.translation.php:113
+msgid "Z-Index"
+msgstr ""
+
+#: includes/translation/class.translation.php:114
+msgid "Objects Copied"
+msgstr ""
+
+#: includes/translation/class.translation.php:115
+msgid "Objects Pasted"
+msgstr ""
+
+#: includes/translation/class.translation.php:116
+msgid "Lite version supports up to 100 objects"
+msgstr ""
+
+#: includes/translation/class.translation.php:117
+msgid "Import data is not available for the Lite version"
+msgstr ""
+
+#: includes/translation/class.translation.php:118
+msgid "Export data is not available for the Lite version"
+msgstr ""
+
+#: includes/translation/class.translation.php:119
+msgid "Export bookings is not available for the Lite version"
+msgstr ""
+
+#: includes/translation/class.translation.php:120
+msgid "Incremental Pattern Applied"
+msgstr ""
+
+#: includes/translation/class.translation.php:121
+msgid "Toggle Light/Dark Mode"
+msgstr ""
+
+#: includes/translation/class.translation.php:122
+msgid "Open Seat Planner"
+msgstr ""
+
+#: includes/translation/class.translation.php:123
+msgid "Screen"
+msgstr ""
+
+#: includes/translation/class.translation.php:124
+#: includes/translation/class.translation.php:324
+msgid "Seat"
+msgstr ""
+
+#: includes/translation/class.translation.php:125
 msgid "Object"
 msgstr ""
 
-#: includes/translation/class.translation.php:90
+#: includes/translation/class.translation.php:126
 msgid "Text"
 msgstr ""
 
-#: includes/translation/class.translation.php:91
+#: includes/translation/class.translation.php:127
 msgctxt "Direction"
 msgid "Left"
 msgstr ""
 
-#: includes/translation/class.translation.php:92
+#: includes/translation/class.translation.php:128
 msgctxt "Direction"
 msgid "Top"
 msgstr ""
 
-#: includes/translation/class.translation.php:93
+#: includes/translation/class.translation.php:129
 msgid "Width"
 msgstr ""
 
-#: includes/translation/class.translation.php:94
+#: includes/translation/class.translation.php:130
 msgid "Height"
 msgstr ""
 
-#: includes/translation/class.translation.php:95
+#: includes/translation/class.translation.php:131
 msgid "Display Label"
 msgstr ""
 
-#: includes/translation/class.translation.php:96
-#: includes/translation/class.translation.php:199
+#: includes/translation/class.translation.php:132
+#: includes/translation/class.translation.php:271
 msgid "Seat Id"
 msgstr ""
 
-#: includes/translation/class.translation.php:97
+#: includes/translation/class.translation.php:133
 msgid "Seat Label"
 msgstr ""
 
-#: includes/translation/class.translation.php:98
+#: includes/translation/class.translation.php:134
+#: includes/translation/class.translation.php:272
 msgid "Seat Price"
 msgstr ""
 
-#: includes/translation/class.translation.php:99
+#: includes/translation/class.translation.php:135
 msgid "Label"
 msgstr ""
 
-#: includes/translation/class.translation.php:100
+#: includes/translation/class.translation.php:136
 msgid "Select Font Size"
 msgstr ""
 
-#: includes/translation/class.translation.php:101
+#: includes/translation/class.translation.php:137
 msgid "Font Size"
 msgstr ""
 
-#: includes/translation/class.translation.php:102
+#: includes/translation/class.translation.php:138
 msgid "Small"
 msgstr ""
 
-#: includes/translation/class.translation.php:103
+#: includes/translation/class.translation.php:139
 msgid "Medium"
 msgstr ""
 
-#: includes/translation/class.translation.php:104
+#: includes/translation/class.translation.php:140
 msgid "Large"
 msgstr ""
 
-#: includes/translation/class.translation.php:105
-#: includes/translation/class.translation.php:200
+#: includes/translation/class.translation.php:141
 msgid "Price"
 msgstr ""
 
-#: includes/translation/class.translation.php:106
+#: includes/translation/class.translation.php:142
 msgid "Color"
 msgstr ""
 
-#: includes/translation/class.translation.php:107
+#: includes/translation/class.translation.php:143
 msgid "Background Color"
 msgstr ""
 
-#: includes/translation/class.translation.php:108
+#: includes/translation/class.translation.php:144
 msgid "Handicap Seat"
 msgstr ""
 
-#: includes/translation/class.translation.php:109
+#: includes/translation/class.translation.php:145
 msgid "Selected Items"
 msgstr ""
 
-#: includes/translation/class.translation.php:110
+#: includes/translation/class.translation.php:146
 msgid "Properties"
 msgstr ""
 
-#: includes/translation/class.translation.php:111
+#: includes/translation/class.translation.php:147
 msgid "Seat Properties"
 msgstr ""
 
-#: includes/translation/class.translation.php:112
+#: includes/translation/class.translation.php:148
 msgid "Screen Properties"
 msgstr ""
 
-#: includes/translation/class.translation.php:113
+#: includes/translation/class.translation.php:149
 msgid "Generic Properties"
 msgstr ""
 
-#: includes/translation/class.translation.php:114
+#: includes/translation/class.translation.php:150
 msgid "Text Properties"
 msgstr ""
 
-#: includes/translation/class.translation.php:115
+#: includes/translation/class.translation.php:151
 msgid "Keystroke Actions"
 msgstr ""
 
-#: includes/translation/class.translation.php:116
+#: includes/translation/class.translation.php:152
 msgid "Undo"
 msgstr ""
 
-#: includes/translation/class.translation.php:117
+#: includes/translation/class.translation.php:153
 msgid "Redo"
 msgstr ""
 
-#: includes/translation/class.translation.php:118
+#: includes/translation/class.translation.php:154
 msgid "Select All Objects"
 msgstr ""
 
-#: includes/translation/class.translation.php:119
+#: includes/translation/class.translation.php:155
 msgid "Invert Selection"
 msgstr ""
 
-#: includes/translation/class.translation.php:120
+#: includes/translation/class.translation.php:156
 msgid "Deselect All Objects"
 msgstr ""
 
-#: includes/translation/class.translation.php:121
+#: includes/translation/class.translation.php:157
 msgid "Toggle Grid"
 msgstr ""
 
-#: includes/translation/class.translation.php:122
+#: includes/translation/class.translation.php:158
 msgid "Grid Contrast"
 msgstr ""
 
-#: includes/translation/class.translation.php:123
+#: includes/translation/class.translation.php:159
 msgid "Grid Color"
 msgstr ""
 
-#: includes/translation/class.translation.php:124
+#: includes/translation/class.translation.php:160
 msgid "Decrease Grid Size"
 msgstr ""
 
-#: includes/translation/class.translation.php:125
+#: includes/translation/class.translation.php:161
 msgid "Increase Grid Size"
 msgstr ""
 
-#: includes/translation/class.translation.php:126
+#: includes/translation/class.translation.php:162
 msgid "Toggle Editor Seat Text Display (Label, Price, Seat Group, Status, Seat ID)"
 msgstr ""
 
-#: includes/translation/class.translation.php:128
+#: includes/translation/class.translation.php:164
 msgid "Workflow Settings"
 msgstr ""
 
-#: includes/translation/class.translation.php:129
+#: includes/translation/class.translation.php:165
 msgid "Failed to add seats to cart."
 msgstr ""
 
-#: includes/translation/class.translation.php:130
+#: includes/translation/class.translation.php:166
 msgid "Back to Edit Product Page"
 msgstr ""
 
-#: includes/translation/class.translation.php:131
+#: includes/translation/class.translation.php:167
 msgid "Sorry, the editor is optimized for desktop devices with larger screens only."
 msgstr ""
 
-#: includes/translation/class.translation.php:132
+#: includes/translation/class.translation.php:168
 msgid "Round Corners"
 msgstr ""
 
-#: includes/translation/class.translation.php:133
-msgid "Background Image"
-msgstr ""
-
-#: includes/translation/class.translation.php:134
-msgid "Add Image"
-msgstr ""
-
-#: includes/translation/class.translation.php:135
-msgid "Select Background Image"
-msgstr ""
-
-#: includes/translation/class.translation.php:136
-msgid "Add Selected Image"
-msgstr ""
-
-#: includes/translation/class.translation.php:137
-msgid "Background Image Opacity"
-msgstr ""
-
-#: includes/translation/class.translation.php:138
-msgid "This id is already in use by another seat!"
-msgstr ""
-
-#: includes/translation/class.translation.php:139
-msgid "Keyboard Shortcuts"
-msgstr ""
-
-#: includes/translation/class.translation.php:140
-msgid "Auto Increment Patterns"
-msgstr ""
-
-#: includes/translation/class.translation.php:141
-msgid "Linear Increment Pattern"
-msgstr ""
-
-#: includes/translation/class.translation.php:142
-msgid "Cyclic Increment Pattern"
-msgstr ""
-
-#: includes/translation/class.translation.php:143
-msgid "Combined Patterns"
-msgstr ""
-
-#: includes/translation/class.translation.php:144
-msgid "Increments sequentially through values"
-msgstr ""
-
-#: includes/translation/class.translation.php:145
-msgid "Cycles through limited range then repeats"
-msgstr ""
-
-#: includes/translation/class.translation.php:146
-msgid "Combine multiple patterns with separators"
-msgstr ""
-
-#: includes/translation/class.translation.php:147
-msgid "Numbers increment by one"
-msgstr ""
-
-#: includes/translation/class.translation.php:148
-msgid "Letters increment alphabetically"
-msgstr ""
-
-#: includes/translation/class.translation.php:149
-msgid "Repeat each letter 3 times"
-msgstr ""
-
-#: includes/translation/class.translation.php:150
-msgid "Repeat each number 3 times"
-msgstr ""
-
-#: includes/translation/class.translation.php:151
-msgid "Cycle A to C then repeat"
-msgstr ""
-
-#: includes/translation/class.translation.php:152
-msgid "Cycle 1 to 3 then repeat"
-msgstr ""
-
-#: includes/translation/class.translation.php:153
-msgid "Repeat letters with cycling numbers"
-msgstr ""
-
-#: includes/translation/class.translation.php:156
-msgid "Discounts are not available for the Lite version"
-msgstr ""
-
-#: includes/translation/class.translation.php:157
-msgid "Discount name must be unique."
-msgstr ""
-
-#: includes/translation/class.translation.php:158
-msgid "Group"
-msgstr ""
-
-#: includes/translation/class.translation.php:159
-msgid "Group Name"
-msgstr ""
-
-#: includes/translation/class.translation.php:160
-msgid "Seat Group"
-msgstr ""
-
-#: includes/translation/class.translation.php:161
-msgid "Manage Discounts"
-msgstr ""
-
-#: includes/translation/class.translation.php:162
-msgid "Add Discount"
-msgstr ""
-
-#: includes/translation/class.translation.php:163
-msgid "Discount Name"
-msgstr ""
-
-#: includes/translation/class.translation.php:164
-msgid "Discount Value"
-msgstr ""
-
-#: includes/translation/class.translation.php:165
-msgid "Discount Type"
-msgstr ""
-
-#: includes/translation/class.translation.php:166
-msgid "Percentage"
-msgstr ""
-
-#: includes/translation/class.translation.php:167
-msgid "Fixed Value"
-msgstr ""
-
-#: includes/translation/class.translation.php:168
-msgid "All Seats"
+#: includes/translation/class.translation.php:169
+msgid "Text Direction"
 msgstr ""
 
 #: includes/translation/class.translation.php:170
-msgid "Import Seat Plan"
+msgid "Horizontal"
 msgstr ""
 
 #: includes/translation/class.translation.php:171
-msgid "Select a CSV file to import a seat plan."
+msgid "Vertical (Upright)"
 msgstr ""
 
 #: includes/translation/class.translation.php:172
-msgid "Import"
+msgid "Vertical (Sideways)"
 msgstr ""
 
-#. translators: %d: number of objects imported
+#: includes/translation/class.translation.php:173
+msgid "Background Image"
+msgstr ""
+
+#: includes/translation/class.translation.php:174
+msgid "Add Image"
+msgstr ""
+
 #: includes/translation/class.translation.php:175
-msgid "%d Objects Imported"
+msgid "Select Background Image"
 msgstr ""
 
 #: includes/translation/class.translation.php:176
-msgid "Export Seat Data"
+msgid "Add Selected Image"
 msgstr ""
 
 #: includes/translation/class.translation.php:177
-msgid "Exporting Data"
+msgid "Background Image Opacity"
+msgstr ""
+
+#: includes/translation/class.translation.php:178
+msgid "This id is already in use by another seat!"
 msgstr ""
 
 #: includes/translation/class.translation.php:179
-msgid "Seat Status"
+msgid "Keyboard Shortcuts"
 msgstr ""
 
 #: includes/translation/class.translation.php:180
-msgid "Sold out"
+msgid "Auto Increment Patterns"
 msgstr ""
 
 #: includes/translation/class.translation.php:181
-msgid "Available"
+msgid "Linear Increment Pattern"
 msgstr ""
 
 #: includes/translation/class.translation.php:182
-msgid "Unavailable"
+msgid "Cyclic Increment Pattern"
 msgstr ""
 
 #: includes/translation/class.translation.php:183
-msgid "Purchasable on Site"
+msgid "Combined Patterns"
+msgstr ""
+
+#: includes/translation/class.translation.php:184
+msgid "Increments sequentially through values"
+msgstr ""
+
+#: includes/translation/class.translation.php:185
+msgid "Cycles through limited range then repeats"
 msgstr ""
 
 #: includes/translation/class.translation.php:186
-msgid "In-Cart Reserved Seats"
+msgid "Combine multiple patterns with separators"
 msgstr ""
 
 #: includes/translation/class.translation.php:187
-msgid "Reserved seats will be automatically released after a set time if not purchased."
+msgid "Numbers increment by one"
 msgstr ""
 
 #: includes/translation/class.translation.php:188
-msgid "Clear All"
+msgid "Letters increment alphabetically"
 msgstr ""
 
 #: includes/translation/class.translation.php:189
-msgid "List is empty"
+msgid "Repeat each letter 3 times"
+msgstr ""
+
+#: includes/translation/class.translation.php:190
+msgid "Repeat each number 3 times"
+msgstr ""
+
+#: includes/translation/class.translation.php:191
+msgid "Cycle A to C then repeat"
 msgstr ""
 
 #: includes/translation/class.translation.php:192
+msgid "Cycle 1 to 3 then repeat"
+msgstr ""
+
+#: includes/translation/class.translation.php:193
+msgid "Repeat letters with cycling numbers"
+msgstr ""
+
+#: includes/translation/class.translation.php:194
+msgid "Copy Selected Objects"
+msgstr ""
+
+#: includes/translation/class.translation.php:195
+msgid "Paste Selected Objects"
+msgstr ""
+
+#: includes/translation/class.translation.php:198
+msgid "Pattern Builder"
+msgstr ""
+
+#: includes/translation/class.translation.php:199
+msgid "Quick Patterns"
+msgstr ""
+
+#: includes/translation/class.translation.php:200
+msgid "Custom Pattern"
+msgstr ""
+
+#: includes/translation/class.translation.php:201
+msgid "Prefix"
+msgstr ""
+
+#: includes/translation/class.translation.php:202
+msgid "Suffix"
+msgstr ""
+
+#: includes/translation/class.translation.php:203
+msgid "Segment"
+msgstr ""
+
+#: includes/translation/class.translation.php:204
+msgid "Remove"
+msgstr ""
+
+#: includes/translation/class.translation.php:205
+msgid "Separator"
+msgstr ""
+
+#: includes/translation/class.translation.php:206
+msgid "Type"
+msgstr ""
+
+#: includes/translation/class.translation.php:207
+msgid "Start"
+msgstr ""
+
+#: includes/translation/class.translation.php:208
+msgid "Mode"
+msgstr ""
+
+#: includes/translation/class.translation.php:209
+msgid "Simple"
+msgstr ""
+
+#: includes/translation/class.translation.php:210
+msgid "Repeat Each"
+msgstr ""
+
+#: includes/translation/class.translation.php:211
+msgid "Cycle"
+msgstr ""
+
+#: includes/translation/class.translation.php:212
+msgid "Range"
+msgstr ""
+
+#: includes/translation/class.translation.php:213
+msgid "Times"
+msgstr ""
+
+#: includes/translation/class.translation.php:214
+msgid "Add Segment"
+msgstr ""
+
+#: includes/translation/class.translation.php:215
+msgid "Preview"
+msgstr ""
+
+#: includes/translation/class.translation.php:216
+msgid "more"
+msgstr ""
+
+#: includes/translation/class.translation.php:217
+msgid "items selected"
+msgstr ""
+
+#: includes/translation/class.translation.php:219
+msgid "Apply Pattern"
+msgstr ""
+
+#: includes/translation/class.translation.php:220
+msgid "Select"
+msgstr ""
+
+#: includes/translation/class.translation.php:221
+msgid "Auto Increment"
+msgstr ""
+
+#: includes/translation/class.translation.php:224
+msgid "Discounts are not available for the Lite version"
+msgstr ""
+
+#: includes/translation/class.translation.php:225
+msgid "Discount name must be unique."
+msgstr ""
+
+#: includes/translation/class.translation.php:226
+msgid "Group"
+msgstr ""
+
+#: includes/translation/class.translation.php:227
+msgid "Group Name"
+msgstr ""
+
+#: includes/translation/class.translation.php:228
+msgid "Seat Group"
+msgstr ""
+
+#: includes/translation/class.translation.php:229
+msgid "Manage Discounts"
+msgstr ""
+
+#: includes/translation/class.translation.php:230
+msgid "Add discounts to your seat plan. You can add discounts for specific seat groups or all seats."
+msgstr ""
+
+#: includes/translation/class.translation.php:231
+msgid "Add Discount"
+msgstr ""
+
+#: includes/translation/class.translation.php:232
+msgid "Discount Name"
+msgstr ""
+
+#: includes/translation/class.translation.php:233
+msgid "Discount Value"
+msgstr ""
+
+#: includes/translation/class.translation.php:234
+msgid "Discount Type"
+msgstr ""
+
+#: includes/translation/class.translation.php:235
+msgid "Percentage"
+msgstr ""
+
+#: includes/translation/class.translation.php:236
+msgid "Fixed Value"
+msgstr ""
+
+#: includes/translation/class.translation.php:237
+msgid "All Seats"
+msgstr ""
+
+#: includes/translation/class.translation.php:239
+msgid "Import Seat Plan"
+msgstr ""
+
+#: includes/translation/class.translation.php:240
+msgid "Upload a CSV file to import your seat plan layout. The file should contain seat positions and properties."
+msgstr ""
+
+#: includes/translation/class.translation.php:241
+msgid "Import"
+msgstr ""
+
+#: includes/translation/class.translation.php:242
+msgid "Drop your CSV file here, or"
+msgstr ""
+
+#: includes/translation/class.translation.php:243
+msgid "browse"
+msgstr ""
+
+#: includes/translation/class.translation.php:244
+msgid "Supports .csv files only"
+msgstr ""
+
+#. translators: %d: number of objects imported
+#: includes/translation/class.translation.php:247
+msgid "%d Objects Imported"
+msgstr ""
+
+#: includes/translation/class.translation.php:248
+msgid "Export Seat Data"
+msgstr ""
+
+#: includes/translation/class.translation.php:249
+msgid "Exporting Data"
+msgstr ""
+
+#: includes/translation/class.translation.php:251
+msgid "Seat Status"
+msgstr ""
+
+#: includes/translation/class.translation.php:252
+msgid "Sold out"
+msgstr ""
+
+#: includes/translation/class.translation.php:253
+msgid "Available"
+msgstr ""
+
+#: includes/translation/class.translation.php:254
+msgid "Unavailable"
+msgstr ""
+
+#: includes/translation/class.translation.php:255
+msgid "Purchasable on Site"
+msgstr ""
+
+#: includes/translation/class.translation.php:258
+msgid "In-Cart Reserved Seats"
+msgstr ""
+
+#: includes/translation/class.translation.php:259
+msgid "Reserved seats will be automatically released after a set time if not purchased."
+msgstr ""
+
+#: includes/translation/class.translation.php:260
+msgid "Clear All"
+msgstr ""
+
+#: includes/translation/class.translation.php:261
+msgid "List is empty"
+msgstr ""
+
+#: includes/translation/class.translation.php:264
 #: includes/woocommerce/product/filters/class.auditorium-product-admin.php:90
 msgid "Export Bookings"
 msgstr ""
 
-#: includes/translation/class.translation.php:194
+#: includes/translation/class.translation.php:266
 msgid "Customer Name"
 msgstr ""
 
-#: includes/translation/class.translation.php:195
+#: includes/translation/class.translation.php:267
 msgid "Customer Email"
 msgstr ""
 
-#: includes/translation/class.translation.php:196
+#: includes/translation/class.translation.php:268
 msgid "Date Created"
 msgstr ""
 
-#: includes/translation/class.translation.php:198
+#: includes/translation/class.translation.php:270
 msgid "Product Name"
 msgstr ""
 
-#: includes/translation/class.translation.php:201
-#: includes/translation/class.translation.php:219
+#: includes/translation/class.translation.php:273
+#: includes/translation/class.translation.php:291
 msgid "Date and Time"
 msgstr ""
 
-#: includes/translation/class.translation.php:202
+#: includes/translation/class.translation.php:274
 msgid "Loading bookings..."
 msgstr ""
 
-#: includes/translation/class.translation.php:203
+#: includes/translation/class.translation.php:275
 msgid "Bookings exported successfully."
 msgstr ""
 
-#: includes/translation/class.translation.php:204
+#: includes/translation/class.translation.php:276
 msgid "An error occurred while exporting bookings."
 msgstr ""
 
-#: includes/translation/class.translation.php:205
+#: includes/translation/class.translation.php:277
 msgid "Product Note"
 msgstr ""
 
-#: includes/translation/class.translation.php:206
+#: includes/translation/class.translation.php:278
 msgid "No bookings found for this product."
 msgstr ""
 
-#: includes/translation/class.translation.php:209
+#: includes/translation/class.translation.php:281
 msgid "Select the fields you want to include in the export file. You can select multiple fields."
 msgstr ""
 
-#: includes/translation/class.translation.php:210
+#: includes/translation/class.translation.php:282
 msgid "Select Fields to Export"
 msgstr ""
 
-#: includes/translation/class.translation.php:211
+#: includes/translation/class.translation.php:283
 msgid "Select All"
 msgstr ""
 
-#: includes/translation/class.translation.php:212
+#: includes/translation/class.translation.php:284
 msgid "Deselect All"
 msgstr ""
 
-#: includes/translation/class.translation.php:213
+#: includes/translation/class.translation.php:285
 msgid "Please select at least one field to export."
 msgstr ""
 
-#: includes/translation/class.translation.php:216
+#: includes/translation/class.translation.php:288
 msgid "Manage Dates and Times"
 msgstr ""
 
-#: includes/translation/class.translation.php:217
+#: includes/translation/class.translation.php:289
 msgid "If this product should be available on multiple dates and times, add them here. If not, leave this field empty."
 msgstr ""
 
-#: includes/translation/class.translation.php:218
+#: includes/translation/class.translation.php:290
 msgid "Add Date and Time"
 msgstr ""
 
-#: includes/translation/class.translation.php:220
+#: includes/translation/class.translation.php:292
 msgid "Dates are not available for the Lite version"
 msgstr ""
 
-#: includes/translation/class.translation.php:230
+#: includes/translation/class.translation.php:294
+msgid "Seat Planner Editor"
+msgstr ""
+
+#: includes/translation/class.translation.php:295
+msgid "Customize your seat plan layout and properties. You can add seats, screens, text, and more."
+msgstr ""
+
+#: includes/translation/class.translation.php:305
 msgid "Add to Cart"
 msgstr ""
 
-#: includes/translation/class.translation.php:231
+#: includes/translation/class.translation.php:306
 msgid "Zoom In"
 msgstr ""
 
-#: includes/translation/class.translation.php:232
+#: includes/translation/class.translation.php:307
 msgid "Zoom Out"
 msgstr ""
 
-#: includes/translation/class.translation.php:233
+#: includes/translation/class.translation.php:308
 msgid "Zoom Reset"
 msgstr ""
 
 #. translators: %d: number of seats
-#: includes/translation/class.translation.php:235
+#: includes/translation/class.translation.php:310
 msgid "Select at least %d seats"
 msgstr ""
 
-#: includes/translation/class.translation.php:236
+#: includes/translation/class.translation.php:311
 msgid "Maximum seats selected"
 msgstr ""
 
-#: includes/translation/class.translation.php:237
+#: includes/translation/class.translation.php:312
 msgid "Seat selected"
 msgstr ""
 
 #. translators: %d: number of seats
-#: includes/translation/class.translation.php:239
+#: includes/translation/class.translation.php:314
 msgid "%d seat selected"
 msgstr ""
 
 #. translators: %d: number of seats
-#: includes/translation/class.translation.php:241
+#: includes/translation/class.translation.php:316
 msgid "%d seats selected"
 msgstr ""
 
 #. translators: %d: number of seats
-#: includes/translation/class.translation.php:243
+#: includes/translation/class.translation.php:318
 msgid "%d seat added to cart."
 msgstr ""
 
 #. translators: %d: number of seats
-#: includes/translation/class.translation.php:245
+#: includes/translation/class.translation.php:320
 msgid "%d seats added to cart."
 msgstr ""
 
-#: includes/translation/class.translation.php:246
-#: includes/translation/class.translation.php:258
+#: includes/translation/class.translation.php:321
+#: includes/translation/class.translation.php:332
 msgid "View Cart"
 msgstr ""
 
-#: includes/translation/class.translation.php:248
+#: includes/translation/class.translation.php:323
 msgid "Failed to fetch seat plan data."
 msgstr ""
 
-#: includes/translation/class.translation.php:251
+#: includes/translation/class.translation.php:325
 msgid "Next"
 msgstr ""
 
-#: includes/translation/class.translation.php:252
+#: includes/translation/class.translation.php:326
 msgid "Back"
 msgstr ""
 
-#: includes/translation/class.translation.php:253
-msgid "Select Discounts for Your Seats"
+#: includes/translation/class.translation.php:327
+msgid "Apply discounts to your seats to get the best price."
 msgstr ""
 
-#: includes/translation/class.translation.php:254
+#: includes/translation/class.translation.php:328
 msgid "Regular Seat"
 msgstr ""
 
-#: includes/translation/class.translation.php:255
+#: includes/translation/class.translation.php:329
+msgid "No discount applied"
+msgstr ""
+
+#: includes/translation/class.translation.php:330
 msgid "Total"
 msgstr ""
 
-#: includes/translation/class.translation.php:256
+#: includes/translation/class.translation.php:331
 #: includes/woocommerce/product/filters/class.auditorium-product-admin.php:74
 msgid "Discounts"
 msgstr ""
 
-#: includes/translation/class.translation.php:260
+#: includes/translation/class.translation.php:333
 msgid "This seat can only be purchased at the venue."
+msgstr ""
+
+#: includes/translation/class.translation.php:334
+msgid "Loading"
+msgstr ""
+
+#: includes/translation/class.translation.php:336
+msgid "Reserved By"
+msgstr ""
+
+#: includes/translation/class.translation.php:337
+msgid "Order Date"
+msgstr ""
+
+#: includes/translation/class.translation.php:341
+msgid "No order data found for this seat."
+msgstr ""
+
+#: includes/translation/class.translation.php:342
+msgid "Notice"
 msgstr ""
 
 #: includes/woocommerce/product/class.auditorium-product.php:148
@@ -1231,13 +1518,18 @@ msgstr ""
 msgid "Unscan Ticket"
 msgstr ""
 
-#: includes/woocommerce/product/filters/class.auditorium-product-select-seat-dates.php:48
+#: includes/woocommerce/product/filters/class.auditorium-product-select-seat-dates.php:52
 msgid "Choose a date"
 msgstr ""
 
 #. translators: %d - product ID
 #: includes/woocommerce/tools/check-double-booking/class.check-double-booking.php:134
 msgid "Product #%d"
+msgstr ""
+
+#. translators: %d - product ID
+#: includes/woocommerce/tools/check-ghost-booking/class.check-ghost-booking.php:160
+msgid "Product #%d (Invalid)"
 msgstr ""
 
 #: stachethemes-seat-planner-lite.php:46
