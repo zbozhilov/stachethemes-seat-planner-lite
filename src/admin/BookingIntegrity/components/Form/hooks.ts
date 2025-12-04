@@ -1,44 +1,42 @@
 import { __ } from "@src/utils";
 import { useEffect, useState, useRef } from "react";
-import { AjaxResponseData, ResponseItem } from "./types";
+import { CheckType, DoubleBookingResult, GhostBookingResult } from "./types";
 
-export const useCheckDoubleBooking = (enabled: boolean) => {
+type CheckResult = DoubleBookingResult | GhostBookingResult;
 
-    const [data, setData] = useState<AjaxResponseData|null>(null);
+export const useBookingIntegrityCheck = (enabled: boolean, checkType: CheckType) => {
+    const [data, setData] = useState<CheckResult[] | null>(null);
     const [isLoading, setIsLoading] = useState(false);
     const [ready, setReady] = useState(false);
     const [error, setError] = useState(false);
     const [productIds, setProductIds] = useState<number[]>([]);
     const [currentProductIndex, setCurrentProductIndex] = useState<number>(-1);
     const abortControllerRef = useRef<AbortController | null>(null);
-    
+
     const cancelCheck = () => {
         if (abortControllerRef.current) {
             abortControllerRef.current.abort();
             setIsLoading(false);
         }
     };
-    
+
     const resetCheck = () => {
-        // Reset states without aborting the current controller
         setData(null);
         setReady(false);
         setError(false);
         setProductIds([]);
         setCurrentProductIndex(-1);
     };
-    
-    // This ensures we have a valid AbortController before making requests
+
     const ensureAbortController = () => {
         if (!abortControllerRef.current || abortControllerRef.current.signal.aborted) {
             abortControllerRef.current = new AbortController();
         }
         return abortControllerRef.current;
     };
-    
+
     useEffect(() => {
         if (enabled) {
-            // When enabling, make sure we have a fresh controller but don't reset data
             ensureAbortController();
             setIsLoading(true);
         } else {
@@ -50,9 +48,9 @@ export const useCheckDoubleBooking = (enabled: boolean) => {
         const fetchProductIds = async () => {
             try {
                 setIsLoading(true);
-                
+
                 const controller = ensureAbortController();
-                
+
                 const response = await fetch(window.stachesepl_ajax.ajax_url, {
                     method: 'POST',
                     headers: {
@@ -79,8 +77,7 @@ export const useCheckDoubleBooking = (enabled: boolean) => {
 
                 setProductIds(result.data.product_ids);
                 setData([]);
-                
-                // Start with the first product
+
                 if (result.data.product_ids.length > 0) {
                     setCurrentProductIndex(0);
                 } else {
@@ -99,7 +96,11 @@ export const useCheckDoubleBooking = (enabled: boolean) => {
         const checkProduct = async (productId: number) => {
             try {
                 const controller = ensureAbortController();
-                
+
+                const task = checkType === 'double_booking' 
+                    ? 'check_product_booking' 
+                    : 'check_product_ghost_booking';
+
                 const response = await fetch(window.stachesepl_ajax.ajax_url, {
                     method: 'POST',
                     headers: {
@@ -107,7 +108,7 @@ export const useCheckDoubleBooking = (enabled: boolean) => {
                     },
                     body: new URLSearchParams({
                         action: 'seatplanner',
-                        task: 'check_product_booking',
+                        task: task,
                         product_id: productId.toString(),
                         nonce: window.stachesepl_ajax.nonce,
                     }),
@@ -124,10 +125,8 @@ export const useCheckDoubleBooking = (enabled: boolean) => {
                     throw new Error(result.data.error);
                 }
 
-                // Append new product results to existing data
                 setData(prevData => [...(prevData || []), result.data]);
 
-                // Move to next product or finish
                 if (currentProductIndex < productIds.length - 1) {
                     setCurrentProductIndex(prev => prev + 1);
                 } else {
@@ -144,30 +143,64 @@ export const useCheckDoubleBooking = (enabled: boolean) => {
         };
 
         if (enabled && currentProductIndex === -1) {
-            // First get all product IDs
             fetchProductIds();
         } else if (enabled && currentProductIndex >= 0 && currentProductIndex < productIds.length) {
-            // Then check each product one by one
             checkProduct(productIds[currentProductIndex]);
         }
 
         return () => {
-            // Cleanup function - abort any ongoing requests when component unmounts
-            // or when dependencies change
             if (abortControllerRef.current) {
                 abortControllerRef.current.abort();
             }
         };
-    }, [enabled, currentProductIndex, productIds]);
+    }, [enabled, currentProductIndex, productIds, checkType]);
 
     return {
-        data: data,
-        ready: ready,
-        isLoading: isLoading,
-        error: error,
-        currentProductIndex: currentProductIndex,
+        data,
+        ready,
+        isLoading,
+        error,
+        currentProductIndex,
         totalProducts: productIds.length,
         resetCheck,
         cancelCheck
     }
 }
+
+export const useFixGhostBooking = () => {
+    const fixGhostBooking = async (
+        productId: number,
+        seatId: string,
+        selectedDate: string
+    ): Promise<boolean> => {
+        try {
+            const response = await fetch(window.stachesepl_ajax.ajax_url, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                },
+                body: new URLSearchParams({
+                    action: 'seatplanner',
+                    task: 'fix_ghost_booking',
+                    product_id: productId.toString(),
+                    seat_id: seatId,
+                    selected_date: selectedDate,
+                    nonce: window.stachesepl_ajax.nonce,
+                }),
+            });
+
+            if (!response.ok) {
+                return false;
+            }
+
+            const result = await response.json();
+
+            return result.success === true;
+        } catch {
+            return false;
+        }
+    };
+
+    return { fixGhostBooking };
+}
+

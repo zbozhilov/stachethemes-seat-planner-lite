@@ -40,6 +40,71 @@ class Translation {
         ];
     }
 
+    // Translates the strings used for the Booking Integrity Checker (Tools -> Booking Integrity Checker)
+    public static function get_booking_integrity_strings() {
+        return [
+            // Common strings
+            'CHECK_NOW'                      => esc_html__('Check Now', 'stachethemes-seat-planner-lite'),
+            'CHECKING'                       => esc_html__('Checking...', 'stachethemes-seat-planner-lite'),
+            'CANCEL'                         => esc_html__('Cancel', 'stachethemes-seat-planner-lite'),
+            'PREPARING_TO_CHECK'             => esc_html__('Preparing to check...', 'stachethemes-seat-planner-lite'),
+            'TRY_AGAIN'                      => esc_html__('Try Again', 'stachethemes-seat-planner-lite'),
+            'RESULTS'                        => esc_html__('Results', 'stachethemes-seat-planner-lite'),
+            // translators: %1$d - number of products checked, %2$d - total number of products
+            'RESULTS_COUNT'                  => esc_html__('Results (%1$d of %2$d products checked)', 'stachethemes-seat-planner-lite'),
+            'SEAT_ID'                        => esc_html__('Seat ID', 'stachethemes-seat-planner-lite'),
+            'ORDER_IDS'                      => esc_html__('Order IDs', 'stachethemes-seat-planner-lite'),
+            'NO_PRODUCTS_FOUND'              => esc_html__('No products found to check.', 'stachethemes-seat-planner-lite'),
+            'ACTIONS'                        => esc_html__('Actions', 'stachethemes-seat-planner-lite'),
+            'NO_ISSUES'                      => esc_html__('No issues', 'stachethemes-seat-planner-lite'),
+
+            // Check type selector
+            'SELECT_CHECK_TYPE'              => esc_html__('Select Check Type', 'stachethemes-seat-planner-lite'),
+            'CHECK_TYPE_DOUBLE_BOOKING'      => esc_html__('Double Booking Check', 'stachethemes-seat-planner-lite'),
+            'CHECK_TYPE_GHOST_BOOKING'       => esc_html__('Ghost Booking Check', 'stachethemes-seat-planner-lite'),
+            'CHECK_TYPE_DOUBLE_DESC'         => esc_html__('Find seats that have been booked multiple times (same seat appears in multiple orders).', 'stachethemes-seat-planner-lite'),
+            'CHECK_TYPE_GHOST_DESC'          => esc_html__('Find seats that appear free on the front-end but have existing orders (data inconsistency).', 'stachethemes-seat-planner-lite'),
+
+            // Double booking specific strings
+            // translators: %1$d - number of products being checked, %2$d - total number of products
+            'CHECKING_DOUBLE_BOOKING'        => esc_html__('Checking for double bookings... %1$d of %2$d products', 'stachethemes-seat-planner-lite'),
+            'ERROR_DOUBLE_BOOKING'           => esc_html__('An error occurred while checking for double bookings.', 'stachethemes-seat-planner-lite'),
+            'NO_DUPLICATES'                  => esc_html__('No duplicates', 'stachethemes-seat-planner-lite'),
+            'ONE_DUPLICATE'                  => esc_html__('1 duplicate', 'stachethemes-seat-planner-lite'),
+            // translators: %d - number of duplicates
+            'MULTIPLE_DUPLICATES'            => esc_html__('%d duplicates', 'stachethemes-seat-planner-lite'),
+            'BOOKING_COUNT'                  => esc_html__('Booking Count', 'stachethemes-seat-planner-lite'),
+            'NO_DUPLICATE_BOOKINGS'          => esc_html__('No duplicate bookings found for this product.', 'stachethemes-seat-planner-lite'),
+            // translators: %d - number of products with duplicate bookings (plural)
+            'DOUBLE_CHECK_COMPLETE'          => esc_html__('Check complete. %d products have duplicate bookings.', 'stachethemes-seat-planner-lite'),
+            // translators: For when only one product has duplicate bookings
+            'DOUBLE_CHECK_COMPLETE_SINGULAR' => esc_html__('Check complete. 1 product has duplicate bookings.', 'stachethemes-seat-planner-lite'),
+            'DOUBLE_CHECK_COMPLETE_NONE'     => esc_html__('Check complete. No duplicate bookings found.', 'stachethemes-seat-planner-lite'),
+
+            // Ghost booking specific strings
+            // translators: %1$d - number of products being checked, %2$d - total number of products
+            'CHECKING_GHOST_BOOKING'         => esc_html__('Checking for ghost bookings... %1$d of %2$d products', 'stachethemes-seat-planner-lite'),
+            'ERROR_GHOST_BOOKING'            => esc_html__('An error occurred while checking for ghost bookings.', 'stachethemes-seat-planner-lite'),
+            'NO_GHOST_SEATS'                 => esc_html__('No issues', 'stachethemes-seat-planner-lite'),
+            'ONE_GHOST_SEAT'                 => esc_html__('1 ghost seat', 'stachethemes-seat-planner-lite'),
+            // translators: %d - number of ghost seats
+            'MULTIPLE_GHOST_SEATS'           => esc_html__('%d ghost seats', 'stachethemes-seat-planner-lite'),
+            'EVENT_DATE'                     => esc_html__('Event Date', 'stachethemes-seat-planner-lite'),
+            'ORDER_COUNT'                    => esc_html__('Order Count', 'stachethemes-seat-planner-lite'),
+            'NO_GHOST_BOOKINGS'              => esc_html__('No ghost bookings found for this product.', 'stachethemes-seat-planner-lite'),
+            // translators: %d - number of products with ghost bookings (plural)
+            'GHOST_CHECK_COMPLETE'           => esc_html__('Check complete. %d products have ghost bookings.', 'stachethemes-seat-planner-lite'),
+            // translators: For when only one product has ghost bookings
+            'GHOST_CHECK_COMPLETE_SINGULAR'  => esc_html__('Check complete. 1 product has ghost bookings.', 'stachethemes-seat-planner-lite'),
+            'GHOST_CHECK_COMPLETE_NONE'      => esc_html__('Check complete. No ghost bookings found.', 'stachethemes-seat-planner-lite'),
+            'FIX_GHOST_BOOKING'              => esc_html__('Mark as Taken', 'stachethemes-seat-planner-lite'),
+            'FIXING'                         => esc_html__('Fixing...', 'stachethemes-seat-planner-lite'),
+            'FIXED'                          => esc_html__('Fixed', 'stachethemes-seat-planner-lite'),
+            'FIX_FAILED'                     => esc_html__('Fix failed', 'stachethemes-seat-planner-lite'),
+            'NO_DATE'                        => esc_html__('No specific date', 'stachethemes-seat-planner-lite'),
+        ];
+    }
+
     // Translates the strings used for checking double booking (Tools -> Double Booking Checker)
     public static function get_check_double_booking_strings() {
         return [
@@ -74,7 +139,7 @@ class Translation {
     public static function get_admin_strings() {
 
         return [
-            'ZINDEX'                         => esc_html__('Z-Index', 'stachethemes-seat-planner-lite'), 
+            'ZINDEX'                         => esc_html__('Z-Index', 'stachethemes-seat-planner-lite'),
             'OBJECTS_COPIED'                 => esc_html__('Objects Copied', 'stachethemes-seat-planner-lite'),
             'OBJECTS_PASTED'                 => esc_html__('Objects Pasted', 'stachethemes-seat-planner-lite'),
             'MAX_OBJECTS_LIMIT_REACHED'      => esc_html__('Lite version supports up to 100 objects', 'stachethemes-seat-planner-lite'),
@@ -204,14 +269,14 @@ class Translation {
             'EXPORT_BOOKINGS_ERROR'           => esc_html__('An error occurred while exporting bookings.', 'stachethemes-seat-planner-lite'),
             'PRODUCT_NOTE'                    => esc_html__('Product Note', 'stachethemes-seat-planner-lite'),
             'EXPORT_BOOKINGS_SUCCESS_NO_DATA' => esc_html__('No bookings found for this product.', 'stachethemes-seat-planner-lite'),
-            
+
             // Field selection for export
             'SELECT_FIELDS_TO_EXPORT_DESCRIPTION'  => esc_html__('Select the fields you want to include in the export file. You can select multiple fields.', 'stachethemes-seat-planner-lite'),
             'SELECT_FIELDS_TO_EXPORT'              => esc_html__('Select Fields to Export', 'stachethemes-seat-planner-lite'),
             'SELECT_ALL'                           => esc_html__('Select All', 'stachethemes-seat-planner-lite'),
             'DESELECT_ALL'                         => esc_html__('Deselect All', 'stachethemes-seat-planner-lite'),
             'PLEASE_SELECT_AT_LEAST_ONE_FIELD'     => esc_html__('Please select at least one field to export.', 'stachethemes-seat-planner-lite'),
-            
+
             // Dates
             'MANAGE_DATES_AND_TIMES'               => esc_html__('Manage Dates and Times', 'stachethemes-seat-planner-lite'),
             'MANAGE_DATES_AND_TIMES_DESC'          => esc_html__('If this product should be available on multiple dates and times, add them here. If not, leave this field empty.', 'stachethemes-seat-planner-lite'),

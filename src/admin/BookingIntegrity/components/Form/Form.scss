@@ -1,5 +1,76 @@
-.stachesepl-check-double-booking-form {
+.stachesepl-booking-integrity-form {
     margin: 20px 0;
+}
+
+.stachesepl-check-type-selector {
+    margin-bottom: 20px;
+    padding: 20px;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+
+    h3 {
+        margin-top: 0;
+        margin-bottom: 15px;
+    }
+}
+
+.stachesepl-check-type-options {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.stachesepl-check-type-option {
+    flex: 1;
+    min-width: 280px;
+    padding: 15px;
+    border: 2px solid #ddd;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    background-color: #f9f9f9;
+
+    &:hover {
+        border-color: #2271b1;
+        background-color: #f0f6fc;
+    }
+
+    &.selected {
+        border-color: #2271b1;
+        background-color: #f0f6fc;
+        box-shadow: 0 0 0 1px #2271b1;
+    }
+
+    input[type="radio"] {
+        margin-right: 10px;
+    }
+
+    label {
+        display: flex;
+        align-items: flex-start;
+        cursor: pointer;
+        font-weight: 600;
+    }
+
+    .stachesepl-option-content {
+        flex: 1;
+    }
+
+    .stachesepl-option-title {
+        font-weight: 600;
+        margin-bottom: 5px;
+    }
+
+    .stachesepl-option-desc {
+        font-weight: normal;
+        color: #666;
+        font-size: 13px;
+    }
+}
+
+.stachesepl-check-actions {
+    margin-top: 15px;
 }
 
 .stachesepl-results {
@@ -30,9 +101,9 @@
     }
 }
 
-.stachesepl-duplicate-badge {
+.stachesepl-issue-badge {
     margin-left: 10px;
-    background-color: #ca4a1f;
+    background-color: #d63638;
     color: white;
     padding: 3px 8px;
     border-radius: 10px;
@@ -40,7 +111,7 @@
     font-weight: normal;
 }
 
-.stachesepl-no-duplicate-badge {
+.stachesepl-no-issue-badge {
     margin-left: 10px;
     background-color: #2e7d32;
     color: white;
@@ -56,7 +127,7 @@
     top: 2px;
 }
 
-.stachesepl-duplicate-details {
+.stachesepl-details {
     padding: 15px;
 
     table {
@@ -86,7 +157,7 @@
     }
 }
 
-.stachesepl-no-duplicates {
+.stachesepl-no-issues {
     padding: 15px;
     color: #2e7d32;
 }
@@ -103,7 +174,7 @@
     background-color: #f0f0f1 !important;
     color: #d63638 !important;
     border-color: #d63638 !important;
-    
+
     &:hover {
         background-color: #f6f7f7 !important;
     }
@@ -135,5 +206,35 @@
     margin-top: 15px;
     padding: 10px;
     background-color: #fdeeee;
-    border-left: 4px solid #ca4a1f;
+    border-left: 4px solid #d63638;
 }
+
+.stachesepl-fix-button {
+    padding: 4px 8px !important;
+    font-size: 12px !important;
+    min-height: auto !important;
+
+    &.fixing {
+        opacity: 0.7;
+        cursor: wait;
+    }
+
+    &.fixed {
+        background-color: #2e7d32 !important;
+        border-color: #2e7d32 !important;
+        color: white !important;
+        cursor: default;
+    }
+
+    &.error {
+        background-color: #d63638 !important;
+        border-color: #d63638 !important;
+        color: white !important;
+    }
+}
+
+.stachesepl-no-date {
+    color: #666;
+    font-style: italic;
+}
+

@@ -102,7 +102,7 @@ module.exports = (env, argv) => {
     return {
       ...productionConfig,
       entry: {
-        'admin/check_double_booking/index': './src/admin/CheckDoubleBooking/index.tsx',
+        'admin/booking_integrity/index': './src/admin/BookingIntegrity/index.tsx',
         'admin/reserved_seats/index': './src/admin/ReservedSeats/index.tsx',
         'admin/discounts/index': './src/admin/Discounts/index.tsx',
         'admin/dates/index': './src/admin/Dates/index.tsx',
@@ -125,7 +125,7 @@ module.exports = (env, argv) => {
     return {
       ...developmentConfig,
       entry: {
-        'admin/check_double_booking/index': './src/admin/CheckDoubleBooking/index.tsx',
+        'admin/booking_integrity/index': './src/admin/BookingIntegrity/index.tsx',
         'admin/reserved_seats/index': './src/admin/ReservedSeats/index.tsx',
         'admin/dates/index': './src/admin/Dates/index.tsx',
         'admin/discounts/index': './src/admin/Discounts/index.tsx',

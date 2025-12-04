@@ -61,27 +61,26 @@ class Admin_Menu {
                 break;
 
 
-            case 'tools_page_stachesepl_double_booking':
+            case 'tools_page_stachesepl_booking_integrity':
 
-                $seat_planner_check_dbl_booking_deps = require_once STACHETHEMES_SEAT_PLANNER_LITE_PLUGIN_DIR . 'assets/admin/check_double_booking/index.bundle.asset.php';
+                $seat_planner_booking_integrity_deps = require_once STACHETHEMES_SEAT_PLANNER_LITE_PLUGIN_DIR . 'assets/admin/booking_integrity/index.bundle.asset.php';
 
                 wp_enqueue_script(
-                    'seat-planner-check-double-booking',
-                    STACHETHEMES_SEAT_PLANNER_LITE_PLUGIN_URL . '/assets/admin/check_double_booking/index.bundle.js',
-                    $seat_planner_check_dbl_booking_deps['dependencies'],
-                    $seat_planner_check_dbl_booking_deps['version'],
+                    'seat-planner-booking-integrity',
+                    STACHETHEMES_SEAT_PLANNER_LITE_PLUGIN_URL . '/assets/admin/booking_integrity/index.bundle.js',
+                    $seat_planner_booking_integrity_deps['dependencies'],
+                    $seat_planner_booking_integrity_deps['version'],
                     [
                         'strategy' => 'defer'
                     ]
                 );
 
                 wp_enqueue_style(
-                    'seat-planner-check-double-booking',
-                    STACHETHEMES_SEAT_PLANNER_LITE_PLUGIN_URL . '/assets/admin/check_double_booking/index.css',
+                    'seat-planner-booking-integrity',
+                    STACHETHEMES_SEAT_PLANNER_LITE_PLUGIN_URL . '/assets/admin/booking_integrity/index.css',
                     [],
-                    $seat_planner_check_dbl_booking_deps['version']
+                    $seat_planner_booking_integrity_deps['version']
                 );
-
 
                 $inline_script = sprintf(
                     'var stachesepl_ajax = %s;',
@@ -91,7 +90,7 @@ class Admin_Menu {
                     ])
                 );
 
-                wp_add_inline_script('seat-planner-check-double-booking', $inline_script, 'before');
+                wp_add_inline_script('seat-planner-booking-integrity', $inline_script, 'before');
 
                 $inline_script_admin_url = sprintf(
                     'var stachesepl_admin_url = %s;',
@@ -100,12 +99,12 @@ class Admin_Menu {
                     ])
                 );
 
-                wp_add_inline_script('seat-planner-check-double-booking', $inline_script_admin_url, 'before');
+                wp_add_inline_script('seat-planner-booking-integrity', $inline_script_admin_url, 'before');
 
                 wp_localize_script(
-                    'seat-planner-check-double-booking',
+                    'seat-planner-booking-integrity',
                     'stachesepl_i18n',
-                    Translation::get_check_double_booking_strings()
+                    Translation::get_booking_integrity_strings()
                 );
 
                 break;
@@ -123,11 +122,11 @@ class Admin_Menu {
         );
 
         add_management_page(
-            esc_html__('Double Booking Checker', 'stachethemes-seat-planner-lite'),
-            esc_html__('Double Booking Checker', 'stachethemes-seat-planner-lite'),
+            esc_html__('Seat Planner Booking Integrity Checker', 'stachethemes-seat-planner-lite'),
+            esc_html__('Seat Planner Booking Integrity Checker', 'stachethemes-seat-planner-lite'),
             'manage_options',
-            'stachesepl_double_booking',
-            [__CLASS__, 'render_check_dobule_booking_page']
+            'stachesepl_booking_integrity',
+            [__CLASS__, 'render_booking_integrity_page']
         );
 
         add_management_page(
@@ -137,7 +136,6 @@ class Admin_Menu {
             'stachesepl_app_settings',
             [__CLASS__, 'render_app_settings_page']
         );
-
     }
 
     public static function render_seat_scanner() {
@@ -146,11 +144,11 @@ class Admin_Menu {
         echo '</wrap>';
     }
 
-    public static function render_check_dobule_booking_page() {
+    public static function render_booking_integrity_page() {
         echo '<div class="wrap">';
-        echo '<h1>' . esc_html__('Double Booking Checker', 'stachethemes-seat-planner-lite') . '</h1>';
-        echo '<p>' . esc_html__('Use this tool to check for double bookings in your auditorium products.', 'stachethemes-seat-planner-lite') . '</p>';
-        echo '<div id="stachesepl-check-double-booking"></div>';
+        echo '<h1>' . esc_html__('Booking Integrity Checker', 'stachethemes-seat-planner') . '</h1>';
+        echo '<p>' . esc_html__('Use this tool to check for booking data inconsistencies in your auditorium products.', 'stachethemes-seat-planner') . '</p>';
+        echo '<div id="stachesepl-booking-integrity"></div>';
         echo '</div>';
     }
 
@@ -162,41 +160,41 @@ class Admin_Menu {
         if (isset($_POST['stachesepl_app_secret_key_submit'])) {
             check_admin_referer('stachesepl_app_settings');
 
-			$has_error = false;
+            $has_error = false;
 
-			// Save enable/disable setting (no individual notice)
-			$enabled_value = isset($_POST['stachesepl_app_enabled']) ? 'yes' : 'no';
-			update_option('stachesepl_app_enabled', $enabled_value);
+            // Save enable/disable setting (no individual notice)
+            $enabled_value = isset($_POST['stachesepl_app_enabled']) ? 'yes' : 'no';
+            update_option('stachesepl_app_enabled', $enabled_value);
 
             $secret_key = isset($_POST['stachesepl_app_secret_key']) ? sanitize_text_field(wp_unslash($_POST['stachesepl_app_secret_key'])) : '';
 
-			if (strlen($secret_key) < 8) {
+            if (strlen($secret_key) < 8) {
                 add_settings_error(
                     'stachesepl_app_settings',
                     'stachesepl_app_secret_key_short',
                     esc_html__('Secret key must be at least 8 characters long.', 'stachethemes-seat-planner-lite'),
                     'error'
                 );
-				$has_error = true;
+                $has_error = true;
             } else {
-				update_option('stachesepl_app_secret_key', $secret_key);
+                update_option('stachesepl_app_secret_key', $secret_key);
             }
 
-			// Add a single generic success notice if no errors were encountered
-			if (! $has_error) {
-				add_settings_error(
-					'stachesepl_app_settings',
-					'stachesepl_settings_saved',
-					esc_html__('Settings saved.', 'stachethemes-seat-planner-lite'),
-					'updated'
-				);
-			}
+            // Add a single generic success notice if no errors were encountered
+            if (! $has_error) {
+                add_settings_error(
+                    'stachesepl_app_settings',
+                    'stachesepl_settings_saved',
+                    esc_html__('Settings saved.', 'stachethemes-seat-planner-lite'),
+                    'updated'
+                );
+            }
         }
 
-		$current_key = get_option('stachesepl_app_secret_key', '');
-		$current_enabled = get_option('stachesepl_app_enabled', 'yes');
-		$enabled_checked_attr = ($current_enabled === 'yes') ? ' checked="checked"' : '';
-		$rest_base_url = rest_url('/');
+        $current_key = get_option('stachesepl_app_secret_key', '');
+        $current_enabled = get_option('stachesepl_app_enabled', 'yes');
+        $enabled_checked_attr = ($current_enabled === 'yes') ? ' checked="checked"' : '';
+        $rest_base_url = rest_url('/');
 
         echo '<div class="wrap">';
         echo '<h1>' . esc_html__('Seat Planner App Settings', 'stachethemes-seat-planner-lite') . '</h1>';
@@ -205,33 +203,33 @@ class Admin_Menu {
         // Display settings messages
         settings_errors('stachesepl_app_settings');
 
-		// Android app download section
-		echo '<h2>' . esc_html__('Android App', 'stachethemes-seat-planner-lite') . '</h2>';
-		echo '<p><a class="button button-secondary" disabled="disabled" href="javascript:void(0);" target="_self" rel="noopener">' . esc_html__('Download Android APK', 'stachethemes-seat-planner-lite') . '</a></p>';
+        // Android app download section
+        echo '<h2>' . esc_html__('Android App', 'stachethemes-seat-planner-lite') . '</h2>';
+        echo '<p><a class="button button-secondary" disabled="disabled" href="javascript:void(0);" target="_self" rel="noopener">' . esc_html__('Download Android APK', 'stachethemes-seat-planner-lite') . '</a></p>';
         echo '<p class="description">' . esc_html__('Android app is not available in Lite version.', 'stachethemes-seat-planner-lite') . '</p>';
 
         echo '<form method="post" action="">';
         wp_nonce_field('stachesepl_app_settings');
 
-		echo '<table class="form-table" role="presentation">';
-		echo '  <tbody>';
-		echo '    <tr>';
-		echo '      <th scope="row">' . esc_html__('REST API Base URL', 'stachethemes-seat-planner-lite') . '</th>';
-		echo '      <td>';
-		echo '        <input type="text" id="stachesepl-rest-base-url" class="regular-text" value="' . esc_attr($rest_base_url) . '" readonly="readonly" /> ';
-		echo '        <button type="button" class="button" id="stachesepl-copy-rest-url">' . esc_html__('Copy', 'stachethemes-seat-planner-lite') . '</button>';
-		echo '        <p class="description">' . esc_html__('Your REST URL for API integrations.', 'stachethemes-seat-planner-lite') . '</p>';
-		echo '      </td>';
-		echo '    </tr>';
-		echo '    <tr>';
-		echo '      <th scope="row">' . esc_html__('Enable/Disable', 'stachethemes-seat-planner-lite') . '</th>';
-		echo '      <td>';
-		echo '        <label for="stachesepl-app-enabled">';
-		echo '          <input type="checkbox" id="stachesepl-app-enabled" name="stachesepl_app_enabled" value="1"' . esc_attr($enabled_checked_attr) . ' /> ' . esc_html__('Enable access', 'stachethemes-seat-planner-lite');
-		echo '        </label>';
-		echo '        <p class="description">' . esc_html__('Uncheck to temporarily disable access.', 'stachethemes-seat-planner-lite') . '</p>';
-		echo '      </td>';
-		echo '    </tr>';
+        echo '<table class="form-table" role="presentation">';
+        echo '  <tbody>';
+        echo '    <tr>';
+        echo '      <th scope="row">' . esc_html__('REST API Base URL', 'stachethemes-seat-planner-lite') . '</th>';
+        echo '      <td>';
+        echo '        <input type="text" id="stachesepl-rest-base-url" class="regular-text" value="' . esc_attr($rest_base_url) . '" readonly="readonly" /> ';
+        echo '        <button type="button" class="button" id="stachesepl-copy-rest-url">' . esc_html__('Copy', 'stachethemes-seat-planner-lite') . '</button>';
+        echo '        <p class="description">' . esc_html__('Your REST URL for API integrations.', 'stachethemes-seat-planner-lite') . '</p>';
+        echo '      </td>';
+        echo '    </tr>';
+        echo '    <tr>';
+        echo '      <th scope="row">' . esc_html__('Enable/Disable', 'stachethemes-seat-planner-lite') . '</th>';
+        echo '      <td>';
+        echo '        <label for="stachesepl-app-enabled">';
+        echo '          <input type="checkbox" id="stachesepl-app-enabled" name="stachesepl_app_enabled" value="1"' . esc_attr($enabled_checked_attr) . ' /> ' . esc_html__('Enable access', 'stachethemes-seat-planner-lite');
+        echo '        </label>';
+        echo '        <p class="description">' . esc_html__('Uncheck to temporarily disable access.', 'stachethemes-seat-planner-lite') . '</p>';
+        echo '      </td>';
+        echo '    </tr>';
         echo '    <tr>';
         echo '      <th scope="row">' . esc_html__('App Secret Key', 'stachethemes-seat-planner-lite') . '</th>';
         echo '      <td>';
@@ -264,35 +262,35 @@ class Admin_Menu {
         echo '    }';
         echo '    return result;';
         echo '  }';
-		echo '  var btn = document.getElementById("stachesepl-generate-key");';
-		echo '  if (btn) {';
-		echo '    btn.addEventListener("click", function(){';
+        echo '  var btn = document.getElementById("stachesepl-generate-key");';
+        echo '  if (btn) {';
+        echo '    btn.addEventListener("click", function(){';
         echo '      var input = document.getElementById("stachesepl-app-secret-key");';
         echo '      if (!input) return;';
         echo '      input.value = generateKey(32);';
         echo '    });';
         echo '  }';
-		echo '  var copyBtn = document.getElementById("stachesepl-copy-rest-url");';
-		echo '  if (copyBtn) {';
-		echo '    copyBtn.addEventListener("click", function(){';
-		echo '      var restInput = document.getElementById("stachesepl-rest-base-url");';
-		echo '      if (!restInput) return;';
-		echo '      restInput.select();';
-		echo '      restInput.setSelectionRange(0, restInput.value.length);';
-		echo '      var copied = false;';
-		echo '      if (navigator.clipboard && navigator.clipboard.writeText) {';
-		echo '        navigator.clipboard.writeText(restInput.value).then(function(){ copied = true; }, function(){});';
-		echo '      }';
-		echo '      if (!copied) {';
-		echo '        try { copied = document.execCommand("copy"); } catch(e) { copied = false; }';
-		echo '      }';
-		echo '      if (copied) {';
-		echo '        var originalText = copyBtn.textContent;';
-		echo '        copyBtn.textContent = "' . esc_js(__('Copied!', 'stachethemes-seat-planner-lite')) . '";';
-		echo '        setTimeout(function(){ copyBtn.textContent = originalText; }, 1500);';
-		echo '      }';
-		echo '    });';
-		echo '  }';
+        echo '  var copyBtn = document.getElementById("stachesepl-copy-rest-url");';
+        echo '  if (copyBtn) {';
+        echo '    copyBtn.addEventListener("click", function(){';
+        echo '      var restInput = document.getElementById("stachesepl-rest-base-url");';
+        echo '      if (!restInput) return;';
+        echo '      restInput.select();';
+        echo '      restInput.setSelectionRange(0, restInput.value.length);';
+        echo '      var copied = false;';
+        echo '      if (navigator.clipboard && navigator.clipboard.writeText) {';
+        echo '        navigator.clipboard.writeText(restInput.value).then(function(){ copied = true; }, function(){});';
+        echo '      }';
+        echo '      if (!copied) {';
+        echo '        try { copied = document.execCommand("copy"); } catch(e) { copied = false; }';
+        echo '      }';
+        echo '      if (copied) {';
+        echo '        var originalText = copyBtn.textContent;';
+        echo '        copyBtn.textContent = "' . esc_js(__('Copied!', 'stachethemes-seat-planner-lite')) . '";';
+        echo '        setTimeout(function(){ copyBtn.textContent = originalText; }, 1500);';
+        echo '      }';
+        echo '    });';
+        echo '  }';
         echo '})();';
         echo '</script>';
 

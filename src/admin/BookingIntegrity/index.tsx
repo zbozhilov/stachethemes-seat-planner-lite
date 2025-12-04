@@ -3,7 +3,7 @@ import React from 'react';
 import './index.scss';
 import Form from './components/Form/Form';
 
-const appInstance = document.getElementById('stachesepl-check-double-booking') as HTMLDivElement;
+const appInstance = document.getElementById('stachesepl-booking-integrity') as HTMLDivElement;
 
 const app = createRoot(appInstance);
 
@@ -12,3 +12,4 @@ app.render(
         <Form />
     </React.StrictMode>
 );
+

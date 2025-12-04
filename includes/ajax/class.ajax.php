@@ -24,6 +24,8 @@ class Ajax {
             'add_seats_to_cart',
             'get_qr_string_details',
             'check_double_booking',
+            'check_product_ghost_booking',
+            'fix_ghost_booking',
             'get_product_ids',
             'check_product_booking'
         ];
@@ -56,7 +58,7 @@ class Ajax {
                             wp_send_json_error(['error' => esc_html__('Product not found', 'stachethemes-seat-planner-lite')]);
                         }
 
-                        if ($selected_date) { 
+                        if ($selected_date) {
                             // Verify date exists and is valid format
                             $dates = $auditorium_product->get_dates_data();
                             if (!in_array($selected_date, $dates)) {
@@ -154,9 +156,9 @@ class Ajax {
                         }
 
                         if ($selected_date) {
-                            
+
                             $dates = $auditorium_product->get_dates_data();
-                            
+
                             if (!in_array($selected_date, $dates)) {
                                 wp_send_json_error(['error' => esc_html__('The selected date is not available', 'stachethemes-seat-planner-lite')]);
                             }
@@ -164,7 +166,6 @@ class Ajax {
                             if ($auditorium_product->has_date_passed($selected_date)) {
                                 wp_send_json_error(['error' => esc_html__('The selected date is no longer available', 'stachethemes-seat-planner-lite')]);
                             }
-
                         }
 
                         // Ensure we work with unique selected seats and handle duplicates correctly (preserve string seat IDs)
@@ -322,6 +323,60 @@ class Ajax {
                         $result = Check_Double_Booking::check_product_for_double_booking($product_id);
 
                         wp_send_json_success($result);
+
+                        break;
+                    }
+
+                case 'check_product_ghost_booking': {
+
+                        if (!current_user_can('manage_woocommerce')) {
+                            wp_send_json_error([
+                                'error' => esc_html__('You do not have the required permissions to access this feature.', 'stachethemes-seat-planner')
+                            ]);
+                        }
+
+                        $product_id = filter_input(INPUT_POST, 'product_id', FILTER_VALIDATE_INT);
+
+                        if (false === $product_id || $product_id < 1) {
+                            wp_send_json_error(['error' => esc_html__('Invalid product ID', 'stachethemes-seat-planner')]);
+                        }
+
+                        $result = Check_Ghost_Booking::check_product_for_ghost_booking($product_id);
+
+                        wp_send_json_success($result);
+
+                        break;
+                    }
+
+                case 'fix_ghost_booking': {
+
+                        if (!current_user_can('manage_woocommerce')) {
+                            wp_send_json_error([
+                                'error' => esc_html__('You do not have the required permissions to access this feature.', 'stachethemes-seat-planner')
+                            ]);
+                        }
+
+                        $product_id    = filter_input(INPUT_POST, 'product_id', FILTER_VALIDATE_INT);
+                        $seat_id       = isset($_POST['seat_id']) ? sanitize_text_field(wp_unslash($_POST['seat_id'])) : '';
+                        $selected_date = isset($_POST['selected_date']) ? sanitize_text_field(wp_unslash($_POST['selected_date'])) : '';
+
+                        if (false === $product_id || $product_id < 1) {
+                            wp_send_json_error(['error' => esc_html__('Invalid product ID', 'stachethemes-seat-planner')]);
+                        }
+
+                        if (empty($seat_id)) {
+                            wp_send_json_error(['error' => esc_html__('Invalid seat ID', 'stachethemes-seat-planner')]);
+                        }
+
+                        $result = Check_Ghost_Booking::fix_ghost_booking($product_id, $seat_id, $selected_date);
+
+                        if ($result) {
+                            wp_send_json_success([
+                                'message' => esc_html__('Seat has been marked as taken.', 'stachethemes-seat-planner')
+                            ]);
+                        } else {
+                            wp_send_json_error(['error' => esc_html__('Failed to fix ghost booking.', 'stachethemes-seat-planner')]);
+                        }
 
                         break;
                     }

@@ -131,8 +131,7 @@ class Check_Double_Booking {
         // Get product name
         $product = wc_get_product($product_id);
         // translators: %d - product ID
-        $product_name = $product ? $product->get_name() : sprintf(esc_html__('Product #%d', 'stachethemes-seat-planner-lite')
-, $product_id);
+        $product_name = $product ? $product->get_name() : sprintf(esc_html__('Product #%d', 'stachethemes-seat-planner-lite'), $product_id);
 
         // Return product results
         return [
