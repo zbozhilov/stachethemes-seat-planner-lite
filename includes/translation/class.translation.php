@@ -154,6 +154,7 @@ class Translation {
             'SELECT_ALL_OBJECTS'             => esc_html__('Select All Objects', 'stachethemes-seat-planner-lite'),
             'INVERT_SELECTION'               => esc_html__('Invert Selection', 'stachethemes-seat-planner-lite'),
             'DESELECT_ALL_OBJECTS'           => esc_html__('Deselect All Objects', 'stachethemes-seat-planner-lite'),
+            'DELETE_SELECTED_OBJECTS'        => esc_html__('Delete Selected Objects', 'stachethemes-seat-planner-lite'),
             'TOGGLE_GRID'                    => esc_html__('Toggle Grid', 'stachethemes-seat-planner-lite'),
             'GRID_CONTRAST'                  => esc_html__('Grid Contrast', 'stachethemes-seat-planner-lite'),
             'GRID_COLOR'                     => esc_html__('Grid Color', 'stachethemes-seat-planner-lite'),
