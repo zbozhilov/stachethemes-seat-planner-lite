@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useLayoutEffect, useState } from "react";
 import { ReactZoomPanPinchProps, TransformComponent, TransformWrapper, useControls } from "react-zoom-pan-pinch";
 import { useSeatPlanData } from "@src/front/AddToCart/components/context/hooks";
 import './Container.scss';
@@ -55,7 +55,8 @@ const Container = ({ children }: { children: React.ReactNode }) => {
     const { seatPlanData } = useSeatPlanData();
 
     // Calc initial scale based on workflow width and container width
-    useEffect(() => {
+    // useLayoutEffect prevents flickering by running synchronously before paint
+    useLayoutEffect(() => {
 
         if (!seatPlanData) {
             return;

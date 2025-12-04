@@ -16,6 +16,7 @@ declare global {
             thousand_separator: string;
             cart_redirect_after_add: 'yes' | 'no';
             cart_redirect_url: string;
+            can_view_seat_orders: boolean;
         };
         seat_scanner: {
             ajax_url: string;

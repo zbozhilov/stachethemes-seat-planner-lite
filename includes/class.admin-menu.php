@@ -146,8 +146,8 @@ class Admin_Menu {
 
     public static function render_booking_integrity_page() {
         echo '<div class="wrap">';
-        echo '<h1>' . esc_html__('Booking Integrity Checker', 'stachethemes-seat-planner') . '</h1>';
-        echo '<p>' . esc_html__('Use this tool to check for booking data inconsistencies in your auditorium products.', 'stachethemes-seat-planner') . '</p>';
+        echo '<h1>' . esc_html__('Booking Integrity Checker', 'stachethemes-seat-planner-lite') . '</h1>';
+        echo '<p>' . esc_html__('Use this tool to check for booking data inconsistencies in your auditorium products.', 'stachethemes-seat-planner-lite') . '</p>';
         echo '<div id="stachesepl-booking-integrity"></div>';
         echo '</div>';
     }

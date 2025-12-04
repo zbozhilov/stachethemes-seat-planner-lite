@@ -14,6 +14,14 @@
             cursor: default;
             color: var(--stachesepl-object-seat-taken-color, #fff) !important;
             background-color: var(--stachesepl-object-seat-taken-bg-color, #eb6651) !important;
+
+            &.taken-clickable {
+                cursor: pointer;
+
+                &:hover {
+                    filter: brightness(1.1);
+                }
+            }
         }
 
         &.selected {
@@ -32,7 +40,9 @@
 
 .stachesepl-modal-message {
     transition: opacity 0.3s ease, transform 0.3s ease;
-    padding: 20px;
+    min-width: 400px;
+    max-width: 600px;
+    padding: 28px 32px;
     box-sizing: border-box;
     background-color: #fff;
     border-radius: 12px;
@@ -40,20 +50,32 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    gap: 10px;
+
+    h3 {
+        margin: 0 0 20px 0;
+        font-size: 1.1rem;
+        font-weight: 600;
+        color: #1a1a1a;
+        text-align: center;
+        padding-bottom: 16px;
+        border-bottom: 1px solid #eee;
+        width: 100%;
+    }
 
     p {
         margin: 0;
-        font-size: 1.2rem;
+        padding: 20px 0;
+        font-size: 0.95rem;
         line-height: 1.5;
-        color: var(--stachesepl-modal-message-text-color, #202020);
-        font-weight: 500;
+        color: var(--stachesepl-modal-message-text-color, #1a1a1a);
+        font-weight: 400;
         text-align: center;
     }
 
     button {
         margin-top: 20px;
         padding: 10px 20px;
+        width: 100%;
         background-color: var(--stachesepl-modal-message-button-background-color, #eeeeee);
         color: var(--stachesepl-modal-message-button-color, #202020);
         border: none;
@@ -70,6 +92,206 @@
     }
 }
 
+// Seat Order Modal Styles
+.stachesepl-seat-order-modal {
+    min-width: 400px;
+    max-width: 600px;
+    padding: 28px 32px;
+
+    .stachesepl-loading-spinner {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 16px;
+        padding: 20px 0;
+
+        &::before {
+            content: '';
+            width: 40px;
+            height: 40px;
+            border: 3px solid #e0e0e0;
+            border-top-color: var(--stachesepl-object-seat-taken-bg-color, #eb6651);
+            border-radius: 50%;
+            animation: stachesepl-spin 0.8s linear infinite;
+        }
+
+        span {
+            font-size: 0.9rem;
+            color: #202020;
+            font-weight: 400;
+        }
+    }
+
+    .stachesepl-seat-order-details {
+        width: 100%;
+
+        h3 {
+            margin: 0 0 20px 0;
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #1a1a1a;
+            text-align: center;
+            padding-bottom: 16px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .stachesepl-order-info {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+
+            .stachesepl-order-row {
+                display: flex;
+                justify-content: space-between;
+                align-items: flex-start;
+                padding: 10px 14px;
+                background: #f8f9fa;
+                border-radius: 8px;
+                transition: background-color 0.2s ease;
+
+                &:hover {
+                    background: #f0f1f2;
+                }
+
+                .stachesepl-order-label {
+                    font-size: 0.8rem;
+                    color: #666;
+                    font-weight: 500;
+                    text-transform: uppercase;
+                    letter-spacing: 0.5px;
+                }
+
+                .stachesepl-order-value {
+                    font-size: 0.95rem;
+                    color: #1a1a1a;
+                    font-weight: 500;
+                    text-align: right;
+                    max-width: 60%;
+                    word-break: break-word;
+                }
+
+                &.stachesepl-order-row-highlight {
+                    background: linear-gradient(135deg, #fff5f3 0%, #ffe8e4 100%);
+                    border: 1px solid rgba(235, 102, 81, 0.2);
+
+                    .stachesepl-order-value {
+                        color: var(--stachesepl-object-seat-taken-bg-color, #eb6651);
+                        font-weight: 600;
+                    }
+                }
+
+                &.stachesepl-order-row-status {
+                    .stachesepl-order-value {
+                        display: inline-flex;
+                        align-items: center;
+                        gap: 6px;
+
+                        &::before {
+                            content: '';
+                            width: 8px;
+                            height: 8px;
+                            border-radius: 50%;
+                            background-color: #4CAF50;
+                        }
+                    }
+                }
+
+                &.stachesepl-order-row-link {
+                    cursor: pointer;
+
+                    a.stachesepl-order-value {
+                        color: #2563eb;
+                        text-decoration: none;
+                        font-weight: 600;
+                        display: inline-flex;
+                        align-items: center;
+                        gap: 4px;
+                        transition: color 0.2s ease;
+
+                        &:hover {
+                            color: #1d4ed8;
+                            text-decoration: underline;
+                        }
+
+                        &::after {
+                            content: '↗';
+                            font-size: 0.85em;
+                            opacity: 0.7;
+                        }
+                    }
+
+                    &:hover {
+                        background: #eff6ff;
+                    }
+                }
+            }
+        }
+    }
+
+    .stachesepl-no-data {
+        text-align: center;
+        padding: 20px 0;
+        color: #666;
+        font-size: 0.95rem;
+    }
+
+    button {
+        width: 100%;
+    }
+}
+
+@keyframes stachesepl-spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .stachesepl-seat-order-modal {
+        min-width: auto;
+        max-width: none;
+        width: 100dvw;
+        height: 100dvh;
+        border-radius: 0;
+        padding: 24px 20px;
+        justify-content: start;
+
+        .stachesepl-loading-spinner {
+            height: 100dvh;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .stachesepl-seat-order-details {
+            h3 {
+                font-size: 1.2rem;
+            }
+
+            .stachesepl-order-info {
+                .stachesepl-order-row {
+                    flex-direction: column;
+                    gap: 4px;
+                    align-items: flex-start;
+
+                    .stachesepl-order-value {
+                        text-align: left;
+                        max-width: 100%;
+                    }
+                }
+            }
+        }
+
+        button {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            right: 20px;
+            width: calc(100% - 40px);
+            margin-top: 0;
+        }
+    }
+}
+
 @starting-style {
     .stachesepl-modal-message {
         opacity: 0;
@@ -79,8 +301,21 @@
 
 @media screen and (max-width: 768px) {
      .stachesepl-modal-message {
+        min-width: auto;
+        max-width: none;
         width: 100dvw;
         height: 100dvh;
         border-radius: 0;
+        padding: 24px 20px;
+        justify-content: start;
+
+        button {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            right: 20px;
+            width: calc(100% - 40px);
+            margin-top: 0;
+        }
      }
 }

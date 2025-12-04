@@ -27,7 +27,8 @@ class Ajax {
             'check_product_ghost_booking',
             'fix_ghost_booking',
             'get_product_ids',
-            'check_product_booking'
+            'check_product_booking',
+            'get_order_details_by_seat_id'
         ];
 
         if (empty($task) || !in_array($task, $allowed_tasks, true)) {
@@ -331,14 +332,14 @@ class Ajax {
 
                         if (!current_user_can('manage_woocommerce')) {
                             wp_send_json_error([
-                                'error' => esc_html__('You do not have the required permissions to access this feature.', 'stachethemes-seat-planner')
+                                'error' => esc_html__('You do not have the required permissions to access this feature.', 'stachethemes-seat-planner-lite')
                             ]);
                         }
 
                         $product_id = filter_input(INPUT_POST, 'product_id', FILTER_VALIDATE_INT);
 
                         if (false === $product_id || $product_id < 1) {
-                            wp_send_json_error(['error' => esc_html__('Invalid product ID', 'stachethemes-seat-planner')]);
+                            wp_send_json_error(['error' => esc_html__('Invalid product ID', 'stachethemes-seat-planner-lite')]);
                         }
 
                         $result = Check_Ghost_Booking::check_product_for_ghost_booking($product_id);
@@ -352,7 +353,7 @@ class Ajax {
 
                         if (!current_user_can('manage_woocommerce')) {
                             wp_send_json_error([
-                                'error' => esc_html__('You do not have the required permissions to access this feature.', 'stachethemes-seat-planner')
+                                'error' => esc_html__('You do not have the required permissions to access this feature.', 'stachethemes-seat-planner-lite')
                             ]);
                         }
 
@@ -361,22 +362,45 @@ class Ajax {
                         $selected_date = isset($_POST['selected_date']) ? sanitize_text_field(wp_unslash($_POST['selected_date'])) : '';
 
                         if (false === $product_id || $product_id < 1) {
-                            wp_send_json_error(['error' => esc_html__('Invalid product ID', 'stachethemes-seat-planner')]);
+                            wp_send_json_error(['error' => esc_html__('Invalid product ID', 'stachethemes-seat-planner-lite')]);
                         }
 
                         if (empty($seat_id)) {
-                            wp_send_json_error(['error' => esc_html__('Invalid seat ID', 'stachethemes-seat-planner')]);
+                            wp_send_json_error(['error' => esc_html__('Invalid seat ID', 'stachethemes-seat-planner-lite')]);
                         }
 
                         $result = Check_Ghost_Booking::fix_ghost_booking($product_id, $seat_id, $selected_date);
 
                         if ($result) {
                             wp_send_json_success([
-                                'message' => esc_html__('Seat has been marked as taken.', 'stachethemes-seat-planner')
+                                'message' => esc_html__('Seat has been marked as taken.', 'stachethemes-seat-planner-lite')
                             ]);
                         } else {
-                            wp_send_json_error(['error' => esc_html__('Failed to fix ghost booking.', 'stachethemes-seat-planner')]);
+                            wp_send_json_error(['error' => esc_html__('Failed to fix ghost booking.', 'stachethemes-seat-planner-lite')]);
                         }
+
+                        break;
+                    }
+
+                    case 'get_order_details_by_seat_id': {
+
+                        if (! current_user_can('manage_woocommerce')) {
+                            wp_send_json_error(['error' => esc_html__('You do not have the required permissions to access this feature.', 'stachethemes-seat-planner-lite')]);
+                            return;
+                        }
+
+                        $product_id    = filter_input(INPUT_POST, 'product_id', FILTER_VALIDATE_INT);
+                        $seat_id       = isset($_POST['seat_id']) ? sanitize_text_field(wp_unslash($_POST['seat_id'])) : '';
+                        $selected_date = isset($_POST['selected_date']) ? sanitize_text_field(wp_unslash($_POST['selected_date'])) : '';
+
+                        if (false === $product_id || $product_id < 1) {
+                            wp_send_json_error(['error' => esc_html__('Invalid product ID', 'stachethemes-seat-planner-lite')]);
+                        }
+
+                        $booking_data = new Bookings_Data($product_id);
+                        $data         = $booking_data->get_order_details_by_seat_id($seat_id, $selected_date);
+
+                        wp_send_json_success($data);
 
                         break;
                     }

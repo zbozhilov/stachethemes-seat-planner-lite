@@ -16,6 +16,7 @@ const Discounts = (props: {
         <div className='stachesepl-seat-planner-discounts'>
 
             <h4 className='stachesepl-seat-planner-discounts-head'>{__('MANAGE_DISCOUNTS')}</h4>
+            <p className='stachesepl-seat-planner-discounts-subtitle'>{__('DISCOUNTS_SUBTITLE')}</p>
 
             <ul>
             </ul>

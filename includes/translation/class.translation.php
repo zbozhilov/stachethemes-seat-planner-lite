@@ -351,18 +351,25 @@ class Translation {
             'A__VIEW_CART'          => sprintf('<a class="wc-forward" href="%s">%s</a>', wc_get_cart_url(), esc_html__('View Cart', 'stachethemes-seat-planner-lite')),
             'GENERIC_ERROR_MESSAGE' => esc_html__('Sorry, something went wrong. Please try again.', 'stachethemes-seat-planner-lite'),
             'FAILED_TO_FETCH_SEAT_PLAN_DATA' => esc_html__('Failed to fetch seat plan data.', 'stachethemes-seat-planner-lite'),
-
             'SEAT'                           => esc_html__('Seat', 'stachethemes-seat-planner-lite'),
             'NEXT'                           => esc_html__('Next', 'stachethemes-seat-planner-lite'),
             'BACK'                           => esc_html__('Back', 'stachethemes-seat-planner-lite'),
-            'SELECT_DISCOUNTS_FOR_SEATS'     => esc_html__('Select Discounts for Your Seats', 'stachethemes-seat-planner-lite'),
+            'DISCOUNTS_SUBTITLE'             => esc_html__('Apply discounts to your seats to get the best price.', 'stachethemes-seat-planner-lite'),
             'REGULAR_SEAT'                   => esc_html__('Regular Seat', 'stachethemes-seat-planner-lite'),
+            'NO_DISCOUNT_APPLIED'            => esc_html__('No discount applied', 'stachethemes-seat-planner-lite'),
             'TOTAL'                          => esc_html__('Total', 'stachethemes-seat-planner-lite'),
-            'DISCOUNTS'                      => esc_html__('Discounts', 'stachethemes-seat-planner-lite'),
-
+            'DISCOUNTS_TITLE'                => esc_html__('Discounts', 'stachethemes-seat-planner-lite'),
             'VIEW_CART'                      => esc_html__('View Cart', 'stachethemes-seat-planner-lite'),
-
             'THIS_SEAT_IS_ONLY_AVAILABLE_ON_SITE' => esc_html__('This seat can only be purchased at the venue.', 'stachethemes-seat-planner-lite'),
+            'LOADING'                        => esc_html__('Loading', 'stachethemes-seat-planner-lite'),
+            'SEAT_RESERVATION_DETAILS'       => esc_html('Seat Reservation Details', 'stachethemes-seat-planner-lite'),
+            'RESERVED_BY'                    => esc_html__('Reserved By', 'stachethemes-seat-planner-lite'),
+            'ORDER_DATE'                     => esc_html__('Order Date', 'stachethemes-seat-planner-lite'),
+            'ORDER_STATUS'                   => esc_html__('Order Status', 'stachethemes-seat-planner-lite'),
+            'EVENT_DATE'                     => esc_html__('Date', 'stachethemes-seat-planner-lite'),
+            'ORDER_ID'                       => esc_html__('Order ID', 'stachethemes-seat-planner-lite'),
+            'NO_ORDER_DATA_FOUND'            => esc_html__('No order data found for this seat.', 'stachethemes-seat-planner-lite'),
+            'NOTICE'                         => esc_html__('Notice', 'stachethemes-seat-planner-lite'),
         ];
     }
 }

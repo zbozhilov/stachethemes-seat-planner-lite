@@ -193,7 +193,8 @@ class Auditorium_Product_Scripts {
                 'decimals_separator'      => esc_html(wc_get_price_decimal_separator()),
                 'thousand_separator'      => esc_html(wc_get_price_thousand_separator()),
                 'cart_redirect_after_add' => esc_html($cart_redirect_after_add),
-                'cart_redirect_url'       => esc_url($cart_redirect_url)
+                'cart_redirect_url'       => esc_url($cart_redirect_url),
+                'can_view_seat_orders'    => current_user_can('manage_woocommerce')
             ])
         );
 

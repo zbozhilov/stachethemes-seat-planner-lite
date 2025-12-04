@@ -31,6 +31,11 @@ class Auditorium_Product_Select_Seat_Dates {
 
     public static function before_select_seat_button($product, $context) {
 
+        if ($product->get_type() !== 'auditorium') {
+            return;
+        }
+
+
         $availableDates = $product->get_available_dates();
 
         // Note: This div wraps the Select Seat button as well so getDateSelector() can target the input using `.closest()` in JS
@@ -39,7 +44,6 @@ class Auditorium_Product_Select_Seat_Dates {
         if (false === $availableDates) {
             return;
         }
-
 
         if (count($availableDates) === 1) {
             printf('<input class="stachesepl-date-selector-input" type="hidden" value="%s">', esc_attr($availableDates[0]));
@@ -58,6 +62,11 @@ class Auditorium_Product_Select_Seat_Dates {
     }
 
     public static function after_select_seat_button($product, $context) {
+
+        if ($product->get_type() !== 'auditorium') {
+            return;
+        }
+        
         echo '</div>';
     }
 }

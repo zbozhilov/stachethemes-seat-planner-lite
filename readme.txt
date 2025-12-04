@@ -60,6 +60,13 @@ Upgrade to **Stachethemes Seat Planner Premium** for advanced features:
 
 == Changelog ==
 
+= 1.0.32 =
+- UI/UX improvements
+- Added UI for Auto Incremental Patterns
+- Added Booking Integrity Checker Tools
+- Added option to check Reservation Details from the front-end if the user has Shop Manager role
+
+
 = 1.0.28 =
 - Minor fixes & improvements
 - Enabled option to Scan QR Codes from the Dashboard

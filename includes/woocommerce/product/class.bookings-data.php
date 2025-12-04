@@ -116,4 +116,44 @@ class Bookings_Data {
             return $order->get_id();
         }, $matching_orders);
     }
+
+    public function get_order_details_by_seat_id($seat_id, $selected_date = '') {
+        $orders = $this->get_orders_with_seat($seat_id, $selected_date);
+        
+        if (empty($orders)) {
+            return null;
+        }
+
+        $order_id = $orders[0];
+        $order = wc_get_order($order_id);
+
+        if (!$order) {
+            return null;
+        }
+
+        $order_items = self::get_order_items($order, $this->product->get_id());
+        $seat_price = 0;
+        $date_time = '';
+
+        foreach ($order_items as $item) {
+            if ($item['seat_id'] === $seat_id) {
+                $seat_price = $item['price'];
+                $date_time = $item['date_time'];
+                break;
+            }
+        }
+
+        return [
+            'order_id'       => $order->get_id(),
+            'order_edit_url' => admin_url('post.php?post=' . $order->get_id() . '&action=edit'),
+            'order_date'     => $order->get_date_created() ? $order->get_date_created()->date_i18n('Y-m-d H:i:s') : '',
+            'order_status'   => $order->get_status() ? wc_get_order_status_name($order->get_status()) : '',
+            'customer_name'  => $order->get_billing_first_name() . ' ' . $order->get_billing_last_name(),
+            'customer_email' => $order->get_billing_email(),
+            'product_name'   => $this->product->get_name(),
+            'seat_id'        => $seat_id,
+            'seat_price'     => $seat_price,
+            'date_time'      => $date_time,
+        ];
+    }
 }

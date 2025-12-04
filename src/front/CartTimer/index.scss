@@ -18,7 +18,7 @@
     align-items: center;
     gap: 8px;
     padding: 10px 14px;
-    border-radius: 3px;
+    border-radius: var(--stachesepl-cart-timer-border-radius, 20px);
     margin-top: 10px;
     background: var(--stachesepl-cart-timer-background-color, #32373c);
     color: var(--stachesepl-cart-timer-text-color, #fff);

@@ -70,7 +70,7 @@ const Modal = (props: {
             <div ref={containerRef} className='stachesepl-seat-planner-portal' onMouseDown={props.onOutsideClick}>
                 <div style={{
                     display: 'contents'
-                }}>
+                }} >
                     {props.children}
                 </div>
             </div>

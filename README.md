@@ -2,9 +2,9 @@
 
 **Tags:** WooCommerce, Seat, Planner, Theatre, Cinema  
 **Requires:** 6.7  
-**Tested up to:** 6.8
+**Tested up to:** 6.9
 **Requires PHP:** 8.2  
-**Stable tag:** 1.0.28  
+**Stable tag:** 1.0.32  
 **License:** GPLv2 or later  
 **WC requires at least:** 9.5  
 **WC tested up to:** 10 
@@ -45,6 +45,13 @@ https://github.com/zbozhilov/stachethemes-seat-planner-lite
 
 ## Changelog
 
+### 1.0.32
+
+- UI/UX improvements
+- Added UI for Auto Incremental Patterns
+- Added Booking Integrity Checker Tools
+- Added option to check Reservation Details from the front-end if the user has Shop Manager role
+
 ### 1.0.28
 
 - Minor fixes & improvements
@@ -56,4 +63,4 @@ https://github.com/zbozhilov/stachethemes-seat-planner-lite
 
 ### 1.0.4
 
-- Initial Release
+- Initial public release with core seat selection features.

@@ -35,7 +35,7 @@ class PDF_Attachments {
         $settings[] = [
             'title'    => esc_html__('Enable PDF Attachments', 'stachethemes-seat-planner-lite'),
             'desc'     => esc_html__('Attach a PDF with ticket details and a QR code to each Completed Order email. (Not available in Lite version)', 'stachethemes-seat-planner-lite'),
-            'id'       => 'stachesepl_pdf_attachments_lite',
+            'id'       => 'stachesepl_pdf_attachments',
             'type'     => 'checkbox',
             'default'  => 'no',
             'disabled' => true,
@@ -43,7 +43,7 @@ class PDF_Attachments {
 
         $settings[] = [
             'type' => 'sectionend',
-            'id'   => 'stachesepl_pdf_attachments_lite',
+            'id'   => 'stachesepl_pdf_attachments',
         ];
 
         return $settings;

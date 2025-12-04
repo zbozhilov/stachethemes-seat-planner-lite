@@ -10,6 +10,8 @@ const SeatObject = (props: {
     selectedSeats: string[];
     style: React.CSSProperties;
     handleSeatSelectToggle: (seatId: string) => void;
+    handleSeatTakenCheck: (seatId: string) => void;
+    canViewSeatOrders: boolean;
 }) => {
 
     const [modalMessage, setModalMessage] = useState<string | null>(null);
@@ -19,6 +21,7 @@ const SeatObject = (props: {
     }
 
     const isSelected = props.selectedSeats.includes(props.data.seatId);
+    const isTaken = props.data.taken || props.data.status === 'sold-out';
 
     const classNameArray = ['stachesepl-object', 'stachesepl-object-seat'];
 
@@ -30,8 +33,12 @@ const SeatObject = (props: {
         classNameArray.push('disabled');
     }
 
-    if (props.data.taken || props.data.status === 'sold-out') {
+    if (isTaken) {
         classNameArray.push('taken');
+        // Add clickable class only if user can view seat orders
+        if (props.canViewSeatOrders) {
+            classNameArray.push('taken-clickable');
+        }
     } else if (props.data.status === 'on-site') {
         classNameArray.push('onsite');
     }
@@ -51,6 +58,7 @@ const SeatObject = (props: {
                     onOutsideClick={handleModalClose}
                 >
                     <div className='stachesepl-modal-message'>
+                        <h3>{__('NOTICE')}</h3>
                         <p>{modalMessage}</p>
                         <button onClick={handleModalClose}>{__('CLOSE')}</button>
                     </div>
@@ -74,6 +82,12 @@ const SeatObject = (props: {
                     if (props.data.type === 'seat' && props.data.seatId && !props.data.taken) {
                         props.handleSeatSelectToggle(props.data.seatId);
                     }
+
+                    if (props.data.type === 'seat' && props.data.seatId && props.data.taken && props.canViewSeatOrders) { 
+                        props.handleSeatTakenCheck(props.data.seatId);
+                    }
+
+
 
                 }}>
                 {props.data.isHandicap && <Accessible />}
