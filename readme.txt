@@ -20,18 +20,23 @@ Easily create and manage seating arrangements for events, venues, or any seat-ba
 - **Seat Reservation**: Seats added to the cart are reserved for a configurable duration, preventing others from selecting them.
 - **Handicap Accessible Seating**: Mark seats as "Handicap Seats" and use customizable background colors to highlight accessibility.
 - **Easy-to-Use Drag & Drop Editor**: Manage seats effortlessly with a simple drag-and-drop interface. No technical skills required.
+- **QR Code Generator for Each Seat**: Automatically generate a unique QR code for each seat purchased, allowing for easy digital validation.
+- **QR Code Scanner for Ticket Validation**: Enable quick entry and ensure smooth check-ins for event attendees.
+- **Double Booking Checker**: Detects and flags accidental duplicate seat reservations.
+- **Ghost Booking Checker**: Detects and fixes seats that appear free on the front-end but have existing orders.
 
 == Premium Features ==
 
 Upgrade to **Stachethemes Seat Planner Premium** for advanced features:
 
-- **Dynamic Pricing**: Assign different prices to seats based on location or other factors.
 - **Seat Discounts**: Offer fixed or percentage-based discounts.
-- **QR Code Generator for Each Seat**: Automatically generate a unique QR code for each seat purchased, allowing for easy digital validation.
-- **QR Code Scanner for Ticket Validation**: Enable quick entry and ensure smooth check-ins for event attendees.
-- **PDF Ticket Attachments**: Attach ticket details as a PDF file to the "Order Completed" email.
+- **Date Selection**: Option to select date & time for each individual product.
+- **PDF Ticket Attachments**: Attach ticket details & QR Code as a PDF file to the "Order Completed" email.
+- **CSV Import & Export Layouts**: Import and export seat layouts in CSV format.
+- **CSV Booking Export**: Exports booking data for each reserved seat in CSV format.
+- **Mobile App**: Free standalone android app for scanning and validating tickets.
 
-[Upgrade to Stachethemes Seat Planner Premium](https://woocommerce.com/products/stachethemes-seat-planner/)
+[See all features](https://stachethemes.com/seat-planner/features/)
 
 == Video Demonstration ==
 [Watch the demo](https://www.youtube.com/watch?v=cDcv1Mnhwyk)
@@ -65,7 +70,6 @@ Upgrade to **Stachethemes Seat Planner Premium** for advanced features:
 - Added UI for Auto Incremental Patterns
 - Added Booking Integrity Checker Tools
 - Added option to check Reservation Details from the front-end if the user has Shop Manager role
-
 
 = 1.0.28 =
 - Minor fixes & improvements
