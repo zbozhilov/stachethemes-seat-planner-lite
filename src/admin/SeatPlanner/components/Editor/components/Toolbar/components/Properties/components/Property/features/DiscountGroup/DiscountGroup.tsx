@@ -37,7 +37,7 @@ const DiscountGroup = (props: {
 
         <div className='stachesepl-toolbar-properties-discount-group'>
             <label htmlFor='stachesepl-toolbar-properties-discount-group'>{__('GROUP')}</label>
-            <input id='stachesepl-toolbar-properties-group'
+            <input id='stachesepl-toolbar-properties-discount-group'
                 type="text"
                 placeholder={__('GROUP_NAME')}
                 value={discountDiscountGroup}

@@ -1,4 +1,5 @@
 import { __ } from '@src/utils';
+import { Keyboard, AutoAwesome } from '@mui/icons-material';
 import './Content.scss';
 
 type LineProps = {
@@ -41,6 +42,14 @@ const Content = () => {
         {
             keystroke: 'Ctrl / Cmd + I',
             description: __('INVERT_SELECTION')
+        },
+        {
+            keystroke: 'Ctrl / Cmd + C',
+            description: __('COPY_SELECTED_OBJECTS')
+        },
+        {
+            keystroke: 'Ctrl / Cmd + V',
+            description: __('PASTE_SELECTED_OBJECTS')
         },
         {
             keystroke: 'Esc',
@@ -104,6 +113,7 @@ const Content = () => {
         <div className='stachesepl-workflow-info-dialog-content'>
             <div className='stachesepl-workflow-info-dialog-content-section'>
                 <h3 className='stachesepl-workflow-info-dialog-content-section-title'>
+                    <Keyboard />
                     {__('KEYBOARD_SHORTCUTS')}
                 </h3>
                 {
@@ -113,6 +123,7 @@ const Content = () => {
 
             <div className='stachesepl-workflow-info-dialog-content-section'>
                 <h3 className='stachesepl-workflow-info-dialog-content-section-title'>
+                    <AutoAwesome />
                     {__('AUTO_INCREMENT_PATTERNS')}
                 </h3>
                 {autoIncrementPatterns.map((section, sectionIndex) => (

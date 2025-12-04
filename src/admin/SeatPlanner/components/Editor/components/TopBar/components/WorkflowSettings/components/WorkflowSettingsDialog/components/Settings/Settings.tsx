@@ -3,7 +3,7 @@ import { __ } from "@src/utils";
 import React, { useState } from "react";
 import './Settings.scss';
 import { hasBackgroundImage, mediaFrame } from "./utils";
-import { Close } from '@mui/icons-material';
+import { Close, AddPhotoAlternate } from '@mui/icons-material';
 import InputColor from "@src/admin/SeatPlanner/components/Editor/components/Toolbar/components/Properties/components/Property/features/InputColor/InputColor";
 
 
@@ -71,6 +71,13 @@ const Settings = () => {
         }));
     }
 
+    const syncBgImageOpacity = () => {
+        setWorkflowProps(prev => ({
+            ...prev,
+            backgroundOpacity: bgImageOpacity
+        }));
+    }
+
     const backgroundImageSource = hasBackgroundImage(workflowProps) ? workflowProps.backgroundImage : '';
 
     return (
@@ -83,7 +90,7 @@ const Settings = () => {
 
             <div>
                 <label htmlFor='stachesepl-workflow-settings-height'>{__('HEIGHT')}</label>
-                <input id='stachesepl-workflow-settings-heught' type='text' value={height} onChange={handleHeightChange} />
+                <input id='stachesepl-workflow-settings-height' type='text' value={height} onChange={handleHeightChange} />
             </div>
 
             <div>
@@ -104,24 +111,46 @@ const Settings = () => {
                         <img src={backgroundImageSource} alt='' />
                     </>}
 
-                    {!backgroundImageSource && <div className='stachesepl-workflow-settings-background-image-placeholder'>{__('ADD_IMAGE')}</div>}
+                    {!backgroundImageSource && (
+                        <div className='stachesepl-workflow-settings-background-image-placeholder'>
+                            <AddPhotoAlternate />
+                            <span>{__('ADD_IMAGE')}</span>
+                        </div>
+                    )}
                 </div>
             </div>
 
             <div>
                 <label htmlFor='stachesepl-workflow-settings-background-opacity'>{__('BACKGROUND_OPACITY')}</label>
-                <input
-                    id='stachesepl-workflow-settings-background-opacity'
-                    type='number'
-                    step={0.1}
-                    min={0}
-                    max={1}
-                    value={bgImageOpacity}
-                    onChange={(e) => {
-                        setBgImageOpacity(e.target.value);
-                    }}
-                    onBlur={handleBgImageOpacityChange}
-                />
+                <div className='stachesepl-workflow-settings-opacity-control'>
+                    <input
+                        type='range'
+                        min={0}
+                        max={1}
+                        step={0.01}
+                        value={bgImageOpacity}
+                        onChange={(e) => {
+                            setBgImageOpacity(e.target.value);
+                        }}
+                        onMouseUp={syncBgImageOpacity}
+                        onTouchEnd={syncBgImageOpacity}
+                        className='stachesepl-workflow-settings-opacity-slider'
+                        style={{ '--opacity-value': `${parseFloat(bgImageOpacity) * 100}%` } as React.CSSProperties}
+                    />
+                    <input
+                        id='stachesepl-workflow-settings-background-opacity'
+                        type='number'
+                        step={0.01}
+                        min={0}
+                        max={1}
+                        value={bgImageOpacity}
+                        onChange={(e) => {
+                            setBgImageOpacity(e.target.value);
+                        }}
+                        onBlur={handleBgImageOpacityChange}
+                        className='stachesepl-workflow-settings-opacity-number'
+                    />
+                </div>
             </div>
         </div>
     )

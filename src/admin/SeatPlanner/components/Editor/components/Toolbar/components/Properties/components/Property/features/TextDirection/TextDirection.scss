@@ -1,4 +1,4 @@
-.stachesepl-toolbar-properties-fontsize {
+.stachesepl-toolbar-properties-textdirection {
     box-sizing: border-box;
     width: 100%;
     padding: 12px 16px;
@@ -15,7 +15,7 @@
 }
 
 // Custom dropdown trigger button
-.stachesepl-fontsize-trigger {
+.stachesepl-textdirection-trigger {
     width: 100%;
     box-sizing: border-box;
     display: flex;
@@ -48,12 +48,12 @@
         box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.15);
     }
 
-    &.is-open .stachesepl-fontsize-trigger-icon {
+    &.is-open .stachesepl-textdirection-trigger-icon {
         transform: rotate(180deg);
     }
 }
 
-.stachesepl-fontsize-trigger-text {
+.stachesepl-textdirection-trigger-text {
     flex: 1;
     white-space: nowrap;
     overflow: hidden;
@@ -64,14 +64,14 @@
     }
 }
 
-.stachesepl-fontsize-trigger-icon {
+.stachesepl-textdirection-trigger-icon {
     flex-shrink: 0;
     color: #71717a;
     transition: transform var(--stachesepl-transition-fast);
 }
 
 // Dropdown menu
-.stachesepl-fontsize-dropdown {
+.stachesepl-textdirection-dropdown {
     position: absolute;
     top: calc(100% - 4px);
     left: 16px;
@@ -86,19 +86,8 @@
     overflow: hidden;
 }
 
-@keyframes stachesepl-dropdown-enter {
-    from {
-        opacity: 0;
-        transform: translateY(-4px) scale(0.98);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0) scale(1);
-    }
-}
-
 // Dropdown options
-.stachesepl-fontsize-option {
+.stachesepl-textdirection-option {
     width: 100%;
     box-sizing: border-box;
     display: flex;
@@ -140,27 +129,28 @@
     }
 }
 
-.stachesepl-fontsize-option-check {
+.stachesepl-textdirection-option-check {
     flex-shrink: 0;
 }
 
 // Light theme adjustments
 .stachesepl-theme-light {
-    .stachesepl-fontsize-trigger {
+    .stachesepl-textdirection-trigger {
         &:hover {
             background-color: rgba(0, 0, 0, 0.03);
             border-color: #d4d4d8;
         }
     }
 
-    .stachesepl-fontsize-trigger-text.is-placeholder {
+    .stachesepl-textdirection-trigger-text.is-placeholder {
         color: #a1a1aa;
     }
 
-    .stachesepl-fontsize-option {
+    .stachesepl-textdirection-option {
         &:hover:not(.is-selected) {
             background-color: rgba(99, 102, 241, 0.1);
             color: #27272a;
         }
     }
 }
+

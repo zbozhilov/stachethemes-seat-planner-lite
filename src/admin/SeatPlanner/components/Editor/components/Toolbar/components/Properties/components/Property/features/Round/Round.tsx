@@ -30,18 +30,37 @@ const Round = (props: {
     }
 
     return (
-
         <div className='stachesepl-toolbar-properties-round'>
-
             <label htmlFor='stachesepl-toolbar-properties-round'>{__('ROUND_CORNERS')}</label>
-            <input
+            
+            <button
+                type="button"
+                role="switch"
                 id='stachesepl-toolbar-properties-round'
-                type="checkbox"
-                checked={displayValue}
-                onChange={(e) => {
-                    handleValueChange(e.target.checked)
-                }} />
-
+                aria-checked={displayValue}
+                className={`stachesepl-toggle ${displayValue ? 'is-checked' : ''}`}
+                onClick={() => handleValueChange(!displayValue)}
+            >
+                <span className="stachesepl-toggle-track">
+                    <span className="stachesepl-toggle-thumb">
+                        {displayValue && (
+                            <svg 
+                                className="stachesepl-toggle-icon" 
+                                width="10" 
+                                height="10" 
+                                viewBox="0 0 24 24" 
+                                fill="none" 
+                                stroke="currentColor" 
+                                strokeWidth="3"
+                                strokeLinecap="round" 
+                                strokeLinejoin="round"
+                            >
+                                <polyline points="20 6 9 17 4 12"/>
+                            </svg>
+                        )}
+                    </span>
+                </span>
+            </button>
         </div>
     )
 }

@@ -9,6 +9,7 @@ import FontSize from "../features/FontSize/FontSize"
 import Round from "../features/Round/Round"
 import PropertiesContent from "../PropertiesContent/PropertiesContent"
 import Zindex from "../features/Zindex/Zindex"
+import TextDirection from "../features/TextDirection/TextDirection"
 
 const GenericProperties = (props: {
     objects: GenericObjectProps[]
@@ -23,6 +24,7 @@ const GenericProperties = (props: {
                 <Round objects={props.objects} />
                 <Label objects={props.objects} />
                 <FontSize objects={props.objects} />
+                <TextDirection objects={props.objects} />
                 <Colors objects={props.objects} />
             </PropertiesContent>
         </>

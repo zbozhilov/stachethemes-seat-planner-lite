@@ -7,15 +7,22 @@
         display: flex;
         align-items: center;
         justify-content: space-between;
+        gap: 200px;
 
         &:not(:first-child) {
             margin-top: 20px;
+        }
+
+        input[type="text"] {
+            max-width: 150px;
+            line-height: 1;
         }
 
         input[type="color"] {
             padding: 2px 4px;
             height: 35px;
             min-width: 100px;
+            line-height: 1;
         }
     }
 
@@ -24,58 +31,201 @@
     }
 
     .stachesepl-workflow-settings-background-image {
-        width: 100px;
-        height: 100px;
+        width: 120px;
+        height: 90px;
         cursor: pointer;
         position: relative;
+        border-radius: 10px;
+        overflow: hidden;
+        transition: transform var(--stachesepl-transition-fast),
+                    box-shadow var(--stachesepl-transition-fast);
+
+        &:hover {
+            transform: scale(1.02);
+        }
 
         img {
-            width: inherit;
-            height: inherit;
-            border: 1px solid #8c8f94;
-            padding: 6px;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border: 2px solid var(--stachesepl-dialog-border-color);
             box-sizing: border-box;
-            border-radius: 4px;
+            border-radius: 10px;
+            transition: border-color var(--stachesepl-transition-fast);
+        }
+
+        &:hover img {
+            border-color: var(--stachesepl-accent-primary);
         }
 
         .stachesepl-workflow-settings-background-image-placeholder {
             display: flex;
+            flex-direction: column;
             align-items: center;
             justify-content: center;
-            background-color: #fff;
-            width: inherit;
-            height: inherit;
-            border: 1px solid #8c8f94;
-            padding: 6px;
+            gap: 6px;
+            background-color: var(--stachesepl-dialog-input-background-color);
+            width: 100%;
+            height: 100%;
+            border: 2px dashed var(--stachesepl-dialog-border-color);
             box-sizing: border-box;
-            border-radius: 4px;
+            border-radius: 10px;
             font-weight: 500;
-            font-size: 12px;
+            font-size: 11px;
             cursor: pointer;
+            color: var(--stachesepl-dialog-label-color);
+            transition: border-color var(--stachesepl-transition-fast),
+                        background-color var(--stachesepl-transition-fast),
+                        color var(--stachesepl-transition-fast);
+
+            svg {
+                font-size: 28px;
+                opacity: 0.7;
+                transition: opacity var(--stachesepl-transition-fast),
+                            color var(--stachesepl-transition-fast);
+            }
 
             &:hover {
-                background-color: #f3f4f7;
+                border-color: var(--stachesepl-accent-primary);
+                background-color: rgba(99, 102, 241, 0.08);
+                color: var(--stachesepl-accent-primary);
+
+                svg {
+                    opacity: 1;
+                    color: var(--stachesepl-accent-primary);
+                }
             }
         }
 
         &-remove {
             position: absolute;
-            right: 7px;
-            top: 7px;
+            right: 6px;
+            top: 6px;
             color: #fff;
-            background: #ff3b3b;
-            border-radius: 3px;
-            width: 30px;
-            height: 30px;
-            display: none;
+            background: var(--stachesepl-accent-danger);
+            border-radius: 6px;
+            width: 26px;
+            height: 26px;
+            display: flex;
             align-items: center;
             justify-content: center;
+            opacity: 0;
+            transform: scale(0.8);
+            transition: opacity var(--stachesepl-transition-fast),
+                        transform var(--stachesepl-transition-fast),
+                        background-color var(--stachesepl-transition-fast);
+            box-shadow: var(--stachesepl-shadow-md);
+
+            svg {
+                font-size: 18px;
+            }
+
+            &:hover {
+                background: #dc2626;
+                transform: scale(1.1) !important;
+            }
         }
 
         &:hover {
             .stachesepl-workflow-settings-background-image-remove {
-                display: flex;
+                opacity: 1;
+                transform: scale(1);
             }
+        }
+    }
+
+    // Opacity control styling
+    .stachesepl-workflow-settings-opacity-control {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+    }
+
+    .stachesepl-workflow-settings-opacity-slider {
+        -webkit-appearance: none;
+        appearance: none;
+        width: 140px;
+        height: 6px;
+        border-radius: 3px;
+        background: linear-gradient(
+            to right,
+            var(--stachesepl-accent-primary) 0%,
+            var(--stachesepl-accent-primary) var(--opacity-value, 100%),
+            var(--stachesepl-dialog-input-background-color) var(--opacity-value, 100%),
+            var(--stachesepl-dialog-input-background-color) 100%
+        );
+        cursor: pointer;
+        outline: none;
+        border: 1px solid var(--stachesepl-dialog-border-color);
+        transition: box-shadow var(--stachesepl-transition-fast);
+
+        &:hover {
+            box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.15);
+        }
+
+        &::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            background: var(--stachesepl-accent-primary);
+            cursor: pointer;
+            border: 2px solid #fff;
+            box-shadow: var(--stachesepl-shadow-md);
+            transition: transform var(--stachesepl-transition-fast),
+                        box-shadow var(--stachesepl-transition-fast);
+        }
+
+        &::-webkit-slider-thumb:hover {
+            transform: scale(1.15);
+            box-shadow: var(--stachesepl-shadow-lg), var(--stachesepl-shadow-glow);
+        }
+
+        &::-moz-range-thumb {
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            background: var(--stachesepl-accent-primary);
+            cursor: pointer;
+            border: 2px solid #fff;
+            box-shadow: var(--stachesepl-shadow-md);
+            transition: transform var(--stachesepl-transition-fast),
+                        box-shadow var(--stachesepl-transition-fast);
+        }
+
+        &::-moz-range-thumb:hover {
+            transform: scale(1.15);
+            box-shadow: var(--stachesepl-shadow-lg), var(--stachesepl-shadow-glow);
+        }
+    }
+
+    .stachesepl-workflow-settings-opacity-number {
+        width: 60px;
+        padding: 8px 10px;
+        border: 1px solid var(--stachesepl-dialog-border-color);
+        border-radius: 8px;
+        background-color: var(--stachesepl-dialog-input-background-color);
+        color: var(--stachesepl-dialog-input-color);
+        font-size: 13px;
+        text-align: center;
+        font-weight: 500;
+        outline: none;
+        transition: border-color var(--stachesepl-transition-fast),
+                    box-shadow var(--stachesepl-transition-fast);
+
+        &:focus {
+            border-color: var(--stachesepl-accent-primary);
+            box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.15);
+        }
+
+        // Hide spinner buttons
+        -moz-appearance: textfield;
+
+        &::-webkit-outer-spin-button,
+        &::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
         }
     }
 }

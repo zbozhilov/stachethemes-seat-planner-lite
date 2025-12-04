@@ -4,11 +4,15 @@ import { __ } from '@src/utils';
 import { getHasValidPattern, getIncrementValueByRegex } from '../utils';
 import './Label.scss';
 import toast from 'react-hot-toast';
+import { useState } from 'react';
+import { AutoAwesome } from '@mui/icons-material';
+import PatternBuilder from '../PatternBuilder/PatternBuilder';
 
 const Label = (props: {
     objects: BaseObjectProps[]
 }) => {
 
+    const [showPatternBuilder, setShowPatternBuilder] = useState(false);
     const { setObjects } = useEditorObjects();
     const objectIds = props.objects.map(({ id }) => id);
     const [firstObject] = props.objects;
@@ -44,6 +48,12 @@ const Label = (props: {
         }
     }
 
+    const handlePatternApply = (pattern: string) => {
+        handleValueChange(pattern);
+    };
+
+    const showPatternBuilderButton = props.objects.length > 1;
+
     return (
 
         <div className='stachesepl-toolbar-properties-label'>
@@ -52,6 +62,26 @@ const Label = (props: {
             <input id='stachesepl-toolbar-properties-label' type="text" placeholder={__('LABEL')} value={displayLabel} onChange={(e) => {
                 handleValueChange(e.target.value)
             }} />
+
+            {showPatternBuilderButton && (
+                <div className='stachesepl-pattern-builder-wrapper'>
+                    <button
+                        className='stachesepl-pattern-builder-trigger'
+                        onClick={() => setShowPatternBuilder(true)}
+                    >
+                        <AutoAwesome sx={{ fontSize: 16 }} />
+                        {__('AUTO_INCREMENT')}
+                    </button>
+
+                    {showPatternBuilder && (
+                        <PatternBuilder
+                            onApply={handlePatternApply}
+                            onClose={() => setShowPatternBuilder(false)}
+                            numItems={props.objects.length}
+                        />
+                    )}
+                </div>
+            )}
 
         </div>
     )

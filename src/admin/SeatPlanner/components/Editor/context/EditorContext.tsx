@@ -20,7 +20,7 @@ interface EditorContextProps {
     setGridGap: (gap: number | ((prev: number) => number)) => void;
 
     seatDisplayLabel: 'label' | 'price' | 'seatid' | 'group' | 'status';
-    setSeatDisplayLabel: (label: 'label' | 'price' | 'seatid' | 'status' | ((prev: 'label' | 'price' | 'seatid' | 'group' | 'status') => 'label' | 'price' | 'seatid' | 'group' | 'status')) => void;
+    setSeatDisplayLabel: (label: 'label' | 'price' | 'seatid' | 'group' | 'status' | ((prev: 'label' | 'price' | 'seatid' | 'group' | 'status') => 'label' | 'price' | 'seatid' | 'group' | 'status')) => void;
 
     editorRef: React.RefObject<HTMLDivElement | null>;
 }

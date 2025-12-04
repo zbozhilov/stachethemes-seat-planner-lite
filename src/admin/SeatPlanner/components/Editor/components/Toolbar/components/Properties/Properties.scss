@@ -3,10 +3,38 @@
     height: 100%;
     box-sizing: border-box;
     position: relative;
+    display: flex;
+    flex-direction: column;
 
     select,
     input[type='text'] {
-        background-color: var(--stachesepl-toolbar-input-background-color, red);
+        background-color: var(--stachesepl-toolbar-input-background-color);
+        border: 1px solid var(--stachesepl-toolbar-input-border-color);
+        color: var(--stachesepl-toolbar-label-color);
+        border-radius: 8px;
+        padding: 10px 12px;
+        font-size: 14px;
+        transition: 
+            border-color var(--stachesepl-transition-fast),
+            box-shadow var(--stachesepl-transition-fast);
+        outline: none;
+
+        &:focus {
+            border-color: var(--stachesepl-toolbar-input-focus-border-color);
+            box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.15);
+        }
+
+        &::placeholder {
+            color: var(--stachesepl-dialog-input-placeholder-color);
+        }
     }
 
+    select {
+        cursor: pointer;
+        appearance: none;
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%2371717a' d='M6 8L1 3h10z'/%3E%3C/svg%3E");
+        background-repeat: no-repeat;
+        background-position: right 12px center;
+        padding-right: 36px;
+    }
 }

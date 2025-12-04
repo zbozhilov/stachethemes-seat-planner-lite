@@ -34,4 +34,28 @@ export function isRounded(object: WorkflowObject): object is (GenericObjectProps
     return 'rounded' in object && object.rounded !== undefined && object.rounded;
 }
 
+export type TextDirection = 'horizontal' | 'vertical-upright' | 'rotated-cw';
+
+export function getTextDirectionStyles(object: WorkflowObject): React.CSSProperties {
+    if (!('textDirection' in object) || !object.textDirection || object.textDirection === 'horizontal') {
+        return {};
+    }
+
+    switch (object.textDirection) {
+        case 'vertical-upright':
+            return {
+                writingMode: 'vertical-lr',
+                textOrientation: 'upright',
+            };
+        case 'rotated-cw':
+            return {
+                writingMode: 'vertical-rl',
+                textOrientation: 'sideways',
+                letterSpacing: '0.2rem',
+            };
+        default:
+            return {};
+    }
+}
+
 export type WorkflowObject = SeatObjectProps | GenericObjectProps | ScreenObjectProps | TextObjectProps

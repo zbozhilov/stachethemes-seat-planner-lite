@@ -1,26 +1,18 @@
-    .stachesepl-toolbar-properties-handicap {
-        display: flex;
-        align-items: center;
-        justify-content: flex-end;
-        flex-direction: row-reverse;
-        gap: 5px;
-        box-sizing: border-box;
-        width: 100%;
-        padding: 10px;
+.stachesepl-toolbar-properties-handicap {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    box-sizing: border-box;
+    width: 100%;
+    padding: 12px 16px;
 
-        label {
-            color: var(--stachesepl-toolbar-label-color, red);
-            font-size: 14px;
-            cursor: pointer;
-        }
-
-        input {
-            max-width: 20px;
-            box-sizing: border-box;
-            border: none;
-            padding: 5px 10px;
-            border-radius: 3px;
-            cursor: pointer;
-            margin-top: -1px;
-        }
+    label {
+        color: var(--stachesepl-toolbar-label-color);
+        font-size: 13px;
+        font-weight: 500;
+        cursor: pointer;
+        user-select: none;
+        flex: 1;
     }
+}

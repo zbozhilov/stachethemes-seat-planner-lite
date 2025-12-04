@@ -6,7 +6,7 @@ import { useWorkflowObject } from '../hooks';
 
 const Seat = (props: SeatObjectProps) => {
 
-    const workflowObjectProps = useWorkflowObject(props, 'stachesepl-sesat');
+    const workflowObjectProps = useWorkflowObject(props, 'stachesepl-seat');
     const { seatDisplayLabel } = useEditorSeatDisplayLabel();
 
     const getDisplayLabel = () => {

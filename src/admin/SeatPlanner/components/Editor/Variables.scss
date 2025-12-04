@@ -1,107 +1,224 @@
 :root {
+    // Core accent colors
+    --stachesepl-accent-primary: #6366f1;
+    --stachesepl-accent-primary-hover: #4f46e5;
+    --stachesepl-accent-secondary: #22d3ee;
+    --stachesepl-accent-success: #10b981;
+    --stachesepl-accent-warning: #f59e0b;
+    --stachesepl-accent-danger: #ef4444;
 
-    --stachesepl-top-button-color: #d4d4d4;
+    // TopBar buttons
+    --stachesepl-top-button-color: #a1a1aa;
     --stachesepl-top-button-background-color: transparent;
-    --stachesepl-top-button-hover-background-color: transparent;
-    --stachesepl-top-button-hover-color: #fff;
+    --stachesepl-top-button-hover-background-color: rgba(255, 255, 255, 0.08);
+    --stachesepl-top-button-hover-color: #fafafa;
 
-    --stachesepl-editor-background-color: #292929;
-    --stachesepl-tooltip-properties-header-background-color: #535353;
-    --stachesepl-tooltip-properties-header-color: #f4f4f4;
-    --stachesepl-toolbar-background-color: #333;
-    --stachesepl-toolbar-input-background-color: #f3f4f7;
-    --stachesepl-toolbar-label-color: #f4f4f4;
-    --stachesepl-tooltip-items-count-color: #999;
+    // Editor background
+    --stachesepl-editor-background-color: #18181b;
+    --stachesepl-editor-surface-color: #27272a;
+    --stachesepl-editor-border-color: rgba(255, 255, 255, 0.08);
 
-    --stachesepl-toolbar-item-background-color: #535353;
-    --stachesepl-toolbar-item-color: #f4f4f4;
+    // Toolbar
+    --stachesepl-toolbar-background-color: #1f1f23;
+    --stachesepl-toolbar-input-background-color: rgba(255, 255, 255, 0.06);
+    --stachesepl-toolbar-input-border-color: rgba(255, 255, 255, 0.1);
+    --stachesepl-toolbar-input-focus-border-color: var(--stachesepl-accent-primary);
+    --stachesepl-toolbar-label-color: #e4e4e7;
 
-    --stachesepl-toolbar-item-hover-background-color: #f0f0f0;
-    --stachesepl-toolbar-item-hover-color: #202020;
+    // Tooltip properties header
+    --stachesepl-tooltip-properties-header-background-color: #27272a;
+    --stachesepl-tooltip-properties-header-color: #fafafa;
+    --stachesepl-tooltip-items-count-color: #71717a;
 
-    --stachesepl-dialog-overlay: rgba(255, 255, 255, 0.3);
-    --stachesepl-dialog-header-background-color: #292929;
-    --stachesepl-dialog-header-color: #f4f4f4;
-    --stachesepl-dialog-background-color: #fff;
-    --stachesepl-dialog-button-close-background-color: #ddd;
-    --stachesepl-dialog-button-close-color: #202020;
-    --stachesepl-dialog-button-close-hover-background-color: #ccc;
-    --stachesepl-dialog-button-close-hover-color: #202020;
-    --stachesepl-dialog-input-background-color: #f3f4f7;
-    --stachesepl-dialog-input-color: #292929;
-    --stachesepl-dialog-input-placeholder-color: #52565e;
-    ;
-    --stachesepl-dialog-label-color: #292929;
+    // Toolbar items
+    --stachesepl-toolbar-item-background-color: #27272a;
+    --stachesepl-toolbar-item-color: #d4d4d8;
+    --stachesepl-toolbar-item-border-color: rgba(255, 255, 255, 0.06);
+    --stachesepl-toolbar-item-hover-background-color: var(--stachesepl-accent-primary);
+    --stachesepl-toolbar-item-hover-color: #ffffff;
 
-    --stachesepl-marquee-color: rgba(0, 100, 255, 0.3);
-    --stachesepl-marquee-border-color: rgb(0, 100, 255);
+    // Dialogs
+    --stachesepl-dialog-overlay: rgba(0, 0, 0, 0.75);
+    --stachesepl-dialog-header-background-color: linear-gradient(135deg, #27272a 0%, #18181b 100%);
+    --stachesepl-dialog-header-color: #fafafa;
+    --stachesepl-dialog-background-color: #27272a;
+    --stachesepl-dialog-border-color: rgba(255, 255, 255, 0.1);
+    --stachesepl-dialog-button-close-background-color: #3f3f46;
+    --stachesepl-dialog-button-close-color: #e4e4e7;
+    --stachesepl-dialog-button-close-hover-background-color: #52525b;
+    --stachesepl-dialog-button-close-hover-color: #fafafa;
+    --stachesepl-dialog-button-primary-background-color: var(--stachesepl-accent-primary);
+    --stachesepl-dialog-button-primary-hover-background-color: var(--stachesepl-accent-primary-hover);
+    --stachesepl-dialog-button-primary-color: #ffffff;
+    --stachesepl-dialog-input-background-color: rgba(255, 255, 255, 0.06);
+    --stachesepl-dialog-input-color: #fafafa;
+    --stachesepl-dialog-input-placeholder-color: #71717a;
+    --stachesepl-dialog-label-color: #a1a1aa;
 
-    --stachesepl-selectable-color: rgba(0, 100, 255, 0.3);
-    --stachesepl-selectable-border-color: rgb(0, 100, 255);
+    // Selection & marquee
+    --stachesepl-marquee-color: rgba(99, 102, 241, 0.2);
+    --stachesepl-marquee-border-color: var(--stachesepl-accent-primary);
+    --stachesepl-selectable-color: rgba(99, 102, 241, 0.25);
+    --stachesepl-selectable-border-color: var(--stachesepl-accent-primary);
 
-    --rcp-background-color: #292929;
+    // Seat display label
+    --stachesepl-seat-display-label-tag-bg-color: var(--stachesepl-accent-primary);
+    --stachesepl-seat-display-label-tag-border-color: transparent;
+    --stachesepl-seat-display-label-tag-color: #ffffff;
+
+    // Color picker
+    --rcp-background-color: #27272a;
     .rcp-root {
-        // Color picker
-        --rcp-background-color: #292929;
-        --rcp-field-input-color: #fff;
-        --rcp-field-input-border-color: #ddd;
-        --rcp-field-label-color: #545454;
+        --rcp-background-color: #27272a;
+        --rcp-field-input-color: #fafafa;
+        --rcp-field-input-border-color: rgba(255, 255, 255, 0.15);
+        --rcp-field-label-color: #71717a;
     }
+
+    // Scrollbar customization
+    --stachesepl-scrollbar-track: rgba(255, 255, 255, 0.02);
+    --stachesepl-scrollbar-thumb: rgba(255, 255, 255, 0.15);
+    --stachesepl-scrollbar-thumb-hover: rgba(255, 255, 255, 0.25);
+
+    // Transitions
+    --stachesepl-transition-fast: 150ms cubic-bezier(0.4, 0, 0.2, 1);
+    --stachesepl-transition-normal: 200ms cubic-bezier(0.4, 0, 0.2, 1);
+    --stachesepl-transition-slow: 300ms cubic-bezier(0.4, 0, 0.2, 1);
+
+    // Shadows
+    --stachesepl-shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.3);
+    --stachesepl-shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.3), 0 2px 4px -2px rgba(0, 0, 0, 0.2);
+    --stachesepl-shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.4), 0 4px 6px -4px rgba(0, 0, 0, 0.3);
+    --stachesepl-shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.5), 0 8px 10px -6px rgba(0, 0, 0, 0.3);
+    --stachesepl-shadow-glow: 0 0 20px rgba(99, 102, 241, 0.3);
+
+    // Info dialog content (Keystroke Actions, etc.)
+    --stachesepl-info-hover-bg: rgba(255, 255, 255, 0.03);
+    --stachesepl-info-section-bg: rgba(255, 255, 255, 0.02);
+    --stachesepl-kbd-bg: linear-gradient(180deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.05) 100%);
+    --stachesepl-kbd-border: rgba(255, 255, 255, 0.12);
+    --stachesepl-kbd-border-bottom: rgba(0, 0, 0, 0.3);
+    --stachesepl-kbd-shadow: 0 1px 0 rgba(0, 0, 0, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+    --stachesepl-kbd-text-shadow: 0 1px 1px rgba(0, 0, 0, 0.3);
+
+    // Error states
+    --stachesepl-error-text-color: #fecaca;
+    --stachesepl-error-bg-color: rgba(239, 68, 68, 0.15);
+    --stachesepl-error-border-color: rgba(239, 68, 68, 0.3);
+
+    // Toast notifications
+    --stachesepl-toast-bg: linear-gradient(135deg, #27272a 0%, #18181b 100%);
+    --stachesepl-toast-color: #fafafa;
+    --stachesepl-toast-border-color: rgba(255, 255, 255, 0.1);
+    --stachesepl-toast-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.4), 0 8px 10px -6px rgba(0, 0, 0, 0.3);
 }
 
+// Light theme
 .stachesepl-theme-light {
-    --stachesepl-top-button-color: #333;
+    // TopBar buttons
+    --stachesepl-top-button-color: #52525b;
     --stachesepl-top-button-background-color: transparent;
-    --stachesepl-top-button-hover-background-color: transparent;
-    --stachesepl-top-button-hover-color: #000;
+    --stachesepl-top-button-hover-background-color: rgba(0, 0, 0, 0.05);
+    --stachesepl-top-button-hover-color: #18181b;
 
-    --stachesepl-editor-background-color: #f1f1f1;
-    --stachesepl-tooltip-properties-header-background-color: #202020;
-    --stachesepl-tooltip-properties-header-color: #f4f4f4;
-    --stachesepl-toolbar-background-color: #fff;
-    --stachesepl-toolbar-input-background-color: #f3f4f7;
-    --stachesepl-toolbar-label-color: #202020;
-    --stachesepl-tooltip-items-count-color: #545454;
+    // Editor background
+    --stachesepl-editor-background-color: #f4f4f5;
+    --stachesepl-editor-surface-color: #ffffff;
+    --stachesepl-editor-border-color: rgba(0, 0, 0, 0.08);
 
-    --stachesepl-toolbar-item-background-color: #ececec;
-    --stachesepl-toolbar-item-color: #202020;
+    // Toolbar
+    --stachesepl-toolbar-background-color: #ffffff;
+    --stachesepl-toolbar-input-background-color: #f4f4f5;
+    --stachesepl-toolbar-input-border-color: #e4e4e7;
+    --stachesepl-toolbar-input-focus-border-color: var(--stachesepl-accent-primary);
+    --stachesepl-toolbar-label-color: #27272a;
 
-    --stachesepl-toolbar-item-hover-background-color: #ccc;
-    --stachesepl-toolbar-item-hover-color: #202020;
+    // Tooltip properties header
+    --stachesepl-tooltip-properties-header-background-color: linear-gradient(135deg, #f4f4f5 0%, #e4e4e7 100%);
+    --stachesepl-tooltip-properties-header-color: #18181b;
+    --stachesepl-tooltip-items-count-color: #71717a;
 
-    --stachesepl-dialog-overlay: rgba(255, 255, 255, 0.3);
-    --stachesepl-dialog-header-background-color: #292929;
-    --stachesepl-dialog-header-color: #f4f4f4;
-    --stachesepl-dialog-background-color: #fff;
-    --stachesepl-dialog-button-close-background-color: #ddd;
-    --stachesepl-dialog-button-close-color: #202020;
-    --stachesepl-dialog-button-close-hover-background-color: #ccc;
-    --stachesepl-dialog-button-close-hover-color: #202020;
-    --stachesepl-dialog-input-background-color: #f3f4f7;
-    --stachesepl-dialog-input-color: #292929;
-    --stachesepl-dialog-input-placeholder-color: #52565e;
-    
-    --stachesepl-dialog-label-color: #292929;
+    // Toolbar items
+    --stachesepl-toolbar-item-background-color: #f4f4f5;
+    --stachesepl-toolbar-item-color: #3f3f46;
+    --stachesepl-toolbar-item-border-color: #e4e4e7;
+    --stachesepl-toolbar-item-hover-background-color: var(--stachesepl-accent-primary);
+    --stachesepl-toolbar-item-hover-color: #ffffff;
 
-    --stachesepl-marquee-color: rgba(0, 100, 255, 0.1);
-    --stachesepl-marquee-border-color: rgb(0, 100, 255);
+    // Dialogs
+    --stachesepl-dialog-overlay: rgba(0, 0, 0, 0.5);
+    --stachesepl-dialog-header-background-color: linear-gradient(135deg, #f4f4f5 0%, #e4e4e7 100%);
+    --stachesepl-dialog-header-color: #18181b;
+    --stachesepl-dialog-background-color: #ffffff;
+    --stachesepl-dialog-border-color: #e4e4e7;
+    --stachesepl-dialog-button-close-background-color: #f4f4f5;
+    --stachesepl-dialog-button-close-color: #3f3f46;
+    --stachesepl-dialog-button-close-hover-background-color: #e4e4e7;
+    --stachesepl-dialog-button-close-hover-color: #18181b;
+    --stachesepl-dialog-button-primary-background-color: var(--stachesepl-accent-primary);
+    --stachesepl-dialog-button-primary-hover-background-color: var(--stachesepl-accent-primary-hover);
+    --stachesepl-dialog-button-primary-color: #ffffff;
+    --stachesepl-dialog-input-background-color: #f4f4f5;
+    --stachesepl-dialog-input-color: #18181b;
+    --stachesepl-dialog-input-placeholder-color: #a1a1aa;
+    --stachesepl-dialog-label-color: #52525b;
 
-    --stachesepl-selectable-color: rgba(0, 100, 255, 0.1);
-    --stachesepl-selectable-border-color: rgb(0, 100, 255);
+    // Selection & marquee
+    --stachesepl-marquee-color: rgba(99, 102, 241, 0.15);
+    --stachesepl-marquee-border-color: var(--stachesepl-accent-primary);
+    --stachesepl-selectable-color: rgba(99, 102, 241, 0.15);
+    --stachesepl-selectable-border-color: var(--stachesepl-accent-primary);
+
+    // Seat display label
+    --stachesepl-seat-display-label-tag-bg-color: var(--stachesepl-accent-primary);
+    --stachesepl-seat-display-label-tag-border-color: transparent;
+    --stachesepl-seat-display-label-tag-color: #ffffff;
+
+    // Color picker
+    --rcp-background-color: #ffffff;
+    .rcp-root {
+        --rcp-background-color: #ffffff;
+        --rcp-field-input-color: #18181b;
+        --rcp-field-input-border-color: #e4e4e7;
+        --rcp-field-label-color: #71717a;
+    }
+
+    // Scrollbar customization
+    --stachesepl-scrollbar-track: rgba(0, 0, 0, 0.02);
+    --stachesepl-scrollbar-thumb: rgba(0, 0, 0, 0.15);
+    --stachesepl-scrollbar-thumb-hover: rgba(0, 0, 0, 0.25);
+
+    // Shadows
+    --stachesepl-shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
+    --stachesepl-shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1);
+    --stachesepl-shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.1);
+    --stachesepl-shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.15), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
+    --stachesepl-shadow-glow: 0 0 20px rgba(99, 102, 241, 0.2);
+
+    // Info dialog content (Keystroke Actions, etc.)
+    --stachesepl-info-hover-bg: rgba(0, 0, 0, 0.03);
+    --stachesepl-info-section-bg: rgba(0, 0, 0, 0.02);
+    --stachesepl-kbd-bg: linear-gradient(180deg, #ffffff 0%, #f4f4f5 100%);
+    --stachesepl-kbd-border: #d4d4d8;
+    --stachesepl-kbd-border-bottom: #a1a1aa;
+    --stachesepl-kbd-shadow: 0 1px 0 rgba(0, 0, 0, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.8);
+    --stachesepl-kbd-text-shadow: none;
+
+    // Error states
+    --stachesepl-error-text-color: #b91c1c;
+    --stachesepl-error-bg-color: #fef2f2;
+    --stachesepl-error-border-color: #fecaca;
+
+    // Toast notifications
+    --stachesepl-toast-bg: linear-gradient(135deg, #ffffff 0%, #f4f4f5 100%);
+    --stachesepl-toast-color: #18181b;
+    --stachesepl-toast-border-color: #e4e4e7;
+    --stachesepl-toast-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.08);
 
     .stachesepl-toolbar-properties-round input,
     .stachesepl-toolbar-properties-handicap input,
     .stachesepl-toolbar-properties-bgcolor input,
     .stachesepl-toolbar-properties-color input {
-        border: 1px solid #a6a6a6;
-    }
-
-    --rcp-background-color: #fff;
-    .rcp-root {
-        // Color picker
-        --rcp-background-color: #fff;
-        --rcp-field-input-color: #202020;
-        --rcp-field-input-border-color: #ddd;
-        --rcp-field-label-color: #545454;
+        border: 1px solid #e4e4e7;
     }
 }

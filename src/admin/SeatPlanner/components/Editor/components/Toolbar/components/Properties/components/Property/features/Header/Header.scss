@@ -2,10 +2,34 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-bottom: 10px;
-    font-weight: bold;
-    font-size: 16px;
-    color: var(--stachesepl-tooltip-properties-header-color, red);
-    background-color: var(--stachesepl-tooltip-properties-header-background-color, red);
-    padding: 15px;
+    gap: 10px;
+    font-weight: 600;
+    font-size: 14px;
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+    color: var(--stachesepl-tooltip-properties-header-color);
+    background: var(--stachesepl-tooltip-properties-header-background-color);
+    padding: 16px 20px;
+    position: relative;
+    
+    &::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 16px;
+        right: 16px;
+        height: 1px;
+        background: linear-gradient(
+            to right,
+            transparent,
+            rgba(255, 255, 255, 0.1) 20%,
+            rgba(255, 255, 255, 0.1) 80%,
+            transparent
+        );
+    }
+
+    svg {
+        font-size: 20px;
+        opacity: 0.8;
+    }
 }

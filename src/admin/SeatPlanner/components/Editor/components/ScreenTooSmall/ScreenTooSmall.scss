@@ -3,18 +3,24 @@
     justify-content: center;
     align-items: center;
     z-index: -1;
+    padding: 24px;
 
     span {
-        padding: 20px;
-        background-color: #777;
-        border-radius: 5px;
-        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        color: #fff;
+        padding: 32px 40px;
+        background: linear-gradient(135deg, #3f3f46 0%, #27272a 100%);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 16px;
+        box-shadow: var(--stachesepl-shadow-xl);
+        color: #fafafa;
         text-align: center;
-        font-size: 16px;
-        line-height: 1.5;
-        font-weight: bold;
-        max-width: 80dvw;
+        font-size: 15px;
+        line-height: 1.6;
+        font-weight: 500;
+        max-width: 85dvw;
+    }
+
+    svg {
+        margin:0 auto 20px;
     }
 }
 
@@ -23,11 +29,10 @@
     .stachesepl-top {
         justify-content: center !important;
 
-        >div:not(.stachesepl-top-button) {
+        > div:not(.stachesepl-top-button) {
             display: none !important;
         }
     }
-
 
     .stachesepl-editor-workspace {
         display: none !important;
@@ -35,6 +40,17 @@
 
     .stachesepl-screen-too-small {
         display: flex;
-        margin-top: 20px;
+        animation: fadeSlideIn 400ms cubic-bezier(0.4, 0, 0.2, 1);
+    }
+}
+
+@keyframes fadeSlideIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
     }
 }

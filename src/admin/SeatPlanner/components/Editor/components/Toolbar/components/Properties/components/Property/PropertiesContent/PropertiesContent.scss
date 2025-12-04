@@ -1,12 +1,12 @@
 .stachesepl-tooltip-properties {
-
     &-content {
-        max-height: calc(100dvh - 135px);
+        max-height: calc(100dvh - 145px);
         overflow: auto;
-        padding-bottom: 20px;
+        padding: 0 0 24px 0;
+        flex: 1;
 
         > .stachesepl-toolbar-properties-color {
-            padding: 10px;
+            padding: 16px;
             box-sizing: border-box;
         }
     }

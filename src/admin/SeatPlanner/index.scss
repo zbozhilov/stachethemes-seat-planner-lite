@@ -53,8 +53,19 @@ body {
 
 
 #stachesepl-seat-planner-editor {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin: 50px auto;
+    padding: 1em 1.5em;
+    box-sizing: border-box;
+
+    
+    .stachesepl-seat-planner-editor-head {
+        margin: 0 !important;
+    }
+
+    .stachesepl-seat-planner-editor-subtitle {
+        margin: 0 !important;
+        padding: 0 !important;
+        font-size: 0.75rem;
+        color: #545454;
+    }
 }
+

@@ -1,20 +1,34 @@
 .stachesepl-top-button {
-    color: var(--stachesepl-top-button-color, red);
-    background-color: var(--stachesepl-top-button-background-color, red);
-    width: 40px;
-    height: 40px;
+    color: var(--stachesepl-top-button-color);
+    background-color: var(--stachesepl-top-button-background-color);
+    width: 38px;
+    height: 38px;
     display: flex;
     align-items: center;
     justify-content: center;
-    float: left;
     cursor: pointer;
+    border-radius: 8px;
+    transition: 
+        background-color var(--stachesepl-transition-fast),
+        color var(--stachesepl-transition-fast),
+        transform var(--stachesepl-transition-fast),
+        box-shadow var(--stachesepl-transition-fast);
 
     svg {
-        font-size: 30px;
+        font-size: 22px;
+        transition: transform var(--stachesepl-transition-fast);
     }
 
     &:hover {
-        background-color: var(--stachesepl-top-button-hover-background-color, red);
-        color: var(--stachesepl-top-button-hover-color, red);
+        background-color: var(--stachesepl-top-button-hover-background-color);
+        color: var(--stachesepl-top-button-hover-color);
+
+        svg {
+            transform: scale(1.1);
+        }
+    }
+
+    &:active {
+        transform: scale(0.95);
     }
 }

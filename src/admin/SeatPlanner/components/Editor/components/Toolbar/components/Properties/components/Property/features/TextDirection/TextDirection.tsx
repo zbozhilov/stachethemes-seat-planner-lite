@@ -1,46 +1,46 @@
-import { BaseObjectProps } from "@src/admin/SeatPlanner/components/Editor/components/Workflow/components/Objects/types";
+import { TextDirection as TextDirectionType } from "@src/admin/SeatPlanner/components/Editor/components/Workflow/components/Objects/types";
+import { TextObjectProps } from "@src/admin/SeatPlanner/components/Editor/components/Workflow/components/Objects/Text/types";
+import { GenericObjectProps } from "@src/admin/SeatPlanner/components/Editor/components/Workflow/components/Objects/Generic/types";
 import { useEditorObjects } from "@src/admin/SeatPlanner/components/Editor/hooks";
 import { __ } from '@src/utils';
 import { useState, useRef, useEffect } from 'react';
-import './FontSize.scss';
+import './TextDirection.scss';
 
-type FontSizeValue = 'small' | 'medium' | 'large';
-
-interface FontSizeOption {
-    value: FontSizeValue;
+interface TextDirectionOption {
+    value: TextDirectionType;
     label: string;
 }
 
-const FontSize = (props: {
-    objects: BaseObjectProps[]
+const TextDirection = (props: {
+    objects: TextObjectProps[] | GenericObjectProps[]
 }) => {
 
     const { setObjects } = useEditorObjects();
     const objectIds = props.objects.map(({ id }) => id);
     const [firstObject] = props.objects;
-    const { fontSize } = firstObject;
-    const areSameSize = props.objects.every(object => object.fontSize === fontSize);
-    const displayValue = areSameSize ? fontSize : '';
+    const textDirection = firstObject.textDirection || 'horizontal';
+    const areSameDirection = props.objects.every(object => (object.textDirection || 'horizontal') === textDirection);
+    const displayValue = areSameDirection ? textDirection : 'horizontal';
 
     const [isOpen, setIsOpen] = useState(false);
     const dropdownRef = useRef<HTMLDivElement>(null);
 
-    const options: FontSizeOption[] = [
-        { value: 'small', label: __('FONT_SIZE_SMALL') },
-        { value: 'medium', label: __('FONT_SIZE_MEDIUM') },
-        { value: 'large', label: __('FONT_SIZE_LARGE') },
+    const options: TextDirectionOption[] = [
+        { value: 'horizontal', label: __('TEXT_DIR_HORIZONTAL') },
+        { value: 'vertical-upright', label: __('TEXT_DIR_VERTICAL_UPRIGHT') },
+        { value: 'rotated-cw', label: __('TEXT_DIR_ROTATED_CW') },
     ];
 
     const selectedOption = options.find(opt => opt.value === displayValue);
-    const displayLabel = selectedOption?.label || __('SELECT_FONT_SIZE');
+    const displayLabel = selectedOption?.label || __('TEXT_DIR_HORIZONTAL');
 
-    const handleLabelChange = (value: FontSizeValue) => {
+    const handleDirectionChange = (value: TextDirectionType) => {
         setObjects(prev => {
             return prev.map(object => {
                 if (!objectIds.includes(object.id)) return { ...object };
                 return {
                     ...object,
-                    fontSize: value
+                    textDirection: value
                 }
             })
         });
@@ -82,21 +82,21 @@ const FontSize = (props: {
     }, [isOpen]);
 
     return (
-        <div className='stachesepl-toolbar-properties-fontsize' ref={dropdownRef}>
-            <label>{__('FONT_SIZE')}</label>
+        <div className='stachesepl-toolbar-properties-textdirection' ref={dropdownRef}>
+            <label>{__('TEXT_DIRECTION')}</label>
 
             <button
                 type="button"
-                className={`stachesepl-fontsize-trigger ${isOpen ? 'is-open' : ''}`}
+                className={`stachesepl-textdirection-trigger ${isOpen ? 'is-open' : ''}`}
                 onClick={() => setIsOpen(!isOpen)}
                 aria-haspopup="listbox"
                 aria-expanded={isOpen}
             >
-                <span className={`stachesepl-fontsize-trigger-text ${!selectedOption ? 'is-placeholder' : ''}`}>
+                <span className={`stachesepl-textdirection-trigger-text ${!selectedOption ? 'is-placeholder' : ''}`}>
                     {displayLabel}
                 </span>
                 <svg 
-                    className="stachesepl-fontsize-trigger-icon" 
+                    className="stachesepl-textdirection-trigger-icon" 
                     width="12" 
                     height="12" 
                     viewBox="0 0 12 12"
@@ -107,20 +107,20 @@ const FontSize = (props: {
             </button>
 
             {isOpen && (
-                <div className="stachesepl-fontsize-dropdown" role="listbox">
+                <div className="stachesepl-textdirection-dropdown" role="listbox">
                     {options.map((option) => (
                         <button
                             key={option.value}
                             type="button"
                             role="option"
                             aria-selected={displayValue === option.value}
-                            className={`stachesepl-fontsize-option ${displayValue === option.value ? 'is-selected' : ''}`}
-                            onClick={() => handleLabelChange(option.value)}
+                            className={`stachesepl-textdirection-option ${displayValue === option.value ? 'is-selected' : ''}`}
+                            onClick={() => handleDirectionChange(option.value)}
                         >
                             {option.label}
                             {displayValue === option.value && (
                                 <svg 
-                                    className="stachesepl-fontsize-option-check" 
+                                    className="stachesepl-textdirection-option-check" 
                                     width="14" 
                                     height="14" 
                                     viewBox="0 0 24 24" 
@@ -141,4 +141,5 @@ const FontSize = (props: {
     )
 }
 
-export default FontSize
+export default TextDirection
+

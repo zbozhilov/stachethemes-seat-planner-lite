@@ -1,9 +1,12 @@
 .stachesepl-toolbar-properties-colors {
-    
     display: flex;
-    align-items: center;
+    align-items: stretch;
     justify-content: space-between;
-    padding: 10px;
-    gap: 10px;
+    padding: 0;
+    gap: 0;
     box-sizing: border-box;
+
+    > div {
+        flex: 1;
+    }
 }

@@ -7,116 +7,169 @@ body.stachesepl-dialog-open {
     width: 100dvw;
     height: 100dvh;
     position: fixed;
-    background-color: var(--stachesepl-dialog-overlay, red);
+    background-color: var(--stachesepl-dialog-overlay);
+    backdrop-filter: blur(4px);
     z-index: 1000;
     box-sizing: border-box;
-    display: block;
     left: 0;
     top: 0;
     display: flex;
     align-items: center;
     justify-content: center;
-    transition: opacity .2s ease;
-    
+    transition: opacity var(--stachesepl-transition-normal);
+    animation: dialogFadeIn var(--stachesepl-transition-normal) ease-out;
 
     &-container {
-        transition: opacity 0.2s ease, transform 0.2s ease;
-        width: 600px;
+        width: 560px;
+        max-width: 90vw;
         height: auto;
-        background-color: var(--stachesepl-dialog-background-color, red);
-        box-shadow: 0 0 30px rgba(0, 0, 0, 0.5);
-        border-radius: 3px;
+        max-height: 90vh;
+        background-color: var(--stachesepl-dialog-background-color);
+        box-shadow: var(--stachesepl-shadow-xl);
+        border-radius: 16px;
+        border: 1px solid var(--stachesepl-dialog-border-color);
         overflow: hidden;
         display: flex;
         align-items: stretch;
         justify-content: space-between;
         flex-direction: column;
+        animation: dialogSlideIn var(--stachesepl-transition-normal) ease-out;
     }
 
     &-title {
-        font-size: 20px;
-        background-color: var(--stachesepl-dialog-header-background-color, red);
-        color: var(--stachesepl-dialog-header-color, red);
-        padding: 20px;
+        font-size: 16px;
+        font-weight: 600;
+        letter-spacing: 0.02em;
+        background: var(--stachesepl-dialog-header-background-color);
+        color: var(--stachesepl-dialog-header-color);
+        padding: 20px 24px;
         box-sizing: border-box;
-
         display: flex;
         align-items: center;
         justify-content: flex-start;
-        gap: 10px;
+        gap: 12px;
 
         svg {
-            font-size: 24px;
+            font-size: 22px;
+            opacity: 0.9;
         }
     }
 
     &-content {
-        max-height: 75dvh;
+        max-height: 60dvh;
         overflow: auto;
         height: 100%;
         width: 100%;
-        padding: 20px;
+        padding: 24px;
         box-sizing: border-box;
 
         label {
-            color: var(--stachesepl-dialog-label-color, red);
-            font-size: 14px;
-            display: inline-block;
+            display: block;
+            color: var(--stachesepl-dialog-label-color);
+            font-size: 12px;
+            font-weight: 500;
+            margin-bottom: 8px;
+            letter-spacing: 0.02em;
         }
 
         input[type="text"] {
             box-sizing: border-box;
-            width: auto;
+            width: 100%;
             margin: 0;
-            padding: 10px;
-            border: none;
-            border-radius: 3px;
-            background-color: var(--stachesepl-dialog-input-background-color, red);
-            color: var(--stachesepl-dialog-input-color, red);
+            padding: 12px 14px;
+            border: 1px solid var(--stachesepl-dialog-border-color);
+            border-radius: 10px;
+            background-color: var(--stachesepl-dialog-input-background-color);
+            color: var(--stachesepl-dialog-input-color);
+            font-size: 14px;
+            transition: 
+                border-color var(--stachesepl-transition-fast),
+                box-shadow var(--stachesepl-transition-fast);
+            outline: none;
+
+            &:focus {
+                border-color: var(--stachesepl-accent-primary);
+                box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.15);
+            }
 
             &::placeholder {
-                color: var(--stachesepl-dialog-input-placeholder-color, red);
+                color: var(--stachesepl-dialog-input-placeholder-color);
             }
         }
     }
 
     &-actions {
-
-        padding: 0 20px 20px 20px;
+        padding: 16px 24px 24px 24px;
         box-sizing: border-box;
         display: flex;
         align-items: center;
-        justify-content: center;
-        gap: 10px;
+        justify-content: flex-end;
+        gap: 12px;
 
         &-button {
-            background-color: var(--stachesepl-dialog-button-close-background-color, red);
-            color: var(--stachesepl-dialog-button-close-color, red);
-            display: inline-block;
-            padding: 8px 16px; /* Reduce height */
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 10px 20px;
             box-sizing: border-box;
-            border-radius: 6px;
-            width: 100%;
+            border-radius: 10px;
+            min-width: 100px;
             text-align: center;
             cursor: pointer;
             user-select: none;
             font-weight: 500;
+            width: 100%;
+            font-size: 14px;
+            transition: 
+                background-color var(--stachesepl-transition-fast),
+                color var(--stachesepl-transition-fast),
+                transform var(--stachesepl-transition-fast),
+                box-shadow var(--stachesepl-transition-fast);
+
+            // Secondary button (default)
+            background-color: var(--stachesepl-dialog-button-close-background-color);
+            color: var(--stachesepl-dialog-button-close-color);
 
             &:hover {
-                background-color: var(--stachesepl-dialog-button-close-hover-background-color, red);
-                color: var(--stachesepl-dialog-button-close-hover-color, red);
+                background-color: var(--stachesepl-dialog-button-close-hover-background-color);
+                color: var(--stachesepl-dialog-button-close-hover-color);
+            }
+
+            &:active {
+                transform: scale(0.98);
+            }
+
+            // Primary button variant
+            &--primary {
+                background-color: var(--stachesepl-dialog-button-primary-background-color);
+                color: var(--stachesepl-dialog-button-primary-color);
+                box-shadow: var(--stachesepl-shadow-sm);
+
+                &:hover {
+                    background-color: var(--stachesepl-dialog-button-primary-hover-background-color);
+                    box-shadow: var(--stachesepl-shadow-md), var(--stachesepl-shadow-glow);
+                }
             }
         }
-
     }
 }
 
-@starting-style {
-    .stachesepl-dialog {
+@keyframes dialogFadeIn {
+    from {
         opacity: 0;
     }
-    .stachesepl-dialog-container {
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes dialogSlideIn {
+    from {
         opacity: 0;
-        transform: scale(0.9);
+        transform: scale(0.95) translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1) translateY(0);
     }
 }

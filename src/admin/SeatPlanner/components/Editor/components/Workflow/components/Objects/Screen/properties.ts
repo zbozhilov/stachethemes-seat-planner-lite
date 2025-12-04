@@ -11,7 +11,7 @@ export const screenProperties: ScreenObjectProps = {
         y: 0
     },
     size: {
-        width: 620,
+        width: 600,
         height: 50
     },
     color: '#000000',

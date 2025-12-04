@@ -1,7 +1,7 @@
 import { useEditorGridGap, useEditorObjects, useSelectObjects } from "@src/admin/SeatPlanner/components/Editor/hooks";
 import { isCtrlKey } from "@src/admin/SeatPlanner/components/utils";
 import { useEffect, useRef, useState } from "react";
-import { hasBackgroundColor, isRounded, WorkflowObject } from "./types";
+import { hasBackgroundColor, isRounded, getTextDirectionStyles, WorkflowObject } from "./types";
 import { getFontSizeByType } from "./helpers";
 
 export const useDraggable = (
@@ -293,6 +293,9 @@ export const useWorkflowObject = (
     if (isRounded(objectProps)) {
         style.borderRadius = '50%';
     }
+
+    const textDirectionStyles = getTextDirectionStyles(objectProps);
+    Object.assign(style, textDirectionStyles);
 
     // Don't show outline error if the object is selected
     if ('outlineError' in objectProps && objectProps.outlineError) {

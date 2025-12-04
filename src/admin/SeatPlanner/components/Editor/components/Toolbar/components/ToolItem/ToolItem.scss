@@ -1,19 +1,31 @@
 .stachesepl-toolbar-item {
-    background-color: var(--stachesepl-toolbar-item-background-color, red);
-    color: var(--stachesepl-toolbar-item-color, red);
+    background-color: var(--stachesepl-toolbar-item-background-color);
+    color: var(--stachesepl-toolbar-item-color);
     width: 100%;
-    height: 100px;
+    aspect-ratio: 4/3;
     cursor: pointer;
     user-select: none;
     position: relative;
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
-    border-radius: 3px;
+    gap: 8px;
+    border-radius: 12px;
+    border: 1px solid var(--stachesepl-toolbar-item-border-color);
+    transition: 
+        background-color var(--stachesepl-transition-fast),
+        color var(--stachesepl-transition-fast),
+        transform var(--stachesepl-transition-fast),
+        box-shadow var(--stachesepl-transition-fast),
+        border-color var(--stachesepl-transition-fast);
 
     &-icon {
-        font-size: 40px;
-        margin-top: -10px;
+        font-size: 32px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: transform var(--stachesepl-transition-fast);
 
         svg {
             font-size: inherit;
@@ -21,26 +33,33 @@
     }
 
     &-label {
-        position: absolute;
-        bottom: 10px;
-        left: 0;
-        right: 0;
-        font-size: 14px;
+        font-size: 12px;
         font-weight: 500;
         text-align: center;
+        line-height: 1.2;
+        padding: 0 8px;
+        transition: color var(--stachesepl-transition-fast);
     }
 
     &:hover,
     &.stachesepl-toolbar-item-dragging {
-
-        background-color: var(--stachesepl-toolbar-item-hover-background-color, red);
-        color: var(--stachesepl-toolbar-item-hover-color, red);
+        background-color: var(--stachesepl-toolbar-item-hover-background-color);
+        color: var(--stachesepl-toolbar-item-hover-color);
+        border-color: transparent;
+        transform: translateY(-2px);
+        box-shadow: var(--stachesepl-shadow-lg), var(--stachesepl-shadow-glow);
 
         .stachesepl-toolbar-item-label,
         .stachesepl-toolbar-item-icon {
-            color: var(--stachesepl-toolbar-item-hover-color, red);
+            color: var(--stachesepl-toolbar-item-hover-color);
         }
 
-        box-shadow: 0 10px 10px rgba(0, 0, 0, 0.1);
+        .stachesepl-toolbar-item-icon {
+            transform: scale(1.1);
+        }
+    }
+
+    &:active {
+        transform: translateY(0) scale(0.98);
     }
 }

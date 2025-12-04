@@ -139,6 +139,7 @@ class Translation {
     public static function get_admin_strings() {
 
         return [
+            'CLICK_TO_CHANGE_DISPLAY_LABEL'  => esc_html__('Click to change display label', 'stachethemes-seat-planner-lite'),
             'ZINDEX'                         => esc_html__('Z-Index', 'stachethemes-seat-planner-lite'),
             'OBJECTS_COPIED'                 => esc_html__('Objects Copied', 'stachethemes-seat-planner-lite'),
             'OBJECTS_PASTED'                 => esc_html__('Objects Pasted', 'stachethemes-seat-planner-lite'),
@@ -195,6 +196,10 @@ class Translation {
             'BACK_TO_EDIT_PRODUCT_PAGE'      => esc_html__('Back to Edit Product Page', 'stachethemes-seat-planner-lite'),
             'SCREEN_TOO_SMALL'               => esc_html__('Sorry, the editor is optimized for desktop devices with larger screens only.', 'stachethemes-seat-planner-lite'),
             'ROUND_CORNERS'                  => esc_html__('Round Corners', 'stachethemes-seat-planner-lite'),
+            'TEXT_DIRECTION'                 => esc_html__('Text Direction', 'stachethemes-seat-planner-lite'),
+            'TEXT_DIR_HORIZONTAL'            => esc_html__('Horizontal', 'stachethemes-seat-planner-lite'),
+            'TEXT_DIR_VERTICAL_UPRIGHT'      => esc_html__('Vertical (Upright)', 'stachethemes-seat-planner-lite'),
+            'TEXT_DIR_ROTATED_CW'            => esc_html__('Vertical (Sideways)', 'stachethemes-seat-planner-lite'),
             'BACKGROUND_IMAGE'               => esc_html__('Background Image', 'stachethemes-seat-planner-lite'),
             'ADD_IMAGE'                      => esc_html__('Add Image', 'stachethemes-seat-planner-lite'),
             'SELECT_BACKGROUND_IMAGE'        => esc_html__('Select Background Image', 'stachethemes-seat-planner-lite'),
@@ -216,6 +221,34 @@ class Translation {
             'CYCLE_A_TO_C_THEN_REPEAT'       => esc_html__('Cycle A to C then repeat', 'stachethemes-seat-planner-lite'),
             'CYCLE_1_TO_3_THEN_REPEAT'       => esc_html__('Cycle 1 to 3 then repeat', 'stachethemes-seat-planner-lite'),
             'REPEAT_LETTERS_WITH_CYCLING_NUMBERS' => esc_html__('Repeat letters with cycling numbers', 'stachethemes-seat-planner-lite'),
+            'COPY_SELECTED_OBJECTS'             => esc_html__('Copy Selected Objects', 'stachethemes-seat-planner-lite'),
+            'PASTE_SELECTED_OBJECTS'            => esc_html__('Paste Selected Objects', 'stachethemes-seat-planner-lite'),
+
+            // Pattern Builder
+            'PATTERN_BUILDER'                   => esc_html__('Pattern Builder', 'stachethemes-seat-planner-lite'),
+            'QUICK_PATTERNS'                    => esc_html__('Quick Patterns', 'stachethemes-seat-planner-lite'),
+            'CUSTOM_PATTERN'                    => esc_html__('Custom Pattern', 'stachethemes-seat-planner-lite'),
+            'PREFIX'                            => esc_html__('Prefix', 'stachethemes-seat-planner-lite'),
+            'SUFFIX'                            => esc_html__('Suffix', 'stachethemes-seat-planner-lite'),
+            'SEGMENT'                           => esc_html__('Segment', 'stachethemes-seat-planner-lite'),
+            'REMOVE'                            => esc_html__('Remove', 'stachethemes-seat-planner-lite'),
+            'SEPARATOR'                         => esc_html__('Separator', 'stachethemes-seat-planner-lite'),
+            'TYPE'                              => esc_html__('Type', 'stachethemes-seat-planner-lite'),
+            'START'                             => esc_html__('Start', 'stachethemes-seat-planner-lite'),
+            'MODE'                              => esc_html__('Mode', 'stachethemes-seat-planner-lite'),
+            'SIMPLE'                            => esc_html__('Simple', 'stachethemes-seat-planner-lite'),
+            'REPEAT_EACH'                       => esc_html__('Repeat Each', 'stachethemes-seat-planner-lite'),
+            'CYCLE'                             => esc_html__('Cycle', 'stachethemes-seat-planner-lite'),
+            'RANGE'                             => esc_html__('Range', 'stachethemes-seat-planner-lite'),
+            'TIMES'                             => esc_html__('Times', 'stachethemes-seat-planner-lite'),
+            'ADD_SEGMENT'                       => esc_html__('Add Segment', 'stachethemes-seat-planner-lite'),
+            'PREVIEW'                           => esc_html__('Preview', 'stachethemes-seat-planner-lite'),
+            'MORE'                              => esc_html__('more', 'stachethemes-seat-planner-lite'),
+            'ITEMS_SELECTED'                    => esc_html__('items selected', 'stachethemes-seat-planner-lite'),
+            'CANCEL'                            => esc_html__('Cancel', 'stachethemes-seat-planner-lite'),
+            'APPLY_PATTERN'                     => esc_html__('Apply Pattern', 'stachethemes-seat-planner-lite'),
+            'SELECT'                            => esc_html__('Select', 'stachethemes-seat-planner-lite'),
+            'AUTO_INCREMENT'                    => esc_html__('Auto Increment', 'stachethemes-seat-planner-lite'),
 
             // Discounts
             'DISCOUNTS_NOT_AVAILABLE_FOR_LITE_VERSION' => esc_html__('Discounts are not available for the Lite version', 'stachethemes-seat-planner-lite'),
@@ -224,6 +257,7 @@ class Translation {
             'GROUP_NAME'                     => esc_html__('Group Name', 'stachethemes-seat-planner-lite'),
             'SEAT_GROUP'                     => esc_html__('Seat Group', 'stachethemes-seat-planner-lite'),
             'MANAGE_DISCOUNTS'               => esc_html__('Manage Discounts', 'stachethemes-seat-planner-lite'),
+            'DISCOUNTS_SUBTITLE'             => esc_html__('Add discounts to your seat plan. You can add discounts for specific seat groups or all seats.', 'stachethemes-seat-planner-lite'),
             'ADD_DISCOUNT'                   => esc_html__('Add Discount', 'stachethemes-seat-planner-lite'),
             'DISCOUNT_NAME'                  => esc_html__('Discount Name', 'stachethemes-seat-planner-lite'),
             'DISCOUNT_VALUE'                 => esc_html__('Discount Value', 'stachethemes-seat-planner-lite'),
@@ -233,8 +267,11 @@ class Translation {
             'ALL_SEATS'                      => esc_html__('All Seats', 'stachethemes-seat-planner-lite'),
 
             'IMPORT_SEAT_PLAN'               => esc_html__('Import Seat Plan', 'stachethemes-seat-planner-lite'),
-            'IMPORT_SEAT_PLAN_DESC'          => esc_html__('Select a CSV file to import a seat plan.', 'stachethemes-seat-planner-lite'),
+            'IMPORT_SEAT_PLAN_DESC'          => esc_html__('Upload a CSV file to import your seat plan layout. The file should contain seat positions and properties.', 'stachethemes-seat-planner-lite'),
             'IMPORT'                         => esc_html__('Import', 'stachethemes-seat-planner-lite'),
+            'DROP_CSV_FILE_HERE_OR'          => esc_html__('Drop your CSV file here, or', 'stachethemes-seat-planner-lite'),
+            'BROWSE'                         => esc_html__('browse', 'stachethemes-seat-planner-lite'),
+            'SUPPORTS_CSV_FILES'             => esc_html__('Supports .csv files only', 'stachethemes-seat-planner-lite'),
 
             // translators: %d: number of objects imported
             'D_OBJECTS_IMPORTED'             => esc_html__('%d Objects Imported', 'stachethemes-seat-planner-lite'),
@@ -262,7 +299,7 @@ class Translation {
             'ORDER_STATUS'                    => esc_html__('Order Status', 'stachethemes-seat-planner-lite'),
             'PRODUCT_NAME'                    => esc_html__('Product Name', 'stachethemes-seat-planner-lite'),
             'SEAT_ID'                         => esc_html__('Seat Id', 'stachethemes-seat-planner-lite'),
-            'SEAT_PRICE'                      => esc_html__('Price', 'stachethemes-seat-planner-lite'),
+            'SEAT_PRICE'                      => esc_html__('Seat Price', 'stachethemes-seat-planner-lite'),
             'DATE_TIME'                       => esc_html__('Date and Time', 'stachethemes-seat-planner-lite'),
             'EXPORT_BOOKINGS_LOADING'         => esc_html__('Loading bookings...', 'stachethemes-seat-planner-lite'),
             'EXPORT_BOOKINGS_SUCCESS'         => esc_html__('Bookings exported successfully.', 'stachethemes-seat-planner-lite'),
@@ -283,6 +320,9 @@ class Translation {
             'ADD_DATE_AND_TIME'                    => esc_html__('Add Date and Time', 'stachethemes-seat-planner-lite'),
             'DATE_AND_TIME'                        => esc_html__('Date and Time', 'stachethemes-seat-planner-lite'),
             'DATES_NOT_AVAILABLE_FOR_LITE_VERSION' => esc_html__('Dates are not available for the Lite version', 'stachethemes-seat-planner-lite'),
+
+            'SEAT_PLANNER_EDITOR_HEAD'         => esc_html__('Seat Planner Editor', 'stachethemes-seat-planner-lite'),
+            'SEAT_PLANNER_EDITOR_SUBTITLE'     => esc_html__('Customize your seat plan layout and properties. You can add seats, screens, text, and more.', 'stachethemes-seat-planner-lite'),
         ];
     }
 

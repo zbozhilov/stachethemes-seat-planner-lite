@@ -13,7 +13,7 @@ const InputColor = (props: InputColorProps) => {
     const previewRef = useRef<HTMLDivElement>(null);
     const pendingColor = useRef<string>(props.value);
     const classNameArray = ['stachesepl-input-color'];
-    const portalNode = document.getElementsByClassName('stachesepl-sesat-planner-editor-portal');
+    const portalNode = document.getElementsByClassName('stachesepl-seat-planner-editor-portal');
 
     const handlePreviewClick = () => {
         setShowColorPicker(!showColorPicker);

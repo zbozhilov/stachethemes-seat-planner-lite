@@ -8,6 +8,7 @@ import Size from "../features/Size/Size"
 import PropertiesContent from "../PropertiesContent/PropertiesContent"
 import Color from "../features/Color/Color"
 import Zindex from "../features/Zindex/Zindex"
+import TextDirection from "../features/TextDirection/TextDirection"
 
 const TextProperties = (props: {
     objects: TextObjectProps[]
@@ -21,6 +22,7 @@ const TextProperties = (props: {
                 <Zindex objects={props.objects} />
                 <Label objects={props.objects} />
                 <FontSize objects={props.objects} />
+                <TextDirection objects={props.objects} />
                 <Color objects={props.objects} />
             </PropertiesContent>
         </>

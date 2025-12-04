@@ -1,5 +1,5 @@
-import React, { useRef } from 'react';
-import { useEditorObjects, useEditorSeatDisplayLabel, useWorkflowProps } from '../../hooks';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
+import { useEditorGridGap, useEditorObjects, useEditorSeatDisplayLabel, useWorkflowProps } from '../../hooks';
 import Generic from './components/Objects/Generic/Generic';
 import Screen from './components/Objects/Screen/Screen';
 import Seat from './components/Objects/Seat/Seat';
@@ -8,11 +8,31 @@ import { useCopyPaste, useDeleteAndEscapeKey, useGrid, useHistory, useMarquee, u
 import './Workflow.scss';
 import { __ } from '@src/utils';
 
+type SeatDisplayLabelType = 'label' | 'price' | 'seatid' | 'group' | 'status';
+
+const DISPLAY_LABEL_OPTIONS: { value: SeatDisplayLabelType; label: string }[] = [
+    { value: 'seatid', label: 'SEAT_ID' },
+    { value: 'label', label: 'SEAT_LABEL' },
+    { value: 'price', label: 'SEAT_PRICE' },
+    { value: 'group', label: 'SEAT_GROUP' },
+    { value: 'status', label: 'SEAT_STATUS' },
+];
+
 const Workflow = () => {
 
     const { objects, getSeatsWithDuplicateSeatIds } = useEditorObjects();
     const workflowRef = useRef<HTMLDivElement | null>(null);
-    const { workflowProps } = useWorkflowProps();
+    const { workflowProps, setWorkflowProps } = useWorkflowProps();
+    const { gridGap } = useEditorGridGap();
+
+    // Resize state
+    const [isResizing, setIsResizing] = useState(false);
+    const [resizeDimensions, setResizeDimensions] = useState<{ width: number; height: number } | null>(null);
+    const latestDimensionsRef = useRef<{ width: number; height: number } | null>(null);
+
+    // Display label dropdown state
+    const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+    const dropdownRef = useRef<HTMLDivElement | null>(null);
 
     useMarquee(workflowRef);
     useGrid(workflowRef);
@@ -21,30 +41,102 @@ const Workflow = () => {
     useHistory();
     useToggleSeatLabelDisplay();
 
-    const { seatDisplayLabel } = useEditorSeatDisplayLabel();
+    const { seatDisplayLabel, setSeatDisplayLabel } = useEditorSeatDisplayLabel();
 
-    const workflowStyle: React.CSSProperties = {
-        width: workflowProps.width,
-        height: workflowProps.height,
-    }
+    // Close dropdown when clicking outside
+    useEffect(() => {
+        const handleClickOutside = (event: MouseEvent) => {
+            if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
+                setIsDropdownOpen(false);
+            }
+        };
 
-    const getDisplayLabel = (seatDisplayLabel: "label" | "price" | "seatid" | "group" | "status") => {
-
-        switch (seatDisplayLabel) {
-            case 'label': return __('SEAT_LABEL')
-            case 'price': return __('SEAT_PRICE')
-            case 'seatid': return __('SEAT_ID')
-            case 'group': return __('SEAT_GROUP')
-            case 'status': return __('SEAT_STATUS')
-            default: ''
+        if (isDropdownOpen) {
+            document.addEventListener('mousedown', handleClickOutside);
         }
 
+        return () => {
+            document.removeEventListener('mousedown', handleClickOutside);
+        };
+    }, [isDropdownOpen]);
+
+    const handleSelectDisplayLabel = useCallback((value: SeatDisplayLabelType) => {
+        setSeatDisplayLabel(value);
+        setIsDropdownOpen(false);
+    }, [setSeatDisplayLabel]);
+
+    // Snap value to grid
+    const snapToGrid = useCallback((value: number) => {
+        return Math.round(value / gridGap) * gridGap;
+    }, [gridGap]);
+
+    const handleResizeStart = useCallback((e: React.MouseEvent) => {
+        e.preventDefault();
+        e.stopPropagation();
+        
+        const workflow = workflowRef.current;
+        if (!workflow) return;
+
+        setIsResizing(true);
+
+        const handleMouseMove = (moveEvent: MouseEvent) => {
+            if (!workflow) return;
+
+            // Get workflow's current bounding rect (updates as it resizes)
+            const rect = workflow.getBoundingClientRect();
+            
+            // Calculate size based on mouse position relative to workflow's top-left
+            const rawWidth = moveEvent.clientX - rect.left;
+            const rawHeight = moveEvent.clientY - rect.top;
+
+            // Snap to grid with minimum size
+            const newWidth = Math.max(300, snapToGrid(rawWidth));
+            const newHeight = Math.max(200, snapToGrid(rawHeight));
+
+            const newDimensions = { width: newWidth, height: newHeight };
+            latestDimensionsRef.current = newDimensions;
+            setResizeDimensions(newDimensions);
+        };
+
+        const handleMouseUp = () => {
+            setIsResizing(false);
+            
+            if (latestDimensionsRef.current) {
+                setWorkflowProps(prev => ({
+                    ...prev,
+                    width: latestDimensionsRef.current!.width,
+                    height: latestDimensionsRef.current!.height,
+                }));
+            }
+            
+            setResizeDimensions(null);
+            latestDimensionsRef.current = null;
+
+            document.removeEventListener('mousemove', handleMouseMove);
+            document.removeEventListener('mouseup', handleMouseUp);
+        };
+
+        document.addEventListener('mousemove', handleMouseMove);
+        document.addEventListener('mouseup', handleMouseUp);
+    }, [setWorkflowProps, snapToGrid]);
+
+    const currentWidth = resizeDimensions?.width ?? workflowProps.width;
+    const currentHeight = resizeDimensions?.height ?? workflowProps.height;
+
+    const workflowStyle: React.CSSProperties = {
+        width: currentWidth,
+        height: currentHeight,
+    }
+
+    const getDisplayLabel = (value: SeatDisplayLabelType) => {
+        const option = DISPLAY_LABEL_OPTIONS.find(opt => opt.value === value);
+        return option ? __(option.label) : '';
     }
 
     const seatsWithErrors = getSeatsWithDuplicateSeatIds();
 
     return (
-        <div className='stachesepl-workflow-wrapper' style={{
+        <div className={`stachesepl-workflow-wrapper${isResizing ? ' is-resizing' : ''}`} style={{
             backgroundColor: workflowProps.backgroundColor
         }}>
 
@@ -57,11 +149,33 @@ const Workflow = () => {
                 }}
             ></div>
 
-            {
-                seatDisplayLabel !== 'label' && <div className='stachesepl-seat-display-label-tag'>
-                    {__('DISPLAY_LABEL')}: {getDisplayLabel(seatDisplayLabel)}
+            <div 
+                className={`stachesepl-seat-display-label-dropdown${isDropdownOpen ? ' is-open' : ''}`}
+                ref={dropdownRef}
+            >
+                <div 
+                    className='stachesepl-seat-display-label-tag'
+                    onClick={() => setIsDropdownOpen(prev => !prev)}
+                    title={__('CLICK_TO_CHANGE_DISPLAY_LABEL')}
+                >
+                    {getDisplayLabel(seatDisplayLabel)}
+                    <span className='stachesepl-seat-display-label-arrow'>▾</span>
                 </div>
-            }
+                
+                {isDropdownOpen && (
+                    <div className='stachesepl-seat-display-label-menu'>
+                        {DISPLAY_LABEL_OPTIONS.map(option => (
+                            <div
+                                key={option.value}
+                                className={`stachesepl-seat-display-label-option${seatDisplayLabel === option.value ? ' is-active' : ''}`}
+                                onClick={() => handleSelectDisplayLabel(option.value)}
+                            >
+                                {__(option.label)}
+                            </div>
+                        ))}
+                    </div>
+                )}
+            </div>
 
             <div className='stachesepl-workflow' ref={workflowRef} style={workflowStyle}>
                 {
@@ -88,7 +202,21 @@ const Workflow = () => {
 
                     })
                 }
+
+                {/* Resize handle */}
+                <div 
+                    className='stachesepl-workflow-resize-handle'
+                    onMouseDown={handleResizeStart}
+                    title={__('RESIZE_WORKFLOW')}
+                />
             </div>
+
+            {/* Resize dimensions tooltip */}
+            {isResizing && resizeDimensions && (
+                <div className='stachesepl-workflow-resize-tooltip'>
+                    {Math.round(resizeDimensions.width)} × {Math.round(resizeDimensions.height)}
+                </div>
+            )}
         </div>
     )
 }
