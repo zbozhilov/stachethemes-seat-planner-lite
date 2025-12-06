@@ -16,7 +16,7 @@ function stachesepl_add_to_cart_shortcode($atts) {
     $product = wc_get_product($product_id);
 
     // test if it is auditorium product
-    if (!$product->get_type() === 'auditorium') {
+    if ($product->get_type() !== 'auditorium') {
         return '';
     }
 
