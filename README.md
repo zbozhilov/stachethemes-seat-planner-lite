@@ -1,6 +1,6 @@
 # Stachethemes Seat Planner Lite
 
-**Tags:** WooCommerce, Seat, Planner, Theatre, Cinema  
+**Tags:** WooCommerce, Seat, Booking, Event, Venue  
 **Requires:** 6.7  
 **Tested up to:** 6.9
 **Requires PHP:** 8.2  
