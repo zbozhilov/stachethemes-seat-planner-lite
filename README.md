@@ -4,7 +4,7 @@
 **Requires:** 6.7  
 **Tested up to:** 6.9
 **Requires PHP:** 8.2  
-**Stable tag:** 1.0.33  
+**Stable tag:** 1.0.34  
 **License:** GPLv2 or later  
 **WC requires at least:** 9.5  
 **WC tested up to:** 10 
@@ -44,6 +44,9 @@ Easily create and manage seating arrangements for events, venues, or any seat-ba
 https://github.com/zbozhilov/stachethemes-seat-planner-lite
 
 ## Changelog
+
+### 1.0.34
+- Bug fix where product can be incorrectly flagged as Unavailable
 
 ### 1.0.33
 

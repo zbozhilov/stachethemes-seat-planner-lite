@@ -107,7 +107,7 @@ class Auditorium_Product extends \WC_Product {
             return false;
         }
 
-        return $this->has_free_seats();
+        return true;
     }
 
     public function has_available_dates() {
@@ -259,32 +259,6 @@ class Auditorium_Product extends \WC_Product {
         });
 
         return $seats;
-    }
-
-    public function get_available_seats_count() {
-
-        $available_seats = $this->get_available_seats();
-
-        if (!is_array($available_seats)) {
-            return 0;
-        }
-
-        return count($available_seats);
-    }
-
-    public function get_taken_seats_count() {
-
-        $taken_seats = $this->get_taken_seats();    
-
-        if (!is_array($taken_seats)) {
-            return 0;
-        }
-
-        return count($taken_seats);
-    }
-
-    public function has_free_seats() {
-        return $this->get_available_seats_count() > $this->get_taken_seats_count();
     }
 
     public function add_to_cart($seat_id, $discount = '', $selected_date = '') {
