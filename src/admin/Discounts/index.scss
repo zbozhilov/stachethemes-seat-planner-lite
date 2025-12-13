@@ -1,3 +1,9 @@
 #stachesepl-seat-planner-discounts {
     
 }
+
+.st_seat_planner_discounts_options {
+    a:before {
+        content: "\f323" !important;
+    }
+}

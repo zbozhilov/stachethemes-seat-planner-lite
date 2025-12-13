@@ -3,7 +3,7 @@ import React from 'react';
 import Dates from './components/Dates/Dates';
 import { dateData } from './components/Dates/types';
 import './index.scss';
-import Toaster from './components/Toaster/Toaster';
+import Toaster from '../CommonUI/Toaster/Toaster';
 
 const appInstance = document.getElementById('stachesepl-seat-planner-dates') as HTMLDivElement;
 const inputData = document.getElementById('stachesepl-seat-planner-dates-data') as HTMLInputElement;

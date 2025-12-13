@@ -2,7 +2,7 @@ import Editor from '@src/admin/SeatPlanner/components/Editor/Editor';
 import { useEffect, useRef } from 'react';
 import { Portal } from 'react-portal';
 import './EditorModal.scss';
-import Toaster from '../../../Toaster/Toaster';
+import Toaster from '../../../../../CommonUI/Toaster/Toaster';
 
 const EditorModal = (props: {
     open: boolean;

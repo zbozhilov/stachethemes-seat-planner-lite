@@ -1,8 +1,9 @@
 import { __ } from '@src/utils';
-import Button from '../Button/Button';
 import './Dates.scss';
 import { dateData } from './types';
 import { toast } from 'react-hot-toast';
+import Container from '@src/admin/CommonUI/Container/Container';
+import Button from '@src/admin/CommonUI/Button/Button';
 
 const Dates = (props: {
     datesData: dateData[],
@@ -13,11 +14,10 @@ const Dates = (props: {
     }
 
     return (
-        <div className='stachesepl-seat-planner-dates'>
-
-            <h4 className='stachesepl-seat-planner-dates-head'>{__('MANAGE_DATES_AND_TIMES')}</h4>
-            <p className='stachesepl-seat-planner-dates-subtitle'>{__('MANAGE_DATES_AND_TIMES_DESC')}</p>
-
+        <Container
+            className='stachesepl-seat-planner-dates'
+            label={__('MANAGE_DATES_AND_TIMES')}
+            description={__('MANAGE_DATES_AND_TIMES_DESC')}>
             <ul>
             </ul>
 
@@ -25,7 +25,7 @@ const Dates = (props: {
                 {__('ADD_DATE_AND_TIME')}
             </Button>
 
-        </div >
+        </Container>
     )
 }
 

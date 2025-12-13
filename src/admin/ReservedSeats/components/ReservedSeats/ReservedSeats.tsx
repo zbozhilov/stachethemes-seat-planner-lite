@@ -1,7 +1,8 @@
 import { Close as Delete } from '@mui/icons-material';
+import Button from '@src/admin/CommonUI/Button/Button';
+import Container from '@src/admin/CommonUI/Container/Container';
 import { __, getFormattedDateTime } from '@src/utils';
 import { useEffect, useState } from 'react';
-import Button from '../Button/Button';
 import './ReservedSeats.scss';
 
 const ReservedSeats = (props: {
@@ -62,17 +63,14 @@ const ReservedSeats = (props: {
     const groupsCount = Object.keys(reservedSeats).length;
 
     return (
-        <div className='stachesepl-seat-planner-reserved-seats'>
-
-            <h4 className='stachesepl-seat-planner-reserved-seats-head'>{__('RESERVED_SEATS_IN_CARTS')}</h4>
-            <p className='stachesepl-seat-planner-reserved-seats-subtitle'>{__('RESERVED_SEATS_IN_CARTS_DESC')}</p>
+        <Container label={__('RESERVED_SEATS_IN_CARTS')} description={__('RESERVED_SEATS_IN_CARTS_DESC')} className='stachesepl-seat-planner-reserved-seats'>
 
             {
                 totalSeatsCount === 0 && <div className='stachesepl-seat-planner-reserved-seats-note'>
                     {__('LIST_IS_EMPTY')}
                 </div>
             }
-            
+
             <div className={`stachesepl-seat-planner-reserved-seats-groups ${groupsCount <= 1 ? 'stachesepl-seat-planner-reserved-seats-groups-single' : ''}`}>
                 {Object.entries(reservedSeats).map(([timeSlot, seats]) => (
                     <div key={timeSlot} className='stachesepl-seat-planner-reserved-seats-group'>
@@ -106,7 +104,7 @@ const ReservedSeats = (props: {
             }
 
 
-        </div >
+        </Container>
     )
 }
 

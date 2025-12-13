@@ -1,8 +1,9 @@
 import { __ } from '@src/utils';
-import Button from '../Button/Button';
+import Button from '@src/admin/CommonUI/Button/Button';
 import './Discounts.scss';
 import { discountData } from './types';
 import toast from 'react-hot-toast';
+import Container from '@src/admin/CommonUI/Container/Container';
 
 const Discounts = (props: {
     discountsData: discountData[],
@@ -13,10 +14,7 @@ const Discounts = (props: {
     }
 
     return (
-        <div className='stachesepl-seat-planner-discounts'>
-
-            <h4 className='stachesepl-seat-planner-discounts-head'>{__('MANAGE_DISCOUNTS')}</h4>
-            <p className='stachesepl-seat-planner-discounts-subtitle'>{__('DISCOUNTS_SUBTITLE')}</p>
+        <Container label={__('MANAGE_DISCOUNTS')} description={__('DISCOUNTS_SUBTITLE')} className='stachesepl-seat-planner-discounts'>
 
             <ul>
             </ul>
@@ -25,7 +23,7 @@ const Discounts = (props: {
                 {__('ADD_DISCOUNT')}
             </Button>
 
-        </div >
+        </Container>
     )
 }
 

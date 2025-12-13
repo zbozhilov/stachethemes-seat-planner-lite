@@ -50,6 +50,28 @@ class Auditorium_Product_Scripts {
             $seat_planner_reserved_seats_deps['version']
         );
 
+          // Custom fields assets
+
+          $seat_planner_custom_fields_deps = require_once STACHETHEMES_SEAT_PLANNER_LITE_PLUGIN_DIR . 'assets/admin/custom_fields/index.bundle.asset.php';
+
+          wp_enqueue_script(
+              'seat-planner-custom-fields',
+              STACHETHEMES_SEAT_PLANNER_LITE_PLUGIN_URL . '/assets/admin/custom_fields/index.bundle.js',
+              $seat_planner_custom_fields_deps['dependencies'],
+              $seat_planner_custom_fields_deps['version'],
+              [
+                  'strategy' => 'defer'
+              ]
+          );
+  
+          wp_enqueue_style(
+              'seat-planner-custom-fields',
+              STACHETHEMES_SEAT_PLANNER_LITE_PLUGIN_URL . '/assets/admin/custom_fields/index.css',
+              [],
+              $seat_planner_custom_fields_deps['version']
+          );
+
+
         // Dates assets
 
         $seat_planner_dates_deps = require_once STACHETHEMES_SEAT_PLANNER_LITE_PLUGIN_DIR . 'assets/admin/dates/index.bundle.asset.php';

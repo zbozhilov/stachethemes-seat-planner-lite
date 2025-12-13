@@ -2,23 +2,26 @@ import React from 'react'
 import './Button.scss'
 
 const Button = (props: {
+    className?: string
     onClick: () => void
     disabled?: boolean
     children: React.ReactNode
 }) => {
 
     const handleClick = () => {
-
-        if (!props.disabled) {
-            props.onClick()
+        if (props.disabled) {
+            return;
         }
-
+        props.onClick();
     }
-    
-    const classNameArray = ['stachesepl-export-bookings-button'];
 
+    const classNameArray = ['stachesepl-admin-button'];
     if (props.disabled) {
-        classNameArray.push('disabled');
+        classNameArray.push('stachesepl-admin-button-disabled');
+    }
+
+    if (props.className) {
+        classNameArray.push(props.className);
     }
 
     return (
@@ -29,3 +32,4 @@ const Button = (props: {
 }
 
 export default Button
+

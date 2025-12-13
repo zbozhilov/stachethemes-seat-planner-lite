@@ -1,7 +1,7 @@
 import { __ } from '@src/utils';
 import { useState } from 'react';
 import toast from 'react-hot-toast';
-import Button from '../Button/Button';
+import Button from '@src/admin/CommonUI/Button/Button';
 import './Form.scss';
 
 const AVAILABLE_FIELDS = [
@@ -15,6 +15,7 @@ const AVAILABLE_FIELDS = [
     { id: 'seat_id', label: 'SEAT_ID' },
     { id: 'date_time', label: 'DATE_TIME' },
     { id: 'seat_price', label: 'SEAT_PRICE' },
+    { id: 'custom_fields', label: 'EXPORT_CUSTOM_FIELDS' },
 ];
 
 const Form = () => {

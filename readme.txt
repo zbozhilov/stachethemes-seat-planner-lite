@@ -3,7 +3,7 @@ Tags: WooCommerce, Seat, Booking, Event, Venue
 Requires: 6.7
 Tested up to: 6.9
 Requires PHP: 8.2
-Stable tag: 1.0.32
+Stable tag: 1.0.33
 License: GPLv2 or later
 WC requires at least: 9.5
 WC tested up to: 10
@@ -29,8 +29,9 @@ Easily create and manage seating arrangements for events, venues, or any seat-ba
 
 Upgrade to **Stachethemes Seat Planner Premium** for advanced features:
 
-- **Seat Discounts**: Offer fixed or percentage-based discounts.
+- **Seat Discounts**: Offer fixed or percentage-based discounts. Option to restrict specific discounts to selected user roles.
 - **Date Selection**: Option to select date & time for each individual product.
+- **Custom Fields**: Assign additional free or paid features to individual seats via custom fields. 
 - **PDF Ticket Attachments**: Attach ticket details & QR Code as a PDF file to the "Order Completed" email.
 - **CSV Import & Export Layouts**: Import and export seat layouts in CSV format.
 - **CSV Booking Export**: Exports booking data for each reserved seat in CSV format.
@@ -39,7 +40,7 @@ Upgrade to **Stachethemes Seat Planner Premium** for advanced features:
 [See all features](https://stachethemes.com/seat-planner/features/)
 
 == Video Demonstration ==
-[Watch the demo](https://www.youtube.com/watch?v=cDcv1Mnhwyk)
+[Watch the demo](https://www.youtube.com/watch?v=o9GExwX6OEo)
 
 == Installation ==
 
@@ -64,6 +65,10 @@ Upgrade to **Stachethemes Seat Planner Premium** for advanced features:
 - [React Zoom Pan Pinch](https://www.npmjs.com/package/react-zoom-pan-pinch)
 
 == Changelog ==
+
+= 1.0.33 =
+- Bug fix where deleting a draft order can accidentally release slot reservation
+- Other minor bug fixes
 
 = 1.0.32 =
 - UI/UX improvements

@@ -4,7 +4,7 @@
 **Requires:** 6.7  
 **Tested up to:** 6.9
 **Requires PHP:** 8.2  
-**Stable tag:** 1.0.32  
+**Stable tag:** 1.0.33  
 **License:** GPLv2 or later  
 **WC requires at least:** 9.5  
 **WC tested up to:** 10 
@@ -44,6 +44,11 @@ Easily create and manage seating arrangements for events, venues, or any seat-ba
 https://github.com/zbozhilov/stachethemes-seat-planner-lite
 
 ## Changelog
+
+### 1.0.33
+
+- Bug fix where deleting a draft order can accidentally release slot reservation
+- Other minor bug fixes
 
 ### 1.0.32
 

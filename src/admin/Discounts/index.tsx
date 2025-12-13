@@ -1,7 +1,7 @@
 import { createRoot } from '@wordpress/element';
 import React from 'react';
 import Discounts from './components/Discounts/Discounts';
-import Toaster from './components/Toaster/Toaster';
+import Toaster from '../CommonUI/Toaster/Toaster';
 import { discountData } from './components/Discounts/types';
 import './index.scss';
 

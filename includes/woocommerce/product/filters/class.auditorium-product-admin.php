@@ -78,6 +78,13 @@ class Auditorium_Product_Admin {
             'priority' => 21,
         ];
 
+        $tabs['st_seat_planner_custom_fields'] = [
+            'label'    => esc_html__('Custom Fields', 'stachethemes-seat-planner-lite'),
+            'target'   => 'st_seat_planner_custom_fields_options',
+            'class'    => ['show_if_auditorium'],
+            'priority' => 21,
+        ];
+
         $tabs['st_seat_planner_reserved'] = [
             'label'    => esc_html__('In-Cart Seats', 'stachethemes-seat-planner-lite')
 ,
@@ -119,6 +126,7 @@ class Auditorium_Product_Admin {
         $seat_planner_discounts_data = $is_auditorium_product ? $product->get_discounts_data() : [];
         $seat_planner_dates_data     = $is_auditorium_product ? $product->get_dates_data() : [];
         $seat_planner_reserved_seats = Slot_Reservation::get_product_reserved_seats($product);
+        $seat_planner_custom_fields_data = [];
 
         ob_start(); ?>
 
@@ -289,6 +297,17 @@ class Auditorium_Product_Admin {
             </div>
         </div>
 
+        <div id="st_seat_planner_custom_fields_options" class="panel woocommerce_options_panel hidden">
+            <div class="options_group">
+                <div id="stachesepl-seat-planner-custom-fields"></div>
+                <input
+                    id="stachesepl-seat-planner-custom-fields-data"
+                    type="hidden"
+                    name="stachesepl_seat_planner_custom_fields_data"
+                    value="<?php echo esc_attr(wp_json_encode($seat_planner_custom_fields_data)); ?>">
+            </div>
+        </div>
+        
         <div id="st_seat_planner_reserved_options" class="panel woocommerce_options_panel hidden">
             <div class="options_group">
                 <div id="stachesepl-seat-planner-reserved-seats"></div>

@@ -262,11 +262,25 @@ class Auditorium_Product extends \WC_Product {
     }
 
     public function get_available_seats_count() {
-        return count($this->get_available_seats());
+
+        $available_seats = $this->get_available_seats();
+
+        if (!is_array($available_seats)) {
+            return 0;
+        }
+
+        return count($available_seats);
     }
 
     public function get_taken_seats_count() {
-        return count($this->get_taken_seats());
+
+        $taken_seats = $this->get_taken_seats();    
+
+        if (!is_array($taken_seats)) {
+            return 0;
+        }
+
+        return count($taken_seats);
     }
 
     public function has_free_seats() {

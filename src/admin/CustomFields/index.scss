@@ -1,0 +1,12 @@
+#stachesepl-seat-planner-custom-fields {
+    
+}
+
+.st_seat_planner_custom_fields_options {
+    a {
+        &:before {
+            content: "\f123" !important;
+        }
+    }
+}
+

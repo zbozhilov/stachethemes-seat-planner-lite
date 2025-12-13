@@ -1,16 +1,15 @@
 import { createRoot } from '@wordpress/element';
 import React from 'react';
 import './index.scss';
-import Form from './components/Form/Form';
+import CustomFields from './components/CustomFields/CustomFields';
 import Toaster from '../CommonUI/Toaster/Toaster';
-
-const appInstance = document.getElementById('stachesepl-export-bookings') as HTMLDivElement;
+const appInstance = document.getElementById('stachesepl-seat-planner-custom-fields') as HTMLDivElement;
 
 const app = createRoot(appInstance);
 
 app.render(
     <React.StrictMode>
         <Toaster />
-        <Form />
+        <CustomFields />
     </React.StrictMode>
 );
