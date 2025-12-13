@@ -2,14 +2,14 @@
 # This file is distributed under the GNU General Public License v2 or later.
 msgid ""
 msgstr ""
-"Project-Id-Version: Stachethemes Seat Planner Lite 1.0.33\n"
+"Project-Id-Version: Stachethemes Seat Planner Lite 1.0.34\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/stachethemes-seat-planner-lite\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2025-12-13T19:22:32+00:00\n"
+"POT-Creation-Date: 2025-12-13T20:05:51+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.11.0\n"
 "X-Domain: stachethemes-seat-planner-lite\n"
@@ -1428,23 +1428,23 @@ msgid "Read more"
 msgstr ""
 
 #. translators: %s: seat id
-#: includes/woocommerce/product/class.auditorium-product.php:294
+#: includes/woocommerce/product/class.auditorium-product.php:268
 msgid "Seat %s is already taken"
 msgstr ""
 
 #. translators: %s: seat id
-#: includes/woocommerce/product/class.auditorium-product.php:303
+#: includes/woocommerce/product/class.auditorium-product.php:277
 #: includes/woocommerce/product/filters/class.auditorium-product-cart-validation.php:118
 msgid "Seat %s is unavailable"
 msgstr ""
 
 #. translators: %s: seat id
-#: includes/woocommerce/product/class.auditorium-product.php:308
+#: includes/woocommerce/product/class.auditorium-product.php:282
 #: includes/woocommerce/product/filters/class.auditorium-product-cart-validation.php:129
 msgid "Seat %s can only be purchased at the venue."
 msgstr ""
 
-#: includes/woocommerce/product/class.auditorium-product.php:312
+#: includes/woocommerce/product/class.auditorium-product.php:286
 msgid "Seat not found"
 msgstr ""
 
