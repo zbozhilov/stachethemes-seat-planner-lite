@@ -1,6 +1,6 @@
 import { useEditorGridEnabled, useEditorGridGap, useEditorObjects, useSelectObjects } from "@src/admin/SeatPlanner/components/Editor/hooks";
 import { isCtrlKey } from "@src/admin/SeatPlanner/components/utils";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, useMemo } from "react";
 import { hasBackgroundColor, isRounded, getTextDirectionStyles, WorkflowObject } from "./types";
 import { getFontSizeByType } from "./helpers";
 
@@ -19,11 +19,23 @@ export const useDraggable = (
     const { gridGap } = useEditorGridGap();
     const { gridEnabled } = useEditorGridEnabled();
 
-    // Check if any selected object is locked
-    const hasLockedSelection = selectedObjects.some(id => {
-        const obj = objects.find(o => o.id === id);
-        return obj?.locked;
-    });
+    // Fast lookup map id -> object
+    const objectById = useMemo(() => {
+        const map = new Map<number, WorkflowObject>();
+        objects.forEach(o => map.set(o.id, o));
+        return map;
+    }, [objects]);
+
+    // Check if any selected object is locked (now O(n))
+    const hasLockedSelection = useMemo(() => {
+        for (const id of selectedObjects) {
+            const obj = objectById.get(id);
+            if (obj?.locked) {
+                return true;
+            }
+        }
+        return false;
+    }, [selectedObjects, objectById]);
 
     const getSelectedSiblings = (element: HTMLElement) => {
         const parentContainer = element.parentElement;

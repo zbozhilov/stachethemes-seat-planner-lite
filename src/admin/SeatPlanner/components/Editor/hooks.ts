@@ -21,7 +21,7 @@ export const useEditorRef = () => {
 
 export const useWorkflowProps = () => {
     const context = useEditorContext();
-
+  
     return {
         workflowProps: context.workflowProps,
         setWorkflowProps: context.setWorkflowProps,
@@ -99,23 +99,33 @@ export const useEditorObjects = () => {
 }
 
 export const useSelectObjects = () => {
-
     const context = useEditorContext();
     const { selectedObjects, setSelectedObjects } = context;
-    const getIsSelected = (id: number) => selectedObjects.includes(id);
+
+    // O(1) membership checks instead of selectedObjects.includes
+    const selectedSet = useMemo(
+        () => new Set(selectedObjects),
+        [selectedObjects]
+    );
+
+    const getIsSelected = (id: number) => selectedSet.has(id);
 
     const setUniqueSelectedObjects = (
         updater: number[] | ((prevIds: number[]) => number[])
     ) => {
-        setSelectedObjects((prevIds) => {
+        setSelectedObjects(prevIds => {
             const newIds =
                 typeof updater === "function" ? updater(prevIds) : updater;
             return [...new Set(newIds)];
         });
     };
 
-    return { selectedObjects, getIsSelected, setSelectedObjects: setUniqueSelectedObjects };
-}
+    return {
+        selectedObjects,
+        getIsSelected,
+        setSelectedObjects: setUniqueSelectedObjects,
+    };
+};
 
 export const useEditorGridGap = () => {
 

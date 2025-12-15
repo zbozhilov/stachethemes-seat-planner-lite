@@ -128,21 +128,25 @@ export const useMarquee = (workflowRef: React.RefObject<HTMLDivElement | null>) 
 
             });
 
+            const overObjectIds = overObjects.map(object => object.id);
+            const overIdSet = new Set(overObjectIds);
+
             const isCtrlPressed = isCtrlKey(e);
             const isAltPressed = e.altKey;
 
             setSelectedObjects(prev => {
-
                 if (isAltPressed) {
-                    return prev.filter(id => !overObjects.map(object => object.id).includes(id));
+                    // Remove all covered ids from current selection
+                    return prev.filter(id => !overIdSet.has(id));
                 }
-
+            
                 if (isCtrlPressed) {
-                    return [...prev, ...overObjects.map(object => object.id)];
+                    // Add covered ids; de-dup will be handled by useSelectObjects
+                    return [...prev, ...overObjectIds];
                 }
-
-                return overObjects.map(object => object.id);
-
+            
+                // Replace selection
+                return overObjectIds;
             });
 
             marquee.remove();
