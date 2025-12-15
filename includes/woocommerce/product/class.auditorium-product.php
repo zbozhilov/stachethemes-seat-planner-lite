@@ -103,22 +103,22 @@ class Auditorium_Product extends \WC_Product {
             return false;
         }
 
-        if (! $this->has_available_dates()) {
+        if (! $this->has_available_seats()) {
             return false;
         }
 
         return true;
     }
 
-    public function has_available_dates() {
 
-        $has_any_dates = $this->get_dates_data();
-
-        if (empty($has_any_dates)) {
-            return true; // This product doesn't use dates
-        }
-
-        return !empty($this->get_available_dates());
+    /**
+     * Checks if this product has any available seats
+     * @return bool
+     */
+    public function has_available_seats(): bool {
+        // The lite version product don't have any dates, check if there are any available seats by default
+        $available_seats = $this->get_available_seats();
+        return empty($available_seats) ? false : true;
     }
 
     public function is_virtual() {
@@ -251,14 +251,16 @@ class Auditorium_Product extends \WC_Product {
             return false;
         }
 
-        // Filter out objects that are not seats or don't have a seat ID or has seat status 'unavailable'
         $seats = array_filter($seat_data->objects, function ($object) {
             return $object->type === 'seat' &&
                 !empty($object->seatId) &&
                 (!isset($object->status) || $object->status !== 'unavailable' && $object->status !== 'sold-out');
         });
 
-        return $seats;
+        $open_seat_ids_by_default = array_column($seats, 'seatId');
+        $taken_seats              = $this->get_taken_seats();
+        $available_seats          = array_diff($open_seat_ids_by_default, $taken_seats);
+        return $available_seats;
     }
 
     public function add_to_cart($seat_id, $discount = '', $selected_date = '') {
