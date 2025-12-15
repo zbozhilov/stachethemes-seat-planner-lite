@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react';
-import { useEditorGridGap, useEditorObjects, useEditorSeatDisplayLabel, useWorkflowProps } from '../../hooks';
+import { useEditorGridEnabled, useEditorGridGap, useEditorObjects, useEditorSeatDisplayLabel, useSelectObjects, useWorkflowProps } from '../../hooks';
 import Generic from './components/Objects/Generic/Generic';
 import Screen from './components/Objects/Screen/Screen';
 import Seat from './components/Objects/Seat/Seat';
@@ -21,9 +21,11 @@ const DISPLAY_LABEL_OPTIONS: { value: SeatDisplayLabelType; label: string }[] = 
 const Workflow = () => {
 
     const { objects, getSeatsWithDuplicateSeatIds } = useEditorObjects();
+    const { selectedObjects } = useSelectObjects();
     const workflowRef = useRef<HTMLDivElement | null>(null);
     const { workflowProps, setWorkflowProps } = useWorkflowProps();
     const { gridGap } = useEditorGridGap();
+    const { gridEnabled } = useEditorGridEnabled();
 
     // Resize state
     const [isResizing, setIsResizing] = useState(false);
@@ -67,8 +69,11 @@ const Workflow = () => {
 
     // Snap value to grid
     const snapToGrid = useCallback((value: number) => {
+        if (!gridEnabled) {
+            return value;
+        }
         return Math.round(value / gridGap) * gridGap;
-    }, [gridGap]);
+    }, [gridGap, gridEnabled]);
 
     const handleResizeStart = useCallback((e: React.MouseEvent) => {
         e.preventDefault();
@@ -90,8 +95,8 @@ const Workflow = () => {
             const rawHeight = moveEvent.clientY - rect.top;
 
             // Snap to grid with minimum size
-            const newWidth = Math.max(300, snapToGrid(rawWidth));
-            const newHeight = Math.max(200, snapToGrid(rawHeight));
+            const newWidth = Math.max(550, snapToGrid(rawWidth));
+            const newHeight = Math.max(550, snapToGrid(rawHeight));
 
             const newDimensions = { width: newWidth, height: newHeight };
             latestDimensionsRef.current = newDimensions;
@@ -133,10 +138,25 @@ const Workflow = () => {
         return option ? __(option.label) : '';
     }
 
+    const getWorkflowWrapperClassName = () => {
+        const classNameArray = [
+            'stachesepl-workflow-wrapper',
+            isResizing ? 'is-resizing' : '',
+        ];
+        
+        if (selectedObjects.length === 1) {
+            classNameArray.push('single-selected');
+        }   
+
+        return classNameArray.filter(Boolean).join(' ');
+    }
+
     const seatsWithErrors = getSeatsWithDuplicateSeatIds();
 
+    const workflowWrapperClassName = getWorkflowWrapperClassName();
+
     return (
-        <div className={`stachesepl-workflow-wrapper${isResizing ? ' is-resizing' : ''}`} style={{
+        <div className={workflowWrapperClassName} style={{
             backgroundColor: workflowProps.backgroundColor
         }}>
 

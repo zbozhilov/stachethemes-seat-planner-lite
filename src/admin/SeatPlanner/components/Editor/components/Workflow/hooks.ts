@@ -1,6 +1,7 @@
 import { isCtrlKey } from "@src/admin/SeatPlanner/components/utils";
-import { useEffect, useRef, useState } from "react";
-import { useEditorGridGap, useEditorObjects, useEditorSeatDisplayLabel, useSelectObjects } from "../../hooks";
+import { useEffect, useRef } from "react";
+import { useEditorGridColorIndex, useEditorGridEnabled, useEditorGridGap, useEditorGridOpacityIndex, useEditorObjects, useEditorSeatDisplayLabel, useSelectObjects } from "../../hooks";
+import { GRID_COLOR_VALUES, GRID_GAP_VALUES, GRID_OPACITY_VALUES, getNextInList, getPrevInList } from "../../grid";
 import { WorkflowObject } from "./components/Objects/types";
 import toast from "react-hot-toast";
 import { __ } from "@src/utils";
@@ -172,10 +173,10 @@ export const useMarquee = (workflowRef: React.RefObject<HTMLDivElement | null>) 
 
 export const useGrid = (workflowRef: React.RefObject<HTMLDivElement | null>) => {
 
-    const [enabled, setEnabled] = useState(true);
-    const [gridOpacityIndex, setGridOpacityIndex] = useState(0);
-    const [gridColorIndex, setGridColorIndex] = useState(1);
     const { gridGap, setGridGap } = useEditorGridGap();
+    const { gridEnabled, setGridEnabled } = useEditorGridEnabled();
+    const { gridOpacityIndex, setGridOpacityIndex } = useEditorGridOpacityIndex();
+    const { gridColorIndex, setGridColorIndex } = useEditorGridColorIndex();
 
     useEffect(() => {
 
@@ -185,10 +186,6 @@ export const useGrid = (workflowRef: React.RefObject<HTMLDivElement | null>) => 
             return;
         }
 
-        const opacityValues = [0.1, 0.2, 0.3, 0.4, 0.5];
-        const colorValues = ['0,0,0', '255,255,255'];
-        const gridGapValues = [5, 10, 25, 50, 75, 100];
-
         const noModifiers = (e: KeyboardEvent) => !isCtrlKey(e) && !e.altKey && !e.shiftKey;
 
         const updateGridStyles = () => {
@@ -197,8 +194,8 @@ export const useGrid = (workflowRef: React.RefObject<HTMLDivElement | null>) => 
                 return;
             }
 
-            const opacity = opacityValues[gridOpacityIndex];
-            const color = colorValues[gridColorIndex];
+            const opacity = GRID_OPACITY_VALUES[gridOpacityIndex] ?? GRID_OPACITY_VALUES[0];
+            const color = GRID_COLOR_VALUES[gridColorIndex] ?? GRID_COLOR_VALUES[1];
 
             workflow.style.backgroundImage = `
                 linear-gradient(to right, rgba(${color}, ${opacity}) 1px, transparent 1px),
@@ -220,29 +217,29 @@ export const useGrid = (workflowRef: React.RefObject<HTMLDivElement | null>) => 
                 switch (e.key.toLowerCase()) {
 
                     case ']': {
-                        setGridGap(prev => gridGapValues[gridGapValues.indexOf(prev) + 1] || prev);
+                        setGridGap(prev => getNextInList(GRID_GAP_VALUES, prev));
                         return;
                     }
 
                     case '[': {
-                        setGridGap(prev => gridGapValues[gridGapValues.indexOf(prev) - 1] || prev);
+                        setGridGap(prev => getPrevInList(GRID_GAP_VALUES, prev));
                         return;
                     }
 
                     case 'h':
-                        setGridOpacityIndex(prev => (prev + 1) % opacityValues.length);
+                        setGridOpacityIndex(prev => (prev + 1) % GRID_OPACITY_VALUES.length);
                         break;
                     case 'c':
-                        setGridColorIndex(prev => (prev + 1) % colorValues.length);
+                        setGridColorIndex(prev => (prev + 1) % GRID_COLOR_VALUES.length);
                         break;
                     case 'g':
-                        setEnabled(prev => !prev);
+                        setGridEnabled(prev => !prev);
                         break;
                 }
             }
         };
 
-        if (enabled) {
+        if (gridEnabled) {
             updateGridStyles();
         } else if (workflow) {
             workflow.style.backgroundImage = '';
@@ -258,7 +255,7 @@ export const useGrid = (workflowRef: React.RefObject<HTMLDivElement | null>) => 
             }
             document.removeEventListener('keydown', handleKeyDown);
         };
-    }, [workflowRef, gridGap, enabled, gridOpacityIndex, gridColorIndex, setGridGap]);
+    }, [workflowRef, gridGap, gridEnabled, gridOpacityIndex, gridColorIndex, setGridGap, setGridEnabled, setGridOpacityIndex, setGridColorIndex]);
 };
 
 export const useToggleSeatLabelDisplay = () => {

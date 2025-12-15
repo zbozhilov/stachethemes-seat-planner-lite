@@ -17,6 +17,9 @@ const EditorProvider = ({
     const [workflowStates, setWorkflowStates] = useState<WorkflowObject[][]>([[]]);
     const [workflowStateIndex, setWorkflowStateIndex] = useState<number>(0);
     const [gridGap, setGridGap] = useState<number>(25);
+    const [gridEnabled, setGridEnabled] = useState<boolean>(true);
+    const [gridOpacityIndex, setGridOpacityIndex] = useState<number>(0);
+    const [gridColorIndex, setGridColorIndex] = useState<number>(1);
     const [seatDisplayLabel, setSeatDisplayLabel] = useState<'label'|'price'|'seatid' | 'group' | 'status'>('label');
 
     return (
@@ -36,6 +39,15 @@ const EditorProvider = ({
 
             gridGap,
             setGridGap,
+
+            gridEnabled,
+            setGridEnabled,
+
+            gridOpacityIndex,
+            setGridOpacityIndex,
+
+            gridColorIndex,
+            setGridColorIndex,
 
             seatDisplayLabel,
             setSeatDisplayLabel,

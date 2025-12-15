@@ -49,9 +49,10 @@ export const useEditorObjects = () => {
             ? (valueOrUpdater as (prev: WorkflowObject[]) => WorkflowObject[])(objects)
             : valueOrUpdater;
 
-        const maxAllowedObjects = 100;
+        const maxAllowedObjects = window.stacheseplFilterMaxAllowedObjects || 2000;
 
         if (theNewObjects.length > maxAllowedObjects) {
+            console.warn(`Max allowed objects is ${maxAllowedObjects}`);
             return;
         }
 
@@ -127,6 +128,30 @@ export const useEditorGridGap = () => {
     }
 
 }
+
+export const useEditorGridEnabled = () => {
+    const context = useEditorContext();
+    return {
+        gridEnabled: context.gridEnabled,
+        setGridEnabled: context.setGridEnabled,
+    };
+};
+
+export const useEditorGridOpacityIndex = () => {
+    const context = useEditorContext();
+    return {
+        gridOpacityIndex: context.gridOpacityIndex,
+        setGridOpacityIndex: context.setGridOpacityIndex,
+    };
+};
+
+export const useEditorGridColorIndex = () => {
+    const context = useEditorContext();
+    return {
+        gridColorIndex: context.gridColorIndex,
+        setGridColorIndex: context.setGridColorIndex,
+    };
+};
 
 export const useEditorSeatDisplayLabel = () => {
 

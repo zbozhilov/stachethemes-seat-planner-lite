@@ -2,11 +2,11 @@ import { Accessible, Check, Block, Store, RemoveShoppingCart } from '@mui/icons-
 import { useEditorSeatDisplayLabel } from '@src/admin/SeatPlanner/components/Editor/hooks';
 import './Seat.scss';
 import { SeatObjectProps } from './types';
-import { useWorkflowObject } from '../hooks';
+import { useResizableWorkflowObject } from '../hooks';
 
 const Seat = (props: SeatObjectProps) => {
 
-    const workflowObjectProps = useWorkflowObject(props, 'stachesepl-seat');
+    const { combinedProps, isResizing, resizeDimensions, handleResizeStart } = useResizableWorkflowObject(props, 'stachesepl-seat');
     const { seatDisplayLabel } = useEditorSeatDisplayLabel();
 
     const getDisplayLabel = () => {
@@ -62,7 +62,19 @@ const Seat = (props: SeatObjectProps) => {
     const displayLabel = getDisplayLabel();
 
     return (
-        <div {...workflowObjectProps}>
+        <div {...combinedProps}>
+            {/* Resize handle */}
+            <div 
+                className='stachesepl-object-resize-handle'
+                onMouseDown={handleResizeStart}
+            />
+            
+            {/* Resize dimensions tooltip */}
+            {isResizing && resizeDimensions && (
+                <div className='stachesepl-object-resize-tooltip' style={{ writingMode: 'horizontal-tb', textOrientation: 'mixed' }}>
+                    {Math.round(resizeDimensions.width)} × {Math.round(resizeDimensions.height)}
+                </div>
+            )}
             {displayLabel}
         </div>
     )

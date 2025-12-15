@@ -52,10 +52,6 @@ const Content = () => {
             description: __('PASTE_SELECTED_OBJECTS')
         },
         {
-            keystroke: 'Del',
-            description: __('DELETE_SELECTED_OBJECTS')
-        },
-        {
             keystroke: 'Esc',
             description: __('DESELECT_ALL_OBJECTS')
         },

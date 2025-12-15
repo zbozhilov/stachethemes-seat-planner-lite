@@ -1,14 +1,15 @@
-import { useEditorGridGap, useEditorObjects, useSelectObjects } from "@src/admin/SeatPlanner/components/Editor/hooks";
+import { useEditorGridEnabled, useEditorGridGap, useEditorObjects, useSelectObjects } from "@src/admin/SeatPlanner/components/Editor/hooks";
 import { isCtrlKey } from "@src/admin/SeatPlanner/components/utils";
 import { useEffect, useRef, useState } from "react";
 import { hasBackgroundColor, isRounded, getTextDirectionStyles, WorkflowObject } from "./types";
 import { getFontSizeByType } from "./helpers";
 
 export const useDraggable = (
-    elementRef: React.RefObject<HTMLDivElement | null>
+    elementRef: React.RefObject<HTMLDivElement | null>,
+    isLocked: boolean = false
 ) => {
 
-    const { setObjects } = useEditorObjects();
+    const { setObjects, objects } = useEditorObjects();
     const { selectedObjects } = useSelectObjects();
 
     const [isDragging, setIsDragging] = useState(false);
@@ -16,6 +17,13 @@ export const useDraggable = (
     const initialSiblingsPos = useRef<{ x: number; y: number }[]>([]);
     const selectedSiblings = useRef<HTMLElement[] | null>(null);
     const { gridGap } = useEditorGridGap();
+    const { gridEnabled } = useEditorGridEnabled();
+
+    // Check if any selected object is locked
+    const hasLockedSelection = selectedObjects.some(id => {
+        const obj = objects.find(o => o.id === id);
+        return obj?.locked;
+    });
 
     const getSelectedSiblings = (element: HTMLElement) => {
         const parentContainer = element.parentElement;
@@ -118,6 +126,12 @@ export const useDraggable = (
             );
 
             // Snap to grid
+            if (!gridEnabled) {
+                return {
+                    x: Math.max(Math.abs(offsetX), clampedX),
+                    y: Math.max(Math.abs(offsetY), clampedY),
+                };
+            }
             return {
                 x: Math.max(Math.abs(offsetX), clampedX - (clampedX % gridGap)),
                 y: Math.max(Math.abs(offsetY), clampedY - (clampedY % gridGap)),
@@ -126,9 +140,19 @@ export const useDraggable = (
 
         const handleDragStart = (e: MouseEvent) => {
 
+            // Don't start drag if clicking on a resize handle
+            if ((e.target as HTMLElement).closest('[class*="resize-handle"]')) {
+                return;
+            }
+
             if (isCtrlKey(e) || e.altKey) {
                 return
             };
+
+            // Don't drag if the object or any selected object is locked
+            if (isLocked || hasLockedSelection) {
+                return;
+            }
 
             setIsDragging(true);
         };
@@ -193,10 +217,10 @@ export const useDraggable = (
             element.removeEventListener("mousedown", handleDragStart);
             document.removeEventListener("mouseup", handleDragEnd);
         };
-    }, [elementRef, gridGap, isDragging, selectedObjects, setObjects]);
+    }, [elementRef, gridGap, gridEnabled, isDragging, selectedObjects, setObjects, isLocked, hasLockedSelection]);
 
     return {
-        className: 'stachesepl-movable',
+        className: isLocked ? 'stachesepl-movable stachesepl-locked' : 'stachesepl-movable',
     }
 
 };
@@ -266,12 +290,105 @@ export const useSelectable = (id: number) => {
     }
 }
 
+export const useResizable = (
+    elementRef: React.RefObject<HTMLDivElement | null>,
+    objectId: number,
+    currentSize: { width: number; height: number },
+    isLocked: boolean = false
+) => {
+    const { setObjects } = useEditorObjects();
+    const { gridGap } = useEditorGridGap();
+    const { gridEnabled } = useEditorGridEnabled();
+    const [isResizing, setIsResizing] = useState(false);
+    const [resizeDimensions, setResizeDimensions] = useState<{ width: number; height: number } | null>(null);
+    const latestDimensionsRef = useRef<{ width: number; height: number } | null>(null);
+
+    // Snap value to grid
+    const snapToGrid = (value: number) => {
+        if (!gridEnabled) {
+            return value;
+        }
+        return Math.round(value / gridGap) * gridGap;
+    };
+
+    const handleResizeStart = (e: React.MouseEvent) => {
+        e.preventDefault();
+        e.stopPropagation();
+
+        // Don't allow resizing if locked
+        if (isLocked) return;
+
+        const element = elementRef.current;
+        if (!element) return;
+
+        setIsResizing(true);
+
+        const startX = e.clientX;
+        const startY = e.clientY;
+        const startWidth = currentSize.width;
+        const startHeight = currentSize.height;
+
+        const handleMouseMove = (moveEvent: MouseEvent) => {
+            const deltaX = moveEvent.clientX - startX;
+            const deltaY = moveEvent.clientY - startY;
+
+            // Calculate new size with minimum constraints
+            const rawWidth = startWidth + deltaX;
+            const rawHeight = startHeight + deltaY;
+
+            // Snap to grid with minimum size
+            const newWidth = Math.max(gridGap, snapToGrid(rawWidth));
+            const newHeight = Math.max(gridGap, snapToGrid(rawHeight));
+
+            const newDimensions = { width: newWidth, height: newHeight };
+            latestDimensionsRef.current = newDimensions;
+            setResizeDimensions(newDimensions);
+        };
+
+        const handleMouseUp = () => {
+            setIsResizing(false);
+
+            if (latestDimensionsRef.current) {
+                setObjects(objects =>
+                    objects.map(object =>
+                        object.id === objectId
+                            ? {
+                                ...object,
+                                size: {
+                                    width: latestDimensionsRef.current!.width,
+                                    height: latestDimensionsRef.current!.height,
+                                },
+                            }
+                            : object
+                    )
+                );
+            }
+
+            setResizeDimensions(null);
+            latestDimensionsRef.current = null;
+
+            document.removeEventListener('mousemove', handleMouseMove);
+            document.removeEventListener('mouseup', handleMouseUp);
+        };
+
+        document.addEventListener('mousemove', handleMouseMove);
+        document.addEventListener('mouseup', handleMouseUp);
+    };
+
+    return {
+        isResizing,
+        resizeDimensions,
+        handleResizeStart,
+    };
+};
+
 export const useWorkflowObject = (
     objectProps: WorkflowObject,
     className: string,
 ) => {
     const elementRef = useRef<HTMLDivElement>(null);
-    const draggableProps = useDraggable(elementRef);
+    const isLocked = objectProps.locked ?? false;
+    const draggableProps = useDraggable(elementRef, isLocked);
     const selectableProps = useSelectable(objectProps.id);
 
     const fontSize = getFontSizeByType(objectProps.fontSize);
@@ -315,5 +432,75 @@ export const useWorkflowObject = (
     };
 
     return combinedProps;
+
+}
+
+export const useResizableWorkflowObject = (
+    objectProps: WorkflowObject,
+    className: string,
+) => {
+    const elementRef = useRef<HTMLDivElement>(null);
+    const isLocked = objectProps.locked ?? false;
+    const draggableProps = useDraggable(elementRef, isLocked);
+    const selectableProps = useSelectable(objectProps.id);
+    const { isResizing, resizeDimensions, handleResizeStart } = useResizable(
+        elementRef,
+        objectProps.id,
+        objectProps.size,
+        isLocked
+    );
+
+    const fontSize = getFontSizeByType(objectProps.fontSize);
+
+    // Use resize dimensions if actively resizing, otherwise use object props
+    const currentWidth = resizeDimensions?.width ?? objectProps.size.width;
+    const currentHeight = resizeDimensions?.height ?? objectProps.size.height;
+
+    const style: React.CSSProperties = {
+        width: currentWidth,
+        height: currentHeight,
+        color: objectProps.color,
+        fontSize: fontSize,
+        left: objectProps.move.x,
+        top: objectProps.move.y,
+        zIndex: objectProps.zIndex,
+    }
+
+    if (hasBackgroundColor(objectProps)) {
+        style.backgroundColor = objectProps.backgroundColor
+    }
+
+    if (isRounded(objectProps)) {
+        style.borderRadius = '50%';
+    }
+
+    const textDirectionStyles = getTextDirectionStyles(objectProps);
+    Object.assign(style, textDirectionStyles);
+
+    // Don't show outline error if the object is selected
+    if ('outlineError' in objectProps && objectProps.outlineError) {
+        style.boxShadow = '0 0 0 2px inset #d32f2f';
+    }
+
+    const combinedProps = {
+        ref: elementRef,
+        ...draggableProps,
+        ...selectableProps,
+        style,
+        className: [
+            className,
+            draggableProps.className,
+            selectableProps.className,
+            isResizing ? 'is-resizing' : ''
+        ].filter(Boolean).join(' '),
+    };
+
+    return {
+        combinedProps,
+        isResizing,
+        isLocked,
+        resizeDimensions,
+        handleResizeStart,
+    };
 
 }

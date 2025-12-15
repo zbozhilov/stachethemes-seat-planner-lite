@@ -1,4 +1,4 @@
-export const __ = (text: string): string => {
+export const __ = (text: string, ...args: any[]): string => {
 
     if (!window.stachesepl_i18n) {
         return text;

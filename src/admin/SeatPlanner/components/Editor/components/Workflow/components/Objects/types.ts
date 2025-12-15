@@ -24,6 +24,7 @@ export interface BaseObjectProps {
     label: string,
     color: string,
     zIndex?: number,
+    locked?: boolean,
 }
 
 export function hasBackgroundColor(object: WorkflowObject): object is (GenericObjectProps | ScreenObjectProps | SeatObjectProps) {

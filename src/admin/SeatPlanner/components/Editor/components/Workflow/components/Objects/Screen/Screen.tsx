@@ -1,11 +1,11 @@
-import { useWorkflowObject } from '../hooks';
+import { useResizableWorkflowObject } from '../hooks';
 import './Screen.scss';
 import { ScreenObjectProps } from './types';
 
 const Screen = (props: ScreenObjectProps) => {
 
-    const workflowObjectProps = useWorkflowObject(props, 'stachesepl-screen');
-    const { style, ...rest } = workflowObjectProps;
+    const { combinedProps, isResizing, resizeDimensions, handleResizeStart } = useResizableWorkflowObject(props, 'stachesepl-screen');
+    const { style, ...rest } = combinedProps;
     const { backgroundColor, ...restStyle } = style;
 
     return (
@@ -17,6 +17,19 @@ const Screen = (props: ScreenObjectProps) => {
                 }}>
                 </div>
             </div>
+            
+            {/* Resize handle */}
+            <div 
+                className='stachesepl-object-resize-handle'
+                onMouseDown={handleResizeStart}
+            />
+            
+            {/* Resize dimensions tooltip */}
+            {isResizing && resizeDimensions && (
+                <div className='stachesepl-object-resize-tooltip' style={{ writingMode: 'horizontal-tb', textOrientation: 'mixed' }}>
+                    {Math.round(resizeDimensions.width)} × {Math.round(resizeDimensions.height)}
+                </div>
+            )}
         </div>
     );
 }

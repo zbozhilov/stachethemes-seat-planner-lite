@@ -19,6 +19,15 @@ interface EditorContextProps {
     gridGap: number;
     setGridGap: (gap: number | ((prev: number) => number)) => void;
 
+    gridEnabled: boolean;
+    setGridEnabled: (enabled: boolean | ((prev: boolean) => boolean)) => void;
+
+    gridOpacityIndex: number;
+    setGridOpacityIndex: (index: number | ((prev: number) => number)) => void;
+
+    gridColorIndex: number;
+    setGridColorIndex: (index: number | ((prev: number) => number)) => void;
+
     seatDisplayLabel: 'label' | 'price' | 'seatid' | 'group' | 'status';
     setSeatDisplayLabel: (label: 'label' | 'price' | 'seatid' | 'group' | 'status' | ((prev: 'label' | 'price' | 'seatid' | 'group' | 'status') => 'label' | 'price' | 'seatid' | 'group' | 'status')) => void;
 
