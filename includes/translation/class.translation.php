@@ -373,6 +373,8 @@ class Translation {
             'ORDER_ID'                       => esc_html__('Order ID', 'stachethemes-seat-planner-lite'),
             'NO_ORDER_DATA_FOUND'            => esc_html__('No order data found for this seat.', 'stachethemes-seat-planner-lite'),
             'NOTICE'                         => esc_html__('Notice', 'stachethemes-seat-planner-lite'),
+            'REDIRECTING_TO_PAYMENT'         => esc_html__('We are redirecting you to the payment page', 'stachethemes-seat-planner-lite'),
+            'PLEASE_WAIT'                    => esc_html__('Please wait...', 'stachethemes-seat-planner-lite'),
         ];
     }
 }

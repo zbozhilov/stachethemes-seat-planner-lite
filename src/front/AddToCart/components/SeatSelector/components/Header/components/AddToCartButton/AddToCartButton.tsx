@@ -5,6 +5,8 @@ import toast from "react-hot-toast";
 import Button from "../Button/Button";
 import { East as ArrowRight } from '@mui/icons-material';
 import addSeatsToCart from "@src/front/AddToCart/ajax/addSeatsToCart";
+import { Portal } from "react-portal";
+import './AddToCartButton.scss';
 
 const AddToCartButton = () => {
 
@@ -13,6 +15,7 @@ const AddToCartButton = () => {
     const { selectedDate } = useSelectedDate();
     const { setModalOpen } = useModalState();
     const { setShowViewCartButton } = useShowViewCartButton();
+    const [showRedirectOverlay, setShowRedirectOverlay] = useState(false);
 
     const { seatPlanData } = useSeatPlanData();
     const { discounts, hasDiscounts } = useDiscounts();
@@ -96,10 +99,26 @@ const AddToCartButton = () => {
                     updateCartFragments(result.data.cart_fragments);
                 }
 
+                const seatsCount = selectedSeats.length;
+                const shouldRedirect = 
+                    window.seat_planner_add_to_cart &&
+                    window.seat_planner_add_to_cart.cart_redirect_after_add === 'yes' &&
+                    typeof window.seat_planner_add_to_cart.cart_redirect_url === 'string';
+
+                // If redirecting, show overlay immediately and don't close modal yet
+                if (shouldRedirect) {
+                    setShowRedirectOverlay(true);
+                    
+                    setTimeout(() => {
+                        window.location.href = window.seat_planner_add_to_cart.cart_redirect_url;
+                    }, 1500);
+                    
+                    return;
+                }
+
+                // Only close modal and show toast if NOT redirecting
                 setModalOpen(false);
                 setShowViewCartButton(true);
-
-                const seatsCount = selectedSeats.length;
 
                 if (seatsCount === 1) {
 
@@ -129,16 +148,6 @@ const AddToCartButton = () => {
 
                 }
 
-                if (
-                    window.seat_planner_add_to_cart &&
-                    window.seat_planner_add_to_cart.cart_redirect_after_add === 'yes' &&
-                    typeof window.seat_planner_add_to_cart.cart_redirect_url === 'string'
-                ) {
-                    setTimeout(() => {
-                        window.location.href = window.seat_planner_add_to_cart.cart_redirect_url;
-                    }, 50);
-                }
-
                 return;
 
             }
@@ -162,7 +171,28 @@ const AddToCartButton = () => {
     }
 
     return (
-        <Button className={classNameArray.join(' ')} onClick={handleAddToCart}>{__('ADD_TO_CART')} <ArrowRight /></Button>
+        <>
+
+            <Button className={classNameArray.join(' ')} onClick={handleAddToCart}>{__('ADD_TO_CART')} <ArrowRight /></Button>
+
+            {showRedirectOverlay && (
+                <Portal>
+                    <div className="stachesepl-redirect-overlay">
+                        <div className="stachesepl-redirect-content">
+                            <div className="stachesepl-redirect-spinner" />
+                            <div className="stachesepl-redirect-text">
+                                <h3>{__('REDIRECTING_TO_PAYMENT')}</h3>
+                                <p>{__('PLEASE_WAIT')}</p>
+                            </div>
+                            <div className="stachesepl-redirect-progress">
+                                <div className="stachesepl-redirect-progress-bar" />
+                            </div>
+                        </div>
+                    </div>
+                </Portal>
+            )}
+
+        </>
     )
 }
 
