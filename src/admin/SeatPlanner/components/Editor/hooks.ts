@@ -21,7 +21,7 @@ export const useEditorRef = () => {
 
 export const useWorkflowProps = () => {
     const context = useEditorContext();
-  
+
     return {
         workflowProps: context.workflowProps,
         setWorkflowProps: context.setWorkflowProps,
@@ -49,10 +49,9 @@ export const useEditorObjects = () => {
             ? (valueOrUpdater as (prev: WorkflowObject[]) => WorkflowObject[])(objects)
             : valueOrUpdater;
 
-        const maxAllowedObjects = window.stacheseplFilterMaxAllowedObjects || 2000;
+        const maxAllowedObjects = 100;
 
         if (theNewObjects.length > maxAllowedObjects) {
-            console.warn(`Max allowed objects is ${maxAllowedObjects}`);
             return;
         }
 
@@ -111,7 +110,7 @@ export const useSelectObjects = () => {
         setSelectedObjects((prevIds) => {
             const newIds =
                 typeof updater === "function" ? updater(prevIds) : updater;
-            return [...new Set(newIds)]; 
+            return [...new Set(newIds)];
         });
     };
 
