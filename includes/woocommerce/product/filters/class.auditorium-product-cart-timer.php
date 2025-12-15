@@ -90,8 +90,7 @@ class Auditorium_Product_Cart_Timer {
             $handle,
             'stacheseplCartTimer',
             [
-                'label' => esc_html__('Time remaining', 'stachethemes-seat-planner-lite')
-,
+                'label' => esc_html__('Time remaining', 'stachethemes-seat-planner-lite'),
             ]
         );
 
@@ -110,6 +109,28 @@ class Auditorium_Product_Cart_Timer {
         );
 
         wp_enqueue_style($handle);
+
+        // Apply user-defined colors via CSS variables so the cart timer can be customized
+        // from the Seat Reservation settings.
+        $bg_color              = get_option('stachesepl_cart_timer_bg_color', '#32373c');
+        $text_color            = get_option('stachesepl_cart_timer_text_color', '#fff');
+        $time_color            = get_option('stachesepl_cart_timer_time_color', '#fb8a2e');
+        $critical_time_color   = get_option('stachesepl_cart_timer_time_color_critical', '#ff6c5f');
+
+        $custom_css = sprintf(
+            ':root{' .
+                '--stachesepl-cart-timer-background-color:%1$s;' .
+                '--stachesepl-cart-timer-text-color:%2$s;' .
+                '--stachesepl-cart-timer-color:%3$s;' .
+                '--stachesepl-cart-timer-critical-color:%4$s;' .
+                '}',
+            esc_html($bg_color),
+            esc_html($text_color),
+            esc_html($time_color),
+            esc_html($critical_time_color)
+        );
+
+        wp_add_inline_style($handle, $custom_css);
     }
 
     /**
@@ -163,8 +184,7 @@ class Auditorium_Product_Cart_Timer {
             }
 
             $item_data[] = [
-                'name'  => esc_html__('Time remaining', 'stachethemes-seat-planner-lite')
-,
+                'name'  => esc_html__('Time remaining', 'stachethemes-seat-planner-lite'),
                 // Store the raw expiration timestamp (escaped for HTML) so the
                 // JavaScript can calculate the remaining time on init.
                 'value' => esc_html((string) $expires_at),
