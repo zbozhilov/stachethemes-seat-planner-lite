@@ -4,7 +4,7 @@
 **Requires:** 6.7  
 **Tested up to:** 6.9
 **Requires PHP:** 8.2  
-**Stable tag:** 1.0.34  
+**Stable tag:** 1.0.35  
 **License:** GPLv2 or later  
 **WC requires at least:** 9.5  
 **WC tested up to:** 10 
@@ -44,6 +44,12 @@ Easily create and manage seating arrangements for events, venues, or any seat-ba
 https://github.com/zbozhilov/stachethemes-seat-planner-lite
 
 ## Changelog
+
+### 1.0.35
+- Added Dashboard Widget showing Seats Sold & Revenue for the last 30 days
+- Added Option to Lock objects in the Drag & Drop Editor 
+- Added Visual UI for turning grid-snap on/off, grid color, grid size
+- Added message when user is redirected to cart/checkout page on the front-end
 
 ### 1.0.34
 - Bug fix where product can be incorrectly flagged as Unavailable
