@@ -1,0 +1,33 @@
+.stachesepl-page-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: var(--stachesepl-space-6);
+    margin-bottom: var(--stachesepl-space-8);
+}
+
+.stachesepl-page-header-content {
+    flex: 1;
+}
+
+.stachesepl-page-header-title {
+    font-size: var(--stachesepl-text-2xl);
+    font-weight: 600;
+    color: var(--stachesepl-text-primary);
+    margin: 0 0 var(--stachesepl-space-2) 0;
+    line-height: var(--stachesepl-leading-tight);
+}
+
+.stachesepl-page-header-description {
+    font-size: var(--stachesepl-text-base);
+    color: var(--stachesepl-text-secondary);
+    margin: 0;
+    line-height: var(--stachesepl-leading-relaxed);
+    max-width: 800px;
+}
+
+.stachesepl-page-header-actions {
+    display: flex;
+    gap: var(--stachesepl-space-3);
+    flex-shrink: 0;
+}

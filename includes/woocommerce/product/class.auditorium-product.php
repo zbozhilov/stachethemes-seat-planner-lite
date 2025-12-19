@@ -450,7 +450,7 @@ class Auditorium_Product extends \WC_Product {
         $this->delete_meta_data_value($meta_key, $seat_id);
     }
 
-    public function add_meta_taken_seat($seat_id, $selected_date = '') {
+    public function add_meta_taken_seat($seat_id, $selected_date = ''): void {
 
         $meta_key = '_taken_seat';
 
@@ -458,7 +458,15 @@ class Auditorium_Product extends \WC_Product {
             $meta_key .= "_{$selected_date}";
         }
 
-        $this->add_meta_data($meta_key, $seat_id, false);
+        // Check if the seat is already taken
+        $taken_seats = $this->get_meta_taken_seat($selected_date);
+        if (in_array($seat_id, $taken_seats)) {
+            return;
+        }
+
+        $unique_key = false; // These are multiple keys!
+
+        $this->add_meta_data($meta_key, $seat_id, $unique_key);
     }
 
     public function get_meta_taken_seat($selected_date = '') {

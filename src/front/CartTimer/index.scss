@@ -29,7 +29,7 @@
     font-weight: bold;
 }
 
-/* Below 1 minute, switch to a "critical" style. This can also be overridden. */
+/* Below 5 minute, switch to a "critical" style. This can also be overridden. */
 .stachesepl-cart-timer--critical {
     color: var(--stachesepl-cart-timer-critical-color, #ff6c5f);
 }

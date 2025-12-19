@@ -1,0 +1,168 @@
+.stachesepl-input-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: var(--stachesepl-space-2);
+
+    &--full-width {
+        .stachesepl-input-container {
+            max-width: none;
+        }
+    }
+
+    &--disabled {
+        opacity: 0.6;
+    }
+
+    &--error {
+        .stachesepl-input-container {
+            border-color: var(--stachesepl-error);
+
+            &:focus-within {
+                border-color: var(--stachesepl-error);
+                box-shadow: 0 0 0 3px rgb(239 68 68 / 0.15);
+            }
+        }
+    }
+}
+
+.stachesepl-input-label {
+    font-size: var(--stachesepl-text-sm);
+    font-weight: 500;
+    color: var(--stachesepl-text-primary);
+    margin: 0;
+}
+
+.stachesepl-input-description {
+    font-size: var(--stachesepl-text-sm);
+    color: var(--stachesepl-text-secondary);
+    margin: 0;
+    line-height: var(--stachesepl-leading-relaxed);
+}
+
+.stachesepl-input-container {
+    display: flex;
+    align-items: center;
+    max-width: 400px;
+    background-color: var(--stachesepl-bg-card);
+    border: 1px solid var(--stachesepl-border);
+    border-radius: var(--stachesepl-radius-md);
+    transition: border-color var(--stachesepl-transition-fast), 
+                box-shadow var(--stachesepl-transition-fast);
+    overflow: hidden;
+
+    &:hover:not(:has(input:disabled)) {
+        border-color: var(--stachesepl-gray-400);
+    }
+
+    &:focus-within {
+        border-color: var(--stachesepl-primary);
+        box-shadow: var(--stachesepl-shadow-focus);
+    }
+
+    &--has-prefix {
+        .stachesepl-input {
+            padding-left: var(--stachesepl-space-2);
+        }
+    }
+
+    &--has-suffix {
+        .stachesepl-input {
+            padding-right: var(--stachesepl-space-2);
+        }
+    }
+}
+
+.stachesepl-input-prefix,
+.stachesepl-input-suffix {
+    display: flex;
+    align-items: center;
+    padding: 0 var(--stachesepl-space-3);
+    color: var(--stachesepl-text-muted);
+    font-size: var(--stachesepl-text-sm);
+    background-color: var(--stachesepl-bg-muted);
+    align-self: stretch;
+    border-right: 1px solid var(--stachesepl-border);
+    user-select: none;
+}
+
+.stachesepl-input-suffix {
+    border-right: none;
+    border-left: 1px solid var(--stachesepl-border);
+}
+
+.stachesepl-input {
+    flex: 1;
+    width: 100%;
+    padding: var(--stachesepl-space-3) var(--stachesepl-space-4) !important;
+    border: none !important;
+    font-size: var(--stachesepl-text-sm) !important;
+    line-height: var(--stachesepl-leading-normal) !important;
+    color: var(--stachesepl-text-primary) !important;
+    background-color: transparent !important;
+    outline: none !important;
+    box-shadow: none !important;
+
+    &:focus {
+        outline: none;
+    }
+
+    &:disabled {
+        background-color: var(--stachesepl-bg-muted);
+        color: var(--stachesepl-text-muted);
+        cursor: not-allowed;
+    }
+
+    &::placeholder {
+        color: var(--stachesepl-text-muted);
+    }
+
+    // Remove number input spinners
+    &[type="number"] {
+        -moz-appearance: textfield;
+        
+        &::-webkit-outer-spin-button,
+        &::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+    }
+}
+
+.stachesepl-input-clear {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 28px;
+    height: 28px;
+    margin-right: var(--stachesepl-space-2);
+    padding: 0;
+    border: none;
+    background-color: transparent;
+    color: var(--stachesepl-text-muted);
+    cursor: pointer;
+    border-radius: var(--stachesepl-radius-sm);
+    transition: color var(--stachesepl-transition-fast),
+                background-color var(--stachesepl-transition-fast);
+
+    &:hover {
+        color: var(--stachesepl-text-primary);
+        background-color: var(--stachesepl-bg-muted);
+    }
+
+    &:focus {
+        outline: none;
+        background-color: var(--stachesepl-bg-muted);
+    }
+}
+
+.stachesepl-input-error {
+    display: flex;
+    align-items: center;
+    gap: var(--stachesepl-space-2);
+    font-size: var(--stachesepl-text-sm);
+    color: var(--stachesepl-error);
+
+    svg {
+        flex-shrink: 0;
+    }
+}

@@ -46,7 +46,9 @@
         "jest": "^30.2.0",
         "react-color-palette": "^7.3.1",
         "react-hot-toast": "^2.5.1",
+        "react-loading-skeleton": "^3.5.0",
         "react-portal": "^4.2.2",
+        "react-router": "^7.10.1",
         "react-zoom-pan-pinch": "3.6.0"
     }
 }

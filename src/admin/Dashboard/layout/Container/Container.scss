@@ -1,0 +1,21 @@
+.stachesepl-container {
+    background-color: var(--stachesepl-bg-card);
+    border: 1px solid var(--stachesepl-border);
+    border-radius: var(--stachesepl-radius-lg);
+    padding: var(--stachesepl-space-6);
+    box-shadow: var(--stachesepl-shadow-sm);
+    transition: box-shadow var(--stachesepl-transition-slow), transform var(--stachesepl-transition-slow), opacity var(--stachesepl-transition-slow);
+
+    
+    &:hover {
+        box-shadow: var(--stachesepl-shadow-md);
+    }
+}
+
+
+@starting-style {
+    .stachesepl-container {
+        transform: translateY(-10px);
+        opacity: 0;
+    }
+}

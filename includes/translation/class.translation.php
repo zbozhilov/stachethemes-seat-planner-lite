@@ -329,6 +329,244 @@ class Translation {
         ];
     }
 
+    // Translates the dashboard strings
+    public static function get_dashboard_strings() {
+        return [
+            'APP_ACCESS_NOT_SUPPORTED'                      => esc_html__('App access is not available in the Lite version', 'stachethemes-seat-planner-lite'),
+            'PDF_ATTACHMENTS_NOT_SUPPORTED'                 => esc_html__('PDF attachments are not available in the Lite version', 'stachethemes-seat-planner-lite'),
+            'DASHBOARD'                                     => esc_html__('Dashboard', 'stachethemes-seat-planner-lite'),
+            'PAGE_NOT_FOUND'                                => esc_html__('Page not found', 'stachethemes-seat-planner-lite'),
+            'OPS'                                           => esc_html__('Oops!', 'stachethemes-seat-planner-lite'),
+            'THE_PAGE_YOU_ARE_LOOKING_FOR_DOES_NOT_EXIST'   => esc_html__('The page you are looking for does not exist.', 'stachethemes-seat-planner-lite'),
+            'GO_HOME'                                       => esc_html__('Go Home', 'stachethemes-seat-planner-lite'),
+
+            // Overview page
+            'OVERVIEW_TITLE'                                => esc_html__('Overview', 'stachethemes-seat-planner-lite'),
+            'OVERVIEW_DESCRIPTION'                          => esc_html__('Welcome to your Seat Planner dashboard. Get a quick overview of your venue bookings.', 'stachethemes-seat-planner-lite'),
+
+            // Stats section
+            'OVERVIEW_STATS_TITLE'                          => esc_html__('At a Glance', 'stachethemes-seat-planner-lite'),
+            'OVERVIEW_STAT_PRODUCTS'                        => esc_html__('Auditorium Products', 'stachethemes-seat-planner-lite'),
+            'OVERVIEW_STAT_SEATS'                           => esc_html__('Seats Sold', 'stachethemes-seat-planner-lite'),
+            'OVERVIEW_STAT_REVENUE'                         => esc_html__('Revenue', 'stachethemes-seat-planner-lite'),
+            'OVERVIEW_STAT_SCANNED_TODAY'                   => esc_html__('Scanned Today', 'stachethemes-seat-planner-lite'),
+
+            // Quick actions section
+            'OVERVIEW_ACTIONS_TITLE'                        => esc_html__('Quick Actions', 'stachethemes-seat-planner-lite'),
+            'OVERVIEW_ACTION_SCANNER'                       => esc_html__('Ticket Scanner', 'stachethemes-seat-planner-lite'),
+            'OVERVIEW_ACTION_SCANNER_DESC'                  => esc_html__('Scan QR codes to verify and check-in guests at your venue.', 'stachethemes-seat-planner-lite'),
+            'OVERVIEW_ACTION_TOOLS'                         => esc_html__('Tools', 'stachethemes-seat-planner-lite'),
+            'OVERVIEW_ACTION_TOOLS_DESC'                    => esc_html__('Run integrity checks and preview PDF tickets.', 'stachethemes-seat-planner-lite'),
+            'OVERVIEW_ACTION_SETTINGS'                      => esc_html__('Settings', 'stachethemes-seat-planner-lite'),
+            'OVERVIEW_ACTION_SETTINGS_DESC'                 => esc_html__('Configure reservation time, cart behavior and more.', 'stachethemes-seat-planner-lite'),
+            'OVERVIEW_ACTION_ORDERS'                        => esc_html__('View Orders', 'stachethemes-seat-planner-lite'),
+            'OVERVIEW_ACTION_ORDERS_DESC'                   => esc_html__('View and manage WooCommerce orders.', 'stachethemes-seat-planner-lite'),
+
+            // Help section
+            'OVERVIEW_HELP_TITLE'                           => esc_html__('Resources', 'stachethemes-seat-planner-lite'),
+            'OVERVIEW_HELP_DOCS'                            => esc_html__('Documentation', 'stachethemes-seat-planner-lite'),
+            'OVERVIEW_HELP_SUPPORT'                         => esc_html__('Get Support', 'stachethemes-seat-planner-lite'),
+
+
+            // Common strings
+            'CHECK_NOW'                      => esc_html__('Check Now', 'stachethemes-seat-planner-lite'),
+            'CHECKING'                       => esc_html__('Checking...', 'stachethemes-seat-planner-lite'),
+            'CANCEL'                         => esc_html__('Cancel', 'stachethemes-seat-planner-lite'),
+            'PREPARING_TO_CHECK'             => esc_html__('Preparing to check...', 'stachethemes-seat-planner-lite'),
+            'TRY_AGAIN'                      => esc_html__('Try Again', 'stachethemes-seat-planner-lite'),
+            'RESULTS'                        => esc_html__('Results', 'stachethemes-seat-planner-lite'),
+            // translators: %1$d - number of products checked, %2$d - total number of products
+            'RESULTS_COUNT'                  => esc_html__('Results (%1$d of %2$d products checked)', 'stachethemes-seat-planner-lite'),
+            'SEAT_ID'                        => esc_html__('Seat ID', 'stachethemes-seat-planner-lite'),
+            'ORDER_IDS'                      => esc_html__('Order IDs', 'stachethemes-seat-planner-lite'),
+            'NO_PRODUCTS_FOUND'              => esc_html__('No products found to check.', 'stachethemes-seat-planner-lite'),
+            'ACTIONS'                        => esc_html__('Actions', 'stachethemes-seat-planner-lite'),
+            'NO_ISSUES'                      => esc_html__('No issues', 'stachethemes-seat-planner-lite'),
+
+            // Check type selector
+            'SELECT_CHECK_TYPE'              => esc_html__('Select Check Type', 'stachethemes-seat-planner-lite'),
+            'CHECK_TYPE_DOUBLE_BOOKING'      => esc_html__('Double Booking Check', 'stachethemes-seat-planner-lite'),
+            'CHECK_TYPE_GHOST_BOOKING'       => esc_html__('Ghost Booking Check', 'stachethemes-seat-planner-lite'),
+            'CHECK_TYPE_DOUBLE_DESC'         => esc_html__('Find seats that have been booked multiple times (same seat appears in multiple orders).', 'stachethemes-seat-planner-lite'),
+            'CHECK_TYPE_GHOST_DESC'          => esc_html__('Find seats that appear free on the front-end but have existing orders (data inconsistency).', 'stachethemes-seat-planner-lite'),
+
+            // Double booking specific strings
+            // translators: %1$d - number of products being checked, %2$d - total number of products
+            'CHECKING_DOUBLE_BOOKING'        => esc_html__('Checking for double bookings... %1$d of %2$d products', 'stachethemes-seat-planner-lite'),
+            'ERROR_DOUBLE_BOOKING'           => esc_html__('An error occurred while checking for double bookings.', 'stachethemes-seat-planner-lite'),
+            'NO_DUPLICATES'                  => esc_html__('No duplicates', 'stachethemes-seat-planner-lite'),
+            'ONE_DUPLICATE'                  => esc_html__('1 duplicate', 'stachethemes-seat-planner-lite'),
+            // translators: %d - number of duplicates
+            'MULTIPLE_DUPLICATES'            => esc_html__('%d duplicates', 'stachethemes-seat-planner-lite'),
+            'BOOKING_COUNT'                  => esc_html__('Booking Count', 'stachethemes-seat-planner-lite'),
+            'NO_DUPLICATE_BOOKINGS'          => esc_html__('No duplicate bookings found for this product.', 'stachethemes-seat-planner-lite'),
+            // translators: %d - number of products with duplicate bookings (plural)
+            'DOUBLE_CHECK_COMPLETE'          => esc_html__('Check complete. %d products have duplicate bookings.', 'stachethemes-seat-planner-lite'),
+            // translators: For when only one product has duplicate bookings
+            'DOUBLE_CHECK_COMPLETE_SINGULAR' => esc_html__('Check complete. 1 product has duplicate bookings.', 'stachethemes-seat-planner-lite'),
+            'DOUBLE_CHECK_COMPLETE_NONE'     => esc_html__('Check complete. No duplicate bookings found.', 'stachethemes-seat-planner-lite'),
+
+            // Ghost booking specific strings
+            // translators: %1$d - number of products being checked, %2$d - total number of products
+            'CHECKING_GHOST_BOOKING'         => esc_html__('Checking for ghost bookings... %1$d of %2$d products', 'stachethemes-seat-planner-lite'),
+            'ERROR_GHOST_BOOKING'            => esc_html__('An error occurred while checking for ghost bookings.', 'stachethemes-seat-planner-lite'),
+            'NO_GHOST_SEATS'                 => esc_html__('No issues', 'stachethemes-seat-planner-lite'),
+            'ONE_GHOST_SEAT'                 => esc_html__('1 ghost seat', 'stachethemes-seat-planner-lite'),
+            // translators: %d - number of ghost seats
+            'MULTIPLE_GHOST_SEATS'           => esc_html__('%d ghost seats', 'stachethemes-seat-planner-lite'),
+            'EVENT_DATE'                     => esc_html__('Event Date', 'stachethemes-seat-planner-lite'),
+            'ORDER_COUNT'                    => esc_html__('Order Count', 'stachethemes-seat-planner-lite'),
+            'NO_GHOST_BOOKINGS'              => esc_html__('No ghost bookings found for this product.', 'stachethemes-seat-planner-lite'),
+            // translators: %d - number of products with ghost bookings (plural)
+            'GHOST_CHECK_COMPLETE'           => esc_html__('Check complete. %d products have ghost bookings.', 'stachethemes-seat-planner-lite'),
+            // translators: For when only one product has ghost bookings
+            'GHOST_CHECK_COMPLETE_SINGULAR'  => esc_html__('Check complete. 1 product has ghost bookings.', 'stachethemes-seat-planner-lite'),
+            'GHOST_CHECK_COMPLETE_NONE'      => esc_html__('Check complete. No ghost bookings found.', 'stachethemes-seat-planner-lite'),
+            'FIX_GHOST_BOOKING'              => esc_html__('Mark as Taken', 'stachethemes-seat-planner-lite'),
+            'FIXING'                         => esc_html__('Fixing...', 'stachethemes-seat-planner-lite'),
+            'FIXED'                          => esc_html__('Fixed', 'stachethemes-seat-planner-lite'),
+            'FIX_FAILED'                     => esc_html__('Fix failed', 'stachethemes-seat-planner-lite'),
+            'NO_DATE'                        => esc_html__('No specific date', 'stachethemes-seat-planner-lite'),
+
+            // Tools page
+            'TOOLS_PAGE_TITLE'                => esc_html__('Tools', 'stachethemes-seat-planner-lite'),
+            'TOOLS_PAGE_DESCRIPTION'          => esc_html__('Utility tools for managing your seat planner bookings and PDF tickets.', 'stachethemes-seat-planner-lite'),
+            'TOOLS_TAB_BOOKING_INTEGRITY'     => esc_html__('Booking Integrity', 'stachethemes-seat-planner-lite'),
+            'TOOLS_TAB_PDF_PREVIEW'           => esc_html__('PDF Preview', 'stachethemes-seat-planner-lite'),
+
+            // PDF Preview
+            'PDF_PREVIEW_NOT_SUPPORTED'       => esc_html__('PDF preview is not available in the Lite version', 'stachethemes-seat-planner-lite'),
+            'PDF_PREVIEW_TITLE'               => esc_html__('Preview Order PDF', 'stachethemes-seat-planner-lite'),
+            'PDF_PREVIEW_DESCRIPTION'         => esc_html__('Enter an order ID to preview the PDF ticket that would be generated for that order. The PDF will open in a new tab.', 'stachethemes-seat-planner-lite'),
+            'PDF_PREVIEW_ORDER_ID_LABEL'      => esc_html__('Order ID', 'stachethemes-seat-planner-lite'),
+            'PDF_PREVIEW_ORDER_ID_DESC'       => esc_html__('Enter the WooCommerce order ID to preview its PDF ticket.', 'stachethemes-seat-planner-lite'),
+            'PDF_PREVIEW_ORDER_ID_PLACEHOLDER' => esc_html__('e.g., 1234', 'stachethemes-seat-planner-lite'),
+            'PDF_PREVIEW_BUTTON'              => esc_html__('Preview PDF', 'stachethemes-seat-planner-lite'),
+            'PDF_PREVIEW_INVALID_ORDER_ID'    => esc_html__('Please enter a valid order ID.', 'stachethemes-seat-planner-lite'),
+            'PDF_PREVIEW_ERROR_INVALID_ORDER_ID' => esc_html__('Please enter a valid order ID.', 'stachethemes-seat-planner-lite'),
+            'PDF_PREVIEW_ERROR_ORDER_NOT_FOUND' => esc_html__('Order not found.', 'stachethemes-seat-planner-lite'),
+            'PDF_PREVIEW_ERROR_PDF_FAILED'    => esc_html__('Failed to generate PDF. The order may not contain auditorium products.', 'stachethemes-seat-planner-lite'),
+            'PDF_PREVIEW_ERROR_FORBIDDEN'     => esc_html__('You do not have permission to preview PDFs.', 'stachethemes-seat-planner-lite'),
+            'PDF_PREVIEW_NOTES_TITLE'         => esc_html__('Important Notes', 'stachethemes-seat-planner-lite'),
+            'PDF_PREVIEW_NOTE_1'              => esc_html__('The order must contain at least one auditorium product to generate a PDF.', 'stachethemes-seat-planner-lite'),
+            'PDF_PREVIEW_NOTE_2'              => esc_html__('PDF templates can be customized by placing stachesepl-pdf-body.php and stachesepl-pdf-loop.php template files in your theme.', 'stachethemes-seat-planner-lite'),
+            'PDF_PREVIEW_NOTE_3'              => esc_html__('Use this tool to test your PDF template before sending tickets to customers.', 'stachethemes-seat-planner-lite'),
+
+            // Order Not Found Page
+            'ORDER_NOT_FOUND_HEADER'          => esc_html__('Order Not Found', 'stachethemes-seat-planner-lite'),
+            'ORDER_NOT_FOUND_TITLE'           => esc_html__('Oops!', 'stachethemes-seat-planner-lite'),
+            'ORDER_NOT_FOUND_MESSAGE'         => esc_html__('The order you are looking for could not be found. It may have been deleted or the ID may be incorrect.', 'stachethemes-seat-planner-lite'),
+            // translators: %s - order ID
+            'ORDER_NOT_FOUND_MESSAGE_WITH_ID' => esc_html__('Order #%s could not be found. It may have been deleted or the ID may be incorrect.', 'stachethemes-seat-planner-lite'),
+            'GO_TO_TOOLS'                     => esc_html__('Go to Tools', 'stachethemes-seat-planner-lite'),
+
+            'QR_CUSTOM_FIELDS'                               => esc_html__('Custom Fields', 'stachethemes-seat-planner-lite'),
+            'QR_CODE_SCAN_FAILED'                            => esc_html__('QR code scan failed. Please try again.', 'stachethemes-seat-planner-lite'),
+            'CAMERA_ACCESS_DENIED'                           => esc_html__('Camera access denied. Please allow camera access to scan QR codes.', 'stachethemes-seat-planner-lite'),
+            'CAMERA_IN_USE_OR_UNAVAILABLE'                   => esc_html__('Camera is in use by another application or unavailable. Please close other applications using the camera and try again.', 'stachethemes-seat-planner-lite'),
+            'NO_CAMERA_FOUND'                                => esc_html__('No camera found. Please ensure a camera is connected and try again.', 'stachethemes-seat-planner-lite'),
+            'QR_CODE_INVALID'                                => esc_html__('This QR code does not contain valid seat data.', 'stachethemes-seat-planner-lite'),
+            'JUST_A_MOMENT'                                  => esc_html__('Just a moment', 'stachethemes-seat-planner-lite'),
+            'SEAT_SCANNER'                                   => esc_html__('Seat Scanner', 'stachethemes-seat-planner-lite'),
+            'SCAN_THE_QR_CODE_TO_GET_SEAT_DETAILS'           => esc_html__('Scan the QR code to validate your ticket', 'stachethemes-seat-planner-lite'),
+            'SCAN_NOW'                                       => esc_html__('Scan Now', 'stachethemes-seat-planner-lite'),
+            'SCAN_NEW_TICKET'                                => esc_html__('Scan New Ticket', 'stachethemes-seat-planner-lite'),
+            'ORDER_ID'                                       => esc_html__('Order ID', 'stachethemes-seat-planner-lite'),
+            'SEAT_ID'                                        => esc_html__('Seat ID', 'stachethemes-seat-planner-lite'),
+            'ORDER_STATUS'                                   => esc_html__('Order Status', 'stachethemes-seat-planner-lite'),
+            'NAME'                                           => esc_html__('Name', 'stachethemes-seat-planner-lite'),
+            'TICKET_IS_VALID'                                => esc_html__('Ticket is valid', 'stachethemes-seat-planner-lite'),
+            'TICKET_IS_INVALID'                              => esc_html__('Ticket is invalid', 'stachethemes-seat-planner-lite'),
+            'TICKET_IS_USED'                                 => esc_html__('Ticket was already scanned', 'stachethemes-seat-planner-lite'),
+            'TICKET_IS_EXPIRED'                              => esc_html__('Ticket date has expired', 'stachethemes-seat-planner-lite'),
+            // Translators: %1$s - seat ID, %2$s - user name
+            'TICKET_SCANNED_BY__S__ON__S__'                  => esc_html__('This ticket has already been scanned by %1$s on %2$s', 'stachethemes-seat-planner-lite'),
+            'PRODUCT_NOT_FOUND'                              => esc_html__('Product Not found', 'stachethemes-seat-planner-lite'),
+            'QR_CODE_SCANNER'                                => esc_html__('QR Code Scanner', 'stachethemes-seat-planner-lite'),
+            'SCAN_QR_CODE_TO_VALIDATE_TICKET'                => esc_html__('Scan QR code to validate ticket', 'stachethemes-seat-planner-lite'),
+            'CLOSE'                                          => esc_html__('Close', 'stachethemes-seat-planner-lite'),
+            'ERROR'                                          => esc_html__('Error', 'stachethemes-seat-planner-lite'),
+            'GENERIC_ERROR_MESSAGE'                          => esc_html__('Sorry, something went wrong. Please try again.', 'stachethemes-seat-planner-lite'),
+            'TRY_AGAIN'                                      => esc_html__('Try Again', 'stachethemes-seat-planner-lite'),
+            'DATE'                                           => esc_html__('Date', 'stachethemes-seat-planner-lite'),
+            'SCAN_TICKETS_TO_VERIFY_AND_CHECK_IN'            => esc_html__('Scan tickets to verify and check-in guests', 'stachethemes-seat-planner-lite'),
+            'SCAN_QR_CODE'                                   => esc_html__('Scan QR Code', 'stachethemes-seat-planner-lite'),
+            'POSITION_QR_CODE_IN_FRAME'                      => esc_html__('Position the QR code within the frame to scan', 'stachethemes-seat-planner-lite'),
+            'VIEW_ORDER'                                     => esc_html__('View Order', 'stachethemes-seat-planner-lite'),
+            'N/A'                                            => esc_html__('N/A', 'stachethemes-seat-planner-lite'),
+
+            // Settings page
+            'SETTINGS_TITLE'                                 => esc_html__('Settings', 'stachethemes-seat-planner-lite'),
+            'SETTINGS_DESCRIPTION'                           => esc_html__('This is where you can configure all the plugin settings.', 'stachethemes-seat-planner-lite'),
+            'TAB_SLOT_RESERVATION'                           => esc_html__('Seat Reservation', 'stachethemes-seat-planner-lite'),
+            'TAB_CART_BEHAVIOR'                              => esc_html__('Cart Behavior', 'stachethemes-seat-planner-lite'),
+            'TAB_CART_TIMER'                                 => esc_html__('Cart Timer', 'stachethemes-seat-planner-lite'),
+            'TAB_ATTACHMENTS'                                => esc_html__('Attachments', 'stachethemes-seat-planner-lite'),
+            'TAB_ORDER_STATUS'                               => esc_html__('Order Status', 'stachethemes-seat-planner-lite'),
+            'TAB_MOBILE_APP'                                 => esc_html__('Mobile App', 'stachethemes-seat-planner-lite'),
+            'SAVING_SETTINGS'                                => esc_html__('Saving settings...', 'stachethemes-seat-planner-lite'),
+            'SETTINGS_SAVED_SUCCESSFULLY'                    => esc_html__('Settings saved successfully!', 'stachethemes-seat-planner-lite'),
+            'FAILED_TO_SAVE_SETTINGS'                        => esc_html__('Failed to save settings', 'stachethemes-seat-planner-lite'),
+            'SAVING'                                         => esc_html__('Saving...', 'stachethemes-seat-planner-lite'),
+            'SAVE_SETTINGS'                                  => esc_html__('Save Settings', 'stachethemes-seat-planner-lite'),
+            'FAILED_TO_SAVE_SETTINGS'                        => esc_html__('Failed to save settings', 'stachethemes-seat-planner-lite'),
+
+            // Slot Reservation tab
+            'SEAT_RESERVATION_TIME'                          => esc_html__('Seat Reservation Time', 'stachethemes-seat-planner-lite'),
+            'SEAT_RESERVATION_TIME_DESC'                     => esc_html__('How long a seat is reserved in the cart during checkout. Minimum: 5 minutes.', 'stachethemes-seat-planner-lite'),
+            'MINUTES'                                        => esc_html__('minutes', 'stachethemes-seat-planner-lite'),
+
+            // Cart Behavior tab
+            'DISABLE_REDIRECT'                              => esc_html__('Disabled', 'stachethemes-seat-planner-lite'),
+            'REDIRECT_CUSTOMERS_AFTER_SUCCESSFUL_ADDITION'  => esc_html__('Redirect Customers After Successful Addition', 'stachethemes-seat-planner-lite'),
+            'REDIRECT_TO_CART_PAGE'                         => esc_html__('Redirect to Cart Page', 'stachethemes-seat-planner-lite'),
+            'REDIRECT_TO_CHECKOUT_PAGE'                     => esc_html__('Redirect to Checkout Page', 'stachethemes-seat-planner-lite'),
+            'SHOW_REDIRECT_MESSAGE'                         => esc_html__('Show Redirect Message', 'stachethemes-seat-planner-lite'),
+            'SHOW_REDIRECT_MESSAGE_DESCRIPTION'             => esc_html__('Show a message informing customers that they are being redirected to the cart or checkout page.', 'stachethemes-seat-planner-lite'),
+            'REDIRECT_MESSAGE'                              => esc_html__('Custom Redirect Message Text', 'stachethemes-seat-planner-lite'),
+            'REDIRECT_MESSAGE_DESCRIPTION'                  => esc_html__('Leave blank to use the default message.', 'stachethemes-seat-planner-lite'),
+
+            // Cart Timer tab
+            'ENABLE_CART_TIMER'                              => esc_html__('Enable Cart Timer', 'stachethemes-seat-planner-lite'),
+            'ENABLE_CART_TIMER_DESC'                         => esc_html__('Show a countdown timer for each reserved seat in the shopping cart.', 'stachethemes-seat-planner-lite'),
+            'CART_TIMER_BACKGROUND_COLOR'                    => esc_html__('Cart Timer Background Color', 'stachethemes-seat-planner-lite'),
+            'CART_TIMER_BACKGROUND_COLOR_DESC'               => esc_html__('Background color of the timer container.', 'stachethemes-seat-planner-lite'),
+            'CART_TIMER_TEXT_COLOR'                          => esc_html__('Cart Timer Text Color', 'stachethemes-seat-planner-lite'),
+            'CART_TIMER_TEXT_COLOR_DESC'                     => esc_html__('Color of the timer label text.', 'stachethemes-seat-planner-lite'),
+            'CART_TIMER_TIME_COLOR'                          => esc_html__('Cart Timer Time Color', 'stachethemes-seat-planner-lite'),
+            'CART_TIMER_TIME_COLOR_DESC'                     => esc_html__('Color of the countdown numbers.', 'stachethemes-seat-planner-lite'),
+            'CART_TIMER_CRITICAL_TIME_COLOR'                 => esc_html__('Cart Timer Critical Time Color', 'stachethemes-seat-planner-lite'),
+            'CART_TIMER_CRITICAL_TIME_COLOR_DESC'            => esc_html__('Countdown color when time is running low (under 5 minutes).', 'stachethemes-seat-planner-lite'),
+            'CART_TIMER_PREVIEW'                              => esc_html__('Cart Timer Preview', 'stachethemes-seat-planner-lite'),
+            // Attachments tab
+            'ENABLE_PDF_ATTACHMENTS'                         => esc_html__('Enable PDF Attachments', 'stachethemes-seat-planner-lite'),
+            'ENABLE_PDF_ATTACHMENTS_DESC'                    => esc_html__('Attach a PDF ticket with QR code to order confirmation emails.', 'stachethemes-seat-planner-lite'),
+            'PDF_FILENAME'                                   => esc_html__('PDF Filename', 'stachethemes-seat-planner-lite'),
+            'PDF_FILENAME_DESC'                              => esc_html__('Name of the PDF file (without .pdf extension). Leave blank to use the default name.', 'stachethemes-seat-planner-lite'),
+            'PDF_FILENAME_PLACEHOLDER'                       => esc_html__('PDF Filename', 'stachethemes-seat-planner-lite'),
+
+            // Order Status tab
+            'AUTO_COMPLETE_ORDERS'                           => esc_html__('Auto-Complete Orders', 'stachethemes-seat-planner-lite'),
+            'AUTO_COMPLETE_ORDERS_DESC'                      => esc_html__('Automatically mark orders containing auditorium products as "Completed" when payment is received.', 'stachethemes-seat-planner-lite'),
+
+            // Mobile App tab
+            'ANDROID_APP'                                    => esc_html__('Android App', 'stachethemes-seat-planner-lite'),
+            'ANDROID_APP_DESC'                               => esc_html__('Download the Android app to scan tickets at your venue.', 'stachethemes-seat-planner-lite'),
+            'DOWNLOAD_ANDROID_APK'                           => esc_html__('Download Android App', 'stachethemes-seat-planner-lite'),
+            'REST_API_BASE_URL'                              => esc_html__('REST API Base URL', 'stachethemes-seat-planner-lite'),
+            'REST_API_BASE_URL_DESC'                         => esc_html__('Your REST URL for API integrations. Use this URL in the mobile app.', 'stachethemes-seat-planner-lite'),
+            'COPY'                                           => esc_html__('Copy', 'stachethemes-seat-planner-lite'),
+            'COPIED'                                         => esc_html__('Copied!', 'stachethemes-seat-planner-lite'),
+            'ENABLE_APP_ACCESS'                              => esc_html__('Enable App Access', 'stachethemes-seat-planner-lite'),
+            'ENABLE_APP_ACCESS_DESC'                         => esc_html__('Enable mobile app access to your site to allow qr code validation of tickets.', 'stachethemes-seat-planner-lite'),
+            'APP_SECRET_KEY'                                 => esc_html__('App Secret Key', 'stachethemes-seat-planner-lite'),
+            'APP_SECRET_KEY_DESC'                            => esc_html__('Minimum 8 characters.', 'stachethemes-seat-planner-lite'),
+            'APP_SECRET_KEY_PLACEHOLDER'                     => esc_html__('Enter or generate a secret key', 'stachethemes-seat-planner-lite'),
+            'GENERATE'                                       => esc_html__('Generate', 'stachethemes-seat-planner-lite'),
+            'SECRET_KEY_MIN_LENGTH_ERROR'                    => esc_html__('Secret key must be at least 8 characters long.', 'stachethemes-seat-planner-lite'),
+        ];
+    }
+
     // Translates the front javascript strings
     public static function get_front_strings() {
 

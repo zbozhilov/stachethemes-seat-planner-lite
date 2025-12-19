@@ -1,0 +1,15 @@
+.stachesepl-page-settings {
+    max-width: 800px;
+}
+
+.stachesepl-page-settings-content {
+    margin-bottom: var(--stachesepl-space-6);
+}
+
+.stachesepl-page-settings-footer {
+    display: flex;
+    align-items: center;
+    gap: var(--stachesepl-space-4);
+    padding-top: var(--stachesepl-space-4);
+    border-top: 1px solid var(--stachesepl-border-light);
+}

@@ -1,0 +1,22 @@
+@use '@src/admin/Dashboard/Variables.scss' as *;
+
+// =====================================================
+// Base Dashboard Styles
+// =====================================================
+
+body {
+    background-color: var(--stachesepl-bg-page);
+}
+
+#stachesepl-dashboard {
+    font-family: var(--stachesepl-font-sans);
+    font-size: var(--stachesepl-text-base);
+    line-height: var(--stachesepl-leading-normal);
+    color: var(--stachesepl-text-primary);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    
+    * {
+        box-sizing: border-box;
+    }
+}

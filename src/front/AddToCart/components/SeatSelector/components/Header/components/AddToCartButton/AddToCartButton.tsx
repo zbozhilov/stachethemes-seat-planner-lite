@@ -100,19 +100,26 @@ const AddToCartButton = () => {
                 }
 
                 const seatsCount = selectedSeats.length;
-                const shouldRedirect = 
+                const shouldRedirect =
                     window.seat_planner_add_to_cart &&
                     window.seat_planner_add_to_cart.cart_redirect_after_add === 'yes' &&
                     typeof window.seat_planner_add_to_cart.cart_redirect_url === 'string';
 
+
                 // If redirecting, show overlay immediately and don't close modal yet
                 if (shouldRedirect) {
-                    setShowRedirectOverlay(true);
-                    
+
+                    const showRedirectMessage = window.seat_planner_add_to_cart.cart_redirect_message === 'yes' ? true : false;
+                    const timeoutDelay = showRedirectMessage ? 1500 : 100;
+
+                    if (showRedirectMessage) {
+                        setShowRedirectOverlay(true);
+                    }
+
                     setTimeout(() => {
                         window.location.href = window.seat_planner_add_to_cart.cart_redirect_url;
-                    }, 1500);
-                    
+                    }, timeoutDelay);
+
                     return;
                 }
 
@@ -170,6 +177,8 @@ const AddToCartButton = () => {
         classNameArray.push('loading');
     }
 
+    const redirectMessage = window.seat_planner_add_to_cart.cart_redirect_message_text || __('REDIRECTING_TO_PAYMENT');
+
     return (
         <>
 
@@ -181,7 +190,7 @@ const AddToCartButton = () => {
                         <div className="stachesepl-redirect-content">
                             <div className="stachesepl-redirect-spinner" />
                             <div className="stachesepl-redirect-text">
-                                <h3>{__('REDIRECTING_TO_PAYMENT')}</h3>
+                                <h3>{redirectMessage}</h3>
                                 <p>{__('PLEASE_WAIT')}</p>
                             </div>
                             <div className="stachesepl-redirect-progress">

@@ -197,26 +197,29 @@ class Auditorium_Product_Scripts {
             ]
         );
 
-        $cart_url = wc_get_cart_url();
-        $cart_redirect_after_add = apply_filters('stachesepl_cart_redirect_after_add', get_option('woocommerce_cart_redirect_after_add'));
-        $cart_redirect_url = apply_filters('stachesepl_cart_redirect_url', $cart_url);
+        $cart_url                = wc_get_cart_url();
+        $checkout_url            = wc_get_checkout_url();
+        $cart_redirect_after_add = get_option('stachesepl_cart_redirect', 'checkout') !== 'disabled' ? 'yes' : 'no';
+        $cart_redirect_url       = get_option('stachesepl_cart_redirect', 'checkout') === 'cart' ? $cart_url : $checkout_url;
 
         $inline_script = sprintf(
             'var seat_planner_add_to_cart = %s;',
             wp_json_encode([
-                'cart_url'                => esc_url($cart_url),
-                'ajax_url'                => esc_url(admin_url('admin-ajax.php')),
-                'nonce'                   => wp_create_nonce('stachethemes_seat_planner'),
-                'currency'                => esc_html(get_woocommerce_currency()),
-                'currency_symbol'         => esc_html(get_woocommerce_currency_symbol()),
-                'currency_format'         => esc_html(get_woocommerce_price_format()),
-                'currency_decimals'       => absint(wc_get_price_decimals()),
-                'symbol_position'         => esc_html(get_option('woocommerce_currency_pos')),
-                'decimals_separator'      => esc_html(wc_get_price_decimal_separator()),
-                'thousand_separator'      => esc_html(wc_get_price_thousand_separator()),
-                'cart_redirect_after_add' => esc_html($cart_redirect_after_add),
-                'cart_redirect_url'       => esc_url($cart_redirect_url),
-                'can_view_seat_orders'    => current_user_can('manage_woocommerce')
+                'cart_url'                   => esc_url($cart_url),
+                'ajax_url'                   => esc_url(admin_url('admin-ajax.php')),
+                'nonce'                      => wp_create_nonce('stachethemes_seat_planner'),
+                'currency'                   => esc_html(get_woocommerce_currency()),
+                'currency_symbol'            => esc_html(get_woocommerce_currency_symbol()),
+                'currency_format'            => esc_html(get_woocommerce_price_format()),
+                'currency_decimals'          => absint(wc_get_price_decimals()),
+                'symbol_position'            => esc_html(get_option('woocommerce_currency_pos')),
+                'decimals_separator'         => esc_html(wc_get_price_decimal_separator()),
+                'thousand_separator'         => esc_html(wc_get_price_thousand_separator()),
+                'cart_redirect_after_add'    => esc_html($cart_redirect_after_add),
+                'cart_redirect_url'          => esc_url($cart_redirect_url),
+                'cart_redirect_message'      => get_option('stachesepl_cart_redirect_message', 'yes'),
+                'cart_redirect_message_text' => esc_html(get_option('stachesepl_cart_redirect_message_text', '')),
+                'can_view_seat_orders'       => current_user_can('manage_woocommerce')
             ])
         );
 

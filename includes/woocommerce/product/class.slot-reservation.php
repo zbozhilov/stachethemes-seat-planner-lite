@@ -15,6 +15,7 @@ if (! defined('ABSPATH')) {
 class Slot_Reservation {
 
     private static $did_init = false;
+    private static $minimum_reserve_time = 5; // 5 minutes
     private static $reserve_time = 0;
     private static $transient_prefix = 'stachesepl_sr_';
 
@@ -25,16 +26,8 @@ class Slot_Reservation {
             return;
         }
 
-        self::$did_init = true;
-
+        self::$did_init     = true;
         self::$reserve_time = self::get_reserve_time();
-        // WooCommerce Settings > Products
-        add_filter('woocommerce_get_settings_products', [__CLASS__, 'add_settings'], 10, 1);
-        add_action('woocommerce_update_options_products', [__CLASS__, 'save_settings'], 10, 1);
-
-        if (!self::$reserve_time) {
-            return; // No need to continue if reservation time is 0
-        }
 
         add_filter('stachesepl_before_add_to_cart', [__CLASS__, 'verify_seat_not_reserved'], 10, 3);
         add_filter('stachesepl_after_add_to_cart', [__CLASS__, 'reserve_seat'], 10, 5);
@@ -43,90 +36,15 @@ class Slot_Reservation {
     }
 
     public static function get_reserve_time() {
-        return max(0, (int) apply_filters('stachesepl_reserve_time', get_option('stachesepl_reserve_time', 24 * 60)));
-    }
+        $min_time = self::$minimum_reserve_time;
 
-    public static function add_settings($settings) {
-
-        $settings[] = [
-            'title' => esc_html__('Seat Reservation', 'stachethemes-seat-planner'),
-            'type'  => 'title',
-            'desc'  => '',
-            'id'    => 'stachesepl_seat_reservation',
-        ];
-
-        $settings[] = [
-            'title'    => esc_html__('Seat Reservation Time', 'stachethemes-seat-planner'),
-            'desc'     => esc_html__('The time in minutes that a seat will be reserved in the cart.', 'stachethemes-seat-planner'),
-            'id'       => 'stachesepl_reserve_time',
-            'type'     => 'number',
-            'default'  => self::$reserve_time,
-            'desc_tip' => true,
-        ];
-
-        $settings[] = [
-            'title'    => esc_html__('Cart Timer', 'stachethemes-seat-planner'),
-            'desc'     => esc_html__('Display seat reservation timer for each reserved seat in the cart.', 'stachethemes-seat-planner'),
-            'id'       => 'stachesepl_cart_timer',
-            'type'     => 'checkbox',
-            'default'  => 'yes',
-        ];
-
-        $settings[] = [
-            // css var --stachesepl-cart-timer-background-color
-            'title'   => esc_html__('Cart Timer Background Color', 'stachethemes-seat-planner'),
-            'desc'    => esc_html__('Background color of the seat reservation timer in the cart.', 'stachethemes-seat-planner'),
-            'id'      => 'stachesepl_cart_timer_bg_color',
-            'type'    => 'color',
-            'default' => '#32373c',
-        ];
-
-        $settings[] = [
-            // css var --stachesepl-cart-timer-text-color
-            'title'   => esc_html__('Cart Timer Text Color', 'stachethemes-seat-planner'),
-            'desc'    => esc_html__('Text color of the seat reservation timer in the cart.', 'stachethemes-seat-planner'),
-            'id'      => 'stachesepl_cart_timer_text_color',
-            'type'    => 'color',
-            'default' => '#fff',
-        ];
-
-        $settings[] = [
-            // css var --stachesepl-cart-timer-color
-            'title'   => esc_html__('Cart Timer Time Color', 'stachethemes-seat-planner'),
-            'desc'    => esc_html__('Color of the countdown time value in the seat reservation timer.', 'stachethemes-seat-planner'),
-            'id'      => 'stachesepl_cart_timer_time_color',
-            'type'    => 'color',
-            'default' => '#fb8a2e',
-        ];
-
-        $settings[] = [
-            // css var --stachesepl-cart-timer-critical-color
-            'title'   => esc_html__('Cart Timer Time Color (Critical)', 'stachethemes-seat-planner'),
-            'desc'    => esc_html__('Color of the countdown time value in the seat reservation timer when it is less than 5 minutes.', 'stachethemes-seat-planner'),
-            'id'      => 'stachesepl_cart_timer_time_color_critical',
-            'type'    => 'color',
-            'default' => '#ff6c5f',
-        ];
-
-        $settings[] = [
-            'type' => 'sectionend',
-            'id'   => 'stachesepl_seat_reservation',
-        ];
-
-        return $settings;
-    }
-
-    public static function save_settings($settings) {
-
-        $nonce_value = isset($_POST['_wpnonce']) ? wp_unslash($_POST['_wpnonce']) : ''; // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
-
-        if (!wp_verify_nonce($nonce_value, 'woocommerce-settings')) {
-            return;
-        }
-
-        $reserve_time = isset($_POST['stachesepl_reserve_time']) ? (int) $_POST['stachesepl_reserve_time'] : 0;
-
-        update_option('stachesepl_reserve_time', max(0, $reserve_time));
+        return max(
+            $min_time,
+            (int) apply_filters(
+                'stachesepl_reserve_time',
+                get_option('stachesepl_reserve_time', 15)
+            )
+        );
     }
 
     // Public API - validation and cart hooks
@@ -135,7 +53,7 @@ class Slot_Reservation {
         $product_id = $product->get_id();
 
         if (self::is_seat_reserved($product_id, $seat_id, $selected_date)) {
-            throw new \Exception(esc_html__('This seat was just added to another cart. Please select another seat or try again later.', 'stachethemes-seat-planner-lite'));
+            throw new \Exception(esc_html__('This seat was just added to another cart. Please select another seat or try again later.', 'stachethemes-seat-planne-lite'));
         }
     }
 

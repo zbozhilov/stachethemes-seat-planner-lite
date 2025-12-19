@@ -4,12 +4,12 @@
 **Requires:** 6.7  
 **Tested up to:** 6.9
 **Requires PHP:** 8.2  
-**Stable tag:** 1.0.35  
+**Stable tag:** 1.0.36  
 **License:** GPLv2 or later  
 **WC requires at least:** 9.5  
 **WC tested up to:** 10 
 
-A WooCommerce extension for creating and managing seat-based products with a drag & drop seat planner.
+A WooCommerce extension for creating & selling seat-based products with a drag & drop seat planner.
 
 ## Description
 
@@ -44,6 +44,13 @@ Easily create and manage seating arrangements for events, venues, or any seat-ba
 https://github.com/zbozhilov/stachethemes-seat-planner-lite
 
 ## Changelog
+
+### 1.0.36
+- Added new plugin dashboard centralizing settings and features.
+- Added new option "Auto-Complete Orders": automatically marks orders as Completed when payment is received for auditorium products.
+- Added new option to control whether users are redirected after adding seats to the cart.
+- Added new option to choose whether users are redirected to the cart or checkout page.
+- Added new option to control whether customers are shown a message during redirection.
 
 ### 1.0.35
 - Added Dashboard Widget showing Seats Sold & Revenue for the last 30 days

@@ -1,6 +1,6 @@
-import { discountData } from "@src/admin/Discounts/components/Discounts/types";
-import { WorkflowObject } from "src/admin/SeatPlanner/components/Editor/components/Workflow/components/Objects/types";
-import { WorkflowProps } from "src/admin/SeatPlanner/components/Editor/components/Workflow/types";
+import { discountData } from "@src/admin/Product/Discounts/components/Discounts/types";
+import { WorkflowObject } from "@src/admin/Product/SeatPlanner/components/Editor/components/Workflow/components/Objects/types";
+import { WorkflowProps } from "@src/admin/Product/SeatPlanner/components/Editor/components/Workflow/types";
 
 export type FrontWorkflowProps = WorkflowProps;
 export type FrontWorkflowObject = WorkflowObject & {

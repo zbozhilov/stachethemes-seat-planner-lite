@@ -1,0 +1,173 @@
+.stachesepl-color-picker-wrapper {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: var(--stachesepl-space-2);
+
+    &.stachesepl-color-picker-disabled {
+        opacity: 0.5;
+        pointer-events: none;
+    }
+}
+
+.stachesepl-color-picker-label {
+    font-size: var(--stachesepl-text-sm);
+    font-weight: 500;
+    color: var(--stachesepl-text-primary);
+    margin: 0;
+}
+
+.stachesepl-color-picker-description {
+    font-size: var(--stachesepl-text-sm);
+    color: var(--stachesepl-text-secondary);
+    line-height: var(--stachesepl-leading-relaxed);
+}
+
+.stachesepl-color-picker-input-wrapper {
+    display: flex;
+    align-items: center;
+    gap: var(--stachesepl-space-3);
+}
+
+.stachesepl-color-picker-swatch {
+    position: relative;
+    width: 44px;
+    height: 44px;
+    border-radius: var(--stachesepl-radius-md);
+    border: 2px solid var(--stachesepl-border);
+    cursor: pointer;
+    transition: 
+        border-color var(--stachesepl-transition-fast),
+        box-shadow var(--stachesepl-transition-fast),
+        transform var(--stachesepl-transition-fast);
+
+    &:hover {
+        border-color: var(--stachesepl-primary);
+        box-shadow: var(--stachesepl-shadow-focus);
+    }
+
+    &:focus {
+        outline: none;
+        border-color: var(--stachesepl-primary);
+        box-shadow: var(--stachesepl-shadow-focus);
+    }
+
+    &:active {
+        transform: scale(0.96);
+    }
+}
+
+.stachesepl-color-picker-value-container {
+    max-width: 120px;
+    flex: 0 0 auto;
+}
+
+.stachesepl-color-picker-value {
+    font-family: var(--stachesepl-font-mono) !important;
+    min-width: 80px;
+    max-height: 40px;
+    font-weight: 400 !important;
+    font-size: var(--stachesepl-text-sm) !important;
+}
+
+// Dropdown styles
+.stachesepl-color-picker-dropdown {
+    position: absolute;
+    z-index: 99999;
+    width: 300px;
+    padding: var(--stachesepl-space-4);
+    box-sizing: border-box;
+    border-radius: var(--stachesepl-radius-lg);
+    background-color: var(--stachesepl-bg-card);
+    border: 1px solid var(--stachesepl-border);
+    box-shadow: var(--stachesepl-shadow-lg);
+    animation: stachesepl-color-picker-fade-in var(--stachesepl-transition-fast) ease-out;
+
+    // Arrow pointing down (dropdown appears above)
+    &.stachesepl-color-picker-dropdown-top::after {
+        content: '';
+        position: absolute;
+        bottom: -7px;
+        left: 24px;
+        width: 0;
+        height: 0;
+        border-left: 8px solid transparent;
+        border-right: 8px solid transparent;
+        border-top: 8px solid var(--stachesepl-bg-card);
+        filter: drop-shadow(0 1px 1px rgba(0, 0, 0, 0.05));
+    }
+
+    // Arrow pointing up (dropdown appears below)
+    &:not(.stachesepl-color-picker-dropdown-top)::after {
+        content: '';
+        position: absolute;
+        top: -7px;
+        left: 24px;
+        width: 0;
+        height: 0;
+        border-left: 8px solid transparent;
+        border-right: 8px solid transparent;
+        border-bottom: 8px solid var(--stachesepl-bg-card);
+        filter: drop-shadow(0 -1px 1px rgba(0, 0, 0, 0.05));
+    }
+
+    // react-color-palette overrides
+    .rcp-root {
+        --rcp-background-color: transparent;
+        --rcp-input-border: var(--stachesepl-border);
+        --rcp-input-label: var(--stachesepl-text-muted);
+    }
+
+    .rcp-saturation {
+        border-radius: var(--stachesepl-radius-md);
+        cursor: crosshair;
+    }
+
+    .rcp-hue,
+    .rcp-alpha {
+        cursor: pointer;
+        border-radius: var(--stachesepl-radius-sm);
+    }
+
+    .rcp-field-input {
+        font-weight: 500;
+        font-size: var(--stachesepl-text-sm);
+        font-family: var(--stachesepl-font-mono);
+        color: var(--stachesepl-text-primary);
+        background-color: var(--stachesepl-bg-muted);
+        border: 1px solid var(--stachesepl-border);
+        border-radius: var(--stachesepl-radius-sm);
+        transition: border-color var(--stachesepl-transition-fast);
+
+        &:focus {
+            outline: none;
+            border-color: var(--stachesepl-primary);
+        }
+    }
+
+    .rcp-field-label {
+        font-size: var(--stachesepl-text-xs);
+        color: var(--stachesepl-text-muted);
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+    }
+
+    .rcp-body {
+        padding-bottom: var(--stachesepl-space-2);
+    }
+
+    .rcp-fields {
+        gap: var(--stachesepl-space-2);
+    }
+}
+
+@keyframes stachesepl-color-picker-fade-in {
+    from {
+        opacity: 0;
+        transform: translateY(8px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}

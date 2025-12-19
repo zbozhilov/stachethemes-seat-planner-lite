@@ -11,7 +11,7 @@ class Bookings_Data {
         $product = wc_get_product($product_id);
 
         if (! $product || ! $product->is_type('auditorium')) {
-            throw new \Exception(esc_html__('Invalid product ID or product is not an auditorium type.', 'stachethemes-seat-planner-lite'));
+            throw new \Exception(esc_html__('Invalid product ID or product is not an auditorium type.', 'stachethemes-seat-planne-lite'));
         }
 
         $this->product = $product;
@@ -29,14 +29,23 @@ class Bookings_Data {
                 continue; // Skip items that do not match the product ID
             }
 
-            $seat_data = (array) $item->get_meta('seat_data');
+            $seat_data_meta = $item->get_meta('seat_data');
+            $seat_data      = is_array($seat_data_meta) ? $seat_data_meta : (is_object($seat_data_meta) ? (array) $seat_data_meta : []);
 
-            if (!$seat_data) {
+            if (empty($seat_data)) {
                 continue;
             }
 
-            $seat_id       = $seat_data['seatId'];
+            $seat_id       = isset($seat_data['seatId']) ? $seat_data['seatId'] : '';
             $selected_date = isset($seat_data['selectedDate']) ? $seat_data['selectedDate'] : '';
+            $custom_fields = isset($seat_data['customFields']) ? $seat_data['customFields'] : [];
+
+            if (is_object($custom_fields)) {
+                $custom_fields = (array) $custom_fields;
+            }
+            if (!is_array($custom_fields)) {
+                $custom_fields = [];
+            }
 
             if (!$seat_id) {
                 continue;
@@ -48,6 +57,7 @@ class Bookings_Data {
                 'seat_id'    => $seat_id,
                 'price'      => $item->get_total(),
                 'date_time'  => $selected_date,
+                'custom_fields' => $custom_fields,
             ];
         }
 
@@ -89,7 +99,7 @@ class Bookings_Data {
 
         return $orders_with_this_product_id;
     }
-
+    
     public function get_orders_with_seat($seat_id, $selected_date = '') {
 
         $orders = $this->get_orders();

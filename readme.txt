@@ -3,12 +3,12 @@ Tags: WooCommerce, Seat, Booking, Event, Venue
 Requires: 6.7
 Tested up to: 6.9
 Requires PHP: 8.2
-Stable tag: 1.0.35
+Stable tag: 1.0.36
 License: GPLv2 or later
 WC requires at least: 9.5
 WC tested up to: 10
 
-A WooCommerce extension for creating and managing seat-based products with a drag & drop seat planner.
+A WooCommerce extension for creating & selling seat-based products with a drag & drop seat planner.
 
 == Description ==
 A WooCommerce extension that adds a custom Auditorium product type for selecting seats with a drag & drop seat planner.
@@ -22,6 +22,9 @@ Easily create and manage seating arrangements for events, venues, or any seat-ba
 - **Easy-to-Use Drag & Drop Editor**: Manage seats effortlessly with a simple drag-and-drop interface. No technical skills required.
 - **QR Code Generator for Each Seat**: Automatically generate a unique QR code for each seat purchased, allowing for easy digital validation.
 - **QR Code Scanner for Ticket Validation**: Enable quick entry and ensure smooth check-ins for event attendees.
+- **Auto Complete Orders**: Option to automatically update the order status to “Completed” when payment is received for orders containing Auditorium products.
+- **Auto Redirect to Cart/Checkout Page**: Set up automatic redirection to the cart or to the checkout page after a customer adds a seat to their cart.
+- **Cart Timer**: Option to display a timer under each seat in the cart and checkout page.
 - **Double Booking Checker**: Detects and flags accidental duplicate seat reservations.
 - **Ghost Booking Checker**: Detects and fixes seats that appear free on the front-end but have existing orders.
 
@@ -65,6 +68,13 @@ Upgrade to **Stachethemes Seat Planner Premium** for advanced features:
 - [React Zoom Pan Pinch](https://www.npmjs.com/package/react-zoom-pan-pinch)
 
 == Changelog ==
+
+= 1.0.36 =
+- Added new plugin dashboard centralizing settings and features.
+- Added new option "Auto-Complete Orders": automatically marks orders as Completed when payment is received for auditorium products.
+- Added new option to control whether users are redirected after adding seats to the cart.
+- Added new option to choose whether users are redirected to the cart or checkout page.
+- Added new option to control whether customers are shown a message during redirection.
 
 = 1.0.35 =
 - Added Dashboard Widget showing Seats Sold & Revenue for the last 30 days

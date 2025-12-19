@@ -1,0 +1,63 @@
+.stachesepl-mobile-app-section {
+    &-title {
+        font-size: 1rem;
+        font-weight: 600;
+        color: var(--stachesepl-text-primary, #1e293b);
+        margin: 0 0 0.5rem 0;
+    }
+
+    &-description {
+        font-size: 0.875rem;
+        color: var(--stachesepl-text-secondary, #64748b);
+        margin: 0 0 1rem 0;
+    }
+}
+
+.stachesepl-mobile-app-download-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.625rem 1rem;
+    background-color: var(--stachesepl-bg-secondary, #f1f5f9);
+    color: var(--stachesepl-text-primary, #1e293b);
+    border-radius: 0.375rem;
+    font-size: 0.875rem;
+    font-weight: 500;
+    text-decoration: none;
+    transition: background-color 0.15s ease;
+
+    &:hover {
+        background-color: var(--stachesepl-bg-tertiary, #e2e8f0);
+    }
+
+    svg {
+        flex-shrink: 0;
+    }
+}
+
+.stachesepl-mobile-app-copy-button,
+.stachesepl-mobile-app-generate-button {
+    padding: 0.375rem 0.75rem;
+    background-color: var(--stachesepl-bg-secondary, #f1f5f9);
+    color: var(--stachesepl-text-primary, #1e293b);
+    border: none;
+    border-radius: 0.25rem;
+    font-size: 0.75rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color 0.15s ease;
+    white-space: nowrap;
+
+    &:hover {
+        background-color: var(--stachesepl-bg-tertiary, #e2e8f0);
+    }
+}
+
+.stachesepl-mobile-app-error {
+    margin: 0.5rem 0 0 0;
+    font-size: 0.75rem;
+    color: var(--stachesepl-error, #ef4444);
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+}

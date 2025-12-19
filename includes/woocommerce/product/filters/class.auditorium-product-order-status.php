@@ -20,6 +20,7 @@ class Auditorium_Product_Order_Status {
         add_action('woocommerce_order_status_changed', [__CLASS__, 'order_status_changed'], 10, 4);
         add_action('woocommerce_delete_order_items', [__CLASS__, 'before_delete_order_items'], 10);
         add_action('woocommerce_before_trash_order', [__CLASS__, 'before_trash_order'], 10, 2);
+
     }
 
     private static function get_status_groups() {
@@ -106,10 +107,11 @@ class Auditorium_Product_Order_Status {
                 case 'reserve':
                     $product->delete_meta_taken_seat($seat_id, $selected_date);
                     $product->save_meta_data();
+
                     Slot_Reservation::release_transient($product_id, $seat_id, $selected_date);
                     Slot_Reservation::insert_transient($product_id, $seat_id, [
                         'session_id'    => 'system',
-                        'reserve_time'  => 1440,
+                        'reserve_time'  => 1440 * 7, // lock for 7 days
                         'selected_date' => $selected_date
                     ]);
 
@@ -117,10 +119,17 @@ class Auditorium_Product_Order_Status {
 
                 case 'confirm':
 
-                    $product->delete_meta_taken_seat($seat_id, $selected_date);
                     $product->add_meta_taken_seat($seat_id, $selected_date);
                     $product->save_meta_data();
                     Slot_Reservation::release_transient($product_id, $seat_id, $selected_date);
+
+                    // Automatically complete paid orders if the option is enabled
+                    if (get_option('stachesepl_auto_confirm_paid_orders') === 'yes') {
+                        if ($that->is_paid() && $that->get_status() !== 'completed') {
+                            $that->update_status('completed');
+                        }
+                    }
+
                     break;
 
                 case 'cancel':
@@ -129,12 +138,15 @@ class Auditorium_Product_Order_Status {
                     $other_orders_with_this_seat = array_diff($orders_with_seat_id, [$that->get_id()]);
 
                     if (!empty($other_orders_with_this_seat)) {
+                        // Prevent release of a seat if it is already booked by another order
+                        // Otherwise we risk to release a seat that was already confirmed by another order
                         continue 2;
                     }
 
                     $product->delete_meta_taken_seat($seat_id, $selected_date);
                     $product->save_meta_data();
                     Slot_Reservation::release_transient($product_id, $seat_id, $selected_date);
+
                     break;
             }
         }

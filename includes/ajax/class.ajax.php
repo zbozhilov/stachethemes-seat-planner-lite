@@ -28,7 +28,9 @@ class Ajax {
             'fix_ghost_booking',
             'get_product_ids',
             'check_product_booking',
-            'get_order_details_by_seat_id'
+            'get_order_details_by_seat_id',
+            'get_overview_stats',
+            'save_dashboard_settings'
         ];
 
         if (empty($task) || !in_array($task, $allowed_tasks, true)) {
@@ -382,7 +384,7 @@ class Ajax {
                         break;
                     }
 
-                    case 'get_order_details_by_seat_id': {
+                case 'get_order_details_by_seat_id': {
 
                         if (! current_user_can('manage_woocommerce')) {
                             wp_send_json_error(['error' => esc_html__('You do not have the required permissions to access this feature.', 'stachethemes-seat-planner-lite')]);
@@ -401,6 +403,55 @@ class Ajax {
                         $data         = $booking_data->get_order_details_by_seat_id($seat_id, $selected_date);
 
                         wp_send_json_success($data);
+
+                        break;
+                    }
+
+                case 'get_overview_stats': {
+
+                        if (!current_user_can('manage_woocommerce')) {
+                            wp_send_json_error([
+                                'error' => esc_html__('You do not have the required permissions to access this feature.', 'stachethemes-seat-planner-lite')
+                            ]);
+                        }
+
+                        $stats = Overview_Stats::get_stats();
+
+                        wp_send_json_success($stats);
+
+                        break;
+                    }
+
+                case 'save_dashboard_settings': {
+
+                        if (!current_user_can('manage_options')) {
+                            wp_send_json_error([
+                                'error' => esc_html__('You do not have the required permissions to save settings.', 'stachethemes-seat-planner-lite')
+                            ]);
+                        }
+
+                        // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
+                        $settings_json = isset($_POST['settings']) ? wp_unslash($_POST['settings']) : '';
+                        $settings      = json_decode($settings_json, true);
+
+                        if (json_last_error() !== JSON_ERROR_NONE || !is_array($settings)) {
+                            wp_send_json_error([
+                                'error' => esc_html__('Invalid settings data format.', 'stachethemes-seat-planner-lite')
+                            ]);
+                        }
+
+                        $result = Dashboard::save_settings($settings);
+
+                        if ($result) {
+                            wp_send_json_success([
+                                'message'  => esc_html__('Settings saved successfully.', 'stachethemes-seat-planner-lite'),
+                                'settings' => Dashboard::get_settings()
+                            ]);
+                        } else {
+                            wp_send_json_error([
+                                'error' => esc_html__('Failed to save settings.', 'stachethemes-seat-planner-lite')
+                            ]);
+                        }
 
                         break;
                     }

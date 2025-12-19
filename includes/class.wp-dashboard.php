@@ -1,6 +1,6 @@
-<?php 
+<?php
 
-namespace Stachethemes\SeatPlanner;
+namespace Stachethemes\SeatPlannerLite;
 
 if (! defined('ABSPATH')) {
     exit;
@@ -17,6 +17,9 @@ class WP_Dashboard {
      */
     public static function init() {
         add_action('wp_dashboard_setup', [__CLASS__, 'register_widget']);
+        add_action('admin_bar_menu', [__CLASS__, 'add_admin_bar_menu'], 100);
+        add_action('admin_head', [__CLASS__, 'add_admin_bar_styles']);
+        add_action('wp_head', [__CLASS__, 'add_admin_bar_styles']);
     }
 
     /**
@@ -25,7 +28,7 @@ class WP_Dashboard {
     public static function register_widget() {
         wp_add_dashboard_widget(
             'stachethemes_seat_planner_seats_sold',
-            esc_html__('Seats Sold & Revenue (Last 30 Days)', 'stachethemes-seat-planner'),
+            esc_html__('Seats Sold & Revenue (Last 30 Days)', 'stachethemes-seat-planner-lite'),
             [__CLASS__, 'render_widget']
         );
     }
@@ -37,13 +40,13 @@ class WP_Dashboard {
         $stats = self::get_seats_and_revenue_stats();
         $formatted_count = number_format_i18n($stats['seats_sold']);
         $formatted_revenue = wc_price($stats['revenue']);
-        ?>
+?>
         <div class="stachethemes-seat-planner-dashboard-widget">
             <div style="display: flex; gap: 12px; flex-wrap: wrap;">
                 <div style="flex: 1; min-width: 180px; padding: 12px; background: #f6f7f7; border: 1px solid #dcdcde; border-radius: 6px;">
                     <div style="display: flex; align-items: center; gap: 8px; color: #50575e; font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: .02em;">
                         <span class="dashicons dashicons-groups" aria-hidden="true"></span>
-                        <span><?php echo esc_html__('Seats sold', 'stachethemes-seat-planner'); ?></span>
+                        <span><?php echo esc_html__('Seats sold', 'stachethemes-seat-planner-lite'); ?></span>
                     </div>
                     <div style="margin-top: 8px; font-size: 30px; line-height: 1.1; font-weight: 700; color: #1d2327;">
                         <?php echo esc_html($formatted_count); ?>
@@ -53,7 +56,7 @@ class WP_Dashboard {
                 <div style="flex: 1; min-width: 180px; padding: 12px; background: #f6f7f7; border: 1px solid #dcdcde; border-radius: 6px;">
                     <div style="display: flex; align-items: center; gap: 8px; color: #50575e; font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: .02em;">
                         <span class="dashicons dashicons-chart-line" aria-hidden="true"></span>
-                        <span><?php echo esc_html__('Revenue', 'stachethemes-seat-planner'); ?></span>
+                        <span><?php echo esc_html__('Revenue', 'stachethemes-seat-planner-lite'); ?></span>
                     </div>
                     <div style="margin-top: 8px; font-size: 30px; line-height: 1.1; font-weight: 700; color: #1d2327;">
                         <?php echo wp_kses_post($formatted_revenue); ?>
@@ -62,10 +65,10 @@ class WP_Dashboard {
             </div>
 
             <p style="margin: 10px 0 0 0; color: #50575e; font-size: 12px;">
-                <?php echo esc_html__('Completed orders • Last 30 days', 'stachethemes-seat-planner'); ?>
+                <?php echo esc_html__('Completed orders • Last 30 days', 'stachethemes-seat-planner-lite'); ?>
             </p>
         </div>
-        <?php
+    <?php
     }
 
     /**
@@ -85,7 +88,7 @@ class WP_Dashboard {
 
         // Calculate stats
         $date_after = strtotime('-30 days');
-        
+
         $orders = wc_get_orders([
             'type'                   => 'shop_order',
             'status'                 => ['wc-completed'],
@@ -134,6 +137,92 @@ class WP_Dashboard {
         set_transient($transient_key, $stats, 5 * MINUTE_IN_SECONDS);
 
         return $stats;
+    }
+
+    /**
+     * Add a menu item to the WordPress admin bar.
+     *
+     * @param \WP_Admin_Bar $wp_admin_bar The WordPress admin bar object.
+     */
+    public static function add_admin_bar_menu($wp_admin_bar) {
+        // Only show to users who can manage options
+        if (! apply_filters('stachesepl_can_read_qr_string_details', 'manage_woocommerce')) {
+            return;
+        }
+
+        $svg_icon = '<svg class="stachesepl-scanner-icon" focusable="false" aria-hidden="true" viewBox="0 0 24 24" width="16" height="16" data-testid="QrCodeScannerIcon"><path d="M9.5 6.5v3h-3v-3zM11 5H5v6h6zm-1.5 9.5v3h-3v-3zM11 13H5v6h6zm6.5-6.5v3h-3v-3zM19 5h-6v6h6zm-6 8h1.5v1.5H13zm1.5 1.5H16V16h-1.5zM16 13h1.5v1.5H16zm-3 3h1.5v1.5H13zm1.5 1.5H16V19h-1.5zM16 16h1.5v1.5H16zm1.5-1.5H19V16h-1.5zm0 3H19V19h-1.5zM22 7h-2V4h-3V2h5zm0 15v-5h-2v3h-3v2zM2 22h5v-2H4v-3H2zM2 2v5h2V4h3V2z"></path></svg>';
+
+        $wp_admin_bar->add_menu([
+            'id'    => 'stachesepl-scanner',
+            'title' => $svg_icon . '<span class="ab-label">' . esc_html__('Seat Scanner', 'stachethemes-seat-planner-lite') . '</span>',
+            'href'  => admin_url('admin.php?page=stachesepl#scanner'),
+            'meta'  => [
+                'title' => esc_html__('Open Seat Planner QR Code Scanner', 'stachethemes-seat-planner-lite'),
+            ],
+        ]);
+    }
+
+    /**
+     * Add custom styles for the admin bar menu item.
+     */
+    public static function add_admin_bar_styles() {
+        // Only show styles to users who can read QR string details
+        if (! apply_filters('stachesepl_can_read_qr_string_details', 'manage_woocommerce')) {
+            return;
+        }
+    ?>
+        <style>
+            #wp-admin-bar-stachesepl-scanner .stachesepl-scanner-icon {
+                display: inline-block;
+                vertical-align: middle;
+                fill: currentColor;
+                margin-right: 6px;
+                transition: opacity 0.2s ease;
+            }
+
+            #wp-admin-bar-stachesepl-scanner:hover .stachesepl-scanner-icon {
+                opacity: 0.8;
+            }
+
+            #wp-admin-bar-stachesepl-scanner .ab-item {
+                display: flex;
+                align-items: center;
+            }
+
+            /* Ensure visibility on mobile devices */
+            @media screen and (max-width: 782px) {
+                #wp-admin-bar-stachesepl-scanner {
+                    display: block !important;
+                }
+
+                #wp-admin-bar-stachesepl-scanner .ab-item {
+                    display: flex !important;
+                    align-items: center;
+                    padding: 7px 10px;
+                }
+
+                #wp-admin-bar-stachesepl-scanner .stachesepl-scanner-icon {
+                    display: inline-block !important;
+                    margin-right: 8px;
+                }
+
+                #wp-admin-bar-stachesepl-scanner .ab-label {
+                    display: inline-block !important;
+                }
+
+                #wp-admin-bar-stachesepl-scanner svg {
+                    width: 32px;
+                    height: 32px;
+                    margin-left: 8px;
+                    color: #c3c4c7;
+                }
+
+                #wp-admin-bar-stachesepl-scanner:hover svg {
+                    color: #72aee6;
+                }
+            }
+        </style>
+<?php
     }
 }
 
