@@ -2,14 +2,14 @@
 # This file is distributed under the GNU General Public License v2 or later.
 msgid ""
 msgstr ""
-"Project-Id-Version: Stachethemes Seat Planner Lite 1.0.35\n"
+"Project-Id-Version: Stachethemes Seat Planner Lite 1.0.36\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/stachethemes-seat-planner-lite\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2025-12-15T15:35:49+00:00\n"
+"POT-Creation-Date: 2025-12-19T18:24:38+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.11.0\n"
 "X-Domain: stachethemes-seat-planner-lite\n"
@@ -39,192 +39,116 @@ msgstr ""
 msgid "https://woocommerce.com/vendor/stachethemes/"
 msgstr ""
 
-#: includes/ajax/class.ajax.php:35
+#: includes/ajax/class.ajax.php:37
 msgid "Invalid task"
 msgstr ""
 
-#: includes/ajax/class.ajax.php:48
-#: includes/ajax/class.ajax.php:138
-#: includes/ajax/class.ajax.php:321
-#: includes/ajax/class.ajax.php:342
-#: includes/ajax/class.ajax.php:365
-#: includes/ajax/class.ajax.php:397
+#: includes/ajax/class.ajax.php:50
+#: includes/ajax/class.ajax.php:140
+#: includes/ajax/class.ajax.php:323
+#: includes/ajax/class.ajax.php:344
+#: includes/ajax/class.ajax.php:367
+#: includes/ajax/class.ajax.php:399
 msgid "Invalid product ID"
 msgstr ""
 
-#: includes/ajax/class.ajax.php:55
-#: includes/ajax/class.ajax.php:59
-#: includes/ajax/class.ajax.php:156
+#: includes/ajax/class.ajax.php:57
+#: includes/ajax/class.ajax.php:61
+#: includes/ajax/class.ajax.php:158
 msgid "Product not found"
 msgstr ""
 
-#: includes/ajax/class.ajax.php:66
+#: includes/ajax/class.ajax.php:68
 msgid "Invalid date"
 msgstr ""
 
-#: includes/ajax/class.ajax.php:73
+#: includes/ajax/class.ajax.php:75
 msgid "Failed to retrieve seat plan data"
 msgstr ""
 
-#: includes/ajax/class.ajax.php:85
+#: includes/ajax/class.ajax.php:87
 msgid "Failed to retrieve taken seats"
 msgstr ""
 
-#: includes/ajax/class.ajax.php:145
+#: includes/ajax/class.ajax.php:147
 msgid "Invalid seat data format"
 msgstr ""
 
-#: includes/ajax/class.ajax.php:149
-#: includes/translation/class.translation.php:336
+#: includes/ajax/class.ajax.php:151
+#: includes/translation/class.translation.php:574
 msgid "No seats selected"
 msgstr ""
 
-#: includes/ajax/class.ajax.php:164
+#: includes/ajax/class.ajax.php:166
 msgid "The selected date is not available"
 msgstr ""
 
-#: includes/ajax/class.ajax.php:168
+#: includes/ajax/class.ajax.php:170
 msgid "The selected date is no longer available"
 msgstr ""
 
-#: includes/ajax/class.ajax.php:177
-#: includes/ajax/class.ajax.php:218
-#: includes/ajax/class.ajax.php:369
+#: includes/ajax/class.ajax.php:179
+#: includes/ajax/class.ajax.php:220
+#: includes/ajax/class.ajax.php:371
 msgid "Invalid seat ID"
 msgstr ""
 
-#: includes/ajax/class.ajax.php:222
+#: includes/ajax/class.ajax.php:224
 msgid "Failed to add seat to cart"
 msgstr ""
 
-#: includes/ajax/class.ajax.php:231
+#: includes/ajax/class.ajax.php:233
 msgid "Failed to generate mini cart"
 msgstr ""
 
-#: includes/ajax/class.ajax.php:243
+#: includes/ajax/class.ajax.php:245
 msgid "Seats added to cart"
 msgstr ""
 
-#: includes/ajax/class.ajax.php:257
+#: includes/ajax/class.ajax.php:259
 msgid "You do not have the required permissions to access QR code details. Please contact the site administrator if you believe this is an error."
 msgstr ""
 
-#: includes/ajax/class.ajax.php:264
+#: includes/ajax/class.ajax.php:266
 msgid "QR string not specified"
 msgstr ""
 
-#: includes/ajax/class.ajax.php:282
-#: includes/ajax/class.ajax.php:297
-#: includes/ajax/class.ajax.php:314
-#: includes/ajax/class.ajax.php:335
-#: includes/ajax/class.ajax.php:356
-#: includes/ajax/class.ajax.php:388
+#: includes/ajax/class.ajax.php:284
+#: includes/ajax/class.ajax.php:299
+#: includes/ajax/class.ajax.php:316
+#: includes/ajax/class.ajax.php:337
+#: includes/ajax/class.ajax.php:358
+#: includes/ajax/class.ajax.php:390
+#: includes/ajax/class.ajax.php:414
 msgid "You do not have the required permissions to access this feature."
 msgstr ""
 
-#: includes/ajax/class.ajax.php:376
+#: includes/ajax/class.ajax.php:378
 msgid "Seat has been marked as taken."
 msgstr ""
 
-#: includes/ajax/class.ajax.php:379
+#: includes/ajax/class.ajax.php:381
 msgid "Failed to fix ghost booking."
 msgstr ""
 
-#: includes/ajax/class.ajax.php:409
+#: includes/ajax/class.ajax.php:429
+msgid "You do not have the required permissions to save settings."
+msgstr ""
+
+#: includes/ajax/class.ajax.php:439
+msgid "Invalid settings data format."
+msgstr ""
+
+#: includes/ajax/class.ajax.php:447
+msgid "Settings saved successfully."
+msgstr ""
+
+#: includes/ajax/class.ajax.php:452
+msgid "Failed to save settings."
+msgstr ""
+
+#: includes/ajax/class.ajax.php:460
 msgid "No action specified"
-msgstr ""
-
-#: includes/class.admin-menu.php:117
-#: includes/class.admin-menu.php:118
-#: includes/translation/class.translation.php:18
-msgid "Seat Scanner"
-msgstr ""
-
-#: includes/class.admin-menu.php:125
-#: includes/class.admin-menu.php:126
-msgid "Seat Planner Booking Integrity Checker"
-msgstr ""
-
-#: includes/class.admin-menu.php:133
-#: includes/class.admin-menu.php:134
-#: includes/class.admin-menu.php:200
-msgid "Seat Planner App Settings"
-msgstr ""
-
-#: includes/class.admin-menu.php:149
-msgid "Booking Integrity Checker"
-msgstr ""
-
-#: includes/class.admin-menu.php:150
-msgid "Use this tool to check for booking data inconsistencies in your auditorium products."
-msgstr ""
-
-#: includes/class.admin-menu.php:175
-msgid "Secret key must be at least 8 characters long."
-msgstr ""
-
-#: includes/class.admin-menu.php:188
-msgid "Settings saved."
-msgstr ""
-
-#: includes/class.admin-menu.php:201
-msgid "Use this tool to set up the Seat Planner app."
-msgstr ""
-
-#: includes/class.admin-menu.php:207
-msgid "Android App"
-msgstr ""
-
-#: includes/class.admin-menu.php:208
-msgid "Download Android APK"
-msgstr ""
-
-#: includes/class.admin-menu.php:209
-msgid "Android app is not available in Lite version."
-msgstr ""
-
-#: includes/class.admin-menu.php:217
-msgid "REST API Base URL"
-msgstr ""
-
-#: includes/class.admin-menu.php:220
-msgid "Copy"
-msgstr ""
-
-#: includes/class.admin-menu.php:221
-msgid "Your REST URL for API integrations."
-msgstr ""
-
-#: includes/class.admin-menu.php:225
-msgid "Enable/Disable"
-msgstr ""
-
-#: includes/class.admin-menu.php:228
-msgid "Enable access"
-msgstr ""
-
-#: includes/class.admin-menu.php:230
-msgid "Uncheck to temporarily disable access."
-msgstr ""
-
-#: includes/class.admin-menu.php:234
-msgid "App Secret Key"
-msgstr ""
-
-#: includes/class.admin-menu.php:237
-msgid "Generate"
-msgstr ""
-
-#: includes/class.admin-menu.php:238
-msgid "Minimum 8 characters. Store this securely; changing it may invalidate existing tokens."
-msgstr ""
-
-#: includes/class.admin-menu.php:245
-msgid "Save Changes"
-msgstr ""
-
-#: includes/class.admin-menu.php:289
-msgid "Copied!"
 msgstr ""
 
 #. Translators: %1$s is the plugin name, %2$s is the rating link
@@ -255,47 +179,133 @@ msgstr ""
 msgid "QR code for seat %1$s was scanned by %2$s."
 msgstr ""
 
+#: includes/class.wp-dashboard.php:31
+msgid "Seats Sold & Revenue (Last 30 Days)"
+msgstr ""
+
+#: includes/class.wp-dashboard.php:49
+msgid "Seats sold"
+msgstr ""
+
+#: includes/class.wp-dashboard.php:59
+#: includes/translation/class.translation.php:351
+msgid "Revenue"
+msgstr ""
+
+#: includes/class.wp-dashboard.php:68
+msgid "Completed orders • Last 30 days"
+msgstr ""
+
+#: includes/class.wp-dashboard.php:157
+#: includes/translation/class.translation.php:18
+#: includes/translation/class.translation.php:470
+msgid "Seat Scanner"
+msgstr ""
+
+#: includes/class.wp-dashboard.php:160
+msgid "Open Seat Planner QR Code Scanner"
+msgstr ""
+
+#: includes/dashboard/class.dashboard.php:28
+#: includes/dashboard/class.dashboard.php:29
+#: includes/woocommerce/product/filters/class.auditorium-product-admin.php:58
+msgid "Seat Planner"
+msgstr ""
+
+#: includes/dashboard/class.dashboard.php:39
+#: includes/dashboard/class.dashboard.php:40
+#: includes/translation/class.translation.php:344
+msgid "Overview"
+msgstr ""
+
+#: includes/dashboard/class.dashboard.php:47
+#: includes/dashboard/class.dashboard.php:48
+#: includes/translation/class.translation.php:360
+#: includes/translation/class.translation.php:499
+msgid "Settings"
+msgstr ""
+
+#: includes/dashboard/class.dashboard.php:55
+#: includes/dashboard/class.dashboard.php:56
+msgid "Scanner"
+msgstr ""
+
+#: includes/dashboard/class.dashboard.php:63
+#: includes/dashboard/class.dashboard.php:64
+#: includes/translation/class.translation.php:358
+#: includes/translation/class.translation.php:432
+msgid "Tools"
+msgstr ""
+
+#: includes/dashboard/class.dashboard.php:161
+#: includes/woocommerce/product/filters/class.auditorium-product-cart-timer.php:99
+#: includes/woocommerce/product/filters/class.auditorium-product-cart-timer.php:193
+#: includes/woocommerce/product/filters/class.auditorium-product-cart-timer.php:221
+msgid "Time remaining"
+msgstr ""
+
 #: includes/shortcodes/stachesepl_add_to_cart.php:30
 #: includes/woocommerce/product/templates/single/single.add-to-cart-template.php:16
 msgid "This product is currently out of stock and unavailable."
 msgstr ""
 
+#. translators: %d - product ID
+#: includes/tools/check-double-booking/class.check-double-booking.php:134
+msgid "Product #%d"
+msgstr ""
+
+#. translators: %d - product ID
+#: includes/tools/check-ghost-booking/class.check-ghost-booking.php:160
+msgid "Product #%d (Invalid)"
+msgstr ""
+
 #: includes/translation/class.translation.php:14
+#: includes/translation/class.translation.php:464
 msgid "QR code scan failed. Please try again."
 msgstr ""
 
 #: includes/translation/class.translation.php:15
+#: includes/translation/class.translation.php:465
 msgid "Camera access denied. Please allow camera access to scan QR codes."
 msgstr ""
 
 #: includes/translation/class.translation.php:16
+#: includes/translation/class.translation.php:468
 msgid "This QR code does not contain valid seat data."
 msgstr ""
 
 #: includes/translation/class.translation.php:17
+#: includes/translation/class.translation.php:469
 msgid "Just a moment"
 msgstr ""
 
 #: includes/translation/class.translation.php:19
+#: includes/translation/class.translation.php:471
 msgid "Scan the QR code to validate your ticket"
 msgstr ""
 
 #: includes/translation/class.translation.php:20
+#: includes/translation/class.translation.php:472
 msgid "Scan Now"
 msgstr ""
 
 #: includes/translation/class.translation.php:21
+#: includes/translation/class.translation.php:473
 msgid "Scan New Ticket"
 msgstr ""
 
 #: includes/translation/class.translation.php:22
 #: includes/translation/class.translation.php:298
-#: includes/translation/class.translation.php:373
+#: includes/translation/class.translation.php:441
+#: includes/translation/class.translation.php:474
+#: includes/translation/class.translation.php:611
 msgid "Order ID"
 msgstr ""
 
 #: includes/translation/class.translation.php:23
 #: includes/translation/class.translation.php:55
+#: includes/translation/class.translation.php:380
+#: includes/translation/class.translation.php:475
 #: includes/woocommerce/product/filters/class.auditorium-product-order-itemmeta.php:40
 #: includes/woocommerce/product/filters/class.auditorium-product-order-itemmeta.php:57
 #: includes/woocommerce/product/filters/class.auditorium-product-order-itemmeta.php:101
@@ -304,241 +314,299 @@ msgstr ""
 
 #: includes/translation/class.translation.php:24
 #: includes/translation/class.translation.php:302
-#: includes/translation/class.translation.php:371
+#: includes/translation/class.translation.php:476
+#: includes/translation/class.translation.php:505
+#: includes/translation/class.translation.php:609
 msgid "Order Status"
 msgstr ""
 
 #: includes/translation/class.translation.php:25
 #: includes/translation/class.translation.php:250
+#: includes/translation/class.translation.php:477
 msgid "Name"
 msgstr ""
 
 #: includes/translation/class.translation.php:26
+#: includes/translation/class.translation.php:478
 msgid "Ticket is valid"
 msgstr ""
 
 #: includes/translation/class.translation.php:27
+#: includes/translation/class.translation.php:479
 msgid "Ticket is invalid"
 msgstr ""
 
 #: includes/translation/class.translation.php:28
+#: includes/translation/class.translation.php:480
 msgid "Ticket was already scanned"
 msgstr ""
 
 #: includes/translation/class.translation.php:29
+#: includes/translation/class.translation.php:481
 msgid "Ticket date has expired"
 msgstr ""
 
 #. Translators: %1$s - seat ID, %2$s - user name
 #: includes/translation/class.translation.php:31
+#: includes/translation/class.translation.php:483
 msgid "This ticket has already been scanned by %1$s on %2$s"
 msgstr ""
 
 #: includes/translation/class.translation.php:32
+#: includes/translation/class.translation.php:484
 msgid "Product Not found"
 msgstr ""
 
 #: includes/translation/class.translation.php:33
+#: includes/translation/class.translation.php:485
 msgid "QR Code Scanner"
 msgstr ""
 
 #: includes/translation/class.translation.php:34
+#: includes/translation/class.translation.php:486
 msgid "Scan QR code to validate ticket"
 msgstr ""
 
 #: includes/translation/class.translation.php:35
 #: includes/translation/class.translation.php:164
-#: includes/translation/class.translation.php:337
+#: includes/translation/class.translation.php:487
+#: includes/translation/class.translation.php:575
 msgid "Close"
 msgstr ""
 
 #: includes/translation/class.translation.php:36
+#: includes/translation/class.translation.php:488
 msgid "Error"
 msgstr ""
 
 #: includes/translation/class.translation.php:37
-#: includes/translation/class.translation.php:355
+#: includes/translation/class.translation.php:489
+#: includes/translation/class.translation.php:593
 msgid "Sorry, something went wrong. Please try again."
 msgstr ""
 
 #: includes/translation/class.translation.php:38
 #: includes/translation/class.translation.php:51
+#: includes/translation/class.translation.php:376
+#: includes/translation/class.translation.php:490
 msgid "Try Again"
 msgstr ""
 
 #: includes/translation/class.translation.php:39
-#: includes/translation/class.translation.php:372
+#: includes/translation/class.translation.php:491
+#: includes/translation/class.translation.php:610
 msgid "Date"
 msgstr ""
 
 #: includes/translation/class.translation.php:47
+#: includes/translation/class.translation.php:372
 msgid "Check Now"
 msgstr ""
 
 #: includes/translation/class.translation.php:48
+#: includes/translation/class.translation.php:373
 msgid "Checking..."
 msgstr ""
 
 #: includes/translation/class.translation.php:49
 #: includes/translation/class.translation.php:219
+#: includes/translation/class.translation.php:374
 msgid "Cancel"
 msgstr ""
 
 #: includes/translation/class.translation.php:50
+#: includes/translation/class.translation.php:375
 msgid "Preparing to check..."
 msgstr ""
 
 #: includes/translation/class.translation.php:52
+#: includes/translation/class.translation.php:377
 msgid "Results"
 msgstr ""
 
 #. translators: %1$d - number of products checked, %2$d - total number of products
 #: includes/translation/class.translation.php:54
+#: includes/translation/class.translation.php:379
 msgid "Results (%1$d of %2$d products checked)"
 msgstr ""
 
 #: includes/translation/class.translation.php:56
+#: includes/translation/class.translation.php:381
 msgid "Order IDs"
 msgstr ""
 
 #: includes/translation/class.translation.php:57
+#: includes/translation/class.translation.php:382
 msgid "No products found to check."
 msgstr ""
 
 #: includes/translation/class.translation.php:58
+#: includes/translation/class.translation.php:383
 msgid "Actions"
 msgstr ""
 
 #: includes/translation/class.translation.php:59
 #: includes/translation/class.translation.php:88
+#: includes/translation/class.translation.php:384
+#: includes/translation/class.translation.php:413
 msgid "No issues"
 msgstr ""
 
 #: includes/translation/class.translation.php:62
+#: includes/translation/class.translation.php:387
 msgid "Select Check Type"
 msgstr ""
 
 #: includes/translation/class.translation.php:63
+#: includes/translation/class.translation.php:388
 msgid "Double Booking Check"
 msgstr ""
 
 #: includes/translation/class.translation.php:64
+#: includes/translation/class.translation.php:389
 msgid "Ghost Booking Check"
 msgstr ""
 
 #: includes/translation/class.translation.php:65
+#: includes/translation/class.translation.php:390
 msgid "Find seats that have been booked multiple times (same seat appears in multiple orders)."
 msgstr ""
 
 #: includes/translation/class.translation.php:66
+#: includes/translation/class.translation.php:391
 msgid "Find seats that appear free on the front-end but have existing orders (data inconsistency)."
 msgstr ""
 
 #. translators: %1$d - number of products being checked, %2$d - total number of products
 #: includes/translation/class.translation.php:70
+#: includes/translation/class.translation.php:395
 msgid "Checking for double bookings... %1$d of %2$d products"
 msgstr ""
 
 #: includes/translation/class.translation.php:71
+#: includes/translation/class.translation.php:396
 msgid "An error occurred while checking for double bookings."
 msgstr ""
 
 #: includes/translation/class.translation.php:72
+#: includes/translation/class.translation.php:397
 msgid "No duplicates"
 msgstr ""
 
 #: includes/translation/class.translation.php:73
+#: includes/translation/class.translation.php:398
 msgid "1 duplicate"
 msgstr ""
 
 #. translators: %d - number of duplicates
 #: includes/translation/class.translation.php:75
+#: includes/translation/class.translation.php:400
 msgid "%d duplicates"
 msgstr ""
 
 #: includes/translation/class.translation.php:76
+#: includes/translation/class.translation.php:401
 msgid "Booking Count"
 msgstr ""
 
 #: includes/translation/class.translation.php:77
+#: includes/translation/class.translation.php:402
 msgid "No duplicate bookings found for this product."
 msgstr ""
 
 #. translators: %d - number of products with duplicate bookings (plural)
 #: includes/translation/class.translation.php:79
+#: includes/translation/class.translation.php:404
 msgid "Check complete. %d products have duplicate bookings."
 msgstr ""
 
 #. translators: For when only one product has duplicate bookings
 #: includes/translation/class.translation.php:81
+#: includes/translation/class.translation.php:406
 msgid "Check complete. 1 product has duplicate bookings."
 msgstr ""
 
 #: includes/translation/class.translation.php:82
+#: includes/translation/class.translation.php:407
 msgid "Check complete. No duplicate bookings found."
 msgstr ""
 
 #. translators: %1$d - number of products being checked, %2$d - total number of products
 #: includes/translation/class.translation.php:86
+#: includes/translation/class.translation.php:411
 msgid "Checking for ghost bookings... %1$d of %2$d products"
 msgstr ""
 
 #: includes/translation/class.translation.php:87
+#: includes/translation/class.translation.php:412
 msgid "An error occurred while checking for ghost bookings."
 msgstr ""
 
 #: includes/translation/class.translation.php:89
+#: includes/translation/class.translation.php:414
 msgid "1 ghost seat"
 msgstr ""
 
 #. translators: %d - number of ghost seats
 #: includes/translation/class.translation.php:91
+#: includes/translation/class.translation.php:416
 msgid "%d ghost seats"
 msgstr ""
 
 #: includes/translation/class.translation.php:92
+#: includes/translation/class.translation.php:417
 msgid "Event Date"
 msgstr ""
 
 #: includes/translation/class.translation.php:93
+#: includes/translation/class.translation.php:418
 msgid "Order Count"
 msgstr ""
 
 #: includes/translation/class.translation.php:94
+#: includes/translation/class.translation.php:419
 msgid "No ghost bookings found for this product."
 msgstr ""
 
 #. translators: %d - number of products with ghost bookings (plural)
 #: includes/translation/class.translation.php:96
+#: includes/translation/class.translation.php:421
 msgid "Check complete. %d products have ghost bookings."
 msgstr ""
 
 #. translators: For when only one product has ghost bookings
 #: includes/translation/class.translation.php:98
+#: includes/translation/class.translation.php:423
 msgid "Check complete. 1 product has ghost bookings."
 msgstr ""
 
 #: includes/translation/class.translation.php:99
+#: includes/translation/class.translation.php:424
 msgid "Check complete. No ghost bookings found."
 msgstr ""
 
 #: includes/translation/class.translation.php:100
+#: includes/translation/class.translation.php:425
 msgid "Mark as Taken"
 msgstr ""
 
 #: includes/translation/class.translation.php:101
+#: includes/translation/class.translation.php:426
 msgid "Fixing..."
 msgstr ""
 
 #: includes/translation/class.translation.php:102
+#: includes/translation/class.translation.php:427
 msgid "Fixed"
 msgstr ""
 
 #: includes/translation/class.translation.php:103
+#: includes/translation/class.translation.php:428
 msgid "Fix failed"
 msgstr ""
 
 #: includes/translation/class.translation.php:104
+#: includes/translation/class.translation.php:429
 msgid "No specific date"
 msgstr ""
 
@@ -591,7 +659,7 @@ msgid "Screen"
 msgstr ""
 
 #: includes/translation/class.translation.php:124
-#: includes/translation/class.translation.php:357
+#: includes/translation/class.translation.php:595
 msgid "Seat"
 msgstr ""
 
@@ -1199,6 +1267,7 @@ msgid "List is empty"
 msgstr ""
 
 #: includes/translation/class.translation.php:296
+#: includes/translation/class.translation.php:463
 #: includes/woocommerce/product/filters/class.auditorium-product-admin.php:82
 msgid "Custom Fields"
 msgstr ""
@@ -1293,122 +1362,539 @@ msgstr ""
 msgid "Customize your seat plan layout and properties. You can add seats, screens, text, and more."
 msgstr ""
 
+#: includes/translation/class.translation.php:335
+msgid "App access is not available in the Lite version"
+msgstr ""
+
+#: includes/translation/class.translation.php:336
+msgid "PDF attachments are not available in the Lite version"
+msgstr ""
+
+#: includes/translation/class.translation.php:337
+msgid "Dashboard"
+msgstr ""
+
 #: includes/translation/class.translation.php:338
-msgid "Add to Cart"
+msgid "Page not found"
 msgstr ""
 
 #: includes/translation/class.translation.php:339
-msgid "Zoom In"
+#: includes/translation/class.translation.php:457
+msgid "Oops!"
 msgstr ""
 
 #: includes/translation/class.translation.php:340
-msgid "Zoom Out"
+msgid "The page you are looking for does not exist."
 msgstr ""
 
 #: includes/translation/class.translation.php:341
+msgid "Go Home"
+msgstr ""
+
+#: includes/translation/class.translation.php:345
+msgid "Welcome to your Seat Planner dashboard. Get a quick overview of your venue bookings."
+msgstr ""
+
+#: includes/translation/class.translation.php:348
+msgid "At a Glance"
+msgstr ""
+
+#: includes/translation/class.translation.php:349
+msgid "Auditorium Products"
+msgstr ""
+
+#: includes/translation/class.translation.php:350
+msgid "Seats Sold"
+msgstr ""
+
+#: includes/translation/class.translation.php:352
+msgid "Scanned Today"
+msgstr ""
+
+#: includes/translation/class.translation.php:355
+msgid "Quick Actions"
+msgstr ""
+
+#: includes/translation/class.translation.php:356
+msgid "Ticket Scanner"
+msgstr ""
+
+#: includes/translation/class.translation.php:357
+msgid "Scan QR codes to verify and check-in guests at your venue."
+msgstr ""
+
+#: includes/translation/class.translation.php:359
+msgid "Run integrity checks and preview PDF tickets."
+msgstr ""
+
+#: includes/translation/class.translation.php:361
+msgid "Configure reservation time, cart behavior and more."
+msgstr ""
+
+#: includes/translation/class.translation.php:362
+msgid "View Orders"
+msgstr ""
+
+#: includes/translation/class.translation.php:363
+msgid "View and manage WooCommerce orders."
+msgstr ""
+
+#: includes/translation/class.translation.php:366
+msgid "Resources"
+msgstr ""
+
+#: includes/translation/class.translation.php:367
+msgid "Documentation"
+msgstr ""
+
+#: includes/translation/class.translation.php:368
+msgid "Get Support"
+msgstr ""
+
+#: includes/translation/class.translation.php:433
+msgid "Utility tools for managing your seat planner bookings and PDF tickets."
+msgstr ""
+
+#: includes/translation/class.translation.php:434
+msgid "Booking Integrity"
+msgstr ""
+
+#: includes/translation/class.translation.php:435
+msgid "PDF Preview"
+msgstr ""
+
+#: includes/translation/class.translation.php:438
+msgid "PDF preview is not available in the Lite version"
+msgstr ""
+
+#: includes/translation/class.translation.php:439
+msgid "Preview Order PDF"
+msgstr ""
+
+#: includes/translation/class.translation.php:440
+msgid "Enter an order ID to preview the PDF ticket that would be generated for that order. The PDF will open in a new tab."
+msgstr ""
+
+#: includes/translation/class.translation.php:442
+msgid "Enter the WooCommerce order ID to preview its PDF ticket."
+msgstr ""
+
+#: includes/translation/class.translation.php:443
+msgid "e.g., 1234"
+msgstr ""
+
+#: includes/translation/class.translation.php:444
+msgid "Preview PDF"
+msgstr ""
+
+#: includes/translation/class.translation.php:445
+#: includes/translation/class.translation.php:446
+msgid "Please enter a valid order ID."
+msgstr ""
+
+#: includes/translation/class.translation.php:447
+msgid "Order not found."
+msgstr ""
+
+#: includes/translation/class.translation.php:448
+msgid "Failed to generate PDF. The order may not contain auditorium products."
+msgstr ""
+
+#: includes/translation/class.translation.php:449
+msgid "You do not have permission to preview PDFs."
+msgstr ""
+
+#: includes/translation/class.translation.php:450
+msgid "Important Notes"
+msgstr ""
+
+#: includes/translation/class.translation.php:451
+msgid "The order must contain at least one auditorium product to generate a PDF."
+msgstr ""
+
+#: includes/translation/class.translation.php:452
+msgid "PDF templates can be customized by placing stachesepl-pdf-body.php and stachesepl-pdf-loop.php template files in your theme."
+msgstr ""
+
+#: includes/translation/class.translation.php:453
+msgid "Use this tool to test your PDF template before sending tickets to customers."
+msgstr ""
+
+#: includes/translation/class.translation.php:456
+msgid "Order Not Found"
+msgstr ""
+
+#: includes/translation/class.translation.php:458
+msgid "The order you are looking for could not be found. It may have been deleted or the ID may be incorrect."
+msgstr ""
+
+#. translators: %s - order ID
+#: includes/translation/class.translation.php:460
+msgid "Order #%s could not be found. It may have been deleted or the ID may be incorrect."
+msgstr ""
+
+#: includes/translation/class.translation.php:461
+msgid "Go to Tools"
+msgstr ""
+
+#: includes/translation/class.translation.php:466
+msgid "Camera is in use by another application or unavailable. Please close other applications using the camera and try again."
+msgstr ""
+
+#: includes/translation/class.translation.php:467
+msgid "No camera found. Please ensure a camera is connected and try again."
+msgstr ""
+
+#: includes/translation/class.translation.php:492
+msgid "Scan tickets to verify and check-in guests"
+msgstr ""
+
+#: includes/translation/class.translation.php:493
+msgid "Scan QR Code"
+msgstr ""
+
+#: includes/translation/class.translation.php:494
+msgid "Position the QR code within the frame to scan"
+msgstr ""
+
+#: includes/translation/class.translation.php:495
+msgid "View Order"
+msgstr ""
+
+#: includes/translation/class.translation.php:496
+msgid "N/A"
+msgstr ""
+
+#: includes/translation/class.translation.php:500
+msgid "This is where you can configure all the plugin settings."
+msgstr ""
+
+#: includes/translation/class.translation.php:501
+msgid "Seat Reservation"
+msgstr ""
+
+#: includes/translation/class.translation.php:502
+msgid "Cart Behavior"
+msgstr ""
+
+#: includes/translation/class.translation.php:503
+msgid "Cart Timer"
+msgstr ""
+
+#: includes/translation/class.translation.php:504
+msgid "Attachments"
+msgstr ""
+
+#: includes/translation/class.translation.php:506
+msgid "Mobile App"
+msgstr ""
+
+#: includes/translation/class.translation.php:507
+msgid "Saving settings..."
+msgstr ""
+
+#: includes/translation/class.translation.php:508
+msgid "Settings saved successfully!"
+msgstr ""
+
+#: includes/translation/class.translation.php:509
+#: includes/translation/class.translation.php:512
+msgid "Failed to save settings"
+msgstr ""
+
+#: includes/translation/class.translation.php:510
+msgid "Saving..."
+msgstr ""
+
+#: includes/translation/class.translation.php:511
+msgid "Save Settings"
+msgstr ""
+
+#: includes/translation/class.translation.php:515
+msgid "Seat Reservation Time"
+msgstr ""
+
+#: includes/translation/class.translation.php:516
+msgid "How long a seat is reserved in the cart during checkout. Minimum: 5 minutes."
+msgstr ""
+
+#: includes/translation/class.translation.php:517
+msgid "minutes"
+msgstr ""
+
+#: includes/translation/class.translation.php:520
+msgid "Disabled"
+msgstr ""
+
+#: includes/translation/class.translation.php:521
+msgid "Redirect Customers After Successful Addition"
+msgstr ""
+
+#: includes/translation/class.translation.php:522
+msgid "Redirect to Cart Page"
+msgstr ""
+
+#: includes/translation/class.translation.php:523
+msgid "Redirect to Checkout Page"
+msgstr ""
+
+#: includes/translation/class.translation.php:524
+msgid "Show Redirect Message"
+msgstr ""
+
+#: includes/translation/class.translation.php:525
+msgid "Show a message informing customers that they are being redirected to the cart or checkout page."
+msgstr ""
+
+#: includes/translation/class.translation.php:526
+msgid "Custom Redirect Message Text"
+msgstr ""
+
+#: includes/translation/class.translation.php:527
+msgid "Leave blank to use the default message."
+msgstr ""
+
+#: includes/translation/class.translation.php:530
+msgid "Enable Cart Timer"
+msgstr ""
+
+#: includes/translation/class.translation.php:531
+msgid "Show a countdown timer for each reserved seat in the shopping cart."
+msgstr ""
+
+#: includes/translation/class.translation.php:532
+msgid "Cart Timer Background Color"
+msgstr ""
+
+#: includes/translation/class.translation.php:533
+msgid "Background color of the timer container."
+msgstr ""
+
+#: includes/translation/class.translation.php:534
+msgid "Cart Timer Text Color"
+msgstr ""
+
+#: includes/translation/class.translation.php:535
+msgid "Color of the timer label text."
+msgstr ""
+
+#: includes/translation/class.translation.php:536
+msgid "Cart Timer Time Color"
+msgstr ""
+
+#: includes/translation/class.translation.php:537
+msgid "Color of the countdown numbers."
+msgstr ""
+
+#: includes/translation/class.translation.php:538
+msgid "Cart Timer Critical Time Color"
+msgstr ""
+
+#: includes/translation/class.translation.php:539
+msgid "Countdown color when time is running low (under 5 minutes)."
+msgstr ""
+
+#: includes/translation/class.translation.php:540
+msgid "Cart Timer Preview"
+msgstr ""
+
+#: includes/translation/class.translation.php:542
+msgid "Enable PDF Attachments"
+msgstr ""
+
+#: includes/translation/class.translation.php:543
+msgid "Attach a PDF ticket with QR code to order confirmation emails."
+msgstr ""
+
+#: includes/translation/class.translation.php:544
+#: includes/translation/class.translation.php:546
+msgid "PDF Filename"
+msgstr ""
+
+#: includes/translation/class.translation.php:545
+msgid "Name of the PDF file (without .pdf extension). Leave blank to use the default name."
+msgstr ""
+
+#: includes/translation/class.translation.php:549
+msgid "Auto-Complete Orders"
+msgstr ""
+
+#: includes/translation/class.translation.php:550
+msgid "Automatically mark orders containing auditorium products as \"Completed\" when payment is received."
+msgstr ""
+
+#: includes/translation/class.translation.php:553
+msgid "Android App"
+msgstr ""
+
+#: includes/translation/class.translation.php:554
+msgid "Download the Android app to scan tickets at your venue."
+msgstr ""
+
+#: includes/translation/class.translation.php:555
+msgid "Download Android App"
+msgstr ""
+
+#: includes/translation/class.translation.php:556
+msgid "REST API Base URL"
+msgstr ""
+
+#: includes/translation/class.translation.php:557
+msgid "Your REST URL for API integrations. Use this URL in the mobile app."
+msgstr ""
+
+#: includes/translation/class.translation.php:558
+msgid "Copy"
+msgstr ""
+
+#: includes/translation/class.translation.php:559
+msgid "Copied!"
+msgstr ""
+
+#: includes/translation/class.translation.php:560
+msgid "Enable App Access"
+msgstr ""
+
+#: includes/translation/class.translation.php:561
+msgid "Enable mobile app access to your site to allow qr code validation of tickets."
+msgstr ""
+
+#: includes/translation/class.translation.php:562
+msgid "App Secret Key"
+msgstr ""
+
+#: includes/translation/class.translation.php:563
+msgid "Minimum 8 characters."
+msgstr ""
+
+#: includes/translation/class.translation.php:564
+msgid "Enter or generate a secret key"
+msgstr ""
+
+#: includes/translation/class.translation.php:565
+msgid "Generate"
+msgstr ""
+
+#: includes/translation/class.translation.php:566
+msgid "Secret key must be at least 8 characters long."
+msgstr ""
+
+#: includes/translation/class.translation.php:576
+msgid "Add to Cart"
+msgstr ""
+
+#: includes/translation/class.translation.php:577
+msgid "Zoom In"
+msgstr ""
+
+#: includes/translation/class.translation.php:578
+msgid "Zoom Out"
+msgstr ""
+
+#: includes/translation/class.translation.php:579
 msgid "Zoom Reset"
 msgstr ""
 
 #. translators: %d: number of seats
-#: includes/translation/class.translation.php:343
+#: includes/translation/class.translation.php:581
 msgid "Select at least %d seats"
 msgstr ""
 
-#: includes/translation/class.translation.php:344
+#: includes/translation/class.translation.php:582
 msgid "Maximum seats selected"
 msgstr ""
 
-#: includes/translation/class.translation.php:345
+#: includes/translation/class.translation.php:583
 msgid "Seat selected"
 msgstr ""
 
 #. translators: %d: number of seats
-#: includes/translation/class.translation.php:347
+#: includes/translation/class.translation.php:585
 msgid "%d seat selected"
 msgstr ""
 
 #. translators: %d: number of seats
-#: includes/translation/class.translation.php:349
+#: includes/translation/class.translation.php:587
 msgid "%d seats selected"
 msgstr ""
 
 #. translators: %d: number of seats
-#: includes/translation/class.translation.php:351
+#: includes/translation/class.translation.php:589
 msgid "%d seat added to cart."
 msgstr ""
 
 #. translators: %d: number of seats
-#: includes/translation/class.translation.php:353
+#: includes/translation/class.translation.php:591
 msgid "%d seats added to cart."
 msgstr ""
 
-#: includes/translation/class.translation.php:354
-#: includes/translation/class.translation.php:365
+#: includes/translation/class.translation.php:592
+#: includes/translation/class.translation.php:603
 msgid "View Cart"
 msgstr ""
 
-#: includes/translation/class.translation.php:356
+#: includes/translation/class.translation.php:594
 msgid "Failed to fetch seat plan data."
 msgstr ""
 
-#: includes/translation/class.translation.php:358
+#: includes/translation/class.translation.php:596
 msgid "Next"
 msgstr ""
 
-#: includes/translation/class.translation.php:359
+#: includes/translation/class.translation.php:597
 msgid "Back"
 msgstr ""
 
-#: includes/translation/class.translation.php:360
+#: includes/translation/class.translation.php:598
 msgid "Apply discounts to your seats to get the best price."
 msgstr ""
 
-#: includes/translation/class.translation.php:361
+#: includes/translation/class.translation.php:599
 msgid "Regular Seat"
 msgstr ""
 
-#: includes/translation/class.translation.php:362
+#: includes/translation/class.translation.php:600
 msgid "No discount applied"
 msgstr ""
 
-#: includes/translation/class.translation.php:363
+#: includes/translation/class.translation.php:601
 msgid "Total"
 msgstr ""
 
-#: includes/translation/class.translation.php:364
+#: includes/translation/class.translation.php:602
 #: includes/woocommerce/product/filters/class.auditorium-product-admin.php:74
 msgid "Discounts"
 msgstr ""
 
-#: includes/translation/class.translation.php:366
+#: includes/translation/class.translation.php:604
 msgid "This seat can only be purchased at the venue."
 msgstr ""
 
-#: includes/translation/class.translation.php:367
+#: includes/translation/class.translation.php:605
 msgid "Loading"
 msgstr ""
 
-#: includes/translation/class.translation.php:369
+#: includes/translation/class.translation.php:607
 msgid "Reserved By"
 msgstr ""
 
-#: includes/translation/class.translation.php:370
+#: includes/translation/class.translation.php:608
 msgid "Order Date"
 msgstr ""
 
-#: includes/translation/class.translation.php:374
+#: includes/translation/class.translation.php:612
 msgid "No order data found for this seat."
 msgstr ""
 
-#: includes/translation/class.translation.php:375
+#: includes/translation/class.translation.php:613
 msgid "Notice"
 msgstr ""
 
-#: includes/translation/class.translation.php:376
+#: includes/translation/class.translation.php:614
 msgid "We are redirecting you to the payment page"
 msgstr ""
 
-#: includes/translation/class.translation.php:377
+#: includes/translation/class.translation.php:615
 msgid "Please wait..."
 msgstr ""
 
@@ -1460,19 +1946,7 @@ msgstr ""
 msgid "Invalid product ID or product is not an auditorium type."
 msgstr ""
 
-#: includes/woocommerce/product/class.pdf-attachments.php:29
-msgid "Seat Planner Attachments"
-msgstr ""
-
-#: includes/woocommerce/product/class.pdf-attachments.php:36
-msgid "Enable PDF Attachments"
-msgstr ""
-
-#: includes/woocommerce/product/class.pdf-attachments.php:37
-msgid "Attach a PDF with ticket details and a QR code to each Completed Order email. (Not available in Lite version)"
-msgstr ""
-
-#: includes/woocommerce/product/class.slot-reservation.php:138
+#: includes/woocommerce/product/class.slot-reservation.php:56
 msgid "This seat was just added to another cart. Please select another seat or try again later."
 msgstr ""
 
@@ -1483,10 +1957,6 @@ msgstr ""
 
 #: includes/woocommerce/product/filters/class.auditorium-product-admin.php:50
 msgid "General"
-msgstr ""
-
-#: includes/woocommerce/product/filters/class.auditorium-product-admin.php:58
-msgid "Seat Planner"
 msgstr ""
 
 #: includes/woocommerce/product/filters/class.auditorium-product-admin.php:66
@@ -1570,12 +2040,6 @@ msgstr ""
 msgid "Choose a tax class for this product. Tax classes are used to apply different tax rates specific to certain types of product."
 msgstr ""
 
-#: includes/woocommerce/product/filters/class.auditorium-product-cart-timer.php:93
-#: includes/woocommerce/product/filters/class.auditorium-product-cart-timer.php:187
-#: includes/woocommerce/product/filters/class.auditorium-product-cart-timer.php:215
-msgid "Time remaining"
-msgstr ""
-
 #. translators: %s: product id
 #: includes/woocommerce/product/filters/class.auditorium-product-cart-validation.php:92
 #: includes/woocommerce/product/filters/class.auditorium-product-cart-validation.php:182
@@ -1612,16 +2076,6 @@ msgstr ""
 
 #: includes/woocommerce/product/filters/class.auditorium-product-select-seat-dates.php:52
 msgid "Choose a date"
-msgstr ""
-
-#. translators: %d - product ID
-#: includes/woocommerce/tools/check-double-booking/class.check-double-booking.php:134
-msgid "Product #%d"
-msgstr ""
-
-#. translators: %d - product ID
-#: includes/woocommerce/tools/check-ghost-booking/class.check-ghost-booking.php:160
-msgid "Product #%d (Invalid)"
 msgstr ""
 
 #: stachethemes-seat-planner-lite.php:46

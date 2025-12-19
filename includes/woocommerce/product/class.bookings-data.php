@@ -11,7 +11,7 @@ class Bookings_Data {
         $product = wc_get_product($product_id);
 
         if (! $product || ! $product->is_type('auditorium')) {
-            throw new \Exception(esc_html__('Invalid product ID or product is not an auditorium type.', 'stachethemes-seat-planne-lite'));
+            throw new \Exception(esc_html__('Invalid product ID or product is not an auditorium type.', 'stachethemes-seat-planner-lite'));
         }
 
         $this->product = $product;

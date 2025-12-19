@@ -53,7 +53,7 @@ class Slot_Reservation {
         $product_id = $product->get_id();
 
         if (self::is_seat_reserved($product_id, $seat_id, $selected_date)) {
-            throw new \Exception(esc_html__('This seat was just added to another cart. Please select another seat or try again later.', 'stachethemes-seat-planne-lite'));
+            throw new \Exception(esc_html__('This seat was just added to another cart. Please select another seat or try again later.', 'stachethemes-seat-planner-lite'));
         }
     }
 

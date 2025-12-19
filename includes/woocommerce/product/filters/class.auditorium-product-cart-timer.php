@@ -96,7 +96,7 @@ class Auditorium_Product_Cart_Timer {
             $handle,
             'stacheseplCartTimer',
             [
-                'label' => esc_html__('Time remaining', 'stachethemes-seat-planne-lite'),
+                'label' => esc_html__('Time remaining', 'stachethemes-seat-planner-lite'),
             ]
         );
 
@@ -190,7 +190,7 @@ class Auditorium_Product_Cart_Timer {
             }
 
             $item_data[] = [
-                'name'  => esc_html__('Time remaining', 'stachethemes-seat-planne-lite'),
+                'name'  => esc_html__('Time remaining', 'stachethemes-seat-planner-lite'),
                 // Store the raw expiration timestamp (escaped for HTML) so the
                 // JavaScript can calculate the remaining time on init.
                 'value' => esc_html((string) $expires_at),
