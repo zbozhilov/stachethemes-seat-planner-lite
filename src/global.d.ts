@@ -37,9 +37,14 @@ declare global {
         stachesepl_admin_url: {
             admin_url: string;
         };
+        stachesepl_server_datetime: {
+            now: string;
+        };
         stachesepl_date_format: {
             date_format: string;
             time_format: string;
+            week_start: string;
+            accent_color: string;
         };
         stachesepl_user_roles: Record<string, string>;
         stachesepl_pdf_preview: {
@@ -65,6 +70,7 @@ declare global {
         stacheseplCartTimer: {
             label: string;
         };
+        stacheseplSeatTooltip: 'yes' | 'no' | undefined;
     }
 }
 

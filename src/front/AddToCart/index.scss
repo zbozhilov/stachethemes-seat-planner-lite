@@ -1,0 +1,138 @@
+@keyframes skeleton-shimmer {
+    0% {
+        background-position: -100% 0;
+    }
+    100% {
+        background-position: 100% 0;
+    }
+}
+
+.stachesepl-date-time-input-placeholder {
+    user-select: none;
+    width: 320px;
+    max-width: 100%;
+    padding: 0.875rem 1rem;
+    font-size: 0.875rem;
+    margin-bottom: 20px;
+    line-height: 1;
+    border: 1px solid transparent;
+    border-radius: 12px;
+    background: linear-gradient(90deg, #f3f3f3 0%, #e8e8e8 50%, #f3f3f3 100%);
+    background-size: 200% 100%;
+    animation: skeleton-shimmer 1.5s linear infinite;
+    box-sizing: border-box;
+    display: block;
+
+    .stachesepl-date-time-input-placeholder-icon {
+        width: 1rem;
+        height: 1rem;
+        display: inline-block;
+    }
+}
+
+.stachesepl-select-seat-placeholder {
+    user-select: none;
+    border-radius: 10px;
+    font-weight: 600;
+    line-height: 1;
+    padding: 0.875rem 1.5rem;
+    text-decoration: none;
+    text-align: center;
+    font-size: 0.875rem;
+    cursor: default;
+    background: linear-gradient(90deg, #f3f3f3 0%, #e8e8e8 50%, #f3f3f3 100%);
+    background-size: 200% 100%;
+    animation: skeleton-shimmer 1.5s ease-in-out infinite;
+    color: transparent;
+    border: none;
+    display: inline-block;
+
+}
+
+.stachesepl-select-seats-button {
+    border-radius: 10px;
+    font-weight: 600;
+    line-height: 1;
+    padding: 0.875rem 1.5rem;
+    text-decoration: none;
+    text-align: center;
+    transition: transform .15s ease, box-shadow .15s ease;
+    font-size: 0.875rem;
+    cursor: pointer;
+    background-color: var(--stachesepl-select-seat-button-background-color, #873eff);
+    color: var(--stachesepl-select-seat-button-color, #fff);
+    border: none;
+    transition: background-color .15s ease, color .15s ease;
+
+    &:hover {
+        background-color: var(--stachesepl-select-seat-button-hover-background-color, #722ed1);
+        color: var(--stachesepl-select-seat-button-hover-color, #fff);
+    }
+}
+
+.stachesepl-view-cart-button {
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+
+    border-radius: 10px;
+    font-weight: 500;
+    line-height: 1;
+    padding: 0.875rem 1.5rem;
+    text-decoration: none;
+    text-align: center;
+    transition: transform .15s ease, box-shadow .15s ease;
+    font-size: 0.875rem;
+    cursor: pointer;
+    background-color: var(--stachesepl-view-cart-button-background-color, #202020);
+    color: var(--stachesepl-view-cart-button-color, #fff);
+    border: none;
+    transition: background-color .15s ease, color .15s ease;
+
+    svg {
+        font-size: 0.875rem;
+    }
+
+    &:hover {
+        background-color: var(--stachesepl-view-cart-button-hover-background-color, #000);
+        color: var(--stachesepl-view-cart-button-hover-color, #fff);
+    }
+}
+
+.stachesepl-add-to-cart-button-wrapper {
+
+    margin-top: 20px;
+    margin-bottom: 20px;
+
+    &-loop,
+    &-loop-block {
+        .stachesepl-date-time-input-placeholder,
+        .stachesepl-select-seat-placeholder,
+        .stachesepl-select-seats-button {
+            width: 100%;
+        }
+
+        .stachesepl-date-time {
+            width: 100%;
+            max-width: 100%;
+        }
+
+        .stachesepl-view-cart-button {
+            margin-top: 10px;
+            display: flex;
+            width: 100%;
+
+        }
+    }
+
+    &-single,
+    &-shortcode {
+
+        .stachesepl-view-cart-button {
+            margin-left: 10px;
+        }
+
+    }
+}

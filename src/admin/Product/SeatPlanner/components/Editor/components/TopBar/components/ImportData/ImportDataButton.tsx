@@ -1,18 +1,20 @@
 import PublishIcon from '@mui/icons-material/Publish';
 import { __ } from "@src/utils";
+import toast from "react-hot-toast";
 import Button from "../Button/Button";
-import toast from 'react-hot-toast';
 
 const ImportDataButton = () => {
 
-    const handleWorkflowSettingsOpen = () => {
+    const handleClick = () => {
         toast.error(__('IMPORT_DATA_NOT_AVAILABLE_FOR_LITE_VERSION'));
-    }
+    };
 
     return (
-        <>
-            <Button onClick={handleWorkflowSettingsOpen} icon={PublishIcon} title={__('IMPORT_SEAT_PLAN')} />
-        </>
+        <Button
+            onClick={handleClick}
+            icon={PublishIcon}
+            title={__('IMPORT_SEAT_PLAN')}
+        />
     )
 }
 

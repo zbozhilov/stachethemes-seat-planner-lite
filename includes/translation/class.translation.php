@@ -8,6 +8,40 @@ if (! defined('ABSPATH')) {
 
 class Translation {
 
+    private static function datepicker_strings() {
+        return [
+            'FAILED_TO_FETCH_AVAILABLE_DATES'             => esc_html__('Failed to fetch available dates.', 'stachethemes-seat-planner-lite'),
+            'DATEPICKER_NOT_SEATS_AVAILABLE_TITLE'        => esc_html__('No dates found', 'stachethemes-seat-planner-lite'),
+            'DATEPICKER_NOT_SEATS_AVAILABLE_DESCRIPTION'  => esc_html__('Sorry, there are no available dates at the moment.', 'stachethemes-seat-planner-lite'),
+            'SELECT_DATE_AND_TIME'                        => esc_html__('Select Date & Time', 'stachethemes-seat-planner-lite'),
+            'PREVIOUS_MONTH'                              => esc_html__('Previous Month', 'stachethemes-seat-planner-lite'),
+            'NEXT_MONTH'                                  => esc_html__('Next Month', 'stachethemes-seat-planner-lite'),
+            'SELECT_DATE'                                 => esc_html__('Select Date', 'stachethemes-seat-planner-lite'),
+            'JANUARY'                                     => esc_html__('January', 'stachethemes-seat-planner-lite'),
+            'FEBRUARY'                                    => esc_html__('February', 'stachethemes-seat-planner-lite'),
+            'MARCH'                                       => esc_html__('March', 'stachethemes-seat-planner-lite'),
+            'APRIL'                                       => esc_html__('April', 'stachethemes-seat-planner-lite'),
+            'MAY'                                         => esc_html__('May', 'stachethemes-seat-planner-lite'),
+            'JUNE'                                        => esc_html__('June', 'stachethemes-seat-planner-lite'),
+            'JULY'                                        => esc_html__('July', 'stachethemes-seat-planner-lite'),
+            'AUGUST'                                      => esc_html__('August', 'stachethemes-seat-planner-lite'),
+            'SEPTEMBER'                                   => esc_html__('September', 'stachethemes-seat-planner-lite'),
+            'OCTOBER'                                     => esc_html__('October', 'stachethemes-seat-planner-lite'),
+            'NOVEMBER'                                    => esc_html__('November', 'stachethemes-seat-planner-lite'),
+            'DECEMBER'                                    => esc_html__('December', 'stachethemes-seat-planner-lite'),
+            'SUNDAY_SHORT'                                => esc_html_x('Su', 'Day of the week', 'stachethemes-seat-planner-lite'),
+            'MONDAY_SHORT'                                => esc_html_x('Mo', 'Day of the week', 'stachethemes-seat-planner-lite'),
+            'TUESDAY_SHORT'                               => esc_html_x('Tu', 'Day of the week', 'stachethemes-seat-planner-lite'),
+            'WEDNESDAY_SHORT'                             => esc_html_x('We', 'Day of the week', 'stachethemes-seat-planner-lite'),
+            'THURSDAY_SHORT'                              => esc_html_x('Th', 'Day of the week', 'stachethemes-seat-planner-lite'),
+            'FRIDAY_SHORT'                                => esc_html_x('Fr', 'Day of the week', 'stachethemes-seat-planner-lite'),
+            'SATURDAY_SHORT'                              => esc_html_x('Sa', 'Day of the week', 'stachethemes-seat-planner-lite'),
+            'AVAILABLE_TIMES'                             => esc_html__('Available Times', 'stachethemes-seat-planner-lite'),
+            'CHECKING_AVAILABILITY'                       => esc_html__('Checking Availability', 'stachethemes-seat-planner-lite'),
+            'PLEASE_SELECT_A_DATE_TO_SEE_AVAILABLE_TIMES' => esc_html__('Select a date to see available times', 'stachethemes-seat-planner-lite'),
+        ];
+    }
+
     // Translates the scanner specific strings
     public static function get_scanner_strings() {
         return [
@@ -109,6 +143,7 @@ class Translation {
     public static function get_admin_strings() {
 
         return [
+            'EXTRA_CLASS'                    => esc_html__('Additional Class Name', 'stachethemes-seat-planner-lite'),
             'CLICK_TO_CHANGE_DISPLAY_LABEL'  => esc_html__('Click to change display label', 'stachethemes-seat-planner-lite'),
             'ZINDEX'                         => esc_html__('Z-Index', 'stachethemes-seat-planner-lite'),
             'OBJECTS_COPIED'                 => esc_html__('Objects Copied', 'stachethemes-seat-planner-lite'),
@@ -133,11 +168,18 @@ class Translation {
             'SEAT_LABEL'                     => esc_html__('Seat Label', 'stachethemes-seat-planner-lite'),
             'SEAT_PRICE'                     => esc_html__('Seat Price', 'stachethemes-seat-planner-lite'),
             'LABEL'                          => esc_html__('Label', 'stachethemes-seat-planner-lite'),
+
             'SELECT_FONT_SIZE'               => esc_html__('Select Font Size', 'stachethemes-seat-planner-lite'),
             'FONT_SIZE'                      => esc_html__('Font Size', 'stachethemes-seat-planner-lite'),
             'FONT_SIZE_SMALL'                => esc_html__('Small', 'stachethemes-seat-planner-lite'),
             'FONT_SIZE_MEDIUM'               => esc_html__('Medium', 'stachethemes-seat-planner-lite'),
             'FONT_SIZE_LARGE'                => esc_html__('Large', 'stachethemes-seat-planner-lite'),
+            'FONT_WEIGHT'                    => esc_html__('Font Weight', 'stachethemes-seat-planner-lite'),
+            'FONT_WEIGHT_LIGHTER'            => esc_html__('Lighter', 'stachethemes-seat-planner-lite'),
+            'FONT_WEIGHT_NORMAL'             => esc_html__('Normal', 'stachethemes-seat-planner-lite'),
+            'FONT_WEIGHT_BOLD'               => esc_html__('Bold', 'stachethemes-seat-planner-lite'),
+            'FONT_WEIGHT_BOLDER'             => esc_html__('Bolder', 'stachethemes-seat-planner-lite'),
+
             'PRICE'                          => esc_html__('Price', 'stachethemes-seat-planner-lite'),
             'COLOR'                          => esc_html__('Color', 'stachethemes-seat-planner-lite'),
             'BACKGROUND_COLOR'               => esc_html__('Background Color', 'stachethemes-seat-planner-lite'),
@@ -332,6 +374,29 @@ class Translation {
     // Translates the dashboard strings
     public static function get_dashboard_strings() {
         return [
+
+            'PRO_FEATURES'                    => esc_html__('Pro Features', 'stachethemes-seat-planner-lite'),
+            'PRO_FEATURES_DESC'               => esc_html__('Upgrade to the Pro version to access these features.', 'stachethemes-seat-planner-lite'),
+            'PROF_NO_OBJECTS_CAP'             => esc_html__('No Seats Limit', 'stachethemes-seat-planner-lite'),
+            'PROF_NO_OBJECTS_CAP_DESC'        => esc_html__('You can create unlimited seats in the Pro version', 'stachethemes-seat-planner-lite'),
+            'PROF_DATES'                      => esc_html__('Dates', 'stachethemes-seat-planner-lite'),
+            'PROF_DATES_DESC'                 => esc_html__('You can select dates and times for each product in the Pro version', 'stachethemes-seat-planner-lite'),
+            'PROF_DISCOUNTS'                  => esc_html__('Discounts', 'stachethemes-seat-planner-lite'),
+            'PROF_DISCOUNTS_DESC'             => esc_html__('You can offer discounts to your customers in the Pro version', 'stachethemes-seat-planner-lite'),
+            'PROF_CUSTOM_FIELDS'              => esc_html__('Custom Fields', 'stachethemes-seat-planner-lite'),
+            'PROF_CUSTOM_FIELDS_DESC'         => esc_html__('You can add custom fields to your products in the Pro version', 'stachethemes-seat-planner-lite'),
+            'PROF_ATTACHMENTS'                => esc_html__('Attachments', 'stachethemes-seat-planner-lite'),
+            'PROF_ATTACHMENTS_DESC'           => esc_html__('You can attach PDF tickets to the order confirmation email in the Pro version', 'stachethemes-seat-planner-lite'),
+            'PROF_CSV_IMPORT_EXPORT'          => esc_html__('CSV Import/Export', 'stachethemes-seat-planner-lite'),
+            'PROF_CSV_IMPORT_EXPORT_DESC'     => esc_html__('You can import and export your data in CSV format in the Pro version', 'stachethemes-seat-planner-lite'),
+            'PROF_APP'                        => esc_html__('Mobile App', 'stachethemes-seat-planner-lite'),
+            'PROF_APP_DESC'                   => esc_html__('Scan QR codes to verify and check-in guests at your venue from your phone.', 'stachethemes-seat-planner-lite'),
+            'GET_PRO_VERSION'                 => esc_html__('Get Pro Version', 'stachethemes-seat-planner-lite'),
+            'PRO_CTA_TEXT'                    => esc_html__('Upgrade to the Pro version to access these features.', 'stachethemes-seat-planner-lite'),
+            'PROF_SUPPORT'                    => esc_html__('Support', 'stachethemes-seat-planner-lite'),
+            'PROF_SUPPORT_DESC'               => esc_html__('Free customer support & updates.', 'stachethemes-seat-planner-lite'),
+
+            'TAB_PRO'                                       => esc_html__('Pro Features', 'stachethemes-seat-planner-lite'),
             'APP_ACCESS_NOT_SUPPORTED'                      => esc_html__('App access is not available in the Lite version', 'stachethemes-seat-planner-lite'),
             'PDF_ATTACHMENTS_NOT_SUPPORTED'                 => esc_html__('PDF attachments are not available in the Lite version', 'stachethemes-seat-planner-lite'),
             'DASHBOARD'                                     => esc_html__('Dashboard', 'stachethemes-seat-planner-lite'),
@@ -498,8 +563,8 @@ class Translation {
             // Settings page
             'SETTINGS_TITLE'                                 => esc_html__('Settings', 'stachethemes-seat-planner-lite'),
             'SETTINGS_DESCRIPTION'                           => esc_html__('This is where you can configure all the plugin settings.', 'stachethemes-seat-planner-lite'),
-            'TAB_SLOT_RESERVATION'                           => esc_html__('Seat Reservation', 'stachethemes-seat-planner-lite'),
-            'TAB_CART_BEHAVIOR'                              => esc_html__('Cart Behavior', 'stachethemes-seat-planner-lite'),
+            'TAB_GENERAL'                                     => esc_html__('General', 'stachethemes-seat-planner-lite'),
+            'TAB_CART_BEHAVIOR'                              => esc_html__('Add to Cart', 'stachethemes-seat-planner-lite'),
             'TAB_CART_TIMER'                                 => esc_html__('Cart Timer', 'stachethemes-seat-planner-lite'),
             'TAB_ATTACHMENTS'                                => esc_html__('Attachments', 'stachethemes-seat-planner-lite'),
             'TAB_ORDER_STATUS'                               => esc_html__('Order Status', 'stachethemes-seat-planner-lite'),
@@ -509,7 +574,10 @@ class Translation {
             'FAILED_TO_SAVE_SETTINGS'                        => esc_html__('Failed to save settings', 'stachethemes-seat-planner-lite'),
             'SAVING'                                         => esc_html__('Saving...', 'stachethemes-seat-planner-lite'),
             'SAVE_SETTINGS'                                  => esc_html__('Save Settings', 'stachethemes-seat-planner-lite'),
-            'FAILED_TO_SAVE_SETTINGS'                        => esc_html__('Failed to save settings', 'stachethemes-seat-planner-lite'),
+
+            // General tab
+            'COMPATIBILITY_MODE'                             => esc_html__('Compatibility Mode', 'stachethemes-seat-planner-lite'),
+            'COMPATIBILITY_MODE_DESC'                        => esc_html__('Enables compatibility with cache plugins (e.g. WP Rocket, LiteSpeed) when lazy loading breaks due to JS optimization. Enable if you use such plugins or experience front-end issues.', 'stachethemes-seat-planner-lite'),
 
             // Slot Reservation tab
             'SEAT_RESERVATION_TIME'                          => esc_html__('Seat Reservation Time', 'stachethemes-seat-planner-lite'),
@@ -564,6 +632,50 @@ class Translation {
             'APP_SECRET_KEY_PLACEHOLDER'                     => esc_html__('Enter or generate a secret key', 'stachethemes-seat-planner-lite'),
             'GENERATE'                                       => esc_html__('Generate', 'stachethemes-seat-planner-lite'),
             'SECRET_KEY_MIN_LENGTH_ERROR'                    => esc_html__('Secret key must be at least 8 characters long.', 'stachethemes-seat-planner-lite'),
+
+            'TAB_DATEPICKER'                                 => esc_html__('Datepicker', 'stachethemes-seat-planner-lite'),
+            'DATEPICKER_ACCENT_COLOR'                        => esc_html__('Accent Color', 'stachethemes-seat-planner-lite'),
+            'DATEPICKER_ACCENT_COLOR_DESC'                   => esc_html__('Datepicker color accent. This will be used to style the datepicker UI.', 'stachethemes-seat-planner-lite'),
+            'DATEPICKER_PREVIEW'                             => esc_html__('Datepicker Preview', 'stachethemes-seat-planner-lite'),
+
+            'ADD_TO_CART_BTN_PREVIEW_LABEL'                 => esc_html__('Add to Cart Button Preview', 'stachethemes-seat-planner-lite'),
+            'SELECT_SEAT_BTN_BTN_PREVIEW_LABEL'             => esc_html__('Select Seat Button Preview', 'stachethemes-seat-planner-lite'),
+            'VIEW_CART_BTN_PREVIEW_LABEL'                   => esc_html__('View Cart Button Preview', 'stachethemes-seat-planner-lite'),
+            
+            'SELECT_SEAT_BTN_BG_COLOR'                      => esc_html__('Select Seat Button Background Color', 'stachethemes-seat-planner-lite'),
+            'SELECT_SEAT_BTN_BG_COLOR_DESC'                 => esc_html__('Background color of the add to cart button.', 'stachethemes-seat-planner-lite'),
+            'SELECT_SEAT_BTN_TEXT_COLOR'                    => esc_html__('Select Seat Button Text Color', 'stachethemes-seat-planner-lite'),
+            'SELECT_SEAT_BTN_TEXT_COLOR_DESC'               => esc_html__('Color of the select seat button text.', 'stachethemes-seat-planner-lite'),
+            'SELECT_SEAT_BTN_BG_COLOR_HOVER'                => esc_html__('Select Seat Button Background Color Hover', 'stachethemes-seat-planner-lite'),
+            'SELECT_SEAT_BTN_BG_COLOR_HOVER_DESC'           => esc_html__('Background color of the select seat button on hover.', 'stachethemes-seat-planner-lite'),
+            'SELECT_SEAT_BTN_TEXT_COLOR_HOVER'              => esc_html__('Select Seat Button Text Color Hover', 'stachethemes-seat-planner-lite'),
+            'SELECT_SEAT_BTN_TEXT_COLOR_HOVER_DESC'         => esc_html__('Color of the select seat button text on hover.', 'stachethemes-seat-planner-lite'),
+
+            'VIEW_CART_BG_COLOR'                             => esc_html__('View Cart Button Background Color', 'stachethemes-seat-planner-lite'),
+            'VIEW_CART_BG_COLOR_DESC'                        => esc_html__('Background color of the view cart button.', 'stachethemes-seat-planner-lite'),
+            'VIEW_CART_TEXT_COLOR'                           => esc_html__('View Cart Button Text Color', 'stachethemes-seat-planner-lite'),
+            'VIEW_CART_TEXT_COLOR_DESC'                      => esc_html__('Color of the view cart button text.', 'stachethemes-seat-planner-lite'),
+            'VIEW_CART_BG_COLOR_HOVER'                       => esc_html__('View Cart Button Background Color Hover', 'stachethemes-seat-planner-lite'),
+            'VIEW_CART_BG_COLOR_HOVER_DESC'                  => esc_html__('Background color of the view cart button on hover.', 'stachethemes-seat-planner-lite'),
+            'VIEW_CART_TEXT_COLOR_HOVER'                     => esc_html__('View Cart Button Text Color Hover', 'stachethemes-seat-planner-lite'),
+            'VIEW_CART_TEXT_COLOR_HOVER_DESC'                => esc_html__('Color of the view cart button text on hover.', 'stachethemes-seat-planner-lite'),
+
+            'ADD_TO_CART_BG_COLOR'                           => esc_html__('Add to Cart Button Background Color', 'stachethemes-seat-planner-lite'),
+            'ADD_TO_CART_BG_COLOR_DESC'                      => esc_html__('Background color of the add to cart button.', 'stachethemes-seat-planner-lite'),
+            'ADD_TO_CART_BG_COLOR_HOVER'                     => esc_html__('Add to Cart Button Background Color Hover', 'stachethemes-seat-planner-lite'),
+            'ADD_TO_CART_BG_COLOR_HOVER_DESC'                => esc_html__('Background color of the add to cart button on hover.', 'stachethemes-seat-planner-lite'),
+            'ADD_TO_CART_TEXT_COLOR'                         => esc_html__('Add to Cart Button Text Color', 'stachethemes-seat-planner-lite'),
+            'ADD_TO_CART_TEXT_COLOR_DESC'                    => esc_html__('Color of the add to cart button text.', 'stachethemes-seat-planner-lite'),
+            'ADD_TO_CART_TEXT_COLOR_HOVER'                   => esc_html__('Add to Cart Button Text Color Hover', 'stachethemes-seat-planner-lite'),
+            'ADD_TO_CART_TEXT_COLOR_HOVER_DESC'              => esc_html__('Color of the add to cart button text on hover.', 'stachethemes-seat-planner-lite'),
+
+
+            'SELECT_SEAT'                                    => esc_html__('Select Seat', 'stachethemes-seat-planner-lite'),
+            'VIEW_CART'                                      => esc_html__('View Cart', 'stachethemes-seat-planner-lite'),
+            'ADD_TO_CART'                                    => esc_html__('Add to Cart', 'stachethemes-seat-planner-lite'),
+
+
+            ...self::datepicker_strings()
         ];
     }
 
@@ -571,6 +683,11 @@ class Translation {
     public static function get_front_strings() {
 
         return [
+            'LOADING_SEATING_LAYOUT' => esc_html__('Loading seating layout', 'stachethemes-seat-planner-lite'),
+            'UNAVAILABLE'            => esc_html__('Unavailable', 'stachethemes-seat-planner-lite'),
+            'PURCHASABLE_ON_SITE'    => esc_html__('Purchasable on Site', 'stachethemes-seat-planner-lite'),
+            'PRICE'                  => esc_html__('Price', 'stachethemes-seat-planner-lite'),
+            'SOLD_OUT'               => esc_html__('Sold Out', 'stachethemes-seat-planner-lite'),
             'NO_SEATS_SELECTED'     => esc_html__('No seats selected', 'stachethemes-seat-planner-lite'),
             'CLOSE'                 => esc_html__('Close', 'stachethemes-seat-planner-lite'),
             'ADD_TO_CART'           => esc_html__('Add to Cart', 'stachethemes-seat-planner-lite'),

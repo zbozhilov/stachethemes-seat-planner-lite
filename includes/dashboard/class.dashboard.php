@@ -6,6 +6,9 @@ if (! defined('ABSPATH')) {
     exit;
 }
 
+/**
+ * This is the new class for the dashboard menu
+ */
 class Dashboard {
 
     public static $did_init = false;
@@ -151,7 +154,7 @@ class Dashboard {
         wp_localize_script(
             'stachesepl-dashboard',
             'stachesepl_settings',
-            self::get_settings()
+            Settings::get_settings()
         );
 
         wp_localize_script(
@@ -159,6 +162,16 @@ class Dashboard {
             'stacheseplCartTimer',
             [
                 'label' => esc_html__('Time remaining', 'stachethemes-seat-planner-lite'),
+            ]
+        );
+
+        wp_localize_script(
+            'stachesepl-dashboard',
+            'stachesepl_date_format',
+            [
+                'date_format' => get_option('date_format'),
+                'time_format' => get_option('time_format'),
+                'week_start'  => get_option('start_of_week'),
             ]
         );
 
@@ -178,144 +191,6 @@ class Dashboard {
              </div>';
     }
 
-    public static function get_settings(): array {
-
-        $settings = [
-            'stachesepl_reserve_time'                   => (int) get_option('stachesepl_reserve_time', 15),
-            'stachesepl_cart_redirect'                  => get_option('stachesepl_cart_redirect', 'checkout'),
-            'stachesepl_cart_redirect_message'          => get_option('stachesepl_cart_redirect_message', 'yes'),
-            'stachesepl_cart_redirect_message_text'     => get_option('stachesepl_cart_redirect_message_text', ''),
-            'stachesepl_cart_timer_enabled'             => get_option('stachesepl_cart_timer_enabled', 'yes'),
-            'stachesepl_cart_timer_bg_color'            => get_option('stachesepl_cart_timer_bg_color', Auditorium_Product_Cart_Timer::$default_cart_timer_bg_color),
-            'stachesepl_cart_timer_text_color'          => get_option('stachesepl_cart_timer_text_color', Auditorium_Product_Cart_Timer::$default_cart_timer_text_color),
-            'stachesepl_cart_timer_time_color'          => get_option('stachesepl_cart_timer_time_color', Auditorium_Product_Cart_Timer::$default_cart_timer_time_color),
-            'stachesepl_cart_timer_time_color_critical' => get_option('stachesepl_cart_timer_time_color_critical', Auditorium_Product_Cart_Timer::$default_cart_timer_time_color_critical),
-            'stachesepl_pdf_attachments'                => get_option('stachesepl_pdf_attachments', 'yes'),
-            'stachesepl_pdf_attachment_name'            => get_option('stachesepl_pdf_attachment_name', ''),
-            'stachesepl_auto_confirm_paid_orders'       => get_option('stachesepl_auto_confirm_paid_orders', 'no'),
-            'stachesepl_app_enabled'                    => get_option('stachesepl_app_enabled', 'yes'),
-            'stachesepl_app_secret_key'                 => get_option('stachesepl_app_secret_key', ''),
-        ];
-
-        return $settings;
-    }
-
-    /**
-     * Save settings from the dashboard
-     * 
-     * @param array $settings Array of settings to save
-     * @return bool True on success, false on failure
-     */
-    public static function save_settings(array $settings): bool {
-
-        $allowed_settings = [
-            'stachesepl_reserve_time' => [
-                'type'    => 'int',
-                'min'     => 5,
-                'max'     => 1440 * 30, // 30 days
-                'default' => 15
-            ],
-            'stachesepl_cart_redirect' => [
-                'type'    => 'string',
-                'allowed' => ['disabled', 'cart', 'checkout'],
-                'default' => 'checkout'
-            ],
-            'stachesepl_cart_redirect_message' => [
-                'type'    => 'string',
-                'allowed' => ['yes', 'no'],
-                'default' => 'yes'
-            ],
-            'stachesepl_cart_redirect_message_text' => [
-                'type'    => 'string',
-                'default' => ''
-            ],
-            'stachesepl_cart_timer_enabled' => [
-                'type'    => 'string',
-                'allowed' => ['yes', 'no'],
-                'default' => 'yes'
-            ],
-            'stachesepl_cart_timer_bg_color' => [
-                'type'    => 'string',
-                'default' => Auditorium_Product_Cart_Timer::$default_cart_timer_bg_color
-            ],
-            'stachesepl_cart_timer_text_color' => [
-                'type'    => 'string',
-                'default' => Auditorium_Product_Cart_Timer::$default_cart_timer_text_color
-            ],
-            'stachesepl_cart_timer_time_color' => [
-                'type'    => 'string',
-                'default' => Auditorium_Product_Cart_Timer::$default_cart_timer_time_color
-            ],
-            'stachesepl_cart_timer_time_color_critical' => [
-                'type'    => 'string',
-                'default' => Auditorium_Product_Cart_Timer::$default_cart_timer_time_color_critical
-            ],
-            'stachesepl_pdf_attachments' => [
-                'type'    => 'string',
-                'allowed' => ['yes', 'no'],
-                'default' => 'yes'
-            ],
-            'stachesepl_pdf_attachment_name' => [
-                'type'    => 'string',
-                'default' => ''
-            ],
-            'stachesepl_auto_confirm_paid_orders' => [
-                'type'    => 'string',
-                'allowed' => ['yes', 'no'],
-                'default' => 'no'
-            ],
-            'stachesepl_app_enabled' => [
-                'type'    => 'string',
-                'allowed' => ['yes', 'no'],
-                'default' => 'yes'
-            ],
-            'stachesepl_app_secret_key' => [
-                'type'    => 'string',
-                'default' => ''
-            ],
-        ];
-
-        foreach ($settings as $key => $value) {
-            // Skip unknown settings
-            if (!isset($allowed_settings[$key])) {
-                continue;
-            }
-
-            $config = $allowed_settings[$key];
-
-            // Sanitize and validate based on type
-            if ($config['type'] === 'int') {
-                $value = intval($value);
-
-                // Apply minimum if set
-                if (isset($config['min']) && $value < $config['min']) {
-                    $value = $config['min'];
-                }
-
-                // Apply maximum if set
-                if (isset($config['max']) && $value > $config['max']) {
-                    $value = $config['max'];
-                }
-            } else {
-                // String type
-                $value = sanitize_text_field($value);
-
-                // Validate against allowed values if set
-                if (isset($config['allowed']) && !in_array($value, $config['allowed'], true)) {
-                    $value = $config['default'];
-                }
-            }
-
-            // Use default if empty and default is set
-            if ('' === $value && isset($config['default']) && '' !== $config['default']) {
-                $value = $config['default'];
-            }
-
-            update_option($key, $value);
-        }
-
-        return true;
-    }
 }
 
 Dashboard::init();

@@ -1,8 +1,7 @@
 import { BaseObjectProps } from "@src/admin/Product/SeatPlanner/components/Editor/components/Workflow/components/Objects/types";
 import { useEditorObjects } from "@src/admin/Product/SeatPlanner/components/Editor/hooks";
 import { __ } from '@src/utils';
-import InputColor from "../InputColor/InputColor";
-import './BackgroundColor.scss';
+import InputColor from "../../../../../../../UI/InputColor/InputColor";
 
 type AcceptType = BaseObjectProps & { backgroundColor: string };
 
@@ -39,28 +38,12 @@ const BackgroundColor = (props: {
 
     return (
 
-        <div className='stachesepl-toolbar-properties-bgcolor'>
+        <InputColor
+            label={__('BACKGROUND_COLOR')}
+            value={displayValue}
+            onChange={handleColorChange}
+        />
 
-            <label htmlFor='stachesepl-toolbar-properties-bgcolor'>{__('BACKGROUND_COLOR')}</label>
-
-            <InputColor
-                value={displayValue}
-                onChange={handleColorChange}
-            />
-
-            {/* <input
-                id='stachesepl-toolbar-properties-bgcolor'
-                type="color"
-                placeholder={__('BACKGROUND_COLOR')}
-                value={displayValue}
-                onChange={(e) => {
-                    setUpdateBGColor(e.target.value)
-                }}
-
-                onBlur={handleLabelChange}
-            /> */}
-
-        </div>
     )
 }
 

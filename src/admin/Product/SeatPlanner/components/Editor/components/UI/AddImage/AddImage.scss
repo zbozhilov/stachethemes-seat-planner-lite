@@ -1,0 +1,102 @@
+.stachesepl-add-image {
+    cursor: pointer;
+    position: relative;
+    border-radius: 10px;
+    overflow: hidden;
+    transition: transform var(--stachesepl-transition-fast),
+                box-shadow var(--stachesepl-transition-fast);
+
+    &:hover {
+        transform: scale(1.02);
+    }
+
+    img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        border: 2px solid var(--stachesepl-dialog-border-color);
+        box-sizing: border-box;
+        border-radius: 10px;
+        transition: border-color var(--stachesepl-transition-fast);
+    }
+
+    &:hover img {
+        border-color: var(--stachesepl-accent-primary);
+    }
+
+    .stachesepl-add-image-placeholder {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 6px;
+        background-color: var(--stachesepl-dialog-input-background-color);
+        width: 100%;
+        height: 100%;
+        border: 2px dashed var(--stachesepl-dialog-border-color);
+        box-sizing: border-box;
+        border-radius: 10px;
+        font-weight: 500;
+        font-size: 11px;
+        cursor: pointer;
+        color: var(--stachesepl-dialog-label-color);
+        transition: border-color var(--stachesepl-transition-fast),
+                    background-color var(--stachesepl-transition-fast),
+                    color var(--stachesepl-transition-fast);
+
+        svg {
+            font-size: 28px;
+            opacity: 0.7;
+            transition: opacity var(--stachesepl-transition-fast),
+                        color var(--stachesepl-transition-fast);
+        }
+
+        &:hover {
+            border-color: var(--stachesepl-accent-primary);
+            background-color: rgba(99, 102, 241, 0.08);
+            color: var(--stachesepl-accent-primary);
+
+            svg {
+                opacity: 1;
+                color: var(--stachesepl-accent-primary);
+            }
+        }
+    }
+
+    &-remove {
+        position: absolute;
+        right: 6px;
+        top: 6px;
+        color: #fff;
+        background: var(--stachesepl-accent-danger);
+        border-radius: 6px;
+        width: 26px;
+        height: 26px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        opacity: 0;
+        transform: scale(0.8);
+        transition: opacity var(--stachesepl-transition-fast),
+                    transform var(--stachesepl-transition-fast),
+                    background-color var(--stachesepl-transition-fast);
+        box-shadow: var(--stachesepl-shadow-md);
+        z-index: 1;
+
+        svg {
+            font-size: 18px;
+        }
+
+        &:hover {
+            background: #dc2626;
+            transform: scale(1.1) !important;
+        }
+    }
+
+    &:hover {
+        .stachesepl-add-image-remove {
+            opacity: 1;
+            transform: scale(1);
+        }
+    }
+}

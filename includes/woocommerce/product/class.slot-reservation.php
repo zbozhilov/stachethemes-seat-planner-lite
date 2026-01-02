@@ -42,7 +42,7 @@ class Slot_Reservation {
             $min_time,
             (int) apply_filters(
                 'stachesepl_reserve_time',
-                get_option('stachesepl_reserve_time', 15)
+                Settings::get_setting('stachesepl_reserve_time')
             )
         );
     }

@@ -1,0 +1,88 @@
+.stachesepl-circ-loader {
+
+    --stachesepl-circ-loader-color: #202020;
+    --stachesepl-circ-loader-color-border: rgba(0, 0, 0, 0.1);
+    --stachesepl-circ-loader-spinner-border-size: 2px;
+    --stachesepl-circ-loader-spinner-size: 40px;
+    --stachesepl-circ-loader-text-font-weight: 400;
+    --stachesepl-circ-loader-text-font-size: 0.75rem;
+    --stachesepl-circ-loader-text-color: #fff;
+
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    >div {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        gap: 1rem;
+    }
+
+    .stachesepl-circ-loader-spinner-wrap {
+        transition: transform 1s ease, opacity 1s ease;
+    }
+
+    .stachesepl-circ-loader-text-wrap {
+        transition: transform 1s ease, opacity 1s ease;
+        transition-delay: 0.2s;
+    }
+
+    &-spinner {
+        width: var(--stachesepl-circ-loader-spinner-size);
+        height: var(--stachesepl-circ-loader-spinner-size);
+        border: var(--stachesepl-circ-loader-spinner-border-size) solid var(--stachesepl-circ-loader-color-border);
+        border-top-color: var(--stachesepl-circ-loader-color);
+        border-radius: 50%;
+        animation: spinnerRotate 0.8s linear infinite;
+    }
+
+    &-text {
+        font-size: var(--stachesepl-circ-loader-text-font-size);
+        font-weight: var(--stachesepl-circ-loader-text-font-weight);
+        text-align: center;
+        color: var(--stachesepl-circ-text-color);
+    }
+
+    &--large {
+        --stachesepl-circ-loader-spinner-border-size: 3px;
+        --stachesepl-circ-loader-text-font-size: 0.875rem;
+        --stachesepl-circ-loader-text-font-weight: 500;
+        --stachesepl-circ-loader-spinner-size: 48px;
+    }
+
+    &--small {
+        --stachesepl-circ-loader-spinner-size: 1.2rem;
+    }
+
+    &--light {
+        --stachesepl-circ-loader-color: #fff;
+        --stachesepl-circ-loader-color-border: rgba(255, 255, 255, 0.1);
+        --stachesepl-circ-text-color: #cacaca;
+    }
+
+}
+
+@keyframes spinnerRotate {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+@starting-style {
+
+    .stachesepl-circ-loader-spinner-wrap {
+        opacity: 0;
+    }
+
+    .stachesepl-circ-loader-text-wrap {
+        opacity: 0;
+        transform: translateY(5px);
+    }
+}

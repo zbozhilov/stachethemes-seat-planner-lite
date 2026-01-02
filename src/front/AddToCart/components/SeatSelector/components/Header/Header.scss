@@ -4,7 +4,7 @@
     background-color: var(--stachesepl-header-background-color, #fff);
     color: var(--stachesepl-header-color, #333);
     font-weight: 600;
-    padding: 0.5em 0.75em 0.5em 1.25em;
+    padding: 0.5rem 0.75rem 0.5rem 1.25rem;
     position: absolute;
     top: 0;
     left: 0;
@@ -13,7 +13,7 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    gap: 1.25rem;
+    gap: 15px;
     min-height: 3.813rem;
     box-shadow: 0 10px 10px rgba(0, 0, 0, 0.1);
     animation: stachesepl-seat-planner-header-animation 0.2s ease;
@@ -21,17 +21,23 @@
 
     .stachesepl-seat-planner-header-label {
         font-size: 1rem;
-        white-space: nowrap;
+        line-height: 1.2;
+        // white-space: nowrap;
+
+        @media (max-width: 782px) {
+            font-size: 0.875rem;
+        }
     }
 
     .stachesepl-add-to-cart-button {
         opacity: 0;
+        transition: background-color 0.3s ease, color 0.3s ease, filter 0.3s ease;
         animation: stachesepl-add-to-cart-button-fade-in 0.3s ease forwards;
     }
 
 }
 
-@media (min-width: 768px) {
+@media (min-width: 782px) {
     .stachesepl-seat-planner-header {
         width: 37.5rem;
         left: auto;
@@ -41,7 +47,7 @@
     }
 }
 
-@media (max-width: 768px) {
+@media (max-width: 782px) {
     .stachesepl-seat-planner-header {
         border-bottom-left-radius: 0;
         border-bottom-right-radius: 0;

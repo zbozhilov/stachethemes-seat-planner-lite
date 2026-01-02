@@ -1,12 +1,13 @@
+import { AutoAwesome } from "@mui/icons-material";
 import { SeatObjectProps } from "@src/admin/Product/SeatPlanner/components/Editor/components/Workflow/components/Objects/Seat/types";
 import { useEditorObjects } from "@src/admin/Product/SeatPlanner/components/Editor/hooks";
 import { __ } from '@src/utils';
-import './SeatId.scss';
-import { getHasValidPattern, getIncrementValueByRegex } from "../utils";
-import toast from "react-hot-toast";
 import { useState } from "react";
-import { Warning, AutoAwesome } from "@mui/icons-material";
+import toast from "react-hot-toast";
+import InputText from "../../../../../../../UI/InputText/InputText";
+import InputWrap from "../../../../../../../UI/InputWrap/InputWrap";
 import PatternBuilder from "../PatternBuilder/PatternBuilder";
+import { getHasValidPattern, getIncrementValueByRegex } from "../utils";
 
 const SeatId = (props: {
     objects: SeatObjectProps[]
@@ -58,12 +59,7 @@ const SeatId = (props: {
     const getErrorMessage = () => {
 
         if (duplicateSeatIds.includes(seatId)) {
-            return (
-                <span className='stachesepl-toolbar-properties-input-error'>
-                    <Warning sx={{ fontSize: 14, color: 'var(--stachesepl-accent-danger)' }} />
-                    {__('SEAT_ID_DUPLICATE')}
-                </span>
-            );
+            return __('SEAT_ID_DUPLICATE');
         }
 
         return '';
@@ -73,22 +69,25 @@ const SeatId = (props: {
 
     return (
 
-        <div className='stachesepl-toolbar-properties-seatid'>
+        <InputWrap flexDirection='column'>
 
-            <label htmlFor='stachesepl-toolbar-properties-seatid'>{__('SEAT_ID')}</label>
-            <input
+            <InputText
                 id='stachesepl-toolbar-properties-seatid'
-                type="text"
-                placeholder={__('SEAT_ID')} value={displayValue}
-                onChange={(e) => {
-                    handleValueChange(e.target.value);
+                label={__('SEAT_ID')}
+                labelFor='stachesepl-toolbar-properties-seatid'
+                placeholder={__('SEAT_ID')}
+                value={displayValue}
+                onChange={(value) => {
+                    handleValueChange(value.toString());
                     setDisplayError(false);
                 }}
-                onBlur={() => {
-                    setDisplayError(true);
+                inputProps={{
+                    onBlur: () => {
+                        setDisplayError(true);
+                    }
                 }}
+                error={displayError ? getErrorMessage() : ''}
             />
-            {displayError && getErrorMessage()}
 
             {showPatternBuilderButton && (
                 <div className='stachesepl-pattern-builder-wrapper'>
@@ -110,7 +109,7 @@ const SeatId = (props: {
                 </div>
             )}
 
-        </div>
+        </InputWrap>
     )
 }
 

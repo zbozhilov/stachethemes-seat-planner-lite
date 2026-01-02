@@ -3,10 +3,9 @@ import { useRef, useState } from 'react';
 
 type UseSeatOrderModalParams = {
     productId: number | null;
-    selectedDate: string | null;
 };
 
-export function useSeatOrderModal({ productId, selectedDate }: UseSeatOrderModalParams) {
+export function useSeatOrderModal({ productId }: UseSeatOrderModalParams) {
     const [seatOrderData, setSeatOrderData] = useState<SeatOrderData | null>(null);
     const [isLoading, setIsLoading] = useState(false);
     const [isOpen, setIsOpen] = useState(false);
@@ -34,7 +33,6 @@ export function useSeatOrderModal({ productId, selectedDate }: UseSeatOrderModal
             const data = await fetchSeatOrderData({
                 productId,
                 seatId,
-                selectedDate,
                 signal: abortControllerRef.current.signal,
             });
 

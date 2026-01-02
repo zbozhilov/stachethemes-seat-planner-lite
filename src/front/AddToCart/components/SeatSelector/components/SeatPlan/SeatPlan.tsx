@@ -11,12 +11,20 @@ const SeatPlan = () => {
     // Remove seats from "selected" if these seats are flagged as taken by someone else
     useLayoutEffect(() => {
 
-        if (!selectedSeats.length) {
+        if (!selectedSeats.length || !seatPlanData?.objects) {
             return;
         }
 
+        // Create a Map for O(1) seat lookups instead of O(n) find operations
+        const seatMap = new Map<string, typeof seatPlanData.objects[0]>();
+        seatPlanData.objects.forEach(object => {
+            if (object.type === 'seat' && object.seatId) {
+                seatMap.set(object.seatId, object);
+            }
+        });
+
         setSelectedSeats(selectedSeats.filter(seatId => {
-            const seat = objects.find(object => object.type === 'seat' && object.seatId === seatId);
+            const seat = seatMap.get(seatId);
             return seat && !seat.taken;
         }));
 

@@ -143,8 +143,8 @@ class Auditorium_Product_Cart_Validation {
                     'error'
                 );
             }
-
-            if ($product->has_date_passed($selected_date)) {
+            
+            if ($product->is_cut_off_time_passed($selected_date)) {
                 wc_add_notice(
                     sprintf(
                         // translators: %1$s: selected date

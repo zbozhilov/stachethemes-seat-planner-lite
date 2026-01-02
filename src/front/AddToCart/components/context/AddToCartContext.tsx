@@ -4,7 +4,8 @@ import { SeatPlanDataProps } from '../../types';
 export interface AddToCartContextProps {
 
     productId: number,
-    setProductId: (id: number) => void
+    hasDate: boolean;
+    addToCartDefaultText: string;
 
     selectedDate: string | null,
     setSelectedDate: (date: string | null) => void

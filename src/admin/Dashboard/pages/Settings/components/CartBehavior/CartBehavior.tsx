@@ -5,6 +5,11 @@ import Select from '@src/admin/Dashboard/layout/Select'
 import Input from '@src/admin/Dashboard/layout/Input'
 import Toggle from '@src/admin/Dashboard/layout/Toggle'
 import Divider from '@src/admin/Dashboard/layout/Divider/Divider'
+import ColorPicker from '@src/admin/Dashboard/layout/ColorPicker'
+import AddToCartPreview from './AddToCartPreview'
+import ViewCartPreview from './ViewCartPreview'
+import SelectSeatPreview from './SelectSeatPreview'
+import FlexTwo from '@src/admin/Dashboard/layout/FlexTwo/FlexTwo'
 
 const CartBehavior = () => {
     const { settings, updateSetting } = useSettings()
@@ -46,6 +51,149 @@ const CartBehavior = () => {
                     updateSetting('stachesepl_cart_redirect_message_text', e.target.value)
                 }
             />
+
+            <Divider />
+
+            {/* SELECT SEAT BUTTON */}
+
+            <FlexTwo>
+
+
+                <ColorPicker
+                    label={__('SELECT_SEAT_BTN_BG_COLOR')}
+                    description={__('SELECT_SEAT_BTN_BG_COLOR_DESC')}
+                    value={settings.stachesepl_select_seat_btn_bg_color}
+                    onChange={(color) => updateSetting('stachesepl_select_seat_btn_bg_color', color)}
+                />
+
+                <ColorPicker
+                    label={__('SELECT_SEAT_BTN_TEXT_COLOR')}
+                    description={__('SELECT_SEAT_BTN_TEXT_COLOR_DESC')}
+                    value={settings.stachesepl_select_seat_btn_text_color}
+                    onChange={(color) => updateSetting('stachesepl_select_seat_btn_text_color', color)}
+                />
+
+            </FlexTwo>
+
+            <Divider />
+
+            <FlexTwo>
+
+                <ColorPicker
+                    label={__('SELECT_SEAT_BTN_BG_COLOR_HOVER')}
+                    description={__('SELECT_SEAT_BTN_BG_COLOR_HOVER_DESC')}
+                    value={settings.stachesepl_select_seat_btn_bg_color_hover}
+                    onChange={(color) => updateSetting('stachesepl_select_seat_btn_bg_color_hover', color)}
+                />
+
+                <ColorPicker
+                    label={__('SELECT_SEAT_BTN_TEXT_COLOR_HOVER')}
+                    description={__('SELECT_SEAT_BTN_TEXT_COLOR_HOVER_DESC')}
+                    value={settings.stachesepl_select_seat_btn_text_color_hover}
+                    onChange={(color) => updateSetting('stachesepl_select_seat_btn_text_color_hover', color)}
+                />
+
+            </FlexTwo>
+
+            <Divider />
+
+            <SelectSeatPreview settings={settings} />
+
+            <Divider />
+
+            {/* ADD TO CART  */}
+
+            <FlexTwo>
+                <ColorPicker
+                    label={__('ADD_TO_CART_BG_COLOR')}
+                    description={__('ADD_TO_CART_BG_COLOR_DESC')}
+                    value={settings.stachesepl_add_to_cart_btn_bg_color}
+                    onChange={(color) => updateSetting('stachesepl_add_to_cart_btn_bg_color', color)}
+                />
+
+                <ColorPicker
+                    label={__('ADD_TO_CART_TEXT_COLOR')}
+                    description={__('ADD_TO_CART_TEXT_COLOR_DESC')}
+                    value={settings.stachesepl_add_to_cart_btn_text_color}
+                    onChange={(color) => updateSetting('stachesepl_add_to_cart_btn_text_color', color)}
+                />
+
+
+
+            </FlexTwo>
+
+            <Divider />
+
+            <FlexTwo>
+
+                <ColorPicker
+                    label={__('ADD_TO_CART_BG_COLOR_HOVER')}
+                    description={__('ADD_TO_CART_BG_COLOR_HOVER_DESC')}
+                    value={settings.stachesepl_add_to_cart_btn_bg_color_hover}
+                    onChange={(color) => updateSetting('stachesepl_add_to_cart_btn_bg_color_hover', color)}
+                />
+
+                <ColorPicker
+                    label={__('ADD_TO_CART_TEXT_COLOR_HOVER')}
+                    description={__('ADD_TO_CART_TEXT_COLOR_HOVER_DESC')}
+                    value={settings.stachesepl_add_to_cart_btn_text_color_hover}
+                    onChange={(color) => updateSetting('stachesepl_add_to_cart_btn_text_color_hover', color)}
+                />
+
+            </FlexTwo>
+
+            <Divider />
+
+            <AddToCartPreview settings={settings} />
+
+            <Divider />
+
+
+            {/* VIEW CART */}
+
+            <FlexTwo>
+
+                <ColorPicker
+                    label={__('VIEW_CART_BG_COLOR')}
+                    description={__('VIEW_CART_BG_COLOR_DESC')}
+                    value={settings.stachesepl_view_cart_button_bg_color}
+                    onChange={(color) => updateSetting('stachesepl_view_cart_button_bg_color', color)}
+                />
+
+                <ColorPicker
+                    label={__('VIEW_CART_TEXT_COLOR')}
+                    description={__('VIEW_CART_TEXT_COLOR_DESC')}
+                    value={settings.stachesepl_view_cart_button_text_color}
+                    onChange={(color) => updateSetting('stachesepl_view_cart_button_text_color', color)}
+                />
+
+            </FlexTwo>
+
+            <Divider />
+
+            <FlexTwo>
+
+                <ColorPicker
+                    label={__('VIEW_CART_BG_COLOR_HOVER')}
+                    description={__('VIEW_CART_BG_COLOR_HOVER_DESC')}
+                    value={settings.stachesepl_view_cart_button_bg_color_hover}
+                    onChange={(color) => updateSetting('stachesepl_view_cart_button_bg_color_hover', color)}
+                />
+
+                <ColorPicker
+                    label={__('VIEW_CART_TEXT_COLOR_HOVER')}
+                    description={__('VIEW_CART_TEXT_COLOR_HOVER_DESC')}
+                    value={settings.stachesepl_view_cart_button_text_color_hover}
+                    onChange={(color) => updateSetting('stachesepl_view_cart_button_text_color_hover', color)}
+                />
+
+            </FlexTwo>
+
+            <Divider />
+
+            <ViewCartPreview settings={settings} />
+
+
         </Container>
     )
 }

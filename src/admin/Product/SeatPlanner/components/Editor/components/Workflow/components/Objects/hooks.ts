@@ -10,7 +10,7 @@ export const useDraggable = (
 ) => {
 
     const { setObjects, objects } = useEditorObjects();
-    const { selectedObjects } = useSelectObjects();
+    const { selectedObjects, getIsSelected } = useSelectObjects();
 
     const [isDragging, setIsDragging] = useState(false);
     const initialElementPos = useRef({ x: 0, y: 0 });
@@ -201,7 +201,7 @@ export const useDraggable = (
 
             setObjects(objects =>
                 objects.map((object) =>
-                    selectedObjects.includes(object.id)
+                    getIsSelected(object.id)
                         ? {
                             ...object,
                             move: {
@@ -229,7 +229,7 @@ export const useDraggable = (
             element.removeEventListener("mousedown", handleDragStart);
             document.removeEventListener("mouseup", handleDragEnd);
         };
-    }, [elementRef, gridGap, gridEnabled, isDragging, selectedObjects, setObjects, isLocked, hasLockedSelection]);
+    }, [elementRef, gridGap, gridEnabled, isDragging, selectedObjects, setObjects, isLocked, hasLockedSelection, getIsSelected]);
 
     return {
         className: isLocked ? 'stachesepl-movable stachesepl-locked' : 'stachesepl-movable',
@@ -410,6 +410,7 @@ export const useWorkflowObject = (
         height: objectProps.size.height,
         color: objectProps.color,
         fontSize: fontSize,
+        fontWeight: objectProps.fontWeight,
         left: objectProps.move.x,
         top: objectProps.move.y,
         zIndex: objectProps.zIndex,
@@ -473,6 +474,7 @@ export const useResizableWorkflowObject = (
         height: currentHeight,
         color: objectProps.color,
         fontSize: fontSize,
+        fontWeight: objectProps.fontWeight,
         left: objectProps.move.x,
         top: objectProps.move.y,
         zIndex: objectProps.zIndex,

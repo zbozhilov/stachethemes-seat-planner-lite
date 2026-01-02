@@ -1,0 +1,30 @@
+.stachesepl-view-cart-button {
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+
+    border-radius: 10px;
+    font-weight: 500;
+    line-height: 1;
+    padding: 0.875rem 1.5rem;
+    text-decoration: none;
+    text-align: center;
+    transition: transform .15s ease, box-shadow .15s ease;
+    font-size: 0.875rem;
+    cursor: pointer;
+    background-color: var(--stachesepl-view-cart-button-background-color, #202020);
+    color: var(--stachesepl-view-cart-button-color, #fff);
+    border: none;
+    transition: background-color .15s ease, color .15s ease;
+
+    svg {
+        font-size: 0.875rem;
+    }
+
+    &:hover {
+        background-color: var(--stachesepl-view-cart-button-hover-background-color, #000);
+        color: var(--stachesepl-view-cart-button-hover-color, #fff);
+    }
+}

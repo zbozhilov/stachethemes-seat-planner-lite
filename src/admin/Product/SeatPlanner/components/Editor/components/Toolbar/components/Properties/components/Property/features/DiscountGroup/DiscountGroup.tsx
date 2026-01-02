@@ -1,7 +1,8 @@
 import { isSeatObject, SeatObjectProps } from '@src/admin/Product/SeatPlanner/components/Editor/components/Workflow/components/Objects/Seat/types';
 import { useEditorObjects } from "@src/admin/Product/SeatPlanner/components/Editor/hooks";
 import { __ } from '@src/utils';
-import './DiscountGroup.scss';
+import InputWrap from '../../../../../../../UI/InputWrap/InputWrap';
+import InputText from '../../../../../../../UI/InputText/InputText';
 
 const DiscountGroup = (props: {
     objects: SeatObjectProps[]
@@ -35,16 +36,18 @@ const DiscountGroup = (props: {
 
     return (
 
-        <div className='stachesepl-toolbar-properties-discount-group'>
-            <label htmlFor='stachesepl-toolbar-properties-discount-group'>{__('GROUP')}</label>
-            <input id='stachesepl-toolbar-properties-discount-group'
-                type="text"
-                placeholder={__('GROUP_NAME')}
+        <InputWrap>
+            <InputText
+                id='stachesepl-toolbar-properties-discount-group'
+                label={__('GROUP')}
+                labelFor='stachesepl-toolbar-properties-discount-group'
                 value={discountDiscountGroup}
-                onChange={(e) => {
-                    handleDiscountGroupChange(e.target.value)
-                }} />
-        </div>
+                onChange={(value) => {
+                    handleDiscountGroupChange(value.toString())
+                }}
+            />
+        </InputWrap>
+
     )
 }
 

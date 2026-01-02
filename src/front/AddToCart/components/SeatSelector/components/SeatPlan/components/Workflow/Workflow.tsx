@@ -1,8 +1,8 @@
 import { useSeatPlanData } from '@src/front/AddToCart/components/context/hooks';
-import React from 'react';
-import './Workflow.scss';
 import { SeatPlanDataProps } from '@src/front/AddToCart/types';
+import React from 'react';
 import { useImageReady } from './hooks';
+import './Workflow.scss';
 
 const Overlay = (props: {
     seatPlanData: SeatPlanDataProps
@@ -36,8 +36,12 @@ const Workflow = (props: {
         backgroundColor: backgroundColor,
     }
 
+    const classNameArray = [
+        'stachesepl-workflow',
+    ];
+
     return (
-        <div className='stachesepl-workflow' style={style}>
+        <div className={classNameArray.join(' ')} style={style}>
             <Overlay seatPlanData={seatPlanData} />
             {
                 props.children

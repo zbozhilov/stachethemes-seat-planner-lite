@@ -20,10 +20,9 @@ type fetchResult = {
     };
 }
 
-const fetchSeatOrderData = async ({ productId, seatId, selectedDate, signal }: {
+const fetchSeatOrderData = async ({ productId, seatId, signal }: {
     productId: number,
     seatId: string,
-    selectedDate: string | null,
     signal: AbortSignal
 }): Promise<SeatOrderData> => {
     const adminAjaxUrl = window.seat_planner_add_to_cart.ajax_url;
@@ -38,7 +37,6 @@ const fetchSeatOrderData = async ({ productId, seatId, selectedDate, signal }: {
             task: 'get_order_details_by_seat_id',
             product_id: productId.toString(),
             seat_id: seatId,
-            selected_date: selectedDate || '',
             nonce: window.seat_planner_add_to_cart.nonce,
         }),
         signal,

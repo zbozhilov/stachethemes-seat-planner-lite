@@ -8,9 +8,9 @@
 
     select,
     input[type='text'] {
-        background-color: var(--stachesepl-toolbar-input-background-color);
-        border: 1px solid var(--stachesepl-toolbar-input-border-color);
-        color: var(--stachesepl-toolbar-label-color);
+        background-color: var(--stachesepl-input-background-color);
+        border: 1px solid var(--stachesepl-input-border-color);
+        color: var(--stachesepl-input-label-color);
         border-radius: 8px;
         padding: 10px 12px;
         font-size: 14px;
@@ -20,7 +20,7 @@
         outline: none;
 
         &:focus {
-            border-color: var(--stachesepl-toolbar-input-focus-border-color);
+            border-color: var(--stachesepl-input-focus-border-color);
             box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.15);
         }
 

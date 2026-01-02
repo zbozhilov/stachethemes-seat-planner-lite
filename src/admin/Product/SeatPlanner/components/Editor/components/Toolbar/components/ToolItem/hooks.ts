@@ -5,6 +5,7 @@ import { textProperties } from "@src/admin/Product/SeatPlanner/components/Editor
 import { ObjectTypes, WorkflowObject } from "@src/admin/Product/SeatPlanner/components/Editor/components/Workflow/components/Objects/types";
 import { useEditorGridGap, useEditorObjects, useEditorRef, useSelectObjects } from "@src/admin/Product/SeatPlanner/components/Editor/hooks";
 import { useEffect, useRef } from "react";
+import { seatRowProperties } from "../../../Workflow/components/Objects/SeatRow/properties";
 
 export const useDraggableToolItem = ({
     itemRef,
@@ -26,6 +27,9 @@ export const useDraggableToolItem = ({
 
             case 'seat':
                 return seatProperties;
+
+            case 'seat-row':
+                return seatRowProperties;   
 
             case 'generic':
                 return genericProperties;

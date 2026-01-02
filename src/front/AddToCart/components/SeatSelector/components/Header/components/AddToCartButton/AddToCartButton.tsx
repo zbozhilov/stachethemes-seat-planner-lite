@@ -1,26 +1,25 @@
-import { useDiscounts, useModalState, useProductId, useSeatPlanData, useSelectedDate, useSelectedSeats, useShowViewCartButton } from "@src/front/AddToCart/components/context/hooks";
+import { East as ArrowRight } from '@mui/icons-material';
+import addSeatsToCart from "@src/front/AddToCart/ajax/addSeatsToCart";
+import CircLoader from "@src/front/AddToCart/components/CircLoader/CircLoader";
+import { useModalState, useProductId, useSeatPlanData, useSelectedSeats, useShowViewCartButton } from "@src/front/AddToCart/components/context/hooks";
 import { __ } from "@src/utils";
 import { useState } from "react";
 import toast from "react-hot-toast";
+import { Portal } from 'react-portal';
 import Button from "../Button/Button";
-import { East as ArrowRight } from '@mui/icons-material';
-import addSeatsToCart from "@src/front/AddToCart/ajax/addSeatsToCart";
-import { Portal } from "react-portal";
 import './AddToCartButton.scss';
 
 const AddToCartButton = () => {
 
     const { productId } = useProductId();
     const { selectedSeats } = useSelectedSeats();
-    const { selectedDate } = useSelectedDate();
     const { setModalOpen } = useModalState();
     const { setShowViewCartButton } = useShowViewCartButton();
-    const [showRedirectOverlay, setShowRedirectOverlay] = useState(false);
 
     const { seatPlanData } = useSeatPlanData();
-    const { discounts, hasDiscounts } = useDiscounts();
 
     const [loading, setLoading] = useState(false);
+    const [showRedirectOverlay, setShowRedirectOverlay] = useState(false);
 
     const updateCartFragments = (fragments: { [key: string]: string }) => {
 
@@ -35,9 +34,9 @@ const AddToCartButton = () => {
         document.body.dispatchEvent(new Event('wc_fragments_refreshed'));
     };
 
-
     const getSelectedSeatsData = () => {
-        const selectedSeatsData: { seatId: string, discountId: string }[] = [];
+
+        const selectedSeatsData: { seatId: string }[] = [];
 
         const seatPlanSeats = seatPlanData?.objects.filter((object) => object.type === 'seat');
 
@@ -45,22 +44,23 @@ const AddToCartButton = () => {
             return selectedSeatsData;
         }
 
+        // Create Maps for O(1) lookups instead of O(n) find operations
+        const seatMap = new Map<string, typeof seatPlanSeats[0]>();
+        seatPlanSeats.forEach((seat) => {
+            if (seat.seatId) {
+                seatMap.set(seat.seatId, seat);
+            }
+        });
+
         selectedSeats.forEach((seatId) => {
-            const seatData = seatPlanSeats.find((seat) => seat.seatId === seatId);
+            const seatData = seatMap.get(seatId);
 
             if (!seatData) {
                 return;
             }
 
-            let seatDiscount = '';
-
-            if (hasDiscounts && seatData.discount) {
-                seatDiscount = discounts.some((discount) => discount.name === seatData.discount) ? seatData.discount : '';
-            }
-
             selectedSeatsData.push({
                 seatId: seatData.seatId,
-                discountId: seatDiscount
             });
         });
 
@@ -87,7 +87,6 @@ const AddToCartButton = () => {
             const result = await addSeatsToCart({
                 productId: productId,
                 selectedSeatsData: selectedSeatsData,
-                selectedDate: selectedDate,
                 signal: new AbortController().signal
             });
 
@@ -174,7 +173,7 @@ const AddToCartButton = () => {
     const classNameArray = ['stachesepl-add-to-cart-button'];
 
     if (loading) {
-        classNameArray.push('loading');
+        classNameArray.push('stachesepl-loading');
     }
 
     const redirectMessage = window.seat_planner_add_to_cart.cart_redirect_message_text || __('REDIRECTING_TO_PAYMENT');
@@ -182,16 +181,19 @@ const AddToCartButton = () => {
     return (
         <>
 
-            <Button className={classNameArray.join(' ')} onClick={handleAddToCart}>{__('ADD_TO_CART')} <ArrowRight /></Button>
+            <Button className={classNameArray.join(' ')} onClick={handleAddToCart}>
+                {__('ADD_TO_CART')}
+                <ArrowRight />
+                {loading && <CircLoader text={__('LOADING')} colorMode="light" type='small' />}
+            </Button>
 
             {showRedirectOverlay && (
                 <Portal>
                     <div className="stachesepl-redirect-overlay">
                         <div className="stachesepl-redirect-content">
-                            <div className="stachesepl-redirect-spinner" />
                             <div className="stachesepl-redirect-text">
-                                <h3>{redirectMessage}</h3>
-                                <p>{__('PLEASE_WAIT')}</p>
+                                <div className='stachesepl-redirect-text-header'>{redirectMessage}</div>
+                                <div className='stachesepl-redirect-text-description'>{__('PLEASE_WAIT')}</div>
                             </div>
                             <div className="stachesepl-redirect-progress">
                                 <div className="stachesepl-redirect-progress-bar" />
@@ -200,7 +202,6 @@ const AddToCartButton = () => {
                     </div>
                 </Portal>
             )}
-
         </>
     )
 }

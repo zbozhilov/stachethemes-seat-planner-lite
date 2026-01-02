@@ -2,6 +2,7 @@ import { createContext, useContext, useState, useCallback, ReactNode } from 'rea
 import { __ } from '@src/utils';
 
 export type SettingsState = {
+    stachesepl_compat_mode: 'yes' | 'no'
     stachesepl_reserve_time: number
     stachesepl_cart_redirect: 'disabled' | 'cart' | 'checkout'
     stachesepl_cart_redirect_message: 'yes' | 'no'
@@ -16,6 +17,27 @@ export type SettingsState = {
     stachesepl_auto_confirm_paid_orders: 'yes' | 'no'
     stachesepl_app_enabled: 'yes' | 'no'
     stachesepl_app_secret_key: string
+
+    // DATEPICKER
+    stachesepl_datepicker_accent_color: string
+
+    // SELECT SEAT BUTTON
+    stachesepl_select_seat_btn_bg_color: string
+    stachesepl_select_seat_btn_bg_color_hover: string
+    stachesepl_select_seat_btn_text_color: string
+    stachesepl_select_seat_btn_text_color_hover: string
+
+    // ADD TO CART BUTTON
+    stachesepl_add_to_cart_btn_bg_color: string
+    stachesepl_add_to_cart_btn_bg_color_hover: string
+    stachesepl_add_to_cart_btn_text_color: string
+    stachesepl_add_to_cart_btn_text_color_hover: string
+
+    // VIEW CART BUTTON
+    stachesepl_view_cart_button_bg_color: string
+    stachesepl_view_cart_button_bg_color_hover: string
+    stachesepl_view_cart_button_text_color: string
+    stachesepl_view_cart_button_text_color_hover: string
 }
 
 type SettingsContextType = {
@@ -27,6 +49,7 @@ type SettingsContextType = {
 }
 
 const defaultSettings: SettingsState = {
+    stachesepl_compat_mode: 'yes',
     stachesepl_reserve_time: 15,
     stachesepl_cart_redirect: 'checkout',
     stachesepl_cart_redirect_message: 'yes',
@@ -36,11 +59,33 @@ const defaultSettings: SettingsState = {
     stachesepl_cart_timer_text_color: '#475569',
     stachesepl_cart_timer_time_color: '#0f172a',
     stachesepl_cart_timer_time_color_critical: '#ef4444',
+
+    // DATEPICKER
+    stachesepl_datepicker_accent_color: '#873eff',
+
     stachesepl_pdf_attachments: 'yes',
     stachesepl_pdf_attachment_name: '',
     stachesepl_auto_confirm_paid_orders: 'no',
     stachesepl_app_enabled: 'yes',
-    stachesepl_app_secret_key: ''
+    stachesepl_app_secret_key: '',
+
+    // SELECT SEAT BUTTON
+    stachesepl_select_seat_btn_bg_color: '#873eff',
+    stachesepl_select_seat_btn_bg_color_hover: '#722ed1',
+    stachesepl_select_seat_btn_text_color: '#fff',
+    stachesepl_select_seat_btn_text_color_hover: '#fff',
+
+    // ADD TO CART BUTTON
+    stachesepl_add_to_cart_btn_bg_color: '#2c9f45',
+    stachesepl_add_to_cart_btn_bg_color_hover: '#0abf53',
+    stachesepl_add_to_cart_btn_text_color: '#fff',
+    stachesepl_add_to_cart_btn_text_color_hover: '#fff',
+
+    // VIEW CART BUTTON
+    stachesepl_view_cart_button_bg_color: '#202020',
+    stachesepl_view_cart_button_bg_color_hover: '#000',
+    stachesepl_view_cart_button_text_color: '#fff',
+    stachesepl_view_cart_button_text_color_hover: '#fff'
 }
 
 const SettingsContext = createContext<SettingsContextType | null>(null)

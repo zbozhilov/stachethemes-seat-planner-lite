@@ -307,7 +307,7 @@ export const useToggleSeatLabelDisplay = () => {
 export const useCopyPaste = () => {
 
     const { objects, setObjects } = useEditorObjects();
-    const { selectedObjects, setSelectedObjects } = useSelectObjects();
+    const { selectedObjects, setSelectedObjects, getIsSelected } = useSelectObjects();
     const disable = useRef(false); // Prevents spamming of copy and paste
     const copiedObjects = useRef<WorkflowObject[]>([]);
 
@@ -331,7 +331,7 @@ export const useCopyPaste = () => {
                 return;
             }
 
-            copiedObjects.current = objects.filter(object => selectedObjects.includes(object.id));
+            copiedObjects.current = objects.filter(object => getIsSelected(object.id));
 
             toast.success(__('OBJECTS_COPIED'));
 
@@ -363,13 +363,6 @@ export const useCopyPaste = () => {
 
             });
 
-            const limit = 100;
-
-            if (newObjects.length + objects.length > limit) {
-                toast.error(__('MAX_OBJECTS_LIMIT_REACHED'));
-                return;
-            }
-
             setObjects(prev => [...prev, ...newObjects]);
 
             setSelectedObjects(newObjects.map(object => object.id));
@@ -392,14 +385,14 @@ export const useCopyPaste = () => {
         }
 
 
-    }, [objects, selectedObjects, setObjects, setSelectedObjects]);
+    }, [objects, selectedObjects, setObjects, setSelectedObjects, getIsSelected]);
 
 }
 
 export const useDeleteAndEscapeKey = () => {
 
     const { setObjects } = useEditorObjects();
-    const { selectedObjects, setSelectedObjects } = useSelectObjects();
+    const { selectedObjects, setSelectedObjects, getIsSelected } = useSelectObjects();
 
     useEffect(() => {
 
@@ -418,7 +411,7 @@ export const useDeleteAndEscapeKey = () => {
             switch (e.key) {
                 case 'Backspace':
                 case 'Delete': {
-                    setObjects(prev => prev.filter(object => !selectedObjects.includes(object.id)));
+                    setObjects(prev => prev.filter(object => !getIsSelected(object.id)));
                     setSelectedObjects([]);
                     break;
                 }
@@ -438,7 +431,7 @@ export const useDeleteAndEscapeKey = () => {
         }
 
 
-    }, [selectedObjects, setObjects, setSelectedObjects]);
+    }, [selectedObjects, setObjects, setSelectedObjects, getIsSelected]);
 
 }
 

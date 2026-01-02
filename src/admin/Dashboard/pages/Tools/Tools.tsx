@@ -7,7 +7,7 @@ import PdfPreview from './components/PdfPreview/PdfPreview'
 import { __ } from '@src/utils'
 
 const Tools = () => {
-    type SupportedTabs = 'booking_integrity' | 'pdf_preview'
+    type SupportedTabs = 'booking_integrity' | 'pdf_preview' | 'edit_order'
 
     const [activeTab, setActiveTab] = useState<SupportedTabs>('booking_integrity')
 

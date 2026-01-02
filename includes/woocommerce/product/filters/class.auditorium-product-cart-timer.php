@@ -13,12 +13,6 @@ if (!defined('ABSPATH')) {
  */
 class Auditorium_Product_Cart_Timer {
 
-    // Default cart timer colors
-    public static $default_cart_timer_bg_color = '#32373c';
-    public static $default_cart_timer_text_color = '#fff';
-    public static $default_cart_timer_time_color = '#fb8a2e';
-    public static $default_cart_timer_time_color_critical = '#ff6c5f';
-
     private static $display_cart_timer = false;
 
     /**
@@ -46,7 +40,7 @@ class Auditorium_Product_Cart_Timer {
 
         add_filter('woocommerce_add_cart_item_data', [__CLASS__, 'add_cart_item_data'], 10, 3);
 
-        self::$display_cart_timer = get_option('stachesepl_cart_timer_enabled', 'yes') === 'yes' && Slot_Reservation::get_reserve_time() > 0;
+        self::$display_cart_timer = Settings::get_setting('stachesepl_cart_timer_enabled') === 'yes' && Slot_Reservation::get_reserve_time() > 0;
 
         if (!self::$display_cart_timer) {
             return;
@@ -118,10 +112,10 @@ class Auditorium_Product_Cart_Timer {
 
         // Apply user-defined colors via CSS variables so the cart timer can be customized
         // from the Seat Reservation settings.
-        $bg_color              = get_option('stachesepl_cart_timer_bg_color', Auditorium_Product_Cart_Timer::$default_cart_timer_bg_color);
-        $text_color            = get_option('stachesepl_cart_timer_text_color', Auditorium_Product_Cart_Timer::$default_cart_timer_text_color);
-        $time_color            = get_option('stachesepl_cart_timer_time_color', Auditorium_Product_Cart_Timer::$default_cart_timer_time_color);
-        $critical_time_color   = get_option('stachesepl_cart_timer_time_color_critical', Auditorium_Product_Cart_Timer::$default_cart_timer_time_color_critical);
+        $bg_color              = Settings::get_setting('stachesepl_cart_timer_bg_color');
+        $text_color            = Settings::get_setting('stachesepl_cart_timer_text_color');
+        $time_color            = Settings::get_setting('stachesepl_cart_timer_time_color');
+        $critical_time_color   = Settings::get_setting('stachesepl_cart_timer_time_color_critical');
 
         $custom_css = sprintf(
             ':root{' .

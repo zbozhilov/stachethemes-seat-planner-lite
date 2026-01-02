@@ -1,0 +1,142 @@
+.stachesepl-switch-button {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    box-sizing: border-box;
+    width: 100%;
+
+    label {
+        color: var(--stachesepl-input-label-color);
+        font-size: 13px;
+        font-weight: 500;
+        cursor: pointer;
+        user-select: none;
+        flex: 1;
+    }
+
+    .stachesepl-toggle {
+        position: relative;
+        display: inline-flex;
+        align-items: center;
+        cursor: pointer;
+        background: transparent;
+        border: none;
+        padding: 0;
+        outline: none;
+        flex-shrink: 0;
+
+        &:focus-visible .stachesepl-toggle-track {
+            box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.3);
+        }
+
+        .stachesepl-toggle-track {
+            position: relative;
+            width: 44px;
+            height: 24px;
+            border-radius: 12px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            transition: background-color var(--stachesepl-transition-fast),
+                       border-color var(--stachesepl-transition-fast),
+                       box-shadow var(--stachesepl-transition-fast);
+        }
+
+        &:hover .stachesepl-toggle-track {
+            background-color: rgba(255, 255, 255, 0.15);
+            border-color: rgba(255, 255, 255, 0.18);
+        }
+
+        &.is-checked .stachesepl-toggle-track {
+            background-color: var(--stachesepl-accent-primary);
+            border-color: var(--stachesepl-accent-primary);
+        }
+
+        &.is-checked:hover .stachesepl-toggle-track {
+            background-color: var(--stachesepl-accent-primary-hover);
+            border-color: var(--stachesepl-accent-primary-hover);
+        }
+
+        .stachesepl-toggle-thumb {
+            position: absolute;
+            top: 2px;
+            left: 2px;
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            background-color: #71717a;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3),
+                        0 1px 2px rgba(0, 0, 0, 0.2);
+            transition: transform var(--stachesepl-transition-fast),
+                        background-color var(--stachesepl-transition-fast);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        &:hover .stachesepl-toggle-thumb {
+            background-color: #a1a1aa;
+        }
+
+        &.is-checked .stachesepl-toggle-thumb {
+            transform: translateX(20px);
+            background-color: #ffffff;
+        }
+
+        &.is-checked:hover .stachesepl-toggle-thumb {
+            background-color: #fafafa;
+        }
+
+        &:active .stachesepl-toggle-thumb {
+            width: 22px;
+        }
+
+        &.is-checked:active .stachesepl-toggle-thumb {
+            transform: translateX(16px);
+        }
+
+        .stachesepl-toggle-icon {
+            color: var(--stachesepl-accent-primary);
+            animation: stachesepl-toggle-check 200ms ease-out;
+        }
+    }
+}
+
+@keyframes stachesepl-toggle-check {
+    from { opacity: 0; transform: scale(0.5); }
+    to   { opacity: 1; transform: scale(1); }
+}
+
+// Light theme overrides
+.stachesepl-theme-light .stachesepl-switch-button .stachesepl-toggle {
+    
+    .stachesepl-toggle-track {
+        background-color: #e4e4e7;
+        border-color: #d4d4d8;
+    }
+
+    &:hover .stachesepl-toggle-track {
+        background-color: #d4d4d8;
+        border-color: #a1a1aa;
+    }
+
+    .stachesepl-toggle-thumb {
+        background-color: #ffffff;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1),
+                    0 1px 2px rgba(0, 0, 0, 0.06);
+    }
+
+    &:hover .stachesepl-toggle-thumb {
+        background-color: #ffffff;
+    }
+
+    &.is-checked .stachesepl-toggle-track {
+        background-color: var(--stachesepl-accent-primary);
+        border-color: var(--stachesepl-accent-primary);
+    }
+
+    &.is-checked:hover .stachesepl-toggle-track {
+        background-color: var(--stachesepl-accent-primary-hover);
+        border-color: var(--stachesepl-accent-primary-hover);
+    }
+}

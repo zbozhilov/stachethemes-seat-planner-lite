@@ -7,6 +7,7 @@ import Text from './components/Objects/Text/Text';
 import { useCopyPaste, useDeleteAndEscapeKey, useGrid, useHistory, useMarquee, useToggleSeatLabelDisplay } from './hooks';
 import './Workflow.scss';
 import { __ } from '@src/utils';
+import SeatRow from './components/Objects/SeatRow/SeatRow';
 
 type SeatDisplayLabelType = 'label' | 'price' | 'seatid' | 'group' | 'status';
 
@@ -205,6 +206,9 @@ const Workflow = () => {
 
                             case 'seat':
                                 return <Seat key={object.id} {...object} outlineError={seatsWithErrors.includes(object.seatId)} />
+
+                            case 'seat-row':
+                                return <SeatRow key={object.id} {...object} />
 
                             case 'generic':
                                 return <Generic key={object.id} {...object} />

@@ -19,11 +19,11 @@
     --stachesepl-editor-border-color: rgba(255, 255, 255, 0.08);
 
     // Toolbar
-    --stachesepl-toolbar-background-color: #1f1f23;
-    --stachesepl-toolbar-input-background-color: rgba(255, 255, 255, 0.06);
-    --stachesepl-toolbar-input-border-color: rgba(255, 255, 255, 0.1);
-    --stachesepl-toolbar-input-focus-border-color: var(--stachesepl-accent-primary);
-    --stachesepl-toolbar-label-color: #e4e4e7;
+    --stachesepl-background-color: #1f1f23;
+    --stachesepl-input-background-color: rgba(255, 255, 255, 0.06);
+    --stachesepl-input-border-color: rgba(255, 255, 255, 0.1);
+    --stachesepl-input-focus-border-color: var(--stachesepl-accent-primary);
+    --stachesepl-input-label-color: #e4e4e7;
 
     // Tooltip properties header
     --stachesepl-tooltip-properties-header-background-color: #27272a;
@@ -31,11 +31,11 @@
     --stachesepl-tooltip-items-count-color: #71717a;
 
     // Toolbar items
-    --stachesepl-toolbar-item-background-color: #27272a;
-    --stachesepl-toolbar-item-color: #d4d4d8;
-    --stachesepl-toolbar-item-border-color: rgba(255, 255, 255, 0.06);
-    --stachesepl-toolbar-item-hover-background-color: var(--stachesepl-accent-primary);
-    --stachesepl-toolbar-item-hover-color: #ffffff;
+    --stachesepl-item-background-color: #27272a;
+    --stachesepl-item-color: #d4d4d8;
+    --stachesepl-item-border-color: rgba(255, 255, 255, 0.06);
+    --stachesepl-item-hover-background-color: var(--stachesepl-accent-primary);
+    --stachesepl-item-hover-color: #ffffff;
 
     // Dialogs
     --stachesepl-dialog-overlay: rgba(0, 0, 0, 0.75);
@@ -127,11 +127,11 @@
     --stachesepl-editor-border-color: rgba(0, 0, 0, 0.08);
 
     // Toolbar
-    --stachesepl-toolbar-background-color: #ffffff;
-    --stachesepl-toolbar-input-background-color: #f4f4f5;
-    --stachesepl-toolbar-input-border-color: #e4e4e7;
-    --stachesepl-toolbar-input-focus-border-color: var(--stachesepl-accent-primary);
-    --stachesepl-toolbar-label-color: #27272a;
+    --stachesepl-background-color: #ffffff;
+    --stachesepl-input-background-color: #f4f4f5;
+    --stachesepl-input-border-color: #e4e4e7;
+    --stachesepl-input-focus-border-color: var(--stachesepl-accent-primary);
+    --stachesepl-input-label-color: #27272a;
 
     // Tooltip properties header
     --stachesepl-tooltip-properties-header-background-color: linear-gradient(135deg, #f4f4f5 0%, #e4e4e7 100%);
@@ -139,11 +139,11 @@
     --stachesepl-tooltip-items-count-color: #71717a;
 
     // Toolbar items
-    --stachesepl-toolbar-item-background-color: #f4f4f5;
-    --stachesepl-toolbar-item-color: #3f3f46;
-    --stachesepl-toolbar-item-border-color: #e4e4e7;
-    --stachesepl-toolbar-item-hover-background-color: var(--stachesepl-accent-primary);
-    --stachesepl-toolbar-item-hover-color: #ffffff;
+    --stachesepl-item-background-color: #f4f4f5;
+    --stachesepl-item-color: #3f3f46;
+    --stachesepl-item-border-color: #e4e4e7;
+    --stachesepl-item-hover-background-color: var(--stachesepl-accent-primary);
+    --stachesepl-item-hover-color: #ffffff;
 
     // Dialogs
     --stachesepl-dialog-overlay: rgba(0, 0, 0, 0.5);

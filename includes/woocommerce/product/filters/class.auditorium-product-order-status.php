@@ -124,7 +124,7 @@ class Auditorium_Product_Order_Status {
                     Slot_Reservation::release_transient($product_id, $seat_id, $selected_date);
 
                     // Automatically complete paid orders if the option is enabled
-                    if (get_option('stachesepl_auto_confirm_paid_orders') === 'yes') {
+                    if (Settings::get_setting('stachesepl_auto_confirm_paid_orders') === 'yes') {
                         if ($that->is_paid() && $that->get_status() !== 'completed') {
                             $that->update_status('completed');
                         }

@@ -80,55 +80,102 @@ export const getPriceWithSymbol = (price: number): string => {
 
 }
 
-const phpToMoment = (format: string): string => {
-    const map: Record<string, string> = {
+const formatDateWithPhpFormat = (date: Date, format: string): string => {
+    const pad = (n: number): string => n.toString().padStart(2, '0');
+
+    const monthsFull = ['January', 'February', 'March', 'April', 'May', 'June',
+        'July', 'August', 'September', 'October', 'November', 'December'];
+    const monthsShort = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
+        'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+
+    const hours24 = date.getHours();
+    const hours12 = hours24 % 12 || 12;
+
+    const tokens: Record<string, string> = {
         // months
-        'F': 'MMMM',
-        'M': 'MMM',
-        'm': 'MM',
-        'n': 'M',
+        'F': monthsFull[date.getMonth()],
+        'M': monthsShort[date.getMonth()],
+        'm': pad(date.getMonth() + 1),
+        'n': (date.getMonth() + 1).toString(),
 
         // days
-        'd': 'DD',
-        'j': 'D',
+        'd': pad(date.getDate()),
+        'j': date.getDate().toString(),
 
         // years
-        'Y': 'YYYY',
-        'y': 'YY',
+        'Y': date.getFullYear().toString(),
+        'y': date.getFullYear().toString().slice(-2),
 
         // hours
-        'H': 'HH',
-        'G': 'H',
-        'h': 'hh',
-        'g': 'h',
+        'H': pad(hours24),
+        'G': hours24.toString(),
+        'h': pad(hours12),
+        'g': hours12.toString(),
 
         // minutes/seconds
-        'i': 'mm',
-        's': 'ss',
+        'i': pad(date.getMinutes()),
+        's': pad(date.getSeconds()),
 
         // am/pm
-        'A': 'A',
-        'a': 'a'
+        'A': hours24 >= 12 ? 'PM' : 'AM',
+        'a': hours24 >= 12 ? 'pm' : 'am'
     };
 
     return format.replace(/\\?([a-zA-Z])/g, (match, token) => {
-        // keep escaped chars like \t or \.
+        // keep escaped chars like \T or \.
         if (match.startsWith('\\')) return token;
-
-        return map[token] || token;
+        return tokens[token] ?? token;
     });
 };
 
-
 export const getFormattedDateTime = (dateTime: string): string => {
+    const date = new Date(dateTime);
+    if (isNaN(date.getTime())) return dateTime;
 
-    const dateFormat = phpToMoment(window.stachesepl_date_format.date_format);
-    const timeFormat = phpToMoment(window.stachesepl_date_format.time_format);
+    const { date_format, time_format } = window.stachesepl_date_format;
+    return `${formatDateWithPhpFormat(date, date_format)} ${formatDateWithPhpFormat(date, time_format)}`;
+};
 
-    if (typeof window.moment === 'undefined') {
-        return dateTime;
+export const getFormatteDate = (date: string): string => {
+    const d = new Date(date);
+    if (isNaN(d.getTime())) return date;
+    return formatDateWithPhpFormat(d, window.stachesepl_date_format.date_format);
+};
+
+export const getFormattedTime = (time: string): string => {
+    const d = new Date(`1970-01-01T${time}`);
+    if (isNaN(d.getTime())) return time;
+    return formatDateWithPhpFormat(d, window.stachesepl_date_format.time_format);
+};
+
+
+export const hexToRgba = (hex: string, alpha: number) => {
+    hex = hex.replace('#', '');
+    if (hex.length === 3) {
+        hex = hex.split('').map(c => c + c).join('');
     }
+    const r = parseInt(hex.substring(0, 2), 16);
+    const g = parseInt(hex.substring(2, 4), 16);
+    const b = parseInt(hex.substring(4, 6), 16);
+    return `rgba(${r}, ${g}, ${b}, ${alpha})`;
+};
 
-    return window.moment(dateTime).format(`${dateFormat} ${timeFormat}`);
+export const darken = (hex: string, percent: number) => {
+    hex = hex.replace('#', '');
+    if (hex.length === 3) {
+        hex = hex.split('').map(c => c + c).join('');
+    }
+    const amt = Math.round(2.55 * percent);
+    const r = Math.max(0, parseInt(hex.substring(0, 2), 16) - amt);
+    const g = Math.max(0, parseInt(hex.substring(2, 4), 16) - amt);
+    const b = Math.max(0, parseInt(hex.substring(4, 6), 16) - amt);
+    return `rgb(${r}, ${g}, ${b})`;
+};
 
-}
+
+/**
+ * Checks if the current device supports touch input
+ */
+export const isTouchDevice = (): boolean => {
+    return 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+};

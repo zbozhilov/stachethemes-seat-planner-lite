@@ -1,7 +1,8 @@
 import { BaseObjectProps } from '@src/admin/Product/SeatPlanner/components/Editor/components/Workflow/components/Objects/types';
 import { useEditorObjects } from "@src/admin/Product/SeatPlanner/components/Editor/hooks";
 import { __ } from '@src/utils';
-import './Zindex.scss';
+import InputText from '../../../../../../../UI/InputText/InputText';
+import InputWrap from '../../../../../../../UI/InputWrap/InputWrap';
 
 const Zindex = (props: {
     objects: BaseObjectProps[]
@@ -37,26 +38,31 @@ const Zindex = (props: {
 
     return (
 
-        <div className='stachesepl-toolbar-properties-zindex'>
+        <InputWrap>
 
-            <label htmlFor='stachesepl-toolbar-properties-zindex'>{__('ZINDEX')}</label>
-            <input id='stachesepl-toolbar-properties-zindex'
-                type="number"
-                min={0}
-                max={99}
-                placeholder={__('ZINDEX')}
-                value={displayZIndex} onChange={(e) => {
-
-                    const numberValue = Number(e.target.value);
+            <InputText 
+                id='stachesepl-toolbar-properties-zindex'
+                label={__('ZINDEX')}
+                labelFor='stachesepl-toolbar-properties-zindex'
+                value={displayZIndex}
+                onChange={(value) => {
+                    const numberValue = Number(value);
 
                     if (isNaN(numberValue)) {
                         return;
                     }
 
                     handleValueChange(numberValue)
-                }} />
+                }}
+                inputProps={{
+                    min: 0,
+                    max: 99,
+                    placeholder: __('ZINDEX'),
+                    type: 'number'
+                }}
+            />  
 
-        </div>
+        </InputWrap>
     )
 }
 

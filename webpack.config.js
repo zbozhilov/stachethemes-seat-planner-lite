@@ -111,6 +111,12 @@ module.exports = (env, argv) => {
         'admin/seat_planner/index': './src/admin/Product/SeatPlanner/index.tsx',
         'front/add_to_cart/add-to-cart': './src/front/AddToCart/index.tsx',
         'front/cart_timer/cart-timer': './src/front/CartTimer/index.js',
+        /** 
+         * Compatibility mode where lazy loading is not supported
+         * so we need to load the component immediately
+         * and disable lazy loading
+         */
+                'front-compat-mode/add_to_cart/add-to-cart': './src/front/AddToCart/index-compat.tsx',
       },
       output: {
         path: path.resolve(__dirname, 'assets'),
@@ -134,6 +140,12 @@ module.exports = (env, argv) => {
         'admin/seat_planner/index': './src/admin/Product/SeatPlanner/index.tsx',
         'front/add_to_cart/add-to-cart': './src/front/AddToCart/index.tsx',
         'front/cart_timer/cart-timer': './src/front/CartTimer/index.js',
+        /** 
+         * Compatibility mode where lazy loading is not supported
+         * so we need to load the component immediately
+         * and disable lazy loading
+         */
+                'front-compat-mode/add_to_cart/add-to-cart': './src/front/AddToCart/index-compat.tsx',
       },
       output: {
         path: path.resolve(__dirname, 'assets'),

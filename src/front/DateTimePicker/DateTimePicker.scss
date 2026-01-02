@@ -1,0 +1,368 @@
+@use "sass:color";
+
+// Base accent color - change this to update all accent-related colors
+$accent-color: #873eff;
+
+@mixin picker-css-vars {
+    --picker-bg: #fafafa;
+    --picker-surface: #ffffff;
+    --picker-border: rgba(0, 0, 0, 0.12);
+    --picker-border-hover: rgba(0, 0, 0, 0.2);
+    --picker-text: #1a1d21;
+    --picker-text-muted: #6b7280;
+    --picker-text-disabled: #c4c9d1;
+    --picker-accent: #{$accent-color};
+    --picker-accent-shadow: #{rgba($accent-color, 0.25)};
+    --picker-accent-hover: #{color.scale($accent-color, $lightness: -5%)};
+    --picker-accent-light: #{rgba($accent-color, 0.08)};
+    --picker-accent-border: #{rgba($accent-color, 0.2)};
+    --picker-shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.04);
+    --picker-shadow-md: 0 4px 12px rgba(0, 0, 0, 0.06), 0 1px 3px rgba(0, 0, 0, 0.04);
+    --picker-shadow-lg: 0 12px 40px rgba(0, 0, 0, 0.08), 0 4px 12px rgba(0, 0, 0, 0.04);
+    --picker-radius-sm: 10px;
+    --picker-radius-md: 12px;
+    --picker-radius-lg: 16px;
+    --picker-transition: 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.stachesepl-date-time {
+    @include picker-css-vars;
+
+    position: relative;
+    width: 100%;
+    max-width: 320px;
+    margin-bottom: 20px;
+
+    @media (max-width: 782px) {
+        max-width: 100%;
+    }
+}
+
+.stachesepl-date-time-input {
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    width: 100%;
+    padding: 0.875rem 1rem;
+    background: var(--picker-surface);
+    border: 1px solid var(--picker-border);
+    border-radius: var(--picker-radius-md);
+    cursor: pointer;
+    font-family: inherit;
+    font-weight: 500;
+    font-size: 0.875rem;
+    line-height: 1;
+    color: var(--picker-text-muted);
+    text-align: left;
+    transition: all var(--picker-transition);
+    box-shadow: var(--picker-shadow-sm);
+
+    &:hover:not(&--active) {
+        border-color: var(--picker-border-hover);
+        box-shadow: var(--picker-shadow-md);
+    }
+
+    &--active {
+        border-color: var(--picker-accent);
+        box-shadow: 0 0 0 3px var(--picker-accent-light), var(--picker-shadow-md);
+    }
+
+    &--filled {
+        color: var(--picker-text);
+    }
+
+    &__icon {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--picker-accent);
+        flex-shrink: 0;
+        width: 1rem;
+        height: 1rem;
+    }
+
+    &__text {
+        flex: 1;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+
+    &__chevron {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--picker-text-muted);
+        flex-shrink: 0;
+        transition: transform var(--picker-transition);
+
+        &--up {
+            transform: rotate(180deg);
+        }
+    }
+
+    &:focus-visible {
+        outline: none;
+        border-color: var(--picker-accent);
+        box-shadow: 0 0 0 3px var(--picker-accent-light), var(--picker-shadow-md);
+    }
+}
+
+// Modal overlay for mobile (rendered via portal)
+.stachesepl-date-time-overlay {
+    display: none;
+
+    @media (max-width: 781px) {
+        display: block;
+        position: fixed;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.5);
+        z-index: 9998;
+        animation: overlayFadeIn 0.25s ease-out;
+        backdrop-filter: blur(4px);
+    }
+}
+
+.stachesepl-date-time-picker {
+    // Include CSS vars since this is rendered via portal outside .stachesepl-date-time
+    @include picker-css-vars;
+
+    user-select: none;
+    background: var(--picker-surface);
+    border-radius: var(--picker-radius-lg);
+    border: 1px solid var(--picker-border);
+    box-shadow: var(--picker-shadow-lg);
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    padding: 0;
+    max-width: 420px;
+    width: fit-content;
+    overflow: hidden;
+    animation: dropdownFadeIn 0.2s ease-out;
+
+    * {
+        box-sizing: border-box;
+    }
+
+    &--above {
+        @media (min-width: 782px) {
+            animation: dropdownFadeInUp 0.2s ease-out;
+        }
+    }
+
+    // Mobile: Full-screen modal
+    @media (max-width: 781px) {
+        position: fixed;
+        inset: 0;
+        width: 100dvw;
+        height: 100dvh;
+        max-width: none;
+        border-radius: 0;
+        border: none;
+        z-index: 9999;
+        animation: modalSlideUp 0.3s cubic-bezier(0.32, 0.72, 0, 1);
+        overflow-y: auto;
+    }
+
+    @media (min-width: 782px) {
+        max-width: 780px;
+    }
+
+    // Mobile header with close button
+    &__header {
+        display: none;
+
+        @media (max-width: 781px) {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 1rem 1.25rem;
+            background: var(--picker-surface);
+            border-bottom: 1px solid var(--picker-border);
+            position: sticky;
+            top: 0;
+            z-index: 10;
+        }
+    }
+
+    &__title {
+        font-size: 1.125rem;
+        font-weight: 600;
+        color: var(--picker-text);
+        margin: 0;
+    }
+
+    &__close-btn {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 36px;
+        height: 36px;
+        background: var(--picker-bg);
+        border: 1px solid var(--picker-border);
+        border-radius: 50%;
+        color: var(--picker-text-muted);
+        cursor: pointer;
+        transition: all var(--picker-transition);
+
+        &:hover {
+            background: var(--picker-accent-light, rgba(13, 148, 136, 0.08));
+            border-color: var(--picker-accent-border, rgba(13, 148, 136, 0.2));
+            color: var(--picker-accent, #0d9488);
+        }
+
+        &:active {
+            transform: scale(0.95);
+        }
+    }
+
+    &__content {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+
+        @media (max-width: 781px) {
+            flex: 1;
+            overflow-y: auto;
+
+            &--loading {
+                .stachesepl-timepicker,
+                .stachesepl-datepicker {
+                    display: none;
+                }
+            }
+        }
+
+        @media (min-width: 782px) {
+            width: max-content;
+            flex-direction: row;
+        }
+
+        .stachesepl-datepicker {
+            padding: 1.75rem 2rem;
+
+            @media (max-width: 781px) {
+                padding: 1.5rem 1.25rem;
+            }
+        }
+
+        >*:not(:last-child) {
+            border-bottom: 1px solid var(--picker-border);
+
+            @media (min-width: 782px) {
+                border-bottom: none;
+                border-right: 1px solid var(--picker-border);
+            }
+        }
+
+    }
+
+    &__footer {
+        padding: 1.25rem 2rem;
+        background: var(--picker-bg);
+        border-top: 1px solid var(--picker-border);
+
+        @media (max-width: 781px) {
+            padding: 1rem 1.25rem;
+            padding-bottom: calc(1rem + env(safe-area-inset-bottom, 0px));
+            position: sticky;
+            bottom: 0;
+        }
+    }
+
+    &__confirm-btn {
+        box-sizing: border-box;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.5rem;
+        width: 100%;
+        padding: 0.875rem 1.5rem;
+        background: var(--picker-accent);
+        border: none;
+        border-radius: var(--picker-radius-sm);
+        color: #ffffff;
+        font-size: 0.875rem;
+        font-weight: 600;
+        font-family: inherit;
+        cursor: pointer;
+        transition: all var(--picker-transition);
+        box-shadow: 0 2px 8px var(--picker-accent-shadow);
+        text-align: center;
+        line-height: 1;
+
+        @media (max-width: 781px) {
+            padding: 1rem 1.5rem;
+            font-size: 1rem;
+        }
+
+        &:focus-visible {
+            outline: 2px solid var(--picker-accent);
+            outline-offset: 2px;
+        }
+
+        &:hover {
+            background: var(--picker-accent-hover);
+            box-shadow: 0 2px 8px var(--picker-accent-shadow);
+        }
+    }
+
+}
+
+@keyframes dropdownFadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes dropdownFadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes modalSlideUp {
+    from {
+        opacity: 0;
+        transform: translateY(100%);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes overlayFadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes spinnerRotate {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}

@@ -20,3 +20,7 @@ body {
         box-sizing: border-box;
     }
 }
+
+#wpbody-content .notice {
+    display: none !important;
+}

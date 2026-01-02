@@ -53,6 +53,7 @@ export function getObjectStyle(data: FrontWorkflowObject): React.CSSProperties {
         height: data.size.height,
         color: data.color,
         fontSize: getFontSizeByType(data.fontSize),
+        fontWeight: data.fontWeight ?? 'normal',
         zIndex: data.zIndex ?? 0,
         backgroundColor: hasBackgroundColor(data) ? data.backgroundColor : 'transparent',
         borderRadius: isRounded(data) ? '50%' : undefined

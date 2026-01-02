@@ -1,7 +1,8 @@
-import { __ } from '@src/utils';
-import './Price.scss';
-import { useEditorObjects } from "@src/admin/Product/SeatPlanner/components/Editor/hooks";
 import { isSeatObject, SeatObjectProps } from '@src/admin/Product/SeatPlanner/components/Editor/components/Workflow/components/Objects/Seat/types';
+import { useEditorObjects } from "@src/admin/Product/SeatPlanner/components/Editor/hooks";
+import { __ } from '@src/utils';
+import InputText from '../../../../../../../UI/InputText/InputText';
+import InputWrap from '../../../../../../../UI/InputWrap/InputWrap';
 
 const Price = (props: {
     objects: SeatObjectProps[]
@@ -35,12 +36,18 @@ const Price = (props: {
 
     return (
 
-        <div className='stachesepl-toolbar-properties-price'>
-            <label htmlFor='stachesepl-toolbar-properties-price'>{__('PRICE')}</label>
-            <input id='stachesepl-toolbar-properties-price' type="text" placeholder={__('PRICE')} value={displayPrice} onChange={(e) => {
-                handlePriceChange(e.target.value)
-            }} />
-        </div>
+        <InputWrap>
+            <InputText
+                id='stachesepl-toolbar-properties-price'
+                label={__('PRICE')}
+                labelFor='stachesepl-toolbar-properties-price'
+                placeholder={__('PRICE')}
+                value={displayPrice}
+                onChange={(value) => {
+                    handlePriceChange(value.toString());
+                }}
+            />
+        </InputWrap>
     )
 }
 

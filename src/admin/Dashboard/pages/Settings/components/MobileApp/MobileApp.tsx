@@ -28,7 +28,7 @@ const generateSecretKey = (length: number = 32): string => {
 }
 
 const MobileApp = () => {
-    const androidApkUrl = 'https://stachethemes.com/plugins/wp-content/uploads/android/stachethemes-seat-planner.apk'
+    const androidApkUrl = 'javascript:void(0)'
     const restBaseUrl = window.stachesepl_rest_url.rest_url;
 
     const { settings, updateSetting } = useSettings()
@@ -59,7 +59,7 @@ const MobileApp = () => {
                     {__('ANDROID_APP_DESC')}
                 </p>
                 <a
-                    href={'javascript:void(0)'}
+                    href={androidApkUrl}
                     className="stachesepl-mobile-app-download-link"
                     target="_self"
                     rel="noopener"

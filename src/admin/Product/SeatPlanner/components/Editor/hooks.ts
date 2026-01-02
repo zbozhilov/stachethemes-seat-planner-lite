@@ -2,6 +2,8 @@ import { isEqual } from "lodash";
 import { useContext, useMemo } from "react";
 import EditorContext from "./context/EditorContext";
 import { WorkflowObject } from "./components/Workflow/components/Objects/types";
+import toast from "react-hot-toast";
+import { __ } from "@src/utils";
 
 const useEditorContext = () => {
 
@@ -52,6 +54,7 @@ export const useEditorObjects = () => {
         const maxAllowedObjects = 100;
 
         if (theNewObjects.length > maxAllowedObjects) {
+            toast.error(__('MAX_OBJECTS_LIMIT_REACHED'));
             return;
         }
 
@@ -82,8 +85,17 @@ export const useEditorObjects = () => {
     const getSeatsWithDuplicateSeatIds = () => {
         const seats = objects.filter(object => object.type === 'seat');
         const seatIds = seats.filter(seat => seat.seatId !== '').map(seat => seat.seatId);
-        const duplicateSeatIds = seatIds.filter((seatId, index) => seatIds.indexOf(seatId) !== index);
-        return duplicateSeatIds;
+        // Use Set for O(n) duplicate detection
+        const seen = new Set<string>();
+        const duplicates = new Set<string>();
+        seatIds.forEach(seatId => {
+            if (seen.has(seatId)) {
+                duplicates.add(seatId);
+            } else {
+                seen.add(seatId);
+            }
+        });
+        return Array.from(duplicates);
     }
 
     return {

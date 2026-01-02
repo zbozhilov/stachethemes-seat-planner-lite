@@ -10,8 +10,7 @@
             "jsx": true
         },
         "ecmaVersion": 13,
-        "sourceType": "module",
-        "project": "./tsconfig.json"
+        "sourceType": "module"
     },
     "extends": [],
     "plugins": [
@@ -26,7 +25,10 @@
     "overrides": [
         {
             "files": ["src/**/*.ts", "src/**/*.tsx"],
-            "excludedFiles": ["node_modules/**", "webpack.config.js"]
+            "excludedFiles": ["node_modules/**", "webpack.config.js"],
+            "parserOptions": {
+                "project": "./tsconfig.json"
+            }
         }
     ]
 }

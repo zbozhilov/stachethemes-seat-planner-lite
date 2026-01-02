@@ -2,6 +2,7 @@ import { AddBox } from "@mui/icons-material";
 import { useEditorGridEnabled, useEditorGridGap } from "@src/admin/Product/SeatPlanner/components/Editor/hooks";
 import { __ } from "@src/utils";
 import { GRID_GAP_VALUES, getNextInList } from "@src/admin/Product/SeatPlanner/components/Editor/grid";
+import Button from "../Button/Button";
 
 const GridSizeIncreaseButton = () => {
     const { gridEnabled } = useEditorGridEnabled();
@@ -9,13 +10,12 @@ const GridSizeIncreaseButton = () => {
     const title = `${__('INCREASE_GRID_SIZE')} (])`;
 
     return (
-        <div
-            className={`stachesepl-top-button ${!gridEnabled && 'disabled'}`}
+        <Button
+            disabled={!gridEnabled}
             title={title}
             onClick={() => setGridGap(prev => getNextInList(GRID_GAP_VALUES, prev))}
-        >
-            <AddBox />
-        </div>
+            icon={AddBox}
+        />
     );
 };
 

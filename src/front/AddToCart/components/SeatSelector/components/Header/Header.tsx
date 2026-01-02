@@ -1,20 +1,16 @@
-import { East as ArrowRight } from '@mui/icons-material';
-import { useDiscounts, useModalState, useSeatPlanData, useSelectedSeats } from '@src/front/AddToCart/components/context/hooks';
+import { useModalState, useSeatPlanData, useSelectedSeats } from '@src/front/AddToCart/components/context/hooks';
+import usePreventSingleEmptySeats from '@src/front/AddToCart/hooks/usePreventSingleEmptySeats';
 import { __ } from '@src/utils';
 import AddToCartButton from './components/AddToCartButton/AddToCartButton';
 import Button from './components/Button/Button';
 import './Header.scss';
 
-const Header = (props: {
-    isDiscountModalOpen: boolean,
-    setIsDiscountModalOpen: (value: boolean) => void,
-    onAddDiscountButtonClick: () => void
-}) => {
+const Header = () => {
 
     const { setModalOpen } = useModalState();
     const { selectedSeats } = useSelectedSeats();
-    const { hasDiscounts } = useDiscounts();
     const { seatPlanData } = useSeatPlanData();
+    const validateSeatingSelection = usePreventSingleEmptySeats();
 
     const selectedSeatsCount = selectedSeats.length;
     const minSeatsRule = seatPlanData?.minSeatsPerPurchase || 0; // 0 => no min rule
@@ -35,30 +31,11 @@ const Header = (props: {
 
     const renderButton = () => {
 
-        if (!canProceed) {
+        if (!canProceed || !validateSeatingSelection) {
             return <Button className='secondary' onClick={handleClose}>{__('CLOSE')}</Button>
         }
 
-        if (!hasDiscounts) {
-            return <AddToCartButton />
-        }
-
-        if (!props.isDiscountModalOpen) {
-            return <Button onClick={props.onAddDiscountButtonClick}>
-                {__('NEXT')}
-                <ArrowRight />
-            </Button>
-        }
-
-        if (props.isDiscountModalOpen) {
-            return <Button className='secondary' onClick={() => {
-                props.setIsDiscountModalOpen(false);
-            }}>
-                {__('BACK')}
-            </Button>
-        }
-
-        return null;
+        return <AddToCartButton />
 
     }
 
@@ -68,6 +45,10 @@ const Header = (props: {
             return hasMinRule && minSeatsRule > 1
                 ? __('D_SEATS_REQUIRED').replace('%d', minSeatsRule.toString())
                 : __('NO_SEATS_SELECTED');
+        }
+
+        if (!validateSeatingSelection) {
+            return __('NO_SINGLE_EMPTY_SEAT');
         }
 
         if (isAtMax) {

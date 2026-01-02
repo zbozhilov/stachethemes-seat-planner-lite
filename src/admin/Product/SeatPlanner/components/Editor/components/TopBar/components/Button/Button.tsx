@@ -3,8 +3,21 @@ import './Button.scss';
 import { ButtonProps } from './types';
 
 const Button = (props: ButtonProps) => {
+
+    const classNameArray = ['stachesepl-top-button'];
+    if (props.disabled) {
+        classNameArray.push('disabled');
+    }
+
+    const handleClick = () => {
+        if (props.disabled) {
+            return;
+        }
+        props.onClick();
+    }
+
     return (
-        <div className='stachesepl-top-button' title={props?.title} onClick={props.onClick}>
+        <div className={classNameArray.join(' ')} title={props?.title} onClick={handleClick}>
             <SvgIcon component={props.icon} />
         </div>
     )

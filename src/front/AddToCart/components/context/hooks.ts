@@ -1,3 +1,4 @@
+import { __ } from "@src/utils";
 import { useContext } from "react";
 import AddToCartContext, { AddToCartContextProps } from "../context/AddToCartContext";
 
@@ -15,11 +16,10 @@ export const useTheContext = () => {
 
 export const useProductId = () => {
 
-    const { productId, setProductId } = useTheContext();
+    const { productId } = useTheContext();
 
     return {
         productId,
-        setProductId,
     }
 }
 
@@ -67,59 +67,27 @@ export const useShowViewCartButton = () => {
 
 }
 
-export const useDiscounts = () => {
- 
-    const { seatPlanData } = useSeatPlanData();
+// The main button add to cart text
+export const useAddToCartText = () => {
+
+    const { addToCartDefaultText } = useTheContext();
     const { selectedSeats } = useSelectedSeats();
 
-    const discounts = seatPlanData?.discounts || [];
-    const hasDiscounts = discounts.length > 0;
+    const selectSingleText = __('D_SEAT_SELECTED');
+    const selectMultipleText = __('D_SEATS_SELECTED');
 
-    // Build a map: seatId -> configured discount name (if any) coming from seat object
-    const seatIdToConfiguredDiscountName = () => {
-        if (!seatPlanData?.objects) return {} as { [seatId: string]: string };
-        const seats = seatPlanData.objects.filter((o) => o.type === 'seat');
-        const map: { [seatId: string]: string } = {};
-        seats.forEach((seat) => {
-            if ('seatId' in seat && seat.seatId) {
-                map[seat.seatId] = seat.discount || '';
-            }
-        });
-        return map;
-    };
+    const getText = () => {
 
-    const configuredDiscountMap = seatIdToConfiguredDiscountName();
-
-    // Validate a discount name against the available discounts list
-    const isValidDiscountName = (name: string): boolean => {
-        if (!name) return false;
-        return discounts.some((d) => d.name === name);
-    };
-
-    // Compute selected seats with their default discount assignment (if valid)
-    const selectedSeatsWithDiscounts = selectedSeats.map((seatId) => {
-        const configured = configuredDiscountMap[seatId] || '';
-        return {
-            seatId,
-            discountName: isValidDiscountName(configured) ? configured : ''
-        } as { seatId: string; discountName: string };
-    });
-
-    return {
-        discounts,
-        hasDiscounts,
-        selectedSeatsWithDiscounts,
-        isValidDiscountName,
+        if (selectedSeats.length === 0) {
+            return addToCartDefaultText;
+        } else if (selectedSeats.length === 1) {
+            return selectSingleText.replace('%d', selectedSeats.length.toString());
+        } else {
+            return selectMultipleText.replace('%d', selectedSeats.length.toString());
+        }
     }
-}
-
-
-export const useSelectedDate = () => {
-    
-    const { selectedDate, setSelectedDate } = useTheContext();
 
     return {
-        selectedDate,
-        setSelectedDate,
+        addToCartText: getText(),
     }
 }

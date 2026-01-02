@@ -9,8 +9,8 @@
     left: 0;
     top: 0;
     z-index: 99999;
-    background-color: var(--stachesepl-modal-background-color, rgba(0, 0, 0, 0.5));
-    backdrop-filter: blur(10px);
+    background-color: var(--stachesepl-modal-background-color, rgba(0, 0, 0, 0.75));
+    backdrop-filter: blur(6px);
     display: flex;
     align-items: center;
     justify-content: center;

@@ -36,8 +36,8 @@
         align-items: flex-start;
         gap: 6px;
         padding: 14px 16px;
-        background: var(--stachesepl-toolbar-input-background-color);
-        border: 1px solid var(--stachesepl-toolbar-input-border-color);
+        background: var(--stachesepl-input-background-color);
+        border: 1px solid var(--stachesepl-input-border-color);
         border-radius: 10px;
         cursor: pointer;
         transition: all var(--stachesepl-transition-fast);
@@ -87,7 +87,6 @@
             font-weight: 600;
             color: var(--stachesepl-dialog-label-color);
             text-transform: uppercase;
-            letter-spacing: 0.05em;
         }
 
         input,
@@ -97,9 +96,9 @@
             box-sizing: border-box;
             padding: 0 12px;
             font-size: 14px;
-            border: 1px solid var(--stachesepl-toolbar-input-border-color);
+            border: 1px solid var(--stachesepl-input-border-color);
             border-radius: 8px;
-            background: var(--stachesepl-toolbar-input-background-color);
+            background: var(--stachesepl-input-background-color);
             color: var(--stachesepl-dialog-input-color);
             outline: none;
             transition: all var(--stachesepl-transition-fast);
@@ -130,7 +129,7 @@
         gap: 0;
         border-radius: 8px;
         overflow: hidden;
-        border: 1px solid var(--stachesepl-toolbar-input-border-color);
+        border: 1px solid var(--stachesepl-input-border-color);
         height: 42px;
 
         button {
@@ -140,14 +139,14 @@
             font-size: 13px;
             font-weight: 600;
             border: none;
-            background: var(--stachesepl-toolbar-input-background-color);
+            background: var(--stachesepl-input-background-color);
             color: var(--stachesepl-dialog-label-color);
             cursor: pointer;
             transition: all var(--stachesepl-transition-fast);
             white-space: nowrap;
 
             &:not(:last-child) {
-                border-right: 1px solid var(--stachesepl-toolbar-input-border-color);
+                border-right: 1px solid var(--stachesepl-input-border-color);
             }
 
             &:hover:not(.active) {
@@ -186,7 +185,6 @@
             font-weight: 600;
             color: var(--stachesepl-dialog-header-color);
             text-transform: uppercase;
-            letter-spacing: 0.04em;
         }
 
         .segment-remove {
@@ -200,7 +198,6 @@
             cursor: pointer;
             transition: all var(--stachesepl-transition-fast);
             text-transform: uppercase;
-            letter-spacing: 0.03em;
 
             &:hover {
                 background: var(--stachesepl-accent-danger);
@@ -252,7 +249,7 @@
         font-weight: 600;
         color: var(--stachesepl-accent-primary);
         background: transparent;
-        border: 2px dashed var(--stachesepl-toolbar-input-border-color);
+        border: 2px dashed var(--stachesepl-input-border-color);
         border-radius: 12px;
         cursor: pointer;
         transition: all var(--stachesepl-transition-fast);
@@ -281,9 +278,9 @@
         font-size: 13px;
         font-weight: 600;
         color: var(--stachesepl-accent-primary);
-        background: var(--stachesepl-toolbar-input-background-color);
+        background: var(--stachesepl-input-background-color);
         border-radius: 6px;
-        border: 1px solid var(--stachesepl-toolbar-input-border-color);
+        border: 1px solid var(--stachesepl-input-border-color);
     }
 
     &-preview {
@@ -298,8 +295,8 @@
         font-size: 13px;
         font-weight: 600;
         color: var(--stachesepl-dialog-header-color);
-        background: var(--stachesepl-toolbar-input-background-color);
-        border: 1px solid var(--stachesepl-toolbar-input-border-color);
+        background: var(--stachesepl-input-background-color);
+        border: 1px solid var(--stachesepl-input-border-color);
         border-radius: 8px;
     }
 
@@ -322,6 +319,7 @@
 // Wrapper for the pattern builder trigger button (used in SeatId and Label components)
 .stachesepl-pattern-builder-wrapper {
     position: relative;
+    width: 100%;
 }
 
 .stachesepl-pattern-builder-trigger {
@@ -331,12 +329,11 @@
     gap: 8px;
     width: 100%;
     padding: 10px 14px;
-    margin-top: 10px;
     font-size: 12px;
     font-weight: 600;
     color: var(--stachesepl-accent-primary);
     background: transparent;
-    border: 1px dashed var(--stachesepl-toolbar-input-border-color);
+    border: 1px dashed var(--stachesepl-input-border-color);
     border-radius: 8px;
     cursor: pointer;
     transition: all var(--stachesepl-transition-fast);
@@ -367,9 +364,9 @@
     justify-content: space-between;
     gap: 8px;
     padding: 0 12px;
-    border: 1px solid var(--stachesepl-toolbar-input-border-color);
+    border: 1px solid var(--stachesepl-input-border-color);
     border-radius: 8px;
-    background: var(--stachesepl-toolbar-input-background-color);
+    background: var(--stachesepl-input-background-color);
     color: var(--stachesepl-dialog-input-color);
     font-size: 14px;
     font-family: inherit;
@@ -414,7 +411,7 @@
     right: 0;
     z-index: 100;
     background: var(--stachesepl-dialog-background-color);
-    border: 1px solid var(--stachesepl-toolbar-input-border-color);
+    border: 1px solid var(--stachesepl-input-border-color);
     border-radius: 8px;
     box-shadow: var(--stachesepl-shadow-lg);
     padding: 4px;

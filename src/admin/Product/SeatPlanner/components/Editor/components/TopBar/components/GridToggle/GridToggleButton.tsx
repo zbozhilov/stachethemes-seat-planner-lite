@@ -1,6 +1,7 @@
 import { GridOff, GridOn } from "@mui/icons-material";
 import { useEditorGridEnabled } from "@src/admin/Product/SeatPlanner/components/Editor/hooks";
 import { __ } from "@src/utils";
+import Button from "../Button/Button";
 
 const GridToggleButton = () => {
     const { gridEnabled, setGridEnabled } = useEditorGridEnabled();
@@ -9,13 +10,11 @@ const GridToggleButton = () => {
     const title = `${__('TOGGLE_GRID')} (G)`;
 
     return (
-        <div
-            className='stachesepl-top-button'
+        <Button
             title={title}
             onClick={() => setGridEnabled(prev => !prev)}
-        >
-            <Icon />
-        </div>
+            icon={Icon}
+        />
     );
 };
 

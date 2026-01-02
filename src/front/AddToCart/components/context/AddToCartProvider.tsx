@@ -1,52 +1,31 @@
 import { useState } from "react";
 import AddToCartContext from "./AddToCartContext";
 import { SeatPlanDataProps } from "../../types";
-import { useEffect } from "react";
 
 const AddToCartProvider = ({
     children,
-    productId: initialProductId,
-    dateSelector,
+    productId,
+    hasDate,
+    addToCartDefaultText,
 }: {
     productId: number;
-    dateSelector: HTMLSelectElement | HTMLInputElement | null;
+    hasDate: boolean;
+    addToCartDefaultText: string;
     children: React.ReactNode;
 }) => {
 
-    const [productId, setProductId] = useState<number>(initialProductId);
-    const [modalOpen, setModalOpen] = useState<boolean>(true);
+    const [modalOpen, setModalOpen] = useState<boolean>(false);
     const [showViewCartButton, setShowViewCartButton] = useState<boolean>(false);
     const [selectedSeats, setSelectedSeats] = useState<string[]>([]);
     const [seatPlanData, setSeatPlanData] = useState<SeatPlanDataProps|null>(null); 
-    const [selectedDate, setSelectedDate] = useState<string | null>(dateSelector?.value ?? null);
-
-    useEffect(() => {
-
-        if (!dateSelector) {
-            return;
-        }
-
-        const updateSelectedDate = (e: Event) => {
-            setSelectedDate((e.target as HTMLSelectElement).value);
-            setSelectedSeats([]);
-            setShowViewCartButton(false);
-        }
-
-        dateSelector.addEventListener('change', updateSelectedDate);
-
-        return () => {
-            if (dateSelector) {
-                dateSelector.removeEventListener('change', updateSelectedDate);
-            }
-        }
-
-    }, [dateSelector, setSelectedDate]);
+    const [selectedDate, setSelectedDate] = useState<string | null>(null);
 
     return (
         <AddToCartContext.Provider value={{
 
             productId,
-            setProductId,
+            hasDate,
+            addToCartDefaultText,
 
             selectedDate,
             setSelectedDate,

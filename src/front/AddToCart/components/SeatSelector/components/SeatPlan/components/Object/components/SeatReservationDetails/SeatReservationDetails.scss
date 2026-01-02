@@ -1,0 +1,31 @@
+// Seat Order Modal Styles
+.stachesepl-seat-order-modal {
+    min-width: 400px;
+    max-width: 600px;
+    padding: 28px 32px;
+
+    button {
+        width: 100%;
+    }
+}
+
+@media screen and (max-width: 782px) {
+    .stachesepl-seat-order-modal {
+        min-width: auto;
+        max-width: none;
+        width: 100dvw;
+        height: 100dvh;
+        border-radius: 0;
+        padding: 24px 20px;
+        justify-content: start;
+
+        button {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            right: 20px;
+            width: calc(100% - 40px);
+            margin-top: 0;
+        }
+    }
+}

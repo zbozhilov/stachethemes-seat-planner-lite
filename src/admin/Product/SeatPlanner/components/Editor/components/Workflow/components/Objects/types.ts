@@ -1,9 +1,10 @@
 import { GenericObjectProps } from "./Generic/types";
 import { ScreenObjectProps } from "./Screen/types";
 import { SeatObjectProps } from "./Seat/types";
+import { SeatRowObjectProps } from "./SeatRow/types";
 import { TextObjectProps } from "./Text/types";
 
-export type ObjectTypes = 'seat' | 'generic' | 'screen' | 'text';
+export type ObjectTypes = 'seat' | 'generic' | 'screen' | 'text' | 'seat-row';
 
 export interface MovableProps {
     x: number;
@@ -21,10 +22,12 @@ export interface BaseObjectProps {
     move: MovableProps,
     size: SizeProps,
     fontSize: 'small' | 'medium' | 'large',
+    fontWeight: 'lighter' | 'normal' | 'bold' | 'bolder',
     label: string,
     color: string,
     zIndex?: number,
     locked?: boolean,
+    extraClass?: string,
 }
 
 export function hasBackgroundColor(object: WorkflowObject): object is (GenericObjectProps | ScreenObjectProps | SeatObjectProps) {
@@ -59,4 +62,4 @@ export function getTextDirectionStyles(object: WorkflowObject): React.CSSPropert
     }
 }
 
-export type WorkflowObject = SeatObjectProps | GenericObjectProps | ScreenObjectProps | TextObjectProps
+export type WorkflowObject = SeatObjectProps | GenericObjectProps | ScreenObjectProps | TextObjectProps | SeatRowObjectProps

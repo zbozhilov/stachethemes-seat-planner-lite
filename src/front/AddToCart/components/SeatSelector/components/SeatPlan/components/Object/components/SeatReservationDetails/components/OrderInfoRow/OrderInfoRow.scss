@@ -1,0 +1,97 @@
+.stachesepl-order-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 14px;
+    background: #f8f9fa;
+    border-radius: 8px;
+    transition: background-color 0.2s ease;
+
+    &:hover {
+        background: #f0f1f2;
+    }
+
+    .stachesepl-order-label {
+        font-size: 0.8rem;
+        color: #666;
+        font-weight: 500;
+        text-transform: uppercase;
+    }
+
+    .stachesepl-order-value {
+        font-size: 0.95rem;
+        color: #202020;
+        font-weight: 500;
+        text-align: right;
+        max-width: 60%;
+        word-break: break-word;
+    }
+
+    &.stachesepl-order-row-highlight {
+        background: linear-gradient(135deg, #fff5f3 0%, #ffe8e4 100%);
+        border: 1px solid rgba(235, 102, 81, 0.2);
+
+        .stachesepl-order-value {
+            color: var(--stachesepl-object-seat-taken-bg-color, #eb6651);
+            font-weight: 600;
+        }
+    }
+
+    &.stachesepl-order-row-status {
+        .stachesepl-order-value {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+
+            &::before {
+                content: '';
+                width: 8px;
+                height: 8px;
+                border-radius: 50%;
+                background-color: #4CAF50;
+            }
+        }
+    }
+
+    &.stachesepl-order-row-link {
+
+        a.stachesepl-order-value {
+            color: #2563eb;
+            text-decoration: none;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            transition: color 0.2s ease;
+
+            &:hover {
+                color: #1d4ed8;
+                text-decoration: underline;
+            }
+
+            &::after {
+                content: '↗';
+                font-size: 0.85rem;
+                opacity: 0.7;
+            }
+        }
+
+        &:hover {
+            background: #f0f1f2;
+        }
+    }
+}
+
+@media screen and (max-width: 782px) {
+    .stachesepl-order-row {
+        flex-direction: column;
+        gap: 4px;
+        align-items: flex-start;
+
+        .stachesepl-order-value {
+            text-align: left;
+            max-width: 100%;
+        }
+    }
+}
+

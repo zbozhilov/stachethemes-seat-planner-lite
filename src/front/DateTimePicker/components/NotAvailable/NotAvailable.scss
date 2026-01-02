@@ -1,0 +1,55 @@
+.stachesepl-date-time-picker-unavailable {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #fff;
+    z-index: 100;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    text-align: center;
+
+    &__container {
+        padding: 30px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 1rem;
+    }
+
+    &__icon {
+        color: var(--picker-accent);
+        opacity: 0.8;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 0.2rem;
+
+        svg {
+            width: 4rem;
+            height: 4rem;
+        }
+    }
+
+    &__label {
+        color: var(--picker-text, #1a1d21);
+        font-size: 1.2rem;
+        line-height: 1.5;
+        font-weight: 500;
+        margin: 0;
+    }
+
+    &__description {
+        color: var(--picker-text-muted, #6b7280);
+        font-size: 0.875rem;
+        line-height: 1.5;
+        margin: 0;
+    }
+}

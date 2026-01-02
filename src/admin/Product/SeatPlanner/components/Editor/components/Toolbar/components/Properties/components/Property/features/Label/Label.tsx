@@ -1,12 +1,13 @@
+import { AutoAwesome } from '@mui/icons-material';
 import { BaseObjectProps } from '@src/admin/Product/SeatPlanner/components/Editor/components/Workflow/components/Objects/types';
 import { useEditorObjects } from "@src/admin/Product/SeatPlanner/components/Editor/hooks";
 import { __ } from '@src/utils';
-import { getHasValidPattern, getIncrementValueByRegex } from '../utils';
-import './Label.scss';
-import toast from 'react-hot-toast';
 import { useState } from 'react';
-import { AutoAwesome } from '@mui/icons-material';
+import toast from 'react-hot-toast';
+import InputText from '../../../../../../../UI/InputText/InputText';
+import InputWrap from '../../../../../../../UI/InputWrap/InputWrap';
 import PatternBuilder from '../PatternBuilder/PatternBuilder';
+import { getHasValidPattern, getIncrementValueByRegex } from '../utils';
 
 const Label = (props: {
     objects: BaseObjectProps[]
@@ -44,7 +45,7 @@ const Label = (props: {
         );
 
         if (foundPattern) {
-            toast.success(__('PATTERN_APPLIED'));   
+            toast.success(__('PATTERN_APPLIED'));
         }
     }
 
@@ -56,14 +57,21 @@ const Label = (props: {
 
     return (
 
-        <div className='stachesepl-toolbar-properties-label'>
+        <InputWrap flexDirection='column'>
 
-            <label htmlFor='stachesepl-toolbar-properties-label'>{__('LABEL')}</label>
-            <input id='stachesepl-toolbar-properties-label' type="text" placeholder={__('LABEL')} value={displayLabel} onChange={(e) => {
-                handleValueChange(e.target.value)
-            }} />
+            <InputText
+                id='stachesepl-toolbar-properties-label'
+                label={__('LABEL')}
+                labelFor='stachesepl-toolbar-properties-label'
+                placeholder={__('LABEL')}
+                value={displayLabel}
+                onChange={(value) => {
+                    handleValueChange(value.toString());
+                }}
+            />
 
             {showPatternBuilderButton && (
+                
                 <div className='stachesepl-pattern-builder-wrapper'>
                     <button
                         className='stachesepl-pattern-builder-trigger'
@@ -83,7 +91,7 @@ const Label = (props: {
                 </div>
             )}
 
-        </div>
+        </InputWrap>
     )
 }
 

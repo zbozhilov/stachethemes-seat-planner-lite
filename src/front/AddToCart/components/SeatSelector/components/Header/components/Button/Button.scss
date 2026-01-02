@@ -14,7 +14,7 @@
     line-height: 1;
     font-size: 0.875rem;
     font-weight: 500;
-    transition: color 0.3s ease, background-color 0.3s ease;
+    transition: color 0.3s ease, background-color 0.3s ease, filter 0.3s ease;
 
     svg {
         font-size: 1rem;
@@ -23,7 +23,7 @@
     }
 
     &:hover {
-        background-color: var(--stachesepl-header-button-hover-background-color, #1c1c1c);
+        background-color: var(--stachesepl-header-button-hover-background-color, #000000);
         color: var(--stachesepl-header-button-hover-color, #fff);
     }
 
@@ -39,20 +39,23 @@
     }
 
     &.stachesepl-add-to-cart-button {
-        background-color: var(--stachesepl-header-button-add-to-cart-background-color, #4CAF50);
-        color: var(--stachesepl-header-button--add-to-cart-color, #fff);
+        background-color: var(--stachesepl-add-to-cart-button-background-color, #2c9f45);
+        color: var(--stachesepl-add-to-cart-button-color, #fff);
 
         &:hover {
-            background-color: var(--stachesepl-header-button-add-to-cart-hover-background-color, #45a049);
-            color: var(--stachesepl-header-button-add-to-cart-hover-color, #fff);
+            background-color: var(--stachesepl-add-to-cart-button-hover-background-color, #0abf53);
+            color: var(--stachesepl-add-to-cart-button-hover-color, #fff);
         }
     }
 
-    &.loading {
+    &.stachesepl-loading {
         color: rgba(0, 0, 0, 0) !important;
-
-        &:after {
-            color:#fff;
+        filter: grayscale(100%);
+        transition: color 0.3s ease, background-color 0.3s ease, filter 0.1s ease;
+        .stachesepl-circ-loader {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
         }
     }
 

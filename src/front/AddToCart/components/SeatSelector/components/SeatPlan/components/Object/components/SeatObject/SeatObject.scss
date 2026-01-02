@@ -1,0 +1,255 @@
+.stachesepl-object {
+
+    &-seat {
+        position: relative;
+
+        &.clickable {
+            cursor: pointer;
+        }
+
+        &.disabled {
+            color: var(--stachesepl-object-seat-disabled-color, #fff) !important;
+            background-color: var(--stachesepl-object-seat-disabled-bg-color, #777777) !important;
+        }
+
+        &.taken {
+            color: var(--stachesepl-object-seat-taken-color, #fff) !important;
+            background-color: var(--stachesepl-object-seat-taken-bg-color, #eb6651) !important;
+        }
+
+        &.selected {
+            color: var(--stachesepl-object-seat-selected-color, #fff) !important;
+            background-color: var(--stachesepl-object-seat-selected-bg-color, #f79a3e) !important;
+        }
+
+        &:hover {
+            &:not(.disabled):not(.taken):not(.selected) {
+                filter: brightness(1.2);
+            }
+        }
+    }
+
+}
+
+.stachesepl-seat-tooltip {
+    position: absolute;
+    top: 0;
+    left: 0;
+    transform: translate(-50%, calc(-100% - 12px));
+    background: var(--stachesepl-tooltip-bg, #ffffff);
+    color: var(--stachesepl-tooltip-color, #202020);
+    padding: 10px 14px;
+    border-radius: 10px;
+    white-space: nowrap;
+    z-index: 999999;
+    pointer-events: none;
+    box-shadow:
+        0 4px 20px rgba(0, 0, 0, 0.12),
+        0 2px 8px rgba(0, 0, 0, 0.08);
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    animation: stachesepl-tooltip-enter 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+
+    // Position tooltip below seat when not enough space above
+    &.below {
+        transform: translate(-50%, 12px);
+        animation: stachesepl-tooltip-enter-below 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+
+        &::after {
+            top: auto;
+            bottom: 99%;
+            border-top-color: transparent;
+            border-bottom-color: var(--stachesepl-tooltip-bg, #ffffff);
+            filter: drop-shadow(0 -2px 2px rgba(0, 0, 0, 0.06));
+        }
+    }
+
+    &::after {
+        content: '';
+        position: absolute;
+        top: 99%;
+        left: 50%;
+        transform: translateX(-50%);
+        border: 7px solid transparent;
+        border-top-color: var(--stachesepl-tooltip-bg, #ffffff);
+        filter: drop-shadow(0 2px 2px rgba(0, 0, 0, 0.06));
+    }
+
+    &-id {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+
+        &-indicator {
+            display: block;
+            width: 8px;
+            height: 8px;
+            background: red;
+            border-radius: 2px;
+            flex-shrink: 0;
+        }
+
+        &-text {
+            font-weight: 600;
+            font-size: 0.675rem;
+            color: var(--stachesepl-tooltip-id-color, #202020);
+        }
+    }
+
+    &-price {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 6px;
+        padding-top: 4px;
+        border-top: 1px solid rgba(0, 0, 0, 0.06);
+
+        &-label {
+            font-weight: 500;
+            font-size: 0.75rem;
+            color: var(--stachesepl-tooltip-price-label-color, #202020);
+        }
+
+        &-value {
+            font-weight: 600;
+            font-size: 0.875rem;
+            color: var(--stachesepl-tooltip-price-color, #202020);
+        }
+
+    }
+
+    &-tag {
+        font-weight: 400;
+        line-height: 1;
+        font-size: 0.75rem;
+        padding: 6px 10px;
+        border-radius: 4px;
+        text-align: center;
+        white-space: nowrap;
+    }
+
+    &-unavailable,
+    &-sold-out {
+        color: var(--stachesepl-tooltip-sold-out-color, #fff);
+        background: var(--stachesepl-tooltip-sold-out-bg-color, #eb6651);
+    }
+
+    &-selected {
+        color: var(--stachesepl-tooltip-selected-color, #fff);
+        background: var(--stachesepl-tooltip-selected-bg-color, #f79a3e);
+    }
+
+    &-onsite {
+        color: var(--stachesepl-tooltip-onsite-color, #fff);
+        background: var(--stachesepl-tooltip-onsite-bg-color, #f79a3e);
+    }
+
+}
+
+@keyframes stachesepl-tooltip-enter {
+    from {
+        opacity: 0;
+        transform: translate(-50%, calc(-100% - 6px)) scale(0.95);
+    }
+
+    to {
+        opacity: 1;
+        transform: translate(-50%, calc(-100% - 12px)) scale(1);
+    }
+}
+
+@keyframes stachesepl-tooltip-enter-below {
+    from {
+        opacity: 0;
+        transform: translate(-50%, 6px) scale(0.95);
+    }
+
+    to {
+        opacity: 1;
+        transform: translate(-50%, 12px) scale(1);
+    }
+}
+
+.stachesepl-modal-message {
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    min-width: 400px;
+    max-width: 600px;
+    padding: 28px 32px;
+    box-sizing: border-box;
+    background-color: #fff;
+    border-radius: 12px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    h3 {
+        margin: 0 0 20px 0;
+        font-size: 1.1rem;
+        font-weight: 600;
+        color: #202020;
+        text-align: center;
+        padding-bottom: 16px;
+        border-bottom: 1px solid #eee;
+        width: 100%;
+    }
+
+    p {
+        margin: 0;
+        padding: 20px 0;
+        font-size: 0.95rem;
+        line-height: 1.5;
+        color: var(--stachesepl-modal-message-text-color, #202020);
+        font-weight: 400;
+        text-align: center;
+    }
+
+    button {
+        margin-top: 20px;
+        padding: 10px 20px;
+        width: 100%;
+        background-color: var(--stachesepl-modal-message-button-background-color, #eeeeee);
+        color: var(--stachesepl-modal-message-button-color, #202020);
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+        font-size: 0.875rem;
+        font-weight: 500;
+
+        &:hover {
+            background-color: var(--stachesepl-modal-message-button-background-hover, #d5d5d5);
+        }
+
+    }
+}
+
+
+@starting-style {
+    .stachesepl-modal-message {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+}
+
+@media screen and (max-width: 782px) {
+    .stachesepl-modal-message {
+        min-width: auto;
+        max-width: none;
+        width: 100dvw;
+        height: 100dvh;
+        border-radius: 0;
+        padding: 24px 20px;
+        justify-content: start;
+
+        button {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            right: 20px;
+            width: calc(100% - 40px);
+            margin-top: 0;
+        }
+    }
+}

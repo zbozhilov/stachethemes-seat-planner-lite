@@ -44,7 +44,6 @@ class Ajax {
                 case 'get_seat_plan_data': {
 
                         $product_id    = filter_input(INPUT_POST, 'product_id', FILTER_VALIDATE_INT);
-                        $selected_date = isset($_POST['selected_date']) ? sanitize_text_field(wp_unslash($_POST['selected_date'])) : '';
 
                         if (false === $product_id || $product_id < 1) {
                             wp_send_json_error(['error' => esc_html__('Invalid product ID', 'stachethemes-seat-planner-lite')]);
@@ -61,14 +60,6 @@ class Ajax {
                             wp_send_json_error(['error' => esc_html__('Product not found', 'stachethemes-seat-planner-lite')]);
                         }
 
-                        if ($selected_date) {
-                            // Verify date exists and is valid format
-                            $dates = $auditorium_product->get_dates_data();
-                            if (!in_array($selected_date, $dates)) {
-                                wp_send_json_error(['error' => esc_html__('Invalid date', 'stachethemes-seat-planner-lite')]);
-                            }
-                        }
-
                         $seat_plan_data = $auditorium_product->get_seat_plan_data('object');
 
                         if (!is_object($seat_plan_data) || !isset($seat_plan_data->objects)) {
@@ -76,10 +67,6 @@ class Ajax {
                         }
 
                         $taken_seats_args = [];
-
-                        if ($selected_date) {
-                            $taken_seats_args['selected_date'] = $selected_date;
-                        }
 
                         $taken_seats = $auditorium_product->get_taken_seats($taken_seats_args);
 
@@ -134,7 +121,6 @@ class Ajax {
                 case 'add_seats_to_cart': {
 
                         $product_id    = filter_input(INPUT_POST, 'product_id', FILTER_VALIDATE_INT);
-                        $selected_date = isset($_POST['selected_date']) ? sanitize_text_field(wp_unslash($_POST['selected_date'])) : '';
 
                         if ($product_id === false || $product_id < 1) {
                             wp_send_json_error(['error' => esc_html__('Invalid product ID', 'stachethemes-seat-planner-lite')]);
@@ -158,19 +144,6 @@ class Ajax {
                             wp_send_json_error(['error' => esc_html__('Product not found', 'stachethemes-seat-planner-lite')]);
                         }
 
-                        if ($selected_date) {
-
-                            $dates = $auditorium_product->get_dates_data();
-
-                            if (!in_array($selected_date, $dates)) {
-                                wp_send_json_error(['error' => esc_html__('The selected date is not available', 'stachethemes-seat-planner-lite')]);
-                            }
-
-                            if ($auditorium_product->has_date_passed($selected_date)) {
-                                wp_send_json_error(['error' => esc_html__('The selected date is no longer available', 'stachethemes-seat-planner-lite')]);
-                            }
-                        }
-
                         // Ensure we work with unique selected seats and handle duplicates correctly (preserve string seat IDs)
                         $unique_selected_seats = []; // list of ['seatId' => string, 'discountId' => string]
                         $seen_seat_ids = []; // list of strings for strict duplicate checks
@@ -190,10 +163,7 @@ class Ajax {
                         }
 
                         $get_seats_in_cart_args = [];
-                        if ($selected_date) {
-                            $get_seats_in_cart_args['selected_date'] = $selected_date;
-                        }
-                        $seats_in_cart       = $auditorium_product->get_seats_in_cart($get_seats_in_cart_args);
+                        $seats_in_cart = $auditorium_product->get_seats_in_cart($get_seats_in_cart_args);
 
                         // Compute total seats post-add (cart + new unique selections not already in cart)
                         $seats_in_cart_lookup = [];
@@ -220,7 +190,7 @@ class Ajax {
                                 wp_send_json_error(['error' => esc_html__('Invalid seat ID', 'stachethemes-seat-planner-lite')]);
                             }
 
-                            if (!$auditorium_product->add_to_cart($seat_id, $seat_discount, $selected_date)) {
+                            if (!$auditorium_product->add_to_cart($seat_id, $seat_discount)) {
                                 wp_send_json_error(['error' => esc_html__('Failed to add seat to cart', 'stachethemes-seat-planner-lite')]);
                             }
                         }
@@ -393,14 +363,13 @@ class Ajax {
 
                         $product_id    = filter_input(INPUT_POST, 'product_id', FILTER_VALIDATE_INT);
                         $seat_id       = isset($_POST['seat_id']) ? sanitize_text_field(wp_unslash($_POST['seat_id'])) : '';
-                        $selected_date = isset($_POST['selected_date']) ? sanitize_text_field(wp_unslash($_POST['selected_date'])) : '';
 
                         if (false === $product_id || $product_id < 1) {
                             wp_send_json_error(['error' => esc_html__('Invalid product ID', 'stachethemes-seat-planner-lite')]);
                         }
 
                         $booking_data = new Bookings_Data($product_id);
-                        $data         = $booking_data->get_order_details_by_seat_id($seat_id, $selected_date);
+                        $data         = $booking_data->get_order_details_by_seat_id($seat_id);
 
                         wp_send_json_success($data);
 
@@ -440,12 +409,12 @@ class Ajax {
                             ]);
                         }
 
-                        $result = Dashboard::save_settings($settings);
+                        $result = Settings::save_settings($settings);
 
                         if ($result) {
                             wp_send_json_success([
                                 'message'  => esc_html__('Settings saved successfully.', 'stachethemes-seat-planner-lite'),
-                                'settings' => Dashboard::get_settings()
+                                'settings' => Settings::get_settings()
                             ]);
                         } else {
                             wp_send_json_error([

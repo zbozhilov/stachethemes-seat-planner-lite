@@ -18,7 +18,7 @@ class Auditorium_Product_Templates {
         self::$did_init = true;
 
         add_action('woocommerce_auditorium_add_to_cart', [__CLASS__, 'insert_single_add_to_cart_template'], 100);
-        add_filter('woocommerce_loop_add_to_cart_link', [__CLASS__, 'insert_loop_to_cart_template'], 100, 3);
+        add_filter('woocommerce_loop_add_to_cart_link', [__CLASS__, 'insert_loop_add_to_cart_template'], 100, 3);
     }
 
     public static function insert_single_add_to_cart_template() {
@@ -26,7 +26,7 @@ class Auditorium_Product_Templates {
         include $template_src;
     }
 
-    public static function insert_loop_to_cart_template($link, $product, $args) {
+    public static function insert_loop_add_to_cart_template($link, $product, $args) {
         if ($product->get_type() !== 'auditorium') {
             return $link;
         }
@@ -39,23 +39,9 @@ class Auditorium_Product_Templates {
             is_string($classes) && strpos($classes, 'wp-block-button__link') !== false
         );
 
-        $context = $is_block_button ? 'loop_block' : 'loop';    
-        
-        ob_start();
-        do_action('stachesepl_before_select_seat_button', $product, $context);
-        $before_link_html = ob_get_clean();
+        $context = $is_block_button ? 'loop_block' : 'loop';
 
-        ob_start();
-        do_action('stachesepl_after_select_seat_button', $product, $context);
-        $after_link_html = ob_get_clean();
+        return $product->get_add_to_cart_html($context);
 
-        if ($is_block_button) {
-            return $before_link_html . $link . $after_link_html;
-        }
-
-        $wrapped_link = sprintf('<span>%s</span>', $link);
-        return $before_link_html . $wrapped_link . $after_link_html;
     }
 }
-
-

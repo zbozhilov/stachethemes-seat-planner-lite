@@ -19,8 +19,8 @@ type fetchResult = {
  *
  * Params:
  * - productId: number
- * - selectedSeatsData: Array<{ seatId: string; discountId: string }>
- *   Each item represents a seat ID (string) and an optional discount ID.
+ * - selectedSeatsData: Array<{ seatId: string }>
+ *   Each item represents a seat ID (string).
  * - signal: AbortSignal used to cancel the request if needed.
  *
  * Behavior:
@@ -33,13 +33,11 @@ type fetchResult = {
  * - A Promise resolving to the parsed JSON (`fetchResult`). When `success` is true,
  *   `data.cart_fragments` may include DOM fragments to refresh the mini cart UI.
  */
-const addSeatsToCart = async ({ productId, selectedSeatsData, selectedDate, signal }: {
+const addSeatsToCart = async ({ productId, selectedSeatsData, signal }: {
     productId: number
     selectedSeatsData: {
         seatId: string,
-        discountId: string,
     }[],
-    selectedDate: string | null,
     signal: AbortSignal
 }): Promise<fetchResult> => {
     const adminAjaxUrl = window.seat_planner_add_to_cart.ajax_url;
@@ -54,7 +52,6 @@ const addSeatsToCart = async ({ productId, selectedSeatsData, selectedDate, sign
             task: 'add_seats_to_cart',
             selected_seats: JSON.stringify(selectedSeatsData),
             product_id: productId.toString(),
-            selected_date: selectedDate || '',
             nonce: window.seat_planner_add_to_cart.nonce
         }),
         signal,

@@ -176,7 +176,7 @@ class Auditorium_Product_Admin {
                         'label'             => esc_html__('Minimum seats per purchase', 'stachethemes-seat-planner-lite'),
                         'placeholder'       => '',
                         'desc_tip'          => true,
-                        'description'       => esc_html__('Require customers to select at least this many seats in a single order. Leave empty or 0 for no minimum.', 'stachethemes-seat-planner-lite'),
+                        'description'       => esc_html__('Require customers to select at least this many seats in a single order. Leave empty or 0 for no minimum. Not available in the LITE version', 'stachethemes-seat-planner-lite'),
                         'type'              => 'number',
                         'custom_attributes' => [
                             'min'  => '0',
@@ -195,7 +195,7 @@ class Auditorium_Product_Admin {
                         'label'             => esc_html__('Maximum seats per purchase', 'stachethemes-seat-planner-lite'),
                         'placeholder'       => '',
                         'desc_tip'          => true,
-                        'description'       => esc_html__('Limit the maximum number of seats a customer can purchase in a single order. Leave empty or 0 for no maximum.', 'stachethemes-seat-planner-lite'),
+                        'description'       => esc_html__('Limit the maximum number of seats a customer can purchase in a single order. Leave empty or 0 for no maximum. Not available in the LITE version', 'stachethemes-seat-planner-lite'),
                         'type'              => 'number',
                         'custom_attributes' => [
                             'min'  => '0',
@@ -216,9 +216,9 @@ class Auditorium_Product_Admin {
                 woocommerce_wp_checkbox(
                     [
                         'id'          => '_stachesepl_pes_enabled',
-                        'label'       => esc_html__('Prevent single empty seats', 'stachethemes-seat-planner'),
+                        'label'       => esc_html__('Prevent single empty seats', 'stachethemes-seat-planner-lite'),
                         'value'       => 'no',
-                        'description' => esc_html__('Prevent customers from booking seats that would leave a single empty seat between booked seats. This feature is only available in the Pro version.', 'stachethemes-seat-planner-lite'),
+                        'description' => esc_html__('Prevent customers from booking seats that would leave a single empty seat between booked seats. Not available in the LITE version.', 'stachethemes-seat-planner-lite'),
                         'custom_attributes' => [
                             'disabled' => 'disabled'
                         ],

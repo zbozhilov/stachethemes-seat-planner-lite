@@ -50,31 +50,37 @@ class Auditorium_Product_Scripts {
             $seat_planner_reserved_seats_deps['version']
         );
 
-          // Custom fields assets
+        // Custom fields assets
 
-          $seat_planner_custom_fields_deps = require_once STACHETHEMES_SEAT_PLANNER_LITE_PLUGIN_DIR . 'assets/admin/custom_fields/index.bundle.asset.php';
+        $seat_planner_custom_fields_deps = require_once STACHETHEMES_SEAT_PLANNER_LITE_PLUGIN_DIR . 'assets/admin/custom_fields/index.bundle.asset.php';
 
-          wp_enqueue_script(
-              'seat-planner-custom-fields',
-              STACHETHEMES_SEAT_PLANNER_LITE_PLUGIN_URL . '/assets/admin/custom_fields/index.bundle.js',
-              $seat_planner_custom_fields_deps['dependencies'],
-              $seat_planner_custom_fields_deps['version'],
-              [
-                  'strategy' => 'defer'
-              ]
-          );
-  
-          wp_enqueue_style(
-              'seat-planner-custom-fields',
-              STACHETHEMES_SEAT_PLANNER_LITE_PLUGIN_URL . '/assets/admin/custom_fields/index.css',
-              [],
-              $seat_planner_custom_fields_deps['version']
-          );
+        wp_enqueue_script(
+            'seat-planner-custom-fields',
+            STACHETHEMES_SEAT_PLANNER_LITE_PLUGIN_URL . '/assets/admin/custom_fields/index.bundle.js',
+            $seat_planner_custom_fields_deps['dependencies'],
+            $seat_planner_custom_fields_deps['version'],
+            [
+                'strategy' => 'defer'
+            ]
+        );
 
+        wp_enqueue_style(
+            'seat-planner-custom-fields',
+            STACHETHEMES_SEAT_PLANNER_LITE_PLUGIN_URL . '/assets/admin/custom_fields/index.css',
+            [],
+            $seat_planner_custom_fields_deps['version']
+        );
 
         // Dates assets
 
         $seat_planner_dates_deps = require_once STACHETHEMES_SEAT_PLANNER_LITE_PLUGIN_DIR . 'assets/admin/dates/index.bundle.asset.php';
+
+        wp_enqueue_style(
+            'seat-planner-dates',
+            STACHETHEMES_SEAT_PLANNER_LITE_PLUGIN_URL . '/assets/admin/dates/index.css',
+            [],
+            $seat_planner_dates_deps['version']
+        );
 
         wp_enqueue_script(
             'seat-planner-dates',
@@ -86,11 +92,12 @@ class Auditorium_Product_Scripts {
             ]
         );
 
-        wp_enqueue_style(
+        wp_localize_script(
             'seat-planner-dates',
-            STACHETHEMES_SEAT_PLANNER_LITE_PLUGIN_URL . '/assets/admin/dates/index.css',
-            [],
-            $seat_planner_dates_deps['version']
+            'stachesepl_server_datetime',
+            [
+                'now' => wp_date('Y-m-d\TH:i'),
+            ]
         );
 
         // Discounts assets
@@ -157,7 +164,6 @@ class Auditorium_Product_Scripts {
         );
 
         // This is common for all scripts
-
         wp_localize_script(
             'seat-planner',
             'stachesepl_i18n',
@@ -179,17 +185,42 @@ class Auditorium_Product_Scripts {
             [
                 'date_format' => get_option('date_format'),
                 'time_format' => get_option('time_format'),
+                'week_start'  => get_option('start_of_week'),
             ]
+        );
+
+        wp_localize_script(
+            'seat-planner',
+            'stachesepl_user_roles',
+            array_map(function ($role) {
+                return $role['name'];
+            }, get_editable_roles()),
         );
     }
 
     public static function register_add_to_cart_scripts() {
 
-        $add_to_cart_deps = require_once STACHETHEMES_SEAT_PLANNER_LITE_PLUGIN_DIR . 'assets/front/add_to_cart/add-to-cart.bundle.asset.php';
+        // add to cart
+
+        /**
+         * Compatibility mode for cache plugins like WP Rocket and LiteSpeed Cache 
+         * where lazy loading is not supported due to JS combining and minification.
+         */
+        $is_compat_mode = Settings::get_setting('stachesepl_compat_mode') === 'yes';
+        $front_folder   = $is_compat_mode ? 'front-compat-mode' : 'front';
+
+        $add_to_cart_deps = require_once STACHETHEMES_SEAT_PLANNER_LITE_PLUGIN_DIR . 'assets/' . $front_folder . '/add_to_cart/add-to-cart.bundle.asset.php';
+
+        wp_enqueue_style(
+            'seat-planner-add-to-cart',
+            STACHETHEMES_SEAT_PLANNER_LITE_PLUGIN_URL . 'assets/' . $front_folder . '/add_to_cart/add-to-cart.css',
+            [],
+            $add_to_cart_deps['version']
+        );
 
         wp_enqueue_script(
             'seat-planner-add-to-cart',
-            STACHETHEMES_SEAT_PLANNER_LITE_PLUGIN_URL . 'assets/front/add_to_cart/add-to-cart.bundle.js',
+            STACHETHEMES_SEAT_PLANNER_LITE_PLUGIN_URL . 'assets/' . $front_folder . '/add_to_cart/add-to-cart.bundle.js',
             $add_to_cart_deps['dependencies'],
             $add_to_cart_deps['version'],
             [
@@ -197,14 +228,37 @@ class Auditorium_Product_Scripts {
             ]
         );
 
+        wp_add_inline_style(
+            'seat-planner-add-to-cart',
+            '
+            :root {
+                --stachesepl-select-seat-button-background-color: ' . Settings::get_setting('stachesepl_select_seat_btn_bg_color') . ';
+                --stachesepl-select-seat-button-color: ' . Settings::get_setting('stachesepl_select_seat_btn_text_color') . ';
+                --stachesepl-select-seat-button-hover-background-color: ' . Settings::get_setting('stachesepl_select_seat_btn_bg_color_hover') . ';
+                --stachesepl-select-seat-button-hover-color: ' . Settings::get_setting('stachesepl_select_seat_btn_text_color_hover') . ';
+
+                --stachesepl-add-to-cart-button-background-color: ' . Settings::get_setting('stachesepl_add_to_cart_btn_bg_color') . ';
+                --stachesepl-add-to-cart-button-color: ' . Settings::get_setting('stachesepl_add_to_cart_btn_text_color') . ';
+                --stachesepl-add-to-cart-button-hover-background-color: ' . Settings::get_setting('stachesepl_add_to_cart_btn_bg_color_hover') . ';
+                --stachesepl-add-to-cart-button-hover-color: ' . Settings::get_setting('stachesepl_add_to_cart_btn_text_color_hover') . ';
+
+                --stachesepl-view-cart-button-background-color: ' . Settings::get_setting('stachesepl_view_cart_button_bg_color') . ';
+                --stachesepl-view-cart-button-color: ' . Settings::get_setting('stachesepl_view_cart_button_text_color') . ';
+                --stachesepl-view-cart-button-hover-background-color: ' . Settings::get_setting('stachesepl_view_cart_button_bg_color_hover') . ';
+                --stachesepl-view-cart-button-hover-color: ' . Settings::get_setting('stachesepl_view_cart_button_text_color_hover') . ';
+            }
+            '
+        );
+
         $cart_url                = wc_get_cart_url();
         $checkout_url            = wc_get_checkout_url();
-        $cart_redirect_after_add = get_option('stachesepl_cart_redirect', 'checkout') !== 'disabled' ? 'yes' : 'no';
-        $cart_redirect_url       = get_option('stachesepl_cart_redirect', 'checkout') === 'cart' ? $cart_url : $checkout_url;
+        $cart_redirect_after_add = Settings::get_setting('stachesepl_cart_redirect') !== 'disabled' ? 'yes' : 'no';
+        $cart_redirect_url       = Settings::get_setting('stachesepl_cart_redirect') === 'cart' ? $cart_url : $checkout_url;
 
-        $inline_script = sprintf(
-            'var seat_planner_add_to_cart = %s;',
-            wp_json_encode([
+        wp_localize_script(
+            'seat-planner-add-to-cart',
+            'seat_planner_add_to_cart',
+            [
                 'cart_url'                   => esc_url($cart_url),
                 'ajax_url'                   => esc_url(admin_url('admin-ajax.php')),
                 'nonce'                      => wp_create_nonce('stachethemes_seat_planner'),
@@ -217,13 +271,22 @@ class Auditorium_Product_Scripts {
                 'thousand_separator'         => esc_html(wc_get_price_thousand_separator()),
                 'cart_redirect_after_add'    => esc_html($cart_redirect_after_add),
                 'cart_redirect_url'          => esc_url($cart_redirect_url),
-                'cart_redirect_message'      => get_option('stachesepl_cart_redirect_message', 'yes'),
-                'cart_redirect_message_text' => esc_html(get_option('stachesepl_cart_redirect_message_text', '')),
-                'can_view_seat_orders'       => current_user_can('manage_woocommerce')
-            ])
+                'cart_redirect_message'      => Settings::get_setting('stachesepl_cart_redirect_message') === 'yes' ? 'yes' : 'no',
+                'cart_redirect_message_text' => esc_html(Settings::get_setting('stachesepl_cart_redirect_message_text')),
+                'can_view_seat_orders'       => current_user_can('manage_woocommerce'),
+            ]
         );
 
-        wp_add_inline_script('seat-planner-add-to-cart', $inline_script, 'before');
+        wp_localize_script(
+            'seat-planner-add-to-cart',
+            'stachesepl_date_format',
+            [
+                'date_format'  => get_option('date_format'),
+                'time_format'  => get_option('time_format'),
+                'week_start'   => get_option('start_of_week'),
+                'accent_color' => Settings::get_setting('stachesepl_datepicker_accent_color'),
+            ]
+        );
 
         wp_localize_script(
             'seat-planner-add-to-cart',

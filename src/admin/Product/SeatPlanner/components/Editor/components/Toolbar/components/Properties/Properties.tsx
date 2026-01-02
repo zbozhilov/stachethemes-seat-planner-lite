@@ -12,6 +12,8 @@ import SeatProperties from './components/Property/SeatProperties/SeatProperties'
 import TextProperties from './components/Property/TextProperties/TextProperties';
 import SelectedCount from './components/SelectedCount/SelectedCount';
 import './Properties.scss';
+import { SeatRowObjectProps } from '../../../Workflow/components/Objects/SeatRow/types';
+import SeatRowProperties from './components/Property/SeatRowProperties/SeatRowProperties';
 
 const Properties = () => {
 
@@ -59,6 +61,7 @@ const Properties = () => {
 
         const typeComponentMap: Record<ObjectTypes, JSX.Element> = {
             seat: <SeatProperties objects={theObjects as SeatObjectProps[]} />,
+            'seat-row': <SeatRowProperties objects={theObjects as SeatRowObjectProps[]} />,
             screen: <ScreenProperties objects={theObjects as ScreenObjectProps[]} />,
             text: <TextProperties objects={theObjects as TextObjectProps[]} />,
             generic: <GenericProperties objects={theObjects as GenericObjectProps[]} />,

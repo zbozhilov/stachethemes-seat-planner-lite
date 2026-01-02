@@ -1,0 +1,28 @@
+.stachesepl-seat-order-details {
+    width: 100%;
+
+    h3 {
+        margin: 0 0 20px 0;
+        font-size: 1.1rem;
+        font-weight: 600;
+        color: #202020;
+        text-align: center;
+        padding-bottom: 16px;
+        border-bottom: 1px solid #eee;
+    }
+
+    .stachesepl-order-info {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+    }
+}
+
+@media screen and (max-width: 782px) {
+    .stachesepl-seat-order-details {
+        h3 {
+            font-size: 1.2rem;
+        }
+    }
+}
+

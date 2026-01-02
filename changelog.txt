@@ -1,5 +1,34 @@
 *** Stachethemes Seat Planner Lite Changelog ***
 
+= 1.0.38 =
+- The Plugin now uses it's own "Select Seat", "View Cart" buttons.
+- Added option to change colors for "Select Seat", "View Cart", "Add to Cart" buttons.
+- Added Front-end seat tooltip
+- Added Compatibility mode for cache plugins (e.g. WP Rocket, LiteSpeed) when lazy loading breaks due to JS optimization.
+- Added New editor option "Additional Class Name" allowing custom CSS classes to be attached to objects.
+- Improved UI for adding dates to the product.
+- "Seat Reservation Time" and "Auto-Complete Orders" options moved to the new General tab in plugin settings.
+
+= 1.0.36 =
+- Added new plugin dashboard centralizing settings and features.
+- Added new option "Auto-Complete Orders": automatically marks orders as Completed when payment is received for auditorium products.
+- Added new option to control whether users are redirected after adding seats to the cart.
+- Added new option to choose whether users are redirected to the cart or checkout page.
+- Added new option to control whether customers are shown a message during redirection.
+
+= 1.0.35 =
+- Added Dashboard Widget showing Seats Sold & Revenue for the last 30 days
+- Added Option to Lock objects in the Drag & Drop Editor 
+- Added Visual UI for turning grid-snap on/off, grid color, grid size
+- Added message when user is redirected to cart/checkout page on the front-end
+
+= 1.0.34 =
+- Bug fix where product can be incorrectly flagged as Unavailable
+
+= 1.0.33 =
+- Bug fix where deleting a draft order can accidentally release slot reservation
+- Other minor bug fixes
+
 = 1.0.32 =
 - UI/UX improvements
 - Added UI for Auto Incremental Patterns

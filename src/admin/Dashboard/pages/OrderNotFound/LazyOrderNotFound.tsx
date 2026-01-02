@@ -1,4 +1,4 @@
-import React, { Suspense, lazy } from 'react';
+import { lazy, Suspense } from 'react';
 
 const OrderNotFound = lazy(() => import('./OrderNotFound'));
 

@@ -1,12 +1,12 @@
 import { BaseObjectProps } from "@src/admin/Product/SeatPlanner/components/Editor/components/Workflow/components/Objects/types";
 import { useEditorObjects } from "@src/admin/Product/SeatPlanner/components/Editor/hooks";
 import { __ } from "@src/utils";
-import './Size.scss';
-
+import InputText from "../../../../../../../UI/InputText/InputText";
+import InputWrap from "../../../../../../../UI/InputWrap/InputWrap";
+    
 const Size = (props: {
     objects: BaseObjectProps[]
 }) => {
-
 
     const { setObjects } = useEditorObjects();
     const objectIds = props.objects.map(({ id }) => id);
@@ -40,22 +40,29 @@ const Size = (props: {
     }
 
     return (
-        <div className='stachesepl-toolbar-properties-size'>
+        <InputWrap>
 
-            <div>
-                <label htmlFor='stachesepl-toolbar-properties-size-width'>{__('WIDTH')}</label>
-                <input id='stachesepl-toolbar-properties-size-width' type="text" placeholder={__('WIDTH')} value={displayWidth} onChange={(e) => {
-                    handleResize(e.target.value, 'width')
-                }} />
-            </div>
+            <InputText
+                id='stachesepl-toolbar-properties-size-width'
+                label={__('WIDTH')}
+                labelFor='stachesepl-toolbar-properties-size-width'
+                value={displayWidth}
+                onChange={(value) => {
+                    handleResize(value.toString(), 'width')
+                }}
+            />  
 
-            <div>
-                <label htmlFor='stachesepl-toolbar-properties-size-height'>{__('HEIGHT')}</label>
-                <input id='stachesepl-toolbar-properties-size-height' type="text" placeholder={__('HEIGHT')} value={displayHeight} onChange={(e) => {
-                    handleResize(e.target.value, 'height')
-                }} />
-            </div>
-        </div>
+            <InputText
+                id='stachesepl-toolbar-properties-size-height'
+                label={__('HEIGHT')}
+                labelFor='stachesepl-toolbar-properties-size-height'
+                value={displayHeight}
+                onChange={(value) => {
+                    handleResize(value.toString(), 'height')
+                }}
+            />
+
+        </InputWrap>
     )
 }
 

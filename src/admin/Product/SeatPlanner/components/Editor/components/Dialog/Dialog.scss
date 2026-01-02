@@ -39,7 +39,6 @@ body.stachesepl-dialog-open {
     &-title {
         font-size: 16px;
         font-weight: 600;
-        letter-spacing: 0.02em;
         background: var(--stachesepl-dialog-header-background-color);
         color: var(--stachesepl-dialog-header-color);
         padding: 20px 24px;
@@ -69,7 +68,6 @@ body.stachesepl-dialog-open {
             font-size: 12px;
             font-weight: 500;
             margin-bottom: 8px;
-            letter-spacing: 0.02em;
         }
 
         input[type="text"] {

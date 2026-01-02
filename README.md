@@ -45,6 +45,15 @@ https://github.com/zbozhilov/stachethemes-seat-planner-lite
 
 ## Changelog
 
+### 1.0.38 
+- The Plugin now uses it's own "Select Seat", "View Cart" buttons.
+- Added option to change colors for "Select Seat", "View Cart", "Add to Cart" buttons.
+- Added Front-end seat tooltip
+- Added Compatibility mode for cache plugins (e.g. WP Rocket, LiteSpeed) when lazy loading breaks due to JS optimization.
+- Added New editor option "Additional Class Name" allowing custom CSS classes to be attached to objects.
+- Improved UI for adding dates to the product.
+- "Seat Reservation Time" and "Auto-Complete Orders" options moved to the new General tab in plugin settings.
+
 ### 1.0.36
 - Added new plugin dashboard centralizing settings and features.
 - Added new option "Auto-Complete Orders": automatically marks orders as Completed when payment is received for auditorium products.

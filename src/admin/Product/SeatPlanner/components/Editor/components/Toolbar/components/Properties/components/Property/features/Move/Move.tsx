@@ -1,7 +1,8 @@
-import { __ } from '@src/utils';
-import './Move.scss';
 import { BaseObjectProps } from '@src/admin/Product/SeatPlanner/components/Editor/components/Workflow/components/Objects/types';
 import { useEditorObjects, useEditorRef } from '@src/admin/Product/SeatPlanner/components/Editor/hooks';
+import { __ } from '@src/utils';
+import InputText from '../../../../../../../UI/InputText/InputText';
+import InputWrap from '../../../../../../../UI/InputWrap/InputWrap';
 
 const Move = (props: {
     objects: BaseObjectProps[]
@@ -64,23 +65,30 @@ const Move = (props: {
 
     return (
 
-        <div className='stachesepl-toolbar-properties-move'>
+        <InputWrap>
 
-            <div>
-                <label htmlFor='stachesepl-toolbar-properties-move-width'>{__('LEFT')}</label>
-                <input id='stachesepl-toolbar-properties-move-width' type="text" placeholder="X" value={smallestX} onChange={(e) => {
-                    handleMoveXY(e.target.value, 'x')
-                }} />
-            </div>
+            <InputText
+                id='stachesepl-toolbar-properties-move-width'
+                label={__('LEFT')}
+                labelFor='stachesepl-toolbar-properties-move-width'
+                value={smallestX}
+                onChange={(value) => {
+                    handleMoveXY(value.toString(), 'x')
+                }}
+            />
 
-            <div>
-                <label htmlFor='stachesepl-toolbar-properties-move-height'>{__('TOP')}</label>
-                <input id='stachesepl-toolbar-properties-move-height' type="text" placeholder="Y" value={smallestY} onChange={(e) => {
-                    handleMoveXY(e.target.value, 'y')
-                }} />
-            </div>
+            <InputText
+                id='stachesepl-toolbar-properties-move-height'
+                label={__('TOP')}
+                labelFor='stachesepl-toolbar-properties-move-height'
+                value={smallestY}
+                onChange={(value) => {
+                    handleMoveXY(value.toString(), 'y')
+                }}
+            />
 
-        </div>
+        </InputWrap>
+
     )
 }
 
