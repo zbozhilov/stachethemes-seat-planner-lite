@@ -90,7 +90,6 @@ class WP_Dashboard {
         $date_after = strtotime('-30 days');
 
         $orders = wc_get_orders([
-            'type'                   => 'shop_order',
             'status'                 => ['wc-completed'],
             'date_after'             => date_i18n('Y-m-d H:i:s', $date_after),
             'limit'                  => -1,

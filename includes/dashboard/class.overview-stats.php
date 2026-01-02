@@ -53,11 +53,11 @@ class Overview_Stats {
      * @return array [ 'seats' => int, 'revenue' => string ]
      */
     private static function get_revenue_and_seats_sold(): array {
+
         $orders = wc_get_orders([
-            'type'                   => 'shop_order',
-            'status'                 => ['wc-completed', 'wc-processing'],
+            'status'                 => ['wc-completed'],
             'limit'                  => -1,
-            'has_auditorium_product' => 1,
+            'has_auditorium_product' => 1
         ]);
 
         $total_revenue = 0;
@@ -66,12 +66,21 @@ class Overview_Stats {
         if (is_array($orders)) {
             /** @var WC_Order $order */
             foreach ($orders as $order) {
-                // Only count auditorium product line items
+                // Only count items that have seat_data with a valid seatId
                 foreach ($order->get_items() as $item) {
-                    $product = $item->get_product();
-                    if ($product && $product->is_type('auditorium')) {
-                        $total_revenue += (float) $item->get_total();
+                    $seat_data_meta = $item->get_meta('seat_data');
+                    $seat_data      = is_array($seat_data_meta) ? $seat_data_meta : (is_object($seat_data_meta) ? (array) $seat_data_meta : []);
+
+                    if (empty($seat_data)) {
+                        continue;
+                    }
+
+                    $seat_id = isset($seat_data['seatId']) ? $seat_data['seatId'] : '';
+
+                    // Count each seat item that has a valid seatId and add its revenue
+                    if ($seat_id) {
                         $total_seats++;
+                        $total_revenue += (float) $item->get_total();
                     }
                 }
             }
