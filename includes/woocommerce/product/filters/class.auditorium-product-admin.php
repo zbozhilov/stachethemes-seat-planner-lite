@@ -27,12 +27,12 @@ class Auditorium_Product_Admin {
     }
 
     public static function register_product_type($types) {
-        $types['auditorium'] = esc_html__('Auditorium Product', 'stachethemes-seat-planner-lite')
-;
+        $types['auditorium'] = esc_html__('Auditorium Product', 'stachethemes-seat-planner-lite');
         $types = array_merge(
             array_slice($types, 0, 2, true),
-            ['auditorium' => esc_html__('Auditorium Product', 'stachethemes-seat-planner-lite')
-],
+            [
+                'auditorium' => esc_html__('Auditorium Product', 'stachethemes-seat-planner-lite')
+            ],
             array_slice($types, 2, null, true)
         );
         return $types;
@@ -47,32 +47,28 @@ class Auditorium_Product_Admin {
 
     public static function add_custom_product_tabs($tabs) {
         $tabs['st_seat_planner_general'] = [
-            'label'    => esc_html__('General', 'stachethemes-seat-planner-lite')
-,
+            'label'    => esc_html__('General', 'stachethemes-seat-planner-lite'),
             'target'   => 'st_seat_planner_general_options',
             'class'    => ['show_if_auditorium', 'inventory_options'],
             'priority' => 21,
         ];
 
         $tabs['st_seat_planner_editor'] = [
-            'label'    => esc_html__('Seat Planner', 'stachethemes-seat-planner-lite')
-,
+            'label'    => esc_html__('Seat Planner', 'stachethemes-seat-planner-lite'),
             'target'   => 'st_seat_planner_editor_options',
             'class'    => ['show_if_auditorium'],
             'priority' => 21,
         ];
 
         $tabs['st_seat_planner_dates'] = [
-            'label'    => esc_html__('Dates', 'stachethemes-seat-planner-lite')
-,
+            'label'    => esc_html__('Dates', 'stachethemes-seat-planner-lite'),
             'target'   => 'st_seat_planner_dates_options',
             'class'    => ['show_if_auditorium'],
             'priority' => 21,
         ];
 
         $tabs['st_seat_planner_discounts'] = [
-            'label'    => esc_html__('Discounts', 'stachethemes-seat-planner-lite')
-,
+            'label'    => esc_html__('Discounts', 'stachethemes-seat-planner-lite'),
             'target'   => 'st_seat_planner_discounts_options',
             'class'    => ['show_if_auditorium', 'attribute_options'],
             'priority' => 21,
@@ -86,16 +82,14 @@ class Auditorium_Product_Admin {
         ];
 
         $tabs['st_seat_planner_reserved'] = [
-            'label'    => esc_html__('In-Cart Seats', 'stachethemes-seat-planner-lite')
-,
+            'label'    => esc_html__('In-Cart Seats', 'stachethemes-seat-planner-lite'),
             'target'   => 'st_seat_planner_reserved_options',
             'class'    => ['show_if_auditorium', 'stachesepl_reserved_options'],
             'priority' => 21,
         ];
 
         $tabs['st_seat_planner_export_bookings'] = [
-            'label'    => esc_html__('Export Bookings', 'stachethemes-seat-planner-lite')
-,
+            'label'    => esc_html__('Export Bookings', 'stachethemes-seat-planner-lite'),
             'target'   => 'st_seat_planner_export_bookings_options',
             'class'    => ['show_if_auditorium', 'stachesepl_export_bookings_options'],
             'priority' => 21,
@@ -139,8 +133,8 @@ class Auditorium_Product_Admin {
                             'id'          => '_stachesepl_sku',
                             'value'       => $product->get_sku('edit'),
                             'label'       => '<abbr title="' . esc_attr__('Stock Keeping Unit', 'stachethemes-seat-planner-lite')
- . '">' . esc_html__('SKU', 'stachethemes-seat-planner-lite')
- . '</abbr>',
+                                . '">' . esc_html__('SKU', 'stachethemes-seat-planner-lite')
+                                . '</abbr>',
                             'desc_tip'    => true,
                             'description' => esc_html__('SKU refers to a Stock-keeping unit, a unique identifier for each distinct product and service that can be purchased.', 'stachethemes-seat-planner-lite'),
                         ]
@@ -152,23 +146,19 @@ class Auditorium_Product_Admin {
                 woocommerce_wp_checkbox(
                     [
                         'id'          => '_stachesepl_force_out_of_stock',
-                        'label'       => esc_html__('Out of stock', 'stachethemes-seat-planner-lite')
-,
+                        'label'       => esc_html__('Out of stock', 'stachethemes-seat-planner-lite'),
                         'value'       => $product->get_meta('_stachesepl_force_out_of_stock', true),
-                        'description' => esc_html__('Set product status to out of stock', 'stachethemes-seat-planner-lite')
-,
+                        'description' => esc_html__('Set product status to out of stock', 'stachethemes-seat-planner-lite'),
                     ]
                 );
 
                 woocommerce_wp_text_input(
                     [
                         'id'          => '_stachesepl_stop_date',
-                        'label'       => esc_html__('Stop Date', 'stachethemes-seat-planner-lite')
-,
+                        'label'       => esc_html__('Stop Date', 'stachethemes-seat-planner-lite'),
                         'placeholder' => '',
                         'desc_tip'    => true,
-                        'description' => esc_html__('The date ( Server Time ) on which the product will become unavailable.', 'stachethemes-seat-planner-lite')
-,
+                        'description' => esc_html__('The date ( Server Time ) on which the product will become unavailable.', 'stachethemes-seat-planner-lite'),
                         'type'        => 'datetime-local',
                         'style'       => 'float: left;'
                     ]
@@ -183,12 +173,10 @@ class Auditorium_Product_Admin {
                 woocommerce_wp_text_input(
                     [
                         'id'                => '_stachesepl_min_seats_per_purchase',
-                        'label'             => esc_html__('Minimum seats per purchase', 'stachethemes-seat-planner-lite')
-,
+                        'label'             => esc_html__('Minimum seats per purchase', 'stachethemes-seat-planner-lite'),
                         'placeholder'       => '',
                         'desc_tip'          => true,
-                        'description'       => esc_html__('Require customers to select at least this many seats in a single order. Leave empty or 0 for no minimum.', 'stachethemes-seat-planner-lite')
-,
+                        'description'       => esc_html__('Require customers to select at least this many seats in a single order. Leave empty or 0 for no minimum.', 'stachethemes-seat-planner-lite'),
                         'type'              => 'number',
                         'custom_attributes' => [
                             'min'  => '0',
@@ -204,12 +192,10 @@ class Auditorium_Product_Admin {
                 woocommerce_wp_text_input(
                     [
                         'id'                => '_stachesepl_max_seats_per_purchase',
-                        'label'             => esc_html__('Maximum seats per purchase', 'stachethemes-seat-planner-lite')
-,
+                        'label'             => esc_html__('Maximum seats per purchase', 'stachethemes-seat-planner-lite'),
                         'placeholder'       => '',
                         'desc_tip'          => true,
-                        'description'       => esc_html__('Limit the maximum number of seats a customer can purchase in a single order. Leave empty or 0 for no maximum.', 'stachethemes-seat-planner-lite')
-,
+                        'description'       => esc_html__('Limit the maximum number of seats a customer can purchase in a single order. Leave empty or 0 for no maximum.', 'stachethemes-seat-planner-lite'),
                         'type'              => 'number',
                         'custom_attributes' => [
                             'min'  => '0',
@@ -224,6 +210,24 @@ class Auditorium_Product_Admin {
                 ?>
             </div>
 
+            <div class="options_group">
+                <?php
+
+                woocommerce_wp_checkbox(
+                    [
+                        'id'          => '_stachesepl_pes_enabled',
+                        'label'       => esc_html__('Prevent single empty seats', 'stachethemes-seat-planner'),
+                        'value'       => 'no',
+                        'description' => esc_html__('Prevent customers from booking seats that would leave a single empty seat between booked seats. This feature is only available in the Pro version.', 'stachethemes-seat-planner-lite'),
+                        'custom_attributes' => [
+                            'disabled' => 'disabled'
+                        ],
+                    ]
+                );
+
+                ?>
+            </div>
+
             <?php if (wc_tax_enabled()) : ?>
                 <div class="options_group">
                     <?php
@@ -231,13 +235,10 @@ class Auditorium_Product_Admin {
                         array(
                             'id'          => '_tax_status',
                             'value'       => $product->get_tax_status('edit'),
-                            'label'       => esc_html__('Tax status', 'stachethemes-seat-planner-lite')
-,
+                            'label'       => esc_html__('Tax status', 'stachethemes-seat-planner-lite'),
                             'options'     => array(
-                                ProductTaxStatus::TAXABLE  => esc_html__('Taxable', 'stachethemes-seat-planner-lite')
-,
-                                ProductTaxStatus::SHIPPING => esc_html__('Shipping only', 'stachethemes-seat-planner-lite')
-,
+                                ProductTaxStatus::TAXABLE  => esc_html__('Taxable', 'stachethemes-seat-planner-lite'),
+                                ProductTaxStatus::SHIPPING => esc_html__('Shipping only', 'stachethemes-seat-planner-lite'),
                                 ProductTaxStatus::NONE     => esc_html_x('None', 'Tax status', 'stachethemes-seat-planner-lite'),
                             ),
                             'desc_tip'    => 'true',
@@ -249,12 +250,10 @@ class Auditorium_Product_Admin {
                         array(
                             'id'          => '_tax_class',
                             'value'       => $product->get_tax_class('edit'),
-                            'label'       => esc_html__('Tax class', 'stachethemes-seat-planner-lite')
-,
+                            'label'       => esc_html__('Tax class', 'stachethemes-seat-planner-lite'),
                             'options'     => wc_get_product_tax_class_options(),
                             'desc_tip'    => 'true',
-                            'description' => esc_html__('Choose a tax class for this product. Tax classes are used to apply different tax rates specific to certain types of product.', 'stachethemes-seat-planner-lite')
-,
+                            'description' => esc_html__('Choose a tax class for this product. Tax classes are used to apply different tax rates specific to certain types of product.', 'stachethemes-seat-planner-lite'),
                         )
                     );
 
@@ -307,7 +306,7 @@ class Auditorium_Product_Admin {
                     value="<?php echo esc_attr(wp_json_encode($seat_planner_custom_fields_data)); ?>">
             </div>
         </div>
-        
+
         <div id="st_seat_planner_reserved_options" class="panel woocommerce_options_panel hidden">
             <div class="options_group">
                 <div id="stachesepl-seat-planner-reserved-seats"></div>
