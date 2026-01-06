@@ -32,7 +32,8 @@
         margin: 0;
         padding: 2.5rem 1.5rem;
         text-align: center;
-        color: var(--picker-text-muted, #6b7280);
+        color: var(--picker-text);
+        opacity: 0.8;
         font-size: 0.875rem;
         font-style: normal;
         line-height: 1.5;
@@ -104,12 +105,12 @@
             border-color: var(--picker-accent, #0d9488);
             color: #ffffff !important;
             font-weight: 600;
-            box-shadow: 0 2px 8px var(--picker-accent-shadow);
+            // box-shadow: 0 2px 8px var(--picker-accent-shadow);
 
             &:hover {
                 background: var(--picker-accent-hover, #0f766e);
                 border-color: var(--picker-accent-hover, #0f766e);
-                box-shadow: 0 4px 12px var(--picker-accent-shadow);
+                // box-shadow: 0 4px 12px var(--picker-accent-shadow);
             }
         }
 

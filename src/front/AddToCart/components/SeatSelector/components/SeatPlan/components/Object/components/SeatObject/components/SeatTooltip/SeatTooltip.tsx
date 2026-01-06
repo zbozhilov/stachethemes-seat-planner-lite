@@ -56,6 +56,15 @@ const SeatTooltip = ({
     }
 
     const getIndicatorColor = () => {
+
+        if (isTaken) {
+            return 'var(--stachesepl-object-seat-taken-bg-color, #ff6c5f)';
+        }
+
+        if (onSiteOnly) {
+            return 'var(--stachesepl-object-seat-onsite-bg-color, #f9a852)';
+        }
+
         return backgroundColor;
     }
 

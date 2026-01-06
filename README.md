@@ -4,7 +4,7 @@
 **Requires:** 6.7  
 **Tested up to:** 6.9
 **Requires PHP:** 8.2  
-**Stable tag:** 1.0.38  
+**Stable tag:** 1.0.40 
 **License:** GPLv2 or later  
 **WC requires at least:** 9.5  
 **WC tested up to:** 10 
@@ -13,12 +13,13 @@ A WooCommerce extension for creating & selling seat-based products with a drag &
 
 ## Description
 
-A WooCommerce extension that adds a custom Auditorium product type for selecting seats with a drag & drop seat planner. 
-Easily create and manage seating arrangements for events, venues, or any seat-based products.
+Stachethemes Seat Planner is a WooCommerce plugin that allows you to create and sell seat-based products for your customers to choose their seats easily.
 
 **Check out the full version at** [WooCommerce](https://woocommerce.com/products/stachethemes-seat-planner/).
 
 **Documentation:** The documentation is available at [Plugin Documentation](https://woocommerce.com/document/stachethemes-seat-planner/).
+
+**Live Demo:** [Live Demo](https://stachethemes.com/seat-planner/demo/)
 
 ## Installation
 
@@ -44,6 +45,15 @@ Easily create and manage seating arrangements for events, venues, or any seat-ba
 https://github.com/zbozhilov/stachethemes-seat-planner-lite
 
 ## Changelog
+
+### 1.0.40
+- Option to disable the "Select Seat" button on product listings (product loops) such as the Shop page and category pages.
+- New Accent Color option for simpler front-end UI color customization. Legacy color customization options have been removed.
+- Merged Cart Timer and Add to Cart settings into a new Cart Behaviour tab in the plugin settings.
+- Front-end UI now displays the Close button at all times.
+- Front-end UI buttons and elements now follow the Accent Color setting.
+- Converted the Round Corners option to a slider for better control over element border radius.
+- Minor fixes and improvements.
 
 ### 1.0.38 
 - The Plugin now uses it's own "Select Seat", "View Cart" buttons.

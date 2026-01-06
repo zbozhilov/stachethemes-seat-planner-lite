@@ -1,3 +1,5 @@
+@use '../Variables.scss' as *;
+
 @keyframes skeleton-shimmer {
     0% {
         background-position: -100% 0;
@@ -50,6 +52,7 @@
 }
 
 .stachesepl-select-seats-button {
+    box-sizing: border-box;
     border-radius: 10px;
     font-weight: 600;
     line-height: 1;
@@ -63,6 +66,7 @@
     color: var(--stachesepl-select-seat-button-color, #fff);
     border: none;
     transition: background-color .15s ease, color .15s ease;
+    white-space: nowrap;
 
     &:hover {
         background-color: var(--stachesepl-select-seat-button-hover-background-color, #722ed1);
@@ -71,11 +75,11 @@
 }
 
 .stachesepl-view-cart-button {
-
     display: inline-flex;
     align-items: center;
     justify-content: center;
     gap: 5px;
+    box-sizing: border-box;
 
     border-radius: 10px;
     font-weight: 500;
@@ -86,7 +90,7 @@
     transition: transform .15s ease, box-shadow .15s ease;
     font-size: 0.875rem;
     cursor: pointer;
-    background-color: var(--stachesepl-view-cart-button-background-color, #202020);
+    background-color: var(--stachesepl-view-cart-button-background-color, #1a1d21);
     color: var(--stachesepl-view-cart-button-color, #fff);
     border: none;
     transition: background-color .15s ease, color .15s ease;

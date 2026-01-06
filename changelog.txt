@@ -1,5 +1,15 @@
 *** Stachethemes Seat Planner Lite Changelog ***
 
+= 1.0.40 =
+- Option to disable the "Select Seat" button on product listings (product loops) such as the Shop page and category pages.
+- New Accent Color option for simpler front-end UI color customization. Legacy color customization options have been removed.
+- Merged Cart Timer and Add to Cart settings into a new Cart Behaviour tab in the plugin settings.
+- Front-end UI now displays the Close button at all times.
+- Front-end UI buttons and elements now follow the Accent Color setting.
+- Converted the Round Corners option to a slider for better control over element border radius.
+- Minor fixes and improvements.
+
+
 = 1.0.38 =
 - The Plugin now uses it's own "Select Seat", "View Cart" buttons.
 - Added option to change colors for "Select Seat", "View Cart", "Add to Cart" buttons.

@@ -1,5 +1,6 @@
 export interface SliderProps {
     id?: string;
+    label?: string;
     value: number | string;
     min?: number;
     max?: number;

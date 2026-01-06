@@ -1,8 +1,9 @@
 import { useEditorGridEnabled, useEditorGridGap, useEditorObjects, useSelectObjects } from "@src/admin/Product/SeatPlanner/components/Editor/hooks";
 import { isCtrlKey } from "@src/admin/Product/SeatPlanner/components/utils";
-import { useEffect, useRef, useState, useMemo } from "react";
-import { hasBackgroundColor, isRounded, getTextDirectionStyles, WorkflowObject } from "./types";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { getFontSizeByType } from "./helpers";
+import { getTextDirectionStyles, hasBackgroundColor, isRounded, isRoundedValue, WorkflowObject } from "./types";
+import { MAX_ROUNDED_VALUE } from "@src/utils";
 
 export const useDraggable = (
     elementRef: React.RefObject<HTMLDivElement | null>,
@@ -421,7 +422,11 @@ export const useWorkflowObject = (
     }
 
     if (isRounded(objectProps)) {
-        style.borderRadius = '50%';
+        style.borderRadius = `${MAX_ROUNDED_VALUE}px`;
+    }
+
+    if (isRoundedValue(objectProps)) {
+        style.borderRadius = `${objectProps.roundedValue}px`;
     }
 
     const textDirectionStyles = getTextDirectionStyles(objectProps);
@@ -485,7 +490,11 @@ export const useResizableWorkflowObject = (
     }
 
     if (isRounded(objectProps)) {
-        style.borderRadius = '50%';
+        style.borderRadius = `${MAX_ROUNDED_VALUE}px`;
+    }
+
+    if (isRoundedValue(objectProps)) {
+        style.borderRadius = `${objectProps.roundedValue}px`;
     }
 
     const textDirectionStyles = getTextDirectionStyles(objectProps);

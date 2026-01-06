@@ -1,9 +1,9 @@
 import DateTimePicker from "@src/front/DateTimePicker/DateTimePicker";
-import { __ } from "@src/utils";
-import { SettingsState } from "../../SettingsContext";
-import './Preview.scss';
+import { useSettings } from "../../../../SettingsContext";
 
-const Preview = (props: { settings: SettingsState }) => {
+const DatePickerPreview = () => {
+
+    const { settings } = useSettings();
 
     const getTimes = () => {
         const times = ['09:00', '19:00', '20:00'];
@@ -33,16 +33,14 @@ const Preview = (props: { settings: SettingsState }) => {
     const genericDates = getGenericDates();
 
     return (
-        <>
-            <p className='stachesepl-datepicker-label-preview'>{__('DATEPICKER_PREVIEW')}</p>
-
+        <div>
             <DateTimePicker
                 dummyDates={genericDates}
                 productId={1}
-                accentColor={props.settings.stachesepl_datepicker_accent_color}
+                accentColor={settings.stachesepl_accent_color}
             />
-        </>
+        </div>
     )
 }
 
-export default Preview
+export default DatePickerPreview

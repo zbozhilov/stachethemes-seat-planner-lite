@@ -5,6 +5,7 @@ import { SliderProps } from './types';
 const Slider = (props: SliderProps) => {
     const {
         id,
+        label,
         value,
         min = 0,
         max = 1,
@@ -45,29 +46,36 @@ const Slider = (props: SliderProps) => {
 
     return (
         <div className={`stachesepl-slider ${className}`}>
-            <input
-                type='range'
-                min={min}
-                max={max}
-                step={step}
-                value={localValue}
-                onChange={handleSliderChange}
-                onMouseUp={handleSliderCommit}
-                onTouchEnd={handleSliderCommit}
-                className={`stachesepl-slider-range ${sliderClassName}`}
-                style={{ '--slider-value': percentageValue } as React.CSSProperties}
-            />
-            <input
-                id={id}
-                type='number'
-                step={step}
-                min={min}
-                max={max}
-                value={localValue}
-                onChange={handleNumberChange}
-                onBlur={handleNumberBlur}
-                className={`stachesepl-slider-number`}
-            />
+
+            {label && <label htmlFor={id}>{label}</label>}
+
+            <div>
+
+                <input
+                    type='range'
+                    min={min}
+                    max={max}
+                    step={step}
+                    value={localValue}
+                    onChange={handleSliderChange}
+                    onMouseUp={handleSliderCommit}
+                    onTouchEnd={handleSliderCommit}
+                    className={`stachesepl-slider-range ${sliderClassName}`}
+                    style={{ '--slider-value': percentageValue } as React.CSSProperties}
+                />
+                <input
+                    id={id}
+                    type='number'
+                    step={step}
+                    min={min}
+                    max={max}
+                    value={localValue}
+                    onChange={handleNumberChange}
+                    onBlur={handleNumberBlur}
+                    className={`stachesepl-slider-number`}
+                />
+
+            </div>
         </div>
     );
 };

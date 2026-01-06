@@ -1,12 +1,14 @@
 import { useEffect, useState } from "react";
 import { useProductId, useSeatPlanData } from "../components/context/hooks";
 import fetchSeatPlanData from "../ajax/fetchSeatPlanData";
+import { useSelectedDate } from "../components/context/hooks";
 
 const useProductSeatPlan = (props: {
     disabled: boolean;
 }) => {
 
     const { productId } = useProductId();
+    const { selectedDate } = useSelectedDate();
     const { seatPlanData, setSeatPlanData } = useSeatPlanData();
     const [dataState, setDataState] = useState<'loading' | 'ready' | 'error'>('loading');
 
@@ -22,6 +24,7 @@ const useProductSeatPlan = (props: {
 
                 const seatPlanData = await fetchSeatPlanData({
                     productId: productId,
+                    selectedDate: selectedDate,
                     signal: controller.signal,
                 });
 
@@ -49,7 +52,7 @@ const useProductSeatPlan = (props: {
             controller.abort();
         }
 
-    }, [props.disabled, productId, setSeatPlanData]);
+    }, [props.disabled, productId, selectedDate, setSeatPlanData]);
 
     return {
         data: seatPlanData,

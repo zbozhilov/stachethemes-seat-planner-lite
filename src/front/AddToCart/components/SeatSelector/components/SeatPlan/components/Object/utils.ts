@@ -1,4 +1,5 @@
 import { FrontWorkflowObject } from "@src/front/AddToCart/types";
+import { MAX_ROUNDED_VALUE } from "@src/utils";
 
 export const hasBackgroundColor = (object: unknown): object is { backgroundColor: string } => {
     return typeof object === 'object' && object !== null && 'backgroundColor' in object;
@@ -15,8 +16,17 @@ export const getFontSizeByType = (type: 'small' | 'medium' | 'large') => {
     }
 }
 
+// rounded is legacy property, roundedValue is the new property
 export function isRounded(object: FrontWorkflowObject): object is FrontWorkflowObject & { rounded: boolean } {
+    if ('roundedValue' in object && object.roundedValue !== undefined) {
+        return false;
+    }
+
     return 'rounded' in object && object.rounded !== undefined && object.rounded;
+}
+
+export function isRoundedValue(object: FrontWorkflowObject): object is FrontWorkflowObject & { roundedValue: number } {
+    return 'roundedValue' in object && object.roundedValue !== undefined && object.roundedValue !== 0;
 }
 
 type TextDirection = 'horizontal' | 'vertical-upright' | 'rotated-cw';
@@ -56,7 +66,7 @@ export function getObjectStyle(data: FrontWorkflowObject): React.CSSProperties {
         fontWeight: data.fontWeight ?? 'normal',
         zIndex: data.zIndex ?? 0,
         backgroundColor: hasBackgroundColor(data) ? data.backgroundColor : 'transparent',
-        borderRadius: isRounded(data) ? '50%' : undefined
+        borderRadius: isRounded(data) ? `${MAX_ROUNDED_VALUE}px` : isRoundedValue(data) ? `${data.roundedValue}px` : undefined
     };
 
     const textDirectionStyles = getTextDirectionStyles(data);

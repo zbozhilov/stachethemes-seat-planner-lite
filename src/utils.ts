@@ -172,10 +172,12 @@ export const darken = (hex: string, percent: number) => {
     return `rgb(${r}, ${g}, ${b})`;
 };
 
-
 /**
  * Checks if the current device supports touch input
  */
 export const isTouchDevice = (): boolean => {
     return 'ontouchstart' in window || navigator.maxTouchPoints > 0;
 };
+
+// Useful if someone wants to increase the max rounded value for the Round component
+export const MAX_ROUNDED_VALUE = typeof window.stacheseplMaxRoundedValue === 'number' ? window.stacheseplMaxRoundedValue : 100;

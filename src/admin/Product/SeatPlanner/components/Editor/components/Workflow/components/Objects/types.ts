@@ -35,7 +35,16 @@ export function hasBackgroundColor(object: WorkflowObject): object is (GenericOb
 }
 
 export function isRounded(object: WorkflowObject): object is (GenericObjectProps | ScreenObjectProps | SeatObjectProps) {
+
+    if ('roundedValue' in object && object.roundedValue !== undefined) {
+        return false;
+    }
+
     return 'rounded' in object && object.rounded !== undefined && object.rounded;
+}
+
+export function isRoundedValue(object: WorkflowObject): object is (GenericObjectProps | SeatObjectProps) {
+    return 'roundedValue' in object && object.roundedValue !== undefined && object.roundedValue !== 0;
 }
 
 export type TextDirection = 'horizontal' | 'vertical-upright' | 'rotated-cw';

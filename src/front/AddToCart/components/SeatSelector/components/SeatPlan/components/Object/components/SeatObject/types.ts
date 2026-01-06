@@ -1,12 +1,14 @@
-import { SeatObjectProps as BaseSeatObjectProps } from '@src/admin/Product/SeatPlanner/components/Editor/components/Workflow/components/Objects/Seat/types';
 import { FrontWorkflowObject } from 'src/front/AddToCart/types';
+import { SeatObjectProps as BaseSeatObjectProps, Statuses } from '@src/admin/Product/SeatPlanner/components/Editor/components/Workflow/components/Objects/Seat/types';
 
 /**
  * Extended seat object type with additional front-end properties
  */
 export type FrontSeatObject = BaseSeatObjectProps & {
     taken?: boolean;
+    discount?: string;
     group?: string;
+    customFields?: Record<string, string | number | boolean>;
 };
 
 /**

@@ -23,7 +23,8 @@
         font-weight: 300;
         cursor: pointer;
         padding: 0;
-        color: var(--picker-text-muted, #6b7280);
+        color: var(--picker-text);
+        opacity: 0.8;
         border-radius: var(--picker-radius-sm, 6px);
         transition: all var(--picker-transition, 0.2s ease);
         line-height: 1;
@@ -57,7 +58,8 @@
         text-align: center;
         font-size: 0.6875rem;
         font-weight: 600;
-        color: var(--picker-text-muted, #6b7280);
+        color: var(--picker-text);
+        opacity: 0.8;
         padding: 0.375rem;
         text-transform: uppercase;
     }
@@ -148,9 +150,9 @@
 
         &--unavailable {
             background: transparent;
-            color: var(--picker-text-disabled, #c4c9d1);
             cursor: not-allowed;
             font-weight: 400;
+            opacity: 0.4;
         }
 
         &--selected {

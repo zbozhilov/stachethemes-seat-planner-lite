@@ -208,7 +208,7 @@ class Translation {
             'FAILED_TO_ADD_SEATS_TO_CART'    => esc_html__('Failed to add seats to cart.', 'stachethemes-seat-planner-lite'),
             'BACK_TO_EDIT_PRODUCT_PAGE'      => esc_html__('Back to Edit Product Page', 'stachethemes-seat-planner-lite'),
             'SCREEN_TOO_SMALL'               => esc_html__('Sorry, the editor is optimized for desktop devices with larger screens only.', 'stachethemes-seat-planner-lite'),
-            'ROUND_CORNERS'                  => esc_html__('Round Corners', 'stachethemes-seat-planner-lite'),
+            'ROUND_CORNERS'                  => esc_html__('Round Corners (px)', 'stachethemes-seat-planner-lite'),
             'TEXT_DIRECTION'                 => esc_html__('Text Direction', 'stachethemes-seat-planner-lite'),
             'TEXT_DIR_HORIZONTAL'            => esc_html__('Horizontal', 'stachethemes-seat-planner-lite'),
             'TEXT_DIR_VERTICAL_UPRIGHT'      => esc_html__('Vertical (Upright)', 'stachethemes-seat-planner-lite'),
@@ -576,6 +576,9 @@ class Translation {
             'SAVE_SETTINGS'                                  => esc_html__('Save Settings', 'stachethemes-seat-planner-lite'),
 
             // General tab
+            'ENABLE_IN_LOOP_SELECT_SEAT_BUTTON'             => esc_html__('Enable "Select Seat" Button in Product Listings', 'stachethemes-seat-planner-lite'),
+            'ENABLE_IN_LOOP_SELECT_SEAT_BUTTON_DESC'        => esc_html__('Disable this option if you want to show the default WooCommerce button in product listings (Shop Page, Categories, etc...).', 'stachethemes-seat-planner-lite'),
+
             'COMPATIBILITY_MODE'                             => esc_html__('Compatibility Mode', 'stachethemes-seat-planner-lite'),
             'COMPATIBILITY_MODE_DESC'                        => esc_html__('Enables compatibility with cache plugins (e.g. WP Rocket, LiteSpeed) when lazy loading breaks due to JS optimization. Enable if you use such plugins or experience front-end issues.', 'stachethemes-seat-planner-lite'),
 
@@ -641,7 +644,7 @@ class Translation {
             'ADD_TO_CART_BTN_PREVIEW_LABEL'                 => esc_html__('Add to Cart Button Preview', 'stachethemes-seat-planner-lite'),
             'SELECT_SEAT_BTN_BTN_PREVIEW_LABEL'             => esc_html__('Select Seat Button Preview', 'stachethemes-seat-planner-lite'),
             'VIEW_CART_BTN_PREVIEW_LABEL'                   => esc_html__('View Cart Button Preview', 'stachethemes-seat-planner-lite'),
-            
+
             'SELECT_SEAT_BTN_BG_COLOR'                      => esc_html__('Select Seat Button Background Color', 'stachethemes-seat-planner-lite'),
             'SELECT_SEAT_BTN_BG_COLOR_DESC'                 => esc_html__('Background color of the add to cart button.', 'stachethemes-seat-planner-lite'),
             'SELECT_SEAT_BTN_TEXT_COLOR'                    => esc_html__('Select Seat Button Text Color', 'stachethemes-seat-planner-lite'),
@@ -669,10 +672,14 @@ class Translation {
             'ADD_TO_CART_TEXT_COLOR_HOVER'                   => esc_html__('Add to Cart Button Text Color Hover', 'stachethemes-seat-planner-lite'),
             'ADD_TO_CART_TEXT_COLOR_HOVER_DESC'              => esc_html__('Color of the add to cart button text on hover.', 'stachethemes-seat-planner-lite'),
 
-
+            // colors
+            'COLOR_PREVIEW_LABEL'                            => esc_html__('Color Preview', 'stachethemes-seat-planner-lite'),
+            'TAB_COLORS'                                     => esc_html__('Colors', 'stachethemes-seat-planner-lite'),
+            'ACCENT_COLOR'                                   => esc_html__('Accent Color', 'stachethemes-seat-planner-lite'),
+            'ACCENT_COLOR_DESC'                              => esc_html__('This color will be used to style the front-end interface.', 'stachethemes-seat-planner-lite'),
+            'BUTTON_PRIMARY'                                 => esc_html__('Primary Button', 'stachethemes-seat-planner-lite'),
+            'BUTTON_SECONDARY'                               => esc_html__('Secondary Button', 'stachethemes-seat-planner-lite'),
             'SELECT_SEAT'                                    => esc_html__('Select Seat', 'stachethemes-seat-planner-lite'),
-            'VIEW_CART'                                      => esc_html__('View Cart', 'stachethemes-seat-planner-lite'),
-            'ADD_TO_CART'                                    => esc_html__('Add to Cart', 'stachethemes-seat-planner-lite'),
 
 
             ...self::datepicker_strings()
@@ -683,6 +690,8 @@ class Translation {
     public static function get_front_strings() {
 
         return [
+            'EDIT_SEATS'             => esc_html__('Edit Seats', 'stachethemes-seat-planner-lite'),
+            'CANCEL'                 => esc_html__('Cancel', 'stachethemes-seat-planner-lite'),
             'LOADING_SEATING_LAYOUT' => esc_html__('Loading seating layout', 'stachethemes-seat-planner-lite'),
             'UNAVAILABLE'            => esc_html__('Unavailable', 'stachethemes-seat-planner-lite'),
             'PURCHASABLE_ON_SITE'    => esc_html__('Purchasable on Site', 'stachethemes-seat-planner-lite'),

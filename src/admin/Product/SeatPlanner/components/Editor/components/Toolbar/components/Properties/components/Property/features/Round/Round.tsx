@@ -1,46 +1,69 @@
-import { __ } from '@src/utils';
+import { useRef, useEffect } from 'react';
+import Slider from '@src/admin/Product/SeatPlanner/components/Editor/components/UI/Slider/Slider';
+import { GenericObjectProps } from '@src/admin/Product/SeatPlanner/components/Editor/components/Workflow/components/Objects/Generic/types';
+import { ScreenObjectProps } from '@src/admin/Product/SeatPlanner/components/Editor/components/Workflow/components/Objects/Screen/types';
 import { SeatObjectProps } from "@src/admin/Product/SeatPlanner/components/Editor/components/Workflow/components/Objects/Seat/types";
 import { useEditorObjects } from '@src/admin/Product/SeatPlanner/components/Editor/hooks';
-import { GenericObjectProps } from '@src/admin/Product/SeatPlanner/components/Editor/components/Workflow/components/Objects/Generic/types';
 import InputWrap from '../../../../../../../UI/InputWrap/InputWrap';
-import ToggleButton from '../../../../../../../UI/ToggleButton/ToggleButton';
+import { __, MAX_ROUNDED_VALUE } from '@src/utils';
 
 const Round = (props: {
-    objects: SeatObjectProps[] | GenericObjectProps[]
+    objects: SeatObjectProps[] | GenericObjectProps[] | ScreenObjectProps[]
 }) => {
 
     const { setObjects } = useEditorObjects();
     const objectIds = props.objects.map(({ id }) => id);
     const areAllChecked = props.objects.every(object => object.rounded === true);
-    const displayValue = areAllChecked;
+    const areAllRounded = areAllChecked;
 
-    const handleValueChange = (value: boolean) => {
+    const [firstObject] = props.objects;
+    const { roundedValue } = firstObject;
+    const areSameValue = props.objects.every(object => object.roundedValue === roundedValue);
+    const displayRoundedValue = areSameValue ? roundedValue : (areAllRounded ? 999 : 0);
+  
+    const timeoutRef = useRef<NodeJS.Timeout | null>(null);
 
-        setObjects(prev => {
+    useEffect(() => {
+        return () => {
+            if (timeoutRef.current) {
+                clearTimeout(timeoutRef.current);
+            }
+        };
+    }, []);
 
-            return prev.map(object => {
+    const handleRoundedValueChange = (value: number) => {
+        if (timeoutRef.current) {
+            clearTimeout(timeoutRef.current);
+        }
 
-                if (!objectIds.includes(object.id)) return { ...object };
+        timeoutRef.current = setTimeout(() => {
+            setObjects(prev => {
 
-                return {
-                    ...object,
-                    rounded: value
-                }
-            })
-        });
+                return prev.map(object => {
+
+                    if (!objectIds.includes(object.id)) return { ...object };
+
+                    return {
+                        ...object,
+                        roundedValue: value
+                    }
+                })
+            });
+        }, 100);
     }
 
     return (
         <InputWrap>
 
-            <ToggleButton
-                id='stachesepl-toolbar-properties-round'
+            <Slider 
+                id='stachesepl-toolbar-properties-round-slider'
                 label={__('ROUND_CORNERS')}
-                labelFor='stachesepl-toolbar-properties-round'
-                value={displayValue}
-                onChange={(value) => handleValueChange(value)}
+                value={displayRoundedValue ?? 0}
+                min={0}
+                max={MAX_ROUNDED_VALUE}
+                step={1}
+                onChange={(value) => handleRoundedValueChange(Number(value))}
             />
-            
         </InputWrap>
     )
 }

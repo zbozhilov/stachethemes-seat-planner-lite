@@ -18,43 +18,22 @@ class Settings {
         }
 
         self::$the_settings = [
+            'stachesepl_enable_in_loop_button'          => get_option('stachesepl_enable_in_loop_button', 'yes'),
             'stachesepl_compat_mode'                    => get_option('stachesepl_compat_mode', 'yes'),
             'stachesepl_reserve_time'                   => (int) get_option('stachesepl_reserve_time', 15),
             'stachesepl_cart_redirect'                  => get_option('stachesepl_cart_redirect', 'checkout'),
             'stachesepl_cart_redirect_message'          => get_option('stachesepl_cart_redirect_message', 'yes'),
             'stachesepl_cart_redirect_message_text'     => get_option('stachesepl_cart_redirect_message_text', ''),
             'stachesepl_cart_timer_enabled'             => get_option('stachesepl_cart_timer_enabled', 'yes'),
-            'stachesepl_cart_timer_bg_color'            => get_option('stachesepl_cart_timer_bg_color', '#32373c'),
-            'stachesepl_cart_timer_text_color'          => get_option('stachesepl_cart_timer_text_color', '#fff'),
-            'stachesepl_cart_timer_time_color'          => get_option('stachesepl_cart_timer_time_color', '#fb8a2e'),
-            'stachesepl_cart_timer_time_color_critical' => get_option('stachesepl_cart_timer_time_color_critical', '#ff6c5f'),
 
-            // datepicker
-            'stachesepl_datepicker_accent_color'       => get_option('stachesepl_datepicker_accent_color', '#873eff'),
+            // accent color
+            'stachesepl_accent_color'                   => get_option('stachesepl_accent_color', '#7F54B3'),
 
             'stachesepl_pdf_attachments'                => get_option('stachesepl_pdf_attachments', 'yes'),
             'stachesepl_pdf_attachment_name'            => get_option('stachesepl_pdf_attachment_name', ''),
             'stachesepl_auto_confirm_paid_orders'       => get_option('stachesepl_auto_confirm_paid_orders', 'no'),
             'stachesepl_app_enabled'                    => get_option('stachesepl_app_enabled', 'yes'),
             'stachesepl_app_secret_key'                 => get_option('stachesepl_app_secret_key', ''),
-
-            // select seat button
-            'stachesepl_select_seat_btn_bg_color' => get_option('stachesepl_select_seat_btn_bg_color', '#202020'),
-            'stachesepl_select_seat_btn_bg_color_hover' => get_option('stachesepl_select_seat_btn_bg_color_hover', '#873EFF'),
-            'stachesepl_select_seat_btn_text_color' => get_option('stachesepl_select_seat_btn_text_color', '#fff'),
-            'stachesepl_select_seat_btn_text_color_hover' => get_option('stachesepl_select_seat_btn_text_color_hover', '#fff'),
-
-            // add to cart button
-            'stachesepl_add_to_cart_btn_bg_color' => get_option('stachesepl_add_to_cart_btn_bg_color', '#2C9F45'),
-            'stachesepl_add_to_cart_btn_bg_color_hover' => get_option('stachesepl_add_to_cart_btn_bg_color_hover', '#0ABF53'),
-            'stachesepl_add_to_cart_btn_text_color' => get_option('stachesepl_add_to_cart_btn_text_color', '#fff'),
-            'stachesepl_add_to_cart_btn_text_color_hover' => get_option('stachesepl_add_to_cart_btn_text_color_hover', '#fff'),
-
-            // view cart button
-            'stachesepl_view_cart_button_bg_color' => get_option('stachesepl_view_cart_button_bg_color', '#2C9F45'),
-            'stachesepl_view_cart_button_bg_color_hover' => get_option('stachesepl_view_cart_button_bg_color_hover', '#0ABF53'),
-            'stachesepl_view_cart_button_text_color' => get_option('stachesepl_view_cart_button_text_color', '#fff'),
-            'stachesepl_view_cart_button_text_color_hover' => get_option('stachesepl_view_cart_button_text_color_hover', '#fff'),
         ];
 
 
@@ -72,6 +51,11 @@ class Settings {
         $current_settings = self::get_settings();
 
         $allowed_settings = [
+
+            'stachesepl_enable_in_loop_button' => [
+                'type'    => 'string',
+                'allowed' => ['yes', 'no'],
+            ],
 
             'stachesepl_compat_mode' => [
                 'type'    => 'string',
@@ -98,18 +82,6 @@ class Settings {
                 'type'    => 'string',
                 'allowed' => ['yes', 'no'],
             ],
-            'stachesepl_cart_timer_bg_color' => [
-                'type'    => 'string',
-            ],
-            'stachesepl_cart_timer_text_color' => [
-                'type'    => 'string',
-            ],
-            'stachesepl_cart_timer_time_color' => [
-                'type'    => 'string',
-            ],
-            'stachesepl_cart_timer_time_color_critical' => [
-                'type'    => 'string',
-            ],
             'stachesepl_pdf_attachments' => [
                 'type'    => 'string',
                 'allowed' => ['yes', 'no'],
@@ -130,49 +102,7 @@ class Settings {
             ],
 
             // datepicker
-            'stachesepl_datepicker_accent_color' => [
-                'type'    => 'string',
-            ],
-
-            // select seat button
-            'stachesepl_select_seat_btn_bg_color' => [
-                'type'    => 'string',
-            ],
-            'stachesepl_select_seat_btn_bg_color_hover' => [
-                'type'    => 'string',
-            ],
-            'stachesepl_select_seat_btn_text_color' => [
-                'type'    => 'string',
-            ],
-            'stachesepl_select_seat_btn_text_color_hover' => [
-                'type'    => 'string',
-            ],
-
-            // add to cart button
-            'stachesepl_add_to_cart_btn_bg_color' => [
-                'type'    => 'string',
-            ],
-            'stachesepl_add_to_cart_btn_bg_color_hover' => [
-                'type'    => 'string',
-            ],
-            'stachesepl_add_to_cart_btn_text_color' => [
-                'type'    => 'string',
-            ],
-            'stachesepl_add_to_cart_btn_text_color_hover' => [
-                'type'    => 'string',
-            ],
-
-            // view cart button
-            'stachesepl_view_cart_button_bg_color' => [
-                'type'    => 'string',
-            ],
-            'stachesepl_view_cart_button_bg_color_hover' => [
-                'type'    => 'string',
-            ],
-            'stachesepl_view_cart_button_text_color' => [
-                'type'    => 'string',
-            ],
-            'stachesepl_view_cart_button_text_color_hover' => [
+            'stachesepl_accent_color' => [
                 'type'    => 'string',
             ],
         ];
@@ -236,5 +166,57 @@ class Settings {
         self::$the_settings = null;
 
         return true;
+    }
+
+    // Responsible for applying the accent color on the front-end ui
+    public static function get_minimized_front_inline_css() {
+        $accent_color = Settings::get_setting('stachesepl_accent_color');
+        $style = ':root {
+            --stachesepl-select-seat-button-background-color: ' . $accent_color . ';
+            --stachesepl-select-seat-button-color: #fff;
+            --stachesepl-select-seat-button-hover-background-color: ' . Utils::darken($accent_color, 8) . ';
+            --stachesepl-select-seat-button-hover-color: #fff;
+    
+            --stachesepl-btn-primary-bg: ' . $accent_color . ';
+            --stachesepl-btn-primary-hover: ' . Utils::darken($accent_color, 8) . ';
+            --stachesepl-btn-primary-text: #fff;
+            --stachesepl-btn-primary-text-hover: #fff;
+    
+            --stachesepl-view-cart-button-background-color: ' . Utils::hexToRgba($accent_color, 0.08) . ';
+            --stachesepl-view-cart-button-color: ' . $accent_color . ';
+            --stachesepl-view-cart-button-hover-background-color: ' . Utils::hexToRgba($accent_color, 0.14) . ';
+            --stachesepl-view-cart-button-hover-color: ' . $accent_color . ';
+    
+            --stachesepl-btn-secondary-bg: ' . Utils::hexToRgba($accent_color, 0.08) . ';
+            --stachesepl-btn-secondary-hover: ' . Utils::hexToRgba($accent_color, 0.14) . ';
+            --stachesepl-btn-secondary-text: ' . $accent_color . ';
+            --stachesepl-btn-secondary-text-hover: ' . $accent_color . ';
+    
+            --stachesepl-accent-color: ' . $accent_color . ';
+            --stachesepl-accent-color-20: ' . Utils::hexToRgba($accent_color, 0.2) . ';
+    
+            --stachesepl-cart-timer-color: ' . $accent_color . ';
+            --stachesepl-cart-timer-critical-color: ' . $accent_color . ';
+            --stachesepl-cart-timer-text-color: ' . $accent_color . ';
+            --stachesepl-cart-timer-background-color: ' . Utils::hexToRgba($accent_color, 0.08) . ';
+    
+            .stachesepl-date-time-input,
+            .stachesepl-date-time-picker {
+            --picker-accent: ' . $accent_color . ';
+            --picker-accent-shadow: ' . Utils::hexToRgba($accent_color, 0.25) . ';
+            --picker-accent-hover: ' . Utils::darken($accent_color, 5) . ';
+            --picker-accent-light: ' . Utils::hexToRgba($accent_color, 0.08) . ';
+            --picker-accent-border: ' . Utils::hexToRgba($accent_color, 0.2) . ';
+            --picker-btn-primary-bg: ' . $accent_color . ';  
+            --picker-btn-primary-hover: ' . Utils::darken($accent_color, 8) . ';
+            --picker-btn-primary-text: #ffffff;
+            --picker-btn-primary-text-hover: #ffffff;
+            --picker-btn-secondary-bg: ' . Utils::hexToRgba($accent_color, 0.08) . ';
+            --picker-btn-secondary-hover: ' . Utils::hexToRgba($accent_color, 0.14) . ';
+            --picker-btn-secondary-text: ' . $accent_color . ';
+            --picker-btn-secondary-text-hover: ' . $accent_color . ';
+        }';
+        $style = preg_replace('/\s+/', '', $style);
+        return $style;
     }
 }

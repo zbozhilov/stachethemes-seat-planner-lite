@@ -1,0 +1,31 @@
+@use "sass:color";
+
+$accent-color: #873EFF;
+
+:root {
+    // Base Colors
+    --stachesepl-surface: #fff;
+    --stachesepl-accent-color: #{$accent-color};
+    --stachesepl-accent-color-20: #{rgba($accent-color, 0.2)};
+    --stachesepl-border-color: rgba(0, 0, 0, 0.12);
+    --stachesepl-text-color: #1a1d21;
+    --stachesepl-text-secondary-color: #545454;
+    --stachesepl-color-error: #ff6c5f;
+    
+    // Border Radius
+    --stachesepl-radius-sm: 10px;
+    --stachesepl-radius-md: 12px;
+    --stachesepl-radius-lg: 16px;
+
+    // Button specific
+    --stachesepl-btn-primary-bg: #{$accent-color};
+    --stachesepl-btn-primary-hover: #{color.scale($accent-color, $lightness: -8%)};
+    --stachesepl-btn-primary-text: #ffffff;
+    --stachesepl-btn-primary-text-hover: #ffffff;
+    --stachesepl-btn-secondary-bg: #{rgba($accent-color, 0.08)};
+    --stachesepl-btn-secondary-hover: #{rgba($accent-color, 0.14)};
+    --stachesepl-btn-secondary-text: #{$accent-color};
+    --stachesepl-btn-secondary-text-hover: #{$accent-color};
+    --stachesepl-btn-transition: 0.2s ease;
+
+}

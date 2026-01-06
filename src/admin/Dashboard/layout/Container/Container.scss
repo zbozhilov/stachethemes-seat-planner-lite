@@ -10,6 +10,14 @@
     &:hover {
         box-shadow: var(--stachesepl-shadow-md);
     }
+
+    &-title {
+        font-size: var(--stachesepl-text-lg);
+        font-weight: 500;
+        color: var(--stachesepl-text-primary);
+        margin: 0;
+        margin-bottom: var(--stachesepl-space-4);
+    }
 }
 
 

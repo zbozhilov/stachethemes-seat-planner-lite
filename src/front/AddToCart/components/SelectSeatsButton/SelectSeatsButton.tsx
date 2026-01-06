@@ -18,6 +18,7 @@ const SelectSeatsButton = () => {
         if (modalOpen) {
             return;
         }
+
         setModalOpen(true);
     }
 

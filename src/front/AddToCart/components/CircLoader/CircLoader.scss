@@ -1,12 +1,12 @@
 .stachesepl-circ-loader {
 
-    --stachesepl-circ-loader-color: #202020;
+    --stachesepl-circ-loader-color: var(--stachesepl-accent-color);
     --stachesepl-circ-loader-color-border: rgba(0, 0, 0, 0.1);
     --stachesepl-circ-loader-spinner-border-size: 2px;
     --stachesepl-circ-loader-spinner-size: 40px;
     --stachesepl-circ-loader-text-font-weight: 400;
-    --stachesepl-circ-loader-text-font-size: 0.75rem;
-    --stachesepl-circ-loader-text-color: #fff;
+    --stachesepl-circ-loader-text-font-size: 0.875rem;
+    --stachesepl-circ-loader-text-color: var(--stachesepl-text-color);
 
 
     display: flex;
@@ -43,7 +43,7 @@
         font-size: var(--stachesepl-circ-loader-text-font-size);
         font-weight: var(--stachesepl-circ-loader-text-font-weight);
         text-align: center;
-        color: var(--stachesepl-circ-text-color);
+        color: var(--stachesepl-circ-loader-text-color);
     }
 
     &--large {
@@ -60,7 +60,7 @@
     &--light {
         --stachesepl-circ-loader-color: #fff;
         --stachesepl-circ-loader-color-border: rgba(255, 255, 255, 0.1);
-        --stachesepl-circ-text-color: #cacaca;
+        --stachesepl-circ-loader-text-color: #cacaca;
     }
 
 }

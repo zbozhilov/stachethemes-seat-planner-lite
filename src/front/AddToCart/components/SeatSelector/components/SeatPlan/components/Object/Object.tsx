@@ -1,4 +1,4 @@
-import { useProductId, useSeatPlanData, useSelectedSeats } from '@src/front/AddToCart/components/context/hooks';
+import { useProductId, useSeatPlanData, useSelectedDate, useSelectedSeats } from '@src/front/AddToCart/components/context/hooks';
 import Modal from '@src/front/AddToCart/components/Modal/Modal';
 import React from 'react';
 import { FrontWorkflowObject } from 'src/front/AddToCart/types';
@@ -14,6 +14,7 @@ const Object = (props: {
 
     const { seatPlanData } = useSeatPlanData();
     const { productId } = useProductId();
+    const { selectedDate } = useSelectedDate();
     const maxSeatsRequired = seatPlanData?.maxSeatsPerPurchase || 0;
     const { selectedSeats, setSelectedSeats } = useSelectedSeats();
 
@@ -24,7 +25,7 @@ const Object = (props: {
         canViewSeatOrders,
         openModal: handleSeatTakenCheck,
         closeModal: handleOrderModalClose,
-    } = useSeatOrderModal({ productId });
+    } = useSeatOrderModal({ productId, selectedDate });
 
     const style = getObjectStyle(props.data);
 
@@ -52,9 +53,10 @@ const Object = (props: {
 
         case 'screen': {
 
-            const { backgroundColor, ...baseStyle } = style;
+            const { backgroundColor, borderRadius, ...baseStyle } = style;
 
             const classNameArray = ['stachesepl-object', 'stachesepl-object-type-screen'];
+
             if (props.data.extraClass) {
                 classNameArray.push(props.data.extraClass);
             }
@@ -64,7 +66,8 @@ const Object = (props: {
                     <div className="stachesepl-object-type-screen-label">{props.data.label}</div>
                     <div className="stachesepl-screen-persepective">
                         <div className="stachesepl-screen-vis" style={{
-                            backgroundColor: backgroundColor
+                            backgroundColor: backgroundColor,
+                            borderRadius: borderRadius ? `${borderRadius}` : undefined
                         }}></div>
                     </div>
                 </div>

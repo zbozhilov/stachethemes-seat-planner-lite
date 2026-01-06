@@ -1,22 +1,4 @@
-.stachesepl-cart-timer-label-preview {
-    font-size: var(--stachesepl-text-sm);
-    font-weight: 500;
-    color: var(--stachesepl-text-primary);
-    margin: 0;
-}
-
-.stachesepl-cart-timer-preview-wrap {
-    margin-top: 10px;
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-    gap: 10px;
-    justify-content: space-between;
-    align-items: center;
-    width: 100%;
-    max-width: 100%;
-}
-
-
+/* Default cart timer styling; site owners can override these in their own CSS. */
 .stachesepl-cart-timer {
     color: var(--stachesepl-cart-timer-color, #fb8a2e);
     line-height: 1;
@@ -26,6 +8,7 @@
     margin: 0;
     padding: 0;
     white-space: nowrap;
+    width: fit-content;
 }
 
 .stachesepl-cart-timer-row {
@@ -35,17 +18,19 @@
     justify-content: center;
     align-items: center;
     gap: 8px;
-    padding: 10px 14px;
-    border-radius: var(--stachesepl-cart-timer-border-radius, 20px);
+    padding: 0.75rem 1.125rem;
+    border-radius: var(--stachesepl-cart-timer-border-radius, 10px);
+    margin-top: 10px;
     background: var(--stachesepl-cart-timer-background-color, #32373c);
     color: var(--stachesepl-cart-timer-text-color, #fff);
 }
 
 .stachesepl-cart-timer-label {
-    font-size: 0.625rem;
-    font-weight: bold;
+    font-size: 0.875rem;
+    font-weight: 500;
 }
 
+/* Below 5 minute, switch to a "critical" style. This can also be overridden. */
 .stachesepl-cart-timer--critical {
     color: var(--stachesepl-cart-timer-critical-color, #ff6c5f);
 }

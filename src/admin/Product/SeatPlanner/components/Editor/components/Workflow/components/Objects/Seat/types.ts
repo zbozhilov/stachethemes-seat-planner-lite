@@ -10,6 +10,7 @@ export interface SeatObjectProps extends BaseObjectProps {
     backgroundColor: string;
     group?: string;
     rounded?: boolean;
+    roundedValue?: number;
     status?: Statuses;
     outlineError?: boolean;
 }

@@ -44,7 +44,6 @@ declare global {
             date_format: string;
             time_format: string;
             week_start: string;
-            accent_color: string;
         };
         stachesepl_user_roles: Record<string, string>;
         stachesepl_pdf_preview: {
@@ -71,6 +70,7 @@ declare global {
             label: string;
         };
         stacheseplSeatTooltip: 'yes' | 'no' | undefined;
+        stacheseplMaxRoundedValue: number | undefined;
     }
 }
 

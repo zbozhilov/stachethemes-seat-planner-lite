@@ -1,14 +1,21 @@
-import { useModalState, useSeatPlanData, useSelectedSeats } from '@src/front/AddToCart/components/context/hooks';
+import { East as ArrowRight } from '@mui/icons-material';
+import { useCustomFields, useDiscounts, useModalState, useSeatPlanData, useSelectedSeats } from '@src/front/AddToCart/components/context/hooks';
 import usePreventSingleEmptySeats from '@src/front/AddToCart/hooks/usePreventSingleEmptySeats';
 import { __ } from '@src/utils';
 import AddToCartButton from './components/AddToCartButton/AddToCartButton';
 import Button from './components/Button/Button';
 import './Header.scss';
 
-const Header = () => {
+const Header = (props: {
+    isOptionsModalOpen: boolean,
+    setIsOptionsModalOpen: (value: boolean) => void,
+    onAddDiscountButtonClick: () => void
+}) => {
 
     const { setModalOpen } = useModalState();
-    const { selectedSeats } = useSelectedSeats();
+    const { selectedSeats, setSelectedSeats } = useSelectedSeats();
+    const { hasDiscounts } = useDiscounts();
+    const { hasCustomFields } = useCustomFields();
     const { seatPlanData } = useSeatPlanData();
     const validateSeatingSelection = usePreventSingleEmptySeats();
 
@@ -17,6 +24,7 @@ const Header = () => {
     const maxSeatsRule = seatPlanData?.maxSeatsPerPurchase || 0; // 0 => no max rule
 
     const handleClose = () => {
+        setSelectedSeats([]); // reset selected seats
         setModalOpen(false);
     }
 
@@ -30,14 +38,40 @@ const Header = () => {
     const canProceed = selectedSeatsCount > 0 && !isBelowMin && !isOverMax;
 
     const renderButton = () => {
+        let action = null;
 
-        if (!canProceed || !validateSeatingSelection) {
-            return <Button className='secondary' onClick={handleClose}>{__('CLOSE')}</Button>
+        if (canProceed && validateSeatingSelection) {
+            if (!hasDiscounts && !hasCustomFields) {
+                action = <AddToCartButton />;
+            } else if (!props.isOptionsModalOpen) {
+                action = (
+                    <Button onClick={props.onAddDiscountButtonClick}>
+                        {__('NEXT')}
+                        <ArrowRight />
+                    </Button>
+                );
+            } else {
+                action = (
+                    <Button
+                        className="secondary"
+                        onClick={() => props.setIsOptionsModalOpen(false)}
+                    >
+                        {__('EDIT_SEATS')}
+                    </Button>
+                );
+            }
         }
 
-        return <AddToCartButton />
+        return (
+            <>
+                <Button className="secondary" onClick={handleClose}>
+                    {__('CANCEL')}
+                </Button>
+                {action}
+            </>
+        );
+    };
 
-    }
 
     const getHeaderLabel = () => {
 

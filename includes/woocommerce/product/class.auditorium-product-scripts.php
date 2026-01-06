@@ -230,24 +230,7 @@ class Auditorium_Product_Scripts {
 
         wp_add_inline_style(
             'seat-planner-add-to-cart',
-            '
-            :root {
-                --stachesepl-select-seat-button-background-color: ' . Settings::get_setting('stachesepl_select_seat_btn_bg_color') . ';
-                --stachesepl-select-seat-button-color: ' . Settings::get_setting('stachesepl_select_seat_btn_text_color') . ';
-                --stachesepl-select-seat-button-hover-background-color: ' . Settings::get_setting('stachesepl_select_seat_btn_bg_color_hover') . ';
-                --stachesepl-select-seat-button-hover-color: ' . Settings::get_setting('stachesepl_select_seat_btn_text_color_hover') . ';
-
-                --stachesepl-add-to-cart-button-background-color: ' . Settings::get_setting('stachesepl_add_to_cart_btn_bg_color') . ';
-                --stachesepl-add-to-cart-button-color: ' . Settings::get_setting('stachesepl_add_to_cart_btn_text_color') . ';
-                --stachesepl-add-to-cart-button-hover-background-color: ' . Settings::get_setting('stachesepl_add_to_cart_btn_bg_color_hover') . ';
-                --stachesepl-add-to-cart-button-hover-color: ' . Settings::get_setting('stachesepl_add_to_cart_btn_text_color_hover') . ';
-
-                --stachesepl-view-cart-button-background-color: ' . Settings::get_setting('stachesepl_view_cart_button_bg_color') . ';
-                --stachesepl-view-cart-button-color: ' . Settings::get_setting('stachesepl_view_cart_button_text_color') . ';
-                --stachesepl-view-cart-button-hover-background-color: ' . Settings::get_setting('stachesepl_view_cart_button_bg_color_hover') . ';
-                --stachesepl-view-cart-button-hover-color: ' . Settings::get_setting('stachesepl_view_cart_button_text_color_hover') . ';
-            }
-            '
+            Settings::get_minimized_front_inline_css()
         );
 
         $cart_url                = wc_get_cart_url();
@@ -284,7 +267,6 @@ class Auditorium_Product_Scripts {
                 'date_format'  => get_option('date_format'),
                 'time_format'  => get_option('time_format'),
                 'week_start'   => get_option('start_of_week'),
-                'accent_color' => Settings::get_setting('stachesepl_datepicker_accent_color'),
             ]
         );
 

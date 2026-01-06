@@ -18,7 +18,10 @@ class Auditorium_Product_Templates {
         self::$did_init = true;
 
         add_action('woocommerce_auditorium_add_to_cart', [__CLASS__, 'insert_single_add_to_cart_template'], 100);
-        add_filter('woocommerce_loop_add_to_cart_link', [__CLASS__, 'insert_loop_add_to_cart_template'], 100, 3);
+
+        if (Settings::get_setting('stachesepl_enable_in_loop_button') === 'yes') {
+            add_filter('woocommerce_loop_add_to_cart_link', [__CLASS__, 'insert_loop_add_to_cart_template'], 100, 3);
+        }
     }
 
     public static function insert_single_add_to_cart_template() {

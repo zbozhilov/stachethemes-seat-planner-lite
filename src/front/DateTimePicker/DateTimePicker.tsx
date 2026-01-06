@@ -88,7 +88,7 @@ const DateTimePicker = (props: {
 
     // Apply accent color to container immediately (always rendered)
     const { style: accentStyle } = useAccentColor({
-        accentColor: accentColor
+        accentColor: accentColor,
     });
 
     useFirstAvailableDate({
@@ -129,26 +129,20 @@ const DateTimePicker = (props: {
     // Lock body scroll when modal is open on mobile
     useEffect(() => {
         if (showDropdown && window.innerWidth < 782) {
-            document.body.style.overflow = 'hidden';
+            document.body.classList.add('stachesepl-date-time-picker-mobile-open');
         } else {
-            document.body.style.overflow = '';
+            document.body.classList.remove('stachesepl-date-time-picker-mobile-open');
         }
 
         return () => {
-            document.body.style.overflow = '';
+            document.body.classList.remove('stachesepl-date-time-picker-mobile-open');
         };
     }, [showDropdown]);
 
-    const getConfirmButtonText = () => {
 
-        if (!selectedDate || !selectedTime) {
-            return __('CLOSE');
-        }
-
-        return __('SELECT_SEAT')
-    }
-
-    const confirmButtonText = getConfirmButtonText();
+    const isInitialState = !selectedDate || !selectedTime;
+    const confirmButtonText = isInitialState ? __('CLOSE') : __('SELECT_SEAT');
+    const buttonClass = isInitialState ? 'stachesepl-date-time-picker__btn--secondary' : 'stachesepl-date-time-picker__btn--primary';
 
     return (
 
@@ -218,6 +212,7 @@ const DateTimePicker = (props: {
                                         width: '100%',
                                         height: '100%',
                                         backgroundColor: '#fff',
+                                        color: 'var(--picker-text)',
                                         zIndex: 100
                                     }} />
                             }
@@ -245,7 +240,7 @@ const DateTimePicker = (props: {
 
                         <div className='stachesepl-date-time-picker__footer'>
                             <div
-                                className='stachesepl-date-time-picker__confirm-btn'
+                                className={`stachesepl-date-time-picker__btn ${buttonClass}`}
                                 onClick={handleConfirm}
                             >
                                 {confirmButtonText}

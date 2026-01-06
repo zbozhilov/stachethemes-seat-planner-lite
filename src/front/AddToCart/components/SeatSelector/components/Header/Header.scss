@@ -1,10 +1,7 @@
 .stachesepl-seat-planner-header {
-    font-size: 0.875rem;
     z-index: 100;
-    background-color: var(--stachesepl-header-background-color, #fff);
-    color: var(--stachesepl-header-color, #333);
-    font-weight: 600;
-    padding: 0.5rem 0.75rem 0.5rem 1.25rem;
+    background-color: var(--stachesepl-surface);
+    padding: 0.625rem 0.875rem 0.625rem 1.25rem;
     position: absolute;
     top: 0;
     left: 0;
@@ -13,26 +10,32 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    gap: 15px;
-    min-height: 3.813rem;
-    box-shadow: 0 10px 10px rgba(0, 0, 0, 0.1);
+    gap: 1rem;
     animation: stachesepl-seat-planner-header-animation 0.2s ease;
     box-sizing: border-box;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 
     .stachesepl-seat-planner-header-label {
         font-size: 1rem;
         line-height: 1.2;
-        // white-space: nowrap;
+        font-weight: 600;
+        color: var(--stachesepl-text-color);
+    }
 
+    &-buttons {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        
         @media (max-width: 782px) {
-            font-size: 0.875rem;
+            width: 100%;
         }
     }
 
-    .stachesepl-add-to-cart-button {
-        opacity: 0;
-        transition: background-color 0.3s ease, color 0.3s ease, filter 0.3s ease;
-        animation: stachesepl-add-to-cart-button-fade-in 0.3s ease forwards;
+    &-button {
+        flex: 1;
+        white-space: nowrap;
     }
 
 }
@@ -42,8 +45,8 @@
         width: 37.5rem;
         left: auto;
         right: auto;
-        border-bottom-left-radius: 12px;
-        border-bottom-right-radius: 12px;
+        border-bottom-left-radius: var(--stachesepl-radius-lg);
+        border-bottom-right-radius: var(--stachesepl-radius-lg);
     }
 }
 
@@ -51,27 +54,25 @@
     .stachesepl-seat-planner-header {
         border-bottom-left-radius: 0;
         border-bottom-right-radius: 0;
+        flex-direction: column;
+        gap: 1rem;
+        padding: 1rem;
+        border-bottom: 1px solid var(--stachesepl-border-color);
+
+        .stachesepl-seat-planner-header-label {
+            font-size: 1.125rem;
+        }
     }
 }
 
 @keyframes stachesepl-seat-planner-header-animation {
     from {
+        opacity: 0;
         transform: translateY(-100%);
     }
 
     to {
-        transform: translateY(0);
-    }
-}
-
-@keyframes stachesepl-add-to-cart-button-fade-in {
-    from {
-        opacity: 0;
-        transform: translateX(5px);
-    }
-
-    to {
         opacity: 1;
-        transform: translateX(0);
+        transform: translateY(0);
     }
 }

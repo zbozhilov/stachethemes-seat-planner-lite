@@ -3,7 +3,7 @@ Tags: WooCommerce, Seat, Booking, Event, Venue
 Requires: 6.7
 Tested up to: 6.9
 Requires PHP: 8.2
-Stable tag: 1.0.38
+Stable tag: 1.0.40
 License: GPLv2 or later
 WC requires at least: 9.5
 WC tested up to: 10
@@ -11,8 +11,7 @@ WC tested up to: 10
 A WooCommerce extension for creating & selling seat-based products with a drag & drop seat planner.
 
 == Description ==
-A WooCommerce extension that adds a custom Auditorium product type for selecting seats with a drag & drop seat planner.
-Easily create and manage seating arrangements for events, venues, or any seat-based products.
+Stachethemes Seat Planner is a WooCommerce plugin that allows you to create and sell seat-based products for your customers to choose their seats easily.
 
 == Features ==
 
@@ -40,10 +39,10 @@ Upgrade to **Stachethemes Seat Planner Premium** for advanced features:
 - **CSV Booking Export**: Exports booking data for each reserved seat in CSV format.
 - **Mobile App**: Free standalone android app for scanning and validating tickets.
 
-[See all features](https://stachethemes.com/seat-planner/features/)
+[Check it out on WooCommerce](https://woocommerce.com/products/stachethemes-seat-planner/)
 
-== Video Demonstration ==
-[Watch the demo](https://www.youtube.com/watch?v=o9GExwX6OEo)
+== Demo ==
+[Live Demo](https://stachethemes.com/seat-planner/demo/)
 
 == Installation ==
 
@@ -68,6 +67,15 @@ Upgrade to **Stachethemes Seat Planner Premium** for advanced features:
 - [React Zoom Pan Pinch](https://www.npmjs.com/package/react-zoom-pan-pinch)
 
 == Changelog ==
+
+= 1.0.40 =
+- Option to disable the "Select Seat" button on product listings (product loops) such as the Shop page and category pages.
+- New Accent Color option for simpler front-end UI color customization. Legacy color customization options have been removed.
+- Merged Cart Timer and Add to Cart settings into a new Cart Behaviour tab in the plugin settings.
+- Front-end UI now displays the Close button at all times.
+- Front-end UI buttons and elements now follow the Accent Color setting.
+- Converted the Round Corners option to a slider for better control over element border radius.
+- Minor fixes and improvements.
 
 = 1.0.38 =
 - The Plugin now uses it's own "Select Seat", "View Cart" buttons.

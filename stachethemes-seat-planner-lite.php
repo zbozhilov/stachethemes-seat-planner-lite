@@ -3,10 +3,10 @@
 /**
  * Plugin Name: Stachethemes Seat Planner Lite
  * Plugin URI: https://woocommerce.com/products/stachethemes-seat-planner/
- * Description: A WooCommerce extension that adds a custom product type for selecting seats with a drag & drop seat planner. Easily create and manage seating arrangements for events, venues, or any seat-based products.
+ * Description: Stachethemes Seat Planner is a WooCommerce plugin that allows you to create and sell seat-based products for your customers to choose their seats easily.
  * Author: Stachethemes
  * Author URI:  https://woocommerce.com/vendor/stachethemes/
- * Version: 1.0.38
+ * Version: 1.0.40
  * License: GNU General Public License v2 or later
  * License URI: http://www.gnu.org/licenses/gpl-2.0.html
  * Domain Path: /languages
@@ -21,7 +21,7 @@ if (! defined('ABSPATH')) {
     exit;
 }
 
-define('STACHETHEMES_SEAT_PLANNER_LITE_VERSION', '1.0.38');
+define('STACHETHEMES_SEAT_PLANNER_LITE_VERSION', '1.0.40');
 define('STACHETHEMES_SEAT_PLANNER_LITE_PLUGIN_DIR', plugin_dir_path(__FILE__));
 define('STACHETHEMES_SEAT_PLANNER_LITE_PLUGIN_URL', plugin_dir_url(__FILE__));
 define('STACHETHEMES_SEAT_PLANNER_LITE_PLUGIN_BASENAME', plugin_basename(__FILE__));

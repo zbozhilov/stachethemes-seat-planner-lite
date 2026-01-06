@@ -6,15 +6,14 @@ import PageHeader from '../../layout/PageHeader/PageHeader';
 import TabbedMenu from '../../layout/TabbedMenu/TabbedMenu';
 import Attachments from './components/Attachments/Attachments';
 import CartBehavior from './components/CartBehavior/CartBehavior';
-import CartTimer from './components/CartTimer/CartTimer';
-import DatePicker from './components/DatePIcker/DatePicker';
+import Colors from './components/Colors/Colors';
 import General from './components/General/General';
 import MobileApp from './components/MobileApp/MobileApp';
+import Pro from './components/Pro/Pro';
 import './Settings.scss';
 import { SettingsProvider, useSettings } from './SettingsContext';
-import Pro from './components/Pro/Pro';
 
-type SupportedTabs = 'general' | 'cart_behavior' | 'cart_timer' | 'datepicker' | 'attachments' | 'mobile_app' | 'pro';
+type SupportedTabs = 'general' | 'cart_behavior' | 'colors' | 'attachments' | 'mobile_app' | 'pro';
 
 const SettingsContent = () => {
     const [activeTab, setActiveTab] = useState<SupportedTabs>('general');
@@ -29,11 +28,8 @@ const SettingsContent = () => {
             case 'cart_behavior': {
                 return <CartBehavior />;
             }
-            case 'cart_timer': {
-                return <CartTimer />;
-            }
-            case 'datepicker': {
-                return <DatePicker />;
+            case 'colors': {
+                return <Colors />;
             }
             case 'attachments': {
                 return <Attachments />;
@@ -41,11 +37,9 @@ const SettingsContent = () => {
             case 'mobile_app': {
                 return <MobileApp />;
             }
-
-            case 'pro': {
+            case 'pro' : {
                 return <Pro />;
             }
-
             default: {
                 return null;
             }
@@ -84,16 +78,12 @@ const SettingsContent = () => {
                         label: __('TAB_CART_BEHAVIOR'),
                     },
                     {
-                        id: 'cart_timer',
-                        label: __('TAB_CART_TIMER'),
-                    },
-                    {
-                        id: 'datepicker',
-                        label: __('TAB_DATEPICKER'),
-                    },
-                    {
                         id: 'attachments',
                         label: __('TAB_ATTACHMENTS'),
+                    },
+                    {
+                        id: 'colors',
+                        label: __('TAB_COLORS'),
                     },
                     {
                         id: 'mobile_app',

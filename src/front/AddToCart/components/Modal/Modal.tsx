@@ -14,6 +14,10 @@ const Modal = (props: {
 
     useEffect(() => {
 
+        if (!open) {
+            return;
+        }
+
         // Check for modal stack and close only if the current modal is the last one
         const onCloseCheck = () => {
             const modals = document.querySelectorAll('.stachesepl-seat-planner-portal');
@@ -46,10 +50,7 @@ const Modal = (props: {
             window.history.pushState(null, '', window.location.href);
             window.addEventListener('popstate', handlePopState);
             document.body.classList.add('stachesepl-modal-open');
-        } else {
-            window.removeEventListener('popstate', handlePopState);
-            document.body.classList.remove('stachesepl-modal-open');
-        }
+        } 
 
         document.addEventListener('keydown', handleEscape);
 

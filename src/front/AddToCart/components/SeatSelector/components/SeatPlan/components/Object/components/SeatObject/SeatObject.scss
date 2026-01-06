@@ -14,12 +14,12 @@
 
         &.taken {
             color: var(--stachesepl-object-seat-taken-color, #fff) !important;
-            background-color: var(--stachesepl-object-seat-taken-bg-color, #eb6651) !important;
+            background-color: var(--stachesepl-object-seat-taken-bg-color, #ff6c5f) !important;
         }
 
         &.selected {
             color: var(--stachesepl-object-seat-selected-color, #fff) !important;
-            background-color: var(--stachesepl-object-seat-selected-bg-color, #f79a3e) !important;
+            background-color: var(--stachesepl-object-seat-selected-bg-color, #f9a852) !important;
         }
 
         &:hover {
@@ -36,20 +36,19 @@
     top: 0;
     left: 0;
     transform: translate(-50%, calc(-100% - 12px));
-    background: var(--stachesepl-tooltip-bg, #ffffff);
-    color: var(--stachesepl-tooltip-color, #202020);
+    background: var(--stachesepl-surface);
+    color: var(--stachesepl-text-color);
     padding: 10px 14px;
-    border-radius: 10px;
+    border-radius: var(--stachesepl-radius-sm);
     white-space: nowrap;
     z-index: 999999;
     pointer-events: none;
-    box-shadow:
-        0 4px 20px rgba(0, 0, 0, 0.12),
-        0 2px 8px rgba(0, 0, 0, 0.08);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
     display: flex;
     flex-direction: column;
     gap: 6px;
     animation: stachesepl-tooltip-enter 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+    min-width: 130px;
 
     // Position tooltip below seat when not enough space above
     &.below {
@@ -60,7 +59,7 @@
             top: auto;
             bottom: 99%;
             border-top-color: transparent;
-            border-bottom-color: var(--stachesepl-tooltip-bg, #ffffff);
+            border-bottom-color: var(--stachesepl-surface);
             filter: drop-shadow(0 -2px 2px rgba(0, 0, 0, 0.06));
         }
     }
@@ -72,7 +71,7 @@
         left: 50%;
         transform: translateX(-50%);
         border: 7px solid transparent;
-        border-top-color: var(--stachesepl-tooltip-bg, #ffffff);
+        border-top-color: var(--stachesepl-surface);
         filter: drop-shadow(0 2px 2px rgba(0, 0, 0, 0.06));
     }
 
@@ -93,7 +92,7 @@
         &-text {
             font-weight: 600;
             font-size: 0.675rem;
-            color: var(--stachesepl-tooltip-id-color, #202020);
+            color: var(--stachesepl-text-color);
         }
     }
 
@@ -108,13 +107,13 @@
         &-label {
             font-weight: 500;
             font-size: 0.75rem;
-            color: var(--stachesepl-tooltip-price-label-color, #202020);
+            color: var(--stachesepl-text-color);
         }
 
         &-value {
             font-weight: 600;
             font-size: 0.875rem;
-            color: var(--stachesepl-tooltip-price-color, #202020);
+            color: var(--stachesepl-text-color);
         }
 
     }
@@ -124,7 +123,7 @@
         line-height: 1;
         font-size: 0.75rem;
         padding: 6px 10px;
-        border-radius: 4px;
+        border-radius: 6px;
         text-align: center;
         white-space: nowrap;
     }
@@ -132,17 +131,17 @@
     &-unavailable,
     &-sold-out {
         color: var(--stachesepl-tooltip-sold-out-color, #fff);
-        background: var(--stachesepl-tooltip-sold-out-bg-color, #eb6651);
+        background: var(--stachesepl-tooltip-sold-out-bg-color, #ff6c5f);
     }
 
     &-selected {
         color: var(--stachesepl-tooltip-selected-color, #fff);
-        background: var(--stachesepl-tooltip-selected-bg-color, #f79a3e);
+        background: var(--stachesepl-tooltip-selected-bg-color, #f9a852);
     }
 
     &-onsite {
         color: var(--stachesepl-tooltip-onsite-color, #fff);
-        background: var(--stachesepl-tooltip-onsite-bg-color, #f79a3e);
+        background: var(--stachesepl-tooltip-onsite-bg-color, #f9a852);
     }
 
 }
@@ -177,7 +176,7 @@
     max-width: 600px;
     padding: 28px 32px;
     box-sizing: border-box;
-    background-color: #fff;
+    background-color: var(--stachesepl-surface);
     border-radius: 12px;
     display: flex;
     flex-direction: column;
@@ -188,10 +187,10 @@
         margin: 0 0 20px 0;
         font-size: 1.1rem;
         font-weight: 600;
-        color: #202020;
+        color: var(--stachesepl-text-color);
         text-align: center;
         padding-bottom: 16px;
-        border-bottom: 1px solid #eee;
+        border-bottom: 1px solid var(--stachesepl-border-color);
         width: 100%;
     }
 
@@ -200,7 +199,7 @@
         padding: 20px 0;
         font-size: 0.95rem;
         line-height: 1.5;
-        color: var(--stachesepl-modal-message-text-color, #202020);
+        color: var(--stachesepl-text-color);
         font-weight: 400;
         text-align: center;
     }
@@ -209,17 +208,18 @@
         margin-top: 20px;
         padding: 10px 20px;
         width: 100%;
-        background-color: var(--stachesepl-modal-message-button-background-color, #eeeeee);
-        color: var(--stachesepl-modal-message-button-color, #202020);
         border: none;
-        border-radius: 5px;
+        border-radius: var(--stachesepl-radius-sm);
         cursor: pointer;
         transition: background-color 0.3s ease;
         font-size: 0.875rem;
-        font-weight: 500;
+        font-weight: 600;
+        background-color: var(--stachesepl-btn-secondary-bg);
+        color: var(--stachesepl-btn-secondary-text);
 
         &:hover {
-            background-color: var(--stachesepl-modal-message-button-background-hover, #d5d5d5);
+            background-color: var(--stachesepl-btn-secondary-hover);
+            color: var(--stachesepl-btn-secondary-text-hover);
         }
 
     }

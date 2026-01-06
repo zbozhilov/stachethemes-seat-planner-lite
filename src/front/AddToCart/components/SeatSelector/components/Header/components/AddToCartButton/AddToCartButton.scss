@@ -1,3 +1,5 @@
+@use "sass:color";
+
 .stachesepl-redirect-overlay {
     position: fixed;
     inset: 0;
@@ -6,8 +8,8 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    background: rgba(0, 0, 0, 0.35);
-    backdrop-filter: blur(12px);
+    background: rgba(0, 0, 0, 0.4);
+    backdrop-filter: blur(16px);
     animation: stachesepl-redirect-fadeIn 0.3s ease-out;
 
     .stachesepl-redirect-content {
@@ -16,11 +18,11 @@
         align-items: center;
         gap: 0;
         padding: 48px 64px;
-        background: linear-gradient(135deg, rgba(0, 0, 0, 0.85) 0%, rgb(39 39 39 / 95%) 100%);
-        border: 1px solid rgba(255, 255, 255, 0.1);
-        border-radius: 20px;
+        background: var(--stachesepl-surface);
+        border: 1px solid var(--stachesepl-border-color);
+        border-radius: var(--stachesepl-radius-lg);
         box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-        margin: auto 10px;
+        margin: auto 16px;
         animation: stachesepl-redirect-scaleIn 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
     }
 
@@ -29,9 +31,9 @@
 
         &-header {
             font-size: 1.5rem;
-            line-height: 1.5;
-            font-weight: 600;
-            color: #fff;
+            line-height: 1.4;
+            font-weight: 700;
+            color: var(--stachesepl-text-color);
 
             @media (max-width: 781px) {
                 font-size: 1.25rem;
@@ -39,25 +41,26 @@
         }
 
         &-description {
-            color: #a8a8a8;
+            color: var(--stachesepl-text-secondary-color);
             font-weight: 400;
-            margin: 15px auto 20px;
+            margin: 12px auto 24px;
+            font-size: 0.9375rem;
         }
-
     }
 
     .stachesepl-redirect-progress {
         width: 60%;
-        height: 4px;
-        background: rgba(255, 255, 255, 0.1);
-        border-radius: 4px;
+        height: 6px;
+        background: rgba(0, 0, 0, 0.06);
+        border-radius: var(--stachesepl-radius-sm);
         overflow: hidden;
 
         .stachesepl-redirect-progress-bar {
             height: 100%;
-            background: var(--stachesepl-add-to-cart-button-background-color);
-            border-radius: 4px;
+            background: var(--stachesepl-accent-color);
+            border-radius: var(--stachesepl-radius-sm);
             animation: stachesepl-redirect-progress 1.5s ease-out forwards;
+            box-shadow: 0 0 12px var(--stachesepl-accent-color);
         }
     }
 }
@@ -66,6 +69,7 @@
     from {
         opacity: 0;
     }
+
     to {
         opacity: 1;
     }
@@ -74,8 +78,9 @@
 @keyframes stachesepl-redirect-scaleIn {
     from {
         opacity: 0;
-        transform: scale(0.9) translateY(10px);
+        transform: scale(0.92) translateY(10px);
     }
+
     to {
         opacity: 1;
         transform: scale(1) translateY(0);
@@ -92,9 +97,8 @@
     from {
         width: 0%;
     }
+
     to {
         width: 100%;
     }
 }
-
-

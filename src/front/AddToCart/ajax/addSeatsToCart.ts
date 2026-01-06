@@ -1,4 +1,5 @@
 import { __ } from "@src/utils";
+import { CustomFieldsEntryData } from "../types";
 
 type fetchResult = {
     success: boolean;
@@ -19,8 +20,8 @@ type fetchResult = {
  *
  * Params:
  * - productId: number
- * - selectedSeatsData: Array<{ seatId: string }>
- *   Each item represents a seat ID (string).
+ * - selectedSeatsData: Array<{ seatId: string; discountId: string; customFields?: Record<string, string | number | boolean> }>
+ *   Each item represents a seat ID (string), an optional discount ID, and optional custom fields data.
  * - signal: AbortSignal used to cancel the request if needed.
  *
  * Behavior:
@@ -33,11 +34,14 @@ type fetchResult = {
  * - A Promise resolving to the parsed JSON (`fetchResult`). When `success` is true,
  *   `data.cart_fragments` may include DOM fragments to refresh the mini cart UI.
  */
-const addSeatsToCart = async ({ productId, selectedSeatsData, signal }: {
+const addSeatsToCart = async ({ productId, selectedSeatsData, selectedDate, signal }: {
     productId: number
     selectedSeatsData: {
         seatId: string,
+        discountId: string,
+        customFields?: CustomFieldsEntryData,
     }[],
+    selectedDate: string | null,
     signal: AbortSignal
 }): Promise<fetchResult> => {
     const adminAjaxUrl = window.seat_planner_add_to_cart.ajax_url;
@@ -52,6 +56,7 @@ const addSeatsToCart = async ({ productId, selectedSeatsData, signal }: {
             task: 'add_seats_to_cart',
             selected_seats: JSON.stringify(selectedSeatsData),
             product_id: productId.toString(),
+            selected_date: selectedDate || '',
             nonce: window.seat_planner_add_to_cart.nonce
         }),
         signal,

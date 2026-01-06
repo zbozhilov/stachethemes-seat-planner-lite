@@ -36,6 +36,14 @@ const General = () => {
             <Divider />
 
             <Toggle
+                label={__('ENABLE_IN_LOOP_SELECT_SEAT_BUTTON')}
+                description={__('ENABLE_IN_LOOP_SELECT_SEAT_BUTTON_DESC')}
+                checked={settings.stachesepl_enable_in_loop_button === 'yes'}
+                onChange={(e) => updateSetting('stachesepl_enable_in_loop_button', e.target.checked ? 'yes' : 'no')}
+            />
+            <Divider />
+
+            <Toggle
                 label={__('COMPATIBILITY_MODE')}
                 description={__('COMPATIBILITY_MODE_DESC')}
                 checked={settings.stachesepl_compat_mode === 'yes'}

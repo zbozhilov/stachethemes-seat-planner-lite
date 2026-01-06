@@ -47,7 +47,7 @@ const CircLoader = (props: {
                     <div className="stachesepl-circ-loader-spinner"></div>
                 </div>
                 {props.type !== 'small' && <div className="stachesepl-circ-loader-text-wrap">
-                    <span className="stachesepl-circ-loader-text">{text}</span>
+                    <span className="stachesepl-circ-loader-text" style={style ? { color: style.color } : undefined}>{text}</span>
                 </div>}
             </div>
         </div>
