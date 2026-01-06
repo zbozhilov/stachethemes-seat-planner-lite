@@ -61,7 +61,7 @@ const Pro = () => {
                 <div className="stachesepl-pro-header">
                     <div className="stachesepl-pro-badge">
                         <SparkleIcon />
-                        <span>PRO</span>
+                        <span>Stachethemes Seat Planner</span>
                     </div>
                     <h3 className="stachesepl-pro-title">{__('PRO_FEATURES')}</h3>
                     <p className="stachesepl-pro-subtitle">

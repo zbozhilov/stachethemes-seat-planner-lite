@@ -43,7 +43,7 @@ class Stachethemes_Seat_Planner_Lite {
         add_action('init', [$this, 'init']);
 
         add_filter('plugin_action_links_' . plugin_basename(__FILE__), function ($links) {
-            $links[] = '<a href="https://woocommerce.com/products/stachethemes-seat-planner/" target="_self" style="color: green; font-weight: bold;">' . esc_html__('Get Full Version', 'stachethemes-seat-planner-lite') . '</a>';
+            $links[] = '<a href="https://woocommerce.com/products/stachethemes-seat-planner/" target="_self" style="color: green; font-weight: bold;">' . esc_html__('Get Pro Version', 'stachethemes-seat-planner-lite') . '</a>';
             return $links;
         });
     }

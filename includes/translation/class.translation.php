@@ -564,7 +564,7 @@ class Translation {
             'SETTINGS_TITLE'                                 => esc_html__('Settings', 'stachethemes-seat-planner-lite'),
             'SETTINGS_DESCRIPTION'                           => esc_html__('This is where you can configure all the plugin settings.', 'stachethemes-seat-planner-lite'),
             'TAB_GENERAL'                                     => esc_html__('General', 'stachethemes-seat-planner-lite'),
-            'TAB_CART_BEHAVIOR'                              => esc_html__('Add to Cart', 'stachethemes-seat-planner-lite'),
+            'TAB_CART_BEHAVIOR'                              => esc_html__('Cart Behavior', 'stachethemes-seat-planner-lite'),
             'TAB_CART_TIMER'                                 => esc_html__('Cart Timer', 'stachethemes-seat-planner-lite'),
             'TAB_ATTACHMENTS'                                => esc_html__('Attachments', 'stachethemes-seat-planner-lite'),
             'TAB_ORDER_STATUS'                               => esc_html__('Order Status', 'stachethemes-seat-planner-lite'),

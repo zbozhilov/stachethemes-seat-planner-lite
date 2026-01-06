@@ -1,5 +1,4 @@
 import { __ } from "@src/utils";
-import { CustomFieldsEntryData } from "../types";
 
 type fetchResult = {
     success: boolean;
@@ -20,8 +19,8 @@ type fetchResult = {
  *
  * Params:
  * - productId: number
- * - selectedSeatsData: Array<{ seatId: string; discountId: string; customFields?: Record<string, string | number | boolean> }>
- *   Each item represents a seat ID (string), an optional discount ID, and optional custom fields data.
+ * - selectedSeatsData: Array<{ seatId: string }>
+ *   Each item represents a seat ID (string).
  * - signal: AbortSignal used to cancel the request if needed.
  *
  * Behavior:
@@ -38,8 +37,6 @@ const addSeatsToCart = async ({ productId, selectedSeatsData, selectedDate, sign
     productId: number
     selectedSeatsData: {
         seatId: string,
-        discountId: string,
-        customFields?: CustomFieldsEntryData,
     }[],
     selectedDate: string | null,
     signal: AbortSignal

@@ -12,10 +12,8 @@ const Object = (props: {
     data: FrontWorkflowObject,
 }) => {
 
-    const { seatPlanData } = useSeatPlanData();
     const { productId } = useProductId();
     const { selectedDate } = useSelectedDate();
-    const maxSeatsRequired = seatPlanData?.maxSeatsPerPurchase || 0;
     const { selectedSeats, setSelectedSeats } = useSelectedSeats();
 
     const {
@@ -34,12 +32,6 @@ const Object = (props: {
         if (selectedSeats.includes(seatId)) {
             setSelectedSeats(selectedSeats.filter((id) => id !== seatId));
         } else {
-
-            if (maxSeatsRequired > 0 && selectedSeats.length >= maxSeatsRequired) {
-                return;
-            }
-            
-            // Add the new seat
             setSelectedSeats([...selectedSeats, seatId]);
         }
 

@@ -24,4 +24,3 @@ const CustomFields = () => {
 };
 
 export default CustomFields;
-

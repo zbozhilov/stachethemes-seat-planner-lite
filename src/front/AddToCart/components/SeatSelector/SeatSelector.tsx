@@ -29,13 +29,7 @@ const SeatSelector = (props: {
 
     return (
         <>
-            <Header
-                isOptionsModalOpen={isOptionsModalOpen}
-                setIsOptionsModalOpen={setIsOptionsModalOpen}
-                onAddDiscountButtonClick={() => {
-                    setIsOptionsModalOpen(true);
-                }}
-            />
+            <Header />
 
             <Container>
                 <SeatPlan />
