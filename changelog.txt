@@ -1,5 +1,8 @@
 *** Stachethemes Seat Planner Lite Changelog ***
 
+= 1.0.42 =
+- Fixed a bug where setting a non-existent or invalid product ID in the shortcode caused a crash.
+
 = 1.0.40 =
 - Option to disable the "Select Seat" button on product listings (product loops) such as the Shop page and category pages.
 - New Accent Color option for simpler front-end UI color customization. Legacy color customization options have been removed.

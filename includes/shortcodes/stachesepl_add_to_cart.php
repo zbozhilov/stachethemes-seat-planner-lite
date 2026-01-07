@@ -22,7 +22,7 @@ function stachesepl_add_to_cart_shortcode($atts) {
     $product = wc_get_product($product_id);
 
     // test if it is auditorium product
-    if ($product->get_type() !== 'auditorium') {
+    if (!$product || !$product->is_type('auditorium')) {
         return '';
     }
 

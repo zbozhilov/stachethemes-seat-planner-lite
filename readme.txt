@@ -3,7 +3,7 @@ Tags: WooCommerce, Seat, Booking, Event, Venue
 Requires: 6.7
 Tested up to: 6.9
 Requires PHP: 8.2
-Stable tag: 1.0.40
+Stable tag: 1.0.42
 License: GPLv2 or later
 WC requires at least: 9.5
 WC tested up to: 10
@@ -67,6 +67,9 @@ Upgrade to **Stachethemes Seat Planner Premium** for advanced features:
 - [React Zoom Pan Pinch](https://www.npmjs.com/package/react-zoom-pan-pinch)
 
 == Changelog ==
+
+= 1.0.42 =
+- Fixed a bug where setting a non-existent or invalid product ID in the shortcode caused a crash.
 
 = 1.0.40 =
 - Option to disable the "Select Seat" button on product listings (product loops) such as the Shop page and category pages.
