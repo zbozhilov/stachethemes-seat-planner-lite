@@ -18,6 +18,12 @@ class Auditorium_Product_Price_Adjustment {
         self::$did_init = true;
 
         add_action('woocommerce_before_calculate_totals', [__CLASS__, 'before_calculate_totals'], 10, 1);
+
+        if ('yes' === Settings::get_setting('stachesepl_compat_calc_totals')) {
+            add_action('woocommerce_cart_loaded_from_session', function () {
+                WC()->cart->calculate_totals();
+            });
+        }
     }
 
     public static function before_calculate_totals($cart) {

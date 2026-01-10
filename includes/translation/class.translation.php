@@ -143,6 +143,8 @@ class Translation {
     public static function get_admin_strings() {
 
         return [
+            'UNLOCK_SELECTED'                => esc_html__('Unlock Selected Objects', 'stachethemes-seat-planner-lite'),
+            'LOCK_SELECTED'                  => esc_html__('Lock Selected Objects', 'stachethemes-seat-planner-lite'),
             'EXTRA_CLASS'                    => esc_html__('Additional Class Name', 'stachethemes-seat-planner-lite'),
             'CLICK_TO_CHANGE_DISPLAY_LABEL'  => esc_html__('Click to change display label', 'stachethemes-seat-planner-lite'),
             'ZINDEX'                         => esc_html__('Z-Index', 'stachethemes-seat-planner-lite'),
@@ -563,7 +565,7 @@ class Translation {
             // Settings page
             'SETTINGS_TITLE'                                 => esc_html__('Settings', 'stachethemes-seat-planner-lite'),
             'SETTINGS_DESCRIPTION'                           => esc_html__('This is where you can configure all the plugin settings.', 'stachethemes-seat-planner-lite'),
-            'TAB_GENERAL'                                     => esc_html__('General', 'stachethemes-seat-planner-lite'),
+            'TAB_GENERAL'                                    => esc_html__('General', 'stachethemes-seat-planner-lite'),
             'TAB_CART_BEHAVIOR'                              => esc_html__('Cart Behavior', 'stachethemes-seat-planner-lite'),
             'TAB_CART_TIMER'                                 => esc_html__('Cart Timer', 'stachethemes-seat-planner-lite'),
             'TAB_ATTACHMENTS'                                => esc_html__('Attachments', 'stachethemes-seat-planner-lite'),
@@ -581,6 +583,9 @@ class Translation {
 
             'COMPATIBILITY_MODE'                             => esc_html__('Compatibility Mode', 'stachethemes-seat-planner-lite'),
             'COMPATIBILITY_MODE_DESC'                        => esc_html__('Enables compatibility with cache plugins (e.g. WP Rocket, LiteSpeed) when lazy loading breaks due to JS optimization. Enable if you use such plugins or experience front-end issues.', 'stachethemes-seat-planner-lite'),
+
+            'COMPATIBILITY_CALC_TOTALS'                     => esc_html__('Enforce WooCommerce Cart Calculation', 'stachethemes-seat-planner-lite'),
+            'COMPATIBILITY_CALC_TOTALS_DESC'                => esc_html__('Turn on if your cart total or product prices don\'t update correctly.', 'stachethemes-seat-planner-lite'),
 
             // Slot Reservation tab
             'SEAT_RESERVATION_TIME'                          => esc_html__('Seat Reservation Time', 'stachethemes-seat-planner-lite'),
@@ -715,7 +720,7 @@ class Translation {
             'D_SEAT_ADDED_TO_CART'  => esc_html__('%d seat added to cart.', 'stachethemes-seat-planner-lite'),
             /* translators: %d: number of seats */
             'D_SEATS_ADDED_TO_CART' => esc_html__('%d seats added to cart.', 'stachethemes-seat-planner-lite'),
-            'A__VIEW_CART'          => sprintf('<a class="wc-forward" href="%s">%s</a>', wc_get_cart_url(), esc_html__('View Cart', 'stachethemes-seat-planner-lite')),
+            'A__VIEW_CART'          => sprintf('<a class="stachesepl-toast-view-cart" href="%s">%s</a>', wc_get_cart_url(), esc_html__('View Cart', 'stachethemes-seat-planner-lite')),
             'GENERIC_ERROR_MESSAGE' => esc_html__('Sorry, something went wrong. Please try again.', 'stachethemes-seat-planner-lite'),
             'FAILED_TO_FETCH_SEAT_PLAN_DATA' => esc_html__('Failed to fetch seat plan data.', 'stachethemes-seat-planner-lite'),
             'SEAT'                           => esc_html__('Seat', 'stachethemes-seat-planner-lite'),

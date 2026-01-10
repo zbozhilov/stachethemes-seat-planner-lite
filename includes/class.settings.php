@@ -20,6 +20,7 @@ class Settings {
         self::$the_settings = [
             'stachesepl_enable_in_loop_button'          => get_option('stachesepl_enable_in_loop_button', 'yes'),
             'stachesepl_compat_mode'                    => get_option('stachesepl_compat_mode', 'yes'),
+            'stachesepl_compat_calc_totals'             => get_option('stachesepl_compat_calc_totals', 'no'),
             'stachesepl_reserve_time'                   => (int) get_option('stachesepl_reserve_time', 15),
             'stachesepl_cart_redirect'                  => get_option('stachesepl_cart_redirect', 'checkout'),
             'stachesepl_cart_redirect_message'          => get_option('stachesepl_cart_redirect_message', 'yes'),
@@ -58,6 +59,11 @@ class Settings {
             ],
 
             'stachesepl_compat_mode' => [
+                'type'    => 'string',
+                'allowed' => ['yes', 'no'],
+            ],
+
+            'stachesepl_compat_calc_totals' => [
                 'type'    => 'string',
                 'allowed' => ['yes', 'no'],
             ],

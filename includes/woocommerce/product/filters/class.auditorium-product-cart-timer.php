@@ -109,7 +109,6 @@ class Auditorium_Product_Cart_Timer {
         );
 
         wp_enqueue_style($handle);
-
     }
 
     /**
@@ -156,17 +155,14 @@ class Auditorium_Product_Cart_Timer {
         if (isset($cart_item['stachesepl_added_at'], $cart_item['stachesepl_reserve_time'], $cart_item['stachesepl_expires_at'])) {
 
             $reserve_time = (int) $cart_item['stachesepl_reserve_time'];
-            $expires_at  = (int) $cart_item['stachesepl_expires_at'];
 
             if ($reserve_time <= 0) {
                 return $item_data; // No need to continue if reservation time is 0
             }
 
             $item_data[] = [
-                'name'  => esc_html__('Time remaining', 'stachethemes-seat-planner-lite'),
-                // Store the raw expiration timestamp (escaped for HTML) so the
-                // JavaScript can calculate the remaining time on init.
-                'value' => esc_html((string) $expires_at),
+                'key'     => 'stachesepl-cart-timer-key',
+                'display' => self::get_timer_html($cart_item, false)
             ];
         }
 
@@ -190,12 +186,12 @@ class Auditorium_Product_Cart_Timer {
         ob_start();
 ?>
 
-        <div class="stachesepl-cart-timer-row">
+        <span class="stachesepl-cart-timer-row stachesepl-cart-timer-is-hidden">
             <span class="stachesepl-cart-timer-label"><?php esc_html_e('Time remaining', 'stachethemes-seat-planner-lite'); ?>:</span>
             <span class="stachesepl-cart-timer"><?php echo (int) $cart_item['stachesepl_expires_at']; ?></span>
-        </div>
+            </div>
 
-<?php
+    <?php
 
         if ($echo) {
             // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped

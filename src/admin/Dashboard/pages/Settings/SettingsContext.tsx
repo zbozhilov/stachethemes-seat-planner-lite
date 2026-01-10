@@ -4,6 +4,7 @@ import { __ } from '@src/utils';
 export type SettingsState = {
     stachesepl_enable_in_loop_button: 'yes' | 'no'
     stachesepl_compat_mode: 'yes' | 'no'
+    stachesepl_compat_calc_totals: 'yes' | 'no'
     stachesepl_reserve_time: number
     stachesepl_cart_redirect: 'disabled' | 'cart' | 'checkout'
     stachesepl_cart_redirect_message: 'yes' | 'no'
@@ -31,6 +32,7 @@ type SettingsContextType = {
 const defaultSettings: SettingsState = {
     stachesepl_enable_in_loop_button: 'yes',
     stachesepl_compat_mode: 'yes',
+    stachesepl_compat_calc_totals: 'no',
     stachesepl_reserve_time: 15,
     stachesepl_cart_redirect: 'checkout',
     stachesepl_cart_redirect_message: 'yes',

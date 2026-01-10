@@ -50,6 +50,16 @@ const General = () => {
                 onChange={(e) => updateSetting('stachesepl_compat_mode', e.target.checked ? 'yes' : 'no')}
             />
 
+            <Divider />
+
+            <Toggle
+                label={__('COMPATIBILITY_CALC_TOTALS')}
+                description={__('COMPATIBILITY_CALC_TOTALS_DESC')}
+                checked={settings.stachesepl_compat_calc_totals === 'yes'}
+                onChange={(e) => updateSetting('stachesepl_compat_calc_totals', e.target.checked ? 'yes' : 'no')}
+            />
+
+
         </Container>
     )
 }

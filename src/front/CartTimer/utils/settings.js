@@ -17,3 +17,5 @@ export function getTimerLabelWithColon() {
     return getTimerLabel() + ':';
 }
 
+// Key added to the el container when initialized to guard against double initialization
+export const DATA_ATTR_INITIALIZED = 'data-stachesepl-cart-timer-initialized';

@@ -4,7 +4,7 @@
 **Requires:** 6.7  
 **Tested up to:** 6.9
 **Requires PHP:** 8.2  
-**Stable tag:** 1.0.42 
+**Stable tag:** 1.1.0
 **License:** GPLv2 or later  
 **WC requires at least:** 9.5  
 **WC tested up to:** 10 
@@ -45,6 +45,10 @@ Stachethemes Seat Planner is a WooCommerce plugin that allows you to create and 
 https://github.com/zbozhilov/stachethemes-seat-planner-lite
 
 ## Changelog
+
+### 1.1.0
+- New general option "Enforce WooCommerce Cart Calculation". This option helps fix the issue with missing cart price on certain themes.
+- Fixed issue where the cart timer may not work properly on certain carts
 
 ### 1.0.42
 - Fixed a bug where setting a non-existent or invalid product ID in the shortcode caused a crash.

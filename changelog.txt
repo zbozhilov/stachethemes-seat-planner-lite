@@ -1,5 +1,9 @@
 *** Stachethemes Seat Planner Lite Changelog ***
 
+2026.01.08 Version 1.1.0
+* Added: New general option "Enforce WooCommerce Cart Calculation". This option helps fix the issue with missing cart price on certain themes.
+* Fixed: Fixed issue where the cart timer may not work properly on certain carts
+
 = 1.0.42 =
 - Fixed a bug where setting a non-existent or invalid product ID in the shortcode caused a crash.
 

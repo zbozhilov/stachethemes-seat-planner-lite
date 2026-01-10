@@ -6,7 +6,7 @@
  * Description: Stachethemes Seat Planner is a WooCommerce plugin that allows you to create and sell seat-based products for your customers to choose their seats easily.
  * Author: Stachethemes
  * Author URI:  https://woocommerce.com/vendor/stachethemes/
- * Version: 1.0.42
+ * Version: 1.1.0
  * License: GNU General Public License v2 or later
  * License URI: http://www.gnu.org/licenses/gpl-2.0.html
  * Domain Path: /languages
@@ -21,7 +21,7 @@ if (! defined('ABSPATH')) {
     exit;
 }
 
-define('STACHETHEMES_SEAT_PLANNER_LITE_VERSION', '1.0.42');
+define('STACHETHEMES_SEAT_PLANNER_LITE_VERSION', '1.1.0');
 define('STACHETHEMES_SEAT_PLANNER_LITE_PLUGIN_DIR', plugin_dir_path(__FILE__));
 define('STACHETHEMES_SEAT_PLANNER_LITE_PLUGIN_URL', plugin_dir_url(__FILE__));
 define('STACHETHEMES_SEAT_PLANNER_LITE_PLUGIN_BASENAME', plugin_basename(__FILE__));

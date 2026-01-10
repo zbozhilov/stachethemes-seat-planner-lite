@@ -50,7 +50,14 @@ export function attachSeatPlannerTimer(valueEl) {
         return;
     }
 
+    // find the parent .stachesepl-cart-timer-row and remove the stachesepl-cart-timer-is-hidden class
+    const parentRow = valueEl.closest('.stachesepl-cart-timer-row');
+    if (parentRow) {
+        parentRow.classList.remove('stachesepl-cart-timer-is-hidden');
+    }
+
     function tick() {
+
         const now = getCurrentTimeSeconds();
         const remaining = expiresAt - now;
 

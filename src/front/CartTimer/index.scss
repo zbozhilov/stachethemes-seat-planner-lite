@@ -11,8 +11,15 @@
     width: fit-content;
 }
 
+.stachesepl-cart-timer-is-hidden {
+    .stachesepl-cart-timer-label,
+    .stachesepl-cart-timer {
+        visibility: hidden !important;
+    }
+}
+
 .stachesepl-cart-timer-row {
-    display: inline-flex !important;
+    display: inline-flex;
     line-height: 1;
     width: 100%;
     justify-content: center;
@@ -33,4 +40,20 @@
 /* Below 5 minute, switch to a "critical" style. This can also be overridden. */
 .stachesepl-cart-timer--critical {
     color: var(--stachesepl-cart-timer-critical-color, #ff6c5f);
+}
+
+.wc-block-components-product-details__stachesepl-cart-timer-key {
+    .wc-block-components-product-details__value {
+        width: 100% !important;
+    }
+}
+
+.variation-stachesepl-cart-timer-key {
+    width: 100%;
+}
+
+.wc-block-components-product-details__stachesepl-cart-timer-key {
+    .wc-block-components-product-details__name {
+        display: none !important;
+    }
 }
