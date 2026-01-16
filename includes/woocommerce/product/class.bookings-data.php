@@ -1,6 +1,6 @@
 <?php
 
-namespace Stachethemes\SeatPlannerLite;
+namespace StachethemesSeatPlannerLite;
 
 class Bookings_Data {
 

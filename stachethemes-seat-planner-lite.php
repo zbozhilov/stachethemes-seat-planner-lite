@@ -15,7 +15,7 @@
  * Requires PHP: 8.2
  */
 
-namespace Stachethemes\SeatPlannerLite;
+namespace StachethemesSeatPlannerLite;
 
 if (! defined('ABSPATH')) {
     exit;

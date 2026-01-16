@@ -1,6 +1,6 @@
 <?php 
 
-namespace Stachethemes\SeatPlannerLite;
+namespace StachethemesSeatPlannerLite;
 
 if (! defined('ABSPATH')) {
     exit;

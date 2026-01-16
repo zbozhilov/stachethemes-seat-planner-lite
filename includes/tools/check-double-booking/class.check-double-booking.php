@@ -1,6 +1,6 @@
 <?php
 
-namespace Stachethemes\SeatPlannerLite;
+namespace StachethemesSeatPlannerLite;
 
 class Check_Double_Booking {
 
