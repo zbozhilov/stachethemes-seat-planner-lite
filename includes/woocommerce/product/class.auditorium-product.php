@@ -203,7 +203,13 @@ class Auditorium_Product extends \WC_Product {
 
                 if ($context === 'add_to_cart') {
                     // Filters out unnecessary keys from the seat data for the add to cart context
-                    $keys_to_include = ['id', 'seatId', 'group','price'];
+                    $keys_to_include       = ['id', 'seatId', 'group', 'price'];
+                    $extra_keys_to_include = apply_filters('stachesepl_context_add_to_cart_keys', []);
+
+                    if (is_array($extra_keys_to_include) && !empty($extra_keys_to_include)) {
+                        $keys_to_include = array_merge($keys_to_include, $extra_keys_to_include);
+                    }
+
                     $object = (object) array_intersect_key((array) $object, array_flip($keys_to_include));
                     return $object;
                 }
