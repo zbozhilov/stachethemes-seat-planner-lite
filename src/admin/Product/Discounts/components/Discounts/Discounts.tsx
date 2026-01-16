@@ -13,8 +13,7 @@ const Discounts = () => {
     return (
         <Container label={__('MANAGE_DISCOUNTS')} description={__('DISCOUNTS_SUBTITLE')} className='stachesepl-seat-planner-discounts'>
 
-            <ul>
-            </ul>
+            <p className="stachesepl-seat-planner-discounts-no-discounts">{__('NO_DISCOUNTS_ADDED')}</p>
 
             <Button onClick={handleAddDiscount}>
                 {__('ADD_DISCOUNT')}

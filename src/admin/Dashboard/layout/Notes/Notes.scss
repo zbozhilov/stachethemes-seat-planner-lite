@@ -1,0 +1,29 @@
+.stachesepl-notes {
+    padding: var(--stachesepl-space-4);
+    background: rgba(59, 130, 246, 0.05);
+    border-radius: var(--stachesepl-radius-md);
+    border: 1px solid rgba(59, 130, 246, 0.1);
+
+    h4 {
+        margin: 0 0 var(--stachesepl-space-3) 0;
+        font-size: 13px;
+        font-weight: 600;
+        color: var(--stachesepl-text-primary);
+    }
+
+    ul {
+        margin: 0;
+        padding-left: var(--stachesepl-space-5);
+        font-size: 13px;
+        color: var(--stachesepl-text-secondary);
+        line-height: 1.6;
+
+        li {
+            margin-bottom: var(--stachesepl-space-1);
+
+            &:last-child {
+                margin-bottom: 0;
+            }
+        }
+    }
+}

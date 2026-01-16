@@ -18,9 +18,10 @@ const Dates = (props: {
             className='stachesepl-seat-planner-dates'
             label={__('MANAGE_DATES_AND_TIMES')}
             description={__('MANAGE_DATES_AND_TIMES_DESC')}>
-            <ul>
-            </ul>
 
+
+            <p className="stachesepl-seat-planner-dates-no-dates">{__('NO_DATES_ADDED')}</p>
+            
             <Button onClick={handleAddDate}>
                 {__('ADD_DATE_AND_TIME')}
             </Button>

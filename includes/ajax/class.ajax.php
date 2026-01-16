@@ -30,7 +30,9 @@ class Ajax {
             'check_product_booking',
             'get_order_details_by_seat_id',
             'get_overview_stats',
-            'save_dashboard_settings'
+            'save_dashboard_settings',
+            'get_order_auditorium_items',
+            'update_order_item_meta',
         ];
 
         if (empty($task) || !in_array($task, $allowed_tasks, true)) {
@@ -421,6 +423,206 @@ class Ajax {
                                 'error' => esc_html__('Failed to save settings.', 'stachethemes-seat-planner-lite')
                             ]);
                         }
+
+                        break;
+                    }
+
+                    case 'get_order_auditorium_items': {
+
+                        if (!current_user_can('manage_woocommerce')) {
+                            wp_send_json_error([
+                                'error' => esc_html__('You do not have the required permissions to access this feature.', 'stachethemes-seat-planner')
+                            ]);
+                        }
+
+                        $order_id = filter_input(INPUT_POST, 'order_id', FILTER_VALIDATE_INT);
+
+                        if (false === $order_id || $order_id < 1) {
+                            wp_send_json_error(['error' => esc_html__('Invalid order ID', 'stachethemes-seat-planner')]);
+                        }
+
+                        $order = wc_get_order($order_id);
+
+                        if (!$order) {
+                            wp_send_json_error(['error' => esc_html__('Order not found', 'stachethemes-seat-planner')]);
+                        }
+
+                        $items = [];
+                        $order_items = $order->get_items();
+
+                        foreach ($order_items as $item_id => $item) {
+                            $seat_data = $item->get_meta('seat_data');
+
+                            if (!$seat_data) {
+                                continue;
+                            }
+
+                            $seat_discount = $item->get_meta('seat_discount');
+                            /** @var \WC_Order_Item_Product $item */
+                            $product_id = $item->get_product_id();
+                            /** @var Auditorium_Product $product */
+                            $product = wc_get_product($product_id);
+
+                            if (!$product || $product->get_type() !== 'auditorium') {
+                                wp_send_json_error(['error' => esc_html__('Invalid product ID', 'stachethemes-seat-planner')]);
+                            }
+
+                            $items[] = [
+                                'item_id'       => $item_id,
+                                'product_id'    => $product_id,
+                                'product_name'  => $product ? $product->get_name() : __('Unknown Product', 'stachethemes-seat-planner'),
+                                'seat_data'     => $seat_data,
+                                'seat_discount' => $seat_discount ?: null,
+                                'has_dates'     => $product->has_dates(),
+                            ];
+                        }
+
+                        wp_send_json_success([
+                            'order_id'     => $order_id,
+                            'order_status' => $order->get_status(),
+                            'items'        => $items,
+                        ]);
+
+                        break;
+                    }
+
+                case 'update_order_item_meta': {
+
+                        if (!current_user_can('manage_woocommerce')) {
+                            wp_send_json_error([
+                                'error' => esc_html__('You do not have the required permissions to access this feature.', 'stachethemes-seat-planner')
+                            ]);
+                        }
+
+                        $order_id = filter_input(INPUT_POST, 'order_id', FILTER_VALIDATE_INT);
+
+                        if (false === $order_id || $order_id < 1) {
+                            wp_send_json_error(['error' => esc_html__('Invalid order ID', 'stachethemes-seat-planner')]);
+                        }
+
+                        $order = wc_get_order($order_id);
+
+                        if (!$order) {
+                            wp_send_json_error(['error' => esc_html__('Order not found', 'stachethemes-seat-planner')]);
+                        }
+
+                        // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
+                        $updates_json = isset($_POST['updates']) ? wp_unslash($_POST['updates']) : '';
+                        $updates      = json_decode($updates_json, true);
+
+                        if (json_last_error() !== JSON_ERROR_NONE || !is_array($updates)) {
+                            wp_send_json_error(['error' => esc_html__('Invalid updates data format', 'stachethemes-seat-planner')]);
+                        }
+
+                        $order_items   = $order->get_items();
+                        $updated_count = 0;
+                        $order_status  = $order->get_status();
+
+                        // Statuses where seats are considered "taken" in the product meta
+                        $taken_statuses = ['completed', 'processing'];
+                        $should_update_taken_seats = in_array($order_status, $taken_statuses, true);
+
+                        foreach ($updates as $update) {
+                            $item_id   = isset($update['item_id']) ? (int) $update['item_id'] : 0;
+                            $seat_data = isset($update['seat_data']) ? $update['seat_data'] : null;
+
+                            if (!$item_id || !$seat_data) {
+                                continue;
+                            }
+
+                            // Verify the item belongs to this order
+                            $item = null;
+                            foreach ($order_items as $oid => $oitem) {
+                                if ((int) $oid === $item_id) {
+                                    $item = $oitem;
+                                    break;
+                                }
+                            }
+
+                            if (!$item) {
+                                continue;
+                            }
+
+                            // Get existing seat data for comparison
+                            $existing_seat_data = $item->get_meta('seat_data');
+                            $existing_array     = $existing_seat_data ? (is_object($existing_seat_data) ? (array) $existing_seat_data : $existing_seat_data) : [];
+
+                            $old_seat_id = isset($existing_array['seatId']) ? $existing_array['seatId'] : '';
+
+                            // Get the product to validate seat ID
+                            /** @var \WC_Order_Item_Product $item */
+                            $product_id = $item->get_product_id();
+                            /** @var Auditorium_Product $product */
+                            $product = wc_get_product($product_id);
+
+                            if (!$product || $product->get_type() !== 'auditorium') {
+                                wp_send_json_error(['error' => esc_html__('Invalid product ID', 'stachethemes-seat-planner-lite')]);
+                            }
+
+                            // Sanitize seat_data fields (default to the existing seat data if it exists)
+                            $sanitized_seat_data = $existing_seat_data ? (is_object($existing_seat_data) ? (array) $existing_seat_data : $existing_seat_data) : [];
+
+                            if (isset($seat_data['seatId'])) {
+                                $sanitized_seat_data['seatId'] = sanitize_text_field($seat_data['seatId']);
+
+                                // Validate that the seat ID exists in the product's seat plan
+                                $seat_exists = $product->get_seat_data($sanitized_seat_data['seatId']);
+                                if (!$seat_exists) {
+                                    wp_send_json_error([
+                                        'error' => sprintf(
+                                            // translators: %s - seat ID
+                                            __('Seat ID "%s" does not exist in the product\'s seat plan.', 'stachethemes-seat-planner-lite'),
+                                            esc_html($sanitized_seat_data['seatId'])
+                                        )
+                                    ]);
+                                }
+                            }
+
+                            $new_seat_id     = isset($sanitized_seat_data['seatId']) ? $sanitized_seat_data['seatId'] : $old_seat_id;
+                            $seat_id_changed = $new_seat_id && $old_seat_id !== $new_seat_id;
+
+                            // Handle seat ID change - release old seat and take new seat
+                            if ($should_update_taken_seats && $seat_id_changed) {
+                                // Check if new seat is already taken
+                                if ($product->is_seat_taken($new_seat_id)) {
+                                    wp_send_json_error([
+                                        'error' => sprintf(
+                                            // translators: %s - seat ID
+                                            __('Seat %s is already taken. Please choose a different seat.', 'stachethemes-seat-planner-lite'),
+                                            esc_html($new_seat_id)
+                                        )
+                                    ]);
+                                }
+
+                                // Release the old seat
+                                $product->delete_meta_taken_seat($old_seat_id);
+
+                                // Take the new seat
+                                $product->add_meta_taken_seat($new_seat_id);
+                                $product->save_meta_data();
+                            }
+
+                            $item->update_meta_data('seat_data', (object) $sanitized_seat_data);
+                            $item->save_meta_data();
+                            $updated_count++;
+                        }
+
+                        if ($updated_count > 0) {
+                            // Add order note for audit trail
+                            $order->add_order_note(
+                                sprintf(
+                                    // translators: %1$d - number of items updated, %2$s - user name
+                                    esc_html__('Order item metadata updated for %1$d item(s) by %2$s via Seat Planner Tools.', 'stachethemes-seat-planner-lite'),
+                                    $updated_count,
+                                    wp_get_current_user()->display_name
+                                )
+                            );
+                        }
+
+                        wp_send_json_success([
+                            'message'       => esc_html__('Order items updated successfully.', 'stachethemes-seat-planner-lite'),
+                            'updated_count' => $updated_count,
+                        ]);
 
                         break;
                     }

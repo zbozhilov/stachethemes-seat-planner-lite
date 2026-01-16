@@ -13,8 +13,7 @@ const CustomFields = () => {
     return (
         <Container label={__('MANAGE_CUSTOM_FIELDS')} description={__('MANAGE_CUSTOM_FIELDS_DESC')} className='stachesepl-seat-planner-custom-fields'>
 
-            <ul className="stachesepl-seat-planner-custom-fields-list">
-            </ul>
+            <p className="stachesepl-seat-planner-custom-fields-no-fields">{__('NO_CUSTOM_FIELDS_ADDED')}</p>
 
             <Button onClick={handleAddField}>
                 {__('ADD_CUSTOM_FIELD')}

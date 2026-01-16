@@ -4,6 +4,7 @@ import TabbedMenu from '../../layout/TabbedMenu/TabbedMenu'
 import PageHeader from '../../layout/PageHeader/PageHeader'
 import BookingIntegrityChecker from './components/BookingIntegrityChecker/BookingIntegrityChecker'
 import PdfPreview from './components/PdfPreview/PdfPreview'
+import EditOrderItem from './components/EditOrderItem/EditOrderItem'
 import { __ } from '@src/utils'
 
 const Tools = () => {
@@ -18,6 +19,9 @@ const Tools = () => {
             }
             case 'pdf_preview': {
                 return <PdfPreview />
+            }
+            case 'edit_order': {
+                return <EditOrderItem />
             }
             default: {
                 return null
@@ -43,6 +47,10 @@ const Tools = () => {
                     {
                         id: 'pdf_preview',
                         label: __('TOOLS_TAB_PDF_PREVIEW'),
+                    },
+                    {
+                        id: 'edit_order',
+                        label: __('TOOLS_TAB_EDIT_ORDER'),
                     }
                 ]}
             />

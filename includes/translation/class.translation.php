@@ -280,8 +280,10 @@ class Translation {
             'PERCENTAGE'                     => esc_html__('Percentage', 'stachethemes-seat-planner-lite'),
             'FIXED'                          => esc_html__('Fixed Value', 'stachethemes-seat-planner-lite'),
             'ALL_SEATS'                      => esc_html__('All Seats', 'stachethemes-seat-planner-lite'),
+            'NO_DISCOUNTS_ADDED'             => esc_html__('No discounts added yet', 'stachethemes-seat-planner-lite'),
 
             // Custom fields
+            'NO_CUSTOM_FIELDS_ADDED'    => esc_html__('No custom fields added yet', 'stachethemes-seat-planner-lite'),
             'MANAGE_CUSTOM_FIELDS'      => esc_html__('Manage Custom Fields', 'stachethemes-seat-planner-lite'),
             'MANAGE_CUSTOM_FIELDS_DESC' => esc_html__('Add custom fields for each selected seat', 'stachethemes-seat-planner-lite'),
             'NO_CUSTOM_FIELDS'          => esc_html__('No custom fields added yet', 'stachethemes-seat-planner-lite'),
@@ -362,6 +364,7 @@ class Translation {
             'PLEASE_SELECT_AT_LEAST_ONE_FIELD'     => esc_html__('Please select at least one field to export.', 'stachethemes-seat-planner-lite'),
 
             // Dates
+            'NO_DATES_ADDED'                       => esc_html__('No dates added yet', 'stachethemes-seat-planner-lite'),
             'MANAGE_DATES_AND_TIMES'               => esc_html__('Manage Dates and Times', 'stachethemes-seat-planner-lite'),
             'MANAGE_DATES_AND_TIMES_DESC'          => esc_html__('If this product should be available on multiple dates and times, add them here. If not, leave this field empty.', 'stachethemes-seat-planner-lite'),
             'ADD_DATE_AND_TIME'                    => esc_html__('Add Date and Time', 'stachethemes-seat-planner-lite'),
@@ -500,6 +503,31 @@ class Translation {
             'TOOLS_PAGE_DESCRIPTION'          => esc_html__('Utility tools for managing your seat planner bookings and PDF tickets.', 'stachethemes-seat-planner-lite'),
             'TOOLS_TAB_BOOKING_INTEGRITY'     => esc_html__('Booking Integrity', 'stachethemes-seat-planner-lite'),
             'TOOLS_TAB_PDF_PREVIEW'           => esc_html__('PDF Preview', 'stachethemes-seat-planner-lite'),
+            'TOOLS_TAB_EDIT_ORDER'            => esc_html__('Edit Order', 'stachethemes-seat-planner-lite'),
+
+            // Edit Order Items Tool
+            'EDIT_ORDER_TITLE'                => esc_html__('Edit Order Item Metadata', 'stachethemes-seat-planner-lite'),
+            'EDIT_ORDER_DESCRIPTION'          => esc_html__('Search for an order by ID to edit the seat data of auditorium product items.', 'stachethemes-seat-planner-lite'),
+            'EDIT_ORDER_INVALID_ORDER_ID'     => esc_html__('Please enter a valid order ID.', 'stachethemes-seat-planner-lite'),
+            'EDIT_ORDER_FETCH_ERROR'          => esc_html__('Failed to fetch order items. Please try again.', 'stachethemes-seat-planner-lite'),
+            'EDIT_ORDER_NO_ITEMS'             => esc_html__('No auditorium product items found in this order.', 'stachethemes-seat-planner-lite'),
+            'EDIT_ORDER_SAVE_ERROR'           => esc_html__('Failed to save changes. Please try again.', 'stachethemes-seat-planner-lite'),
+            'EDIT_ORDER_EMPTY_SEAT_ID'        => esc_html__('Seat ID cannot be empty.', 'stachethemes-seat-planner-lite'),
+            'EDIT_ORDER_SAVE_SUCCESS'         => esc_html__('Changes saved successfully!', 'stachethemes-seat-planner-lite'),
+            'EDIT_ORDER_SAVE_CHANGES'         => esc_html__('Save Changes', 'stachethemes-seat-planner-lite'),
+            'EDIT_ORDER_ORDER_ID_PLACEHOLDER' => esc_html__('e.g., 1234', 'stachethemes-seat-planner-lite'),
+            'EDIT_ORDER_LOADING'              => esc_html__('Loading...', 'stachethemes-seat-planner-lite'),
+            'EDIT_ORDER_SEARCH'               => esc_html__('Search Order', 'stachethemes-seat-planner-lite'),
+            // translators: %s - order ID
+            'EDIT_ORDER_ORDER_NUMBER'         => esc_html__('Order #%s', 'stachethemes-seat-planner-lite'),
+            'EDIT_ORDER_ITEM_ID'              => esc_html__('Item ID', 'stachethemes-seat-planner-lite'),
+            'EDIT_ORDER_VIEW_PRODUCT'         => esc_html__('View Product', 'stachethemes-seat-planner-lite'),
+            'EDIT_ORDER_TICKET_SCANNED'       => esc_html__('This ticket has already been scanned', 'stachethemes-seat-planner-lite'),
+            'EDIT_ORDER_NOTES_TITLE'          => esc_html__('Important Notes', 'stachethemes-seat-planner-lite'),
+            'EDIT_ORDER_NOTE_1'               => esc_html__('Changes will be recorded in the order notes for audit purposes.', 'stachethemes-seat-planner-lite'),
+            'EDIT_ORDER_NOTE_2'               => esc_html__('QR code data and scan status are preserved and cannot be modified here.', 'stachethemes-seat-planner-lite'),
+            'EDIT_ORDER_NOTE_3'               => esc_html__('When changing a Seat ID, the old seat will be released and the new seat will be marked as taken automatically.', 'stachethemes-seat-planner-lite'),
+            'EDIT_ORDER_NOTE_4'               => esc_html__('Seat availability is verified before saving - you cannot assign a seat that is already taken.', 'stachethemes-seat-planner-lite'),
 
             // PDF Preview
             'PDF_PREVIEW_NOT_SUPPORTED'       => esc_html__('PDF preview is not available in the Lite version', 'stachethemes-seat-planner-lite'),

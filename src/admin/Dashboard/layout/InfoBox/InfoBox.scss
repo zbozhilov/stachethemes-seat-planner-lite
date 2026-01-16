@@ -1,0 +1,28 @@
+.stachesepl-info-box {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--stachesepl-space-4);
+    padding: var(--stachesepl-space-5);
+    background: var(--stachesepl-bg-muted);
+    border-radius: var(--stachesepl-radius-md);
+    border: 1px solid var(--stachesepl-border-light);
+
+    svg {
+        flex-shrink: 0;
+        color: var(--stachesepl-primary);
+    }
+}
+
+.stachesepl-info-box-title {
+    margin: 0 0 var(--stachesepl-space-1) 0;
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--stachesepl-text-primary);
+}
+
+.stachesepl-info-box-description {
+    margin: 0;
+    font-size: 13px;
+    color: var(--stachesepl-text-secondary);
+    line-height: 1.5;
+}
