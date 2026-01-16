@@ -1,5 +1,8 @@
 *** Stachethemes Seat Planner Lite Changelog ***
 
+2026.01.16 Version 1.3.0
+* Added: New tool "Edit Order", enabling admins to modify existing orders data, such as changing seat ID.
+
 2026.01.08 Version 1.1.0
 * Added: New general option "Enforce WooCommerce Cart Calculation". This option helps fix the issue with missing cart price on certain themes.
 * Fixed: Fixed issue where the cart timer may not work properly on certain carts
