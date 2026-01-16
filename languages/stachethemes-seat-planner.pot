@@ -9,7 +9,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2026-01-16T20:49:37+00:00\n"
+"POT-Creation-Date: 2026-01-16T21:08:44+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.11.0\n"
 "X-Domain: stachethemes-seat-planner-lite\n"
@@ -49,6 +49,7 @@ msgstr ""
 #: includes/ajax/class.ajax.php:316
 #: includes/ajax/class.ajax.php:339
 #: includes/ajax/class.ajax.php:370
+#: includes/ajax/class.ajax.php:467
 #: includes/ajax/class.ajax.php:559
 msgid "Invalid product ID"
 msgstr ""
@@ -109,6 +110,8 @@ msgstr ""
 #: includes/ajax/class.ajax.php:330
 #: includes/ajax/class.ajax.php:362
 #: includes/ajax/class.ajax.php:385
+#: includes/ajax/class.ajax.php:434
+#: includes/ajax/class.ajax.php:493
 msgid "You do not have the required permissions to access this feature."
 msgstr ""
 
@@ -134,6 +137,24 @@ msgstr ""
 
 #: includes/ajax/class.ajax.php:423
 msgid "Failed to save settings."
+msgstr ""
+
+#: includes/ajax/class.ajax.php:441
+#: includes/ajax/class.ajax.php:500
+msgid "Invalid order ID"
+msgstr ""
+
+#: includes/ajax/class.ajax.php:447
+#: includes/ajax/class.ajax.php:506
+msgid "Order not found"
+msgstr ""
+
+#: includes/ajax/class.ajax.php:473
+msgid "Unknown Product"
+msgstr ""
+
+#: includes/ajax/class.ajax.php:514
+msgid "Invalid updates data format"
 msgstr ""
 
 #. translators: %s - seat ID

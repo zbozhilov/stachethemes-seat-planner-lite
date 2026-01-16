@@ -51,7 +51,7 @@ class Stachethemes_Seat_Planner_Lite {
     public function init(): void {
 
 
-        if (class_exists('Stachethemes\SeatPlanner\Stachethemes_Seat_Planner')) {
+        if (class_exists('StachethemesSeatPlannerLite\Stachethemes_Seat_Planner')) {
 
             add_action('admin_notices', function () {
 ?>

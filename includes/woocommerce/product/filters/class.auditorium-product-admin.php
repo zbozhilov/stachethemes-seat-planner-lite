@@ -40,7 +40,7 @@ class Auditorium_Product_Admin {
 
     public static function add_custom_product_class($classname, $product_type) {
         if ($product_type === 'auditorium') {
-            $classname = 'Stachethemes\\SeatPlannerLite\\Auditorium_Product';
+            $classname = 'StachethemesSeatPlannerLite\\Auditorium_Product';
         }
         return $classname;
     }

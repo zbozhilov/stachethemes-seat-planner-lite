@@ -18,7 +18,7 @@ function stachesepl_add_to_cart_shortcode($atts) {
         return '';
     }
 
-    /** @var \Stachethemes\SeatPlanner\Auditorium_Product $product */
+    /** @var \StachethemesSeatPlannerLite\Auditorium_Product $product */
     $product = wc_get_product($product_id);
 
     // test if it is auditorium product
@@ -34,4 +34,4 @@ function stachesepl_add_to_cart_shortcode($atts) {
     return ob_get_clean();
 }
 
-add_shortcode('stachesepl_add_to_cart', '\Stachethemes\SeatPlannerLite\stachesepl_add_to_cart_shortcode');
+add_shortcode('stachesepl_add_to_cart', '\StachethemesSeatPlannerLite\stachesepl_add_to_cart_shortcode');
