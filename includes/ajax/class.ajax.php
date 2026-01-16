@@ -431,20 +431,20 @@ class Ajax {
 
                         if (!current_user_can('manage_woocommerce')) {
                             wp_send_json_error([
-                                'error' => esc_html__('You do not have the required permissions to access this feature.', 'stachethemes-seat-planner')
+                                'error' => esc_html__('You do not have the required permissions to access this feature.', 'stachethemes-seat-planner-lite')
                             ]);
                         }
 
                         $order_id = filter_input(INPUT_POST, 'order_id', FILTER_VALIDATE_INT);
 
                         if (false === $order_id || $order_id < 1) {
-                            wp_send_json_error(['error' => esc_html__('Invalid order ID', 'stachethemes-seat-planner')]);
+                            wp_send_json_error(['error' => esc_html__('Invalid order ID', 'stachethemes-seat-planner-lite')]);
                         }
 
                         $order = wc_get_order($order_id);
 
                         if (!$order) {
-                            wp_send_json_error(['error' => esc_html__('Order not found', 'stachethemes-seat-planner')]);
+                            wp_send_json_error(['error' => esc_html__('Order not found', 'stachethemes-seat-planner-lite')]);
                         }
 
                         $items = [];
@@ -464,13 +464,13 @@ class Ajax {
                             $product = wc_get_product($product_id);
 
                             if (!$product || $product->get_type() !== 'auditorium') {
-                                wp_send_json_error(['error' => esc_html__('Invalid product ID', 'stachethemes-seat-planner')]);
+                                wp_send_json_error(['error' => esc_html__('Invalid product ID', 'stachethemes-seat-planner-lite')]);
                             }
 
                             $items[] = [
                                 'item_id'       => $item_id,
                                 'product_id'    => $product_id,
-                                'product_name'  => $product ? $product->get_name() : __('Unknown Product', 'stachethemes-seat-planner'),
+                                'product_name'  => $product ? $product->get_name() : __('Unknown Product', 'stachethemes-seat-planner-lite'),
                                 'seat_data'     => $seat_data,
                                 'seat_discount' => $seat_discount ?: null,
                                 'has_dates'     => $product->has_dates(),
@@ -490,20 +490,20 @@ class Ajax {
 
                         if (!current_user_can('manage_woocommerce')) {
                             wp_send_json_error([
-                                'error' => esc_html__('You do not have the required permissions to access this feature.', 'stachethemes-seat-planner')
+                                'error' => esc_html__('You do not have the required permissions to access this feature.', 'stachethemes-seat-planner-lite')
                             ]);
                         }
 
                         $order_id = filter_input(INPUT_POST, 'order_id', FILTER_VALIDATE_INT);
 
                         if (false === $order_id || $order_id < 1) {
-                            wp_send_json_error(['error' => esc_html__('Invalid order ID', 'stachethemes-seat-planner')]);
+                            wp_send_json_error(['error' => esc_html__('Invalid order ID', 'stachethemes-seat-planner-lite')]);
                         }
 
                         $order = wc_get_order($order_id);
 
                         if (!$order) {
-                            wp_send_json_error(['error' => esc_html__('Order not found', 'stachethemes-seat-planner')]);
+                            wp_send_json_error(['error' => esc_html__('Order not found', 'stachethemes-seat-planner-lite')]);
                         }
 
                         // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
@@ -511,7 +511,7 @@ class Ajax {
                         $updates      = json_decode($updates_json, true);
 
                         if (json_last_error() !== JSON_ERROR_NONE || !is_array($updates)) {
-                            wp_send_json_error(['error' => esc_html__('Invalid updates data format', 'stachethemes-seat-planner')]);
+                            wp_send_json_error(['error' => esc_html__('Invalid updates data format', 'stachethemes-seat-planner-lite')]);
                         }
 
                         $order_items   = $order->get_items();
