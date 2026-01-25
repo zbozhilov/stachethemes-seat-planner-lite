@@ -44,6 +44,15 @@ const General = () => {
             <Divider />
 
             <Toggle
+                label={__('SHOW_ADJACENT_MONTHS_IN_DATE_PICKER')}
+                description={__('SHOW_ADJACENT_MONTHS_IN_DATE_PICKER_DESC')}
+                checked={settings.stachesepl_dt_adjacent_months === 'yes'}
+                onChange={(e) => updateSetting('stachesepl_dt_adjacent_months', e.target.checked ? 'yes' : 'no')}
+            />
+
+            <Divider />
+
+            <Toggle
                 label={__('COMPATIBILITY_MODE')}
                 description={__('COMPATIBILITY_MODE_DESC')}
                 checked={settings.stachesepl_compat_mode === 'yes'}

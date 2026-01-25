@@ -21,9 +21,10 @@ const DateTimePicker = (props: {
     selectedDateTime?: string;
     onDateTimeSelected?: (dateTime: string) => void;
     onConfirm?: () => void;
+    showAdjacentMonths?: boolean;
 }) => {
 
-    const { productId, accentColor, selectedDateTime, dummyDates, onDateTimeSelected, onConfirm } = props;
+    const { productId, accentColor, selectedDateTime, dummyDates, onDateTimeSelected, onConfirm, showAdjacentMonths = false } = props;
     const containerRef = useRef<HTMLDivElement>(null);
     const dropdownRef = useRef<HTMLDivElement>(null);
     const selectedDateTimeParts = selectedDateTime?.split('T') || [];
@@ -226,6 +227,7 @@ const DateTimePicker = (props: {
                                 selectedDate={selectedDate}
                                 setSelectedDate={handleSelectedDate}
                                 initialMonthDate={initialMonthDate}
+                                showAdjacentMonths={showAdjacentMonths}
                             />
 
                             <TimePicker

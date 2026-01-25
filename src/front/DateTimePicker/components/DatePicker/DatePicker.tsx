@@ -16,8 +16,9 @@ const DatePicker = (props: {
     selectedDate: string;
     setSelectedDate: (date: string) => void;
     initialMonthDate?: string;
+    showAdjacentMonths?: boolean;
 }) => {
-    const { datesList, selectedDate, setSelectedDate, initialMonthDate } = props;
+    const { datesList, selectedDate, setSelectedDate, initialMonthDate, showAdjacentMonths = false } = props;
 
     const weekStart = useWeekStart();
     const monthNames = useMonthNames();
@@ -36,7 +37,8 @@ const DatePicker = (props: {
         currentMonth,
         prevMonth,
         datesList,
-        weekStart
+        weekStart,
+        showAdjacentMonths
     );
 
     const { touchHandlers } = useSwipe({

@@ -2,6 +2,7 @@ export interface DayInfo {
     day: number;
     dateString: string;
     isAvailable: boolean;
+    isAdjacentMonth?: boolean;
 }
 
 export interface MonthInfo {
@@ -44,16 +45,34 @@ export const generateDays = (
     year: number,
     month: number,
     datesList: string[],
-    weekStart: number
+    weekStart: number,
+    showAdjacentMonths: boolean = false
 ): (DayInfo | null)[] => {
     const daysInMonth = getDaysInMonth(year, month);
     const firstDay = getFirstDayOfMonth(year, month, weekStart);
     const days: (DayInfo | null)[] = [];
     const TOTAL_CELLS = 42; // 6 rows × 7 days
 
-    // Empty cells for days before month starts
-    for (let i = 0; i < firstDay; i++) {
-        days.push(null);
+    // Days before month starts - fill with previous month dates if showAdjacentMonths is enabled
+    if (showAdjacentMonths && firstDay > 0) {
+        const prevMonth = getPrevMonth({ year, month });
+        const prevMonthDays = getDaysInMonth(prevMonth.year, prevMonth.month);
+        // Start from the last day of previous month that fits before the first day
+        const startDay = prevMonthDays - firstDay + 1;
+        for (let day = startDay; day <= prevMonthDays; day++) {
+            const dateString = formatDateString(prevMonth.year, prevMonth.month, day);
+            days.push({
+                day,
+                dateString,
+                isAvailable: datesList.includes(dateString),
+                isAdjacentMonth: true,
+            });
+        }
+    } else {
+        // Empty cells for days before month starts
+        for (let i = 0; i < firstDay; i++) {
+            days.push(null);
+        }
     }
 
     // Days of the month
@@ -63,12 +82,27 @@ export const generateDays = (
             day,
             dateString,
             isAvailable: datesList.includes(dateString),
+            isAdjacentMonth: false,
         });
     }
 
-    // Pad with empty cells to always have 42 cells (6 rows)
-    while (days.length < TOTAL_CELLS) {
-        days.push(null);
+    // Pad with empty cells or next month dates to always have 42 cells (6 rows)
+    const remainingCells = TOTAL_CELLS - days.length;
+    if (showAdjacentMonths && remainingCells > 0) {
+        const nextMonth = getNextMonth({ year, month });
+        for (let day = 1; day <= remainingCells; day++) {
+            const dateString = formatDateString(nextMonth.year, nextMonth.month, day);
+            days.push({
+                day,
+                dateString,
+                isAvailable: datesList.includes(dateString),
+                isAdjacentMonth: true,
+            });
+        }
+    } else {
+        while (days.length < TOTAL_CELLS) {
+            days.push(null);
+        }
     }
 
     return days;

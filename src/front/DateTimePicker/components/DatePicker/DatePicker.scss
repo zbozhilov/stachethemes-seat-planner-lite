@@ -167,6 +167,24 @@
             }
         }
 
+        &--adjacent {
+            opacity: 0.4;
+            color: var(--picker-text, #1a1d21);
+            
+            &.stachesepl-datepicker__day--available {
+                opacity: 0.5;
+                
+                &:hover {
+                    opacity: 0.7;
+                }
+            }
+            
+            &.stachesepl-datepicker__day--selected {
+                opacity: 1;
+                color: #ffffff;
+            }
+        }
+
         &:disabled {
             cursor: not-allowed;
         }

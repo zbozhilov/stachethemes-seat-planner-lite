@@ -11,8 +11,7 @@ export function useSeatOrderModal({ productId, selectedDate }: UseSeatOrderModal
     const [isLoading, setIsLoading] = useState(false);
     const [isOpen, setIsOpen] = useState(false);
     const abortControllerRef = useRef<AbortController | null>(null);
-
-    const canViewSeatOrders = window.seat_planner_add_to_cart?.can_view_seat_orders ?? false;
+    const canViewSeatOrders = 'yes' === (window.seat_planner_add_to_cart?.can_view_seat_orders ?? 'no');
 
     const openModal = async (seatId: string) => {
         if (!canViewSeatOrders || !productId) {

@@ -149,17 +149,18 @@ export const useCalendarDays = (
     currentMonth: MonthInfo,
     prevMonth: MonthInfo | null,
     datesList: string[],
-    weekStart: number
+    weekStart: number,
+    showAdjacentMonths: boolean = false
 ) => {
     const currentDays = useMemo(
-        () => generateDays(currentMonth.year, currentMonth.month, datesList, weekStart),
-        [currentMonth.year, currentMonth.month, datesList, weekStart]
+        () => generateDays(currentMonth.year, currentMonth.month, datesList, weekStart, showAdjacentMonths),
+        [currentMonth.year, currentMonth.month, datesList, weekStart, showAdjacentMonths]
     );
 
     const prevDays = useMemo(() => {
         if (!prevMonth) return null;
-        return generateDays(prevMonth.year, prevMonth.month, datesList, weekStart);
-    }, [prevMonth, datesList, weekStart]);
+        return generateDays(prevMonth.year, prevMonth.month, datesList, weekStart, showAdjacentMonths);
+    }, [prevMonth, datesList, weekStart, showAdjacentMonths]);
 
     return { currentDays, prevDays };
 };

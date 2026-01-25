@@ -308,18 +308,14 @@ $accent-color: #873eff;
         transition: all var(--picker-transition);
         text-align: center;
         line-height: 1;
-        background: var(--picker-btn-primary-bg);
-        color: var(--picker-btn-primary-text);
-
-        @media (max-width: 781px) {
-            padding: 1rem 1.5rem;
-            font-size: 1rem;
-        }
 
         &:focus-visible {
             outline: 2px solid var(--picker-accent);
             outline-offset: 2px;
         }
+
+        background: var(--picker-btn-primary-bg);
+        color: var(--picker-btn-primary-text);
 
         &:hover {
             background: var(--picker-btn-primary-hover);
@@ -334,6 +330,11 @@ $accent-color: #873eff;
                 background: var(--picker-btn-secondary-hover);
                 color: var(--picker-btn-secondary-text-hover);
             }
+        }
+
+        @media (max-width: 781px) {
+            padding: 1rem 1.5rem;
+            font-size: 1rem;
         }
     }
 

@@ -615,6 +615,9 @@ class Translation {
             'COMPATIBILITY_CALC_TOTALS'                     => esc_html__('Enforce WooCommerce Cart Calculation', 'stachethemes-seat-planner-lite'),
             'COMPATIBILITY_CALC_TOTALS_DESC'                => esc_html__('Turn on if your cart total or product prices don\'t update correctly.', 'stachethemes-seat-planner-lite'),
 
+            'SHOW_ADJACENT_MONTHS_IN_DATE_PICKER'          => esc_html__('Show Adjacent Months in Date Picker', 'stachethemes-seat-planner-lite'),
+            'SHOW_ADJACENT_MONTHS_IN_DATE_PICKER_DESC'     => esc_html__('Show adjacent months in the date picker to allow users to select dates from previous and next months.', 'stachethemes-seat-planner-lite'),
+
             // Slot Reservation tab
             'SEAT_RESERVATION_TIME'                          => esc_html__('Seat Reservation Time', 'stachethemes-seat-planner-lite'),
             'SEAT_RESERVATION_TIME_DESC'                     => esc_html__('How long a seat is reserved in the cart during checkout. Minimum: 5 minutes.', 'stachethemes-seat-planner-lite'),

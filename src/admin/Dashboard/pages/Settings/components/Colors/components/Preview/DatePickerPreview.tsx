@@ -35,6 +35,7 @@ const DatePickerPreview = () => {
     return (
         <div>
             <DateTimePicker
+                showAdjacentMonths={settings.stachesepl_dt_adjacent_months === 'yes'}
                 dummyDates={genericDates}
                 productId={1}
                 accentColor={settings.stachesepl_accent_color}

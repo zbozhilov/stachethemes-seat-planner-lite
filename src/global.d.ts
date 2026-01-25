@@ -7,6 +7,13 @@ declare global {
             cart_url: string;
             ajax_url: string;
             nonce: string;
+            cart_redirect_after_add: 'yes' | 'no';
+            cart_redirect_url: string;
+            cart_redirect_message: 'yes' | 'no';
+            cart_redirect_message_text: string;
+            can_view_seat_orders: 'yes' | 'no';
+        };
+        seat_planner_currency: {
             currency: string;
             currency_symbol: string;
             currency_format: string;
@@ -14,12 +21,7 @@ declare global {
             symbol_position: 'left' | 'right' | 'left_space' | 'right_space';
             decimals_separator: string;
             thousand_separator: string;
-            cart_redirect_after_add: 'yes' | 'no';
-            cart_redirect_url: string;
-            cart_redirect_message: 'yes' | 'no';
-            cart_redirect_message_text: string;
-            can_view_seat_orders: boolean;
-        };
+        },
         seat_scanner: {
             ajax_url: string;
             nonce: string;
@@ -44,6 +46,7 @@ declare global {
             date_format: string;
             time_format: string;
             week_start: string;
+            adjacent_months?: 'yes' | 'no' | undefined;
         };
         stachesepl_user_roles: Record<string, string>;
         stachesepl_pdf_preview: {
@@ -74,4 +77,4 @@ declare global {
     }
 }
 
-export {};
+export { };

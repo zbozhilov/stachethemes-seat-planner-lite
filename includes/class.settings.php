@@ -18,6 +18,7 @@ class Settings {
         }
 
         self::$the_settings = [
+            'stachesepl_dt_adjacent_months'             => get_option('stachesepl_dt_adjacent_months', 'no'),
             'stachesepl_enable_in_loop_button'          => get_option('stachesepl_enable_in_loop_button', 'yes'),
             'stachesepl_compat_mode'                    => get_option('stachesepl_compat_mode', 'yes'),
             'stachesepl_compat_calc_totals'             => get_option('stachesepl_compat_calc_totals', 'no'),
@@ -52,6 +53,11 @@ class Settings {
         $current_settings = self::get_settings();
 
         $allowed_settings = [
+
+            'stachesepl_dt_adjacent_months' => [
+                'type'    => 'string',
+                'allowed' => ['yes', 'no'],
+            ],
 
             'stachesepl_enable_in_loop_button' => [
                 'type'    => 'string',

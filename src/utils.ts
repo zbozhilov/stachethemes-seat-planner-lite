@@ -25,7 +25,7 @@ export const getFormattedPrice = (price: number): string => {
         currency_decimals,
         decimals_separator,
         thousand_separator,
-    } = window.seat_planner_add_to_cart;
+    } = window.seat_planner_currency;
 
     // Round the price to the correct number of decimals
     const roundedPrice = Number(price.toFixed(currency_decimals));
@@ -55,7 +55,7 @@ export const getPriceWithSymbol = (price: number): string => {
     const {
         currency_symbol,
         symbol_position
-    } = window.seat_planner_add_to_cart;
+    } = window.seat_planner_currency;
 
     const decodeHtmlEntities = (text: string): string => {
         const doc = new DOMParser().parseFromString(text, "text/html");
@@ -80,13 +80,38 @@ export const getPriceWithSymbol = (price: number): string => {
 
 }
 
-const formatDateWithPhpFormat = (date: Date, format: string): string => {
+export const formatDateWithPhpFormat = (date: Date, format: string): string => {
     const pad = (n: number): string => n.toString().padStart(2, '0');
 
-    const monthsFull = ['January', 'February', 'March', 'April', 'May', 'June',
-        'July', 'August', 'September', 'October', 'November', 'December'];
-    const monthsShort = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
-        'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+    const monthsFull = [
+        __('JANUARY'),
+        __('FEBRUARY'),
+        __('MARCH'),
+        __('APRIL'),
+        __('MAY'),
+        __('JUNE'),
+        __('JULY'),
+        __('AUGUST'),
+        __('SEPTEMBER'),
+        __('OCTOBER'),
+        __('NOVEMBER'),
+        __('DECEMBER')
+    ];
+
+    const monthsShort = [
+        __('JANUARY_SHORT'),
+        __('FEBRUARY_SHORT'),
+        __('MARCH_SHORT'),
+        __('APRIL_SHORT'),
+        __('MAY_SHORT'),
+        __('JUNE_SHORT'),
+        __('JULY_SHORT'),
+        __('AUGUST_SHORT'),
+        __('SEPTEMBER_SHORT'),
+        __('OCTOBER_SHORT'),
+        __('NOVEMBER_SHORT'),
+        __('DECEMBER_SHORT')
+    ];
 
     const hours24 = date.getHours();
     const hours12 = hours24 % 12 || 12;
@@ -144,10 +169,10 @@ export const getFormatteDate = (date: string): string => {
 
 export const getFormattedTime = (time: string): string => {
     const d = new Date(`1970-01-01T${time}`);
+
     if (isNaN(d.getTime())) return time;
     return formatDateWithPhpFormat(d, window.stachesepl_date_format.time_format);
 };
-
 
 export const hexToRgba = (hex: string, alpha: number) => {
     hex = hex.replace('#', '');
@@ -181,3 +206,5 @@ export const isTouchDevice = (): boolean => {
 
 // Useful if someone wants to increase the max rounded value for the Round component
 export const MAX_ROUNDED_VALUE = typeof window.stacheseplMaxRoundedValue === 'number' ? window.stacheseplMaxRoundedValue : 100;
+
+export const generateUniqueId = () => crypto.randomUUID();

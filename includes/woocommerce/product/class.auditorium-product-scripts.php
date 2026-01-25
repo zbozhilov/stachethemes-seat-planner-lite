@@ -245,6 +245,18 @@ class Auditorium_Product_Scripts {
                 'cart_url'                   => esc_url($cart_url),
                 'ajax_url'                   => esc_url(admin_url('admin-ajax.php')),
                 'nonce'                      => wp_create_nonce('stachethemes_seat_planner'),
+                'cart_redirect_after_add'    => esc_html($cart_redirect_after_add),
+                'cart_redirect_url'          => esc_url($cart_redirect_url),
+                'cart_redirect_message'      => Settings::get_setting('stachesepl_cart_redirect_message') === 'yes' ? 'yes' : 'no',
+                'cart_redirect_message_text' => esc_html(Settings::get_setting('stachesepl_cart_redirect_message_text')),
+                'can_view_seat_orders'       => current_user_can('manage_woocommerce') ? 'yes' : 'no'
+            ]
+        );
+
+        wp_localize_script(
+            'seat-planner-add-to-cart',
+            'seat_planner_currency',
+            [
                 'currency'                   => esc_html(get_woocommerce_currency()),
                 'currency_symbol'            => esc_html(get_woocommerce_currency_symbol()),
                 'currency_format'            => esc_html(get_woocommerce_price_format()),
@@ -252,11 +264,6 @@ class Auditorium_Product_Scripts {
                 'symbol_position'            => esc_html(get_option('woocommerce_currency_pos')),
                 'decimals_separator'         => esc_html(wc_get_price_decimal_separator()),
                 'thousand_separator'         => esc_html(wc_get_price_thousand_separator()),
-                'cart_redirect_after_add'    => esc_html($cart_redirect_after_add),
-                'cart_redirect_url'          => esc_url($cart_redirect_url),
-                'cart_redirect_message'      => Settings::get_setting('stachesepl_cart_redirect_message') === 'yes' ? 'yes' : 'no',
-                'cart_redirect_message_text' => esc_html(Settings::get_setting('stachesepl_cart_redirect_message_text')),
-                'can_view_seat_orders'       => current_user_can('manage_woocommerce'),
             ]
         );
 
@@ -264,9 +271,10 @@ class Auditorium_Product_Scripts {
             'seat-planner-add-to-cart',
             'stachesepl_date_format',
             [
-                'date_format'  => get_option('date_format'),
-                'time_format'  => get_option('time_format'),
-                'week_start'   => get_option('start_of_week'),
+                'date_format'   => get_option('date_format'),
+                'time_format'   => get_option('time_format'),
+                'week_start'    => get_option('start_of_week'),
+                'adjacent_months' => Settings::get_setting('stachesepl_dt_adjacent_months'),
             ]
         );
 

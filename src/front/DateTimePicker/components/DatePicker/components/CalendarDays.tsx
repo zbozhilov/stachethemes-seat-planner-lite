@@ -4,6 +4,7 @@ interface DayInfo {
     day: number;
     dateString: string;
     isAvailable: boolean;
+    isAdjacentMonth?: boolean;
 }
 
 interface CalendarDaysProps {
@@ -56,7 +57,7 @@ const CalendarDays = ({
                     );
                 }
 
-                const { day, dateString, isAvailable } = dayInfo;
+                const { day, dateString, isAvailable, isAdjacentMonth } = dayInfo;
                 const isSelected = selectedDate === dateString;
 
                 return (
@@ -66,6 +67,7 @@ const CalendarDays = ({
                         dateString={dateString}
                         isAvailable={isAvailable}
                         isSelected={isSelected}
+                        isAdjacentMonth={isAdjacentMonth || false}
                         onClick={onDateClick}
                     />
                 );
