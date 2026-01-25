@@ -388,7 +388,6 @@ export const useUpdateSeatOverride = () => {
     return { updateOverride, loading, error };
 }
 
-
 export type SeatOrderDetails = {
     order_id: number;
     item_id: number;

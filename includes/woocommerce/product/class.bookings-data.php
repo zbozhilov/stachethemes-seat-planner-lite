@@ -11,7 +11,7 @@ class Bookings_Data {
         $product = wc_get_product($product_id);
 
         if (! $product || ! $product->is_type('auditorium')) {
-            throw new \Exception(esc_html__('Invalid product ID or product is not an auditorium type.', 'stachethemes-seat-planner-lite'));
+            throw new \Exception(esc_html__('Invalid product ID or product is not an auditorium type.', 'stachethemes-seat-planner'));
         }
 
         $this->product = $product;
@@ -21,7 +21,7 @@ class Bookings_Data {
         $items = [];
         $order_items = $order->get_items();
 
-        foreach ($order_items as $item) {
+        foreach ($order_items as $item_id => $item) {
 
             $product_id = $item->get_product_id();
 
@@ -37,7 +37,7 @@ class Bookings_Data {
             }
 
             $seat_id       = isset($seat_data['seatId']) ? $seat_data['seatId'] : '';
-            $selected_date = isset($seat_data['selectedDate']) ? $seat_data['selectedDate'] : '';
+            $selected_date = '';
             $custom_fields = isset($seat_data['customFields']) ? $seat_data['customFields'] : [];
 
             if (is_object($custom_fields)) {
@@ -52,11 +52,13 @@ class Bookings_Data {
             }
 
             $items[] = [
-                'order_id'   => $order->get_id(),
-                'product_id' => $product_id,
-                'seat_id'    => $seat_id,
-                'price'      => $item->get_total(),
-                'date_time'  => $selected_date,
+                'item_id'       => $item_id,
+                'order_id'      => $order->get_id(),
+                'product_id'    => $product_id,
+                'seat_id'       => $seat_id,
+                'seat_data'     => $seat_data,
+                'price'         => $item->get_total(),
+                'date_time'     => $selected_date,
                 'custom_fields' => $custom_fields,
             ];
         }
@@ -99,7 +101,7 @@ class Bookings_Data {
 
         return $orders_with_this_product_id;
     }
-    
+
     public function get_orders_with_seat($seat_id, $selected_date = '') {
 
         $orders = $this->get_orders();
@@ -144,17 +146,22 @@ class Bookings_Data {
         $order_items = self::get_order_items($order, $this->product->get_id());
         $seat_price = 0;
         $date_time = '';
+        $item_id = 0;
+        $seat_data = [];
 
         foreach ($order_items as $item) {
             if ($item['seat_id'] === $seat_id) {
                 $seat_price = $item['price'];
                 $date_time = $item['date_time'];
+                $item_id = $item['item_id'];
+                $seat_data = $item['seat_data'];
                 break;
             }
         }
 
         return [
             'order_id'       => $order->get_id(),
+            'item_id'        => $item_id,
             'order_edit_url' => admin_url('post.php?post=' . $order->get_id() . '&action=edit'),
             'order_date'     => $order->get_date_created() ? $order->get_date_created()->date_i18n('Y-m-d H:i:s') : '',
             'order_status'   => $order->get_status() ? wc_get_order_status_name($order->get_status()) : '',
@@ -164,6 +171,9 @@ class Bookings_Data {
             'seat_id'        => $seat_id,
             'seat_price'     => $seat_price,
             'date_time'      => $date_time,
+            'seat_data'      => $seat_data,
+            'has_dates'      => $this->product->has_dates(),
         ];
     }
+
 }

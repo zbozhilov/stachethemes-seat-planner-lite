@@ -155,7 +155,6 @@ const EditOrderItem = () => {
             if (!seatId) {
                 return __('EDIT_ORDER_EMPTY_SEAT_ID')
             }
-
         }
         return null
     }
