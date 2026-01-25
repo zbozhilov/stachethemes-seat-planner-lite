@@ -33,6 +33,9 @@ class Ajax {
             'save_dashboard_settings',
             'get_order_auditorium_items',
             'update_order_item_meta',
+            'get_auditorium_products',
+            'get_auditorium_product',
+            'update_manager_seat_override',
         ];
 
         if (empty($task) || !in_array($task, $allowed_tasks, true)) {
@@ -45,55 +48,23 @@ class Ajax {
 
                 case 'get_seat_plan_data': {
 
+                    try {
+
                         $product_id    = filter_input(INPUT_POST, 'product_id', FILTER_VALIDATE_INT);
+                        $result        = Seat_Plan_Data::get_seat_plan_data($product_id);
 
-                        if (false === $product_id || $product_id < 1) {
-                            wp_send_json_error(['error' => esc_html__('Invalid product ID', 'stachethemes-seat-planner-lite')]);
+                        if (!$result['success']) {
+                            wp_send_json_error(['error' => $result['error']]);
                         }
 
-                        /** @var Auditorium_Product $auditorium_product */
-                        $auditorium_product = wc_get_product($product_id);
+                        wp_send_json_success($result['data']);
+                    } catch (\Throwable $th) {
 
-                        if (!$auditorium_product || $auditorium_product->get_type() !== 'auditorium') {
-                            wp_send_json_error(['error' => esc_html__('Product not found', 'stachethemes-seat-planner-lite')]);
-                        }
-
-                        if (!$auditorium_product->get_id()) {
-                            wp_send_json_error(['error' => esc_html__('Product not found', 'stachethemes-seat-planner-lite')]);
-                        }
-
-                        $seat_plan_data = $auditorium_product->get_seat_plan_data('object');
-
-                        if (!is_object($seat_plan_data) || !isset($seat_plan_data->objects)) {
-                            wp_send_json_error(['error' => esc_html__('Failed to retrieve seat plan data', 'stachethemes-seat-planner-lite')]);
-                        }
-
-                        $taken_seats_args = [];
-
-                        $taken_seats = $auditorium_product->get_taken_seats($taken_seats_args);
-
-                        if (!is_array($taken_seats)) {
-                            wp_send_json_error(['error' => esc_html__('Failed to retrieve taken seats', 'stachethemes-seat-planner-lite')]);
-                        }
-
-                        $seat_plan_data->objects = array_map(function ($object) use ($taken_seats) {
-                            if ($object->type !== 'seat') {
-                                return $object;
-                            }
-                            $object->taken = isset($object->seatId) ? in_array($object->seatId, $taken_seats) : false;
-                            return $object;
-                        }, $seat_plan_data->objects);
-
-                        $discounts_data = $auditorium_product->get_discounts_data();
-
-                        if (is_array($discounts_data) && !empty($discounts_data)) {
-                            $seat_plan_data->discounts = $discounts_data;
-                        }
-
-                        wp_send_json_success($seat_plan_data);
-
-                        break;
+                        wp_send_json_error(['error' => $th->getMessage()]);
                     }
+
+                    break;
+                }
 
                 /**
                  * AJAX task: add_seats_to_cart
@@ -427,7 +398,7 @@ class Ajax {
                         break;
                     }
 
-                    case 'get_order_auditorium_items': {
+                case 'get_order_auditorium_items': {
 
                         if (!current_user_can('manage_woocommerce')) {
                             wp_send_json_error([
@@ -627,8 +598,59 @@ class Ajax {
                         break;
                     }
 
+                case 'get_auditorium_products': {
+
+                        if (!current_user_can('manage_woocommerce')) {
+                            wp_send_json_error([
+                                'error' => esc_html__('You do not have the required permissions to access this feature.', 'stachethemes-seat-planner')
+                            ]);
+                        }
+
+                        $search   = isset($_POST['search']) ? sanitize_text_field(wp_unslash($_POST['search'])) : '';
+                        $page     = isset($_POST['page']) ? absint($_POST['page']) : 1;
+                        $per_page = isset($_POST['per_page']) ? absint($_POST['per_page']) : 10;
+
+                        $result = Manager_Service::get_auditorium_products($search, (int) $page, (int) $per_page);
+
+                        if (!$result['success']) {
+                            wp_send_json_error(['error' => $result['error']]);
+                        }
+
+                        wp_send_json_success($result['data']);
+
+                        break;
+                    }
+
+                case 'update_manager_seat_override': {
+
+                        if (!current_user_can('manage_woocommerce')) {
+                            wp_send_json_error([
+                                'error' => esc_html__('You do not have the required permissions to access this feature.', 'stachethemes-seat-planner')
+                            ]);
+                        }
+
+                        $product_id    = filter_input(INPUT_POST, 'product_id', FILTER_VALIDATE_INT);
+                        $seat_id       = isset($_POST['seat_id']) ? sanitize_text_field(wp_unslash($_POST['seat_id'])) : '';
+                        $selected_date = isset($_POST['selected_date']) ? sanitize_text_field(wp_unslash($_POST['selected_date'])) : '';
+                        $status        = isset($_POST['status']) ? sanitize_text_field(wp_unslash($_POST['status'])) : '';
+
+                        $result = Manager_Service::update_manager_seat_override(
+                            (int) $product_id,
+                            $seat_id,
+                            $selected_date,
+                            $status
+                        );
+
+                        if (!$result['success']) {
+                            wp_send_json_error(['error' => $result['error']]);
+                        }
+
+                        wp_send_json_success($result['data']);
+
+                        break;
+                    }
                 default: {
-                        throw new \Exception(esc_html__('No action specified', 'stachethemes-seat-planner-lite'));
+                        throw new \Exception(esc_html__('No action specified', 'stachethemes-seat-planner'));
                     }
             }
         } catch (\Exception $e) {

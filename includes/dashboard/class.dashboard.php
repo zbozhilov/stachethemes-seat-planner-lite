@@ -2,6 +2,7 @@
 
 namespace StachethemesSeatPlannerLite;
 
+
 if (! defined('ABSPATH')) {
     exit;
 }
@@ -28,8 +29,8 @@ class Dashboard {
     public static function register_menu() {
 
         add_menu_page(
-            esc_html__('Seat Planner', 'stachethemes-seat-planner-lite'),
-            esc_html__('Seat Planner', 'stachethemes-seat-planner-lite'),
+            esc_html__('Seat Planner', 'stachethemes-seat-planner'),
+            esc_html__('Seat Planner', 'stachethemes-seat-planner'),
             'manage_options',
             'stachesepl',
             [__CLASS__, 'render_menu'],
@@ -39,32 +40,40 @@ class Dashboard {
 
         add_submenu_page(
             'stachesepl',
-            esc_html__('Overview', 'stachethemes-seat-planner-lite'),
-            esc_html__('Overview', 'stachethemes-seat-planner-lite'),
+            esc_html__('Overview', 'stachethemes-seat-planner'),
+            esc_html__('Overview', 'stachethemes-seat-planner'),
             'manage_options',
             admin_url('admin.php?page=stachesepl#overview'),
         );
 
         add_submenu_page(
             'stachesepl',
-            esc_html__('Settings', 'stachethemes-seat-planner-lite'),
-            esc_html__('Settings', 'stachethemes-seat-planner-lite'),
+            esc_html__('Settings', 'stachethemes-seat-planner'),
+            esc_html__('Settings', 'stachethemes-seat-planner'),
             'manage_options',
             admin_url('admin.php?page=stachesepl#settings'),
         );
 
         add_submenu_page(
             'stachesepl',
-            esc_html__('Scanner', 'stachethemes-seat-planner-lite'),
-            esc_html__('Scanner', 'stachethemes-seat-planner-lite'),
+            esc_html__('Scanner', 'stachethemes-seat-planner'),
+            esc_html__('Scanner', 'stachethemes-seat-planner'),
             'manage_options',
             admin_url('admin.php?page=stachesepl#scanner'),
         );
 
         add_submenu_page(
             'stachesepl',
-            esc_html__('Tools', 'stachethemes-seat-planner-lite'),
-            esc_html__('Tools', 'stachethemes-seat-planner-lite'),
+            esc_html__('Manager', 'stachethemes-seat-planner'),
+            esc_html__('Manager', 'stachethemes-seat-planner'),
+            'manage_options',
+            admin_url('admin.php?page=stachesepl#manager'),
+        );
+
+        add_submenu_page(
+            'stachesepl',
+            esc_html__('Tools', 'stachethemes-seat-planner'),
+            esc_html__('Tools', 'stachethemes-seat-planner'),
             'manage_options',
             admin_url('admin.php?page=stachesepl#tools'),
         );
@@ -161,7 +170,7 @@ class Dashboard {
             'stachesepl-dashboard',
             'stacheseplCartTimer',
             [
-                'label' => esc_html__('Time remaining', 'stachethemes-seat-planner-lite'),
+                'label' => esc_html__('Time remaining', 'stachethemes-seat-planner'),
             ]
         );
 
@@ -169,9 +178,9 @@ class Dashboard {
             'stachesepl-dashboard',
             'stachesepl_date_format',
             [
-                'date_format' => get_option('date_format'),
-                'time_format' => get_option('time_format'),
-                'week_start'  => get_option('start_of_week'),
+                'date_format'     => get_option('date_format'),
+                'time_format'     => get_option('time_format'),
+                'week_start'      => get_option('start_of_week')
             ]
         );
 
@@ -180,6 +189,21 @@ class Dashboard {
             'stachesepl_version',
             [
                 'version' => STACHETHEMES_SEAT_PLANNER_LITE_VERSION
+            ]
+        );
+
+        // Localize the currency data for the dashboard price formatting ( getFormattedPrice(...) ) 
+        wp_localize_script(
+            'stachesepl-dashboard',
+            'seat_planner_currency',
+            [
+                'currency'                   => esc_html(get_woocommerce_currency()),
+                'currency_symbol'            => esc_html(get_woocommerce_currency_symbol()),
+                'currency_format'            => esc_html(get_woocommerce_price_format()),
+                'currency_decimals'          => absint(wc_get_price_decimals()),
+                'symbol_position'            => esc_html(get_option('woocommerce_currency_pos')),
+                'decimals_separator'         => esc_html(wc_get_price_decimal_separator()),
+                'thousand_separator'         => esc_html(wc_get_price_thousand_separator()),
             ]
         );
     }

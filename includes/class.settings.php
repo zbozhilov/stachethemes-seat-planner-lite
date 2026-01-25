@@ -22,11 +22,14 @@ class Settings {
             'stachesepl_enable_in_loop_button'          => get_option('stachesepl_enable_in_loop_button', 'yes'),
             'stachesepl_compat_mode'                    => get_option('stachesepl_compat_mode', 'yes'),
             'stachesepl_compat_calc_totals'             => get_option('stachesepl_compat_calc_totals', 'no'),
+            
             'stachesepl_reserve_time'                   => (int) get_option('stachesepl_reserve_time', 15),
             'stachesepl_cart_redirect'                  => get_option('stachesepl_cart_redirect', 'checkout'),
             'stachesepl_cart_redirect_message'          => get_option('stachesepl_cart_redirect_message', 'yes'),
             'stachesepl_cart_redirect_message_text'     => get_option('stachesepl_cart_redirect_message_text', ''),
             'stachesepl_cart_timer_enabled'             => get_option('stachesepl_cart_timer_enabled', 'yes'),
+
+            'stachesepl_qr_code_enabled'                => get_option('stachesepl_qr_code_enabled', 'yes'),
 
             // accent color
             'stachesepl_accent_color'                   => get_option('stachesepl_accent_color', '#7F54B3'),
@@ -89,6 +92,10 @@ class Settings {
             ],
             'stachesepl_cart_redirect_message_text' => [
                 'type'    => 'string',
+            ],
+            'stachesepl_qr_code_enabled' => [
+                'type'    => 'string',
+                'allowed' => ['yes', 'no'],
             ],
             'stachesepl_cart_timer_enabled' => [
                 'type'    => 'string',

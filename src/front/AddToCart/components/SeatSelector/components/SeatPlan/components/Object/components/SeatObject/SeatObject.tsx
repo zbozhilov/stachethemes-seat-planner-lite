@@ -39,7 +39,16 @@ const SeatObject = ({
     const { isTaken, isUnavailable, onSiteOnly, isSelected } = seatStatus;
 
     const handleClick = useCallback(() => {
-        if (!isSeat || isUnavailable) {
+
+        if (!isSeat) {
+            return;
+        }
+
+        if (isTaken && canViewSeatOrders) {
+            handleSeatTakenCheck(seatData.seatId);
+        }
+
+        if (isUnavailable || isTaken) {
             return;
         }
 
@@ -52,11 +61,7 @@ const SeatObject = ({
             return;
         }
 
-        if (isTaken && canViewSeatOrders) {
-            handleSeatTakenCheck(seatData.seatId);
-        } else if (!isTaken) {
-            handleSeatSelectToggle(seatData.seatId);
-        }
+        handleSeatSelectToggle(seatData.seatId);
     }, [
         isSeat,
         isUnavailable,

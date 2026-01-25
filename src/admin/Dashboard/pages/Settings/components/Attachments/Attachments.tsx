@@ -11,9 +11,19 @@ const Attachments = () => {
 
     return (
         <Container>
-            <Toggle 
-                label={__('ENABLE_PDF_ATTACHMENTS')} 
-                description={__('ENABLE_PDF_ATTACHMENTS_DESC')} 
+
+            <Toggle
+                label={__('ENABLE_QR_CODE')}
+                description={__('ENABLE_QR_CODE_DESC')}
+                checked={settings.stachesepl_qr_code_enabled === 'yes'}
+                onChange={(e) => updateSetting('stachesepl_qr_code_enabled', e.target.checked ? 'yes' : 'no')}
+            />
+
+            <Divider />
+            
+            <Toggle
+                label={__('ENABLE_PDF_ATTACHMENTS')}
+                description={__('ENABLE_PDF_ATTACHMENTS_DESC')}
                 checked={false}
                 onChange={() => {
                     toast.error(__('PDF_ATTACHMENTS_NOT_SUPPORTED'))

@@ -105,6 +105,10 @@ class Auditorium_Product_Order_Itemmeta {
             return;
         }
 
+        if ( Settings::get_setting('stachesepl_qr_code_enabled') !== 'yes' || !isset($seat_data->qr_code) || !$seat_data->qr_code) {
+            return;
+        }
+
         if (!isset($seat_data->qr_code) || !$seat_data->qr_code) {
             return;
         }

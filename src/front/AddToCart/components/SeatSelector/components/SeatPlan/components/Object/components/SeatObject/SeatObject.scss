@@ -5,6 +5,10 @@
 
         &.clickable {
             cursor: pointer;
+
+            &:hover {
+                filter: brightness(1.2);
+            }
         }
 
         &.disabled {
@@ -22,11 +26,6 @@
             background-color: var(--stachesepl-object-seat-selected-bg-color, #f9a852) !important;
         }
 
-        &:hover {
-            &:not(.disabled):not(.taken):not(.selected) {
-                filter: brightness(1.2);
-            }
-        }
     }
 
 }

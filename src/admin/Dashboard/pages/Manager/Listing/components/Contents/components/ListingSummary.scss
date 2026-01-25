@@ -1,0 +1,19 @@
+.stachesepl-manager-listing-summary {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-bottom: var(--stachesepl-space-4);
+    border-bottom: 1px solid var(--stachesepl-border-light);
+
+    &-count {
+        font-size: var(--stachesepl-text-sm);
+        font-weight: 600;
+        color: var(--stachesepl-text-primary);
+    }
+
+    &-page {
+        font-size: var(--stachesepl-text-sm);
+        color: var(--stachesepl-text-muted);
+    }
+}
+

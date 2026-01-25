@@ -8,15 +8,8 @@ if (! defined('ABSPATH')) {
 
 class Translation {
 
-    private static function datepicker_strings() {
+    private static function month_strings() {
         return [
-            'FAILED_TO_FETCH_AVAILABLE_DATES'             => esc_html__('Failed to fetch available dates.', 'stachethemes-seat-planner-lite'),
-            'DATEPICKER_NOT_SEATS_AVAILABLE_TITLE'        => esc_html__('No dates found', 'stachethemes-seat-planner-lite'),
-            'DATEPICKER_NOT_SEATS_AVAILABLE_DESCRIPTION'  => esc_html__('Sorry, there are no available dates at the moment.', 'stachethemes-seat-planner-lite'),
-            'SELECT_DATE_AND_TIME'                        => esc_html__('Select Date & Time', 'stachethemes-seat-planner-lite'),
-            'PREVIOUS_MONTH'                              => esc_html__('Previous Month', 'stachethemes-seat-planner-lite'),
-            'NEXT_MONTH'                                  => esc_html__('Next Month', 'stachethemes-seat-planner-lite'),
-            'SELECT_DATE'                                 => esc_html__('Select Date', 'stachethemes-seat-planner-lite'),
             'JANUARY'                                     => esc_html__('January', 'stachethemes-seat-planner-lite'),
             'FEBRUARY'                                    => esc_html__('February', 'stachethemes-seat-planner-lite'),
             'MARCH'                                       => esc_html__('March', 'stachethemes-seat-planner-lite'),
@@ -29,6 +22,32 @@ class Translation {
             'OCTOBER'                                     => esc_html__('October', 'stachethemes-seat-planner-lite'),
             'NOVEMBER'                                    => esc_html__('November', 'stachethemes-seat-planner-lite'),
             'DECEMBER'                                    => esc_html__('December', 'stachethemes-seat-planner-lite'),
+          
+            'JANUARY_SHORT'                               => esc_html_x('Jan','Month label short', 'stachethemes-seat-planner-lite'),
+            'FEBRUARY_SHORT'                              => esc_html_x('Feb','Month label short', 'stachethemes-seat-planner-lite'),
+            'MARCH_SHORT'                                 => esc_html_x('Mar','Month label short', 'stachethemes-seat-planner-lite'),
+            'APRIL_SHORT'                                 => esc_html_x('Apr','Month label short', 'stachethemes-seat-planner-lite'),
+            'MAY_SHORT'                                   => esc_html_x('May','Month label short', 'stachethemes-seat-planner-lite'),
+            'JUNE_SHORT'                                  => esc_html_x('Jun','Month label short', 'stachethemes-seat-planner-lite'),
+            'JULY_SHORT'                                  => esc_html_x('Jul','Month label short', 'stachethemes-seat-planner-lite'),
+            'AUGUST_SHORT'                                => esc_html_x('Aug','Month label short', 'stachethemes-seat-planner-lite'),
+            'SEPTEMBER_SHORT'                             => esc_html_x('Sep','Month label short', 'stachethemes-seat-planner-lite'),
+            'OCTOBER_SHORT'                               => esc_html_x('Oct','Month label short', 'stachethemes-seat-planner-lite'),
+            'NOVEMBER_SHORT'                              => esc_html_x('Nov','Month label short', 'stachethemes-seat-planner-lite'),
+            'DECEMBER_SHORT'                              => esc_html_x('Dec','Month label short', 'stachethemes-seat-planner-lite'),
+          
+        ];
+    }
+
+    private static function datepicker_strings() {
+        return [
+            'FAILED_TO_FETCH_AVAILABLE_DATES'             => esc_html__('Failed to fetch available dates.', 'stachethemes-seat-planner-lite'),
+            'DATEPICKER_NOT_SEATS_AVAILABLE_TITLE'        => esc_html__('No dates found', 'stachethemes-seat-planner-lite'),
+            'DATEPICKER_NOT_SEATS_AVAILABLE_DESCRIPTION'  => esc_html__('Sorry, there are no available dates at the moment.', 'stachethemes-seat-planner-lite'),
+            'SELECT_DATE_AND_TIME'                        => esc_html__('Select Date & Time', 'stachethemes-seat-planner-lite'),
+            'PREVIOUS_MONTH'                              => esc_html__('Previous Month', 'stachethemes-seat-planner-lite'),
+            'NEXT_MONTH'                                  => esc_html__('Next Month', 'stachethemes-seat-planner-lite'),
+            'SELECT_DATE'                                 => esc_html__('Select Date', 'stachethemes-seat-planner-lite'),
             'SUNDAY_SHORT'                                => esc_html_x('Su', 'Day of the week', 'stachethemes-seat-planner-lite'),
             'MONDAY_SHORT'                                => esc_html_x('Mo', 'Day of the week', 'stachethemes-seat-planner-lite'),
             'TUESDAY_SHORT'                               => esc_html_x('Tu', 'Day of the week', 'stachethemes-seat-planner-lite'),
@@ -39,6 +58,7 @@ class Translation {
             'AVAILABLE_TIMES'                             => esc_html__('Available Times', 'stachethemes-seat-planner-lite'),
             'CHECKING_AVAILABILITY'                       => esc_html__('Checking Availability', 'stachethemes-seat-planner-lite'),
             'PLEASE_SELECT_A_DATE_TO_SEE_AVAILABLE_TIMES' => esc_html__('Select a date to see available times', 'stachethemes-seat-planner-lite'),
+            ...self::month_strings(),
         ];
     }
 
@@ -136,6 +156,107 @@ class Translation {
             'FIXED'                          => esc_html__('Fixed', 'stachethemes-seat-planner-lite'),
             'FIX_FAILED'                     => esc_html__('Fix failed', 'stachethemes-seat-planner-lite'),
             'NO_DATE'                        => esc_html__('No specific date', 'stachethemes-seat-planner-lite'),
+        ];
+    }
+
+      // Manager related strings
+      public static function manager_strings() {
+        return [
+            // Manager - Edit Seat
+            'BULK_UPDATE_NOT_SUPPORTED_IN_LITE_VERSION' => esc_html__('Bulk update is not supported in the Lite version.', 'stachethemes-seat-planner-lite'),
+            'PRODUCT_ID_IS_REQUIRED'         => esc_html__('Product ID is required.', 'stachethemes-seat-planner-lite'),
+            'SELECT_ALL'                     => esc_html__('Select All', 'stachethemes-seat-planner-lite'),
+            'DESELECT_ALL'                   => esc_html__('Deselect All', 'stachethemes-seat-planner-lite'),
+            'MANAGER_PRODUCTS'               => esc_html__('Products', 'stachethemes-seat-planner-lite'),
+            'MANAGER_EDIT_SEAT_TITLE'        => esc_html__('Edit Seat', 'stachethemes-seat-planner-lite'),
+            'MANAGER_EDIT_SEAT_DESCRIPTION'  => esc_html__('Override seat status and manage order details', 'stachethemes-seat-planner-lite'),
+            'SEAT_ORDERED'                   => esc_html__('Seat Ordered', 'stachethemes-seat-planner-lite'),
+            'SEAT_STATUS_OVERRIDE'           => esc_html__('Status Override', 'stachethemes-seat-planner-lite'),
+            'SEAT_STATUS_OVERRIDE_DESC'      => esc_html__('Override the default status for this seat. This will take precedence over the product-level settings.', 'stachethemes-seat-planner-lite'),
+            'SEAT_OVERRIDE_SAVED'            => esc_html__('Seat status override saved successfully.', 'stachethemes-seat-planner-lite'),
+            'FAILED_TO_UPDATE_SEAT_OVERRIDE' => esc_html__('Failed to update seat status override.', 'stachethemes-seat-planner-lite'),
+            'FAILED_TO_FETCH_SEAT_DATA'      => esc_html__('Failed to fetch seat data.', 'stachethemes-seat-planner-lite'),
+            'ORDER_DETAILS'                  => esc_html__('Order Details', 'stachethemes-seat-planner-lite'),
+            'ORDER_DETAILS_DESC'             => esc_html__('This seat is linked to an existing order. You can edit the seat assignment below.', 'stachethemes-seat-planner-lite'),
+            'CUSTOMER'                       => esc_html__('Customer', 'stachethemes-seat-planner-lite'),
+            'NEW_SEAT_ID'                    => esc_html__('New Seat ID', 'stachethemes-seat-planner-lite'),
+            'NEW_DATE'                       => esc_html__('New Date', 'stachethemes-seat-planner-lite'),
+            'UPDATE_ORDER'                   => esc_html__('Update Order', 'stachethemes-seat-planner-lite'),
+            'ORDER_UPDATED'                  => esc_html__('Order updated successfully.', 'stachethemes-seat-planner-lite'),
+            'FAILED_TO_FETCH_ORDER_DETAILS'  => esc_html__('Failed to fetch order details.', 'stachethemes-seat-planner-lite'),
+            'FAILED_TO_UPDATE_ORDER_ITEM'    => esc_html__('Failed to update order item.', 'stachethemes-seat-planner-lite'),
+            'FAILED_TO_FETCH_PRODUCTS'       => esc_html__('Failed to fetch products.', 'stachethemes-seat-planner-lite'),
+            'FAILED_TO_FETCH_SEAT_AVAILABILITY' => esc_html__('Failed to fetch seat availability.', 'stachethemes-seat-planner-lite'),
+            'FAILED_TO_FETCH_DATES'          => esc_html__('Failed to fetch dates.', 'stachethemes-seat-planner-lite'),
+            'SAVE_CHANGES'                   => esc_html__('Save Changes', 'stachethemes-seat-planner-lite'),
+            'CANCEL'                         => esc_html__('Cancel', 'stachethemes-seat-planner-lite'),
+            'MANAGER_LISTING_TITLE'          => esc_html__('Manage Products', 'stachethemes-seat-planner-lite'),
+            'MANAGER_LISTING_DESCRIPTION'    => esc_html__('Manage the availability of your auditorium products.', 'stachethemes-seat-planner-lite'),
+            // translators: %d - number of products (singular)
+            'PRODUCT_COUNT_SINGULAR'         => esc_html__('%d Auditorium Product Found', 'stachethemes-seat-planner-lite'),
+            // translators: %d - number of products (plural)
+            'PRODUCT_COUNT_PLURAL'           => esc_html__('%d Auditorium Products Found', 'stachethemes-seat-planner-lite'),
+            'DATED_EVENT'                    => esc_html__('Dated Event', 'stachethemes-seat-planner-lite'),
+            'STANDARD'                       => esc_html__('Standard', 'stachethemes-seat-planner-lite'),
+            'VIEW_DATES'                     => esc_html__('View Dates', 'stachethemes-seat-planner-lite'),
+            'CHECK_AVAILABILITY'             => esc_html__('Check Availability', 'stachethemes-seat-planner-lite'),
+            'EDIT_PRODUCT'                   => esc_html__('Edit Product', 'stachethemes-seat-planner-lite'),
+            'VIEW_PRODUCT'                   => esc_html__('View Product', 'stachethemes-seat-planner-lite'),
+            // translators: %d - number of time slots (singular)
+            'TIME_SLOT_SINGULAR'             => esc_html__('%d Time Slot', 'stachethemes-seat-planner-lite'),
+            // translators: %d - number of time slots (plural)
+            'TIME_SLOTS_PLURAL'                => esc_html__('%d Time Slots', 'stachethemes-seat-planner-lite'),
+            'TOTAL_SEATS'                      => esc_html__('Total Seats', 'stachethemes-seat-planner-lite'),
+            'STATUS_AVAILABLE'                 => esc_html__('Available', 'stachethemes-seat-planner-lite'),
+            'STATUS_UNAVAILABLE'               => esc_html__('Unavailable', 'stachethemes-seat-planner-lite'),
+            'STATUS_SOLD_OUT'                  => esc_html__('Sold Out', 'stachethemes-seat-planner-lite'),
+            'STATUS_ON_SITE'                   => esc_html__('On Site', 'stachethemes-seat-planner-lite'),
+            'SEARCH_SEATS'                     => esc_html__('Search Seats', 'stachethemes-seat-planner-lite'),
+            'MANAGER_AVAILABILITY_TITLE'       => esc_html__('Seat Availability', 'stachethemes-seat-planner-lite'),
+            'MANAGER_AVAILABILITY_DESCRIPTION' => esc_html__('View and manage the availability of your seats.', 'stachethemes-seat-planner-lite'),
+            // translators: %s - date and time
+            'MANAGER_AVAILABILITY_DESCRIPTION_FOR_DATE' => esc_html__('View and manage the availability of your seats for %s.', 'stachethemes-seat-planner-lite'),
+            'STATUS'                           => esc_html__('Status', 'stachethemes-seat-planner-lite'),
+            'MANAGER_DATES_TITLE'              => esc_html__('Dates and Times', 'stachethemes-seat-planner-lite'),
+            'MANAGER_DATES_DESCRIPTION'        => esc_html__('Manage product dates and time slots.', 'stachethemes-seat-planner-lite'),
+            'SEARCH_PRODUCTS'                  => esc_html__('Search Products', 'stachethemes-seat-planner-lite'),
+            'MANAGER_LOADING'                  => esc_html__('Just a moment', 'stachethemes-seat-planner-lite'),
+            // translators: %d - number of seats (singular)
+            'SEAT_SINGULAR'                     => esc_html__('%d Seat', 'stachethemes-seat-planner-lite'),
+            // translators: %d - number of seats (plural)
+            'SEATS_PLURAL'                             => esc_html__('%d Seats', 'stachethemes-seat-planner-lite'),
+            'NO_PRODUCTS_MATCH_SEARCH'                 => esc_html__('No products match your search.', 'stachethemes-seat-planner-lite'),
+            'TRY_DIFFERENT_SEARCH_TERM'                => esc_html__('Try different search term.', 'stachethemes-seat-planner-lite'),
+            'CREATE_AUDITORIUM_PRODUCT_TO_GET_STARTED' => esc_html__('Create an auditorium product to get started.', 'stachethemes-seat-planner-lite'),
+            'PAGE'                                     => esc_html__('Page', 'stachethemes-seat-planner-lite'),      
+            'NO_SEATS_MATCH_FILTER'                    => esc_html__('No seats match your filter.', 'stachethemes-seat-planner-lite'),
+            'PRICE'                                    => esc_html__('Price', 'stachethemes-seat-planner-lite'),
+            'ORDER_DATE'                               => esc_html__('Order Date', 'stachethemes-seat-planner-lite'),
+            'NO_DATES_FOUND'                           => esc_html__('No dates found.', 'stachethemes-seat-planner-lite'),
+            'NO_DATES_CONFIGURED_FOR_PRODUCT'          => esc_html__('No dates configured for this product.', 'stachethemes-seat-planner-lite'),
+            'AVAILABLE_TIME_SLOTS'                     => esc_html__('Available Time Slots', 'stachethemes-seat-planner-lite'),
+            // translators: %s - time
+            'VIEW_AVAILABILITY_FOR__S'                 => esc_html__('View availability for %s', 'stachethemes-seat-planner-lite'),
+            'NEXT_MONTH'                                => esc_html__('Next Month', 'stachethemes-seat-planner-lite'),
+            'PREVIOUS_MONTH'                            => esc_html__('Previous Month', 'stachethemes-seat-planner-lite'),
+
+            // Bulk Seat Availability
+            'BULK_UPDATE_STATUS'                        => esc_html__('Set status to:', 'stachethemes-seat-planner-lite'),
+            /* translators: %d: number of seats */
+            'SEATS_SELECTED'                            => esc_html__('%d seats selected', 'stachethemes-seat-planner-lite'),
+            'ENTER_SELECTION_MODE'                      => esc_html__('Bulk Select', 'stachethemes-seat-planner-lite'),
+            'EXIT_SELECTION_MODE'                       => esc_html__('Cancel', 'stachethemes-seat-planner-lite'),
+            'BULK_UPDATE_SUCCESS'                       => esc_html__('Successfully updated seats.', 'stachethemes-seat-planner-lite'),
+            'BULK_UPDATE_PARTIAL_SUCCESS'               => esc_html__('Updated some seats. Some were skipped due to existing orders.', 'stachethemes-seat-planner-lite'),
+            'BULK_UPDATE_FAILED'                        => esc_html__('Failed to update seats.', 'stachethemes-seat-planner-lite'),
+            'RESET_TO_DEFAULT'                          => esc_html__('Reset to Default', 'stachethemes-seat-planner-lite'),
+            'UPDATING'                                  => esc_html__('Updating...', 'stachethemes-seat-planner-lite'),
+
+            'NO_SEATS_FOUND'                             => esc_html__('No seats found.', 'stachethemes-seat-planner-lite'),
+            'NO_SEATS_CONFIGURED_FOR_PRODUCT'            => esc_html__('No seats found for this product.', 'stachethemes-seat-planner-lite'),
+            'STATUS_CANNOT_BE_CHANGED'                   => esc_html__('The seat status cannot be changed because it is linked to an order.', 'stachethemes-seat-planner-lite'),
+            'FAILED_TO_UPDATE_ORDER'                     => esc_html__('Failed to update order.', 'stachethemes-seat-planner-lite'),
+            'FAILED_TO_SAVE_SEAT_OVERRIDE'               => esc_html__('Failed to update seat.', 'stachethemes-seat-planner-lite'),
         ];
     }
 
@@ -373,6 +494,7 @@ class Translation {
 
             'SEAT_PLANNER_EDITOR_HEAD'         => esc_html__('Seat Planner Editor', 'stachethemes-seat-planner-lite'),
             'SEAT_PLANNER_EDITOR_SUBTITLE'     => esc_html__('Customize your seat plan layout and properties. You can add seats, screens, text, and more.', 'stachethemes-seat-planner-lite'),
+            ...self::month_strings()
         ];
     }
 
@@ -429,14 +551,13 @@ class Translation {
             'OVERVIEW_ACTION_TOOLS_DESC'                    => esc_html__('Run integrity checks and preview PDF tickets.', 'stachethemes-seat-planner-lite'),
             'OVERVIEW_ACTION_SETTINGS'                      => esc_html__('Settings', 'stachethemes-seat-planner-lite'),
             'OVERVIEW_ACTION_SETTINGS_DESC'                 => esc_html__('Configure reservation time, cart behavior and more.', 'stachethemes-seat-planner-lite'),
-            'OVERVIEW_ACTION_ORDERS'                        => esc_html__('View Orders', 'stachethemes-seat-planner-lite'),
-            'OVERVIEW_ACTION_ORDERS_DESC'                   => esc_html__('View and manage WooCommerce orders.', 'stachethemes-seat-planner-lite'),
+            'OVERVIEW_ACTION_MANAGER'                       => esc_html__('Manager', 'stachethemes-seat-planner-lite'),
+            'OVERVIEW_ACTION_MANAGER_DESC'                  => esc_html__('View and manage products availability.', 'stachethemes-seat-planner-lite'),
 
             // Help section
             'OVERVIEW_HELP_TITLE'                           => esc_html__('Resources', 'stachethemes-seat-planner-lite'),
             'OVERVIEW_HELP_DOCS'                            => esc_html__('Documentation', 'stachethemes-seat-planner-lite'),
             'OVERVIEW_HELP_SUPPORT'                         => esc_html__('Get Support', 'stachethemes-seat-planner-lite'),
-
 
             // Common strings
             'CHECK_NOW'                      => esc_html__('Check Now', 'stachethemes-seat-planner-lite'),
@@ -646,6 +767,8 @@ class Translation {
             'CART_TIMER_CRITICAL_TIME_COLOR_DESC'            => esc_html__('Countdown color when time is running low (under 5 minutes).', 'stachethemes-seat-planner-lite'),
             'CART_TIMER_PREVIEW'                              => esc_html__('Cart Timer Preview', 'stachethemes-seat-planner-lite'),
             // Attachments tab
+            'ENABLE_QR_CODE'                                 => esc_html__('Enable QR Code', 'stachethemes-seat-planner-lite'),
+            'ENABLE_QR_CODE_DESC'                            => esc_html__('Attach QR Code to order confirmation emails.', 'stachethemes-seat-planner-lite'),
             'ENABLE_PDF_ATTACHMENTS'                         => esc_html__('Enable PDF Attachments', 'stachethemes-seat-planner-lite'),
             'ENABLE_PDF_ATTACHMENTS_DESC'                    => esc_html__('Attach a PDF ticket with QR code to order confirmation emails.', 'stachethemes-seat-planner-lite'),
             'PDF_FILENAME'                                   => esc_html__('PDF Filename', 'stachethemes-seat-planner-lite'),
@@ -718,7 +841,8 @@ class Translation {
             'SELECT_SEAT'                                    => esc_html__('Select Seat', 'stachethemes-seat-planner-lite'),
 
 
-            ...self::datepicker_strings()
+            ...self::datepicker_strings(),
+            ...self::manager_strings()
         ];
     }
 

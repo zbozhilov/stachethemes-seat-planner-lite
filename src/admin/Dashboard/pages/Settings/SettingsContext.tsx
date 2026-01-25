@@ -2,6 +2,7 @@ import { createContext, useContext, useState, useCallback, ReactNode } from 'rea
 import { __ } from '@src/utils';
 
 export type SettingsState = {
+    stachesepl_qr_code_enabled: 'yes' | 'no'
     stachesepl_dt_adjacent_months: 'yes' | 'no'
     stachesepl_enable_in_loop_button: 'yes' | 'no'
     stachesepl_compat_mode: 'yes' | 'no'
@@ -31,6 +32,7 @@ type SettingsContextType = {
 }
 
 const defaultSettings: SettingsState = {
+    stachesepl_qr_code_enabled: 'yes',
     stachesepl_dt_adjacent_months: 'no',
     stachesepl_enable_in_loop_button: 'yes',
     stachesepl_compat_mode: 'yes',

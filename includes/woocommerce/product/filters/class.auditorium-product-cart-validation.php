@@ -80,7 +80,6 @@ class Auditorium_Product_Cart_Validation {
 
             $seat_data     = $cart_item['seat_data'];
             $product_id    = $cart_item['product_id'];
-            $selected_date = isset($cart_item['selected_date']) ? $cart_item['selected_date'] : '';
             $seat_id    = $seat_data->seatId;
             /** @var Auditorium_Product $product */
             $product    = wc_get_product($product_id);
@@ -97,18 +96,12 @@ class Auditorium_Product_Cart_Validation {
                 continue;
             }
 
-            $seat_status = $product->get_seat_status($seat_id);
+            $seat_status = $product->get_seat_status($seat_id, 'apply_seat_object_overrides');
 
             if ($seat_id) {
                 if (!isset($seats_by_product[$product_id])) {
                     $seats_by_product[$product_id] = [];
                 }
-
-                if (!isset($seats_by_product[$product_id][$selected_date])) {
-                    $seats_by_product[$product_id][$selected_date] = [];
-                }
-
-                $seats_by_product[$product_id][$selected_date][$seat_id] = true;
             }
 
             if ($seat_status === 'unavailable') {
@@ -133,7 +126,7 @@ class Auditorium_Product_Cart_Validation {
                 );
             }
 
-            if ($seat_status === 'sold-out' || $product->is_seat_taken($seat_id, $selected_date)) {
+            if ($seat_status === 'sold-out' || $product->is_seat_taken($seat_id)) {
                 wc_add_notice(
                     sprintf(
                         // translators: %s: seat id
@@ -144,49 +137,14 @@ class Auditorium_Product_Cart_Validation {
                 );
             }
             
-            if ($product->is_cut_off_time_passed($selected_date)) {
+            if ($product->is_cut_off_time_passed()) {
                 wc_add_notice(
-                    sprintf(
-                        // translators: %1$s: selected date
-                        // translators: %2$s: product name
-                        esc_html__('The date "%1$s" for "%2$s" is no longer available', 'stachethemes-seat-planner-lite'),
-                        esc_html(Utils::get_formatted_date_time($selected_date)),
-                        esc_html($product->get_name()),
-                    ),
+                    esc_html__('The product is no longer available', 'stachethemes-seat-planner-lite'),
                     'error'
                 );
             }
 
-            if (!$product->validate_cart_item_discount($cart_item)) {
-                wc_add_notice(
-                    sprintf(
-                        // translators: %s: seat id
-                        esc_html__('Discount for seat %s is not valid. Please remove it from your cart and select a different discount.', 'stachethemes-seat-planner-lite'),
-                        esc_html($seat_id)
-                    ),
-                    'error'
-                );
-            }
         }
 
-        foreach ($seats_by_product as $product_id => $dates_map) {
-
-            foreach ($dates_map as $selected_date => $seat_ids_map) {
-
-                $product = wc_get_product($product_id);
-
-                if (!$product || $product->get_type() !== 'auditorium') {
-                    wc_add_notice(
-                        sprintf(
-                            // translators: %s: product id
-                            esc_html__('Product %s is not found', 'stachethemes-seat-planner-lite'),
-                            esc_html($product_id)
-                        ),
-                        'error'
-                    );
-                    continue;
-                }
-            }
-        }
     }
 }

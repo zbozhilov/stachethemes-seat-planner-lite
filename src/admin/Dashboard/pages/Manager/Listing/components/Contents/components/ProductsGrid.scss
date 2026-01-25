@@ -1,0 +1,10 @@
+.stachesepl-manager-listing-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+    gap: var(--stachesepl-space-4);
+
+    @media (max-width: 768px) {
+        grid-template-columns: 1fr;
+    }
+}
+

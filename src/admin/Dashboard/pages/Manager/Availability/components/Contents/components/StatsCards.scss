@@ -1,0 +1,103 @@
+.stachesepl-manager-availability-stats {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: var(--stachesepl-space-3);
+
+    @media (max-width: 1200px) {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    @media (max-width: 768px) {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    @media (max-width: 480px) {
+        grid-template-columns: 1fr;
+    }
+}
+
+.stachesepl-manager-availability-stat {
+    display: flex;
+    align-items: center;
+    gap: var(--stachesepl-space-3);
+    padding: var(--stachesepl-space-4);
+    background: var(--stachesepl-bg-page);
+    border: 2px solid var(--stachesepl-border);
+    border-radius: var(--stachesepl-radius-lg);
+    cursor: pointer;
+    transition: all var(--stachesepl-transition-fast);
+    text-align: left;
+
+    &:hover {
+        border-color: var(--stachesepl-primary);
+        box-shadow: var(--stachesepl-shadow-sm);
+    }
+
+    &--active {
+        border-color: var(--stachesepl-primary);
+        background: var(--stachesepl-primary-light);
+    }
+
+    &-icon {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 40px;
+        height: 40px;
+        border-radius: var(--stachesepl-radius-md);
+        flex-shrink: 0;
+
+        svg {
+            width: 20px;
+            height: 20px;
+        }
+
+        &--total {
+            background: var(--stachesepl-gray-100);
+            color: var(--stachesepl-gray-600);
+        }
+
+        &--available {
+            background: rgba(16, 185, 129, 0.15);
+            color: #10b981;
+        }
+
+        &--sold-out {
+            background: rgba(239, 68, 68, 0.15);
+            color: #ef4444;
+        }
+
+        &--on-site {
+            background: rgba(245, 158, 11, 0.15);
+            color: #f59e0b;
+        }
+
+        &--unavailable {
+            background: rgba(107, 114, 128, 0.15);
+            color: #6b7280;
+        }
+    }
+
+    &-content {
+        display: flex;
+        flex-direction: column;
+        gap: 2px;
+        min-width: 0;
+    }
+
+    &-value {
+        font-size: var(--stachesepl-text-xl);
+        font-weight: 700;
+        color: var(--stachesepl-text-primary);
+        line-height: 1;
+    }
+
+    &-label {
+        font-size: var(--stachesepl-text-xs);
+        color: var(--stachesepl-text-secondary);
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+}
+

@@ -56,10 +56,11 @@ export const getSeatStatus = (
     selectedSeats: string[],
     canViewSeatOrders: boolean
 ): SeatStatus => {
+
     const isTaken = data.taken || data.status === 'sold-out';
     const isUnavailable = !data.seatId || data.status === 'unavailable' || data.status === 'sold-out';
     const onSiteOnly = data.status === 'on-site' && !data.taken;
-    const isClickable = !isUnavailable && !!data.seatId && (!isTaken || (isTaken && canViewSeatOrders));
+    const isClickable = (isTaken && canViewSeatOrders) || !isUnavailable && !!data.seatId;
     const isSelected = selectedSeats.includes(data.seatId);
 
     return {

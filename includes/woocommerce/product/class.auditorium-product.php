@@ -6,7 +6,11 @@ if (! defined('ABSPATH')) {
     exit;
 }
 
+use StachethemesSeatPlannerLite\Product_Traits\Manager_Overrides;
+
 class Auditorium_Product extends \WC_Product {
+
+    use Manager_Overrides;
 
     public function get_type() {
         return 'auditorium';
@@ -165,11 +169,18 @@ class Auditorium_Product extends \WC_Product {
         }
     }
 
-    public function get_seat_data($seat_id, $context = '') {
+    /**
+     * Get seat data for a specific seat
+     * 
+     * @param string $seat_id
+     * @param string $context
+     * @param bool $modifier
+     * @return object|false
+     */
+    public function get_seat_data($seat_id, $context = '', $modifier = '') {
 
         $seat_data = $this->get_seat_plan_data('object');
-
-        $objects = $seat_data->objects;
+        $objects   = $seat_data->objects;
 
         if (!is_array($objects) || empty($objects)) {
             return false;
@@ -183,9 +194,13 @@ class Auditorium_Product extends \WC_Product {
 
             if ($object->seatId === $seat_id) {
 
+                if ($modifier === 'apply_seat_object_overrides') {
+                    $object = $this->apply_seat_object_overrides($object);
+                }
+
                 if ($context === 'add_to_cart') {
                     // Filters out unnecessary keys from the seat data for the add to cart context
-                    $keys_to_include       = ['id', 'seatId', 'group', 'price'];
+                    $keys_to_include       = ['id', 'seatId', 'group', 'price', 'status'];
                     $extra_keys_to_include = apply_filters('stachesepl_context_add_to_cart_keys', []);
 
                     if (is_array($extra_keys_to_include) && !empty($extra_keys_to_include)) {
@@ -216,7 +231,7 @@ class Auditorium_Product extends \WC_Product {
         return in_array($seat_id, $taken_seats);
     }
 
-    public function get_available_seats($selected_date = '') {
+    public function get_available_seats() {
 
         $seat_data = $this->get_seat_plan_data('object');
 
@@ -225,22 +240,37 @@ class Auditorium_Product extends \WC_Product {
         }
 
         // First check the cut-off time
-        if ($this->is_cut_off_time_passed($selected_date)) {
+        if ($this->is_cut_off_time_passed()) {
             return false;
         }
 
         // Filter out objects that are not seats or don't have a seat ID or has seat status 'unavailable' or 'sold-out'
         $seats = array_filter($seat_data->objects, function ($object) {
-            return $object->type === 'seat' &&
-                !empty($object->seatId) &&
-                (!isset($object->status) || $object->status !== 'unavailable' && $object->status !== 'sold-out');
+
+            if ($object->type !== 'seat') {
+                return false;
+            }
+
+            $object = $this->apply_seat_object_overrides($object);
+
+            if (!isset($object->seatId) || empty($object->seatId)) {
+                return false;
+            }
+
+            $seat_status = isset($object->status) ? $object->status : '';
+
+            if ($seat_status === 'unavailable' || $seat_status === 'sold-out') {
+                return false;
+            }
+
+            return true;
         });
 
         // Retrieve open seats IDs by default as defined in the seat plan editor
         $open_seat_ids_by_default = array_column($seats, 'seatId');
 
         // Retrieve taken seats for the selected date
-        $taken_seats              = $this->get_taken_seats(['selected_date' => $selected_date]);
+        $taken_seats              = $this->get_taken_seats();
 
         // Remove taken seats from open seats by default
         $available_seats          = array_diff($open_seat_ids_by_default, $taken_seats);
@@ -249,53 +279,37 @@ class Auditorium_Product extends \WC_Product {
         return $available_seats;
     }
 
-    public function add_to_cart($seat_id, $discount = '', $selected_date = '', $customFields = null) {
+    public function add_to_cart($seat_id, $discount = '') {
 
-        if ($this->is_seat_taken($seat_id, $selected_date)) {
-            // translators: %s: seat id
-            throw new \Exception(sprintf(esc_html__('Seat %s is already taken', 'stachethemes-seat-planner-lite'), esc_html($seat_id)));
+        $seat_data   = $this->get_seat_data($seat_id, 'add_to_cart', 'apply_seat_object_overrides');
+        $seat_status = $seat_data->status ?? 'available'; // Default to available if status is not set
+
+        if (!$seat_data) {
+            throw new \Exception(esc_html__('Seat not found', 'stachethemes-seat-planner'));
         }
-
-        $seat_data = $this->get_seat_data($seat_id, 'add_to_cart');
-
-        $seat_status = isset($seat_data->status) ? $seat_data->status : '';
 
         if ($seat_status === 'unavailable') {
             // translators: %s: seat id
-            throw new \Exception(sprintf(esc_html__('Seat %s is unavailable', 'stachethemes-seat-planner-lite'), esc_html($seat_id)));
+            throw new \Exception(sprintf(esc_html__('Seat %s is unavailable. Please select a different seat.', 'stachethemes-seat-planner'), esc_html($seat_id)));
         }
 
         if ($seat_status === 'on-site') {
             // translators: %s: seat id
-            throw new \Exception(sprintf(esc_html__('Seat %s can only be purchased at the venue.', 'stachethemes-seat-planner-lite'), esc_html($seat_id)));
+            throw new \Exception(sprintf(esc_html__('Seat %s can only be purchased at the venue.', 'stachethemes-seat-planner'), esc_html($seat_id)));
         }
 
-        if (!$seat_data) {
-            throw new \Exception(esc_html__('Seat not found', 'stachethemes-seat-planner-lite'));
-        }
-
-        $validation_result = $this->validate_custom_fields($customFields);
-
-        if (is_array($validation_result) && isset($validation_result['error'])) {
-            throw new \Exception(esc_html($validation_result['error']));
-        }
-
-        $sanitized_custom_fields = $this->sanitize_custom_fields($customFields);
-
-        if (is_array($sanitized_custom_fields) && isset($sanitized_custom_fields['error'])) {
-            throw new \Exception(esc_html($sanitized_custom_fields['error']));
+        if ($seat_status === 'sold-out' || $this->is_seat_taken($seat_id)) {
+            // translators: %s: seat id
+            throw new \Exception(sprintf(esc_html__('Seat %s is already taken. Please select a different seat.', 'stachethemes-seat-planner'), esc_html($seat_id)));
         }
 
         $cart = WC()->cart;
 
         foreach ($cart->get_cart() as $cart_item) {
 
-            $cart_item_selected_date = isset($cart_item['selected_date']) ? $cart_item['selected_date'] : '';
-
             if (
                 isset($cart_item['seat_data']) &&
-                $cart_item['seat_data']->seatId === $seat_id &&
-                $cart_item_selected_date  === $selected_date
+                $cart_item['seat_data']->seatId === $seat_id
             ) {
                 $cart->remove_cart_item($cart_item['key']);
             }
@@ -306,17 +320,15 @@ class Auditorium_Product extends \WC_Product {
         $cart_item_data = [
             'seat_data'          => $seat_data,
             'seat_discount'      => $this->get_discount_by_name($discount),
-            'selected_date'      => $selected_date,
-            'seat_custom_fields' => $sanitized_custom_fields
         ];
 
         // Check if transient exists for this seat and throw an exception if it does
-        apply_filters('stachesepl_before_add_to_cart', $this, $seat_id, $selected_date);
+        do_action('stachesepl_before_add_to_cart', $this, $seat_id);
 
         $cart_item_key = $cart->add_to_cart($this->get_id(), 1, 0, [], $cart_item_data, $cart_item_key);
 
         // Insert transient to reserve the seat temporarily
-        apply_filters('stachesepl_after_add_to_cart', $this, $seat_id, $cart_item_key, $cart, $selected_date);
+        do_action('stachesepl_after_add_to_cart', $this, $seat_id, $cart_item_key, $cart);
 
         return $cart_item_key;
     }
@@ -328,7 +340,7 @@ class Auditorium_Product extends \WC_Product {
         ];
 
         $args          = wp_parse_args($args, $default_args);
-        $taken_seats   = $this->get_meta_taken_seat($args['selected_date']);
+        $taken_seats   = $this->get_meta_taken_seat();
 
         if (!$taken_seats) {
             $taken_seats = [];
@@ -445,15 +457,30 @@ class Auditorium_Product extends \WC_Product {
         return true;
     }
 
-    public function get_seat_status($seat_id) {
+    /**
+     * Get seat status
+     * Retrieves the seat status from the seat data and 
+     * optionally applies the seat object overrides
+     * 
+     * It does not take into account if the seat is sold or not
+     * If you need to check if the seat is sold, use it along with is_seat_taken() method!
+     * 
+     * @param string $seat_id
+     * @param bool $modifier ( apply_seat_object_overrides )
+     * @param string $selected_date
+     * @return string|false
+     */
+    public function get_seat_status($seat_id, $modifier = '') {
 
-        $seat_data = $this->get_seat_data($seat_id);
+        $seat_data = $this->get_seat_data($seat_id, '', $modifier);
 
         if (!$seat_data) {
             return false;
         }
 
-        return isset($seat_data->status) ? $seat_data->status : '';
+        $status = isset($seat_data->status) ? $seat_data->status : '';
+
+        return $status;
     }
 
     public function get_seats_in_cart($args = []) {
@@ -503,19 +530,14 @@ class Auditorium_Product extends \WC_Product {
      * If the seat is already taken, it will not be added again.
      * 
      * @param string $seat_id
-     * @param string $selected_date
      * @return void
      */
-    public function add_meta_taken_seat($seat_id, $selected_date = ''): void {
+    public function add_meta_taken_seat($seat_id): void {
 
         $meta_key = '_taken_seat';
 
-        if ($selected_date) {
-            $meta_key .= "_{$selected_date}";
-        }
-
         // Check if the seat is already taken
-        $taken_seats = $this->get_meta_taken_seat($selected_date);
+        $taken_seats = $this->get_meta_taken_seat();
         if (in_array($seat_id, $taken_seats)) {
             return;
         }
@@ -525,13 +547,9 @@ class Auditorium_Product extends \WC_Product {
         $this->add_meta_data($meta_key, $seat_id, $unique_key);
     }
 
-    public function get_meta_taken_seat($selected_date = '') {
+    public function get_meta_taken_seat(): array {
 
         $meta_key = '_taken_seat';
-
-        if ($selected_date) {
-            $meta_key .= "_{$selected_date}";
-        }
 
         $taken_seats = $this->get_meta($meta_key, false);
 
@@ -559,7 +577,7 @@ class Auditorium_Product extends \WC_Product {
         ob_start();
 
         if (!$this->is_in_stock()) {
-        ?>
+?>
             <p class="<?php printf('stachesepl-add-to-cart-button-out-of-stock stachesepl-add-to-cart-button-out-of-stock-%s', esc_attr($context)); ?>">
                 <?php
                 echo esc_html(

@@ -1,10 +1,9 @@
+import { Build, CalendarMonth, QrCodeScanner, Settings } from '@mui/icons-material'
 import { __ } from '@src/utils'
-import { QrCodeScanner, Build, Settings, ShoppingBag } from '@mui/icons-material'
 import ActionCard from './ActionCard'
 import type { QuickAction } from './types'
 
 const getQuickActions = (): QuickAction[] => {
-    const adminUrl = window.stachesepl_admin_url.admin_url
 
     return [
         {
@@ -15,11 +14,11 @@ const getQuickActions = (): QuickAction[] => {
             href: '#scanner',
         },
         {
-            id: 'tools',
-            icon: <Build />,
-            title: __('OVERVIEW_ACTION_TOOLS'),
-            description: __('OVERVIEW_ACTION_TOOLS_DESC'),
-            href: '#tools',
+            id: 'manager',
+            icon: <CalendarMonth />,
+            title: __('OVERVIEW_ACTION_MANAGER'),
+            description: __('OVERVIEW_ACTION_MANAGER_DESC'),
+            href: '#manager',
         },
         {
             id: 'settings',
@@ -29,12 +28,11 @@ const getQuickActions = (): QuickAction[] => {
             href: '#settings',
         },
         {
-            id: 'orders',
-            icon: <ShoppingBag />,
-            title: __('OVERVIEW_ACTION_ORDERS'),
-            description: __('OVERVIEW_ACTION_ORDERS_DESC'),
-            href: `${adminUrl}edit.php?post_type=shop_order`,
-            external: true,
+            id: 'tools',
+            icon: <Build />,
+            title: __('OVERVIEW_ACTION_TOOLS'),
+            description: __('OVERVIEW_ACTION_TOOLS_DESC'),
+            href: '#tools',
         },
     ]
 }

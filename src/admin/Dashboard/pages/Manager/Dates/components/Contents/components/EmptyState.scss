@@ -1,0 +1,29 @@
+.stachesepl-manager-dates-empty {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: var(--stachesepl-space-12);
+    text-align: center;
+
+    &-icon {
+        width: 64px;
+        height: 64px;
+        color: var(--stachesepl-text-muted);
+        margin-bottom: var(--stachesepl-space-4);
+        opacity: 0.5;
+    }
+
+    &-title {
+        font-size: var(--stachesepl-text-lg);
+        font-weight: 600;
+        color: var(--stachesepl-text-primary);
+        margin: 0 0 var(--stachesepl-space-2) 0;
+    }
+
+    &-description {
+        font-size: var(--stachesepl-text-sm);
+        color: var(--stachesepl-text-secondary);
+        margin: 0;
+    }
+}

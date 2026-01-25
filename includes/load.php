@@ -15,6 +15,7 @@ require_once STACHETHEMES_SEAT_PLANNER_LITE_PLUGIN_DIR . 'includes/shortcodes/st
 require_once STACHETHEMES_SEAT_PLANNER_LITE_PLUGIN_DIR . 'includes/class.wp-dashboard.php';
 require_once STACHETHEMES_SEAT_PLANNER_LITE_PLUGIN_DIR . 'includes/dashboard/class.dashboard.php';
 require_once STACHETHEMES_SEAT_PLANNER_LITE_PLUGIN_DIR . 'includes/dashboard/class.overview-stats.php';
+require_once STACHETHEMES_SEAT_PLANNER_LITE_PLUGIN_DIR . 'includes/dashboard/class.manager-service.php';
 
 // Admin Tools
 require_once STACHETHEMES_SEAT_PLANNER_LITE_PLUGIN_DIR . 'includes/tools/check-double-booking/class.check-double-booking.php';

@@ -15,7 +15,6 @@ export type TicketData = {
     seat_id: string
     order_link: string
     customer_name: string
-    seat_status?: string
     date_time?: string
     date_time_timestamp?: number
     custom_fields?: Record<string, string>

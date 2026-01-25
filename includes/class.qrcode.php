@@ -78,7 +78,6 @@ class QRCode {
             'product_title'        => '',
             'price'                => '',
             'seat_id'              => '',
-            'seat_status'          => '',
             'order_link'           => '',
             'customer_name'        => ''
         ];
@@ -170,7 +169,6 @@ class QRCode {
             'product_title'        => esc_html($product->get_title()),
             'price'                => esc_html(wc_price($seat_data['price'])),
             'seat_id'              => esc_html($seat_data['seatId']),
-            'seat_status'          => $product->get_seat_status($seat_data['seatId']),
             'date_time'            => isset($seat_data['selectedDate']) && $seat_data['selectedDate']  ? Utils::get_formatted_date_time($seat_data['selectedDate']) : '',
             'date_time_timestamp'  => isset($seat_data['selectedDate']) && $seat_data['selectedDate']  ? strtotime($seat_data['selectedDate']) : 0,
             'order_link'           => $order->get_edit_order_url(),
