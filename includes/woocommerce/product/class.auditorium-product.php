@@ -285,22 +285,22 @@ class Auditorium_Product extends \WC_Product {
         $seat_status = $seat_data->status ?? 'available'; // Default to available if status is not set
 
         if (!$seat_data) {
-            throw new \Exception(esc_html__('Seat not found', 'stachethemes-seat-planner'));
+            throw new \Exception(esc_html__('Seat not found', 'stachethemes-seat-planner-lite'));
         }
 
         if ($seat_status === 'unavailable') {
             // translators: %s: seat id
-            throw new \Exception(sprintf(esc_html__('Seat %s is unavailable. Please select a different seat.', 'stachethemes-seat-planner'), esc_html($seat_id)));
+            throw new \Exception(sprintf(esc_html__('Seat %s is unavailable. Please select a different seat.', 'stachethemes-seat-planner-lite'), esc_html($seat_id)));
         }
 
         if ($seat_status === 'on-site') {
             // translators: %s: seat id
-            throw new \Exception(sprintf(esc_html__('Seat %s can only be purchased at the venue.', 'stachethemes-seat-planner'), esc_html($seat_id)));
+            throw new \Exception(sprintf(esc_html__('Seat %s can only be purchased at the venue.', 'stachethemes-seat-planner-lite'), esc_html($seat_id)));
         }
 
         if ($seat_status === 'sold-out' || $this->is_seat_taken($seat_id)) {
             // translators: %s: seat id
-            throw new \Exception(sprintf(esc_html__('Seat %s is already taken. Please select a different seat.', 'stachethemes-seat-planner'), esc_html($seat_id)));
+            throw new \Exception(sprintf(esc_html__('Seat %s is already taken. Please select a different seat.', 'stachethemes-seat-planner-lite'), esc_html($seat_id)));
         }
 
         $cart = WC()->cart;

@@ -150,7 +150,7 @@ trait Manager_Overrides {
 
         // Validate overrides structure
         if (!is_array($overrides)) {
-            throw new \Exception(esc_html__('Manager overrides must be an array', 'stachethemes-seat-planner'));
+            throw new \Exception(esc_html__('Manager overrides must be an array', 'stachethemes-seat-planner-lite'));
         }
 
         // Allowed status values
@@ -170,7 +170,7 @@ trait Manager_Overrides {
                     throw new \Exception(
                         sprintf(
                             // translators: %1$s - invalid status value, %2$s - allowed values
-                            esc_html__('Invalid override status "%1$s". Allowed values: %2$s', 'stachethemes-seat-planner'),
+                            esc_html__('Invalid override status "%1$s". Allowed values: %2$s', 'stachethemes-seat-planner-lite'),
                             esc_html($override_data['status']),
                             esc_html(implode(', ', $allowed_statuses))
                         )

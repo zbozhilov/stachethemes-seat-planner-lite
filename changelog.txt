@@ -1,5 +1,9 @@
 *** Stachethemes Seat Planner Lite Changelog ***
 
+2026.01.26 Version 1.4.0
+* Added Manager section in the Admin Panel
+* Added option to hide the QR Code
+
 2026.01.16 Version 1.3.0
 * Added: New tool "Edit Order", enabling admins to modify existing orders data, such as changing seat ID.
 

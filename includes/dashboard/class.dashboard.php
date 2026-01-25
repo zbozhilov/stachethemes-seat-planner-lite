@@ -29,8 +29,8 @@ class Dashboard {
     public static function register_menu() {
 
         add_menu_page(
-            esc_html__('Seat Planner', 'stachethemes-seat-planner'),
-            esc_html__('Seat Planner', 'stachethemes-seat-planner'),
+            esc_html__('Seat Planner', 'stachethemes-seat-planner-lite'),
+            esc_html__('Seat Planner', 'stachethemes-seat-planner-lite'),
             'manage_options',
             'stachesepl',
             [__CLASS__, 'render_menu'],
@@ -40,40 +40,40 @@ class Dashboard {
 
         add_submenu_page(
             'stachesepl',
-            esc_html__('Overview', 'stachethemes-seat-planner'),
-            esc_html__('Overview', 'stachethemes-seat-planner'),
+            esc_html__('Overview', 'stachethemes-seat-planner-lite'),
+            esc_html__('Overview', 'stachethemes-seat-planner-lite'),
             'manage_options',
             admin_url('admin.php?page=stachesepl#overview'),
         );
 
         add_submenu_page(
             'stachesepl',
-            esc_html__('Settings', 'stachethemes-seat-planner'),
-            esc_html__('Settings', 'stachethemes-seat-planner'),
+            esc_html__('Settings', 'stachethemes-seat-planner-lite'),
+            esc_html__('Settings', 'stachethemes-seat-planner-lite'),
             'manage_options',
             admin_url('admin.php?page=stachesepl#settings'),
         );
 
         add_submenu_page(
             'stachesepl',
-            esc_html__('Scanner', 'stachethemes-seat-planner'),
-            esc_html__('Scanner', 'stachethemes-seat-planner'),
+            esc_html__('Scanner', 'stachethemes-seat-planner-lite'),
+            esc_html__('Scanner', 'stachethemes-seat-planner-lite'),
             'manage_options',
             admin_url('admin.php?page=stachesepl#scanner'),
         );
 
         add_submenu_page(
             'stachesepl',
-            esc_html__('Manager', 'stachethemes-seat-planner'),
-            esc_html__('Manager', 'stachethemes-seat-planner'),
+            esc_html__('Manager', 'stachethemes-seat-planner-lite'),
+            esc_html__('Manager', 'stachethemes-seat-planner-lite'),
             'manage_options',
             admin_url('admin.php?page=stachesepl#manager'),
         );
 
         add_submenu_page(
             'stachesepl',
-            esc_html__('Tools', 'stachethemes-seat-planner'),
-            esc_html__('Tools', 'stachethemes-seat-planner'),
+            esc_html__('Tools', 'stachethemes-seat-planner-lite'),
+            esc_html__('Tools', 'stachethemes-seat-planner-lite'),
             'manage_options',
             admin_url('admin.php?page=stachesepl#tools'),
         );
@@ -170,7 +170,7 @@ class Dashboard {
             'stachesepl-dashboard',
             'stacheseplCartTimer',
             [
-                'label' => esc_html__('Time remaining', 'stachethemes-seat-planner'),
+                'label' => esc_html__('Time remaining', 'stachethemes-seat-planner-lite'),
             ]
         );
 

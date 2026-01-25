@@ -123,8 +123,8 @@ class QRCode {
 
         // Get seat data
         $seat_data = (array) $item->get_meta('seat_data');
-        $selected_date = isset($seat_data['selectedDate']) ? $seat_data['selectedDate'] : '';
-        if (!$seat_data || !$product->is_seat_taken($seat_data['seatId'], $selected_date)) {
+        
+        if (!$seat_data || !$product->is_seat_taken($seat_data['seatId'])) {
             return $fail_data;
         }
 
@@ -169,8 +169,8 @@ class QRCode {
             'product_title'        => esc_html($product->get_title()),
             'price'                => esc_html(wc_price($seat_data['price'])),
             'seat_id'              => esc_html($seat_data['seatId']),
-            'date_time'            => isset($seat_data['selectedDate']) && $seat_data['selectedDate']  ? Utils::get_formatted_date_time($seat_data['selectedDate']) : '',
-            'date_time_timestamp'  => isset($seat_data['selectedDate']) && $seat_data['selectedDate']  ? strtotime($seat_data['selectedDate']) : 0,
+            'date_time'            => '',
+            'date_time_timestamp'  => 0,
             'order_link'           => $order->get_edit_order_url(),
             'customer_name'        => esc_html($order->get_billing_first_name() . ' ' . $order->get_billing_last_name())
         ];

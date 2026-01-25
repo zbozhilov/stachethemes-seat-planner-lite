@@ -3,7 +3,7 @@ Tags: WooCommerce, Seat, Booking, Event, Venue
 Requires: 6.7
 Tested up to: 6.9
 Requires PHP: 8.2
-Stable tag: 1.3.0
+Stable tag: 1.4.0
 License: GPLv2 or later
 WC requires at least: 9.5
 WC tested up to: 10
@@ -67,6 +67,10 @@ Upgrade to **Stachethemes Seat Planner Premium** for advanced features:
 - [React Zoom Pan Pinch](https://www.npmjs.com/package/react-zoom-pan-pinch)
 
 == Changelog ==
+
+= 1.4.0 =
+- Added Manager section in the Admin Panel
+- Added option to hide the QR Code
 
 = 1.3.0 =
 - New tool "Edit Order", enabling admins to modify existing orders data, such as changing seat ID.

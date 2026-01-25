@@ -66,31 +66,6 @@ class Ajax {
                         break;
                     }
 
-                /**
-                 * AJAX task: add_seats_to_cart
-                 *
-                 * Adds one or more seats for an Auditorium product to the WooCommerce cart.
-                 *
-                 * Expected POST params:
-                 * - product_id (int): The Auditorium product ID.
-                 * - selected_date (string): The selected date in format YYYY-MM-DDTHH:MM or empty string if not provided.
-                 * - selected_seats (string, JSON): JSON-encoded array of objects:
-                 *     [{ "seatId": string, "discountId": string }]
-                 * - nonce (string): WordPress AJAX nonce for 'stachethemes_seat_planner'.
-                 *
-                 * What it does:
-                 * - Validates nonce, product, and request payload format.
-                 * - Normalizes selection by keeping only the first occurrence per seatId (unique seats).
-                 * - Calculates total seats as (already in cart + new unique selections) and enforces
-                 *   product limits for min/max seats per purchase.
-                 * - For each unique seat, calls Auditorium_Product::add_to_cart to add and reserve it.
-                 * - Returns success along with WooCommerce cart fragments so the mini cart can refresh.
-                 *
-                 * Error responses:
-                 * - wp_send_json_error(['error' => string]) with a human-readable message for:
-                 *   invalid product, bad JSON, empty selection, invalid seat IDs,
-                 *   min/max limits violations, or add-to-cart failures.
-                 */
                 case 'add_seats_to_cart': {
 
                         $product_id    = filter_input(INPUT_POST, 'product_id', FILTER_VALIDATE_INT);
@@ -304,7 +279,6 @@ class Ajax {
 
                         $product_id    = filter_input(INPUT_POST, 'product_id', FILTER_VALIDATE_INT);
                         $seat_id       = isset($_POST['seat_id']) ? sanitize_text_field(wp_unslash($_POST['seat_id'])) : '';
-                        $selected_date = isset($_POST['selected_date']) ? sanitize_text_field(wp_unslash($_POST['selected_date'])) : '';
 
                         if (false === $product_id || $product_id < 1) {
                             wp_send_json_error(['error' => esc_html__('Invalid product ID', 'stachethemes-seat-planner-lite')]);
@@ -314,7 +288,7 @@ class Ajax {
                             wp_send_json_error(['error' => esc_html__('Invalid seat ID', 'stachethemes-seat-planner-lite')]);
                         }
 
-                        $result = Check_Ghost_Booking::fix_ghost_booking($product_id, $seat_id, $selected_date);
+                        $result = Check_Ghost_Booking::fix_ghost_booking($product_id, $seat_id, '');
 
                         if ($result) {
                             wp_send_json_success([
@@ -402,14 +376,14 @@ class Ajax {
 
                         if (!current_user_can('manage_woocommerce')) {
                             wp_send_json_error([
-                                'error' => esc_html__('You do not have the required permissions to access this feature.', 'stachethemes-seat-planner')
+                                'error' => esc_html__('You do not have the required permissions to access this feature.', 'stachethemes-seat-planner-lite')
                             ]);
                         }
 
                         $order_id = filter_input(INPUT_POST, 'order_id', FILTER_VALIDATE_INT);
 
                         if (false === $order_id || $order_id < 1) {
-                            wp_send_json_error(['error' => esc_html__('Invalid order ID', 'stachethemes-seat-planner')]);
+                            wp_send_json_error(['error' => esc_html__('Invalid order ID', 'stachethemes-seat-planner-lite')]);
                         }
 
                         $result = Manager_Service::get_order_auditorium_items($order_id);
@@ -427,14 +401,14 @@ class Ajax {
 
                         if (!current_user_can('manage_woocommerce')) {
                             wp_send_json_error([
-                                'error' => esc_html__('You do not have the required permissions to access this feature.', 'stachethemes-seat-planner')
+                                'error' => esc_html__('You do not have the required permissions to access this feature.', 'stachethemes-seat-planner-lite')
                             ]);
                         }
 
                         $order_id = filter_input(INPUT_POST, 'order_id', FILTER_VALIDATE_INT);
 
                         if (false === $order_id || $order_id < 1) {
-                            wp_send_json_error(['error' => esc_html__('Invalid order ID', 'stachethemes-seat-planner')]);
+                            wp_send_json_error(['error' => esc_html__('Invalid order ID', 'stachethemes-seat-planner-lite')]);
                         }
 
                         // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
@@ -442,7 +416,7 @@ class Ajax {
                         $updates      = json_decode($updates_json, true);
 
                         if (json_last_error() !== JSON_ERROR_NONE || !is_array($updates)) {
-                            wp_send_json_error(['error' => esc_html__('Invalid updates data format', 'stachethemes-seat-planner')]);
+                            wp_send_json_error(['error' => esc_html__('Invalid updates data format', 'stachethemes-seat-planner-lite')]);
                         }
 
                         $result = Manager_Service::update_order_item_meta($order_id, $updates);
@@ -460,7 +434,7 @@ class Ajax {
 
                         if (!current_user_can('manage_woocommerce')) {
                             wp_send_json_error([
-                                'error' => esc_html__('You do not have the required permissions to access this feature.', 'stachethemes-seat-planner')
+                                'error' => esc_html__('You do not have the required permissions to access this feature.', 'stachethemes-seat-planner-lite')
                             ]);
                         }
 
@@ -485,7 +459,7 @@ class Ajax {
 
                         if (!current_user_can('manage_woocommerce')) {
                             wp_send_json_error([
-                                'error' => esc_html__('You do not have the required permissions to access this feature.', 'stachethemes-seat-planner')
+                                'error' => esc_html__('You do not have the required permissions to access this feature.', 'stachethemes-seat-planner-lite')
                             ]);
                         }
 
@@ -508,19 +482,18 @@ class Ajax {
 
                         if (!current_user_can('manage_woocommerce')) {
                             wp_send_json_error([
-                                'error' => esc_html__('You do not have the required permissions to access this feature.', 'stachethemes-seat-planner')
+                                'error' => esc_html__('You do not have the required permissions to access this feature.', 'stachethemes-seat-planner-lite')
                             ]);
                         }
 
                         $product_id    = filter_input(INPUT_POST, 'product_id', FILTER_VALIDATE_INT);
                         $seat_id       = isset($_POST['seat_id']) ? sanitize_text_field(wp_unslash($_POST['seat_id'])) : '';
-                        $selected_date = isset($_POST['selected_date']) ? sanitize_text_field(wp_unslash($_POST['selected_date'])) : '';
                         $status        = isset($_POST['status']) ? sanitize_text_field(wp_unslash($_POST['status'])) : '';
 
                         $result = Manager_Service::update_manager_seat_override(
                             (int) $product_id,
                             $seat_id,
-                            $selected_date,
+                            '',
                             $status
                         );
 
@@ -534,7 +507,7 @@ class Ajax {
                     }
 
                 default: {
-                        throw new \Exception(esc_html__('No action specified', 'stachethemes-seat-planner'));
+                        throw new \Exception(esc_html__('No action specified', 'stachethemes-seat-planner-lite'));
                     }
             }
         } catch (\Exception $e) {

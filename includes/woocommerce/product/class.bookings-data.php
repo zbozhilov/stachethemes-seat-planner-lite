@@ -11,7 +11,7 @@ class Bookings_Data {
         $product = wc_get_product($product_id);
 
         if (! $product || ! $product->is_type('auditorium')) {
-            throw new \Exception(esc_html__('Invalid product ID or product is not an auditorium type.', 'stachethemes-seat-planner'));
+            throw new \Exception(esc_html__('Invalid product ID or product is not an auditorium type.', 'stachethemes-seat-planner-lite'));
         }
 
         $this->product = $product;
@@ -129,8 +129,8 @@ class Bookings_Data {
         }, $matching_orders);
     }
 
-    public function get_order_details_by_seat_id($seat_id, $selected_date = '') {
-        $orders = $this->get_orders_with_seat($seat_id, $selected_date);
+    public function get_order_details_by_seat_id($seat_id) {
+        $orders = $this->get_orders_with_seat($seat_id);
         
         if (empty($orders)) {
             return null;
