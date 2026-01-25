@@ -6,9 +6,12 @@
         &.clickable {
             cursor: pointer;
 
-            &:hover {
-                filter: brightness(1.2);
+            &:not(.selected) {
+                &:hover {
+                    filter: brightness(1.2);
+                }
             }
+
         }
 
         &.disabled {
