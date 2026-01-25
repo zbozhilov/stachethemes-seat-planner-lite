@@ -8,24 +8,6 @@ if (! defined('ABSPATH')) {
 
 class Auditorium_Product extends \WC_Product {
 
-    protected function get_auditorium_meta_value(string $key,  bool $single = \false) {
-
-        $value = $this->get_meta($key, $single);
-
-        if (! $value) {
-
-            // Check for deprecated meta keys ( prior 1.0.6)
-
-            $legacy_key = str_replace('stachesepl', 'stsp', $key);
-            $deprecated_value = $this->get_meta($legacy_key, $single);
-            if ($deprecated_value) {
-                $value = $deprecated_value;
-            }
-        }
-
-        return $value;
-    }
-
     public function get_type() {
         return 'auditorium';
     }
@@ -55,7 +37,7 @@ class Auditorium_Product extends \WC_Product {
 
     public function has_stop_date_passed() {
 
-        $stop_date = $this->get_auditorium_meta_value('_stachesepl_stop_date', true); // datetime-local value
+        $stop_date = $this->get_meta('_stachesepl_stop_date', true); // datetime-local value
 
         if (! $stop_date) {
             return false;
@@ -80,7 +62,7 @@ class Auditorium_Product extends \WC_Product {
 
     public function is_in_stock() {
 
-        $is_forced_out_of_stock = 'yes' === $this->get_auditorium_meta_value('_stachesepl_force_out_of_stock', true);
+        $is_forced_out_of_stock = 'yes' === $this->get_meta('_stachesepl_force_out_of_stock', true);
 
         if ($is_forced_out_of_stock) {
             return false;
@@ -118,8 +100,8 @@ class Auditorium_Product extends \WC_Product {
 
     public function get_price_html($context = 'view') {
 
-        $min = (float) $this->get_auditorium_meta_value('_stachesepl_price_min', true);
-        $max = (float) $this->get_auditorium_meta_value('_stachesepl_price_max', true);
+        $min = (float) $this->get_meta('_stachesepl_price_min', true);
+        $max = (float) $this->get_meta('_stachesepl_price_max', true);
 
         if ($min === $max) {
 
@@ -160,7 +142,7 @@ class Auditorium_Product extends \WC_Product {
 
     public function get_seat_plan_data($context = 'raw') {
 
-        $data = $this->get_auditorium_meta_value('_stachesepl_seat_planner_data', true);
+        $data = $this->get_meta('_stachesepl_seat_planner_data', true);
 
         switch ($context) {
 
@@ -414,7 +396,7 @@ class Auditorium_Product extends \WC_Product {
     }
 
     public function get_stop_selling_tickets_before() {
-        $value = $this->get_auditorium_meta_value('_stachesepl_stop_selling_tickets_before', true);
+        $value = $this->get_meta('_stachesepl_stop_selling_tickets_before', true);
 
         return (int) $value;
     }
