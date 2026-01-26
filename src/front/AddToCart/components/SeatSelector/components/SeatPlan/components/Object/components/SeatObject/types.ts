@@ -6,7 +6,9 @@ import { SeatObjectProps as BaseSeatObjectProps, Statuses } from '@src/admin/Pro
  */
 export type FrontSeatObject = BaseSeatObjectProps & {
     taken?: boolean;
+    discount?: string;
     group?: string;
+    customFields?: Record<string, string | number | boolean>;
 };
 
 /**

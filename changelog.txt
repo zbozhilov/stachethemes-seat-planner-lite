@@ -1,5 +1,9 @@
 *** Stachethemes Seat Planner Lite Changelog ***
 
+2026.01.27 Version 1.4.1
+- Added seat details tooltip on mobile devices
+- Other minor bug fixes
+
 2026.01.26 Version 1.4.0
 * Added Manager section in the Admin Panel
 * Added option to hide the QR Code

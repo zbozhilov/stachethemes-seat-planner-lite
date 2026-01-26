@@ -1,5 +1,4 @@
 import { __ } from '@src/utils';
-import React from 'react';
 import './NoDataMessage.scss';
 
 const NoDataMessage: React.FC = () => {

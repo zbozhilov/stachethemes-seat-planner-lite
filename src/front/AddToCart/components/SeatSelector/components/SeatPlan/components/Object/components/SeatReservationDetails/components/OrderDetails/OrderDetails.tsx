@@ -1,5 +1,4 @@
 import { __ } from '@src/utils';
-import React from 'react';
 import { SeatOrderData } from '@src/front/AddToCart/ajax/fetchSeatOrderData';
 import OrderInfoRow from '../OrderInfoRow/OrderInfoRow';
 import './OrderDetails.scss';

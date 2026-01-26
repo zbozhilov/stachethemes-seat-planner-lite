@@ -6,12 +6,13 @@
         &.clickable {
             cursor: pointer;
 
-            &:not(.selected) {
-                &:hover {
+            &:hover {
+
+                &:not(.selected) {
                     filter: brightness(1.2);
                 }
-            }
 
+            }
         }
 
         &.disabled {
@@ -138,7 +139,7 @@
 
     &-selected {
         color: var(--stachesepl-tooltip-selected-color, #fff);
-        background: var(--stachesepl-tooltip-selected-bg-color, #f9a852);
+        background: var(--stachesepl-tooltip-selected-bg-color, var(--stachesepl-accent-color));
     }
 
     &-onsite {

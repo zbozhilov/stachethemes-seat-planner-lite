@@ -850,6 +850,9 @@ class Translation {
     public static function get_front_strings() {
 
         return [
+            'SELECT_SEAT'            => esc_html__('Select Seat', 'stachethemes-seat-planner-lite'),
+            'VIEW_DETAILS'           => esc_html__('View Details', 'stachethemes-seat-planner-lite'),
+            'REMOVE'                 => esc_html__('Remove', 'stachethemes-seat-planner-lite'),
             'EDIT_SEATS'             => esc_html__('Edit Seats', 'stachethemes-seat-planner-lite'),
             'CANCEL'                 => esc_html__('Cancel', 'stachethemes-seat-planner-lite'),
             'LOADING_SEATING_LAYOUT' => esc_html__('Loading seating layout', 'stachethemes-seat-planner-lite'),
@@ -887,9 +890,11 @@ class Translation {
             'TOTAL'                          => esc_html__('Total', 'stachethemes-seat-planner-lite'),
             'DISCOUNTS_TITLE'                => esc_html__('Discounts', 'stachethemes-seat-planner-lite'),
             'VIEW_CART'                      => esc_html__('View Cart', 'stachethemes-seat-planner-lite'),
+            'THIS_SEAT_IS_TAKEN'             => esc_html__('This seat is already taken.', 'stachethemes-seat-planner-lite'),
+            'THIS_SEAT_IS_UNAVAILABLE'       => esc_html__('This seat is unavailable.', 'stachethemes-seat-planner-lite'),
             'THIS_SEAT_IS_ONLY_AVAILABLE_ON_SITE' => esc_html__('This seat can only be purchased at the venue.', 'stachethemes-seat-planner-lite'),
             'LOADING'                        => esc_html__('Loading', 'stachethemes-seat-planner-lite'),
-            'SEAT_RESERVATION_DETAILS'       => esc_html('Seat Reservation Details', 'stachethemes-seat-planner-lite'),
+            'SEAT_RESERVATION_DETAILS'       => esc_html__('Seat Reservation Details', 'stachethemes-seat-planner-lite'),
             'RESERVED_BY'                    => esc_html__('Reserved By', 'stachethemes-seat-planner-lite'),
             'ORDER_DATE'                     => esc_html__('Order Date', 'stachethemes-seat-planner-lite'),
             'ORDER_STATUS'                   => esc_html__('Order Status', 'stachethemes-seat-planner-lite'),

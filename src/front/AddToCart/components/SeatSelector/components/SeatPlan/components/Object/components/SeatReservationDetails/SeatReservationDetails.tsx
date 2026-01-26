@@ -1,9 +1,8 @@
-import { __ } from '@src/utils';
-import React from 'react';
 import { SeatOrderData } from '@src/front/AddToCart/ajax/fetchSeatOrderData';
-import LoadingSpinner from './components/LoadingSpinner/LoadingSpinner';
-import OrderDetails from './components/OrderDetails/OrderDetails';
+import CircLoader from '@src/front/AddToCart/components/CircLoader/CircLoader';
+import { __ } from '@src/utils';
 import NoDataMessage from './components/NoDataMessage/NoDataMessage';
+import OrderDetails from './components/OrderDetails/OrderDetails';
 import './SeatReservationDetails.scss';
 
 type SeatReservationDetailsProps = {
@@ -19,7 +18,7 @@ const SeatReservationDetails: React.FC<SeatReservationDetailsProps> = ({
 }) => {
     return (
         <div className='stachesepl-modal-message stachesepl-seat-order-modal' onMouseDown={e => e.stopPropagation()}>
-            {isLoading && <LoadingSpinner />}
+            {isLoading && <CircLoader text={__('LOADING')} />}
             {!isLoading && seatOrderData && <OrderDetails seatOrderData={seatOrderData} />}
             {!isLoading && !seatOrderData && <NoDataMessage />}
             <button onClick={onClose}>{__('CLOSE')}</button>

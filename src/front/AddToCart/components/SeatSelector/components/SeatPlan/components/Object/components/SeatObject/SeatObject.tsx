@@ -1,7 +1,8 @@
 import { Accessible } from '@mui/icons-material';
-import { __ } from '@src/utils';
-import { useCallback } from 'react';
+import { __, isTouchDevice } from '@src/utils';
+import { useCallback, useState } from 'react';
 import OnSiteModal from './components/OnSiteModal/OnSiteModal';
+import SeatInfoBottomSheet from './components/SeatInfoBottomSheet/SeatInfoBottomSheet';
 import SeatTooltip from './components/SeatTooltip/SeatTooltip';
 import { useOnSiteModal, useTooltip } from './hooks';
 import './SeatObject.scss';
@@ -30,6 +31,8 @@ const SeatObject = ({
     } = useTooltip();
 
     const { modalMessage, isOpen: isModalOpen, showModal, hideModal } = useOnSiteModal();
+    const [isBottomSheetOpen, setIsBottomSheetOpen] = useState(false);
+    const isMobile = isTouchDevice();
 
     // Compute status (returns safe defaults if not a seat)
     const seatStatus = isSeat 
@@ -44,8 +47,16 @@ const SeatObject = ({
             return;
         }
 
+        // On mobile, show bottom sheet for all seats (with info and appropriate actions)
+        if (isMobile) {
+            setIsBottomSheetOpen(true);
+            return;
+        }
+
+        // Desktop behavior
         if (isTaken && canViewSeatOrders) {
             handleSeatTakenCheck(seatData.seatId);
+            return;
         }
 
         if (isUnavailable || isTaken) {
@@ -69,10 +80,28 @@ const SeatObject = ({
         seatData.seatId,
         isTaken,
         canViewSeatOrders,
+        isMobile,
         showModal,
         handleSeatTakenCheck,
         handleSeatSelectToggle,
     ]);
+
+    const handleBottomSheetSelect = useCallback(() => {
+        if (!seatData.seatId) {
+            return;
+        }
+        handleSeatSelectToggle(seatData.seatId);
+        setIsBottomSheetOpen(false);
+    }, [seatData.seatId, handleSeatSelectToggle]);
+
+    const handleBottomSheetClose = useCallback(() => {
+        setIsBottomSheetOpen(false);
+    }, []);
+
+    const handleBottomSheetViewOrder = useCallback(() => {
+        setIsBottomSheetOpen(false);
+        handleSeatTakenCheck(seatData.seatId);
+    }, [seatData.seatId, handleSeatTakenCheck]);
 
     // Early return after all hooks
     if (!isSeat) {
@@ -84,7 +113,7 @@ const SeatObject = ({
 
     return (
         <>
-            {onSiteOnly && (
+            {onSiteOnly && !isMobile && (
                 <OnSiteModal
                     open={isModalOpen}
                     message={modalMessage}
@@ -104,17 +133,36 @@ const SeatObject = ({
                 {seatData.isHandicap ? <Accessible /> : seatData.label}
             </div>
 
-            <SeatTooltip
-                visible={tooltipVisible}
-                position={tooltipPosition}
-                seatId={seatData.seatId}
-                isTaken={isTaken}
-                isSelected={isSelected}
-                isUnavailable={isUnavailable}
-                onSiteOnly={onSiteOnly}
-                backgroundColor={seatData.backgroundColor}
-                price={seatData.price}
-            />
+            {!isMobile && (
+                <SeatTooltip
+                    visible={tooltipVisible}
+                    position={tooltipPosition}
+                    seatId={seatData.seatId}
+                    isTaken={isTaken}
+                    isSelected={isSelected}
+                    isUnavailable={isUnavailable}
+                    onSiteOnly={onSiteOnly}
+                    backgroundColor={seatData.backgroundColor}
+                    price={seatData.price}
+                />
+            )}
+
+            {isMobile && (
+                <SeatInfoBottomSheet
+                    open={isBottomSheetOpen}
+                    seatId={seatData.seatId}
+                    isTaken={isTaken}
+                    isSelected={isSelected}
+                    isUnavailable={isUnavailable}
+                    onSiteOnly={onSiteOnly}
+                    backgroundColor={seatData.backgroundColor}
+                    price={seatData.price}
+                    canViewSeatOrders={canViewSeatOrders}
+                    onClose={handleBottomSheetClose}
+                    onSelect={handleBottomSheetSelect}
+                    onViewOrder={handleBottomSheetViewOrder}
+                />
+            )}
         </>
     );
 };

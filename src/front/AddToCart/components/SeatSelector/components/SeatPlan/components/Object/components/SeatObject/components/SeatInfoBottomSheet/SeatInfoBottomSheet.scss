@@ -1,0 +1,226 @@
+.stachesepl-seat-info-bottom-sheet-backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 1000000;
+    animation: stachesepl-seat-info-bottom-sheet-backdrop-fade-in 0.3s ease;
+}
+
+@keyframes stachesepl-seat-info-bottom-sheet-backdrop-fade-in {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+.stachesepl-seat-info-bottom-sheet {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000001;
+    background: var(--stachesepl-surface);
+    border-radius: 20px 20px 0 0;
+    border-top: 1px solid var(--stachesepl-border-color);
+    max-height: 60vh;
+    overflow-y: auto;
+    animation: stachesepl-seat-info-bottom-sheet-slide-up 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    box-shadow: 0 -10px 40px rgba(0, 0, 0, 0.12);
+}
+
+@keyframes stachesepl-seat-info-bottom-sheet-slide-up {
+    from {
+        opacity: 0;
+        transform: translateY(100%);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.stachesepl-seat-info-bottom-sheet-handle {
+    position: absolute;
+    top: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 40px;
+    height: 4px;
+    background: #d1d5db;
+    border-radius: 100px;
+}
+
+.stachesepl-seat-info-bottom-sheet-close {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: transparent;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    color: var(--stachesepl-text-secondary-color);
+    transition: all 0.2s ease;
+    z-index: 10;
+    padding: 0;
+
+    svg {
+        font-size: 20px;
+        fill: #d1d5db;
+    }
+
+    &:hover {
+        background-color: rgba(0, 0, 0, 0.05);
+        color: var(--stachesepl-text-color);
+    }
+
+    &:active {
+        transform: scale(0.95);
+    }
+}
+
+.stachesepl-seat-info-bottom-sheet-content {
+    padding: 24px 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.stachesepl-seat-info-bottom-sheet-header {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.stachesepl-seat-info-bottom-sheet-id {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 1rem;
+    font-weight: 600;
+}
+
+.stachesepl-seat-info-bottom-sheet-id-indicator {
+    width: 16px;
+    height: 16px;
+    border-radius: 4px;
+    flex-shrink: 0;
+}
+
+.stachesepl-seat-info-bottom-sheet-id-text {
+    color: var(--stachesepl-text-color);
+}
+
+.stachesepl-seat-info-bottom-sheet-tag {
+    display: inline-block;
+    padding: 6px 12px;
+    border-radius: var(--stachesepl-radius-sm);
+    font-size: 0.75rem;
+    font-weight: 400;
+    text-align: center;
+    width: fit-content;
+}
+
+.stachesepl-seat-info-bottom-sheet-sold-out {
+    background-color: #ff6c5f;
+    color: #fff;
+}
+
+.stachesepl-seat-info-bottom-sheet-unavailable {
+    background-color: #9ca3af;
+    color: #fff;
+}
+
+.stachesepl-seat-info-bottom-sheet-onsite {
+    background-color: #f9a852;
+    color: #fff;
+}
+
+.stachesepl-seat-info-bottom-sheet-selected {
+    background-color: var(--stachesepl-accent-color);
+    color: #fff;
+}
+
+.stachesepl-seat-info-bottom-sheet-message {
+    color: var(--stachesepl-text-secondary-color);
+    font-size: 0.875rem;
+    line-height: 1.5;
+}
+
+.stachesepl-seat-info-bottom-sheet-sold-out-message {
+    color: var(--stachesepl-text-secondary-color);
+}
+
+.stachesepl-seat-info-bottom-sheet-unavailable-message {
+    color: var(--stachesepl-text-secondary-color);
+}
+
+.stachesepl-seat-info-bottom-sheet-onsite-message {
+    color: var(--stachesepl-text-secondary-color);
+}
+
+.stachesepl-seat-info-bottom-sheet-price {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px 0;
+    border-top: 1px solid var(--stachesepl-border-color);
+    padding-bottom: 0;
+}
+
+.stachesepl-seat-info-bottom-sheet-price-label {
+    font-size: 0.875rem;
+    color: var(--stachesepl-text-secondary-color);
+    font-weight: 500;
+}
+
+.stachesepl-seat-info-bottom-sheet-price-value {
+    font-size: 1.125rem;
+    font-weight: 700;
+    color: var(--stachesepl-text-color);
+}
+
+.stachesepl-seat-info-bottom-sheet-button {
+    background-color: var(--stachesepl-btn-primary-bg);
+    color: var(--stachesepl-btn-primary-text, #fff);
+    border: none;
+    outline: none;
+    border-radius: var(--stachesepl-radius-sm);
+    padding: 0.75rem 1.125rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    line-height: 1;
+    font-size: 0.875rem;
+    font-weight: 600;
+    transition: all var(--stachesepl-btn-transition, 0.2s ease);
+    position: relative;
+    white-space: nowrap;
+
+    &:hover {
+        background-color: var(--stachesepl-btn-primary-hover);
+        color: var(--stachesepl-btn-primary-text-hover, #fff);
+    }
+
+    &.secondary {
+        background-color: var(--stachesepl-btn-secondary-bg);
+        color: var(--stachesepl-btn-secondary-text);
+
+        &:hover {
+            background-color: var(--stachesepl-btn-secondary-hover);
+            color: var(--stachesepl-btn-secondary-text-hover);
+        }
+
+    }
+}
