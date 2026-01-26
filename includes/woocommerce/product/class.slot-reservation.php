@@ -38,8 +38,6 @@ class Slot_Reservation {
     public static function get_reserve_time() {
         $min_time = self::$minimum_reserve_time;
 
-        return 1;
-
         return max(
             $min_time,
             (int) apply_filters(
