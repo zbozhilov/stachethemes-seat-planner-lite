@@ -160,6 +160,8 @@ export const useAuditoriumProductAvailability = (
                 setLoading(false);
             } catch (err) {
 
+                setLoading(false);
+
                 if (axios.isCancel(err)) {
                     return;
                 }
@@ -168,7 +170,6 @@ export const useAuditoriumProductAvailability = (
                     setError(err.message);
                 }
 
-                setLoading(false);
             } 
         };
 
@@ -249,12 +250,12 @@ export const useSeatData = (
 
                 setLoading(false);
             } catch (err) {
+                setLoading(false);
+
 
                 if (axios.isCancel(err)) {
                     return;
                 }
-
-                setLoading(false);
                 
                 if (err instanceof Error) {
                     setError(err.message);
@@ -563,6 +564,8 @@ export const useUpdateOrderItem = () => {
                 }
             )
 
+            setLoading(false);
+
             const result = response.data;
 
             if (!result.success) {
@@ -570,8 +573,6 @@ export const useUpdateOrderItem = () => {
                 setError(errorMessage);
                 return { success: false, error: errorMessage };
             }
-
-            setLoading(false);
 
             return { success: true, error: null };
         } catch (err) {

@@ -277,11 +277,6 @@ const EditSeat = () => {
                             <h3 className="stachesepl-manager-edit-seat-info-title">
                                 {seatId}
                             </h3>
-                            {seatInfo?.group && (
-                                <span className="stachesepl-manager-edit-seat-info-group">
-                                    {__('GROUP')}: {seatInfo.group}
-                                </span>
-                            )}
                         </div>
                         {orderCheckComplete && hasOrder && (
                             <div className="stachesepl-manager-edit-seat-taken-badge">
