@@ -38,6 +38,8 @@ class Slot_Reservation {
     public static function get_reserve_time() {
         $min_time = self::$minimum_reserve_time;
 
+        return 1;
+
         return max(
             $min_time,
             (int) apply_filters(
@@ -80,7 +82,7 @@ class Slot_Reservation {
 
         $product_id    = $cart->cart_contents[$cart_item_key]['product_id'];
         $seat_id       = $cart->cart_contents[$cart_item_key]['seat_data']->seatId;
-        $selected_date = $cart->cart_contents[$cart_item_key]['selected_date'];
+        $selected_date = $cart->cart_contents[$cart_item_key]['selected_date'] ?? '';
         $transient     = self::get_slot_transient($product_id, $seat_id, $selected_date);
 
         // Let's first verify if the seat is reserved by another user
