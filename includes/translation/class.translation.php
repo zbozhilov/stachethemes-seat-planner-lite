@@ -727,6 +727,15 @@ class Translation {
             'SAVE_SETTINGS'                                  => esc_html__('Save Settings', 'stachethemes-seat-planner-lite'),
 
             // General tab
+
+            'SEAT_SELECTOR_TOOLTIP'                         => esc_html__('Seat Selector Tooltip', 'stachethemes-seat-planner-lite'),
+            'SEAT_SELECTOR_TOOLTIP_DESC'                    => esc_html__('Display seat details in a tooltip on hover or touch.', 'stachethemes-seat-planner-lite'),
+         
+            'DISABLE_TOOLTIP'                               => esc_html__('Disabled', 'stachethemes-seat-planner-lite'),
+            'ENABLE_TOOLTIP_FOR_DESKTOP'                    => esc_html__('Desktop Only', 'stachethemes-seat-planner-lite'),
+            'ENABLE_TOOLTIP_FOR_MOBILE'                     => esc_html__('Mobile Only', 'stachethemes-seat-planner-lite'),
+            'ENABLE_TOOLTIP_ALWAYS'                         => esc_html__('Always', 'stachethemes-seat-planner-lite'),
+
             'ENABLE_IN_LOOP_SELECT_SEAT_BUTTON'             => esc_html__('Enable "Select Seat" Button in Product Listings', 'stachethemes-seat-planner-lite'),
             'ENABLE_IN_LOOP_SELECT_SEAT_BUTTON_DESC'        => esc_html__('Disable this option if you want to show the default WooCommerce button in product listings (Shop Page, Categories, etc...).', 'stachethemes-seat-planner-lite'),
 

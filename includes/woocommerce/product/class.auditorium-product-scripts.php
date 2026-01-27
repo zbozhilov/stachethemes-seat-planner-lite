@@ -249,7 +249,8 @@ class Auditorium_Product_Scripts {
                 'cart_redirect_url'          => esc_url($cart_redirect_url),
                 'cart_redirect_message'      => Settings::get_setting('stachesepl_cart_redirect_message') === 'yes' ? 'yes' : 'no',
                 'cart_redirect_message_text' => esc_html(Settings::get_setting('stachesepl_cart_redirect_message_text')),
-                'can_view_seat_orders'       => current_user_can('manage_woocommerce') ? 'yes' : 'no'
+                'can_view_seat_orders'       => current_user_can('manage_woocommerce') ? 'yes' : 'no',
+                'seat_selector_tooltip'      => Settings::get_setting('stachesepl_seat_selector_tooltip'),
             ]
         );
 
