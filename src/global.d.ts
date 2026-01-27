@@ -12,6 +12,7 @@ declare global {
             cart_redirect_message: 'yes' | 'no';
             cart_redirect_message_text: string;
             can_view_seat_orders: 'yes' | 'no';
+            seat_selector_tooltip: 'disabled' | 'desktop' | 'mobile' | 'always';
         };
         seat_planner_currency: {
             currency: string;

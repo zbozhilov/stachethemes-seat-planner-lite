@@ -70,6 +70,7 @@ Upgrade to **Stachethemes Seat Planner Premium** for advanced features:
 
 = 1.4.1 =
 - Added seat details tooltip on mobile devices
+- Added new option in general settings to show or hide the seat details tooltip
 - Other minor bug fixes
 
 = 1.4.0 =

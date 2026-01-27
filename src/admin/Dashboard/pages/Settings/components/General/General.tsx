@@ -1,5 +1,6 @@
 import Divider from '@src/admin/Dashboard/layout/Divider/Divider'
 import Input from '@src/admin/Dashboard/layout/Input'
+import Select from '@src/admin/Dashboard/layout/Select'
 import Toggle from '@src/admin/Dashboard/layout/Toggle'
 import { __ } from '@src/utils'
 import Container from '../../../../layout/Container/Container'
@@ -22,6 +23,23 @@ const General = () => {
                 suffix={__('MINUTES')}
                 showClear
                 onClear={() => updateSetting('stachesepl_reserve_time', 15)}
+            />
+
+            <Divider />
+
+            <Select
+                label={__('SEAT_SELECTOR_TOOLTIP')}
+                description={__('SEAT_SELECTOR_TOOLTIP_DESC')}
+                options={[
+                    { label: __('DISABLE_TOOLTIP'), value: 'disabled' },
+                    { label: __('ENABLE_TOOLTIP_FOR_DESKTOP'), value: 'desktop' },
+                    { label: __('ENABLE_TOOLTIP_FOR_MOBILE'), value: 'mobile' },
+                    { label: __('ENABLE_TOOLTIP_ALWAYS'), value: 'always' },
+                ]}
+                value={settings.stachesepl_seat_selector_tooltip}
+                onChange={(e: React.ChangeEvent<HTMLSelectElement>) =>
+                    updateSetting('stachesepl_seat_selector_tooltip', e.target.value as 'disabled' | 'desktop' | 'mobile' | 'always')
+                }
             />
 
             <Divider />

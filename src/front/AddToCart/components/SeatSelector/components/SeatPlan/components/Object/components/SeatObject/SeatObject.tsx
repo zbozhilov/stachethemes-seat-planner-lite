@@ -18,10 +18,10 @@ const SeatObject = ({
     canViewSeatOrders,
 }: SeatObjectComponentProps) => {
     const isSeat = isSeatObject(data);
-    
+
     // Cast to seat type for hook usage (safe because we check isSeat before rendering)
     const seatData = data as FrontSeatObject;
-    
+
     const {
         seatRef,
         visible: tooltipVisible,
@@ -33,12 +33,15 @@ const SeatObject = ({
     const { modalMessage, isOpen: isModalOpen, showModal, hideModal } = useOnSiteModal();
     const [isBottomSheetOpen, setIsBottomSheetOpen] = useState(false);
     const isMobile = isTouchDevice();
+    const tooltipMode = window.seat_planner_add_to_cart.seat_selector_tooltip;
+    const desktopTooltipEnabled = tooltipMode === 'desktop' || tooltipMode === 'always';
+    const mobileTooltipEnabled = tooltipMode === 'mobile' || tooltipMode === 'always';
 
     // Compute status (returns safe defaults if not a seat)
-    const seatStatus = isSeat 
+    const seatStatus = isSeat
         ? getSeatStatus(seatData, selectedSeats, canViewSeatOrders)
         : { isTaken: false, isUnavailable: true, onSiteOnly: false, isClickable: false, isSelected: false };
-    
+
     const { isTaken, isUnavailable, onSiteOnly, isSelected } = seatStatus;
 
     const handleClick = useCallback(() => {
@@ -48,7 +51,7 @@ const SeatObject = ({
         }
 
         // On mobile, show bottom sheet for all seats (with info and appropriate actions)
-        if (isMobile) {
+        if (isMobile && mobileTooltipEnabled) {
             setIsBottomSheetOpen(true);
             return;
         }
@@ -84,6 +87,7 @@ const SeatObject = ({
         showModal,
         handleSeatTakenCheck,
         handleSeatSelectToggle,
+        mobileTooltipEnabled,
     ]);
 
     const handleBottomSheetSelect = useCallback(() => {
@@ -109,7 +113,7 @@ const SeatObject = ({
     }
 
     const className = getSeatClassNames(seatStatus, data.extraClass).join(' ');
-    
+
 
     return (
         <>
@@ -133,7 +137,7 @@ const SeatObject = ({
                 {seatData.isHandicap ? <Accessible /> : seatData.label}
             </div>
 
-            {!isMobile && (
+            {(!isMobile && desktopTooltipEnabled) && (
                 <SeatTooltip
                     visible={tooltipVisible}
                     position={tooltipPosition}
@@ -147,7 +151,7 @@ const SeatObject = ({
                 />
             )}
 
-            {isMobile && (
+            {(isMobile && mobileTooltipEnabled) && (
                 <SeatInfoBottomSheet
                     open={isBottomSheetOpen}
                     seatId={seatData.seatId}

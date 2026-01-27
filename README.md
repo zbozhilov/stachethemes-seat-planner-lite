@@ -47,8 +47,9 @@ https://github.com/zbozhilov/stachethemes-seat-planner-lite
 ## Changelog
 
 ### 1.4.1
-- Added seat details tooltip on mobile devices
-- Other minor bug fixes
+* Added Seat details tooltip on mobile devices
+* Added new option in general settings to show or hide the seat details tooltip
+* Other Minor bug fixes
 
 ### 1.4.0
 - Added Manager section in the Admin Panel

@@ -18,6 +18,7 @@ class Settings {
         }
 
         self::$the_settings = [
+            'stachesepl_seat_selector_tooltip'          => get_option('stachesepl_seat_selector_tooltip', 'always'),
             'stachesepl_dt_adjacent_months'             => get_option('stachesepl_dt_adjacent_months', 'no'),
             'stachesepl_enable_in_loop_button'          => get_option('stachesepl_enable_in_loop_button', 'yes'),
             'stachesepl_compat_mode'                    => get_option('stachesepl_compat_mode', 'yes'),
@@ -56,6 +57,11 @@ class Settings {
         $current_settings = self::get_settings();
 
         $allowed_settings = [
+
+            'stachesepl_seat_selector_tooltip' => [
+                'type'    => 'string',
+                'allowed' => ['disabled', 'desktop', 'mobile', 'always'],
+            ],
 
             'stachesepl_dt_adjacent_months' => [
                 'type'    => 'string',
