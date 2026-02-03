@@ -6,4 +6,3 @@
 .phpunit.result.cache
 **/build
 **/cached
-**/vendor
