@@ -9,7 +9,6 @@ if (! defined('ABSPATH')) {
 require_once STACHETHEMES_SEAT_PLANNER_LITE_PLUGIN_DIR . 'includes/translation/class.translation.php';
 require_once STACHETHEMES_SEAT_PLANNER_LITE_PLUGIN_DIR . 'includes/woocommerce/class.order-helper.php';
 require_once STACHETHEMES_SEAT_PLANNER_LITE_PLUGIN_DIR . 'includes/woocommerce/product/class.slot-reservation.php';
-require_once STACHETHEMES_SEAT_PLANNER_LITE_PLUGIN_DIR . 'includes/woocommerce/product/class.pdf-attachments.php';
 
 require_once STACHETHEMES_SEAT_PLANNER_LITE_PLUGIN_DIR . 'includes/woocommerce/product/product_traits/trait.cart-operations.php';
 require_once STACHETHEMES_SEAT_PLANNER_LITE_PLUGIN_DIR . 'includes/woocommerce/product/product_traits/trait.custom-fields.php';

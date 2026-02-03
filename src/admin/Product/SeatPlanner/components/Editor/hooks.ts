@@ -49,10 +49,9 @@ export const useEditorObjects = () => {
             ? (valueOrUpdater as (prev: WorkflowObject[]) => WorkflowObject[])(objects)
             : valueOrUpdater;
 
-        const maxAllowedObjects = window.stacheseplFilterMaxAllowedObjects || 2000;
+        const maxAllowedObjects = 100;
 
         if (theNewObjects.length > maxAllowedObjects) {
-            console.warn(`Max allowed objects is ${maxAllowedObjects}`);
             return;
         }
 

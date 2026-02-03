@@ -8,9 +8,6 @@ parameters:
         # Redundant check; PHPStan doesn't see the branch
         - message: '~Right side of && is always true~'
           path: includes/class.qrcode.php
-        # Dompdf is loaded from libs at runtime, not visible to PHPStan
-        - message: '~Dompdf\\~'
-          path: includes/pdf/class.pdf.php
         # WooCommerce HPOS internal class exists at runtime, not in stubs
         - message: '~CustomOrdersTableController not found~'
           path: includes/woocommerce/product/filters/class.auditorium-product-order-query.php
