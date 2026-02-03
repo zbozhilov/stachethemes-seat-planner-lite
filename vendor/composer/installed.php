@@ -3,7 +3,7 @@
         'name' => 'stachethemes/seat-planner-lite',
         'pretty_version' => '1.5.0.x-dev',
         'version' => '1.5.0.9999999-dev',
-        'reference' => 'f74727da0988204fe4700380ed564f8b72424ba5',
+        'reference' => '0e495821bde73ce69bbd1684f299a490f7aa8166',
         'type' => 'wordpress-plugin',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -292,7 +292,7 @@
         'stachethemes/seat-planner-lite' => array(
             'pretty_version' => '1.5.0.x-dev',
             'version' => '1.5.0.9999999-dev',
-            'reference' => 'f74727da0988204fe4700380ed564f8b72424ba5',
+            'reference' => '0e495821bde73ce69bbd1684f299a490f7aa8166',
             'type' => 'wordpress-plugin',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
