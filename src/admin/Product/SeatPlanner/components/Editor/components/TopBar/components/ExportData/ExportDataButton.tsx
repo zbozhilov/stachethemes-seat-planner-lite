@@ -1,15 +1,17 @@
 import FileDownloadIcon from '@mui/icons-material/FileDownload';
 import { __ } from "@src/utils";
 import Button from "../Button/Button";
-import { useExportToCsv } from './hooks';
+import toast from 'react-hot-toast';
 
 const ExportDataButton = () => {
 
-    const { handleClick } = useExportToCsv();
+    const handleExportData = () => {
+        toast.error(__('EXPORT_SEAT_DATA_NOT_SUPPORTED'));
+    }
 
     return (
         <Button
-            onClick={handleClick}
+            onClick={handleExportData}
             icon={FileDownloadIcon}
             title={__('EXPORT_SEAT_DATA')}
         />

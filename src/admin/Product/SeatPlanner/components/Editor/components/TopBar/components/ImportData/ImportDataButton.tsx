@@ -1,25 +1,17 @@
 import PublishIcon from '@mui/icons-material/Publish';
 import { __ } from "@src/utils";
-import { useState } from "react";
 import Button from "../Button/Button";
-import ImportDialog from "./components/ImportDialog/ImportDialog";
+import toast from "react-hot-toast";
 
 const ImportDataButton = () => {
 
-    const [settingsOpen, setSettingsOpen] = useState(false);
-
-    const handleWorkflowSettingsClose = () => {
-        setSettingsOpen(false);
-    }
-
-    const handleWorkflowSettingsOpen = () => {
-        setSettingsOpen(true);
+    const handleImportData = () => {
+        toast.error(__('IMPORT_SEAT_PLAN_NOT_SUPPORTED'));
     }
 
     return (
         <>
-            <ImportDialog isOpen={settingsOpen} onClose={handleWorkflowSettingsClose} />
-            <Button onClick={handleWorkflowSettingsOpen} icon={PublishIcon} title={__('IMPORT_SEAT_PLAN')} />
+            <Button onClick={handleImportData} icon={PublishIcon} title={__('IMPORT_SEAT_PLAN')} />
         </>
     )
 }

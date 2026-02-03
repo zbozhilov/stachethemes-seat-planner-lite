@@ -78,6 +78,8 @@ class Translation {
     public static function get_admin_strings(): array {
 
         return [
+            'EXPORT_SEAT_DATA_NOT_SUPPORTED' => esc_html__('Export seat data is not supported in the lite version.', 'stachethemes-seat-planner-lite'),
+            'IMPORT_SEAT_PLAN_NOT_SUPPORTED' => esc_html__('Import seat plan is not supported in the lite version.', 'stachethemes-seat-planner-lite'),
             'MAX_OBJECTS_LIMIT_REACHED'      => esc_html__('Lite version supports up to 100 objects.', 'stachethemes-seat-planner-lite'),
             'EXTRA_CLASS'                    => esc_html__('Additional Class Name', 'stachethemes-seat-planner-lite'),
             'CLICK_TO_CHANGE_DISPLAY_LABEL'  => esc_html__('Click to change display label', 'stachethemes-seat-planner-lite'),
