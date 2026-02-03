@@ -1,5 +1,6 @@
 import Button from '@src/admin/Dashboard/layout/Button/Button';
 import './Pagination.scss';
+import { __ } from '@src/utils';
 
 type PaginationProps = {
     currentPage: number;
@@ -112,7 +113,7 @@ const Pagination = ({ currentPage, totalPages, onPageChange }: PaginationProps) 
                     onClick={handlePrevious}
                     disabled={currentPage === 1}
                 >
-                    <span className="stachesepl-listing-pagination-btn-full">← Previous</span>
+                    <span className="stachesepl-listing-pagination-btn-full">{__('PREVIOUS_PAGE')} ←</span>
                     <span className="stachesepl-listing-pagination-btn-short">←</span>
                 </Button>
             </div>
@@ -185,7 +186,7 @@ const Pagination = ({ currentPage, totalPages, onPageChange }: PaginationProps) 
                     onClick={handleNext}
                     disabled={currentPage === totalPages}
                 >
-                    <span className="stachesepl-listing-pagination-btn-full">Next →</span>
+                    <span className="stachesepl-listing-pagination-btn-full">{__('NEXT_PAGE')} →</span>
                     <span className="stachesepl-listing-pagination-btn-short">→</span>
                 </Button>
             </div>

@@ -16,21 +16,21 @@ if (! defined('COOKIE_DOMAIN')) {
     define('COOKIE_DOMAIN', '');
 }
 
-$plugin_file = __DIR__ . '/stachethemes-seat-planner.php';
-if (! defined('STACHETHEMES_SEAT_PLANNER_VERSION')) {
-    define('STACHETHEMES_SEAT_PLANNER_VERSION', '1.4.1');
+$plugin_file = __DIR__ . '/stachethemes-seat-planner-lite.php';
+if (! defined('STACHETHEMES_SEAT_PLANNER_LITE_VERSION')) {
+    define('STACHETHEMES_SEAT_PLANNER_LITE_VERSION', '1.5.0');
 }
-if (! defined('STACHETHEMES_SEAT_PLANNER_PLUGIN_DIR')) {
-    define('STACHETHEMES_SEAT_PLANNER_PLUGIN_DIR', __DIR__ . '/');
+if (! defined('STACHETHEMES_SEAT_PLANNER_LITE_PLUGIN_DIR')) {
+    define('STACHETHEMES_SEAT_PLANNER_LITE_PLUGIN_DIR', __DIR__ . '/');
 }
-if (! defined('STACHETHEMES_SEAT_PLANNER_PLUGIN_URL')) {
-    define('STACHETHEMES_SEAT_PLANNER_PLUGIN_URL', 'https://example.com/wp-content/plugins/stachethemes-seat-planner/');
+if (! defined('STACHETHEMES_SEAT_PLANNER_LITE_PLUGIN_URL')) {
+    define('STACHETHEMES_SEAT_PLANNER_LITE_PLUGIN_URL', 'https://example.com/wp-content/plugins/stachethemes-seat-planner-lite/');
 }
-if (! defined('STACHETHEMES_SEAT_PLANNER_PLUGIN_BASENAME')) {
-    define('STACHETHEMES_SEAT_PLANNER_PLUGIN_BASENAME', 'stachethemes-seat-planner/stachethemes-seat-planner.php');
+if (! defined('STACHETHEMES_SEAT_PLANNER_LITE_PLUGIN_BASENAME')) {
+    define('STACHETHEMES_SEAT_PLANNER_LITE_PLUGIN_BASENAME', 'stachethemes-seat-planner-lite/stachethemes-seat-planner-lite.php');
 }
-if (! defined('STACHETHEMES_SEAT_PLANNER_PLUGIN_FILE')) {
-    define('STACHETHEMES_SEAT_PLANNER_PLUGIN_FILE', $plugin_file);
+if (! defined('STACHETHEMES_SEAT_PLANNER_LITE_PLUGIN_FILE')) {
+    define('STACHETHEMES_SEAT_PLANNER_LITE_PLUGIN_FILE', $plugin_file);
 }
 
 require_once __DIR__ . '/vendor/autoload.php';

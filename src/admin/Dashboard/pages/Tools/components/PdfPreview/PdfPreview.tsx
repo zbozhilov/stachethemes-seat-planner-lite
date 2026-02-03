@@ -1,11 +1,10 @@
-import { __ } from '@src/utils'
-import { useRef, useState } from 'react'
-import { toast } from 'react-hot-toast'
-import Button from '../../../../layout/Button/Button'
+import { useState, useRef } from 'react'
 import Container from '../../../../layout/Container/Container'
-import InfoBox from '../../../../layout/InfoBox/InfoBox'
+import Button from '../../../../layout/Button/Button'
 import Input from '../../../../layout/Input/Input'
 import Notes from '../../../../layout/Notes/Notes'
+import InfoBox from '../../../../layout/InfoBox/InfoBox'
+import { __ } from '@src/utils'
 import './PdfPreview.scss'
 
 const PdfPreview = () => {
@@ -15,7 +14,18 @@ const PdfPreview = () => {
 
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault()
-        toast.error(__('PDF_PREVIEW_NOT_SUPPORTED'))
+        setError('')
+
+        const orderIdNum = parseInt(orderId, 10)
+        if (!orderId || isNaN(orderIdNum) || orderIdNum <= 0) {
+            setError(__('PDF_PREVIEW_INVALID_ORDER_ID'))
+            return
+        }
+
+        // Submit the form to open PDF in new tab
+        if (formRef.current) {
+            formRef.current.submit()
+        }
     }
 
     const handleOrderIdChange = (e: React.ChangeEvent<HTMLInputElement>) => {

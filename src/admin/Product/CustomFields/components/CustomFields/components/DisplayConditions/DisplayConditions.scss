@@ -1,0 +1,137 @@
+.stachesepl-seat-planner-custom-fields-display-conditions {
+    width: 100%;
+    margin-top: 0;
+    margin-bottom: 16px;
+    box-sizing: border-box;
+
+    // Remove bottom margin when it's the last item in a group
+    .stachesepl-custom-fields-group > &:last-child {
+        margin-bottom: 0;
+    }
+
+    .stachesepl-seat-planner-custom-fields-display-conditions-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        margin-bottom: 15px;
+        padding-bottom: 10px;
+        border-bottom: 1px solid #e5e5e5;
+
+        .stachesepl-seat-planner-custom-fields-display-conditions-title {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+
+            span {
+                font-weight: 600;
+                font-size: 13px;
+                color: #1d2327;
+            }
+        }
+
+        .stachesepl-seat-planner-custom-fields-display-conditions-description {
+            margin: 0;
+            font-size: 12px;
+            color: #50575e;
+            line-height: 1.5;
+            font-weight: normal;
+            padding:0;
+        }
+    }
+
+    .stachesepl-seat-planner-custom-fields-no-conditions {
+        margin: 0;
+        padding: 15px;
+        text-align: center;
+        color: #50575e;
+        font-size: 13px;
+        font-style: italic;
+        background-color: #fff;
+        border: 1px dashed #ccc;
+        border-radius: 8px;
+    }
+
+    .stachesepl-seat-planner-custom-fields-conditions-list {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+    }
+
+    .stachesepl-seat-planner-custom-fields-condition-item {
+        position: relative;
+        display: flex;
+        align-items: flex-start;
+        gap: 10px;
+        padding: 16px;
+        background-color: #f9f9f9;
+        border: 1px solid #dcdcde;
+        border-radius: 8px;
+        box-sizing: border-box;
+
+        .stachesepl-seat-planner-custom-fields-condition-content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+
+            label {
+                margin: 0;
+                width: 100%;
+
+                span {
+                    display: block;
+                    margin-bottom: 5px;
+                    font-size: 13px;
+                    font-weight: 500;
+                    color: #555;
+                }
+
+                select,
+                input {
+                    width: 100%;
+                    padding: 6px 10px;
+                    border: 1px solid #c3c4c7;
+                    box-sizing: border-box;
+                    font-size: 13px;
+                    min-height: 36px;
+                    background: #fff;
+                    color: #1d2327;
+
+                    &:focus {
+                        outline: none;
+                        border-color: #2271b1;
+                        box-shadow: 0 0 0 1px #2271b1;
+                    }
+                }
+
+                small {
+                    margin-top: 5px;
+                    display: block;
+                    color: #50575e;
+                    font-size: 12px;
+                }
+            }
+        }
+    }
+}
+
+@media (max-width: 782px) {
+    .stachesepl-seat-planner-custom-fields-display-conditions {
+        .stachesepl-seat-planner-custom-fields-display-conditions-header {
+            flex-direction: column;
+            align-items: stretch;
+            gap: 10px;
+
+            .stachesepl-seat-planner-custom-fields-display-conditions-title {
+                width: 100%;
+            }
+        }
+
+        .stachesepl-seat-planner-custom-fields-condition-item {
+            flex-direction: column;
+            gap: 12px;
+            padding-right: 12px;
+        }
+    }
+}

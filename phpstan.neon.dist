@@ -2,6 +2,30 @@ parameters:
     level: 8
     treatPhpDocTypesAsCertain: false
     ignoreErrors:
+        # chillerlan\QRCode is loaded from libs/php-qrcode at runtime, not visible to PHPStan
+        - message: '~chillerlan\\QRCode~'
+          path: includes/class.qrcode.php
+        # Redundant check; PHPStan doesn't see the branch
+        - message: '~Right side of && is always true~'
+          path: includes/class.qrcode.php
+        # Dompdf is loaded from libs at runtime, not visible to PHPStan
+        - message: '~Dompdf\\~'
+          path: includes/pdf/class.pdf.php
+        # WooCommerce HPOS internal class exists at runtime, not in stubs
+        - message: '~CustomOrdersTableController not found~'
+          path: includes/woocommerce/product/filters/class.auditorium-product-order-query.php
+        # Kept break; after wp_send_json_*() for sanity check (wp_send_json_* exits)
+        - identifier: deadCode.unreachable
+          path: includes/ajax/class.ajax.php
+        # WooCommerce product traits/filters: array value types and missing types (to be added incrementally)
+        - identifier: missingType.iterableValue
+          path: includes/woocommerce/product/**
+        - identifier: missingType.property
+          path: includes/woocommerce/product/**
+        - identifier: missingType.return
+          path: includes/woocommerce/product/**
+        - identifier: missingType.parameter
+          path: includes/woocommerce/product/**
     paths:
         - stachethemes-seat-planner-lite.php
         - includes/

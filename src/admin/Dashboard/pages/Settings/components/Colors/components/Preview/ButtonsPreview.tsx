@@ -1,4 +1,3 @@
-import FlexTwo from '@src/admin/Dashboard/layout/FlexTwo/FlexTwo';
 import Button from "@src/front/AddToCart/components/SeatSelector/components/Header/components/Button/Button";
 import { __, darken, hexToRgba } from "@src/utils";
 import { useSettings } from "../../../../SettingsContext";
@@ -19,19 +18,16 @@ const ButtonsPreview = () => {
     } as React.CSSProperties;
 
     return (
-        <div style={btnColorsStyle}>
+        <div style={{...btnColorsStyle, display: 'contents'}}>
 
-            <FlexTwo>
+            <Button onClick={() => { }}>
+                {__('BUTTON_PRIMARY')}
+            </Button>
 
-                <Button onClick={() => { }}>
-                    {__('BUTTON_PRIMARY')}
-                </Button>
+            <Button className="secondary" onClick={() => { }}>
+                {__('BUTTON_SECONDARY')}
+            </Button>
 
-                <Button className="secondary" onClick={() => { }}>
-                    {__('BUTTON_SECONDARY')}
-                </Button>
-
-            </FlexTwo>
         </div>
     )
 }

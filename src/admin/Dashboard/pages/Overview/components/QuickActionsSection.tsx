@@ -33,7 +33,7 @@ const getQuickActions = (): QuickAction[] => {
             title: __('OVERVIEW_ACTION_TOOLS'),
             description: __('OVERVIEW_ACTION_TOOLS_DESC'),
             href: '#tools',
-        },
+        }
     ]
 }
 

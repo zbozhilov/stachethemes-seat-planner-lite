@@ -8,20 +8,20 @@ if (! defined('ABSPATH')) {
 
 class Auditorium_Product_Scripts {
 
-    private static $did_init = false;
+    private static bool $did_init = false;
 
-    public static function init() {
+    public static function init(): void {
         if (self::$did_init) { // Prevent double initialization
             return;
         }
 
         self::$did_init = true;
 
-        add_filter('admin_enqueue_scripts', [__CLASS__, 'register_admin_scripts']);
-        add_filter('wp_enqueue_scripts', [__CLASS__, 'register_add_to_cart_scripts']);
+        add_action('admin_enqueue_scripts', [__CLASS__, 'register_admin_scripts']);
+        add_action('wp_enqueue_scripts', [__CLASS__, 'register_add_to_cart_scripts']);
     }
 
-    public static function register_admin_scripts() {
+    public static function register_admin_scripts(string $hook): void {
 
         $screen = get_current_screen();
 
@@ -96,7 +96,7 @@ class Auditorium_Product_Scripts {
             'seat-planner-dates',
             'stachesepl_server_datetime',
             [
-                'now' => wp_date('Y-m-d\TH:i'),
+                'now' => current_datetime()->format('Y-m-d\TH:i')
             ]
         );
 
@@ -119,6 +119,20 @@ class Auditorium_Product_Scripts {
             STACHETHEMES_SEAT_PLANNER_LITE_PLUGIN_URL . '/assets/admin/discounts/index.css',
             [],
             $seat_planner_discounts_deps['version']
+        );
+
+        wp_localize_script(
+            'seat-planner-discounts',
+            'seat_planner_currency',
+            [
+                'currency'                   => esc_html(get_woocommerce_currency()),
+                'currency_symbol'            => esc_html(get_woocommerce_currency_symbol()),
+                'currency_format'            => esc_html(get_woocommerce_price_format()),
+                'currency_decimals'          => absint(wc_get_price_decimals()),
+                'symbol_position'            => esc_html(get_option('woocommerce_currency_pos')),
+                'decimals_separator'         => esc_html(wc_get_price_decimal_separator()),
+                'thousand_separator'         => esc_html(wc_get_price_thousand_separator()),
+            ]
         );
 
         // Editor assets 
@@ -196,9 +210,10 @@ class Auditorium_Product_Scripts {
                 return $role['name'];
             }, get_editable_roles()),
         );
+
     }
 
-    public static function register_add_to_cart_scripts() {
+    public static function register_add_to_cart_scripts(string $hook): void {
 
         // add to cart
 
@@ -250,7 +265,7 @@ class Auditorium_Product_Scripts {
                 'cart_redirect_message'      => Settings::get_setting('stachesepl_cart_redirect_message') === 'yes' ? 'yes' : 'no',
                 'cart_redirect_message_text' => esc_html(Settings::get_setting('stachesepl_cart_redirect_message_text')),
                 'can_view_seat_orders'       => current_user_can('manage_woocommerce') ? 'yes' : 'no',
-                'seat_selector_tooltip'      => Settings::get_setting('stachesepl_seat_selector_tooltip'),
+                'seat_selector_tooltip'      => Settings::get_setting('stachesepl_seat_selector_tooltip')
             ]
         );
 
@@ -284,6 +299,7 @@ class Auditorium_Product_Scripts {
             'stachesepl_i18n',
             Translation::get_front_strings()
         );
+
     }
 }
 

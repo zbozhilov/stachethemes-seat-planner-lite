@@ -48,7 +48,7 @@ class Auditorium_Product_Cart_Timer {
 
         // Use a high priority so this runs after other item data filters,
         // ensuring the reservation notice appears as the last line.
-        add_filter('woocommerce_get_item_data', [__CLASS__, 'attach_item_timer_data'], 100, 3);
+        add_filter('woocommerce_get_item_data', [__CLASS__, 'attach_item_timer_data'], 100, 2);
 
         // Enqueue cart timer assets (script + styles) in the document head.
         add_action('wp_enqueue_scripts', [__CLASS__, 'register_cart_timer_scripts']);
@@ -82,7 +82,9 @@ class Auditorium_Product_Cart_Timer {
             STACHETHEMES_SEAT_PLANNER_LITE_PLUGIN_URL . 'assets/front/cart_timer/cart-timer.bundle.js',
             $asset['dependencies'],
             $asset['version'],
-            true
+            [
+                'strategy' => 'defer'
+            ]
         );
 
         // Pass the translated label to the script so it can stay in sync with PHP.
@@ -109,6 +111,7 @@ class Auditorium_Product_Cart_Timer {
         );
 
         wp_enqueue_style($handle);
+
     }
 
     /**
@@ -189,9 +192,9 @@ class Auditorium_Product_Cart_Timer {
         <span class="stachesepl-cart-timer-row stachesepl-cart-timer-is-hidden">
             <span class="stachesepl-cart-timer-label"><?php esc_html_e('Time remaining', 'stachethemes-seat-planner-lite'); ?>:</span>
             <span class="stachesepl-cart-timer"><?php echo (int) $cart_item['stachesepl_expires_at']; ?></span>
-            </div>
+        </span>
 
-    <?php
+<?php
 
         if ($echo) {
             // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped

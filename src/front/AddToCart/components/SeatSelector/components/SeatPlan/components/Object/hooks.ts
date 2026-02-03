@@ -39,7 +39,6 @@ export function useSeatOrderModal({ productId, selectedDate }: UseSeatOrderModal
 
             setSeatOrderData(data);
         } catch (error) {
-            // Don't log abort errors
             if (error instanceof Error && error.name !== 'AbortError') {
                 console.error('Failed to fetch seat order data:', error);
             }

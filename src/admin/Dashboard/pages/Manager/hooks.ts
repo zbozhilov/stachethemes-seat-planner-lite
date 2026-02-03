@@ -131,6 +131,7 @@ export const useAuditoriumProductAvailability = (
         const abortController = new AbortController();
 
         const fetchAvailability = async () => {
+
             setLoading(true);
             setError(null);
 
@@ -160,8 +161,6 @@ export const useAuditoriumProductAvailability = (
                 setLoading(false);
             } catch (err) {
 
-                setLoading(false);
-
                 if (axios.isCancel(err)) {
                     return;
                 }
@@ -169,6 +168,8 @@ export const useAuditoriumProductAvailability = (
                 if (err instanceof Error) {
                     setError(err.message);
                 }
+
+                setLoading(false);
 
             } 
         };
@@ -246,11 +247,12 @@ export const useSeatData = (
                     seat,
                     currentStatus,
                     isTaken,
+                    discounts: seatPlanData.discounts,
+                    customFields: seatPlanData.customFields,
                 });
 
                 setLoading(false);
             } catch (err) {
-                setLoading(false);
 
 
                 if (axios.isCancel(err)) {
@@ -260,6 +262,8 @@ export const useSeatData = (
                 if (err instanceof Error) {
                     setError(err.message);
                 }
+
+                setLoading(false);
 
             } 
         };
@@ -319,6 +323,8 @@ export const useSeatData = (
                 seat,
                 currentStatus,
                 isTaken,
+                discounts: seatPlanData.discounts,
+                customFields: seatPlanData.customFields,
             });
 
             setLoading(false);
@@ -389,6 +395,72 @@ export const useUpdateSeatOverride = () => {
     return { updateOverride, loading, error };
 }
 
+export type BulkUpdateResult = {
+    success: boolean;
+    successCount: number;
+    skippedCount: number;
+    failedSeats: string[];
+    message: string;
+};
+
+export const useBulkUpdateSeatOverride = () => {
+    const [loading, setLoading] = useState(false);
+    const [error, setError] = useState<string | null>(null);
+
+    const bulkUpdateOverride = useCallback(async (
+        productId: number,
+        seatIds: string[],
+        status: SeatStatus | 'default',
+        dateTime?: string
+    ): Promise<BulkUpdateResult | null> => {
+        setLoading(true);
+        setError(null);
+
+        try {
+            const response = await axios.post(
+                window.stachesepl_ajax.ajax_url,
+                new URLSearchParams({
+                    action: 'seatplanner',
+                    task: 'bulk_update_manager_seat_overrides',
+                    product_id: productId.toString(),
+                    seat_ids: JSON.stringify(seatIds),
+                    status: status,
+                    selected_date: dateTime || '',
+                    nonce: window.stachesepl_ajax.nonce,
+                }),
+                {
+                    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                }
+            )
+
+            const result = response.data;
+
+            if (!result.success) {
+                throw new Error(result.data?.error || __('BULK_UPDATE_FAILED'));
+            }
+
+            setLoading(false);
+
+            return {
+                success: true,
+                successCount: result.data.success_count,
+                skippedCount: result.data.skipped_count,
+                failedSeats: result.data.failed_seats,
+                message: result.data.message,
+            };
+        } catch (err) {
+            setLoading(false);
+
+            if (err instanceof Error) {
+                setError(err.message);
+            }
+            return null;
+        } 
+    }, []);
+
+    return { bulkUpdateOverride, loading, error };
+}
+
 export type SeatOrderDetails = {
     order_id: number;
     item_id: number;
@@ -406,6 +478,11 @@ export type SeatOrderDetails = {
         selectedDate: string;
         customFields?: Record<string, string>;
     };
+    seat_discount?: {
+        name: string;
+        type: 'percentage' | 'fixed';
+        value: number;
+    } | null;
     has_dates: boolean;
 };
 
@@ -462,11 +539,11 @@ export const useOrderDetailsBySeat = (
                     return;
                 }
 
-                setLoading(false);
-
                 if (err instanceof Error) {
                     setError(err.message);
                 }
+
+                setLoading(false);
 
             } 
         };
@@ -526,6 +603,8 @@ export const useOrderDetailsBySeat = (
 export type UpdateOrderItemData = {
     seatId?: string;
     selectedDate?: string;
+    customFields?: Record<string, string>;
+    seatDiscount?: { name: string; type: 'percentage' | 'fixed'; value: number } | null;
 };
 
 export const useUpdateOrderItem = () => {
@@ -542,13 +621,26 @@ export const useUpdateOrderItem = () => {
         setError(null);
 
         try {
-            const updates = [{
+            const { seatDiscount, ...seatDataForMeta } = seatData;
+            const seat_data = {
+                ...originalSeatData,
+                ...seatDataForMeta,
+            };
+
+            const updatePayload: {
+                item_id: number;
+                seat_data: Record<string, unknown>;
+                seat_discount?: { name: string; type: 'percentage' | 'fixed'; value: number } | '';
+            } = {
                 item_id: itemId,
-                seat_data: {
-                    ...originalSeatData,
-                    ...seatData,
-                }
-            }];
+                seat_data,
+            };
+
+            if (seatDiscount !== undefined) {
+                updatePayload.seat_discount = seatDiscount && seatDiscount.value > 0 ? seatDiscount : '';
+            }
+
+            const updates = [updatePayload];
 
             const response = await axios.post(
                 window.stachesepl_ajax.ajax_url,
@@ -584,4 +676,84 @@ export const useUpdateOrderItem = () => {
     }, []);
 
     return { updateOrderItem, loading, error, clearError: () => setError(null) };
+}
+
+export type CreateOrderSeatDiscount = {
+    name: string;
+    type: 'percentage' | 'fixed';
+    value: number;
+};
+
+export type CreateOrderData = {
+    customerName: string;
+    customerEmail: string;
+    customerPhone?: string;
+    orderStatus?: string;
+    sendEmails?: boolean;
+    seatDiscount?: CreateOrderSeatDiscount | null;
+    seatCustomFields?: Record<string, string | number | boolean>;
+};
+
+export const useCreateOrder = () => {
+    const [loading, setLoading] = useState(false);
+    const [error, setError] = useState<string | null>(null);
+
+    const createOrder = useCallback(async (
+        productId: number,
+        seatId: string,
+        dateTime: string | undefined,
+        orderData: CreateOrderData
+    ): Promise<{ success: boolean; error: string | null; orderId?: number }> => {
+        setLoading(true);
+        setError(null);
+
+        try {
+            const params: Record<string, string> = {
+                action: 'seatplanner',
+                task: 'create_order_for_seat',
+                product_id: productId.toString(),
+                seat_id: seatId,
+                selected_date: dateTime || '',
+                customer_name: orderData.customerName,
+                customer_email: orderData.customerEmail,
+                customer_phone: orderData.customerPhone || '',
+                order_status: orderData.orderStatus || 'processing',
+                send_emails: orderData.sendEmails ? 'yes' : 'no',
+                nonce: window.stachesepl_ajax.nonce,
+            };
+            if (orderData.seatDiscount && orderData.seatDiscount.value > 0) {
+                params.seat_discount = JSON.stringify(orderData.seatDiscount);
+            }
+            if (orderData.seatCustomFields && Object.keys(orderData.seatCustomFields).length > 0) {
+                params.seat_custom_fields = JSON.stringify(orderData.seatCustomFields);
+            }
+
+            const response = await axios.post(
+                window.stachesepl_ajax.ajax_url,
+                new URLSearchParams(params),
+                {
+                    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                }
+            )
+
+            setLoading(false);
+
+            const result = response.data;
+
+            if (!result.success) {
+                const errorMessage = result.data?.error || __('FAILED_TO_CREATE_ORDER');
+                setError(errorMessage);
+                return { success: false, error: errorMessage };
+            }
+
+            return { success: true, error: null, orderId: result.data?.order_id };
+        } catch (err) {
+            const errorMessage = err instanceof Error ? err.message : __('FAILED_TO_CREATE_ORDER');
+            setError(errorMessage);
+            setLoading(false);
+            return { success: false, error: errorMessage };
+        }
+    }, []);
+
+    return { createOrder, loading, error, clearError: () => setError(null) };
 }

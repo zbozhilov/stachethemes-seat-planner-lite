@@ -12,70 +12,20 @@ namespace StachethemesSeatPlannerLite;
 class Check_Ghost_Booking {
 
     /**
-     * Get all orders for a specific product that contain seat bookings
-     */
-    private static function get_orders_by_product_id($product_id) {
-
-        $orders = wc_get_orders([
-            'type'                   => 'shop_order',
-            'status'                 => ['wc-completed', 'wc-processing', 'pending', 'on-hold'],
-            'limit'                  => -1,
-            'has_auditorium_product' => 1
-        ]);
-
-        if (empty($orders)) {
-            return [];
-        }
-
-        $orders_with_this_product_id = [];
-
-        foreach ($orders as $order) {
-            $order_items = self::get_order_items($order, $product_id);
-
-            foreach ($order_items as $item) {
-                if ($item['product_id'] === $product_id) {
-                    $orders_with_this_product_id[] = $order;
-                    break;
-                }
-            }
-        }
-
-        return $orders_with_this_product_id;
-    }
-
-    /**
      * Extract seat data from order items
+     *
+     * @return list<array{order_id: int, product_id: int, seat_id: string, selected_date: string, order_status: string}>
      */
-    private static function get_order_items($order, $filter_by_product_id) {
+    private static function get_order_items(\WC_Order $order, int $filter_by_product_id): array {
+        $base_items = Order_Helper::get_order_items($order, $filter_by_product_id);
         $items = [];
-        $order_items = $order->get_items();
 
-        foreach ($order_items as $item) {
-
-            $product_id = $item->get_product_id();
-
-            if ($product_id !== $filter_by_product_id) {
-                continue;
-            }
-
-            $seat_data = (array) $item->get_meta('seat_data');
-
-            if (!$seat_data) {
-                continue;
-            }
-
-            $seat_id       = isset($seat_data['seatId']) ? $seat_data['seatId'] : '';
-            $selected_date = isset($seat_data['selectedDate']) ? $seat_data['selectedDate'] : '';
-
-            if (!$seat_id) {
-                continue;
-            }
-
+        foreach ($base_items as $base_item) {
             $items[] = [
-                'order_id'      => $order->get_id(),
-                'product_id'    => $product_id,
-                'seat_id'       => $seat_id,
-                'selected_date' => $selected_date,
+                'order_id'      => $base_item['order_id'],
+                'product_id'    => $base_item['product_id'],
+                'seat_id'       => $base_item['seat_id'],
+                'selected_date' => $base_item['selected_date'],
                 'order_status'  => $order->get_status()
             ];
         }
@@ -85,8 +35,10 @@ class Check_Ghost_Booking {
 
     /**
      * Get all auditorium product IDs
+     *
+     * @return list<int>
      */
-    public static function get_auditorium_product_ids() {
+    public static function get_auditorium_product_ids(): array {
         $products_to_test = wc_get_products([
             'status' => 'publish',
             'limit'  => -1,
@@ -94,13 +46,19 @@ class Check_Ghost_Booking {
             'return' => 'ids'
         ]);
 
-        return $products_to_test;
+        if (empty($products_to_test) || !is_array($products_to_test)) {
+            return [];
+        }
+
+        return array_values(array_unique($products_to_test));
     }
 
     /**
      * Get taken seats from product meta for a specific date
+     *
+     * @return list<string>
      */
-    private static function get_taken_seats_from_meta($product, $selected_date = '') {
+    private static function get_taken_seats_from_meta(\WC_Product $product, string $selected_date = ''): array {
         
         $meta_key = '_taken_seat';
 
@@ -116,19 +74,22 @@ class Check_Ghost_Booking {
 
         // Extract seat IDs from metadata if they are WC_Meta_Data objects
         $seat_ids = array_map(function ($seat) {
-            if (is_a($seat, 'WC_Meta_Data')) {
+            if (is_a($seat, '\WC_Meta_Data') && isset($seat->value)) {
                 return $seat->value;
             }
             return $seat;
         }, $taken_seats);
 
-        return array_unique($seat_ids);
+        return array_values(array_unique($seat_ids));
     }
 
     /**
      * Get all unique dates from orders for a product
+     *
+     * @param list<\WC_Order> $orders
+     * @return list<string>
      */
-    private static function get_unique_dates_from_orders($orders, $product_id) {
+    private static function get_unique_dates_from_orders(array $orders, int $product_id): array {
         $dates = [''];  // Include empty string for non-date specific bookings
 
         foreach ($orders as $order) {
@@ -147,13 +108,17 @@ class Check_Ghost_Booking {
 
     /**
      * Check a product for ghost bookings (seats with orders that appear free)
+     *
+     * @return array{product_id: int, product_name: string, ghost_seats: list<array{seat_id: string, selected_date: string, order_ids: list<int>, order_statuses: list<string>, order_count?: int}>, has_ghost_seats: bool}
      */
-    public static function check_product_for_ghost_booking($product_id) {
+    public static function check_product_for_ghost_booking(int $product_id): array {
         
-        /** @var Auditorium_Product $product */
         $product = wc_get_product($product_id);
 
         if (!$product || !$product->is_type('auditorium')) {
+
+            /** @var Auditorium_Product $product */
+
             return [
                 'product_id'     => $product_id,
                 // translators: %d - product ID
@@ -163,7 +128,7 @@ class Check_Ghost_Booking {
             ];
         }
 
-        $orders      = self::get_orders_by_product_id($product_id);
+        $orders      = Order_Helper::get_orders_by_product_id($product_id);
         $ghost_seats = [];
 
         // Get all unique dates from orders
@@ -233,8 +198,10 @@ class Check_Ghost_Booking {
 
     /**
      * Check all auditorium products for ghost bookings
+     *
+     * @return list<array{product_id: int, product_name: string, ghost_seats: list<array{seat_id: string, selected_date: string, order_ids: list<int>, order_statuses: list<string>, order_count?: int}>, has_ghost_seats: bool}>
      */
-    public static function get_ghost_bookings_for_products() {
+    public static function get_ghost_bookings_for_products(): array {
 
         $result = [];
         $products_to_test = self::get_auditorium_product_ids();
@@ -250,14 +217,15 @@ class Check_Ghost_Booking {
     /**
      * Fix ghost booking by adding the seat to the taken meta
      */
-    public static function fix_ghost_booking($product_id, $seat_id, $selected_date = '') {
+    public static function fix_ghost_booking(int $product_id, string $seat_id, string $selected_date = ''): bool {
         
-        /** @var Auditorium_Product $product */
         $product = wc_get_product($product_id);
 
         if (!$product || !$product->is_type('auditorium')) {
             return false;
         }
+
+        /** @var Auditorium_Product $product */
 
         // Add the seat to taken meta
         $product->add_meta_taken_seat($seat_id, $selected_date);

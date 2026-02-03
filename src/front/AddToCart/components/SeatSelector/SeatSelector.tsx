@@ -1,8 +1,9 @@
 import { useEffect, useLayoutEffect, useState } from 'react';
-import initToaster from '../Toaster/initToaster';
 import Container from './components/Container/Container';
+import Options from './components/Header/components/Options/Options';
 import Header from './components/Header/Header';
 import SeatPlan from './components/SeatPlan/SeatPlan';
+import initToaster from '../Toaster/initToaster';
 
 const SeatSelector = (props: {
     readyToRender: boolean;
@@ -29,11 +30,22 @@ const SeatSelector = (props: {
 
     return (
         <>
-            <Header />
+            <Header
+                isOptionsModalOpen={isOptionsModalOpen}
+                setIsOptionsModalOpen={setIsOptionsModalOpen}
+                onAddDiscountButtonClick={() => {
+                    setIsOptionsModalOpen(true);
+                }}
+            />
 
-            <Container>
-                <SeatPlan />
-            </Container>
+            {!isOptionsModalOpen && <>
+                <Container>
+                    <SeatPlan />
+                </Container>
+
+            </>}
+
+            {isOptionsModalOpen && <Options />}
         </>
     )
 }

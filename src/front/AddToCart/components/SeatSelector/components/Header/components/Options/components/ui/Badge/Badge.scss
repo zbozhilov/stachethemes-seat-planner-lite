@@ -1,0 +1,27 @@
+.stachesepl-ui-badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 999px;
+    white-space: nowrap;
+    flex-shrink: 0;
+    font-size: 0.75rem;
+    font-weight: 600;
+    line-height: 1;
+    padding: 6px 10px;
+}
+
+.stachesepl-ui-badge--tone-success {
+    background: var(--stachesepl-accent-color);
+    color: #fff;
+}
+
+.stachesepl-ui-badge--tone-accent {
+    background: var(--stachesepl-accent-color);
+    color: #fff;
+}
+
+.stachesepl-ui-badge--tone-neutral {
+    background: var(--stachesepl-accent-color-20);
+    color: var(--stachesepl-accent-color);
+}

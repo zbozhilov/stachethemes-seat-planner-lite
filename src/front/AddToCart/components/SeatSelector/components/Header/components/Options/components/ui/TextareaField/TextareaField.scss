@@ -1,0 +1,46 @@
+.stachesepl-textarea-field {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+}
+
+textarea.stachesepl-textarea-field-textarea {
+    all: unset;
+    box-sizing: border-box;
+    width: 100%;
+    padding: 12px 14px;
+    border-radius: var(--stachesepl-radius-md);
+    border: 1px solid var(--stachesepl-border-color);
+    font-size: 0.875rem;
+    color: var(--stachesepl-text-color);
+    background-color: rgba(0,0,0,0.025);
+    resize: vertical;
+    min-height: 100px;
+    line-height: 1.5;
+    font-family: inherit;
+    transition: all 0.2s ease;
+
+    &::placeholder {
+        font-size: 0.875rem;
+        color: var(--stachesepl-color-text-secondary);
+    }
+
+    &:hover {
+        background-color: transparent;
+    }
+
+    &:focus {
+        outline: none;
+        border-color: var(--stachesepl-accent-color);
+        box-shadow: 0 0 0 3px var(--stachesepl-accent-color-20);
+        background-color: var(--stachesepl-surface);
+    }
+}
+
+@media (max-width: 782px) {
+    textarea.stachesepl-textarea-field-textarea {
+        font-size: 1rem;
+        padding: 14px;
+        min-height: 90px;
+    }
+}

@@ -4,6 +4,11 @@
 
 .stachesepl-page-settings-content {
     margin-bottom: var(--stachesepl-space-6);
+
+    .stachesepl-select-container,
+    .stachesepl-input-container {
+        max-width: 400px;
+    }
 }
 
 .stachesepl-page-settings-footer {

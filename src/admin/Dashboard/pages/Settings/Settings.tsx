@@ -9,11 +9,10 @@ import CartBehavior from './components/CartBehavior/CartBehavior';
 import Colors from './components/Colors/Colors';
 import General from './components/General/General';
 import MobileApp from './components/MobileApp/MobileApp';
-import Pro from './components/Pro/Pro';
 import './Settings.scss';
 import { SettingsProvider, useSettings } from './SettingsContext';
 
-type SupportedTabs = 'general' | 'cart_behavior' | 'colors' | 'attachments' | 'mobile_app' | 'pro';
+type SupportedTabs = 'general' | 'cart_behavior' | 'colors' | 'attachments' | 'mobile_app';
 
 const SettingsContent = () => {
     const [activeTab, setActiveTab] = useState<SupportedTabs>('general');
@@ -36,9 +35,6 @@ const SettingsContent = () => {
             }
             case 'mobile_app': {
                 return <MobileApp />;
-            }
-            case 'pro' : {
-                return <Pro />;
             }
             default: {
                 return null;
@@ -88,10 +84,6 @@ const SettingsContent = () => {
                     {
                         id: 'mobile_app',
                         label: __('TAB_MOBILE_APP'),
-                    },
-                    {
-                        id: 'pro',
-                        label: __('TAB_PRO'),
                     }
                 ]} />
 

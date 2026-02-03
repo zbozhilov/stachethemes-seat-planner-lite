@@ -2,7 +2,6 @@
 
 namespace StachethemesSeatPlannerLite;
 
-
 if (! defined('ABSPATH')) {
     exit;
 }
@@ -12,9 +11,9 @@ if (! defined('ABSPATH')) {
  */
 class Dashboard {
 
-    public static $did_init = false;
+    public static bool $did_init = false;
 
-    public static function init() {
+    public static function init(): void {
 
         if (self::$did_init) {
             return;
@@ -26,7 +25,7 @@ class Dashboard {
         add_action('admin_enqueue_scripts', [__CLASS__, 'enqueue_scripts']);
     }
 
-    public static function register_menu() {
+    public static function register_menu(): void {
 
         add_menu_page(
             esc_html__('Seat Planner', 'stachethemes-seat-planner-lite'),
@@ -96,7 +95,7 @@ class Dashboard {
         return false;
     }
 
-    public static function enqueue_scripts() {
+    public static function enqueue_scripts(): void {
 
         if (true !== self::should_load_admin_scripts()) {
             return;
@@ -118,7 +117,7 @@ class Dashboard {
             'stachesepl-dashboard',
             STACHETHEMES_SEAT_PLANNER_LITE_PLUGIN_URL . 'assets/admin/dashboard/index.css',
             array(),
-            filemtime(STACHETHEMES_SEAT_PLANNER_LITE_PLUGIN_DIR . 'assets/admin/dashboard/index.css')
+            $dependencies['version']
         );
 
         wp_localize_script(

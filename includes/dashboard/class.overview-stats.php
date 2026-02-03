@@ -15,7 +15,7 @@ class Overview_Stats {
     /**
      * Get all overview statistics
      *
-     * @return array
+     * @return array{total_products: int, total_seats: int, total_revenue: string}
      */
     public static function get_stats(): array {
 
@@ -50,7 +50,7 @@ class Overview_Stats {
     /**
      * Get total revenue and seats sold from auditorium product orders
      *
-     * @return array [ 'seats' => int, 'revenue' => string ]
+     * @return array{seats: int, revenue: string}
      */
     private static function get_revenue_and_seats_sold(): array {
 
@@ -64,24 +64,14 @@ class Overview_Stats {
         $total_seats = 0;
 
         if (is_array($orders)) {
-            /** @var WC_Order $order */
+            /** @var \WC_Order $order */
             foreach ($orders as $order) {
-                // Only count items that have seat_data with a valid seatId
-                foreach ($order->get_items() as $item) {
-                    $seat_data_meta = $item->get_meta('seat_data');
-                    $seat_data      = is_array($seat_data_meta) ? $seat_data_meta : (is_object($seat_data_meta) ? (array) $seat_data_meta : []);
 
-                    if (empty($seat_data)) {
-                        continue;
-                    }
+                $order_items = Order_Helper::get_order_items($order);   
 
-                    $seat_id = isset($seat_data['seatId']) ? $seat_data['seatId'] : '';
-
-                    // Count each seat item that has a valid seatId and add its revenue
-                    if ($seat_id) {
-                        $total_seats++;
-                        $total_revenue += (float) $item->get_total();
-                    }
+                foreach ($order_items as $item) {
+                    $total_seats++;
+                    $total_revenue += $item['price'];
                 }
             }
         }

@@ -1,59 +1,111 @@
 .stachesepl-checkbox-wrapper {
     display: flex;
     flex-direction: column;
-    gap: 5px;
+    gap: var(--stachesepl-space-2);
+}
+
+.stachesepl-checkbox-header {
+    display: flex;
+    align-items: center;
+    gap: var(--stachesepl-space-3);
+}
+
+.stachesepl-checkbox-control {
+    position: relative;
+    display: inline-flex;
+    cursor: pointer;
+    flex-shrink: 0;
+}
+
+.stachesepl-checkbox-input {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    padding: 0;
+    margin: 0;
+    opacity: 0 !important;
+    cursor: pointer;
+    border-width: 0;
+
+    &:focus + .stachesepl-checkbox-box {
+        box-shadow: var(--stachesepl-shadow-focus);
+    }
+
+    &:checked + .stachesepl-checkbox-box {
+        background-color: var(--stachesepl-primary);
+        border-color: var(--stachesepl-primary);
+
+        .stachesepl-checkbox-check {
+            opacity: 1;
+        }
+    }
+
+    &:disabled + .stachesepl-checkbox-box {
+        background-color: var(--stachesepl-bg-subtle, #f3f4f6);
+        border-color: var(--stachesepl-border, #e5e7eb);
+        cursor: not-allowed;
+    }
+
+    &:disabled:checked + .stachesepl-checkbox-box {
+        background-color: var(--stachesepl-gray-400, #9ca3af);
+        border-color: var(--stachesepl-gray-400, #9ca3af);
+    }
+}
+
+.stachesepl-checkbox-box {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 20px;
+    height: 20px;
+    border: 2px solid var(--stachesepl-border, #d1d5db);
+    border-radius: 4px;
+    background-color: var(--stachesepl-bg-card, #fff);
+    transition:
+        background-color 0.15s ease,
+        border-color 0.15s ease,
+        box-shadow 0.15s ease;
+}
+
+.stachesepl-checkbox-control:hover .stachesepl-checkbox-input:not(:disabled):not(:checked) + .stachesepl-checkbox-box {
+    border-color: var(--stachesepl-gray-400, #9ca3af);
+}
+
+.stachesepl-checkbox-check {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    color: #fff;
+    transition: opacity 0.15s ease;
 }
 
 .stachesepl-checkbox-label {
-    display: flex;
-    align-items: center;
-    gap: 8px;
+    font-size: var(--stachesepl-text-sm);
+    font-weight: 500;
+    color: var(--stachesepl-text-primary);
     cursor: pointer;
     margin: 0;
+    user-select: none;
 }
 
-.stachesepl-checkbox {
-    width: 18px;
-    height: 18px;
-    margin: 0;
-    cursor: pointer;
-    border: 1px solid #c3c4c7;
-    border-radius: 3px;
-    background-color: #fff;
-    transition: border-color 0.2s ease, background-color 0.2s ease;
+.stachesepl-checkbox-header:has(.stachesepl-checkbox-input:disabled) {
+    cursor: not-allowed;
 
-    &:checked {
-        background-color: var(--wp-admin-theme-color, #007cba);
-        border-color: var(--wp-admin-theme-color, #007cba);
-        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20' fill='white'%3E%3Cpath fill-rule='evenodd' d='M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z' clip-rule='evenodd'/%3E%3C/svg%3E");
-        background-size: 14px;
-        background-position: center;
-        background-repeat: no-repeat;
-    }
-
-    &:focus {
-        outline: none;
-        border-color: var(--wp-admin-theme-color, #007cba);
-        box-shadow: 0 0 0 1px var(--wp-admin-theme-color, #007cba);
-    }
-
-    &:disabled {
-        background-color: #f0f0f1;
-        border-color: #dcdcde;
+    .stachesepl-checkbox-control,
+    .stachesepl-checkbox-label {
         cursor: not-allowed;
+    }
+
+    .stachesepl-checkbox-label {
         opacity: 0.6;
     }
 }
 
-.stachesepl-checkbox-label-text {
-    font-size: 14px;
-    color: #2c3338;
-    user-select: none;
-}
-
 .stachesepl-checkbox-description {
-    font-size: 13px;
-    color: #646970;
-    margin-left: 26px;
-    line-height: 1.5;
+    font-size: var(--stachesepl-text-sm);
+    color: var(--stachesepl-text-secondary);
+    line-height: var(--stachesepl-leading-relaxed);
+    padding-left: calc(20px + var(--stachesepl-space-3));
 }

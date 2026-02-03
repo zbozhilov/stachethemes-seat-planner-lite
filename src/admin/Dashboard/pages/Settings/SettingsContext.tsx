@@ -3,7 +3,6 @@ import { __ } from '@src/utils';
 
 export type SettingsState = {
     stachesepl_seat_selector_tooltip: 'disabled' | 'desktop' | 'mobile' | 'always'
-    stachesepl_qr_code_enabled: 'yes' | 'no'
     stachesepl_dt_adjacent_months: 'yes' | 'no'
     stachesepl_enable_in_loop_button: 'yes' | 'no'
     stachesepl_compat_mode: 'yes' | 'no'
@@ -13,6 +12,7 @@ export type SettingsState = {
     stachesepl_cart_redirect_message: 'yes' | 'no'
     stachesepl_cart_redirect_message_text: string
     stachesepl_cart_timer_enabled: 'yes' | 'no'
+     stachesepl_qr_code_enabled: 'yes' | 'no'
     stachesepl_pdf_attachments: 'yes' | 'no'
     stachesepl_pdf_attachment_name: string
     stachesepl_auto_confirm_paid_orders: 'yes' | 'no'
@@ -33,8 +33,7 @@ type SettingsContextType = {
 }
 
 const defaultSettings: SettingsState = {
-    stachesepl_seat_selector_tooltip: 'always',
-    stachesepl_qr_code_enabled: 'yes',
+    stachesepl_seat_selector_tooltip: 'disabled',
     stachesepl_dt_adjacent_months: 'no',
     stachesepl_enable_in_loop_button: 'yes',
     stachesepl_compat_mode: 'yes',
@@ -48,6 +47,7 @@ const defaultSettings: SettingsState = {
     // ACCENT COLOR
     stachesepl_accent_color: '#873eff',
 
+    stachesepl_qr_code_enabled: 'yes',
     stachesepl_pdf_attachments: 'yes',
     stachesepl_pdf_attachment_name: '',
     stachesepl_auto_confirm_paid_orders: 'no',

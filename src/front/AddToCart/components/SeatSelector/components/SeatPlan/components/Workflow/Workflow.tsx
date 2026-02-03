@@ -1,6 +1,5 @@
 import { useSeatPlanData } from '@src/front/AddToCart/components/context/hooks';
 import { SeatPlanDataProps } from '@src/front/AddToCart/types';
-import React from 'react';
 import { useImageReady } from './hooks';
 import './Workflow.scss';
 

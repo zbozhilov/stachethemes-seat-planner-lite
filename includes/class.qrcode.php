@@ -9,7 +9,7 @@ if (! defined('ABSPATH')) {
 class QRCode {
 
     // Retrieve qr code image url from text
-    public static function get_qr_code(string $text) {
+    public static function get_qr_code(string $text): string|false {
 
         try {
 
@@ -63,7 +63,10 @@ class QRCode {
     }
 
     // Retrieve qr code data from text
-    public static function get_decode_qr_code_text(string $text, bool $mark_as_scanned = true, string $scan_author_name = '') {
+    /**
+     * @return array<string, mixed>
+     */
+    public static function get_decode_qr_code_text(string $text, bool $mark_as_scanned = true, string $scan_author_name = ''): array {
 
         // Default data on failure
         $fail_data = [
@@ -79,7 +82,8 @@ class QRCode {
             'price'                => '',
             'seat_id'              => '',
             'order_link'           => '',
-            'customer_name'        => ''
+            'customer_name'        => '',
+            'custom_fields'        => null
         ];
 
         // Expected format
@@ -105,7 +109,7 @@ class QRCode {
         }
 
         $order = wc_get_order($order_id);
-        if (!$order) {
+        if (!$order || !($order instanceof \WC_Order)) {
             return $fail_data;
         }
 
@@ -116,15 +120,15 @@ class QRCode {
         }
 
         // Get order item
-        $item = $order->get_item($item_id);
+        $item = $order->get_item((int) $item_id);
         if (!$item) {
             return $fail_data;
         }
 
         // Get seat data
-        $seat_data = (array) $item->get_meta('seat_data');
-        
-        if (!$seat_data || !$product->is_seat_taken($seat_data['seatId'])) {
+        $seat_data = Utils::normalize_seat_data_meta($item->get_meta('seat_data'));
+        $selected_date = isset($seat_data['selectedDate']) ? $seat_data['selectedDate'] : '';
+        if (empty($seat_data) || !$product->is_seat_taken($seat_data['seatId'], $selected_date)) {
             return $fail_data;
         }
 
@@ -134,6 +138,7 @@ class QRCode {
         }
 
         // 3. Mark as scanned
+        $was_scanned = false;
         if ($mark_as_scanned) {
             $was_scanned = isset($seat_data['qr_code_scanned']) ? (bool) $seat_data['qr_code_scanned'] : false;
 
@@ -141,7 +146,7 @@ class QRCode {
                 $seat_data['qr_code_scanned'] = true;
                 $seat_data['qr_code_scanned_timestamp'] = time();
                 $seat_data['qr_code_scanned_author'] = $scan_author_name ?: get_current_user_id();
-                $item->update_meta_data('seat_data', (object) $seat_data);
+                $item->update_meta_data('seat_data', $seat_data);
                 $item->save_meta_data();
             }
 
@@ -159,8 +164,8 @@ class QRCode {
         // Return the result
         return [
             'scanned'              => (bool) $was_scanned,
-            'scan_date'            => self::get_qr_code_scan_date($seat_data['qr_code_scanned_timestamp'] ?? 0),
-            'scan_author'          => self::get_qr_code_scan_author($seat_data['qr_code_scanned_author'] ?? 0),
+            'scan_date'            => self::get_qr_code_scan_date($seat_data['qr_code_scanned_timestamp'] ?? ''),
+            'scan_author'          => self::get_qr_code_scan_author($seat_data['qr_code_scanned_author'] ?? ''),
             'order_id'             => (int) $order_id,
             'order_key'            => esc_html($order_key),
             'order_display_status' => esc_html(wc_get_order_status_name($order->get_status())),
@@ -169,10 +174,11 @@ class QRCode {
             'product_title'        => esc_html($product->get_title()),
             'price'                => esc_html(wc_price($seat_data['price'])),
             'seat_id'              => esc_html($seat_data['seatId']),
-            'date_time'            => '',
-            'date_time_timestamp'  => 0,
+            'date_time'            => isset($seat_data['selectedDate']) && $seat_data['selectedDate']  ? Utils::get_formatted_date_time($seat_data['selectedDate']) : '',
+            'date_time_timestamp'  => isset($seat_data['selectedDate']) && $seat_data['selectedDate']  ? strtotime($seat_data['selectedDate']) : 0,
             'order_link'           => $order->get_edit_order_url(),
-            'customer_name'        => esc_html($order->get_billing_first_name() . ' ' . $order->get_billing_last_name())
+            'customer_name'        => esc_html($order->get_billing_first_name() . ' ' . $order->get_billing_last_name()),
+            'custom_fields'        => $seat_data['customFields'] ?? null
         ];
     }
 
@@ -197,9 +203,8 @@ class QRCode {
         if (!$timestamp) {
             return '';
         }
-    
+
         $date_string = get_date_from_gmt(gmdate('Y-m-d H:i:s', $timestamp));
         return date_i18n(get_option('date_format') . ' ' . get_option('time_format'), strtotime($date_string));
     }
-    
 }

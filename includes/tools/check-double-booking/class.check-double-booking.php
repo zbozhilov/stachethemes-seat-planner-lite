@@ -4,77 +4,29 @@ namespace StachethemesSeatPlannerLite;
 
 class Check_Double_Booking {
 
-    private static function get_orders_by_product_id($product_id) {
-
-        // Note 
-        // 'auditorium_product_id' filter is not yet used since older versions of the plugin does not include this meta key.
-        // That's why 'has_auditorium_product' is used instead and the orders are later checked for the $product_id
-
-        $orders = wc_get_orders([
-            'type'                   => 'shop_order',
-            'status'                 => ['wc-completed', 'wc-processing', 'pending', 'on-hold'],
-            'limit'                  => -1,
-            'has_auditorium_product' => 1
-        ]);
-
-        if (empty($orders)) {
-            return [];
-        }
-
-        $orders_with_this_product_id = [];
-
-        foreach ($orders as $order) {
-            $order_items = self::get_order_items($order, $product_id);
-
-            foreach ($order_items as $item) {
-
-                if ($item['product_id'] === $product_id) {
-                    $orders_with_this_product_id[] = $order;
-                    break; // No need to check other items in this order
-                }
-            }
-        }
-
-        return $orders_with_this_product_id;
-    }
-
-    private static function get_order_items($order, $filter_by_product_id) {
+    /**
+     * @return list<array{order_id: int, product_id: int, seat_id: string, selected_date: string}>
+     */
+    private static function get_order_items(\WC_Order $order, int $filter_by_product_id): array {
+        $base_items = Order_Helper::get_order_items($order, $filter_by_product_id);
         $items = [];
-        $order_items = $order->get_items();
 
-        foreach ($order_items as $item) {
-
-            $product_id = $item->get_product_id();
-
-            if ($product_id !== $filter_by_product_id) {
-                continue; // Skip items that do not match the product ID
-            }
-
-            $seat_data = (array) $item->get_meta('seat_data');
-
-            if (!$seat_data) {
-                continue;
-            }
-
-            $seat_id       = $seat_data['seatId'];
-            $selected_date = isset($seat_data['selectedDate']) ? $seat_data['selectedDate'] : '';
-
-            if (!$seat_id) {
-                continue;
-            }
-
+        foreach ($base_items as $base_item) {
             $items[] = [
-                'order_id'      => $order->get_id(),
-                'product_id'    => $product_id,
-                'seat_id'       => $seat_id,
-                'selected_date' => $selected_date
+                'order_id'      => $base_item['order_id'],
+                'product_id'    => $base_item['product_id'],
+                'seat_id'       => $base_item['seat_id'],
+                'selected_date' => $base_item['selected_date']
             ];
         }
 
         return $items;
     }
 
-    public static function get_auditorium_product_ids() {
+    /**
+     * @return list<int>
+     */
+    public static function get_auditorium_product_ids(): array {
         $products_to_test = wc_get_products([
             'status' => 'publish',
             'limit'  => -1,
@@ -82,11 +34,18 @@ class Check_Double_Booking {
             'return' => 'ids'
         ]);
 
-        return $products_to_test;
+        if (empty($products_to_test) || !is_array($products_to_test)) {
+            return [];
+        }
+
+        return array_values(array_unique($products_to_test));
     }
 
-    public static function check_product_for_double_booking($product_id) {
-        $orders      = self::get_orders_by_product_id($product_id);
+    /**
+     * @return array{product_id: int, product_name: string, duplicates: list<array{seat_id: string, selected_date: string, count: int, order_ids: list<int>}>, has_duplicates: bool}
+     */
+    public static function check_product_for_double_booking(int $product_id): array {
+        $orders      = Order_Helper::get_orders_by_product_id($product_id);
         $duplicates  = [];
         $seat_counts = [];
 
@@ -142,7 +101,10 @@ class Check_Double_Booking {
         ];
     }
 
-    public static function get_double_bookings_for_products() {
+    /**
+     * @return list<array{product_id: int, product_name: string, duplicates: list<array{seat_id: string, selected_date: string, count: int, order_ids: list<int>}>, has_duplicates: bool}>
+     */
+    public static function get_double_bookings_for_products(): array {
 
         $result = [];
 

@@ -1,0 +1,95 @@
+.stachesepl-options-seat-options {
+    border: 1px solid var(--stachesepl-border-color);
+    border-radius: var(--stachesepl-radius-md);
+
+    +.stachesepl-options-seat-options {
+        margin-top: 16px;
+    }
+
+    &-header {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+        padding: 18px 24px;
+        background: rgba(0,0,0,0.025);
+        border-bottom: 1px solid var(--stachesepl-border-color);
+        border-top-left-radius: var(--stachesepl-radius-md);
+        border-top-right-radius: var(--stachesepl-radius-md);
+
+        .stachesepl-seat-icon {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 44px;
+            height: 44px;
+            background: var(--stachesepl-accent-color);
+            border-radius: 10px;
+            color: #ffffff;
+            font-size: 0.8125rem;
+            font-weight: 700;
+            flex-shrink: 0;
+        }
+
+        .stachesepl-seat-info {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+            min-width: 0;
+            line-height: 1;
+        }
+
+        .stachesepl-seat-label {
+            font-size: 0.6875rem;
+            font-weight: 600;
+            color: var(--stachesepl-text-secondary-color);
+            text-transform: uppercase;
+            line-height: 1;
+        }
+
+        .stachesepl-seat-id {
+            font-size: 1.0625rem;
+            font-weight: 700;
+            color: var(--stachesepl-text-color);
+        }
+    }
+}
+
+
+.stachesepl-options-seat-options-body {
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+@media (max-width: 782px) {
+    .stachesepl-options-seat-options {
+        border-radius: var(--stachesepl-radius-md);
+
+        +.stachesepl-options-seat-options {
+            margin-top: 12px;
+        }
+    }
+
+    .stachesepl-options-seat-options-header {
+        padding: 16px 18px;
+        font-size: 0.875rem;
+        gap: 12px;
+
+        .stachesepl-seat-icon {
+            width: 40px;
+            height: 40px;
+            font-size: 0.75rem;
+        }
+
+        .stachesepl-seat-id {
+            font-size: 1rem;
+        }
+    }
+
+    .stachesepl-options-seat-options-body {
+        padding: 20px 18px;
+        gap: 24px;
+    }
+}

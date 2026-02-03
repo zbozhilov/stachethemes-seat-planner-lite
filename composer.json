@@ -1,5 +1,5 @@
 {
-    "name": "stachethemes/seat-planner-lite",
+    "name": "stachethemes/seat-planner",
     "description": "WordPress Seat Planner Plugin",
     "type": "wordpress-plugin",
     "require": {
@@ -11,6 +11,17 @@
         "phpstan/extension-installer": "^1.4",
         "szepeviktor/phpstan-wordpress": "^2.0",
         "php-stubs/woocommerce-stubs": "^9.5"
+    },
+    "autoload": {
+        "psr-4": {
+            "Stachethemes\\SeatPlanner\\": "includes/",
+            "Stachethemes\\SeatPlanner\\Product_Traits\\": "includes/woocommerce/product/product_traits/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Stachethemes\\SeatPlanner\\Tests\\": "tests/"
+        }
     },
     "scripts": {
         "test": "phpunit",

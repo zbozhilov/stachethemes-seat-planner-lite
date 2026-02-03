@@ -1,5 +1,5 @@
 import { useNavigate, useParams } from 'react-router';
-import { useAuditoriumProductAvailability } from '../../../hooks';
+import { useAuditoriumProductAvailability, useBulkUpdateSeatOverride } from '../../../hooks';
 import './Contents.scss';
 import { __ } from '@src/utils';
 import { EventSeat } from '@mui/icons-material';
@@ -44,6 +44,7 @@ const Contents = () => {
     // Selection mode state
     const [isSelectionMode, setIsSelectionMode] = useState(false);
     const [selectedSeats, setSelectedSeats] = useState<Set<string>>(new Set());
+    const { bulkUpdateOverride, loading: bulkLoading } = useBulkUpdateSeatOverride();
 
     const handleEditSeat = (seatId: string) => {
         if (isSelectionMode) return; // Don't navigate when in selection mode
@@ -83,6 +84,29 @@ const Contents = () => {
     const handleDeselectAll = useCallback(() => {
         setSelectedSeats(new Set());
     }, []);
+
+    const handleBulkStatusChange = useCallback(async (status: SeatStatus | 'default') => {
+        if (!productIdNum || selectedSeats.size === 0) return;
+
+        // toast updating message
+        const toastId = toast.loading(__('UPDATING'));
+
+        const result = await bulkUpdateOverride(
+            productIdNum,
+            Array.from(selectedSeats),
+            status,
+            dateTime
+        );
+
+        if (result?.success) {
+            toast.success(__('BULK_UPDATE_SUCCESS'), { id: toastId });
+            setSelectedSeats(new Set());
+            setIsSelectionMode(false);
+            reload();       
+        } else {
+            toast.error(result?.message || __('BULK_UPDATE_FAILED'), { id: toastId });
+        }
+    }, [productIdNum, selectedSeats, dateTime, bulkUpdateOverride, reload]);
 
     const seats = data?.objects.filter(isSeatObject) || [];
 
@@ -196,11 +220,9 @@ const Contents = () => {
             {isSelectionMode && selectedSeats.size > 0 && (
                 <BulkActionBar
                     selectedCount={selectedSeats.size}
-                    onStatusChange={() => {
-                        toast.error(__('BULK_UPDATE_NOT_SUPPORTED_IN_LITE_VERSION'));
-                    }}
+                    onStatusChange={handleBulkStatusChange}
                     onCancel={handleToggleSelectionMode}
-                    loading={false}
+                    loading={bulkLoading}
                 />
             )}
         </div>

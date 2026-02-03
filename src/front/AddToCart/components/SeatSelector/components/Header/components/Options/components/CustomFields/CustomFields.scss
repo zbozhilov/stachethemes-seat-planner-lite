@@ -1,0 +1,11 @@
+.stachesepl-options-container-custom-fields {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    
+    .stachesepl-options-container-custom-field {
+        display: flex;
+        flex-direction: column;
+
+    }
+}

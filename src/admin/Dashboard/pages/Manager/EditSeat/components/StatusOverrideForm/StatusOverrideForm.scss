@@ -1,0 +1,7 @@
+// Status Override Form (card wrapper; -form-title, -form-description, -form-field are in EditSeat.scss)
+.stachesepl-manager-edit-seat-form {
+    background: var(--stachesepl-bg-card);
+    border: 1px solid var(--stachesepl-border);
+    border-radius: var(--stachesepl-radius-lg);
+    padding: var(--stachesepl-space-5);
+}

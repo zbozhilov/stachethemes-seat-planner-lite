@@ -11,6 +11,10 @@
     .stachesepl-input-wrapper {
         width: 300px;
         flex-shrink: 0;
+
+        .stachesepl-input-container {
+            width: 300px;
+        }
     }
 
     @media (max-width: 768px) {

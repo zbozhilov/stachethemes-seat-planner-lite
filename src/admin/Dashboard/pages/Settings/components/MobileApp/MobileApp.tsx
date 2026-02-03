@@ -6,7 +6,6 @@ import Input from '@src/admin/Dashboard/layout/Input'
 import { useSettings } from '../../SettingsContext'
 import './MobileApp.scss'
 import { __ } from '@src/utils'
-import { toast } from 'react-hot-toast'
 
 const generateSecretKey = (length: number = 32): string => {
     const charset = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-_'
@@ -28,7 +27,7 @@ const generateSecretKey = (length: number = 32): string => {
 }
 
 const MobileApp = () => {
-    const androidApkUrl = 'javascript:void(0)'
+    const androidApkUrl = 'https://stachethemes.com/plugins/wp-content/uploads/android/stachethemes-seat-planner.apk'
     const restBaseUrl = window.stachesepl_rest_url.rest_url;
 
     const { settings, updateSetting } = useSettings()
@@ -63,9 +62,6 @@ const MobileApp = () => {
                     className="stachesepl-mobile-app-download-link"
                     target="_self"
                     rel="noopener"
-                    onClick={() => {
-                        toast.error(__('APP_ACCESS_NOT_SUPPORTED'))
-                    }}
                 >
                     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                         <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
@@ -78,61 +74,62 @@ const MobileApp = () => {
 
             <Divider />
 
-            <div className="stachesepl-mobile-app-rest-url">
-                <Input
-                    ref={restUrlInputRef}
-                    label={__('REST_API_BASE_URL')}
-                    description={__('REST_API_BASE_URL_DESC')}
-                    value={restBaseUrl}
-                    readOnly
-                    suffix={
-                        <button
-                            type="button"
-                            className="stachesepl-mobile-app-copy-button"
-                            onClick={handleCopyRestUrl}
-                        >
-                            {copyButtonText}
-                        </button>
-                    }
-                />
-            </div>
-
-            <Divider />
-
             <Toggle
                 label={__('ENABLE_APP_ACCESS')}
                 description={__('ENABLE_APP_ACCESS_DESC')}
-                checked={false}
-                onChange={() => {
-                    toast.error(__('APP_ACCESS_NOT_SUPPORTED'))
-                }}
+                checked={settings.stachesepl_app_enabled === 'yes'}
+                onChange={(e) => updateSetting('stachesepl_app_enabled', e.target.checked ? 'yes' : 'no')}
             />
 
-            <Divider />
+            {settings.stachesepl_app_enabled === 'yes' && <>
 
-            <div className="stachesepl-mobile-app-secret-key">
-                <Input
-                    label={__('APP_SECRET_KEY')}
-                    description={__('APP_SECRET_KEY_DESC')}
-                    placeholder={__('APP_SECRET_KEY_PLACEHOLDER')}
-                    value={settings.stachesepl_app_secret_key}
-                    onChange={(e) => updateSetting('stachesepl_app_secret_key', e.target.value)}
-                    suffix={
-                        <button
-                            type="button"
-                            className="stachesepl-mobile-app-generate-button"
-                            onClick={handleGenerateKey}
-                        >
-                            {__('GENERATE')}
-                        </button>
-                    }
-                />
-                {secretKeyLength > 0 && secretKeyLength < 8 && (
-                    <p className="stachesepl-mobile-app-error">
-                        {__('SECRET_KEY_MIN_LENGTH_ERROR')}
-                    </p>
-                )}
-            </div>
+                <Divider />
+
+                <div className="stachesepl-mobile-app-rest-url">
+                    <Input
+                        ref={restUrlInputRef}
+                        label={__('REST_API_BASE_URL')}
+                        description={__('REST_API_BASE_URL_DESC')}
+                        value={restBaseUrl}
+                        readOnly
+                        suffix={
+                            <button
+                                type="button"
+                                className="stachesepl-mobile-app-copy-button"
+                                onClick={handleCopyRestUrl}
+                            >
+                                {copyButtonText}
+                            </button>
+                        }
+                    />
+                </div>
+
+                <Divider />
+
+                <div className="stachesepl-mobile-app-secret-key">
+                    <Input
+                        label={__('APP_SECRET_KEY')}
+                        description={__('APP_SECRET_KEY_DESC')}
+                        placeholder={__('APP_SECRET_KEY_PLACEHOLDER')}
+                        value={settings.stachesepl_app_secret_key}
+                        onChange={(e) => updateSetting('stachesepl_app_secret_key', e.target.value)}
+                        suffix={
+                            <button
+                                type="button"
+                                className="stachesepl-mobile-app-generate-button"
+                                onClick={handleGenerateKey}
+                            >
+                                {__('GENERATE')}
+                            </button>
+                        }
+                    />
+                    {secretKeyLength > 0 && secretKeyLength < 8 && (
+                        <p className="stachesepl-mobile-app-error">
+                            {__('SECRET_KEY_MIN_LENGTH_ERROR')}
+                        </p>
+                    )}
+                </div>
+            </>}
         </Container>
     )
 }

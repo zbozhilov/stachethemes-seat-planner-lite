@@ -1,10 +1,9 @@
 import { useState, useMemo, useCallback } from 'react';
-import { __ } from '@src/utils';
+import { __, generateUniqueId } from '@src/utils';
 import { Add } from '@mui/icons-material';
 import { getIncrementValueByRegex } from '../utils';
 import Dialog from '@src/admin/Product/SeatPlanner/components/Editor/components/Dialog/Dialog';
 import { PatternSegment } from './types';
-import { generateUniqueId } from './utils';
 import QuickPatterns from './components/QuickPatterns';
 import PrefixSuffixFields from './components/PrefixSuffixFields';
 import PatternSegmentComponent from './components/PatternSegment';
