@@ -29,10 +29,10 @@ define('STACHETHEMES_SEAT_PLANNER_LITE_PLUGIN_FILE', __FILE__);
 
 class Stachethemes_Seat_Planner_Lite {
 
-    private static $instance;
+    private static ?Stachethemes_Seat_Planner_Lite  $instance = null;
 
     public static function instance(): Stachethemes_Seat_Planner_Lite {
-        if (!isset(self::$instance) && !(self::$instance instanceof Stachethemes_Seat_Planner_Lite)) {
+        if (!isset(self::$instance)) {
             self::$instance = new Stachethemes_Seat_Planner_Lite();
         }
         return self::$instance;

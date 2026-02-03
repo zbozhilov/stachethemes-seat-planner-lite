@@ -1,0 +1,13 @@
+parameters:
+    level: 8
+    treatPhpDocTypesAsCertain: false
+    ignoreErrors:
+    paths:
+        - stachethemes-seat-planner-lite.php
+        - includes/
+    excludePaths:
+        - includes/pdf/templates/*
+        - includes/woocommerce/product/templates/*
+    bootstrapFiles:
+        - phpstan-bootstrap.php
+    tmpDir: cached/phpstan
