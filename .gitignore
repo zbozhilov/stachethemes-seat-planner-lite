@@ -2,7 +2,6 @@
 assets/
 .vscode/
 **/libs/
-/ship
 .phpunit.result.cache
 build/
 cached/
