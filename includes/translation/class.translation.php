@@ -312,6 +312,7 @@ class Translation {
             'PRODUCT_NOTE'                    => esc_html__('Product Note', 'stachethemes-seat-planner-lite'),
             'EXPORT_BOOKINGS_SUCCESS_NO_DATA' => esc_html__('No bookings found for this product.', 'stachethemes-seat-planner-lite'),
             'EXPORT_BOOKINGS_SUCCESS_NO_DATA_FOR_DATE' => esc_html__('No bookings found for the selected date.', 'stachethemes-seat-planner-lite'),
+            'EXPORT_BOOKINGS_NOT_SUPPORTED_IN_LITE' => esc_html__('Exporting bookings is not supported in the Lite version. Upgrade to Pro to export bookings.', 'stachethemes-seat-planner-lite'),
 
             // Field selection for export
             'SELECT_FIELDS_TO_EXPORT_DESCRIPTION' => esc_html__('Select the fields you want to include in the export file', 'stachethemes-seat-planner-lite'),
