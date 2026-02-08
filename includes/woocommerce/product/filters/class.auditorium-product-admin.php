@@ -121,13 +121,6 @@ class Auditorium_Product_Admin {
         $seat_planner_reserved_seats     = Slot_Reservation::get_product_reserved_seats($product);
         $stop_selling_tickets_before     = $is_auditorium_product ? $product->get_stop_selling_tickets_before() : null;
 
-        // Extract workflowProps for prevent single empty seats settings
-        $seat_planner_data_object = $is_auditorium_product ? $product->get_seat_plan_data('object') : null;
-        $workflow_props           = $seat_planner_data_object && isset($seat_planner_data_object->workflowProps) ? $seat_planner_data_object->workflowProps : (object) [];
-        $pes_enabled              = isset($workflow_props->pesEnabled) ? (bool) $workflow_props->pesEnabled : false;
-        $pes_vert_tolerance       = isset($workflow_props->pesVertTolerance) ? (float) $workflow_props->pesVertTolerance : 0;
-        $pes_group_threshold      = isset($workflow_props->pesGroupThreshold) ? (float) $workflow_props->pesGroupThreshold : 1;
-
         ob_start(); ?>
 
         <div id="st_seat_planner_general_options" class="panel woocommerce_options_panel hidden">
@@ -183,10 +176,11 @@ class Auditorium_Product_Admin {
                         'description'       => esc_html__('Require customers to select at least this many seats in a single order. Leave empty or 0 for no minimum.', 'stachethemes-seat-planner-lite'),
                         'type'              => 'number',
                         'custom_attributes' => [
-                            'min'  => '0',
-                            'step' => '1',
+                            'min'   => '0',
+                            'step'  => '1',
+                            'disabled' => true,
                         ],
-                        'value'             => $product->get_meta('_stachesepl_min_seats_per_purchase', true),
+                        'value' => 0,
                     ]
                 );
 
@@ -201,8 +195,9 @@ class Auditorium_Product_Admin {
                         'custom_attributes' => [
                             'min'  => '0',
                             'step' => '1',
+                            'disabled' => true,
                         ],
-                        'value'             => $product->get_meta('_stachesepl_max_seats_per_purchase', true),
+                        'value' => 0,
                     ]
                 );
                 ?>
@@ -215,32 +210,13 @@ class Auditorium_Product_Admin {
                     [
                         'id'          => '_stachesepl_pes_enabled',
                         'label'       => esc_html__('Prevent single empty seats', 'stachethemes-seat-planner-lite'),
-                        'value'       => $pes_enabled ? 'yes' : 'no',
+                        'value'       => 'no',
+                        'custom_attributes' => [
+                            'disabled' => true,
+                        ],
                         'description' => esc_html__('Prevent customers from booking seats that would leave a single empty seat between booked seats.', 'stachethemes-seat-planner-lite'),
                     ]
                 );
-
-                woocommerce_wp_text_input([
-                    'id'                => '_stachesepl_pes_vert_tolerance',
-                    'label'             => esc_html__('Row Vertical Tolerance', 'stachethemes-seat-planner-lite'),
-                    'placeholder'       => '0',
-                    'desc_tip'          => true,
-                    'description'       => esc_html__('How much vertical misalignment is allowed for seats to be considered in the same row (in pixels). Small value = seats must be almost perfectly aligned. Larger value = tolerates slightly uneven rows.', 'stachethemes-seat-planner-lite'),
-                    'type'              => 'number',
-                    'custom_attributes' => ['min' => '0', 'step' => '1'],
-                    'value'             => $pes_vert_tolerance,
-                ]);
-
-                woocommerce_wp_text_input([
-                    'id'                => '_stachesepl_pes_group_threshold',
-                    'label'             => esc_html__('Seat Group Threshold', 'stachethemes-seat-planner-lite'),
-                    'placeholder'       => '1',
-                    'desc_tip'          => true,
-                    'description'       => esc_html__('Multiplier for determining seat groups. Lower values (0.5-1.0) keep seats grouped together more strictly. Higher values (2.0-5.0) allow larger gaps before splitting into separate groups. The single-seat rule applies only within each group. Default: 1.0 works for most layouts.', 'stachethemes-seat-planner-lite'),
-                    'type'              => 'number',
-                    'custom_attributes' => ['min' => '0', 'step' => '0.1'],
-                    'value'             => $pes_group_threshold,
-                ]);
                 ?>
             </div>
 
@@ -278,26 +254,6 @@ class Auditorium_Product_Admin {
                 </div>
             <?php endif; ?>
 
-            <script type="text/javascript">
-                jQuery(document).ready(function($) {
-                    const $enabledCheckbox = $('#_stachesepl_pes_enabled');
-                    const $toleranceInput = $('._stachesepl_pes_vert_tolerance_field');
-                    const $clusterSpacingMultiplierInput = $('._stachesepl_pes_group_threshold_field');
-
-                    function toggleSettings() {
-                        if ($enabledCheckbox.is(':checked')) {
-                            $toleranceInput.show();
-                            $clusterSpacingMultiplierInput.show();
-                        } else {
-                            $toleranceInput.hide();
-                            $clusterSpacingMultiplierInput.hide();
-                        }
-                    }
-
-                    $enabledCheckbox.on('change', toggleSettings);
-                    toggleSettings(); // Initial state
-                });
-            </script>
         </div>
 
         <div id="st_seat_planner_editor_options" class="panel woocommerce_options_panel hidden">
@@ -404,31 +360,6 @@ class Auditorium_Product_Admin {
         $product->update_meta_data('_stachesepl_force_out_of_stock', filter_input(INPUT_POST, '_stachesepl_force_out_of_stock', FILTER_SANITIZE_FULL_SPECIAL_CHARS));
         $product->update_meta_data('_stachesepl_stop_date', filter_input(INPUT_POST, '_stachesepl_stop_date', FILTER_SANITIZE_FULL_SPECIAL_CHARS));
 
-        $min_seats_per_purchase_raw = filter_input(INPUT_POST, '_stachesepl_min_seats_per_purchase', FILTER_SANITIZE_NUMBER_INT);
-        $max_seats_per_purchase_raw = filter_input(INPUT_POST, '_stachesepl_max_seats_per_purchase', FILTER_SANITIZE_NUMBER_INT);
-
-        $min_seats_per_purchase = max(0, (int) $min_seats_per_purchase_raw);
-        $max_seats_per_purchase = max(0, (int) $max_seats_per_purchase_raw);
-
-        $adjusted_max_seats = false;
-        if ($max_seats_per_purchase > 0 && $min_seats_per_purchase > 0 && $max_seats_per_purchase < $min_seats_per_purchase) {
-            $max_seats_per_purchase = $min_seats_per_purchase;
-            $adjusted_max_seats = true;
-        }
-
-        $product->update_meta_data('_stachesepl_min_seats_per_purchase', (string) $min_seats_per_purchase);
-        $product->update_meta_data('_stachesepl_max_seats_per_purchase', (string) $max_seats_per_purchase);
-
-        if ($adjusted_max_seats && is_admin() && class_exists('\WC_Admin_Meta_Boxes')) {
-            \WC_Admin_Meta_Boxes::add_error(
-                sprintf(
-                    // translators: %d: maximum seats per purchase
-                    esc_html__('Maximum seats per purchase was less than the minimum and has been set to %d.', 'stachethemes-seat-planner-lite'),
-                    $max_seats_per_purchase
-                )
-            );
-        }
-
         $product->set_sku(filter_input(INPUT_POST, '_stachesepl_sku', FILTER_SANITIZE_FULL_SPECIAL_CHARS));
 
         $clear_reserved_seats = isset($_POST['stachesepl_seat_planner_reserved_seats_data_remove']) ? sanitize_text_field(wp_unslash($_POST['stachesepl_seat_planner_reserved_seats_data_remove'])) : '';
@@ -447,76 +378,7 @@ class Auditorium_Product_Admin {
                 }
             }
         }
-
-        $dates_data = isset($_POST['stachesepl_seat_planner_dates_data']) ? sanitize_text_field(wp_unslash($_POST['stachesepl_seat_planner_dates_data'])) : '';
-        $has_dates  = 'no';
-
-        if ($dates_data) {
-
-            $dates_data_decoded = json_decode($dates_data);
-
-            if (is_array($dates_data_decoded)) {
-                // Remove duplicates while preserving array keys
-                $dates_data_decoded = array_values(array_unique($dates_data_decoded, SORT_STRING));
-
-                // sort dates
-                sort($dates_data_decoded);
-
-                $product->update_meta_data('_stachesepl_seat_planner_dates_data', $dates_data_decoded);
-
-                if (!empty($dates_data_decoded)) {
-                    $has_dates = 'yes';
-                }
-            }
-        }
-
-        $product->update_meta_data('_stachesepl_has_dates', $has_dates);
-
-
-        $stop_selling_tickets_before = filter_input(INPUT_POST, 'stachesepl_stop_selling_tickets_before', FILTER_SANITIZE_NUMBER_INT);
-
-        $product->update_meta_data('_stachesepl_cutoff_time', (string) $stop_selling_tickets_before);
-
-        $discounts_data         = isset($_POST['stachesepl_seat_planner_discounts_data']) ? sanitize_text_field(wp_unslash($_POST['stachesepl_seat_planner_discounts_data'])) : '';
-        $discounts_data_decoded = json_decode($discounts_data);
-
-        if (is_array($discounts_data_decoded)) {
-            $used_names = [];
-            foreach ($discounts_data_decoded as $key => $discount) {
-                $discount_name = $discount->name;
-                if (isset($used_names[$discount_name])) {
-                    $suffix    = 1;
-                    $base_name = $discount_name;
-                    while (isset($used_names[$base_name . '-' . $suffix])) {
-                        $suffix++;
-                    }
-                    $discount_name = $base_name . '-' . $suffix;
-                    $discounts_data_decoded[$key]->name = $discount_name;
-                }
-                $used_names[$discount_name] = true;
-            }
-        }
-
-        $product->update_meta_data('_stachesepl_seat_planner_discounts_data', $discounts_data_decoded);
-
-        // Custom fields data
-        $custom_fields_data = isset($_POST['stachesepl_seat_planner_custom_fields_data']) ? sanitize_text_field(wp_unslash($_POST['stachesepl_seat_planner_custom_fields_data'])) : '';
-        if ($custom_fields_data) {
-            $custom_fields_data_decoded = json_decode($custom_fields_data);
-            if (is_array($custom_fields_data_decoded)) {
-                $product->update_meta_data('_stachesepl_seat_planner_custom_fields_data', $custom_fields_data_decoded);
-            }
-        }
-
         $seat_planner_data = isset($_POST['stachesepl_seat_planner_data']) ? sanitize_text_field(wp_unslash($_POST['stachesepl_seat_planner_data'])) : '';
-
-        // Get prevent single empty seats settings from POST
-        $pes_enabled             = isset($_POST['_stachesepl_pes_enabled']) && $_POST['_stachesepl_pes_enabled'] === 'yes';
-        $pes_vert_tolerance_raw  = filter_input(INPUT_POST, '_stachesepl_pes_vert_tolerance', FILTER_SANITIZE_NUMBER_FLOAT, FILTER_FLAG_ALLOW_FRACTION);
-        $pes_group_threshold_raw = filter_input(INPUT_POST, '_stachesepl_pes_group_threshold', FILTER_SANITIZE_NUMBER_FLOAT, FILTER_FLAG_ALLOW_FRACTION);
-
-        $pes_vert_tolerance       = $pes_vert_tolerance_raw !== false && $pes_vert_tolerance_raw !== '' ? (float) $pes_vert_tolerance_raw : 0;
-        $pes_group_threshold = $pes_group_threshold_raw !== false && $pes_group_threshold_raw !== '' ? (float) $pes_group_threshold_raw : 1;
 
         if (!$seat_planner_data || $seat_planner_data === '[]') {
             // If no seat planner data exists, create minimal structure with workflowProps
@@ -537,11 +399,6 @@ class Auditorium_Product_Admin {
             $seat_planner_data_decoded->workflowProps = (object) [];
         }
 
-        // Update workflowProps with prevent single empty seats settings
-        $seat_planner_data_decoded->workflowProps->pesEnabled                  = $pes_enabled;
-        $seat_planner_data_decoded->workflowProps->pesVertTolerance                = $pes_vert_tolerance;
-        $seat_planner_data_decoded->workflowProps->pesGroupThreshold = $pes_group_threshold;
-
         $seat_planner_data_decoded->objects = array_map(function ($object) {
             if (!isset($object->type) || $object->type !== 'seat') {
                 return $object;
@@ -557,26 +414,10 @@ class Auditorium_Product_Admin {
         $product->update_meta_data('_stachesepl_seat_planner_data', (wp_json_encode($seat_planner_data_decoded, JSON_UNESCAPED_UNICODE) ?: ''));
 
         $objects = $seat_planner_data_decoded->objects;
+
         $seats = array_filter($objects, function ($object) {
             return $object->type === 'seat';
         });
-
-        $min_max_price = array_reduce($seats, function ($carry, $seat) {
-            $price = $seat->price;
-            if ($price <= 0) {
-                return $carry;
-            }
-            if ($price < $carry['min']) {
-                $carry['min'] = $price;
-            }
-            if ($price > $carry['max']) {
-                $carry['max'] = $price;
-            }
-            return $carry;
-        }, ['min' => INF, 'max' => 0]);
-
-        $product->update_meta_data('_stachesepl_price_min', $min_max_price['min']);
-        $product->update_meta_data('_stachesepl_price_max', $min_max_price['max']);
 
         $saved = $product->save();
 
