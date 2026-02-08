@@ -38,7 +38,6 @@ class Bookings_Data {
 
             /** @var \WC_Order_Item_Product $item */
             $seat_data     = $base_item['seat_data'];
-            $custom_fields = [];
             $seat_discount = $item->get_meta('seat_discount');
 
             $items[] = [
@@ -50,7 +49,7 @@ class Bookings_Data {
                 'seat_discount' => $seat_discount && is_array($seat_discount) ? $seat_discount : null,
                 'price'         => $item->get_total(),
                 'date_time'     => $base_item['selected_date'],
-                'custom_fields' => $custom_fields,
+                'custom_fields' => [],
             ];
         }
 
@@ -124,7 +123,6 @@ class Bookings_Data {
         $date_time      = '';
         $item_id        = 0;
         $seat_data      = [];
-        $seat_discount  = null;
 
         foreach ($order_items as $item) {
             if ($item['seat_id'] === $seat_id) {
@@ -132,7 +130,6 @@ class Bookings_Data {
                 $date_time = $item['date_time'];
                 $item_id = $item['item_id'];
                 $seat_data = $item['seat_data'];
-                $seat_discount = isset($item['seat_discount']) ? $item['seat_discount'] : null;
                 break;
             }
         }
@@ -150,7 +147,7 @@ class Bookings_Data {
             'seat_price'     => $seat_price,
             'date_time'      => $date_time,
             'seat_data'      => $seat_data,
-            'seat_discount'  => $seat_discount,
+            'seat_discount'  => null,
             'has_dates'      => $this->product->has_dates(),
         ];
     }
