@@ -43,7 +43,9 @@ class Ajax {
             'get_auditorium_product',
             'update_manager_seat_override',
             'bulk_update_manager_seat_overrides',
+            'bulk_move_bookings_to_date',
             'create_order_for_seat',
+            'bulk_create_order_for_seats',
         ];
 
         if (empty($task) || !in_array($task, $allowed_tasks, true)) {
@@ -580,7 +582,9 @@ class Ajax {
                             wp_send_json_error(['error' => esc_html__('Invalid updates data format', 'stachethemes-seat-planner-lite')]);
                         }
 
-                        $result = Manager_Service::update_order_item_meta($order_id, $updates);
+                        $send_notifications = isset($_POST['send_notifications']) && $_POST['send_notifications'] === 'yes';
+
+                        $result = Manager_Service::update_order_item_meta($order_id, $updates, $send_notifications);
 
                         if (!$result['success']) {
                             wp_send_json_error(['error' => $result['error']]);
@@ -704,6 +708,49 @@ class Ajax {
                         break;
                     }
 
+                case 'bulk_move_bookings_to_date': {
+
+                        if (!current_user_can('manage_woocommerce')) {
+                            wp_send_json_error([
+                                'error' => esc_html__('You do not have the required permissions to access this feature.', 'stachethemes-seat-planner-lite')
+                            ]);
+                        }
+
+                        $product_id         = filter_input(INPUT_POST, 'product_id', FILTER_VALIDATE_INT);
+                        $source_date        = isset($_POST['source_date']) ? sanitize_text_field(wp_unslash($_POST['source_date'])) : '';
+                        $target_date        = isset($_POST['target_date']) ? sanitize_text_field(wp_unslash($_POST['target_date'])) : '';
+                        $send_notifications = isset($_POST['send_notifications']) && $_POST['send_notifications'] === 'yes';
+
+                        // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
+                        $seat_ids_json = isset($_POST['seat_ids']) ? wp_unslash($_POST['seat_ids']) : '';
+                        $seat_ids      = json_decode($seat_ids_json, true);
+
+                        if (json_last_error() !== JSON_ERROR_NONE || !is_array($seat_ids)) {
+                            wp_send_json_error(['error' => esc_html__('Invalid seat IDs format', 'stachethemes-seat-planner-lite')]);
+                        }
+
+                        $result = Manager_Service::bulk_move_bookings_to_date(
+                            (int) $product_id,
+                            $seat_ids,
+                            $source_date,
+                            $target_date,
+                            $send_notifications
+                        );
+
+                        if (!$result['success']) {
+                            // Include data (blocking_errors) in error response if available
+                            $error_response = ['error' => $result['error']];
+                            if (!empty($result['data'])) {
+                                $error_response = array_merge($error_response, $result['data']);
+                            }
+                            wp_send_json_error($error_response);
+                        }
+
+                        wp_send_json_success($result['data']);
+
+                        break;
+                    }
+
                 case 'create_order_for_seat': {
 
                         if (!current_user_can('manage_woocommerce')) {
@@ -758,6 +805,54 @@ class Ajax {
                             $send_emails,
                             $seat_discount,
                             $seat_custom_fields
+                        );
+
+                        if (!$result['success']) {
+                            wp_send_json_error(['error' => $result['error']]);
+                        }
+
+                        wp_send_json_success($result['data']);
+
+                        break;
+                    }
+
+                case 'bulk_create_order_for_seats': {
+
+                        if (!current_user_can('manage_woocommerce')) {
+                            wp_send_json_error([
+                                'error' => esc_html__('You do not have the required permissions to create orders.', 'stachethemes-seat-planner-lite')
+                            ]);
+                        }
+
+                        $product_id     = filter_input(INPUT_POST, 'product_id', FILTER_VALIDATE_INT);
+                        $selected_date  = isset($_POST['selected_date']) ? sanitize_text_field(wp_unslash($_POST['selected_date'])) : '';
+                        $customer_name  = isset($_POST['customer_name']) ? sanitize_text_field(wp_unslash($_POST['customer_name'])) : '';
+                        $customer_email = isset($_POST['customer_email']) ? sanitize_email(wp_unslash($_POST['customer_email'])) : '';
+                        $customer_phone = isset($_POST['customer_phone']) ? sanitize_text_field(wp_unslash($_POST['customer_phone'])) : '';
+                        $order_status   = isset($_POST['order_status']) ? sanitize_text_field(wp_unslash($_POST['order_status'])) : 'processing';
+                        $send_emails    = isset($_POST['send_emails']) && $_POST['send_emails'] === 'yes';
+
+                        // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized -- JSON validated via json_decode below
+                        $seats_data_json = isset($_POST['seats_data']) ? wp_unslash($_POST['seats_data']) : '';
+                        $seats_data      = json_decode($seats_data_json, true);
+
+                        if (json_last_error() !== JSON_ERROR_NONE || !is_array($seats_data)) {
+                            wp_send_json_error(['error' => esc_html__('Invalid seats data format', 'stachethemes-seat-planner-lite')]);
+                        }
+
+                        if (false === $product_id || $product_id < 1) {
+                            wp_send_json_error(['error' => esc_html__('Invalid product ID', 'stachethemes-seat-planner-lite')]);
+                        }
+
+                        $result = Manager_Service::bulk_create_order_for_seats(
+                            (int) $product_id,
+                            $seats_data,
+                            $selected_date,
+                            $customer_name,
+                            $customer_email,
+                            $customer_phone,
+                            $order_status,
+                            $send_emails
                         );
 
                         if (!$result['success']) {

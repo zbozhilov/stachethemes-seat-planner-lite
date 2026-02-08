@@ -1,4 +1,4 @@
-import { EventSeat, CheckCircle, Cancel, Block, Storefront } from '@mui/icons-material';
+import { EventSeat, CheckCircle, LocalActivity, Block, Storefront } from '@mui/icons-material';
 import { __ } from '@src/utils';
 import type { SeatAvailabilityStatus } from '../types';
 import './StatsCards.scss';
@@ -48,7 +48,7 @@ const StatsCards = ({ totalSeats, statusCounts, filterStatus, onFilterChange }: 
                 onClick={() => onFilterChange('sold-out')}
             >
                 <div className="stachesepl-manager-availability-stat-icon stachesepl-manager-availability-stat-icon--sold-out">
-                    <Cancel />
+                    <LocalActivity  />
                 </div>
                 <div className="stachesepl-manager-availability-stat-content">
                     <span className="stachesepl-manager-availability-stat-value">{statusCounts['sold-out'] || 0}</span>

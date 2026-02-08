@@ -59,7 +59,14 @@ const Dates = (props: {
     
     const [stopSellingTicketsBefore, setStopSellingTicketsBefore] = useState<number>(() => {
         const element = document.querySelector('input[name="stachesepl_stop_selling_tickets_before"]') as HTMLInputElement;
-        return parseInt(element.value, 10);
+
+        const value = parseInt(element.value, 10);
+
+        if (isNaN(value)) {
+            return 0;
+        }
+
+        return value;
     });
 
     const handleAddDate = () => {

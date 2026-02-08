@@ -34,6 +34,8 @@ const EditOrderItem = () => {
         formatDateForInput,
         hasChanges,
         saveChanges,
+        sendNotifications,
+        handleSendNotificationsChange,
     } = useEditOrderItem()
 
     return (
@@ -64,6 +66,8 @@ const EditOrderItem = () => {
                             formatDateForInput,
                             hasChanges,
                             isSaving,
+                            sendNotifications,
+                            onSendNotificationsChange: handleSendNotificationsChange,
                             onSave: saveChanges,
                         }}
                     >

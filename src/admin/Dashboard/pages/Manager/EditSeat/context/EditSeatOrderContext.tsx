@@ -9,6 +9,7 @@ export type EditSeatOrderContextValue = {
     editedDate: string;
     editedDiscountName: string;
     editedCustomFields: Record<string, string | number | boolean>;
+    sendNotifications: boolean;
     visibleCustomFields: ManagerCustomFieldData[];
     isOrderSaving: boolean;
     hasOrderChanges: boolean;
@@ -20,6 +21,7 @@ export type EditSeatOrderContextValue = {
     onDateChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
     onDiscountChange: (e: React.ChangeEvent<HTMLSelectElement>) => void;
     onCustomFieldChange: (label: string, value: string | number | boolean) => void;
+    onSendNotificationsChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
     onSaveOrder: () => void;
     onResetOrder: () => void;
 };

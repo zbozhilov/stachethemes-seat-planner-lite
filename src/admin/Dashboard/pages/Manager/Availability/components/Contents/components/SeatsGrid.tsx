@@ -62,11 +62,11 @@ const SeatsGrid = ({
                         )}
                         <span className={`stachesepl-manager-seat-row-status stachesepl-manager-seat-row-status--${status}`} />
                         <span className="stachesepl-manager-seat-row-id" title={seat.seatId}>{seat.seatId}</span>
-                        {price > 0 && (
+                        {/* {price > 0 && (
                             <span className="stachesepl-manager-seat-row-price">
                                 {getFormattedPrice(price)}
                             </span>
-                        )}
+                        )} */}
                         {!isSelectionMode && <Edit className="stachesepl-manager-seat-row-edit" />}
                     </button>
                 );

@@ -2,8 +2,6 @@ import { isEqual } from "lodash";
 import { useContext, useMemo } from "react";
 import EditorContext from "./context/EditorContext";
 import { WorkflowObject } from "./components/Workflow/components/Objects/types";
-import toast from "react-hot-toast";
-import { __ } from "@src/utils";
 
 const useEditorContext = () => {
 
@@ -23,7 +21,7 @@ export const useEditorRef = () => {
 
 export const useWorkflowProps = () => {
     const context = useEditorContext();
-
+  
     return {
         workflowProps: context.workflowProps,
         setWorkflowProps: context.setWorkflowProps,
@@ -51,10 +49,10 @@ export const useEditorObjects = () => {
             ? (valueOrUpdater as (prev: WorkflowObject[]) => WorkflowObject[])(objects)
             : valueOrUpdater;
 
-        const maxAllowedObjects = 100;
+        const maxAllowedObjects = window.stacheseplFilterMaxAllowedObjects || 2000;
 
         if (theNewObjects.length > maxAllowedObjects) {
-            toast.error(__('MAX_OBJECTS_LIMIT_REACHED'));
+            console.warn(`Max allowed objects is ${maxAllowedObjects}`);
             return;
         }
 

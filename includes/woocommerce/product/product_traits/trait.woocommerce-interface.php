@@ -92,7 +92,10 @@ trait WooCommerce_Interface {
      * @param array $args
      * @return string
      */
-    public function get_add_to_cart_html($context = 'single', $args = []) {
+    public function get_add_to_cart_html($context = 'single', $args = [
+        'class' => '',
+        'date'  => '',
+    ]) {
 
         $date                = $args['date'] ?? '';
         $has_dates           = $this->has_dates() ? 'yes' : 'no';
@@ -116,7 +119,14 @@ trait WooCommerce_Interface {
 
         if ($force_out_of_stock || !$this->is_in_stock()) {
 ?>
-            <p class="<?php printf('stachesepl-add-to-cart-button-out-of-stock stachesepl-add-to-cart-button-out-of-stock-%s', esc_attr($context)); ?>">
+            <p class="<?php
+                        echo esc_attr(implode(' ', array_filter([
+                            'stachesepl-add-to-cart-button-out-of-stock',
+                            'stachesepl-add-to-cart-button-out-of-stock-' . $context,
+                            $args['class'] ?? ''
+                        ])));
+                        ?>">
+
                 <?php
                 echo esc_html(
                     apply_filters(
@@ -130,7 +140,7 @@ trait WooCommerce_Interface {
             </p>
         <?php
 
-             /** @var string $output */
+            /** @var string $output */
             $output = ob_get_clean();
             return $output;
         }
@@ -139,7 +149,11 @@ trait WooCommerce_Interface {
 
         ?>
 
-        <div class="<?php printf('stachesepl-add-to-cart-button-wrapper stachesepl-add-to-cart-button-wrapper-%s', esc_attr($context)); ?>">
+        <div class="<?php echo esc_attr(implode(' ', array_filter([
+                        'stachesepl-add-to-cart-button-wrapper',
+                        'stachesepl-add-to-cart-button-wrapper-' . $context,
+                        $args['class'] ?? ''
+                    ]))); ?>">
             <?php do_action('woocommerce_before_add_to_cart_button'); ?>
             <div
                 class="stachesepl-add-to-cart-button-root"
@@ -160,7 +174,7 @@ trait WooCommerce_Interface {
 <?php
 
         do_action('stachesepl_after_select_seat_button', $this, $context);
-                
+
         /** @var string $output */
         $output = ob_get_clean();
         return $output;

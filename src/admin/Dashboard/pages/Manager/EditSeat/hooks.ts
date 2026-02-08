@@ -43,6 +43,7 @@ export function useEditSeatOrderForm({
     const [editedCustomFields, setEditedCustomFields] = useState<
         Record<string, string | number | boolean>
     >({});
+    const [sendNotifications, setSendNotifications] = useState(true);
     const [orderSuccessMessage, setOrderSuccessMessage] = useState<string | null>(null);
     const [hasOrderChanges, setHasOrderChanges] = useState(false);
 
@@ -116,6 +117,10 @@ export function useEditSeatOrderForm({
         setOrderSuccessMessage(null);
         clearOrderError();
     }, [clearOrderError]);
+
+    const handleSendNotificationsChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
+        setSendNotifications(e.target.checked);
+    }, []);
 
     const handleCustomFieldChange = useCallback(
         (label: string, value: string | number | boolean) => {
@@ -204,7 +209,8 @@ export function useEditSeatOrderForm({
                     ...(updateData.customFields !== undefined && { customFields: updateData.customFields }),
                     ...(updateData.seatDiscount !== undefined && { seatDiscount: updateData.seatDiscount }),
                 },
-                orderDetails.seat_data
+                orderDetails.seat_data,
+                sendNotifications
             );
 
             if (result.success) {
@@ -242,6 +248,7 @@ export function useEditSeatOrderForm({
         editedDate,
         editedDiscountName,
         editedCustomFields,
+        sendNotifications,
         visibleCustomFields,
         editableCustomFields,
         seatData?.discounts,
@@ -279,6 +286,7 @@ export function useEditSeatOrderForm({
             editedDate,
             editedDiscountName,
             editedCustomFields,
+            sendNotifications,
             visibleCustomFields,
             isOrderSaving,
             hasOrderChanges,
@@ -290,6 +298,7 @@ export function useEditSeatOrderForm({
             onDateChange: handleDateChange,
             onDiscountChange: handleDiscountChange,
             onCustomFieldChange: handleCustomFieldChange,
+            onSendNotificationsChange: handleSendNotificationsChange,
             onSaveOrder: handleSaveOrder,
             onResetOrder: handleResetOrder,
         };
@@ -300,6 +309,7 @@ export function useEditSeatOrderForm({
         editedDate,
         editedDiscountName,
         editedCustomFields,
+        sendNotifications,
         visibleCustomFields,
         isOrderSaving,
         hasOrderChanges,
@@ -311,6 +321,7 @@ export function useEditSeatOrderForm({
         handleDateChange,
         handleDiscountChange,
         handleCustomFieldChange,
+        handleSendNotificationsChange,
         handleSaveOrder,
         handleResetOrder,
     ]);

@@ -23,6 +23,60 @@ if (! defined('ABSPATH')) {
 class Manager_Service {
 
     /**
+     * Allowed seat statuses for manager overrides.
+     *
+     * @var string[]
+     */
+    private const ALLOWED_SEAT_STATUSES = ['default', 'available', 'unavailable', 'sold-out', 'on-site'];
+
+    /**
+     * Order statuses where seats are considered "taken" in product meta.
+     *
+     * @var string[]
+     */
+    private const TAKEN_ORDER_STATUSES = ['completed', 'processing', 'on-hold'];
+
+    /**
+     * Load an Auditorium product by ID or throw an exception.
+     *
+     * @param int $product_id
+     *
+     * @return Auditorium_Product
+     *
+     * @throws \Exception When the product ID is invalid or product is not an auditorium product.
+     */
+    private static function get_auditorium_product_or_throw(int $product_id): Auditorium_Product {
+        if ($product_id < 1) {
+            throw new \Exception(esc_html__('Invalid product ID', 'stachethemes-seat-planner-lite'));
+        }
+
+        $product = wc_get_product($product_id);
+
+        if (!$product || ! $product->is_type('auditorium')) {
+            throw new \Exception(esc_html__('Product not found', 'stachethemes-seat-planner-lite'));
+        }
+
+        /** @var Auditorium_Product $product */
+        return $product;
+    }
+
+    /**
+     * Assert that a given date exists for the auditorium product.
+     *
+     * @param Auditorium_Product $product
+     * @param string             $date
+     * @param string             $error_message
+     *
+     * @return void
+     * @throws \Exception When the date does not exist for the product.
+     */
+    private static function assert_product_date_exists(Auditorium_Product $product, string $date, string $error_message): void {
+        if ($date && ! $product->date_exists($date)) {
+            throw new \Exception(esc_html($error_message));
+        }
+    }
+
+    /**
      * Validates that a discount is available for the given seat (checks seat group).
      *
      * @param Auditorium_Product $product
@@ -48,7 +102,7 @@ class Manager_Service {
             throw new \Exception(
                 sprintf(
                     /* translators: %s: discount name */
-                    esc_html__('Discount "%s" is not available for this product.', 'stachethemes-seat-planner-lite'),
+                    esc_html__('Discount %s is not available for this product.', 'stachethemes-seat-planner-lite'),
                     esc_html($name)
                 )
             );
@@ -88,17 +142,7 @@ class Manager_Service {
     public static function get_auditorium_product(int $product_id, bool $include_dates = false): array {
 
         try {
-            if ($product_id < 1) {
-                throw new \Exception(esc_html__('Invalid product ID', 'stachethemes-seat-planner-lite'));
-            }
-
-            $product = wc_get_product($product_id);
-
-            if (!$product || $product->get_type() !== 'auditorium') {
-                throw new \Exception(esc_html__('Invalid product ID', 'stachethemes-seat-planner-lite'));
-            }
-
-            /** @var Auditorium_Product $product */
+            $product  = self::get_auditorium_product_or_throw($product_id);
             $has_dates = $product->has_dates();
 
             $image = $product->get_image_id() ? wp_get_attachment_image_src((int) $product->get_image_id(), 'thumbnail') : '';
@@ -144,84 +188,56 @@ class Manager_Service {
      * @return array{success: bool, data: array<string, mixed>|null, error: string|null}
      */
     public static function get_auditorium_products(string $search = '', int $page = 1, int $per_page = 10): array {
+        $page     = max(1, $page);
+        $per_page = max(1, min(100, $per_page));
 
-        try {
-            if ($page < 1) {
-                $page = 1;
-            }
+        $query = wc_get_products([
+            'type'      => 'auditorium',
+            'status'    => 'publish',
+            'limit'     => $per_page,
+            'page'      => $page,
+            'orderby'   => 'title',
+            'order'     => 'DESC',
+            's'         => $search,
+            'paginate'  => true,
+            'return'    => 'objects',
+        ]);
 
-            if ($per_page < 1 || $per_page > 100) {
-                $per_page = 10;
-            }
+        $formatted = [];
 
-            $args = [
-                'type'    => 'auditorium',
-                'status'  => 'publish',
-                'limit'   => $per_page,
-                'offset'  => ($page - 1) * $per_page,
-                'orderby' => 'title',
-                'order'   => 'ASC',
-            ];
-
-            // Add search if provided
-            if (!empty($search)) {
-                $args['s'] = $search;
-            }
-
-            // Get total count for pagination
-            $count_args           = $args;
-            $count_args['limit']  = -1;
-            $count_args['return'] = 'ids';
-
-            $total_products = wc_get_products($count_args);
-            $total          = is_array($total_products) ? count($total_products) : 0;
-
-            // Get products
-            $products = wc_get_products($args);
-
-            $formatted_products = [];
-
-            if (is_array($products)) {
-                foreach ($products as $product) {
-
-                    $image = $product->get_image_id() ? wp_get_attachment_image_src($product->get_image_id(), 'thumbnail') : '';
-
-                    if (is_array($image)) {
-                        $image = $image[0];
-                    }
-
-                    $formatted_products[] = [
-                        /** @var Auditorium_Product $product */
-                        'id'        => $product->get_id(),
-                        'name'      => $product->get_name(),
-                        'permalink' => $product->get_permalink(),
-                        'edit_link' => get_edit_post_link($product->get_id(), 'raw'),
-                        'has_dates' => $product->has_dates(),
-                        'image'     => $image,
-                    ];
-                }
-            }
-
-            $total_pages = $total > 0 ? ceil($total / $per_page) : 0;
-
-            return [
-                'success' => true,
-                'data'    => [
-                    'products'    => $formatted_products,
-                    'total'       => $total,
-                    'page'        => $page,
-                    'per_page'    => $per_page,
-                    'total_pages' => $total_pages,
-                ],
-                'error'   => null,
-            ];
-        } catch (\Throwable $th) {
+        if (is_array($query)) {
             return [
                 'success' => false,
                 'data'    => null,
-                'error'   => $th->getMessage(),
+                'error'   => esc_html__('Invalid query result', 'stachethemes-seat-planner-lite'),
+            ]; // Expects stdClass object, not array
+        };
+
+        foreach ($query->products as $product) {
+            $img_id = $product->get_image_id();
+            $image  = $img_id ? wp_get_attachment_image_url($img_id, 'thumbnail') : '';
+
+            $formatted[] = [
+                'id'        => $product->get_id(),
+                'name'      => $product->get_name(),
+                'permalink' => $product->get_permalink(),
+                'edit_link' => get_edit_post_link($product->get_id(), 'raw'),
+                'has_dates' => $product->has_dates(),
+                'image'     => $image,
             ];
         }
+
+        return [
+            'success' => true,
+            'data'    => [
+                'products'    => $formatted,
+                'total'       => $query->total,
+                'page'        => $page,
+                'per_page'    => $per_page,
+                'total_pages' => $query->max_num_pages,
+            ],
+            'error'   => null,
+        ];
     }
 
     /**
@@ -239,22 +255,12 @@ class Manager_Service {
     public static function update_manager_seat_override(int $product_id, string $seat_id, string $selected_date, string $status): array {
 
         try {
-            if ($product_id < 1) {
-                throw new \Exception(esc_html__('Invalid product ID', 'stachethemes-seat-planner-lite'));
-            }
-
             if ($seat_id === '') {
                 throw new \Exception(esc_html__('Invalid seat ID', 'stachethemes-seat-planner-lite'));
             }
 
-            $product = wc_get_product($product_id);
-
-            if (!$product || $product->get_type() !== 'auditorium') {
-                throw new \Exception(esc_html__('Product not found', 'stachethemes-seat-planner-lite'));
-            }
-
-            // Validate that the seat exists in the product's seat plan
             /** @var Auditorium_Product $product */
+            $product   = self::get_auditorium_product_or_throw($product_id);
             $seat_data = $product->get_seat_data($seat_id);
 
             if (!$seat_data) {
@@ -262,14 +268,10 @@ class Manager_Service {
             }
 
             // Validate selected date if provided
-            if ($selected_date && !$product->date_exists($selected_date)) {
-                throw new \Exception(esc_html__('Invalid date', 'stachethemes-seat-planner-lite'));
-            }
+            self::assert_product_date_exists($product, $selected_date, esc_html__('Invalid date', 'stachethemes-seat-planner-lite'));
 
             // Validate status
-            $allowed_statuses = ['default', 'available', 'unavailable', 'sold-out', 'on-site'];
-
-            if ($status !== '' && !in_array($status, $allowed_statuses, true)) {
+            if ($status !== '' && !in_array($status, self::ALLOWED_SEAT_STATUSES, true)) {
                 throw new \Exception(esc_html__('Invalid status', 'stachethemes-seat-planner-lite'));
             }
 
@@ -356,30 +358,17 @@ class Manager_Service {
     public static function bulk_update_manager_seat_overrides(int $product_id, array $seat_ids, string $selected_date, string $status): array {
 
         try {
-            if ($product_id < 1) {
-                throw new \Exception(esc_html__('Invalid product ID', 'stachethemes-seat-planner-lite'));
-            }
-
             if (empty($seat_ids)) {
                 throw new \Exception(esc_html__('No seats selected', 'stachethemes-seat-planner-lite'));
             }
 
-            $product = wc_get_product($product_id);
-
-            if (!$product || $product->get_type() !== 'auditorium') {
-                throw new \Exception(esc_html__('Product not found', 'stachethemes-seat-planner-lite'));
-            }
-
             // Validate selected date if provided
             /** @var Auditorium_Product $product */
-            if ($selected_date && !$product->date_exists($selected_date)) {
-                throw new \Exception(esc_html__('Invalid date', 'stachethemes-seat-planner-lite'));
-            }
+            $product = self::get_auditorium_product_or_throw($product_id);
+            self::assert_product_date_exists($product, $selected_date, esc_html__('Invalid date', 'stachethemes-seat-planner-lite'));
 
             // Validate status
-            $allowed_statuses = ['default', 'available', 'unavailable', 'sold-out', 'on-site'];
-
-            if ($status !== '' && !in_array($status, $allowed_statuses, true)) {
+            if ($status !== '' && !in_array($status, self::ALLOWED_SEAT_STATUSES, true)) {
                 throw new \Exception(esc_html__('Invalid status', 'stachethemes-seat-planner-lite'));
             }
 
@@ -510,7 +499,7 @@ class Manager_Service {
                     continue;
                 }
 
-                // if is refunded, skip
+                // if refunded, skip
                 if (Order_Helper::is_item_refunded($order, $item_id)) {
                     continue;
                 }
@@ -518,13 +507,8 @@ class Manager_Service {
                 $seat_discount = $item->get_meta('seat_discount');
                 /** @var \WC_Order_Item_Product $item */
                 $product_id = $item->get_product_id();
-                $product = wc_get_product($product_id);
-
-                if (!$product || $product->get_type() !== 'auditorium') {
-                    throw new \Exception(esc_html__('Invalid product ID', 'stachethemes-seat-planner-lite'));
-                }
-
                 /** @var Auditorium_Product $product */
+                $product = self::get_auditorium_product_or_throw($product_id);
 
                 $current_user_roles = wp_get_current_user()->roles;
                 $discounts_data     = $product->get_discounts_data(['filter_by_roles' => $current_user_roles]);
@@ -578,10 +562,11 @@ class Manager_Service {
      *
      * @param int                    $order_id
      * @param array<int, array<string, mixed>> $updates Array of update objects, each with 'item_id' and 'seat_data'.
+     * @param bool                   $send_notifications When true, sends customer notification emails.
      *
      * @return array{success: bool, data: array<string, mixed>|null, error: string|null}
      */
-    public static function update_order_item_meta(int $order_id, array $updates): array {
+    public static function update_order_item_meta(int $order_id, array $updates, bool $send_notifications = false): array {
 
         try {
             if ($order_id < 1) {
@@ -599,12 +584,11 @@ class Manager_Service {
             $order_status  = $order->get_status();
 
             // Statuses where seats are considered "taken" in the product meta
-            $taken_statuses            = ['completed', 'processing'];
-            $should_update_taken_seats = in_array($order_status, $taken_statuses, true);
+            $should_update_taken_seats = in_array($order_status, self::TAKEN_ORDER_STATUSES, true);
 
             // First pass: collect all the seat changes and build a list of seats being released
             // This is needed to allow swapping seats between items in the same order
-            $processed_updates   = [];
+            $processed_updates    = [];
             $seats_being_released = []; // key: product_id-seat_id-date, value: true
 
             foreach ($updates as $update) {
@@ -638,13 +622,8 @@ class Manager_Service {
                 // Get the product to validate seat ID
                 /** @var \WC_Order_Item_Product $item */
                 $product_id = $item->get_product_id();
-                $product = wc_get_product($product_id);
-
-                if (!$product || $product->get_type() !== 'auditorium') {
-                    throw new \Exception(esc_html__('Invalid product ID', 'stachethemes-seat-planner-lite'));
-                }
-
                 /** @var Auditorium_Product $product */
+                $product   = self::get_auditorium_product_or_throw($product_id);
 
                 // Sanitize seat_data fields (default to the existing seat data if it exists)
                 $sanitized_seat_data = $existing_array;
@@ -658,7 +637,7 @@ class Manager_Service {
                         throw new \Exception(
                             sprintf(
                                 // translators: %s - seat ID
-                                __('Seat ID "%s" does not exist in the product\'s seat plan.', 'stachethemes-seat-planner-lite'),
+                                __('Seat ID %s does not exist in the product\'s seat plan.', 'stachethemes-seat-planner-lite'),
                                 esc_html($sanitized_seat_data['seatId'])
                             )
                         );
@@ -680,7 +659,7 @@ class Manager_Service {
                             throw new \Exception(
                                 sprintf(
                                     // translators: %s - date
-                                    __('Date "%s" does not exist for this product.', 'stachethemes-seat-planner-lite'),
+                                    __('Date %s does not exist for this product.', 'stachethemes-seat-planner-lite'),
                                     esc_html($sanitized_seat_data['selectedDate'])
                                 )
                             );
@@ -860,7 +839,7 @@ class Manager_Service {
                     /** @var \stdClass $meta_field */
                     $label = isset($meta_field->label) ? trim((string) $meta_field->label) : '';
                     if ($label !== '' && isset($meta_field->value)) {
-                        $sanitized_seat_data['customFields'][ $label ] = $meta_field->value;
+                        $sanitized_seat_data['customFields'][$label] = $meta_field->value;
                     }
                 }
 
@@ -917,17 +896,762 @@ class Manager_Service {
                         wp_get_current_user()->display_name
                     )
                 );
+
+                // Send customer notification when requested
+                if ($send_notifications) {
+                    $mailer = WC()->mailer();
+                    $emails = $mailer->get_emails();
+                    $order_status = $order->get_status();
+                    $email_class  = '';
+
+                    switch ($order_status) {
+                        case 'processing':
+                            $email_class = 'WC_Email_Customer_Processing_Order';
+                            break;
+                        case 'completed':
+                            $email_class = 'WC_Email_Customer_Completed_Order';
+                            break;
+                        case 'on-hold':
+                            $email_class = 'WC_Email_Customer_On_Hold_Order';
+                            break;
+                    }
+
+                    $customer_email_obj = ($email_class && isset($emails[$email_class])) ? $emails[$email_class] : null;
+                    if ($customer_email_obj && method_exists($customer_email_obj, 'trigger')) {
+                        /** @var \WC_Email_Customer_Processing_Order|\WC_Email_Customer_Completed_Order|\WC_Email_Customer_On_Hold_Order $customer_email_obj */
+                        $customer_email_obj->trigger($order_id, $order);
+                    }
+                }
             }
 
             return [
                 'success' => true,
                 'data'    => [
-                    'message'       => esc_html__('Order items updated successfully.', 'stachethemes-seat-planner-lite'),
-                    'updated_count' => $updated_count,
+                    'message'            => esc_html__('Order items updated successfully.', 'stachethemes-seat-planner-lite'),
+                    'updated_count'      => $updated_count,
+                    'notifications_sent' => ($send_notifications && $updated_count > 0) ? 1 : 0,
                 ],
                 'error'   => null,
             ];
         } catch (\Throwable $th) {
+            return [
+                'success' => false,
+                'data'    => null,
+                'error'   => $th->getMessage(),
+            ];
+        }
+    }
+
+    /**
+     * Bulk move bookings from one date to another.
+     *
+     * Moves all orders (or their seat statuses) for the specified seats from the source date to the target date.
+     * Optionally sends notification emails to customers.
+     *
+     * @param int               $product_id
+     * @param array<int, string> $seat_ids
+     * @param string            $source_date
+     * @param string            $target_date
+     * @param bool              $send_notifications
+     *
+     * @return array{success: bool, data: array<string, mixed>|null, error: string|null}
+     */
+    public static function bulk_move_bookings_to_date(
+        int $product_id,
+        array $seat_ids,
+        string $source_date,
+        string $target_date,
+        bool $send_notifications = true
+    ): array {
+
+        try {
+            if (empty($seat_ids)) {
+                throw new \Exception(esc_html__('No seats selected', 'stachethemes-seat-planner-lite'));
+            }
+
+            if (empty($target_date)) {
+                throw new \Exception(esc_html__('Target date is required', 'stachethemes-seat-planner-lite'));
+            }
+
+            /** @var Auditorium_Product $product */
+            $product = self::get_auditorium_product_or_throw($product_id);
+
+            // Validate source date if provided
+            self::assert_product_date_exists($product, $source_date, esc_html__('Invalid source date', 'stachethemes-seat-planner-lite'));
+
+            // Validate target date
+            self::assert_product_date_exists($product, $target_date, esc_html__('Invalid target date', 'stachethemes-seat-planner-lite'));
+
+            // Don't allow moving to the same date
+            if ($source_date === $target_date) {
+                throw new \Exception(esc_html__('Source and target dates cannot be the same', 'stachethemes-seat-planner-lite'));
+            }
+
+            $bookings_data = new Bookings_Data($product_id);
+
+            // ================================================================
+            // PHASE 1: Validate all seats first (all or nothing approach)
+            // Hard errors block the entire operation, other issues are silently skipped
+            // ================================================================
+            $seats_to_move    = []; // Seats with orders to move
+            $statuses_to_copy = []; // Seats without orders but with status overrides to copy
+            $blocking_errors  = []; // Errors that block the entire operation
+            $skipped_count    = 0;
+
+            foreach ($seat_ids as $seat_id) {
+                $seat_id = sanitize_text_field($seat_id);
+
+                if (empty($seat_id)) {
+                    // Silently skip empty seat IDs
+                    $skipped_count++;
+                    continue;
+                }
+
+                // Validate that the seat exists in the product's seat plan
+                $seat_data = $product->get_seat_data($seat_id);
+
+                if (!$seat_data) {
+                    // Silently skip seats that don't exist
+                    $skipped_count++;
+                    continue;
+                }
+
+                // BLOCKING ERROR: Check if the seat already has an order on the target date
+                $target_orders = $bookings_data->get_orders_with_seat($seat_id, $target_date);
+                if (!empty($target_orders)) {
+                    // This is a blocking error - disallow the entire operation
+                    $blocking_errors[] = sprintf(
+                        // translators: %s - seat ID
+                        esc_html__('Seat %s cannot be moved because the target seat and date already has an order', 'stachethemes-seat-planner-lite'),
+                        $seat_id
+                    );
+                    continue;
+                }
+
+                // BLOCKING ERROR: Check if the target seat is sold-out or unavailable
+                $target_seat_status = $product->get_manager_seat_override($seat_id, 'status', $target_date);
+                if ($target_seat_status === 'sold-out' || $target_seat_status === 'unavailable') {
+                    // This is a blocking error - disallow the entire operation
+                    $blocking_errors[] = sprintf(
+                        // translators: %1$s - seat ID, %2$s - status
+                        esc_html__('Seat %1$s is %2$s on the target date', 'stachethemes-seat-planner-lite'),
+                        $seat_id,
+                        $target_seat_status
+                    );
+                    continue;
+                }
+
+                // Get the order for this seat on the source date
+                $order_details = $bookings_data->get_order_details_by_seat_id($seat_id, $source_date);
+
+                if (!$order_details) {
+                    // No order found - check if there are status overrides to copy
+                    $source_seat_overrides = $product->get_manager_seat_overrides($seat_id, $source_date);
+
+                    if ($source_seat_overrides) {
+                        // Has status overrides to copy
+                        $statuses_to_copy[] = [
+                            'seat_id'   => $seat_id,
+                            'overrides' => $source_seat_overrides,
+                        ];
+                    } else {
+                        // Silently skip - no order and no overrides to move
+                        $skipped_count++;
+                    }
+                    continue;
+                }
+
+                $order_id = $order_details['order_id'];
+                $item_id  = $order_details['item_id'];
+                $order    = wc_get_order($order_id);
+
+                if (!$order || !($order instanceof \WC_Order)) {
+                    // Silently skip - order not found or invalid
+                    $skipped_count++;
+                    continue;
+                }
+
+                // Get the order item
+                $items = $order->get_items();
+                $item  = null;
+
+                foreach ($items as $oid => $oitem) {
+                    if ((int) $oid === $item_id) {
+                        $item = $oitem;
+                        break;
+                    }
+                }
+
+                if (!$item) {
+                    // Silently skip - order item not found
+                    $skipped_count++;
+                    continue;
+                }
+
+                // Get existing seat data
+                $existing_seat_data = Utils::normalize_seat_data_meta($item->get_meta('seat_data'));
+
+                if (empty($existing_seat_data)) {
+                    // Silently skip - invalid seat data
+                    $skipped_count++;
+                    continue;
+                }
+
+                // Validation passed - add to seats to move
+                $seats_to_move[] = [
+                    'seat_id'            => $seat_id,
+                    'order_id'           => $order_id,
+                    'item_id'            => $item_id,
+                    'order'              => $order,
+                    'item'               => $item,
+                    'existing_seat_data' => $existing_seat_data,
+                    'old_selected_date'  => isset($existing_seat_data['selectedDate']) ? $existing_seat_data['selectedDate'] : '',
+                ];
+            }
+
+            // ================================================================
+            // Check for blocking errors - if any, abort the entire operation
+            // ================================================================
+            if (!empty($blocking_errors)) {
+                return [
+                    'success' => false,
+                    'data'    => [
+                        'blocking_errors' => $blocking_errors,
+                        'blocking_count'  => count($blocking_errors),
+                    ],
+                    'error'   => sprintf(
+                        // translators: %d - number of seats
+                        esc_html__('Cannot move: %d seat(s) have conflicts on the target date.', 'stachethemes-seat-planner-lite'),
+                        count($blocking_errors)
+                    ),
+                ];
+            }
+
+            // Check if there's anything to move
+            if (empty($seats_to_move) && empty($statuses_to_copy)) {
+                throw new \Exception(esc_html__('No seats with orders or status overrides to move', 'stachethemes-seat-planner-lite'));
+            }
+
+            // ================================================================
+            // PHASE 2: All validations passed - now perform the actual moves
+            // ================================================================
+            $moved_count  = 0;
+            $moved_orders = []; // Track orders to send notifications
+
+            // Move seats with orders
+            foreach ($seats_to_move as $seat_info) {
+                $seat_id            = $seat_info['seat_id'];
+                $order              = $seat_info['order'];
+                $item               = $seat_info['item'];
+                $existing_seat_data = $seat_info['existing_seat_data'];
+                $old_selected_date  = $seat_info['old_selected_date'];
+                $order_id           = $seat_info['order_id'];
+
+                // Update the seat data with the new date
+                $existing_seat_data['selectedDate'] = $target_date;
+
+                // Update taken seats in product meta
+                $order_status               = $order->get_status();
+                $should_update_taken_seats  = in_array($order_status, self::TAKEN_ORDER_STATUSES, true);
+
+                if ($should_update_taken_seats) {
+                    // Release the seat on the old date
+                    $product->delete_meta_taken_seat($seat_id, $old_selected_date);
+                    // Take the seat on the new date
+                    $product->add_meta_taken_seat($seat_id, $target_date);
+                }
+
+                // Copy manager seat overrides from source to target date (if any)
+                $source_seat_overrides = $product->get_manager_seat_overrides($seat_id, $source_date);
+                if ($source_seat_overrides) {
+                    $product->update_manager_seat_override($seat_id, $source_seat_overrides, $target_date);
+                    // Reset the source date seat status to default
+                    $product->delete_manager_seat_override($seat_id, $source_date);
+                }
+
+                // Update the order item meta
+                $item->update_meta_data('seat_data', $existing_seat_data);
+                $item->save_meta_data();
+
+                // Add order note
+                $current_user = wp_get_current_user();
+                $order->add_order_note(
+                    sprintf(
+                        // translators: %1$s - seat ID, %2$s - old date, %3$s - new date, %4$s - user name
+                        esc_html__('Seat %1$s moved from %2$s to %3$s by %4$s via Seat Planner bulk move.', 'stachethemes-seat-planner-lite'),
+                        $seat_id,
+                        $old_selected_date,
+                        $target_date,
+                        $current_user->display_name
+                    )
+                );
+
+                $order->save();
+
+                $moved_count++;
+
+                // Track order for notification
+                if ($send_notifications && !isset($moved_orders[$order_id])) {
+                    $moved_orders[$order_id] = $order;
+                }
+            }
+
+            // Copy status overrides for seats without orders
+            foreach ($statuses_to_copy as $status_info) {
+                $seat_id   = $status_info['seat_id'];
+                $overrides = $status_info['overrides'];
+
+                // Copy the status to the target date
+                $product->update_manager_seat_override($seat_id, $overrides, $target_date);
+                // Reset the source date seat status to default
+                $product->delete_manager_seat_override($seat_id, $source_date);
+
+                $moved_count++;
+            }
+
+            // Save product meta (taken seats) once after all updates
+            $product->save_meta_data();
+
+            // Send notifications if requested
+            if ($send_notifications && !empty($moved_orders)) {
+                $mailer = WC()->mailer();
+                $emails = $mailer->get_emails();
+
+                foreach ($moved_orders as $order_id => $order) {
+                    // Send customer notification based on order status
+                    $order_status = $order->get_status();
+                    $email_class  = '';
+
+                    switch ($order_status) {
+                        case 'processing':
+                            $email_class = 'WC_Email_Customer_Processing_Order';
+                            break;
+                        case 'completed':
+                            $email_class = 'WC_Email_Customer_Completed_Order';
+                            break;
+                        case 'on-hold':
+                            $email_class = 'WC_Email_Customer_On_Hold_Order';
+                            break;
+                    }
+
+                    $customer_email_obj = ($email_class && isset($emails[$email_class])) ? $emails[$email_class] : null;
+                    if ($customer_email_obj && method_exists($customer_email_obj, 'trigger')) {
+                        /** @var \WC_Email_Customer_Processing_Order|\WC_Email_Customer_Completed_Order|\WC_Email_Customer_On_Hold_Order $customer_email_obj */
+                        $customer_email_obj->trigger($order_id, $order);
+                    }
+                }
+            }
+
+            $message = $skipped_count > 0
+                ? sprintf(
+                    // translators: %1$d - number of bookings/statuses moved, %2$d - number of seats skipped
+                    esc_html__('Successfully moved %1$d booking(s)/status(es). Skipped %2$d seat(s) with no order or status.', 'stachethemes-seat-planner-lite'),
+                    $moved_count,
+                    $skipped_count
+                )
+                : sprintf(
+                    // translators: %d - number of bookings/statuses moved
+                    esc_html__('Successfully moved %d booking(s)/status(es).', 'stachethemes-seat-planner-lite'),
+                    $moved_count
+                );
+
+            return [
+                'success' => true,
+                'data'    => [
+                    'message'            => $message,
+                    'moved_count'        => $moved_count,
+                    'skipped_count'      => $skipped_count,
+                    'notifications_sent' => $send_notifications ? count($moved_orders) : 0,
+                    'target_date'        => $target_date,
+                ],
+                'error'   => null,
+            ];
+        } catch (\Throwable $th) {
+            return [
+                'success' => false,
+                'data'    => null,
+                'error'   => $th->getMessage(),
+            ];
+        }
+    }
+
+    /**
+     * Bulk create a new order for multiple seats.
+     *
+     * Creates a single WooCommerce order with multiple line items (one per seat).
+     *
+     * @param int    $product_id
+     * @param array<int, array{seat_id: string, seat_discount?: array{type: string, value: float, name?: string}|null, seat_custom_fields?: array<string, mixed>|null}> $seats_data Array of seat data objects.
+     * @param string $selected_date
+     * @param string $customer_name
+     * @param string $customer_email
+     * @param string $customer_phone
+     * @param string $order_status
+     * @param bool   $send_emails
+     *
+     * @return array{success: bool, data: array<string, mixed>|null, error: string|null}
+     */
+    public static function bulk_create_order_for_seats(
+        int $product_id,
+        array $seats_data,
+        string $selected_date,
+        string $customer_name,
+        string $customer_email,
+        string $customer_phone = '',
+        string $order_status = 'processing',
+        bool $send_emails = true
+    ): array {
+
+        try {
+            if (empty($seats_data)) {
+                throw new \Exception(esc_html__('No seats selected', 'stachethemes-seat-planner-lite'));
+            }
+
+            // Validate customer data
+            if (empty($customer_name)) {
+                throw new \Exception(esc_html__('Customer name is required', 'stachethemes-seat-planner-lite'));
+            }
+
+            if (empty($customer_email)) {
+                throw new \Exception(esc_html__('Customer email is required', 'stachethemes-seat-planner-lite'));
+            }
+
+            if (!is_email($customer_email)) {
+                throw new \Exception(esc_html__('Invalid email address', 'stachethemes-seat-planner-lite'));
+            }
+
+            // Validate order status
+            $allowed_statuses = ['pending', 'processing', 'on-hold', 'completed'];
+            if (!in_array($order_status, $allowed_statuses, true)) {
+                throw new \Exception(esc_html__('Invalid order status', 'stachethemes-seat-planner-lite'));
+            }
+
+            /** @var Auditorium_Product $product */
+            $product = self::get_auditorium_product_or_throw($product_id);
+
+            // Validate selected date if provided
+            self::assert_product_date_exists($product, $selected_date, esc_html__('Invalid date', 'stachethemes-seat-planner-lite'));
+
+            // Pre-validation of all seats
+            // We want to ensure ALL seats are available and valid before creating the order
+            $booking_data = new Bookings_Data($product_id);
+            $editable_custom_fields = $product->get_custom_fields_data(['editable_only' => true]);
+
+            foreach ($seats_data as $seat_item) {
+                $seat_id = isset($seat_item['seat_id']) ? trim((string) $seat_item['seat_id']) : '';
+                if (empty($seat_id)) {
+                    continue; // Skip invalid entries
+                }
+
+                // Validate that the seat exists in the product's seat plan
+                $seat_exists = $product->get_seat_data($seat_id);
+                if (!$seat_exists) {
+                    // translators: %s - seat ID
+                    throw new \Exception(sprintf(esc_html__('Seat %s not found in the product seat plan', 'stachethemes-seat-planner-lite'), $seat_id));
+                }
+
+                // Check if the seat is already taken
+                if ($product->is_seat_taken($seat_id, $selected_date)) {
+                    // Check if the seat has order
+                    $order_details = $booking_data->get_order_details_by_seat_id($seat_id, $selected_date);
+                    if ($order_details) {
+                        // translators: %s - seat ID
+                        throw new \Exception(sprintf(esc_html__('Seat %s is already taken by another order', 'stachethemes-seat-planner-lite'), $seat_id));
+                    }
+                }
+
+                $seat_discount      = isset($seat_item['seat_discount']) ? $seat_item['seat_discount'] : null;
+                $seat_custom_fields = isset($seat_item['seat_custom_fields']) ? $seat_item['seat_custom_fields'] : null;
+
+                // Validate discount is available for this seat (group check)
+                if ($seat_discount && (float) ($seat_discount['value'] ?? 0) > 0) {
+                    self::validate_discount_for_seat($product, $seat_id, $selected_date, $seat_discount);
+                }
+
+                // Validate custom fields
+                if (!empty($editable_custom_fields)) {
+                    $cf_object = (is_array($seat_custom_fields) && $seat_custom_fields !== [])
+                        ? (object) $seat_custom_fields
+                        : new \stdClass();
+
+                    $validation_result = $product->validate_custom_fields($cf_object);
+                    if ($validation_result !== null && is_array($validation_result) && isset($validation_result['error'])) {
+                        // translators: %1$s - seat ID, %2$s - error message
+                        throw new \Exception(sprintf(esc_html__('Seat %1$s: %2$s', 'stachethemes-seat-planner-lite'), $seat_id, esc_html($validation_result['error'])));
+                    }
+                } elseif (is_array($seat_custom_fields) && $seat_custom_fields !== []) {
+                    // translators: %s - seat ID
+                    throw new \Exception(sprintf(esc_html__('Seat %s: No seat options are configured for this product', 'stachethemes-seat-planner-lite'), $seat_id));
+                }
+            }
+
+            // Check if the email belongs to an existing customer and if so, use the customer ID
+            $customer = get_user_by('email', $customer_email);
+            if ($customer) {
+                $customer_id = $customer->ID;
+            } else {
+                $customer_id = 0;
+            }
+
+            // Temporarily disable emails during order creation to control when they're sent
+            add_filter('woocommerce_email_enabled_new_order', '__return_false', 999);
+            add_filter('woocommerce_email_enabled_customer_processing_order', '__return_false', 999);
+            add_filter('woocommerce_email_enabled_customer_completed_order', '__return_false', 999);
+            add_filter('woocommerce_email_enabled_customer_on_hold_order', '__return_false', 999);
+
+            // Create the order with pending status first, then change it later
+            $order = wc_create_order([
+                'status'        => 'pending',
+                'customer_id'   => $customer_id,
+                'created_via'   => 'seat-planner-admin-bulk',
+            ]);
+
+            // Remove email filters immediately after order creation
+            remove_filter('woocommerce_email_enabled_new_order', '__return_false', 999);
+            remove_filter('woocommerce_email_enabled_customer_processing_order', '__return_false', 999);
+            remove_filter('woocommerce_email_enabled_customer_completed_order', '__return_false', 999);
+            remove_filter('woocommerce_email_enabled_customer_on_hold_order', '__return_false', 999);
+
+            if (!$order || is_wp_error($order)) {
+                throw new \Exception(esc_html__('Failed to create order', 'stachethemes-seat-planner-lite'));
+            }
+
+            // Set billing information - populate from existing customer if available
+            if ($customer_id > 0) {
+                $wc_customer = new \WC_Customer($customer_id);
+
+                // Use provided name, but fall back to customer's stored name if available
+                $billing_first_name = $customer_name;
+                $billing_last_name  = '';
+
+                // Try to get first/last name from customer
+                $stored_first_name = $wc_customer->get_billing_first_name();
+                $stored_last_name  = $wc_customer->get_billing_last_name();
+
+                if (!empty($stored_first_name)) {
+                    $billing_first_name = $stored_first_name;
+                    $billing_last_name  = $stored_last_name;
+                }
+
+                $order->set_billing_first_name($billing_first_name);
+                $order->set_billing_last_name($billing_last_name);
+                $order->set_billing_email($customer_email);
+                $order->set_billing_phone(!empty($customer_phone) ? $customer_phone : $wc_customer->get_billing_phone());
+                $order->set_billing_company($wc_customer->get_billing_company());
+                $order->set_billing_address_1($wc_customer->get_billing_address_1());
+                $order->set_billing_address_2($wc_customer->get_billing_address_2());
+                $order->set_billing_city($wc_customer->get_billing_city());
+                $order->set_billing_state($wc_customer->get_billing_state());
+                $order->set_billing_postcode($wc_customer->get_billing_postcode());
+                $order->set_billing_country($wc_customer->get_billing_country());
+            } else {
+                // Guest customer - use provided data
+                $order->set_billing_first_name($customer_name);
+                $order->set_billing_email($customer_email);
+
+                if (!empty($customer_phone)) {
+                    $order->set_billing_phone($customer_phone);
+                }
+            }
+
+            $added_items_count = 0;
+
+            foreach ($seats_data as $seat_item) {
+                $seat_id = isset($seat_item['seat_id']) ? trim((string) $seat_item['seat_id']) : '';
+                if (empty($seat_id)) {
+                    continue;
+                }
+
+                $seat_discount      = isset($seat_item['seat_discount']) ? $seat_item['seat_discount'] : null;
+                $seat_custom_fields = isset($seat_item['seat_custom_fields']) ? $seat_item['seat_custom_fields'] : null;
+
+                // Validate discount is available for this seat (group check)
+                // Already validated in pre-validation loop
+
+                $seat_obj = $product->get_seat_data($seat_id);
+                // Get seat price from the seat data
+                $seat_price = isset($seat_obj->price) ? (float) $seat_obj->price : (float) $product->get_price();
+
+                // Apply discount if provided
+                $seat_price = Auditorium_Product_Price_Adjustment::apply_discount($seat_price, $seat_discount);
+                $seat_price = max(0.0, $seat_price);
+
+                $order_custom_fields = [];
+                $editable_custom_fields = $product->get_custom_fields_data(['editable_only' => true]);
+
+                if (!empty($editable_custom_fields)) {
+                    // Product has custom fields: sanitize values.
+                    // Validation was performed in the pre-validation loop.
+                    $cf_object = (is_array($seat_custom_fields) && $seat_custom_fields !== [])
+                        ? (object) $seat_custom_fields
+                        : new \stdClass();
+
+                    $sanitized_custom_fields = $product->sanitize_custom_fields($cf_object);
+                    if ($sanitized_custom_fields instanceof \stdClass) {
+                        $order_custom_fields = (array) $sanitized_custom_fields;
+                        if ($order_custom_fields !== []) {
+                            $surcharge = Auditorium_Product_Price_Adjustment::calculate_custom_fields_surcharge($product, $sanitized_custom_fields);
+                            $seat_price = max(0.0, $seat_price + $surcharge);
+                        }
+                    }
+                }
+
+                // Attach read-only Meta type custom fields (same as add-to-cart flow).
+                $meta_fields = $product->get_custom_fields_data(['meta_only' => true]);
+                foreach ($meta_fields as $meta_field) {
+                    /** @var \stdClass $meta_field */
+                    $label = isset($meta_field->label) ? trim((string) $meta_field->label) : '';
+                    if ($label !== '' && isset($meta_field->value)) {
+                        $order_custom_fields[$label] = $meta_field->value;
+                    }
+                }
+
+                // Add product to order
+                $item = new \WC_Order_Item_Product();
+                $item->set_product($product);
+                $item->set_quantity(1);
+                $item->set_subtotal((string) $seat_price);
+                $item->set_total((string) $seat_price);
+
+                // Prepare seat data for the order item
+                $order_seat_data = [
+                    'seatId'       => $seat_id,
+                    'selectedDate' => $selected_date,
+                    'customFields' => $order_custom_fields,
+                ];
+
+                // Add seat metadata
+                $item->add_meta_data('seat_data', $order_seat_data, true);
+                $item->add_meta_data('seat_discount', $seat_discount && (float) ($seat_discount['value'] ?? 0) > 0 ? $seat_discount : '', true);
+
+                // Add item to order
+                $order->add_item($item);
+                
+                $added_items_count++;
+            }
+
+            if ($added_items_count === 0) {
+                // No items added? Should not happen due to pre-validation, but just in case.
+                throw new \Exception(esc_html__('No valid seats to add to order', 'stachethemes-seat-planner-lite'));
+            }
+
+            // Set order meta for auditorium products
+            $order->update_meta_data('has_auditorium_product', '1');
+            $order->update_meta_data('auditorium_product_id', (string) $product_id);
+
+            // Calculate totals
+            $order->calculate_totals();
+
+            // Save order to get item IDs
+            $order->save();
+
+            // Post-save processing: QR codes and marking taken
+            foreach ($order->get_items() as $item) {
+                /** @var \WC_Order_Item_Product $item */
+                $item_seat_data = $item->get_meta('seat_data');
+                if (empty($item_seat_data) || !isset($item_seat_data['seatId'])) {
+                    continue;
+                }
+                
+                $item_seat_id = $item_seat_data['seatId'];
+
+                // Generate QR code for the seat
+                $item_id        = $item->get_id();
+                $secret_key     = wp_generate_password(6, false);
+                $qr_code_string = $order->get_order_key() . '-' . $product_id . '-' . $item_id . '-' . $secret_key;
+                $qr_code_url    = QRCode::get_qr_code($qr_code_string);
+
+                if ($qr_code_url) {
+                    $item_seat_data['qr_code']        = $qr_code_url;
+                    $item_seat_data['qr_code_secret'] = $secret_key;
+                    $item->update_meta_data('seat_data', $item_seat_data);
+                    $item->save_meta_data();
+                }
+
+                // Mark the seat as taken
+                $product->add_meta_taken_seat($item_seat_id, $selected_date);
+            }
+            
+            $product->save_meta_data();
+
+            // Add order note
+            $current_user = wp_get_current_user();
+            $order->add_order_note(
+                sprintf(
+                    // translators: %1$d - count, %2$s - user name
+                    esc_html__('Bulk order created manually for %1$d seats by %2$s via Seat Planner Admin Panel.', 'stachethemes-seat-planner-lite'),
+                    $added_items_count,
+                    $current_user->display_name
+                )
+            );
+
+            // Save order again with all updates
+            $order->save();
+
+            // Always suppress automatic emails during status change so we have full control
+            add_filter('woocommerce_email_enabled_new_order', '__return_false', 999);
+            add_filter('woocommerce_email_enabled_customer_processing_order', '__return_false', 999);
+            add_filter('woocommerce_email_enabled_customer_completed_order', '__return_false', 999);
+            add_filter('woocommerce_email_enabled_customer_on_hold_order', '__return_false', 999);
+
+            // Change status from pending to the requested status
+            if ($order_status !== 'pending') {
+                $order->update_status($order_status, __('Status set via Seat Planner Admin Panel.', 'stachethemes-seat-planner-lite'));
+            }
+
+            // Remove email filters
+            remove_filter('woocommerce_email_enabled_new_order', '__return_false', 999);
+            remove_filter('woocommerce_email_enabled_customer_processing_order', '__return_false', 999);
+            remove_filter('woocommerce_email_enabled_customer_completed_order', '__return_false', 999);
+            remove_filter('woocommerce_email_enabled_customer_on_hold_order', '__return_false', 999);
+
+            // Send order emails only if requested
+            if ($send_emails) {
+                // Ensure WooCommerce mailer is loaded
+                $mailer = WC()->mailer();
+                $emails = $mailer->get_emails();
+
+                // Trigger new order email to admin
+                $new_order_email = isset($emails['WC_Email_New_Order']) ? $emails['WC_Email_New_Order'] : null;
+                if ($new_order_email && method_exists($new_order_email, 'trigger')) {
+                    /** @var \WC_Email_New_Order $new_order_email */
+                    $new_order_email->trigger($order->get_id(), $order);
+                }
+
+                // Trigger customer notification based on order status
+                $email_class = '';
+                switch ($order_status) {
+                    case 'processing':
+                        $email_class = 'WC_Email_Customer_Processing_Order';
+                        break;
+                    case 'completed':
+                        $email_class = 'WC_Email_Customer_Completed_Order';
+                        break;
+                    case 'on-hold':
+                        $email_class = 'WC_Email_Customer_On_Hold_Order';
+                        break;
+                }
+
+                $customer_email_obj = ($email_class && isset($emails[$email_class])) ? $emails[$email_class] : null;
+                if ($customer_email_obj && method_exists($customer_email_obj, 'trigger')) {
+                    /** @var \WC_Email_Customer_Processing_Order|\WC_Email_Customer_Completed_Order|\WC_Email_Customer_On_Hold_Order $customer_email_obj */
+                    $customer_email_obj->trigger($order->get_id(), $order);
+                }
+            }
+
+            return [
+                'success' => true,
+                'data'    => [
+                    'message'        => esc_html__('Order created successfully', 'stachethemes-seat-planner-lite'),
+                    'order_id'       => $order->get_id(),
+                    'order_status'   => $order->get_status(),
+                    'order_edit_url' => get_edit_post_link($order->get_id(), 'raw'),
+                ],
+                'error'   => null,
+            ];
+        } catch (\Throwable $th) {
+            // If we created an order but failed later, we should probably void it or at least log it.
+            // But for now, just return the error.
             return [
                 'success' => false,
                 'data'    => null,
@@ -969,11 +1693,6 @@ class Manager_Service {
     ): array {
 
         try {
-            // Validate product ID
-            if ($product_id < 1) {
-                throw new \Exception(esc_html__('Invalid product ID', 'stachethemes-seat-planner-lite'));
-            }
-
             // Validate seat ID
             if (empty($seat_id)) {
                 throw new \Exception(esc_html__('Invalid seat ID', 'stachethemes-seat-planner-lite'));
@@ -998,14 +1717,8 @@ class Manager_Service {
                 throw new \Exception(esc_html__('Invalid order status', 'stachethemes-seat-planner-lite'));
             }
 
-            // Get and validate product
-            $product = wc_get_product($product_id);
-
-            if (!$product || ! $product->is_type('auditorium')) {
-                throw new \Exception(esc_html__('Product not found', 'stachethemes-seat-planner-lite'));
-            }
-
             /** @var Auditorium_Product $product */
+            $product = self::get_auditorium_product_or_throw($product_id);
 
             // Validate that the seat exists in the product's seat plan
             $seat_data = $product->get_seat_data($seat_id);
@@ -1015,9 +1728,7 @@ class Manager_Service {
             }
 
             // Validate selected date if provided
-            if ($selected_date && !$product->date_exists($selected_date)) {
-                throw new \Exception(esc_html__('Invalid date', 'stachethemes-seat-planner-lite'));
-            }
+            self::assert_product_date_exists($product, $selected_date, esc_html__('Invalid date', 'stachethemes-seat-planner-lite'));
 
             // Check if the seat is already taken
             if ($product->is_seat_taken($seat_id, $selected_date)) {
@@ -1027,7 +1738,7 @@ class Manager_Service {
                 $order_details = new Bookings_Data($product_id);
                 $order_details = $order_details->get_order_details_by_seat_id($seat_id, $selected_date);
                 if ($order_details) {
-                    throw new \Exception(esc_html__('This seat is already taken by another order', 'stachethemes-seat-planner-lite'));
+                    throw new \Exception(esc_html__('This seat isder', 'stachethemes-seat-planner-lite'));
                 }
             }
 
@@ -1037,6 +1748,28 @@ class Manager_Service {
                 $customer_id = $customer->ID;
             } else {
                 $customer_id = 0;
+            }
+
+            // Validate discount is available for this seat (group check)
+            if ($seat_discount && (float) ($seat_discount['value'] ?? 0) > 0) {
+                self::validate_discount_for_seat($product, $seat_id, $selected_date, $seat_discount);
+            }
+
+            $editable_custom_fields = $product->get_custom_fields_data(['editable_only' => true]);
+
+            if (!empty($editable_custom_fields)) {
+                // Product has custom fields: always validate integrity and values, then sanitize.
+                $cf_object = (is_array($seat_custom_fields) && $seat_custom_fields !== [])
+                    ? (object) $seat_custom_fields
+                    : new \stdClass();
+
+                $validation_result = $product->validate_custom_fields($cf_object);
+                if ($validation_result !== null && is_array($validation_result) && isset($validation_result['error'])) {
+                    throw new \Exception(esc_html($validation_result['error']));
+                }
+            } elseif (is_array($seat_custom_fields) && $seat_custom_fields !== []) {
+                // Product has no editable custom fields but request sent some: reject.
+                throw new \Exception(esc_html__('No seat options are configured for this product', 'stachethemes-seat-planner-lite'));
             }
 
             // Temporarily disable emails during order creation to control when they're sent
@@ -1101,9 +1834,7 @@ class Manager_Service {
             }
 
             // Validate discount is available for this seat (group check)
-            if ($seat_discount && (float) ($seat_discount['value'] ?? 0) > 0) {
-                self::validate_discount_for_seat($product, $seat_id, $selected_date, $seat_discount);
-            }
+            // Already validated before order creation
 
             // Get seat price from the seat data
             $seat_price = isset($seat_data->price) ? (float) $seat_data->price : (float) $product->get_price();
@@ -1116,15 +1847,11 @@ class Manager_Service {
             $editable_custom_fields = $product->get_custom_fields_data(['editable_only' => true]);
 
             if (!empty($editable_custom_fields)) {
-                // Product has custom fields: always validate integrity and values, then sanitize.
+                // Product has custom fields: sanitize values.
+                // Validation was performed before order creation.
                 $cf_object = (is_array($seat_custom_fields) && $seat_custom_fields !== [])
                     ? (object) $seat_custom_fields
                     : new \stdClass();
-
-                $validation_result = $product->validate_custom_fields($cf_object);
-                if ($validation_result !== null && is_array($validation_result) && isset($validation_result['error'])) {
-                    throw new \Exception(esc_html($validation_result['error']));
-                }
 
                 $sanitized_custom_fields = $product->sanitize_custom_fields($cf_object);
                 if ($sanitized_custom_fields instanceof \stdClass) {
@@ -1134,9 +1861,6 @@ class Manager_Service {
                         $seat_price = max(0.0, $seat_price + $surcharge);
                     }
                 }
-            } elseif (is_array($seat_custom_fields) && $seat_custom_fields !== []) {
-                // Product has no editable custom fields but request sent some: reject.
-                throw new \Exception(esc_html__('No seat options are configured for this product', 'stachethemes-seat-planner-lite'));
             }
 
             // Attach read-only Meta type custom fields (same as add-to-cart flow).
@@ -1145,7 +1869,7 @@ class Manager_Service {
                 /** @var \stdClass $meta_field */
                 $label = isset($meta_field->label) ? trim((string) $meta_field->label) : '';
                 if ($label !== '' && isset($meta_field->value)) {
-                    $order_custom_fields[ $label ] = $meta_field->value;
+                    $order_custom_fields[$label] = $meta_field->value;
                 }
             }
 

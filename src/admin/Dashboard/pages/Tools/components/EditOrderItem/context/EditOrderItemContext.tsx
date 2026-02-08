@@ -16,6 +16,8 @@ export type EditOrderItemContextValue = {
     formatDateForInput: (dateString: string) => string
     hasChanges: boolean
     isSaving: boolean
+    sendNotifications: boolean
+    onSendNotificationsChange: (e: React.ChangeEvent<HTMLInputElement>) => void
     onSave: () => void
 }
 

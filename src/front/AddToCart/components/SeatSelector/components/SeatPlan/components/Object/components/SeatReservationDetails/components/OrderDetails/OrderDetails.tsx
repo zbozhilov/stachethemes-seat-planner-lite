@@ -1,4 +1,4 @@
-import { __ } from '@src/utils';
+import { __, getFormattedDateTime } from '@src/utils';
 import { SeatOrderData } from '@src/front/AddToCart/ajax/fetchSeatOrderData';
 import OrderInfoRow from '../OrderInfoRow/OrderInfoRow';
 import './OrderDetails.scss';
@@ -19,7 +19,7 @@ const OrderDetails: React.FC<OrderDetailsProps> = ({ seatOrderData }) => {
                 />
                 <OrderInfoRow
                     label={__('ORDER_DATE')}
-                    value={seatOrderData.order_date}
+                    value={getFormattedDateTime(seatOrderData.order_date)}
                 />
                 <OrderInfoRow
                     label={__('ORDER_STATUS')}
@@ -29,7 +29,7 @@ const OrderDetails: React.FC<OrderDetailsProps> = ({ seatOrderData }) => {
                 {seatOrderData.date_time && (
                     <OrderInfoRow
                         label={__('EVENT_DATE')}
-                        value={seatOrderData.date_time}
+                        value={getFormattedDateTime(seatOrderData.date_time)}
                     />
                 )}
                 <OrderInfoRow

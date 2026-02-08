@@ -78,9 +78,6 @@ class Translation {
     public static function get_admin_strings(): array {
 
         return [
-            'EXPORT_SEAT_DATA_NOT_SUPPORTED' => esc_html__('Export seat data is not supported in the lite version.', 'stachethemes-seat-planner-lite'),
-            'IMPORT_SEAT_PLAN_NOT_SUPPORTED' => esc_html__('Import seat plan is not supported in the lite version.', 'stachethemes-seat-planner-lite'),
-            'MAX_OBJECTS_LIMIT_REACHED'      => esc_html__('Lite version supports up to 100 objects.', 'stachethemes-seat-planner-lite'),
             'EXTRA_CLASS'                    => esc_html__('Additional Class Name', 'stachethemes-seat-planner-lite'),
             'CLICK_TO_CHANGE_DISPLAY_LABEL'  => esc_html__('Click to change display label', 'stachethemes-seat-planner-lite'),
             'ZINDEX'                         => esc_html__('Z-Index', 'stachethemes-seat-planner-lite'),
@@ -378,6 +375,7 @@ class Translation {
     public static function manager_strings(): array {
         return [
             // Manager - Edit Seat
+            'SELECTED'                       => esc_html__('Selected', 'stachethemes-seat-planner-lite'),
             'FIRST_PAGE'                     => esc_html__('First Page', 'stachethemes-seat-planner-lite'),
             'LAST_PAGE'                      => esc_html__('Last Page', 'stachethemes-seat-planner-lite'),
             'NEXT_PAGE'                      => esc_html__('Next Page', 'stachethemes-seat-planner-lite'),
@@ -471,6 +469,32 @@ class Translation {
             'BULK_UPDATE_FAILED'                        => esc_html__('Failed to update seats.', 'stachethemes-seat-planner-lite'),
             'RESET_TO_DEFAULT'                          => esc_html__('Reset to Default', 'stachethemes-seat-planner-lite'),
             'UPDATING'                                  => esc_html__('Updating...', 'stachethemes-seat-planner-lite'),
+            
+            'SEAT_CONFIGURATION'                        => esc_html__('Seat Configuration', 'stachethemes-seat-planner-lite'),
+            'GENERAL_INFO'                              => esc_html__('General Info', 'stachethemes-seat-planner-lite'),
+            'SEAT_OPTIONS'                              => esc_html__('Seat Options', 'stachethemes-seat-planner-lite'),
+            'ORDER_CREATED_SUCCESS'                     => esc_html__('Order created successfully!', 'stachethemes-seat-planner-lite'),
+            'ORDER_CREATION_FAILED'                     => esc_html__('Failed to create order.', 'stachethemes-seat-planner-lite'),
+            'NO_SEAT_OPTIONS'                           => esc_html__('No seat options available.', 'stachethemes-seat-planner-lite'),
+            
+            // Bulk Move to Date
+            'SET_STATUS_TO'                             => esc_html__('Set status to:', 'stachethemes-seat-planner-lite'),
+            'MOVE'                                      => esc_html__('Move', 'stachethemes-seat-planner-lite'),
+            'BULK_MOVE_TO_DATE'                         => esc_html__('Move to Date', 'stachethemes-seat-planner-lite'),
+            'BULK_MOVE_DESCRIPTION'                     => esc_html__('Relocate selected bookings and status overrides to another date.', 'stachethemes-seat-planner-lite'),
+            'BULK_SELECT_TARGET_DATE'                   => esc_html__('Target Date & Time', 'stachethemes-seat-planner-lite'),
+            'BULK_SEND_NOTIFICATIONS'                   => esc_html__('Re-send order notifications to customers', 'stachethemes-seat-planner-lite'),
+            'BULK_CONFIRM_MOVE'                         => esc_html__('Confirm Move', 'stachethemes-seat-planner-lite'),
+            'BULK_MOVING_BOOKINGS'                      => esc_html__('Moving seats...', 'stachethemes-seat-planner-lite'),
+            'BULK_MOVE_SUCCESS'                         => esc_html__('Successfully moved seats to new date.', 'stachethemes-seat-planner-lite'),
+            'BULK_MOVE_PARTIAL_SUCCESS'                 => esc_html__('Moved some seats. Others had no orders or status overrides to move.', 'stachethemes-seat-planner-lite'),
+            'BULK_MOVE_FAILED'                          => esc_html__('Failed to move seats.', 'stachethemes-seat-planner-lite'),
+            'BULK_MOVE_NOT_IMPLEMENTED'                 => esc_html__('Bulk move feature is not yet implemented on the server.', 'stachethemes-seat-planner-lite'),
+            'BULK_MOVE_COMPLETE'                        => esc_html__('Seats Moved Successfully', 'stachethemes-seat-planner-lite'),
+            /* translators: %1$d: number of seats moved, %2$s: source date, %3$d: number of notifications sent */
+            'BULK_MOVE_NOTICE_TEXT'                     => esc_html__('%1$d seat(s) were moved from %2$s to this date. %3$d notification email(s) sent.', 'stachethemes-seat-planner-lite'),
+            /* translators: %d: number of seats skipped */
+            'BULK_MOVE_SKIPPED_TEXT'                    => esc_html__('%d seat(s) were skipped (no orders or status overrides to move).', 'stachethemes-seat-planner-lite'),
 
             'NO_SEATS_FOUND'                             => esc_html__('No seats found.', 'stachethemes-seat-planner-lite'),
             'NO_SEATS_CONFIGURED_FOR_PRODUCT'            => esc_html__('No seats found for this product.', 'stachethemes-seat-planner-lite'),
@@ -503,7 +527,7 @@ class Translation {
             'CUSTOM_FIELD_NUMBER_MIN'                     => esc_html__('Seat option "%1$s" must be at least %2$s.', 'stachethemes-seat-planner-lite'),
             /* translators: 1: field label, 2: maximum value */
             'CUSTOM_FIELD_NUMBER_MAX'                     => esc_html__('Seat option "%1$s" must be at most %2$s.', 'stachethemes-seat-planner-lite'),
-            'SEND_ORDER_EMAILS'                          => esc_html__('Send order notification emails', 'stachethemes-seat-planner-lite'),
+            'SEND_ORDER_EMAIL'                           => esc_html__('Send order notifications to customers', 'stachethemes-seat-planner-lite'),
             'PENDING'                                    => esc_html__('Pending Payment', 'stachethemes-seat-planner-lite'),
             'PROCESSING'                                 => esc_html__('Processing', 'stachethemes-seat-planner-lite'),
             'ON_HOLD'                                    => esc_html__('On Hold', 'stachethemes-seat-planner-lite'),

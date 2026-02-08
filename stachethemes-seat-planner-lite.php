@@ -6,7 +6,7 @@
  * Description: Stachethemes Seat Planner is a WooCommerce plugin that allows you to create and sell seat-based products for your customers to choose their seats easily.
  * Author: Stachethemes
  * Author URI:  https://woocommerce.com/vendor/stachethemes/
- * Version: 1.5.0
+ * Version: 1.5.2
  * License: GNU General Public License v2 or later
  * License URI: http://www.gnu.org/licenses/gpl-2.0.html
  * Domain Path: /languages
@@ -21,7 +21,7 @@ if (! defined('ABSPATH')) {
     exit;
 }
 
-define('STACHETHEMES_SEAT_PLANNER_LITE_VERSION', '1.5.0');
+define('STACHETHEMES_SEAT_PLANNER_LITE_VERSION', '1.5.2');
 define('STACHETHEMES_SEAT_PLANNER_LITE_PLUGIN_DIR', plugin_dir_path(__FILE__));
 define('STACHETHEMES_SEAT_PLANNER_LITE_PLUGIN_URL', plugin_dir_url(__FILE__));
 define('STACHETHEMES_SEAT_PLANNER_LITE_PLUGIN_BASENAME', plugin_basename(__FILE__));
@@ -40,6 +40,8 @@ class Stachethemes_Seat_Planner_Lite {
 
     public function __construct() {
 
+        register_activation_hook(STACHETHEMES_SEAT_PLANNER_LITE_PLUGIN_FILE, [__CLASS__, 'on_activation']);
+
         add_action('init', [$this, 'init']);
 
         add_filter('plugin_action_links_' . plugin_basename(__FILE__), function ($links) {
@@ -48,10 +50,14 @@ class Stachethemes_Seat_Planner_Lite {
         });
     }
 
+    public static function on_activation(): void {
+        set_transient('stacheseplite_notice_rate_timer', time(), 2 * DAY_IN_SECONDS);
+    }
+
     public function init(): void {
 
 
-        if (class_exists('\Stachethemes\SeatPlanner\Stachethemes_Seat_Planner')) {
+        if (class_exists('\StachethemesSeatPlannerLite\Stachethemes_Seat_Planner')) {
 
             add_action('admin_notices', function () {
 ?>

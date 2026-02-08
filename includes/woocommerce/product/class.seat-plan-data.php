@@ -7,15 +7,11 @@ class Seat_Plan_Data {
     /**
      * Retrieves the front-end seat plan data, seats, discounts, etc... for a given product and date.
      */
-    public static function get_seat_plan_data(int $product_id, string $selected_date = '') {
+    public static function get_seat_plan_data(int|Auditorium_Product $product, string $selected_date = '') {
 
         try {
 
-            if ($product_id < 1) {
-                throw new \Exception(esc_html__('Invalid product ID', 'stachethemes-seat-planner-lite'));
-            }
-
-            $auditorium_product = wc_get_product($product_id);
+            $auditorium_product = is_int($product) ? wc_get_product($product) : $product;
 
             if (!$auditorium_product || $auditorium_product->get_type() !== 'auditorium') {
                 throw new \Exception(esc_html__('Product not found', 'stachethemes-seat-planner-lite'));

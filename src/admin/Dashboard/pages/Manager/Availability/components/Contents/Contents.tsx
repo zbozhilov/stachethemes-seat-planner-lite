@@ -1,8 +1,8 @@
-import { useNavigate, useParams } from 'react-router';
-import { useAuditoriumProductAvailability, useBulkUpdateSeatOverride } from '../../../hooks';
+import { useNavigate, useParams, useLocation } from 'react-router';
+import { useAuditoriumProduct, useAuditoriumProductAvailability, useBulkMoveBookingsToDate, useBulkUpdateSeatOverride } from '../../../hooks';
 import './Contents.scss';
-import { __ } from '@src/utils';
-import { EventSeat } from '@mui/icons-material';
+import { __, getFormattedDateTime } from '@src/utils';
+import { CheckCircle, Close, Error as ErrorIcon, EventSeat } from '@mui/icons-material';
 import { useState, useEffect, useCallback } from 'react';
 import Loading from '../../../components/Loading/Loading';
 import StatsCards from './components/StatsCards';
@@ -31,12 +31,26 @@ const getSeatAvailabilityStatus = (seat: SeatObject): SeatAvailabilityStatus => 
 
 type FilterStatus = 'all' | SeatAvailabilityStatus;
 
+type BulkMoveNotice = {
+    movedCount: number;
+    skippedCount: number;
+    notificationsSent: number;
+    sourceDate: string;
+};
+
+type BulkMoveErrorNotice = {
+    message: string;
+    errors: string[];
+};
+
 const Contents = () => {
 
     const { productId, dateTime } = useParams<{ productId?: string; dateTime?: string }>();
     const productIdNum = productId ? parseInt(productId, 10) : undefined;
     const { data, loading, error, reload } = useAuditoriumProductAvailability(productIdNum, dateTime);
+    const { data: productData } = useAuditoriumProduct(productIdNum);
     const navigate = useNavigate();
+    const location = useLocation();
     const [filterStatus, setFilterStatus] = useState<FilterStatus>('all');
     const [searchTerm, setSearchTerm] = useState('');
     const [currentPage, setCurrentPage] = useState(1);
@@ -45,6 +59,24 @@ const Contents = () => {
     const [isSelectionMode, setIsSelectionMode] = useState(false);
     const [selectedSeats, setSelectedSeats] = useState<Set<string>>(new Set());
     const { bulkUpdateOverride, loading: bulkLoading } = useBulkUpdateSeatOverride();
+    const { bulkMoveToDate, loading: movingToDate } = useBulkMoveBookingsToDate();
+    
+    // Bulk move notice state
+    const [bulkMoveNotice, setBulkMoveNotice] = useState<BulkMoveNotice | null>(null);
+    const [bulkMoveErrorNotice, setBulkMoveErrorNotice] = useState<BulkMoveErrorNotice | null>(null);
+    
+    // Check if product has dates
+    const hasDates = productData?.has_dates ?? false;
+
+    // Read bulk move result from navigation state
+    useEffect(() => {
+        const state = location.state as { bulkMoveResult?: BulkMoveNotice } | null;
+        if (state?.bulkMoveResult) {
+            setBulkMoveNotice(state.bulkMoveResult);
+            // Clear the state so it doesn't persist on refresh
+            window.history.replaceState({}, document.title);
+        }
+    }, [location.state]);
 
     const handleEditSeat = (seatId: string) => {
         if (isSelectionMode) return; // Don't navigate when in selection mode
@@ -107,6 +139,56 @@ const Contents = () => {
             toast.error(result?.message || __('BULK_UPDATE_FAILED'), { id: toastId });
         }
     }, [productIdNum, selectedSeats, dateTime, bulkUpdateOverride, reload]);
+
+    const handleBulkMoveToDate = useCallback(async (targetDateTime: string, sendNotifications: boolean) => {
+        if (!productIdNum || selectedSeats.size === 0 || !targetDateTime) return;
+
+        // Clear any previous error notice
+        setBulkMoveErrorNotice(null);
+
+        const toastId = toast.loading(__('BULK_MOVING_BOOKINGS'));
+
+        const result = await bulkMoveToDate(
+            productIdNum,
+            Array.from(selectedSeats),
+            dateTime || '',
+            targetDateTime,
+            sendNotifications
+        );
+
+        if (result?.success) {
+            if (result.movedCount > 0) {
+                toast.success(__('BULK_MOVE_SUCCESS'), { id: toastId });
+                setSelectedSeats(new Set());
+                setIsSelectionMode(false);
+                // Navigate to the target date's availability page with result data
+                navigate(`/manager/product/${productId}/date/${targetDateTime}/availability`, {
+                    state: {
+                        bulkMoveResult: {
+                            movedCount: result.movedCount,
+                            skippedCount: result.skippedCount,
+                            notificationsSent: result.notificationsSent,
+                            sourceDate: dateTime || '',
+                        }
+                    }
+                });
+            } else {
+                // No bookings were moved (all skipped)
+                toast.error(result.message || __('BULK_MOVE_PARTIAL_SUCCESS'), { id: toastId });
+            }
+        } else {
+            // Check if we have blocking errors to display
+            if (result?.blockingErrors && result.blockingErrors.length > 0) {
+                toast.error(result.error || __('BULK_MOVE_FAILED'), { id: toastId });
+                setBulkMoveErrorNotice({
+                    message: result.error || __('BULK_MOVE_FAILED'),
+                    errors: result.blockingErrors,
+                });
+            } else {
+                toast.error(result?.error || result?.message || __('BULK_MOVE_FAILED'), { id: toastId });
+            }
+        }
+    }, [productIdNum, productId, selectedSeats, dateTime, bulkMoveToDate, navigate]);
 
     const seats = data?.objects.filter(isSeatObject) || [];
 
@@ -195,6 +277,56 @@ const Contents = () => {
                 onDeselectAll={handleDeselectAll}
             />
 
+            {/* Bulk Move Notice */}
+            {bulkMoveNotice && (
+                <div className="stachesepl-manager-availability-notice stachesepl-manager-availability-notice--success">
+                    <CheckCircle className="stachesepl-manager-availability-notice-icon" />
+                    <div className="stachesepl-manager-availability-notice-content">
+                        <strong>{__('BULK_MOVE_COMPLETE')}</strong>
+                        <span>
+                            {__('BULK_MOVE_NOTICE_TEXT')
+                                ?.replace('%1$d', bulkMoveNotice.movedCount.toString())
+                                ?.replace('%2$s', getFormattedDateTime(bulkMoveNotice.sourceDate))
+                                ?.replace('%3$d', bulkMoveNotice.notificationsSent.toString())}
+                        </span>
+                        {bulkMoveNotice.skippedCount > 0 && (
+                            <span className="stachesepl-manager-availability-notice-secondary">
+                                {__('BULK_MOVE_SKIPPED_TEXT')?.replace('%d', bulkMoveNotice.skippedCount.toString())}
+                            </span>
+                        )}
+                    </div>
+                    <button
+                        className="stachesepl-manager-availability-notice-close"
+                        onClick={() => setBulkMoveNotice(null)}
+                        aria-label={__('CLOSE')}
+                    >
+                        <Close />
+                    </button>
+                </div>
+            )}
+
+            {/* Bulk Move Error Notice */}
+            {bulkMoveErrorNotice && (
+                <div className="stachesepl-manager-availability-notice stachesepl-manager-availability-notice--error">
+                    <ErrorIcon className="stachesepl-manager-availability-notice-icon" />
+                    <div className="stachesepl-manager-availability-notice-content">
+                        <strong>{bulkMoveErrorNotice.message}</strong>
+                        <ul className="stachesepl-manager-availability-notice-list">
+                            {bulkMoveErrorNotice.errors.map((error, index) => (
+                                <li key={index}>{error}</li>
+                            ))}
+                        </ul>
+                    </div>
+                    <button
+                        className="stachesepl-manager-availability-notice-close"
+                        onClick={() => setBulkMoveErrorNotice(null)}
+                        aria-label={__('CLOSE')}
+                    >
+                        <Close />
+                    </button>
+                </div>
+            )}
+
             {/* Seats Grid */}
             <SeatsGrid
                 seats={filteredSeats}
@@ -220,9 +352,17 @@ const Contents = () => {
             {isSelectionMode && selectedSeats.size > 0 && (
                 <BulkActionBar
                     selectedCount={selectedSeats.size}
+                    selectedSeatIds={Array.from(selectedSeats)}
+                    discounts={data?.discounts || []}
+                    customFields={data?.customFields || []}
                     onStatusChange={handleBulkStatusChange}
                     onCancel={handleToggleSelectionMode}
                     loading={bulkLoading}
+                    hasDates={hasDates}
+                    currentDateTime={dateTime}
+                    onMoveToDate={handleBulkMoveToDate}
+                    movingToDate={movingToDate}
+                    onSuccess={reload}
                 />
             )}
         </div>

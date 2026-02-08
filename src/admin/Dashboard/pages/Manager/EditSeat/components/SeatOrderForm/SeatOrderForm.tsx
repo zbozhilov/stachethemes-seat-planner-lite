@@ -342,7 +342,7 @@ const SeatOrderFormCreate = ({
 
                 <div className="stachesepl-manager-edit-seat-form-field">
                     <Checkbox
-                        label={__('SEND_ORDER_EMAILS')}
+                        label={__('SEND_ORDER_EMAIL')}
                         checked={sendEmails}
                         onChange={(e) => {
                             setSendEmails(e.target.checked);
@@ -389,6 +389,7 @@ const SeatOrderFormEdit = () => {
         editedSeatId,
         editedDate,
         editedDiscountName,
+        sendNotifications,
         visibleCustomFields,
         isOrderSaving,
         hasOrderChanges,
@@ -400,6 +401,7 @@ const SeatOrderFormEdit = () => {
         onDateChange,
         onDiscountChange,
         onCustomFieldChange,
+        onSendNotificationsChange,
         onSaveOrder,
         onResetOrder,
     } = useEditSeatOrderContext();
@@ -462,6 +464,15 @@ const SeatOrderFormEdit = () => {
                     onChange={onCustomFieldChange}
                     disabled={isOrderSaving}
                 />
+
+                <div className="stachesepl-manager-edit-seat-form-field">
+                    <Checkbox
+                        label={__('BULK_SEND_NOTIFICATIONS')}
+                        checked={sendNotifications}
+                        onChange={onSendNotificationsChange}
+                        disabled={isOrderSaving}
+                    />
+                </div>
             </div>
 
             {orderSaveError && (

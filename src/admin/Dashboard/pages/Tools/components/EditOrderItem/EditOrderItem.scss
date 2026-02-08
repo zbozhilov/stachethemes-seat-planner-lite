@@ -58,7 +58,6 @@
         font-weight: 600;
         color: #111827;
         text-transform: uppercase;
-        letter-spacing: 0.5px;
     }
 
     .stachesepl-eoi-order-total-value {
@@ -229,7 +228,6 @@
     font-weight: 600;
     color: var(--stachesepl-text-primary);
     text-transform: uppercase;
-    letter-spacing: 0.5px;
 }
 
 .stachesepl-eoi-item-total-value {
@@ -278,6 +276,9 @@
 .stachesepl-eoi-actions {
     display: flex;
     justify-content: flex-end;
+    align-items: center;
+    gap: 16px;
+    flex-wrap: wrap;
     padding-top: 16px;
     border-top: 1px solid #e5e7eb;
 }

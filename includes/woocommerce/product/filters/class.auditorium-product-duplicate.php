@@ -20,6 +20,11 @@ class Auditorium_Product_Duplicate {
         add_filter('woocommerce_duplicate_product_exclude_meta', [__CLASS__, 'duplicate_exclude_meta'], 10, 2);
     }
 
+    public static function get_taken_seat_meta_keys() {
+
+
+    }
+
     public static function duplicate_exclude_meta($exclude_array, $array_map) {
         
         $taken_seats_keys = [];

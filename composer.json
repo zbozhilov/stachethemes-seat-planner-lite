@@ -14,13 +14,13 @@
     },
     "autoload": {
         "psr-4": {
-            "Stachethemes\\SeatPlanner\\": "includes/",
-            "Stachethemes\\SeatPlanner\\Product_Traits\\": "includes/woocommerce/product/product_traits/"
+            "StachethemesSeatPlannerLite\\": "includes/",
+            "StachethemesSeatPlannerLite\\Product_Traits\\": "includes/woocommerce/product/product_traits/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "Stachethemes\\SeatPlanner\\Tests\\": "tests/"
+            "StachethemesSeatPlannerLite\\Tests\\": "tests/"
         }
     },
     "scripts": {

@@ -21,6 +21,7 @@ export function useEditOrderItem() {
     const [successMessage, setSuccessMessage] = useState('')
     const [orderData, setOrderData] = useState<OrderData | null>(null)
     const [editedItems, setEditedItems] = useState<Map<number, ItemEdits>>(new Map())
+    const [sendNotifications, setSendNotifications] = useState(true)
 
     const fetchOrderItems = useCallback(async (options?: { preserveMessages?: boolean }) => {
         const orderIdNum = parseInt(orderId, 10)
@@ -213,6 +214,7 @@ export function useEditOrderItem() {
                     task: 'update_order_item_meta',
                     order_id: orderData.order_id.toString(),
                     updates: JSON.stringify(updates),
+                    send_notifications: sendNotifications ? 'yes' : 'no',
                     nonce: window.stachesepl_ajax.nonce,
                 }),
             })
@@ -232,7 +234,11 @@ export function useEditOrderItem() {
         } finally {
             setIsSaving(false)
         }
-    }, [orderData, editedItems, hasChanges, validateItems, fetchOrderItems])
+    }, [orderData, editedItems, hasChanges, validateItems, fetchOrderItems, sendNotifications])
+
+    const handleSendNotificationsChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
+        setSendNotifications(e.target.checked)
+    }, [])
 
     return {
         orderId,
@@ -252,8 +258,10 @@ export function useEditOrderItem() {
         handleItemChange,
         handleCustomFieldChange,
         handleDiscountChange,
+        handleSendNotificationsChange,
         formatDateForInput: formatDateForInputUtil,
         hasChanges,
         saveChanges,
+        sendNotifications,
     }
 }

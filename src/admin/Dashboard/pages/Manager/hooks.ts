@@ -461,6 +461,120 @@ export const useBulkUpdateSeatOverride = () => {
     return { bulkUpdateOverride, loading, error };
 }
 
+export type BulkMoveResult = {
+    success: boolean;
+    movedCount: number;
+    skippedCount: number;
+    failedSeats: string[];
+    notificationsSent: number;
+    targetDate: string;
+    message: string;
+    error?: string;
+    blockingErrors?: string[];
+    blockingCount?: number;
+};
+
+export const useBulkMoveBookingsToDate = () => {
+    const [loading, setLoading] = useState(false);
+    const [error, setError] = useState<string | null>(null);
+
+    const bulkMoveToDate = useCallback(async (
+        productId: number,
+        seatIds: string[],
+        sourceDate: string,
+        targetDate: string,
+        sendNotifications: boolean
+    ): Promise<BulkMoveResult | null> => {
+        setLoading(true);
+        setError(null);
+
+        try {
+            const response = await axios.post(
+                window.stachesepl_ajax.ajax_url,
+                new URLSearchParams({
+                    action: 'seatplanner',
+                    task: 'bulk_move_bookings_to_date',
+                    product_id: productId.toString(),
+                    seat_ids: JSON.stringify(seatIds),
+                    source_date: sourceDate || '',
+                    target_date: targetDate,
+                    send_notifications: sendNotifications ? 'yes' : 'no',
+                    nonce: window.stachesepl_ajax.nonce,
+                }),
+                {
+                    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                }
+            )
+
+            const result = response.data;
+
+            setLoading(false);
+
+            if (!result.success) {
+                // wp_send_json_error wraps everything in result.data
+                const errorData = result.data || {};
+                const errorMessage = errorData.error || __('BULK_MOVE_FAILED');
+                setError(errorMessage);
+
+                // Check if this is a blocking error response (seats are sold-out/unavailable on target)
+                if (errorData.blocking_errors) {
+                    return {
+                        success: false,
+                        movedCount: 0,
+                        skippedCount: 0,
+                        failedSeats: [],
+                        notificationsSent: 0,
+                        targetDate: '',
+                        message: '',
+                        error: errorMessage,
+                        blockingErrors: errorData.blocking_errors,
+                        blockingCount: errorData.blocking_count,
+                    };
+                }
+
+                return {
+                    success: false,
+                    movedCount: 0,
+                    skippedCount: 0,
+                    failedSeats: [],
+                    notificationsSent: 0,
+                    targetDate: '',
+                    message: '',
+                    error: errorMessage,
+                };
+            }
+
+            return {
+                success: true,
+                movedCount: result.data.moved_count,
+                skippedCount: result.data.skipped_count,
+                failedSeats: result.data.failed_seats,
+                notificationsSent: result.data.notifications_sent,
+                targetDate: result.data.target_date,
+                message: result.data.message,
+            };
+        } catch (err) {
+            setLoading(false);
+
+            const errorMessage = err instanceof Error ? err.message : __('BULK_MOVE_FAILED');
+            setError(errorMessage);
+
+            return {
+                success: false,
+                movedCount: 0,
+                skippedCount: 0,
+                failedSeats: [],
+                notificationsSent: 0,
+                targetDate: '',
+                message: '',
+                error: errorMessage,
+            };
+        } 
+    }, []);
+
+    return { bulkMoveToDate, loading, error };
+}
+
 export type SeatOrderDetails = {
     order_id: number;
     item_id: number;
@@ -615,7 +729,8 @@ export const useUpdateOrderItem = () => {
         orderId: number,
         itemId: number,
         seatData: UpdateOrderItemData,
-        originalSeatData: Record<string, unknown>
+        originalSeatData: Record<string, unknown>,
+        sendNotifications = true
     ): Promise<{ success: boolean; error: string | null }> => {
         setLoading(true);
         setError(null);
@@ -649,6 +764,7 @@ export const useUpdateOrderItem = () => {
                     task: 'update_order_item_meta',
                     order_id: orderId.toString(),
                     updates: JSON.stringify(updates),
+                    send_notifications: sendNotifications ? 'yes' : 'no',
                     nonce: window.stachesepl_ajax.nonce,
                 }),
                 {
@@ -756,4 +872,68 @@ export const useCreateOrder = () => {
     }, []);
 
     return { createOrder, loading, error, clearError: () => setError(null) };
+}
+
+export type BulkCreateOrderSeatData = {
+    seat_id: string;
+    seat_discount?: CreateOrderSeatDiscount | null;
+    seat_custom_fields?: Record<string, string | number | boolean>;
+};
+
+export const useBulkCreateOrder = () => {
+    const [loading, setLoading] = useState(false);
+    const [error, setError] = useState<string | null>(null);
+
+    const bulkCreateOrder = useCallback(async (
+        productId: number,
+        seatsData: BulkCreateOrderSeatData[],
+        dateTime: string | undefined,
+        orderData: CreateOrderData
+    ): Promise<{ success: boolean; error: string | null; orderId?: number }> => {
+        setLoading(true);
+        setError(null);
+
+        try {
+            const params: Record<string, string> = {
+                action: 'seatplanner',
+                task: 'bulk_create_order_for_seats',
+                product_id: productId.toString(),
+                seats_data: JSON.stringify(seatsData),
+                selected_date: dateTime || '',
+                customer_name: orderData.customerName,
+                customer_email: orderData.customerEmail,
+                customer_phone: orderData.customerPhone || '',
+                order_status: orderData.orderStatus || 'processing',
+                send_emails: orderData.sendEmails ? 'yes' : 'no',
+                nonce: window.stachesepl_ajax.nonce,
+            };
+
+            const response = await axios.post(
+                window.stachesepl_ajax.ajax_url,
+                new URLSearchParams(params),
+                {
+                    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                }
+            )
+
+            setLoading(false);
+
+            const result = response.data;
+
+            if (!result.success) {
+                const errorMessage = result.data?.error || __('FAILED_TO_CREATE_ORDER');
+                setError(errorMessage);
+                return { success: false, error: errorMessage };
+            }
+
+            return { success: true, error: null, orderId: result.data?.order_id };
+        } catch (err) {
+            const errorMessage = err instanceof Error ? err.message : __('FAILED_TO_CREATE_ORDER');
+            setError(errorMessage);
+            setLoading(false);
+            return { success: false, error: errorMessage };
+        }
+    }, []);
+
+    return { bulkCreateOrder, loading, error, clearError: () => setError(null) };
 }
