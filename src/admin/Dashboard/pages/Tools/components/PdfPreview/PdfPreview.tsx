@@ -1,4 +1,5 @@
-import { useState, useRef } from 'react'
+import { useRef } from 'react'
+import toast from 'react-hot-toast'
 import Container from '../../../../layout/Container/Container'
 import Button from '../../../../layout/Button/Button'
 import Input from '../../../../layout/Input/Input'
@@ -8,29 +9,11 @@ import { __ } from '@src/utils'
 import './PdfPreview.scss'
 
 const PdfPreview = () => {
-    const [orderId, setOrderId] = useState('')
-    const [error, setError] = useState('')
     const formRef = useRef<HTMLFormElement>(null)
 
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault()
-        setError('')
-
-        const orderIdNum = parseInt(orderId, 10)
-        if (!orderId || isNaN(orderIdNum) || orderIdNum <= 0) {
-            setError(__('PDF_PREVIEW_INVALID_ORDER_ID'))
-            return
-        }
-
-        // Submit the form to open PDF in new tab
-        if (formRef.current) {
-            formRef.current.submit()
-        }
-    }
-
-    const handleOrderIdChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        setOrderId(e.target.value)
-        if (error) setError('')
+        toast.error(__('PDF_PREVIEW_NOT_SUPPORTED_IN_LITE'))
     }
 
     return (
@@ -72,9 +55,6 @@ const PdfPreview = () => {
                             label={__('PDF_PREVIEW_ORDER_ID_LABEL')}
                             description={__('PDF_PREVIEW_ORDER_ID_DESC')}
                             placeholder={__('PDF_PREVIEW_ORDER_ID_PLACEHOLDER')}
-                            value={orderId}
-                            onChange={handleOrderIdChange}
-                            error={error}
                             min={1}
                         />
                     </div>

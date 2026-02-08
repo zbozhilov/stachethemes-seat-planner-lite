@@ -704,6 +704,7 @@ class Translation {
             // PDF Preview
             'PDF_PREVIEW_TITLE'               => esc_html__('Preview Order PDF', 'stachethemes-seat-planner-lite'),
             'PDF_PREVIEW_DESCRIPTION'         => esc_html__('Enter an order ID to preview the PDF ticket that would be generated for that order. The PDF will open in a new tab.', 'stachethemes-seat-planner-lite'),
+            'PDF_PREVIEW_NOT_SUPPORTED_IN_LITE' => esc_html__('PDF preview is not supported in the Lite version. Upgrade to Pro to preview PDF tickets.', 'stachethemes-seat-planner-lite'),
             'PDF_PREVIEW_ORDER_ID_LABEL'      => esc_html__('Order ID', 'stachethemes-seat-planner-lite'),
             'PDF_PREVIEW_ORDER_ID_DESC'       => esc_html__('Enter the WooCommerce order ID to preview its PDF ticket.', 'stachethemes-seat-planner-lite'),
             'PDF_PREVIEW_ORDER_ID_PLACEHOLDER' => esc_html__('e.g., 1234', 'stachethemes-seat-planner-lite'),
