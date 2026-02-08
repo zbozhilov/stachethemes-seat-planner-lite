@@ -1,4 +1,4 @@
-import { Suspense, lazy } from '@wordpress/element';
+import { Suspense, lazy } from 'react';
 
 const OrderNotFound = lazy(() => import('./OrderNotFound'));
 

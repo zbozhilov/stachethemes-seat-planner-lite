@@ -309,6 +309,9 @@ $accent-color: #873eff;
         text-align: center;
         line-height: 1;
 
+        background: var(--picker-btn-primary-bg);
+        color: var(--picker-btn-primary-text);
+
         @media (max-width: 781px) {
             padding: 1rem 1.5rem;
             font-size: 1rem;
@@ -319,9 +322,6 @@ $accent-color: #873eff;
             outline-offset: 2px;
         }
 
-        background: var(--picker-btn-primary-bg);
-        color: var(--picker-btn-primary-text);
-        
 
         &:hover {
             background: var(--picker-btn-primary-hover);
