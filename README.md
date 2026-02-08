@@ -4,7 +4,7 @@
 **Requires:** 6.7  
 **Tested up to:** 6.9
 **Requires PHP:** 8.2  
-**Stable tag:** 1.5.0
+**Stable tag:** 1.5.2
 **License:** GPLv2 or later  
 **WC requires at least:** 9.5  
 **WC tested up to:** 10 
@@ -45,6 +45,10 @@ Stachethemes Seat Planner is a WooCommerce plugin that allows you to create and 
 https://github.com/zbozhilov/stachethemes-seat-planner-lite
 
 ## Changelog
+
+### 1.5.1
+- Added option to create Order from the Manager section
+- Added new shortcode [stachesepl_count] for displaying the total seat count for auditorium product(s).
 
 ### 1.4.1
 * Added Seat details tooltip on mobile devices

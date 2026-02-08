@@ -1,5 +1,9 @@
 *** Stachethemes Seat Planner Lite Changelog ***
 
+2026.02.08 Version 1.5.1
+* Added: Option to create Order from the Manager section
+* Added: New shortcode [stachesepl_count] for displaying the total seat count for auditorium product(s).
+
 2026.01.27 Version 1.4.1
 * Added: Seat details tooltip on mobile devices
 * Added: Added new option in general settings to show or hide the seat details tooltip
