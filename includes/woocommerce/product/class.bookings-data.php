@@ -68,53 +68,7 @@ class Bookings_Data {
      * @return list<array<string, mixed>>
      */
     public function get_bookings(string $selected_date = ''): array {
-
-        $orders = $this->get_orders();
         $data   = [];
-
-        foreach ($orders as $order) {
-
-            $seats_in_order = [];
-
-            $order_items = $this->get_order_items($order, $this->product->get_id());
-
-            foreach ($order_items as $item) {
-                if (!isset($item['seat_id'])) {
-                    continue; // Skip items without seat_id
-                }
-
-                if ($selected_date && (!isset($item['date_time']) || $item['date_time'] !== $selected_date)) {
-                    continue;
-                }
-
-                $seats_in_order[] = [
-                    'seat_id'       => $item['seat_id'],
-                    'price'         => $item['price'],
-                    'date_time'     => $item['date_time'],
-                    'custom_fields' => isset($item['custom_fields']) && is_array($item['custom_fields']) ? $item['custom_fields'] : [],
-                ];
-            }
-
-            $general_data = [
-                'order_id'       => $order->get_id(),
-                'order_date'     => $order->get_date_created() ? $order->get_date_created()->date_i18n('Y-m-d H:i:s') : '',
-                'order_status'   => $order->get_status() ? wc_get_order_status_name($order->get_status()) : '',
-                'customer_name'  => $order->get_billing_first_name() . ' ' . $order->get_billing_last_name(),
-                'customer_email' => $order->get_billing_email(),
-                'product_name'   => $this->product->get_name(),
-                'product_note'   => $this->product->get_purchase_note()
-            ];
-
-            foreach ($seats_in_order as $seat_id) {
-                $data[] = array_merge($general_data, [
-                    'seat_id'       => $seat_id['seat_id'],
-                    'seat_price'    => $seat_id['price'],
-                    'date_time'     => $seat_id['date_time'],
-                    'custom_fields' => $seat_id['custom_fields'],
-                ]);
-            }
-        }
-
         return $data;
     }
 
