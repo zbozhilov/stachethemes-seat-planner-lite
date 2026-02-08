@@ -40,15 +40,22 @@
 }
 
 .stachesepl-input-container {
+    width: 100%;
     display: flex;
     align-items: center;
-    max-width: 400px;
     background-color: var(--stachesepl-bg-card);
     border: 1px solid var(--stachesepl-border);
     border-radius: var(--stachesepl-radius-md);
-    transition: border-color var(--stachesepl-transition-fast), 
-                box-shadow var(--stachesepl-transition-fast);
+    transition: border-color var(--stachesepl-transition-fast),
+        box-shadow var(--stachesepl-transition-fast);
     overflow: hidden;
+
+    &-inner {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+    }
 
     &:hover:not(:has(input:disabled)) {
         border-color: var(--stachesepl-gray-400);
@@ -102,6 +109,10 @@
     outline: none !important;
     box-shadow: none !important;
 
+    &[type="datetime-local"] {
+        max-height: 45px;
+    }
+
     &:focus {
         outline: none;
     }
@@ -119,11 +130,29 @@
     // Remove number input spinners
     &[type="number"] {
         -moz-appearance: textfield;
-        
+
         &::-webkit-outer-spin-button,
         &::-webkit-inner-spin-button {
             -webkit-appearance: none;
             margin: 0;
+        }
+    }
+
+    // Hide browser's default clear button (Chrome autocomplete clear button)
+    &::-webkit-search-cancel-button,
+    &::-webkit-credentials-auto-fill-button,
+    &::-webkit-strong-password-auto-fill-button {
+        appearance: none;
+        -webkit-appearance: none;
+        display: none;
+    }
+
+    // Hide Chrome's autocomplete dropdown clear button
+    &::-webkit-autofill {
+        &::-webkit-credentials-auto-fill-button {
+            appearance: none;
+            -webkit-appearance: none;
+            display: none;
         }
     }
 }
@@ -142,7 +171,7 @@
     cursor: pointer;
     border-radius: var(--stachesepl-radius-sm);
     transition: color var(--stachesepl-transition-fast),
-                background-color var(--stachesepl-transition-fast);
+        background-color var(--stachesepl-transition-fast);
 
     &:hover {
         color: var(--stachesepl-text-primary);
@@ -164,5 +193,30 @@
 
     svg {
         flex-shrink: 0;
+    }
+}
+
+.stachesepl-input-textarea {
+    width: 100%;
+    padding: var(--stachesepl-space-3) var(--stachesepl-space-4);
+    border: 1px solid var(--stachesepl-border);
+    border-radius: var(--stachesepl-radius-md);
+    font-size: var(--stachesepl-text-sm);
+    line-height: var(--stachesepl-leading-normal);
+    color: var(--stachesepl-text-primary);
+    background-color: var(--stachesepl-bg-card);
+    resize: vertical;
+    min-height: 80px;
+
+    &:focus {
+        outline: none;
+        border-color: var(--stachesepl-primary);
+        box-shadow: var(--stachesepl-shadow-focus);
+    }
+
+    &:disabled {
+        background-color: var(--stachesepl-bg-muted);
+        color: var(--stachesepl-text-muted);
+        cursor: not-allowed;
     }
 }

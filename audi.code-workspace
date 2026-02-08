@@ -1,0 +1,13 @@
+{
+	"folders": [
+		{
+			"path": "."
+		}
+	],
+	"settings": {
+		"intelephense.environment.includePaths": [
+			"/home/sapyn/wp-env/ced29b8fb280bfd145b20f39ccf6566f/WordPress/wp-content/plugins/woocommerce/",
+			"/home/sapyn/wp-env/ced29b8fb280bfd145b20f39ccf6566f/WordPress/wp-content/plugins/woocommerce/includes",
+		]
+	}
+}

@@ -66,8 +66,8 @@
         }
 
         &-separator {
-            width: 16px;
-            height: 16px;
+            width: 16px !important;
+            height: 16px !important;
             color: var(--stachesepl-text-muted);
             flex-shrink: 0;
         }
@@ -118,10 +118,6 @@
         border-radius: var(--stachesepl-radius-lg);
         padding: var(--stachesepl-space-6);
         box-shadow: var(--stachesepl-shadow-sm);
-    }
-
-    .stachesepl-input-container {
-        width: 300px;
     }
 
     // Responsive

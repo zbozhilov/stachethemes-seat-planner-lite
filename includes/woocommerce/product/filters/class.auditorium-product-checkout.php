@@ -30,8 +30,8 @@ class Auditorium_Product_Checkout {
         $items = $order->get_items();
 
         foreach ($items as $item) {
-            $seat_data = (array) $item->get_meta('seat_data');
-            if (!$seat_data) {
+            $seat_data = Utils::normalize_seat_data_meta($item->get_meta('seat_data'));
+            if (empty($seat_data)) {
                 continue;
             }
 
@@ -49,28 +49,24 @@ class Auditorium_Product_Checkout {
             if ($qr_code_url) {
                 $seat_data['qr_code']        = $qr_code_url;
                 $seat_data['qr_code_secret'] = $secret_key;
-                $item->update_meta_data('seat_data', (object) $seat_data);
+                $item->update_meta_data('seat_data', $seat_data);
                 $item->save_meta_data();
             }
 
-            $order->add_meta_data('auditorium_product_id', $product_id);
+            $order->update_meta_data('auditorium_product_id', $product_id);
         }
 
         $order->save_meta_data();
     }
 
     public static function checkout_create_order_line_item($item, $cart_item_key, $values, $order) {
+
         if (!isset($values['seat_data'])) {
             return;
         }
 
-        $seat_data     = $values['seat_data'];
-        $seat_discount = isset($values['seat_discount']) && is_array($values['seat_discount']) ? $values['seat_discount'] : '';
-        $selected_date = isset($values['selected_date']) ? $values['selected_date'] : '';
-
-        if ($selected_date) {
-            $seat_data->selectedDate = $selected_date;
-        }
+        $seat_data     = Utils::normalize_seat_data_meta($values['seat_data']);
+        $seat_discount = '';
 
         $item->update_meta_data('seat_data', $seat_data);
         $item->update_meta_data('seat_discount', $seat_discount);

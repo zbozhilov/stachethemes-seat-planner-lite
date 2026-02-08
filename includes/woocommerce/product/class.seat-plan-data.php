@@ -7,23 +7,26 @@ class Seat_Plan_Data {
     /**
      * Retrieves the front-end seat plan data, seats, discounts, etc... for a given product and date.
      */
-    public static function get_seat_plan_data(int $product_id) {
+    public static function get_seat_plan_data(int|Auditorium_Product $product, string $selected_date = '') {
 
         try {
 
-            if (false === $product_id || $product_id < 1) {
-                throw new \Exception(esc_html__('Invalid product ID', 'stachethemes-seat-planner-lite'));
-            }
-
-            /** @var Auditorium_Product $auditorium_product */
-            $auditorium_product = wc_get_product($product_id);
+            $auditorium_product = is_int($product) ? wc_get_product($product) : $product;
 
             if (!$auditorium_product || $auditorium_product->get_type() !== 'auditorium') {
                 throw new \Exception(esc_html__('Product not found', 'stachethemes-seat-planner-lite'));
             }
 
+            /** @var Auditorium_Product $auditorium_product */
+
             if (!$auditorium_product->get_id()) {
                 throw new \Exception(esc_html__('Product not found', 'stachethemes-seat-planner-lite'));
+            }
+
+            if ($selected_date) {
+                if (!$auditorium_product->date_exists($selected_date)) {
+                    throw new \Exception(esc_html__('Invalid date', 'stachethemes-seat-planner-lite'));
+                }
             }
 
             $seat_plan_data = $auditorium_product->get_seat_plan_data('object');
@@ -32,22 +35,27 @@ class Seat_Plan_Data {
                 throw new \Exception(esc_html__('Failed to retrieve seat plan data', 'stachethemes-seat-planner-lite'));
             }
 
+            /** @var \stdClass $seat_plan_data */
+
+            // Normalize to stdClass so we can assign discounts, minSeatsPerPurchase, etc.
             $taken_seats_args = [];
+
+            if ($selected_date) {
+                $taken_seats_args['selected_date'] = $selected_date;
+            }
 
             $taken_seats = $auditorium_product->get_taken_seats($taken_seats_args);
 
-            if (!is_array($taken_seats)) {
-                throw new \Exception(esc_html__('Failed to retrieve taken seats', 'stachethemes-seat-planner-lite'));
-            }
-
-            $seat_plan_data->objects = array_map(function ($object) use ($taken_seats, $auditorium_product) {
-
+            $seat_plan_data->objects = array_map(function ($object) use ($taken_seats, $selected_date, $auditorium_product) {
+               
+                /** @var \stdClass $object */
                 if ($object->type !== 'seat') {
                     return $object;
                 }
 
                 // Applied Manager Overrides to the seat object
-                $object = $auditorium_product->apply_seat_object_overrides($object);
+                $object = $auditorium_product->apply_seat_object_overrides($object, $selected_date);
+                /** @var \stdClass $object */
 
                 $object->taken =
                     (isset($object->status) && $object->status === 'sold-out')
@@ -71,8 +79,30 @@ class Seat_Plan_Data {
                 'filter_by_roles' => $current_user_roles
             ]);
 
-            if (is_array($discounts_data) && !empty($discounts_data)) {
+            if (!empty($discounts_data)) {
                 $seat_plan_data->discounts = $discounts_data;
+            }
+
+            $min_seats_per_purchase = (int) $auditorium_product->get_meta('_stachesepl_min_seats_per_purchase', true);
+            $max_seats_per_purchase = (int) $auditorium_product->get_meta('_stachesepl_max_seats_per_purchase', true);
+
+            if ($min_seats_per_purchase) {
+                $seat_plan_data->minSeatsPerPurchase = $min_seats_per_purchase;
+            }
+
+            if ($max_seats_per_purchase) {
+                $seat_plan_data->maxSeatsPerPurchase = $max_seats_per_purchase;
+            }
+
+            // Custom fields data 
+            // We exclude the Meta type fields because they are read only and not editable
+            // They are attached later during the add to cart process via the back-end
+            $custom_fields_data = $auditorium_product->get_custom_fields_data([
+                'editable_only' => true
+            ]);
+
+            if (!empty($custom_fields_data)) {
+                $seat_plan_data->customFields = $custom_fields_data;
             }
 
             return [

@@ -1,0 +1,23 @@
+.stachesepl-expand-collapse-all-button {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: transparent;
+    border: 1px solid #dcdcde;
+    padding: 6px 12px;
+    border-radius: 4px;
+    color: #555;
+    font-size: 13px;
+    cursor: pointer;
+    transition: all 0.15s;
+
+    &:hover {
+        border-color: var(--wp-admin-theme-color, #007cba);
+        color: var(--wp-admin-theme-color, #007cba);
+        background: rgba(0, 124, 186, 0.04);
+    }
+
+    .MuiSvgIcon-root {
+        font-size: 18px;
+    }
+}

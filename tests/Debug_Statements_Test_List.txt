@@ -1,0 +1,19 @@
+DEBUG STATEMENTS TEST - TEST LIST
+==================================
+
+CODE QUALITY CHECKS
+-------------------
+1. test_no_php_debugging_statements
+   - Checks for: error_log, print_r, var_dump, var_export, dump, dd
+   - Scans: includes/ directory
+
+2. test_no_js_debugging_statements
+   - Checks for: console.log, console.error, console.warn, console.debug, console.info, debugger
+   - Scans: src/ directory
+
+EXCLUSIONS
+----------
+- Excludes: vendor/, node_modules/, tests/, .git/ directories
+- Skips commented lines (//, #, /* */)
+
+TOTAL: 2 tests

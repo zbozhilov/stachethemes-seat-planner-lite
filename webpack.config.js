@@ -105,8 +105,8 @@ module.exports = (env, argv) => {
         'admin/dashboard/index': './src/admin/Dashboard/index.tsx',
         'admin/reserved_seats/index': './src/admin/Product/ReservedSeats/index.tsx',
         'admin/discounts/index': './src/admin/Product/Discounts/index.tsx',
-        'admin/custom_fields/index': './src/admin/Product/CustomFields/index.tsx',
         'admin/dates/index': './src/admin/Product/Dates/index.tsx',
+        'admin/custom_fields/index': './src/admin/Product/CustomFields/index.tsx',
         'admin/export_bookings/index': './src/admin/Product/ExportBookings/index.tsx',
         'admin/seat_planner/index': './src/admin/Product/SeatPlanner/index.tsx',
         'front/add_to_cart/add-to-cart': './src/front/AddToCart/index.tsx',
@@ -116,7 +116,7 @@ module.exports = (env, argv) => {
          * so we need to load the component immediately
          * and disable lazy loading
          */
-                'front-compat-mode/add_to_cart/add-to-cart': './src/front/AddToCart/index-compat.tsx',
+        'front-compat-mode/add_to_cart/add-to-cart': './src/front/AddToCart/index-compat.tsx',
       },
       output: {
         path: path.resolve(__dirname, 'assets'),
@@ -134,8 +134,8 @@ module.exports = (env, argv) => {
         'admin/dashboard/index': './src/admin/Dashboard/index.tsx',
         'admin/reserved_seats/index': './src/admin/Product/ReservedSeats/index.tsx',
         'admin/discounts/index': './src/admin/Product/Discounts/index.tsx',
-        'admin/custom_fields/index': './src/admin/Product/CustomFields/index.tsx',
         'admin/dates/index': './src/admin/Product/Dates/index.tsx',
+        'admin/custom_fields/index': './src/admin/Product/CustomFields/index.tsx',
         'admin/export_bookings/index': './src/admin/Product/ExportBookings/index.tsx',
         'admin/seat_planner/index': './src/admin/Product/SeatPlanner/index.tsx',
         'front/add_to_cart/add-to-cart': './src/front/AddToCart/index.tsx',
@@ -145,7 +145,7 @@ module.exports = (env, argv) => {
          * so we need to load the component immediately
          * and disable lazy loading
          */
-                'front-compat-mode/add_to_cart/add-to-cart': './src/front/AddToCart/index-compat.tsx',
+        'front-compat-mode/add_to_cart/add-to-cart': './src/front/AddToCart/index-compat.tsx',
       },
       output: {
         path: path.resolve(__dirname, 'assets'),

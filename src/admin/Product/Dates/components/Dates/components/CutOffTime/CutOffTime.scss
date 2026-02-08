@@ -1,0 +1,52 @@
+.stachesepl-cutoff-time {
+    .stachesepl-cutoff-time-inputs {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        flex-wrap: wrap;
+        margin-top: 10px;
+    }
+
+    .stachesepl-cutoff-time-field {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+
+        input {
+            width: 80px !important;
+            padding: 4px 8px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 14px;
+            text-align: center;
+
+            &:focus {
+                outline: none;
+                border-color: #2271b1;
+            }
+        }
+
+        .stachesepl-cutoff-time-unit {
+            font-size: 13px;
+            color: #666;
+        }
+    }
+
+}
+
+@media (max-width: 600px) {
+    .stachesepl-cutoff-time {
+        .stachesepl-cutoff-time-inputs {
+            gap: 8px;
+        }
+
+        .stachesepl-cutoff-time-field {
+            flex: 1;
+            min-width: 100%;
+
+            input {
+                width: 100% !important;
+            }
+        }
+    }
+}

@@ -281,13 +281,13 @@ trait Manager_Overrides {
     /**
      * Apply seat object overrides
      * 
-     * @param object $seat_object
+     * @param \stdClass $seat_object
      * @param string $selected_date
      * @return object
      */
-    public function apply_seat_object_overrides($seat_object) {
+    public function apply_seat_object_overrides($seat_object, $selected_date = '') {
         
-        $manager_override_seat_status = $this->get_manager_seat_override($seat_object->seatId, 'status');
+        $manager_override_seat_status = $this->get_manager_seat_override($seat_object->seatId, 'status', $selected_date);
      
         if ($manager_override_seat_status) {
             $seat_object->status = $manager_override_seat_status;

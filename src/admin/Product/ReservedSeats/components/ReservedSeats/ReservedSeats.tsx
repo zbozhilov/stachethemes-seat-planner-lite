@@ -1,6 +1,7 @@
 import { Close as Delete } from '@mui/icons-material';
 import Button from '@src/admin/Product/CommonUI/Button/Button';
 import Container from '@src/admin/Product/CommonUI/Container/Container';
+import EmptyState from '@src/admin/Product/CommonUI/EmptyState/EmptyState';
 import { __, getFormattedDateTime } from '@src/utils';
 import { useEffect, useState } from 'react';
 import './ReservedSeats.scss';
@@ -65,12 +66,8 @@ const ReservedSeats = (props: {
     return (
         <Container label={__('RESERVED_SEATS_IN_CARTS')} description={__('RESERVED_SEATS_IN_CARTS_DESC')} className='stachesepl-seat-planner-reserved-seats'>
 
-            {
-                totalSeatsCount === 0 && <div className='stachesepl-seat-planner-reserved-seats-note'>
-                    {__('LIST_IS_EMPTY')}
-                </div>
-            }
-
+            {totalSeatsCount === 0 && <EmptyState>{__('RESERVED_SEATS_IN_CARTS_EMPTY')}</EmptyState>}
+            
             <div className={`stachesepl-seat-planner-reserved-seats-groups ${groupsCount <= 1 ? 'stachesepl-seat-planner-reserved-seats-groups-single' : ''}`}>
                 {Object.entries(reservedSeats).map(([timeSlot, seats]) => (
                     <div key={timeSlot} className='stachesepl-seat-planner-reserved-seats-group'>
@@ -102,7 +99,6 @@ const ReservedSeats = (props: {
             {
                 totalSeatsCount > 0 && <Button onClick={handleClearAll}>{__('CLEAR_RESERVATIONS')}</Button>
             }
-
 
         </Container>
     )

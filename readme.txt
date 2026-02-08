@@ -3,7 +3,7 @@ Tags: WooCommerce, Seat, Booking, Event, Venue
 Requires: 6.7
 Tested up to: 6.9
 Requires PHP: 8.2
-Stable tag: 1.4.1
+Stable tag: 1.5.2
 License: GPLv2 or later
 WC requires at least: 9.5
 WC tested up to: 10
@@ -34,6 +34,7 @@ Upgrade to **Stachethemes Seat Planner Premium** for advanced features:
 - **Seat Discounts**: Offer fixed or percentage-based discounts. Option to restrict specific discounts to selected user roles.
 - **Date Selection**: Option to select date & time for each individual product.
 - **Custom Fields**: Assign additional free or paid features to individual seats via custom fields. 
+- **Edit and create orders**: Edit existing order items (seat ID, date, custom fields). Bulk actions: change status, move bookings to another date, and create orders for multiple seats at once.
 - **PDF Ticket Attachments**: Attach ticket details & QR Code as a PDF file to the "Order Completed" email.
 - **CSV Import & Export Layouts**: Import and export seat layouts in CSV format.
 - **CSV Booking Export**: Exports booking data for each reserved seat in CSV format.
@@ -67,6 +68,10 @@ Upgrade to **Stachethemes Seat Planner Premium** for advanced features:
 - [React Zoom Pan Pinch](https://www.npmjs.com/package/react-zoom-pan-pinch)
 
 == Changelog ==
+
+= 1.5.1 =
+- Added option to create Order from the Manager section
+- Added new shortcode [stachesepl_count] for displaying the total seat count for auditorium product(s).
 
 = 1.4.1 =
 - Added seat details tooltip on mobile devices

@@ -6,8 +6,8 @@ import Divider from '@src/admin/Dashboard/layout/Divider/Divider'
 import DatePickerPreview from './components/Preview/DatePickerPreview'
 import ButtonsPreview from './components/Preview/ButtonsPreview'
 import CartTimerPreview from './components/Preview/CartTimerPreview'
-import FlexTwo from '@src/admin/Dashboard/layout/FlexTwo/FlexTwo'
 import LabelPreview from '../LabelPreview/LabelPreview'
+import './Colors.scss'
 
 const Colors = () => {
 
@@ -31,12 +31,12 @@ const Colors = () => {
 
             <DatePickerPreview />
 
-            <FlexTwo>
+            <div className='stachesepl-colors-preview-buttons-flex'>
                 <ButtonsPreview />
                 <CartTimerPreview />
-            </FlexTwo>
+            </div>
 
-        </Container>
+        </Container >
     )
 }
 

@@ -15,7 +15,7 @@ class WP_Dashboard {
     /**
      * Initialize the dashboard widget.
      */
-    public static function init() {
+    public static function init(): void {
         add_action('wp_dashboard_setup', [__CLASS__, 'register_widget']);
         add_action('admin_bar_menu', [__CLASS__, 'add_admin_bar_menu'], 100);
         add_action('admin_head', [__CLASS__, 'add_admin_bar_styles']);
@@ -25,7 +25,7 @@ class WP_Dashboard {
     /**
      * Register the dashboard widget.
      */
-    public static function register_widget() {
+    public static function register_widget(): void {
         wp_add_dashboard_widget(
             'stachethemes_seat_planner_seats_sold',
             esc_html__('Seats Sold & Revenue (Last 30 Days)', 'stachethemes-seat-planner-lite'),
@@ -36,7 +36,7 @@ class WP_Dashboard {
     /**
      * Render the dashboard widget content.
      */
-    public static function render_widget() {
+    public static function render_widget(): void {
         $stats = self::get_seats_and_revenue_stats();
         $formatted_count = number_format_i18n($stats['seats_sold']);
         $formatted_revenue = wc_price($stats['revenue']);
@@ -44,7 +44,7 @@ class WP_Dashboard {
         <div class="stachethemes-seat-planner-dashboard-widget">
             <div style="display: flex; gap: 12px; flex-wrap: wrap;">
                 <div style="flex: 1; min-width: 180px; padding: 12px; background: #f6f7f7; border: 1px solid #dcdcde; border-radius: 6px;">
-                    <div style="display: flex; align-items: center; gap: 8px; color: #50575e; font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: .02em;">
+                    <div style="display: flex; align-items: center; gap: 8px; color: #50575e; font-size: 12px; font-weight: 600; text-transform: uppercase;">
                         <span class="dashicons dashicons-groups" aria-hidden="true"></span>
                         <span><?php echo esc_html__('Seats sold', 'stachethemes-seat-planner-lite'); ?></span>
                     </div>
@@ -54,7 +54,7 @@ class WP_Dashboard {
                 </div>
 
                 <div style="flex: 1; min-width: 180px; padding: 12px; background: #f6f7f7; border: 1px solid #dcdcde; border-radius: 6px;">
-                    <div style="display: flex; align-items: center; gap: 8px; color: #50575e; font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: .02em;">
+                    <div style="display: flex; align-items: center; gap: 8px; color: #50575e; font-size: 12px; font-weight: 600; text-transform: uppercase;">
                         <span class="dashicons dashicons-chart-line" aria-hidden="true"></span>
                         <span><?php echo esc_html__('Revenue', 'stachethemes-seat-planner-lite'); ?></span>
                     </div>
@@ -83,6 +83,7 @@ class WP_Dashboard {
 
         // Return cached data if available
         if (false !== $cached_stats && is_array($cached_stats)) {
+            /** @var array{seats_sold: int, revenue: float} $cached_stats */
             return $cached_stats;
         }
 
@@ -90,13 +91,14 @@ class WP_Dashboard {
         $date_after = strtotime('-30 days');
 
         $orders = wc_get_orders([
+            'type'                   => 'shop_order',
             'status'                 => ['wc-completed'],
             'date_after'             => date_i18n('Y-m-d H:i:s', $date_after),
             'limit'                  => -1,
             'has_auditorium_product' => 1
         ]);
 
-        if (empty($orders)) {
+        if (empty($orders) || !is_array($orders)) {
             $stats = [
                 'seats_sold' => 0,
                 'revenue'    => 0.0
@@ -106,23 +108,13 @@ class WP_Dashboard {
             $total_revenue = 0.0;
 
             foreach ($orders as $order) {
-                $order_items = $order->get_items();
+                $order_items = Order_Helper::get_order_items($order);
 
                 foreach ($order_items as $item) {
-                    $seat_data_meta = $item->get_meta('seat_data');
-                    $seat_data      = is_array($seat_data_meta) ? $seat_data_meta : (is_object($seat_data_meta) ? (array) $seat_data_meta : []);
 
-                    if (empty($seat_data)) {
-                        continue;
-                    }
+                    $total_seats++;
+                    $total_revenue += $item['price'];
 
-                    $seat_id = isset($seat_data['seatId']) ? $seat_data['seatId'] : '';
-
-                    // Count each seat item that has a valid seatId and add its revenue
-                    if ($seat_id) {
-                        $total_seats++;
-                        $total_revenue += (float) $item->get_total();
-                    }
                 }
             }
 
@@ -143,7 +135,7 @@ class WP_Dashboard {
      *
      * @param \WP_Admin_Bar $wp_admin_bar The WordPress admin bar object.
      */
-    public static function add_admin_bar_menu($wp_admin_bar) {
+    public static function add_admin_bar_menu(\WP_Admin_Bar $wp_admin_bar): void {
         // Only show to users who can manage options
         if (! apply_filters('stachesepl_can_read_qr_string_details', 'manage_woocommerce')) {
             return;
@@ -164,7 +156,7 @@ class WP_Dashboard {
     /**
      * Add custom styles for the admin bar menu item.
      */
-    public static function add_admin_bar_styles() {
+    public static function add_admin_bar_styles(): void {
         // Only show styles to users who can read QR string details
         if (! apply_filters('stachesepl_can_read_qr_string_details', 'manage_woocommerce')) {
             return;

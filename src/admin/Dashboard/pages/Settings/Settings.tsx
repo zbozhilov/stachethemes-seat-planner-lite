@@ -9,9 +9,9 @@ import CartBehavior from './components/CartBehavior/CartBehavior';
 import Colors from './components/Colors/Colors';
 import General from './components/General/General';
 import MobileApp from './components/MobileApp/MobileApp';
-import Pro from './components/Pro/Pro';
 import './Settings.scss';
 import { SettingsProvider, useSettings } from './SettingsContext';
+import Pro from './components/Pro/Pro';
 
 type SupportedTabs = 'general' | 'cart_behavior' | 'colors' | 'attachments' | 'mobile_app' | 'pro';
 
@@ -37,7 +37,7 @@ const SettingsContent = () => {
             case 'mobile_app': {
                 return <MobileApp />;
             }
-            case 'pro' : {
+            case 'pro': {
                 return <Pro />;
             }
             default: {

@@ -9,8 +9,12 @@ if (! defined('ABSPATH')) {
 // Centralize all the settings for the Seat Planner plugin
 class Settings {
 
-    private static $the_settings = null;
+    /** @var array<string, mixed>|null */
+    private static ?array $the_settings = null;
 
+    /**
+     * @return array<string, mixed>
+     */
     public static function get_settings(): array {
 
         if (!empty(self::$the_settings)) {
@@ -23,23 +27,21 @@ class Settings {
             'stachesepl_enable_in_loop_button'          => get_option('stachesepl_enable_in_loop_button', 'yes'),
             'stachesepl_compat_mode'                    => get_option('stachesepl_compat_mode', 'yes'),
             'stachesepl_compat_calc_totals'             => get_option('stachesepl_compat_calc_totals', 'no'),
-            
             'stachesepl_reserve_time'                   => (int) get_option('stachesepl_reserve_time', 15),
             'stachesepl_cart_redirect'                  => get_option('stachesepl_cart_redirect', 'checkout'),
             'stachesepl_cart_redirect_message'          => get_option('stachesepl_cart_redirect_message', 'yes'),
             'stachesepl_cart_redirect_message_text'     => get_option('stachesepl_cart_redirect_message_text', ''),
             'stachesepl_cart_timer_enabled'             => get_option('stachesepl_cart_timer_enabled', 'yes'),
 
-            'stachesepl_qr_code_enabled'                => get_option('stachesepl_qr_code_enabled', 'yes'),
-
             // accent color
             'stachesepl_accent_color'                   => get_option('stachesepl_accent_color', '#7F54B3'),
 
-            'stachesepl_pdf_attachments'                => get_option('stachesepl_pdf_attachments', 'yes'),
-            'stachesepl_pdf_attachment_name'            => get_option('stachesepl_pdf_attachment_name', ''),
+            'stachesepl_qr_code_enabled'                => get_option('stachesepl_qr_code_enabled', 'yes'),
+            'stachesepl_pdf_attachments'                => 'no',
+            'stachesepl_pdf_attachment_name'            => '',
             'stachesepl_auto_confirm_paid_orders'       => get_option('stachesepl_auto_confirm_paid_orders', 'no'),
-            'stachesepl_app_enabled'                    => get_option('stachesepl_app_enabled', 'yes'),
-            'stachesepl_app_secret_key'                 => get_option('stachesepl_app_secret_key', ''),
+            'stachesepl_app_enabled'                    => 'no',
+            'stachesepl_app_secret_key'                 => '',
         ];
 
 
@@ -48,8 +50,8 @@ class Settings {
 
     /**
      * Save settings from the dashboard
-     * 
-     * @param array $settings Array of settings to save
+     *
+     * @param array<string, mixed> $settings Array of settings to save
      * @return bool True on success, false on failure
      */
     public static function save_settings(array $settings): bool {
@@ -163,9 +165,9 @@ class Settings {
                 }
             }
 
-            // Use default if empty and default is set
-            if ('' === $value && isset($config['default']) && '' !== $config['default']) {
-                $value = isset($current_settings[$key]) ? $current_settings[$key] : '';
+            // When value is empty, keep the current setting
+            if ('' === $value) {
+                $value = $current_settings[$key] ?? '';
             }
 
             update_option($key, $value);
@@ -194,7 +196,7 @@ class Settings {
     }
 
     // Responsible for applying the accent color on the front-end ui
-    public static function get_minimized_front_inline_css() {
+    public static function get_minimized_front_inline_css(): string {
         $accent_color = Settings::get_setting('stachesepl_accent_color');
         $style = ':root {
             --stachesepl-select-seat-button-background-color: ' . $accent_color . ';
@@ -242,6 +244,7 @@ class Settings {
             --picker-btn-secondary-text-hover: ' . $accent_color . ';
         }';
         $style = preg_replace('/\s+/', '', $style);
+        /** @var string $style */
         return $style;
     }
 }

@@ -1,7 +1,6 @@
 import { AddPhotoAlternate, Close } from '@mui/icons-material';
 import { mediaFrame } from '@src/admin/Product/SeatPlanner/components/Editor/components/TopBar/components/WorkflowSettings/components/WorkflowSettingsDialog/components/Settings/utils';
 import { __ } from '@src/utils';
-import React from 'react';
 import './AddImage.scss';
 
 export interface AddImageProps {

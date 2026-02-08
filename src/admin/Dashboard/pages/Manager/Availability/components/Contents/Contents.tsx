@@ -1,19 +1,17 @@
-import { useNavigate, useParams } from 'react-router';
-import { useAuditoriumProductAvailability } from '../../../hooks';
-import './Contents.scss';
-import { __ } from '@src/utils';
 import { EventSeat } from '@mui/icons-material';
-import { useState, useEffect, useCallback } from 'react';
+import type { FrontWorkflowObject } from '@src/front/AddToCart/types';
+import { __ } from '@src/utils';
+import { useCallback, useEffect, useState } from 'react';
+import { useNavigate, useParams } from 'react-router';
 import Loading from '../../../components/Loading/Loading';
+import { useAuditoriumProduct, useAuditoriumProductAvailability } from '../../../hooks';
+import BulkActionBar from './components/BulkActionBar';
+import Pagination from './components/Pagination';
+import SeatsGrid from './components/SeatsGrid';
 import StatsCards from './components/StatsCards';
 import Toolbar from './components/Toolbar';
-import SeatsGrid from './components/SeatsGrid';
-import Pagination from './components/Pagination';
-import BulkActionBar from './components/BulkActionBar';
+import './Contents.scss';
 import type { SeatAvailabilityStatus, SeatObject } from './types';
-import type { FrontWorkflowObject } from '@src/front/AddToCart/types';
-import type { SeatStatus } from '../../../types';
-import { toast } from 'react-hot-toast';
 
 const SEATS_PER_PAGE = 50;
 
@@ -36,6 +34,7 @@ const Contents = () => {
     const { productId, dateTime } = useParams<{ productId?: string; dateTime?: string }>();
     const productIdNum = productId ? parseInt(productId, 10) : undefined;
     const { data, loading, error, reload } = useAuditoriumProductAvailability(productIdNum, dateTime);
+    const { data: productData } = useAuditoriumProduct(productIdNum);
     const navigate = useNavigate();
     const [filterStatus, setFilterStatus] = useState<FilterStatus>('all');
     const [searchTerm, setSearchTerm] = useState('');
@@ -44,6 +43,9 @@ const Contents = () => {
     // Selection mode state
     const [isSelectionMode, setIsSelectionMode] = useState(false);
     const [selectedSeats, setSelectedSeats] = useState<Set<string>>(new Set());
+    
+    // Check if product has dates
+    const hasDates = productData?.has_dates ?? false;
 
     const handleEditSeat = (seatId: string) => {
         if (isSelectionMode) return; // Don't navigate when in selection mode
@@ -83,6 +85,7 @@ const Contents = () => {
     const handleDeselectAll = useCallback(() => {
         setSelectedSeats(new Set());
     }, []);
+
 
     const seats = data?.objects.filter(isSeatObject) || [];
 
@@ -196,11 +199,17 @@ const Contents = () => {
             {isSelectionMode && selectedSeats.size > 0 && (
                 <BulkActionBar
                     selectedCount={selectedSeats.size}
-                    onStatusChange={() => {
-                        toast.error(__('BULK_UPDATE_NOT_SUPPORTED_IN_LITE_VERSION'));
-                    }}
+                    selectedSeatIds={Array.from(selectedSeats)}
+                    discounts={data?.discounts || []}
+                    customFields={data?.customFields || []}
+                    onStatusChange={() => {}}
                     onCancel={handleToggleSelectionMode}
                     loading={false}
+                    hasDates={hasDates}
+                    currentDateTime={dateTime}
+                    onMoveToDate={() => {}}
+                    movingToDate={false}
+                    onSuccess={reload}
                 />
             )}
         </div>

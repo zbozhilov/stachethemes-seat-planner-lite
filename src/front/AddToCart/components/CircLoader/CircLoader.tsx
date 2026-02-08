@@ -1,5 +1,5 @@
-import './CircLoader.scss';
 import { useEffect, useRef } from 'react';
+import './CircLoader.scss';
 
 const CircLoader = (props: {
     text: string;

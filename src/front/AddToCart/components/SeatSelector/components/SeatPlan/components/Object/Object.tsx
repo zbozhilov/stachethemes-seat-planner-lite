@@ -1,6 +1,5 @@
 import { useProductId, useSeatPlanData, useSelectedDate, useSelectedSeats } from '@src/front/AddToCart/components/context/hooks';
 import Modal from '@src/front/AddToCart/components/Modal/Modal';
-import React from 'react';
 import { FrontWorkflowObject } from 'src/front/AddToCart/types';
 import SeatObject from './components/SeatObject/SeatObject';
 import SeatReservationDetails from './components/SeatReservationDetails/SeatReservationDetails';
@@ -12,8 +11,10 @@ const Object = (props: {
     data: FrontWorkflowObject,
 }) => {
 
+    const { seatPlanData } = useSeatPlanData();
     const { productId } = useProductId();
     const { selectedDate } = useSelectedDate();
+    const maxSeatsRequired = seatPlanData?.maxSeatsPerPurchase || 0;
     const { selectedSeats, setSelectedSeats } = useSelectedSeats();
 
     const {
@@ -32,6 +33,12 @@ const Object = (props: {
         if (selectedSeats.includes(seatId)) {
             setSelectedSeats(selectedSeats.filter((id) => id !== seatId));
         } else {
+
+            if (maxSeatsRequired > 0 && selectedSeats.length >= maxSeatsRequired) {
+                return;
+            }
+            
+            // Add the new seat
             setSelectedSeats([...selectedSeats, seatId]);
         }
 

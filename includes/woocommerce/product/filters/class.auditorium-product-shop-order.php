@@ -30,13 +30,14 @@ class Auditorium_Product_Shop_Order_Admin {
             return;
         }
 
-        $item_id = filter_input(INPUT_POST, 'stachesepl_unscan_ticket', FILTER_SANITIZE_NUMBER_INT);
-        if (!$item_id) {
+        $item_id = (int) filter_input(INPUT_POST, 'stachesepl_unscan_ticket', FILTER_SANITIZE_NUMBER_INT);
+       
+        if (!$item_id ) {
             return;
         }
 
         $order = wc_get_order($post_id);
-        if (!$order) {
+        if (!$order || !($order instanceof \WC_Order)) {
             return;
         }
 
@@ -45,14 +46,14 @@ class Auditorium_Product_Shop_Order_Admin {
             return;
         }
 
-        $seat_data = (array) $item->get_meta('seat_data');
+        $seat_data = Utils::normalize_seat_data_meta($item->get_meta('seat_data'));
         if (!$seat_data) {
             return;
         }
 
         unset($seat_data['qr_code_scanned']);
 
-        $item->update_meta_data('seat_data', (object) $seat_data);
+        $item->update_meta_data('seat_data', $seat_data);
         $item->save_meta_data();
     }
 }

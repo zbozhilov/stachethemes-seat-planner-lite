@@ -23,7 +23,7 @@ export const useEditorRef = () => {
 
 export const useWorkflowProps = () => {
     const context = useEditorContext();
-  
+
     return {
         workflowProps: context.workflowProps,
         setWorkflowProps: context.setWorkflowProps,
@@ -55,6 +55,10 @@ export const useEditorObjects = () => {
 
         if (theNewObjects.length > maxAllowedObjects) {
             toast.error(__('MAX_OBJECTS_LIMIT_REACHED'));
+            return;
+        }
+
+        if (theNewObjects.length > maxAllowedObjects) {
             return;
         }
 

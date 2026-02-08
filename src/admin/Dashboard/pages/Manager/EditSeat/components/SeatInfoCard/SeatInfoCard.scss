@@ -1,0 +1,79 @@
+// Seat Info Card
+.stachesepl-manager-edit-seat-info {
+    background: var(--stachesepl-bg-card);
+    border: 1px solid var(--stachesepl-border);
+    border-radius: var(--stachesepl-radius-lg);
+    padding: var(--stachesepl-space-5);
+
+    &-header {
+        display: flex;
+        align-items: center;
+        gap: var(--stachesepl-space-4);
+    }
+
+    &-icon {
+        width: 56px !important;
+        height: 56px !important;
+        padding: var(--stachesepl-space-3);
+        background: var(--stachesepl-primary-light);
+        color: var(--stachesepl-primary);
+        border-radius: var(--stachesepl-radius-md);
+        flex-shrink: 0;
+    }
+
+    &-details {
+        flex: 1;
+        min-width: 0;
+    }
+
+    &-title {
+        font-size: var(--stachesepl-text-lg);
+        font-weight: 600;
+        color: var(--stachesepl-text-primary);
+        margin: 0;
+    }
+
+    &-meta {
+        display: flex;
+        flex-wrap: wrap;
+        gap: var(--stachesepl-space-4);
+        margin-top: var(--stachesepl-space-4);
+        padding-top: var(--stachesepl-space-4);
+        border-top: 1px solid var(--stachesepl-border);
+
+        &-item {
+            display: flex;
+            align-items: center;
+            gap: var(--stachesepl-space-2);
+        }
+
+        &-label {
+            font-size: var(--stachesepl-text-sm);
+            color: var(--stachesepl-text-secondary);
+        }
+
+        &-value {
+            font-size: var(--stachesepl-text-sm);
+            font-weight: 500;
+            color: var(--stachesepl-text-primary);
+        }
+    }
+}
+
+.stachesepl-manager-edit-seat-taken-badge {
+    display: flex;
+    align-items: center;
+    gap: var(--stachesepl-space-1);
+    padding: var(--stachesepl-space-2) var(--stachesepl-space-3);
+    background: var(--stachesepl-warning-light, #fef3c7);
+    color: var(--stachesepl-warning, #d97706);
+    border-radius: var(--stachesepl-radius-md);
+    font-size: var(--stachesepl-text-xs);
+    font-weight: 600;
+    text-transform: uppercase;
+}
+
+.stachesepl-manager-edit-seat-taken-icon {
+    width: 14px;
+    height: 14px;
+}

@@ -1,6 +1,10 @@
-node_modules/
+**/node_modules/
 assets/
-audi.code-workspace
+.vscode/
+**/libs/
+/ship
+.phpunit.result.cache
 build/
 cached/
-.phpunit.result.cache
+vendor/
+tests/

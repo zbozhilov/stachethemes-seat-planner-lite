@@ -12,11 +12,19 @@ if (! defined('ABSPATH')) {
  */
 class Notice_Rate {
 
-    const TRANSIENT_ID     = 'stachesepl_notice_rate_timer';
-    const OPTION_ID        = 'stachesepl_notice_rate';
+    const TRANSIENT_ID     = 'stacheseplite_notice_rate_timer';
+    const OPTION_ID        = 'stacheseplite_notice_rate';
     const NOTICE_FREQUENCY = 2 * DAY_IN_SECONDS;
 
-    public static function init() {
+    private static bool $did_init = false;
+
+    public static function init(): void {
+
+        if (self::$did_init) {
+            return;
+        }
+
+        self::$did_init = true;
 
         if (get_option(self::OPTION_ID, 'on') === 'off') {
             return;
@@ -26,7 +34,7 @@ class Notice_Rate {
         add_action('admin_init', [__CLASS__, 'handler']);
     }
 
-    public static function handler() {
+    public static function handler(): void {
 
         if (!isset($_GET['stachesepl_notice_rate']) || !isset($_GET['stachesepl_nonce'])) {
             return;
@@ -56,7 +64,7 @@ class Notice_Rate {
         exit;
     }
 
-    public static function maybe_show_notice() {
+    public static function maybe_show_notice(): void {
 
         if (!current_user_can('manage_options')) {
             return;
@@ -65,22 +73,18 @@ class Notice_Rate {
         $screen           = get_current_screen();
         $allowed_screens = ['dashboard', 'plugins'];
 
-        if (!$screen || !in_array($screen->id, $allowed_screens)) {
+        if (!$screen || !in_array($screen->id, $allowed_screens, true)) {
             return;
         }
 
-        if (!in_array($screen->id, $allowed_screens)) {
-            return;
-        }
-
-        if (get_transient('stachesepl_notice_rate_timer')) {
+        if (get_transient('stacheseplite_notice_rate_timer')) {
             return;
         }
 
         self::show_message();
     }
 
-    public static function show_message() {
+    public static function show_message(): void {
 
         $current_page_url   = add_query_arg([]);
         $dismiss_url        = wp_nonce_url(add_query_arg(['stachesepl_notice_rate' => 'off'], $current_page_url), 'stachesepl_notice_rate_action', 'stachesepl_nonce');
@@ -91,13 +95,10 @@ class Notice_Rate {
             <p>
                 <?php
                 echo sprintf(
-                    // Translators: %1$s is the plugin name, %2$s is the rating link
-                    esc_html__('Thank you for using %1$s! Please consider leaving a %2$s rating to support the plugin.', 'stachethemes-seat-planner-lite')
-,
-                    '<strong>' . esc_html__('Stachethemes Seat Planner', 'stachethemes-seat-planner-lite')
- . '</strong>',
-                    '<a href="https://woocommerce.com/products/stachethemes-seat-planner/" target="_blank">' . esc_html__('★★★★★', 'stachethemes-seat-planner-lite')
- . '</a>'
+                    // Translators: %1$s is the plugin name, %2$s is the review link
+                    esc_html__('Thank you for choosing %1$s! We\'d appreciate it if you could leave a %2$s to support the plugin.', 'stachethemes-seat-planner-lite'),
+                    '<strong>' . esc_html__('Stachethemes Seat Planner', 'stachethemes-seat-planner-lite') . '</strong>',
+                    '<a href="https://wordpress.org/support/plugin/stachethemes-seat-planner-lite/reviews/?filter=#new-post" target="_blank">' . esc_html__('review', 'stachethemes-seat-planner-lite') . '</a>'
                 );
                 ?>
             </p>
@@ -105,14 +106,12 @@ class Notice_Rate {
                 <?php
                 echo sprintf(
                     // Translators: %s is the URL to dismiss the notice
-                    '<a class="button-secondary" href="%s">' . esc_html__('Maybe Later', 'stachethemes-seat-planner-lite')
- . '</a>',
+                    '<a class="button-secondary" href="%s">' . esc_html__('Maybe Later', 'stachethemes-seat-planner-lite') . '</a>',
                     esc_url($maybe_later_url)
                 );
                 echo sprintf(
                     // Translators: %s is the URL to dismiss the notice
-                    '<a class="button-secondary" style="margin-left: 10px" href="%s">' . esc_html__('Don\'t Show Again', 'stachethemes-seat-planner-lite')
- . '</a>',
+                    '<a class="button-secondary" style="margin-left: 10px" href="%s">' . esc_html__('Don\'t Show Again', 'stachethemes-seat-planner-lite') . '</a>',
                     esc_url($dismiss_url)
                 );
                 ?>

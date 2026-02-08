@@ -27,11 +27,13 @@
     display: flex;
     align-items: center;
     gap: var(--stachesepl-space-3);
+    max-width: 320px;
 }
 
 .stachesepl-color-picker-swatch {
     position: relative;
     width: 44px;
+    min-width: 44px;
     height: 44px;
     border-radius: var(--stachesepl-radius-md);
     border: 2px solid var(--stachesepl-border);
@@ -59,7 +61,7 @@
 
 .stachesepl-color-picker-value-container {
     max-width: 120px;
-    flex: 0 0 auto;
+    flex: 1;
 }
 
 .stachesepl-color-picker-value {

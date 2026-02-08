@@ -6,16 +6,12 @@ import Button from "../Button/Button";
 const ImportDataButton = () => {
 
     const handleClick = () => {
-        toast.error(__('IMPORT_DATA_NOT_AVAILABLE_FOR_LITE_VERSION'));
+        toast.error(__('IMPORT_SEAT_PLAN_NOT_SUPPORTED_IN_LITE'));
     };
 
     return (
-        <Button
-            onClick={handleClick}
-            icon={PublishIcon}
-            title={__('IMPORT_SEAT_PLAN')}
-        />
-    )
-}
+        <Button onClick={handleClick} icon={PublishIcon} title={__('IMPORT_SEAT_PLAN')} />
+    );
+};
 
-export default ImportDataButton
+export default ImportDataButton;

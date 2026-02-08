@@ -1,10 +1,10 @@
 import Divider from '@src/admin/Dashboard/layout/Divider/Divider'
 import Input from '@src/admin/Dashboard/layout/Input'
-import Select from '@src/admin/Dashboard/layout/Select'
 import Toggle from '@src/admin/Dashboard/layout/Toggle'
 import { __ } from '@src/utils'
 import Container from '../../../../layout/Container/Container'
 import { useSettings } from '../../SettingsContext'
+import Select from '@src/admin/Dashboard/layout/Select'
 
 const General = () => {
     const { settings, updateSetting } = useSettings()
@@ -41,7 +41,6 @@ const General = () => {
                     updateSetting('stachesepl_seat_selector_tooltip', e.target.value as 'disabled' | 'desktop' | 'mobile' | 'always')
                 }
             />
-
             <Divider />
 
             <Toggle
@@ -59,6 +58,7 @@ const General = () => {
                 checked={settings.stachesepl_enable_in_loop_button === 'yes'}
                 onChange={(e) => updateSetting('stachesepl_enable_in_loop_button', e.target.checked ? 'yes' : 'no')}
             />
+
             <Divider />
 
             <Toggle

@@ -1,0 +1,16 @@
+.stachesepl-empty-state {
+    padding: 24px;
+    text-align: center;
+    color: #666;
+    background: #f9f9f9;
+    border: 2px dashed #ddd;
+    border-radius: 6px;
+    font-size: 14px;
+    margin: 20px auto;
+}
+
+@media (max-width: 782px) {
+    .stachesepl-empty-state {
+        padding: 16px;
+    }
+}

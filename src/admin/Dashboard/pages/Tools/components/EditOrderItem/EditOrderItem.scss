@@ -43,6 +43,31 @@
     gap: 12px;
 }
 
+.stachesepl-eoi-order-total-wrap {
+    margin-top: 8px;
+}
+
+.stachesepl-eoi-order-total {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    text-align: right;
+
+    .stachesepl-eoi-order-total-label {
+        font-size: 13px;
+        font-weight: 600;
+        color: #111827;
+        text-transform: uppercase;
+    }
+
+    .stachesepl-eoi-order-total-value {
+        font-size: 20px;
+        font-weight: 700;
+        color: #111827;
+        margin-top: 4px;
+    }
+}
+
 .stachesepl-eoi-status {
     display: inline-block;
     padding: 4px 10px;
@@ -153,14 +178,25 @@
 }
 
 .stachesepl-eoi-field {
-    max-width: 400px;
+}
+
+.stachesepl-eoi-custom-fields {
+    margin-top: 8px;
+    padding-top: 16px;
+    border-top: 1px dashed #d1d5db;
+}
+
+.stachesepl-eoi-custom-fields-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 20px;
 }
 
 .stachesepl-eoi-item-scanned {
     display: flex;
     align-items: center;
     gap: 8px;
-    margin-top: 16px;
+    margin: 16px auto;
     padding: 10px 14px;
     background: #fff3e0;
     border: 1px solid #ff9800;
@@ -170,6 +206,38 @@
 
     svg {
         flex-shrink: 0;
+    }
+}
+
+.stachesepl-eoi-item-total {
+    display: flex;
+    flex-direction: column;
+    gap: var(--stachesepl-space-1);
+    margin-top: var(--stachesepl-space-4);
+    padding-top: var(--stachesepl-space-3);
+    border-top: 1px solid var(--stachesepl-border);
+    text-align: right;
+
+    @media (max-width: 768px) {
+        padding-top: var(--stachesepl-space-4);
+    }
+}
+
+.stachesepl-eoi-item-total-label {
+    font-size: var(--stachesepl-text-sm);
+    font-weight: 600;
+    color: var(--stachesepl-text-primary);
+    text-transform: uppercase;
+}
+
+.stachesepl-eoi-item-total-value {
+    font-size: var(--stachesepl-text-xl);
+    font-weight: 700;
+    color: var(--stachesepl-text-primary);
+    margin-top: var(--stachesepl-space-1);
+
+    @media (max-width: 768px) {
+        font-size: var(--stachesepl-text-lg);
     }
 }
 
@@ -208,6 +276,9 @@
 .stachesepl-eoi-actions {
     display: flex;
     justify-content: flex-end;
+    align-items: center;
+    gap: 16px;
+    flex-wrap: wrap;
     padding-top: 16px;
     border-top: 1px solid #e5e7eb;
 }

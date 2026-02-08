@@ -13,12 +13,18 @@ if (roots.length > 0) {
 
         const productId = Number(root.getAttribute('data-product-id'))
         const hasDates = root.getAttribute('data-has-dates') === 'yes';
+        const date = root.getAttribute('data-date') as string;
         const addToCartText = root.getAttribute('data-add-to-cart-text') as string;
 
         createRoot(root)
             .render(
                 <React.StrictMode>
-                    <AddToCartProvider productId={productId} hasDate={hasDates} addToCartDefaultText={addToCartText}>
+                    <AddToCartProvider
+                        productId={productId}
+                        hasDate={hasDates}
+                        initialDate={date}
+                        addToCartDefaultText={addToCartText}
+                    >
                         <SelectSeatsButton />
                     </AddToCartProvider>
                 </React.StrictMode>

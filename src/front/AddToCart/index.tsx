@@ -14,6 +14,7 @@ if (roots.length > 0) {
         const productId = Number(root.getAttribute('data-product-id'))
         const hasDates = root.getAttribute('data-has-dates') === 'yes';
         const addToCartText = root.getAttribute('data-add-to-cart-text') as string;
+        const date = root.getAttribute('data-date') as string;
 
         // Capture static HTML content for fallback before React takes over
         const fallbackHTML = root.innerHTML;
@@ -25,7 +26,12 @@ if (roots.length > 0) {
         createRoot(root)
             .render(
                 <React.StrictMode>
-                    <AddToCartProvider productId={productId} hasDate={hasDates} addToCartDefaultText={addToCartText}>
+                    <AddToCartProvider
+                        productId={productId}
+                        hasDate={hasDates}
+                        initialDate={date}
+                        addToCartDefaultText={addToCartText}
+                    >
                         <LazySelectSeatButton fallback={fallback ? fallback : ''} />
                     </AddToCartProvider>
                 </React.StrictMode>

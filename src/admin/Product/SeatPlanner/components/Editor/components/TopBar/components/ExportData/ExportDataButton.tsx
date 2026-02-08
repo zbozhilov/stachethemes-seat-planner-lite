@@ -6,7 +6,7 @@ import Button from "../Button/Button";
 const ExportDataButton = () => {
 
     const handleClick = () => {
-        toast.error(__('EXPORT_DATA_NOT_AVAILABLE_FOR_LITE_VERSION'));
+        toast.error(__('EXPORT_SEAT_DATA_NOT_SUPPORTED_IN_LITE'));
     };
 
     return (
@@ -15,7 +15,7 @@ const ExportDataButton = () => {
             icon={FileDownloadIcon}
             title={__('EXPORT_SEAT_DATA')}
         />
-    )
-}
+    );
+};
 
-export default ExportDataButton
+export default ExportDataButton;
