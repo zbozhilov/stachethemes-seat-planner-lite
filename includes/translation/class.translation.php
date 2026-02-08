@@ -488,6 +488,7 @@ class Translation {
             'SET_STATUS_TO'                             => esc_html__('Set status to:', 'stachethemes-seat-planner-lite'),
             'MOVE'                                      => esc_html__('Move', 'stachethemes-seat-planner-lite'),
             'BULK_MOVE_TO_DATE'                         => esc_html__('Move to Date', 'stachethemes-seat-planner-lite'),
+            'BULK_ACTIONS_NOT_SUPPORTED_IN_LITE'         => esc_html__('Bulk actions are not supported in the Lite version. Upgrade to Pro to change status, create orders, and move bookings.', 'stachethemes-seat-planner-lite'),
             'BULK_MOVE_DESCRIPTION'                     => esc_html__('Relocate selected bookings and status overrides to another date.', 'stachethemes-seat-planner-lite'),
             'BULK_SELECT_TARGET_DATE'                   => esc_html__('Target Date & Time', 'stachethemes-seat-planner-lite'),
             'BULK_SEND_NOTIFICATIONS'                   => esc_html__('Re-send order notifications to customers', 'stachethemes-seat-planner-lite'),

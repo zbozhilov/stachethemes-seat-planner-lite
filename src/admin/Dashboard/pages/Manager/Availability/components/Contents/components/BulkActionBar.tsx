@@ -117,6 +117,10 @@ const BulkSelectionBar = ({
         });
     }, [selectedSeatIds]);
 
+    const handleStatusClick = () => {
+        toast.error(__('BULK_ACTIONS_NOT_SUPPORTED_IN_LITE'));
+    };
+
     const handleMoveClick = () => {
         setShowMovePanel(true);
         setShowOrderPanel(false);
@@ -215,111 +219,8 @@ const BulkSelectionBar = ({
     };
 
     const handleConfirmBulkCreateOrder = async () => {
-        if (!selectedCount || !productIdNum) return;
-
-        if (!customerName.trim()) {
-            toast.error(__('CUSTOMER_NAME_REQUIRED'));
-            return;
-        }
-
-        if (!customerEmail.trim()) {
-            toast.error(__('CUSTOMER_EMAIL_REQUIRED'));
-            return;
-        }
-
-        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        if (!emailRegex.test(customerEmail.trim())) {
-            toast.error(__('CUSTOMER_EMAIL_INVALID'));
-            return;
-        }
-
-        // Validate required custom fields per-seat (same rules as SeatOrderForm)
-        for (const seatId of selectedSeatIds) {
-            const visibleFields = getVisibleCustomFieldsForSeat(seatId);
-            for (const field of visibleFields) {
-                if (field.required) {
-                    const val = getSeatCustomFieldValue(seatId, field);
-                    const isEmpty = val === '' || val === undefined || (typeof val === 'string' && !val.trim());
-                    if (isEmpty) {
-                        toast.error(`${seatId}: ${__('CUSTOM_FIELD_REQUIRED').replace('%s', field.label)}`);
-                        return;
-                    }
-                }
-                if (field.type === 'number') {
-                    const val = getSeatCustomFieldValue(seatId, field);
-                    if (val === '' || val === undefined) continue;
-                    const num = Number(val);
-                    if (!Number.isFinite(num)) continue;
-                    if (field.min != null && num < field.min) {
-                        toast.error(
-                            `${seatId}: ${__('CUSTOM_FIELD_NUMBER_MIN')
-                                .replace('%1$s', field.label)
-                                .replace('%2$s', String(field.min))}`
-                        );
-                        return;
-                    }
-                    if (field.max != null && num > field.max) {
-                        toast.error(
-                            `${seatId}: ${__('CUSTOM_FIELD_NUMBER_MAX')
-                                .replace('%1$s', field.label)
-                                .replace('%2$s', String(field.max))}`
-                        );
-                        return;
-                    }
-                }
-            }
-        }
-
-        // Prepare data
-        const seatsData: BulkCreateOrderSeatData[] = selectedSeatIds.map(seatId => {
-            const discountName = selectedDiscountNameBySeatId[seatId];
-            const discount = discountName ? discounts?.find(d => d.name === discountName) : null;
-
-            const seatDiscount = discount ? {
-                name: discount.name,
-                type: discount.type,
-                value: discount.value
-            } : null;
-
-            const visibleFields = getVisibleCustomFieldsForSeat(seatId);
-            const customFields: Record<string, string | number | boolean> = {};
-            visibleFields.forEach(field => {
-                const val = getSeatCustomFieldValue(seatId, field);
-                if (val !== '' && val !== undefined) {
-                    customFields[field.label] = val;
-                }
-            });
-
-            return {
-                seat_id: seatId,
-                seat_discount: seatDiscount,
-                seat_custom_fields: customFields
-            };
-        });
-
-        const toastId = toast.loading(__('CREATING_ORDER'));
-
-        const result = await bulkCreateOrder(
-            productIdNum,
-            seatsData,
-            currentDateTime,
-            {
-                customerName,
-                customerEmail,
-                customerPhone,
-                orderStatus,
-                sendEmails: sendOrderEmails
-            }
-        );
-
-        if (result.success) {
-            toast.success(__('ORDER_CREATED_SUCCESS'), { id: toastId });
-            handleCloseOrderPanel();
-            onCancel(); // Exit selection mode
-            if (onSuccess) onSuccess();
-        } else {
-            toast.error(result.error || __('ORDER_CREATION_FAILED'), { id: toastId });
-        }
+        toast.error(__('BULK_ACTIONS_NOT_SUPPORTED_IN_LITE'));
+        return;
     };
 
     return (
@@ -351,7 +252,7 @@ const BulkSelectionBar = ({
                             key={option.value}
                             type="button"
                             className={`stachesepl-bulk-bar-action-btn stachesepl-bulk-bar-action-btn--${option.color}`}
-                            onClick={() => onStatusChange(option.value)}
+                            onClick={handleStatusClick}
                             disabled={isBusy}
                             title={__('SET_STATUS_TO') + ' ' + __(option.label)}
                         >
