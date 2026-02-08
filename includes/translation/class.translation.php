@@ -275,6 +275,7 @@ class Translation {
 
             'IMPORT_SEAT_PLAN'               => esc_html__('Import Seat Plan', 'stachethemes-seat-planner-lite'),
             'IMPORT_SEAT_PLAN_DESC'          => esc_html__('Upload a CSV file to import your seat plan layout. The file should contain seat positions and properties.', 'stachethemes-seat-planner-lite'),
+            'IMPORT_SEAT_PLAN_NOT_SUPPORTED_IN_LITE' => esc_html__('Importing seat plans is not supported in the Lite version. Upgrade to Pro to import seat plans.', 'stachethemes-seat-planner-lite'),
             'IMPORT'                         => esc_html__('Import', 'stachethemes-seat-planner-lite'),
             'DROP_CSV_FILE_HERE_OR'          => esc_html__('Drop your CSV file here, or', 'stachethemes-seat-planner-lite'),
             'BROWSE'                         => esc_html__('browse', 'stachethemes-seat-planner-lite'),
@@ -283,6 +284,7 @@ class Translation {
             // translators: %d: number of objects imported
             'D_OBJECTS_IMPORTED'             => esc_html__('%d Objects Imported', 'stachethemes-seat-planner-lite'),
             'EXPORT_SEAT_DATA'               => esc_html__('Export Seat Data', 'stachethemes-seat-planner-lite'),
+            'EXPORT_SEAT_DATA_NOT_SUPPORTED_IN_LITE' => esc_html__('Exporting seat data is not supported in the Lite version. Upgrade to Pro to export seat data.', 'stachethemes-seat-planner-lite'),
             'EXPORTING_DATA'                 => esc_html__('Exporting Data', 'stachethemes-seat-planner-lite'),
 
             'SEAT_STATUS'                   => esc_html__('Seat Status', 'stachethemes-seat-planner-lite'),
