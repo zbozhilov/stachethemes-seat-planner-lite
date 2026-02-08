@@ -66,17 +66,7 @@ class Auditorium_Product_Checkout {
         }
 
         $seat_data     = Utils::normalize_seat_data_meta($values['seat_data']);
-        $seat_discount = isset($values['seat_discount']) && is_array($values['seat_discount']) ? $values['seat_discount'] : '';
-        $selected_date = isset($values['selected_date']) ? $values['selected_date'] : '';
-
-        if ($selected_date) {
-            $seat_data['selectedDate'] = $selected_date;
-        }
-
-        if (isset($values['seat_custom_fields'])) {
-            $cf = $values['seat_custom_fields'];
-            $seat_data['customFields'] = is_array($cf) ? $cf : (is_object($cf) ? (array) $cf : []);
-        }
+        $seat_discount = '';
 
         $item->update_meta_data('seat_data', $seat_data);
         $item->update_meta_data('seat_discount', $seat_discount);

@@ -57,7 +57,7 @@ class Ajax {
                         try {
 
                             $product_id    = filter_input(INPUT_POST, 'product_id', FILTER_VALIDATE_INT);
-                            $selected_date = isset($_POST['selected_date']) ? sanitize_text_field(wp_unslash($_POST['selected_date'])) : '';
+                            $selected_date = '';;
 
                             if ($product_id === false || $product_id < 1) {
                                 throw new \Exception(esc_html__('Invalid product ID', 'stachethemes-seat-planner-lite'));
@@ -106,7 +106,6 @@ class Ajax {
                 case 'add_seats_to_cart': {
 
                         $product_id    = filter_input(INPUT_POST, 'product_id', FILTER_VALIDATE_INT);
-                        $selected_date = isset($_POST['selected_date']) ? sanitize_text_field(wp_unslash($_POST['selected_date'])) : '';
 
                         if ($product_id === false || $product_id < 1) {
                             wp_send_json_error(['error' => esc_html__('Invalid product ID', 'stachethemes-seat-planner-lite')]);
@@ -130,49 +129,28 @@ class Ajax {
                             wp_send_json_error(['error' => esc_html__('Product not found', 'stachethemes-seat-planner-lite')]);
                         }
 
-                        if ($selected_date) {
-
-                            $dates = $auditorium_product->get_dates_data();
-
-                            if (!in_array($selected_date, $dates)) {
-                                wp_send_json_error(['error' => esc_html__('The selected date is not available', 'stachethemes-seat-planner-lite')]);
-                            }
-
-                            if ($auditorium_product->is_cut_off_time_passed($selected_date)) {
-                                wp_send_json_error(['error' => esc_html__('The selected date is no longer available', 'stachethemes-seat-planner-lite')]);
-                            }
-                        }
-
-                        $min_seats_per_purchase = (int) $auditorium_product->get_meta('_stachesepl_min_seats_per_purchase', true);
-                        $max_seats_per_purchase = (int) $auditorium_product->get_meta('_stachesepl_max_seats_per_purchase', true);
-
                         // Ensure we work with unique selected seats and handle duplicates correctly (preserve string seat IDs)
-                        $unique_selected_seats = []; // list of ['seatId' => string, 'discountId' => string]
+                        $unique_selected_seats = []; // list of ['seatId' => string]
                         $seen_seat_ids = []; // list of strings for strict duplicate checks
                         foreach ($seats_object as $seat_data) {
                             if (!isset($seat_data->seatId) || !is_string($seat_data->seatId) || '' === $seat_data->seatId) {
                                 wp_send_json_error(['error' => esc_html__('Invalid seat ID', 'stachethemes-seat-planner-lite')]);
                             }
-                            $seat_id       = sanitize_text_field($seat_data->seatId);
-                            $seat_discount = isset($seat_data->discountId) ? sanitize_text_field($seat_data->discountId) : '';
-                            $custom_fields  = isset($seat_data->customFields) ? $seat_data->customFields : new \stdClass();
+                            $seat_id        = sanitize_text_field($seat_data->seatId);
 
                             if (!in_array($seat_id, $seen_seat_ids, true)) {
                                 $unique_selected_seats[] = [
                                     'seatId'       => $seat_id,
-                                    'discountId'   => $seat_discount,
-                                    'customFields' => $custom_fields,
+                                    'discountId'   => '',
+                                    'customFields' => new \stdClass(),
                                 ];
                                 $seen_seat_ids[] = $seat_id;
                             }
                         }
 
                         $get_seats_in_cart_args = [];
-                        if ($selected_date) {
-                            $get_seats_in_cart_args['selected_date'] = $selected_date;
-                        }
-                        $seats_in_cart       = $auditorium_product->get_seats_in_cart($get_seats_in_cart_args);
-                        $seats_in_cart_count = max(0, count($seats_in_cart));
+                     
+                        $seats_in_cart = $auditorium_product->get_seats_in_cart($get_seats_in_cart_args);
 
                         // Compute total seats post-add (cart + new unique selections not already in cart)
                         $seats_in_cart_lookup = [];
@@ -188,64 +166,17 @@ class Ajax {
                                 $new_unique_seats++;
                             }
                         }
-                        $total_seats_count = $seats_in_cart_count + $new_unique_seats;
-
-                        // Enforce purchase limits
-                        if ($min_seats_per_purchase > 0 && $total_seats_count < $min_seats_per_purchase) {
-                            $error_message = sprintf(
-                                // translators: %d is the minimum number of seats per purchase
-                                _n(
-                                    'You need to purchase at least %d seat per order.',
-                                    'You need to purchase at least %d seats per order.',
-                                    $min_seats_per_purchase,
-                                    'stachethemes-seat-planner-lite'
-                                ),
-                                $min_seats_per_purchase
-                            );
-
-                            wp_send_json_error(['error' => $error_message]);
-                        }
-
-                        if ($max_seats_per_purchase > 0 && $total_seats_count > $max_seats_per_purchase) {
-                            $error_message = sprintf(
-                                // translators: %d is the maximum number of seats per purchase
-                                _n(
-                                    'You can only purchase up to %d seat per order.',
-                                    'You can only purchase up to %d seats per order.',
-                                    $max_seats_per_purchase,
-                                    'stachethemes-seat-planner-lite'
-                                ),
-                                $max_seats_per_purchase
-                            );
-
-                            if ($seats_in_cart_count > 0) {
-                                $error_message .= ' ' . sprintf(
-                                    // translators: %d is the number of seats in the cart
-                                    _n(
-                                        'You already have %d seat in your cart.',
-                                        'You already have %d seats in your cart.',
-                                        $seats_in_cart_count,
-                                        'stachethemes-seat-planner-lite'
-                                    ),
-                                    $seats_in_cart_count
-                                );
-                            }
-
-                            wp_send_json_error(['error' => $error_message]);
-                        }
 
                         // Add only unique seats (first occurrence discount preference)
                         foreach ($unique_selected_seats as $item) {
 
                             $seat_id       = $item['seatId'];
-                            $seat_discount = $item['discountId'];
-                            $custom_fields = $item['customFields'];
 
                             if ('' === $seat_id) {
                                 wp_send_json_error(['error' => esc_html__('Invalid seat ID', 'stachethemes-seat-planner-lite')]);
                             }
 
-                            if (!$auditorium_product->add_to_cart($seat_id, $seat_discount, $selected_date, $custom_fields)) {
+                            if (!$auditorium_product->add_to_cart($seat_id, '', '', new \stdClass())) {
                                 wp_send_json_error(['error' => esc_html__('Failed to add seat to cart', 'stachethemes-seat-planner-lite')]);
                             }
                         }
@@ -385,7 +316,7 @@ class Ajax {
 
                         $product_id    = filter_input(INPUT_POST, 'product_id', FILTER_VALIDATE_INT);
                         $seat_id       = isset($_POST['seat_id']) ? sanitize_text_field(wp_unslash($_POST['seat_id'])) : '';
-                        $selected_date = isset($_POST['selected_date']) ? sanitize_text_field(wp_unslash($_POST['selected_date'])) : '';
+                        $selected_date = '';;
 
                         if (false === $product_id || $product_id < 1) {
                             wp_send_json_error(['error' => esc_html__('Invalid product ID', 'stachethemes-seat-planner-lite')]);
@@ -417,7 +348,7 @@ class Ajax {
 
                         $product_id    = filter_input(INPUT_POST, 'product_id', FILTER_VALIDATE_INT);
                         $seat_id       = isset($_POST['seat_id']) ? sanitize_text_field(wp_unslash($_POST['seat_id'])) : '';
-                        $selected_date = isset($_POST['selected_date']) ? sanitize_text_field(wp_unslash($_POST['selected_date'])) : '';
+                        $selected_date = '';
 
                         if (false === $product_id || $product_id < 1) {
                             wp_send_json_error(['error' => esc_html__('Invalid product ID', 'stachethemes-seat-planner-lite')]);
@@ -633,7 +564,7 @@ class Ajax {
 
                         $product_id    = filter_input(INPUT_POST, 'product_id', FILTER_VALIDATE_INT);
                         $seat_id       = isset($_POST['seat_id']) ? sanitize_text_field(wp_unslash($_POST['seat_id'])) : '';
-                        $selected_date = isset($_POST['selected_date']) ? sanitize_text_field(wp_unslash($_POST['selected_date'])) : '';
+                        $selected_date = '';;
                         $status        = isset($_POST['status']) ? sanitize_text_field(wp_unslash($_POST['status'])) : '';
 
                         $result = Manager_Service::update_manager_seat_override(
@@ -662,34 +593,12 @@ class Ajax {
 
                         $product_id     = filter_input(INPUT_POST, 'product_id', FILTER_VALIDATE_INT);
                         $seat_id        = isset($_POST['seat_id']) ? sanitize_text_field(wp_unslash($_POST['seat_id'])) : '';
-                        $selected_date  = isset($_POST['selected_date']) ? sanitize_text_field(wp_unslash($_POST['selected_date'])) : '';
+                        $selected_date  = '';;
                         $customer_name  = isset($_POST['customer_name']) ? sanitize_text_field(wp_unslash($_POST['customer_name'])) : '';
                         $customer_email = isset($_POST['customer_email']) ? sanitize_email(wp_unslash($_POST['customer_email'])) : '';
                         $customer_phone = isset($_POST['customer_phone']) ? sanitize_text_field(wp_unslash($_POST['customer_phone'])) : '';
                         $order_status   = isset($_POST['order_status']) ? sanitize_text_field(wp_unslash($_POST['order_status'])) : 'processing';
                         $send_emails    = isset($_POST['send_emails']) && $_POST['send_emails'] === 'yes';
-
-                        $seat_discount = null;
-                        if (!empty($_POST['seat_discount'])) {
-                            $seat_discount_raw = sanitize_text_field(wp_unslash($_POST['seat_discount']));
-                            $decoded           = json_decode($seat_discount_raw, true);
-                            if (is_array($decoded) && isset($decoded['type'], $decoded['value']) && (float) $decoded['value'] > 0) {
-                                $seat_discount = [
-                                    'type'  => in_array($decoded['type'], ['fixed', 'percentage'], true) ? $decoded['type'] : 'fixed',
-                                    'value' => (float) $decoded['value'],
-                                    'name'  => isset($decoded['name']) ? sanitize_text_field($decoded['name']) : '',
-                                ];
-                            }
-                        }
-
-                        $seat_custom_fields = null;
-                        if (!empty($_POST['seat_custom_fields'])) {
-                            $seat_custom_fields_raw = sanitize_text_field(wp_unslash($_POST['seat_custom_fields']));
-                            $decoded_cf            = json_decode($seat_custom_fields_raw, true);
-                            if (is_array($decoded_cf)) {
-                                $seat_custom_fields = $decoded_cf;
-                            }
-                        }
 
                         if (false === $product_id || $product_id < 1) {
                             wp_send_json_error(['error' => esc_html__('Invalid product ID', 'stachethemes-seat-planner-lite')]);
@@ -704,8 +613,8 @@ class Ajax {
                             $customer_phone,
                             $order_status,
                             $send_emails,
-                            $seat_discount,
-                            $seat_custom_fields
+                            null,
+                            null
                         );
 
                         if (!$result['success']) {

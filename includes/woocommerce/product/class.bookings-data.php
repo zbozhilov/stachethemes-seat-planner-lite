@@ -38,7 +38,7 @@ class Bookings_Data {
 
             /** @var \WC_Order_Item_Product $item */
             $seat_data     = $base_item['seat_data'];
-            $custom_fields = isset($seat_data['customFields']) && is_array($seat_data['customFields']) ? $seat_data['customFields'] : [];
+            $custom_fields = [];
             $seat_discount = $item->get_meta('seat_discount');
 
             $items[] = [

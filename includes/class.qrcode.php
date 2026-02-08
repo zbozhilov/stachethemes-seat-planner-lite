@@ -178,7 +178,7 @@ class QRCode {
             'date_time_timestamp'  => isset($seat_data['selectedDate']) && $seat_data['selectedDate']  ? strtotime($seat_data['selectedDate']) : 0,
             'order_link'           => $order->get_edit_order_url(),
             'customer_name'        => esc_html($order->get_billing_first_name() . ' ' . $order->get_billing_last_name()),
-            'custom_fields'        => $seat_data['customFields'] ?? null
+            'custom_fields'        => null
         ];
     }
 

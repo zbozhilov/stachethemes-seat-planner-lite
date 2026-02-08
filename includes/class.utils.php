@@ -27,8 +27,7 @@ class Utils {
             return [];
         }
         if (isset($out['customFields'])) {
-            $cf = $out['customFields'];
-            $out['customFields'] = is_array($cf) ? $cf : (is_object($cf) ? (array) $cf : []);
+            $out['customFields'] = [];
         }
         return $out;
     }
