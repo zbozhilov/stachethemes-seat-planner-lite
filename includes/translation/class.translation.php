@@ -542,6 +542,7 @@ class Translation {
      */
     public static function get_dashboard_strings(): array {
         return [
+            'TAB_PRO'                                       => esc_html__('Pro', 'stachethemes-seat-planner-lite'),
             'DASHBOARD'                                     => esc_html__('Dashboard', 'stachethemes-seat-planner-lite'),
             'PAGE_NOT_FOUND'                                => esc_html__('Page not found', 'stachethemes-seat-planner-lite'),
             'OPS'                                           => esc_html__('Oops!', 'stachethemes-seat-planner-lite'),

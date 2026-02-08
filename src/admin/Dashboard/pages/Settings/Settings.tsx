@@ -11,8 +11,9 @@ import General from './components/General/General';
 import MobileApp from './components/MobileApp/MobileApp';
 import './Settings.scss';
 import { SettingsProvider, useSettings } from './SettingsContext';
+import Pro from './components/Pro/Pro';
 
-type SupportedTabs = 'general' | 'cart_behavior' | 'colors' | 'attachments' | 'mobile_app';
+type SupportedTabs = 'general' | 'cart_behavior' | 'colors' | 'attachments' | 'mobile_app' | 'pro';
 
 const SettingsContent = () => {
     const [activeTab, setActiveTab] = useState<SupportedTabs>('general');
@@ -35,6 +36,9 @@ const SettingsContent = () => {
             }
             case 'mobile_app': {
                 return <MobileApp />;
+            }
+            case 'pro': {
+                return <Pro />;
             }
             default: {
                 return null;
@@ -84,6 +88,10 @@ const SettingsContent = () => {
                     {
                         id: 'mobile_app',
                         label: __('TAB_MOBILE_APP'),
+                    },
+                    {
+                        id: 'pro',
+                        label: __('TAB_PRO'),
                     }
                 ]} />
 
