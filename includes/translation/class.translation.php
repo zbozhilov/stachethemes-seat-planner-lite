@@ -78,6 +78,7 @@ class Translation {
     public static function get_admin_strings(): array {
 
         return [
+            'MAX_OBJECTS_LIMIT_REACHED'      => esc_html__('You have reached the maximum number of objects allowed. Please upgrade to the Pro version to create more seats.', 'stachethemes-seat-planner-lite'),
             'EXTRA_CLASS'                    => esc_html__('Additional Class Name', 'stachethemes-seat-planner-lite'),
             'CLICK_TO_CHANGE_DISPLAY_LABEL'  => esc_html__('Click to change display label', 'stachethemes-seat-planner-lite'),
             'ZINDEX'                         => esc_html__('Z-Index', 'stachethemes-seat-planner-lite'),
