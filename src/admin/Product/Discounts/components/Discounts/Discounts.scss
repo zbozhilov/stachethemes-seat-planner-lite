@@ -1,12 +1,14 @@
 .stachesepl-seat-planner-discounts {
 
-    .stachesepl-discounts-controls {
-        margin-bottom: 12px;
-        text-align: right;
-    }
-
     .stachesepl-seat-planner-discounts-list {
         margin: 20px 0;
+    }
+
+    .stachesepl-add-discount-button {
+
+        .MuiSvgIcon-root {
+            font-size: 18px;
+        }
     }
 }
 

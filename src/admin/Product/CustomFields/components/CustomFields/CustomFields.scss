@@ -1,14 +1,16 @@
 .stachesepl-seat-planner-custom-fields {
 
-    .stachesepl-custom-fields-controls {
-        margin-bottom: 12px;
-        text-align: right;
-    }
-
     .stachesepl-seat-planner-custom-fields-list {
         margin: 20px 0;
         padding: 0;
         list-style-type: none;
+    }
+
+    .stachesepl-add-custom-field-button {
+
+        .MuiSvgIcon-root {
+            font-size: 18px;
+        }
     }
 
     @media (max-width: 782px) {

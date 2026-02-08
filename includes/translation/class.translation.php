@@ -350,6 +350,9 @@ class Translation {
 
             // Dates
             'NO_DATES_ADDED'                      => esc_html__('No dates added yet', 'stachethemes-seat-planner-lite'),
+            'DATES_NOT_SUPPORTED_IN_LITE'         => esc_html__('Adding dates is not supported in the Lite version. Upgrade to Pro to add multiple dates and times.', 'stachethemes-seat-planner-lite'),
+            'DISCOUNTS_NOT_SUPPORTED_IN_LITE'     => esc_html__('Discounts are not supported in the Lite version. Upgrade to Pro to add discounts.', 'stachethemes-seat-planner-lite'),
+            'CUSTOM_FIELDS_NOT_SUPPORTED_IN_LITE' => esc_html__('Custom fields are not supported in the Lite version. Upgrade to Pro to add custom fields.', 'stachethemes-seat-planner-lite'),
             'ADD_DATE'                            => esc_html__('Add Date', 'stachethemes-seat-planner-lite'),
             'ADD_TIME'                            => esc_html__('Add Time', 'stachethemes-seat-planner-lite'),
             'REMOVE_DATE'                         => esc_html__('Remove Date', 'stachethemes-seat-planner-lite'),
