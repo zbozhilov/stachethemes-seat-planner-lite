@@ -17,7 +17,6 @@ const Header = (props: {
     const { hasDiscounts } = useDiscounts();
     const { hasCustomFields } = useCustomFields();
     const { seatPlanData } = useSeatPlanData();
-    const validateSeatingSelection = usePreventSingleEmptySeats();
 
     const selectedSeatsCount = selectedSeats.length;
     const minSeatsRule = seatPlanData?.minSeatsPerPurchase || 0; // 0 => no min rule
@@ -40,7 +39,7 @@ const Header = (props: {
     const renderButton = () => {
         let action = null;
 
-        if (canProceed && validateSeatingSelection) {
+        if (canProceed) {
             if (!hasDiscounts && !hasCustomFields) {
                 action = <AddToCartButton />;
             } else if (!props.isOptionsModalOpen) {
@@ -79,10 +78,6 @@ const Header = (props: {
             return hasMinRule && minSeatsRule > 1
                 ? __('D_SEATS_REQUIRED').replace('%d', minSeatsRule.toString())
                 : __('NO_SEATS_SELECTED');
-        }
-
-        if (!validateSeatingSelection) {
-            return __('NO_SINGLE_EMPTY_SEAT');
         }
 
         if (isAtMax) {

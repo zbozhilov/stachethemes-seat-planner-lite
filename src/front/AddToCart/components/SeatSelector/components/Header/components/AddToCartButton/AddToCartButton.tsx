@@ -2,13 +2,12 @@ import { East as ArrowRight } from '@mui/icons-material';
 import addSeatsToCart from "@src/front/AddToCart/ajax/addSeatsToCart";
 import CircLoader from "@src/front/AddToCart/components/CircLoader/CircLoader";
 import { useCustomFields, useDiscounts, useModalState, useProductId, useSeatPlanData, useSelectedDate, useSelectedSeats, useShowViewCartButton } from "@src/front/AddToCart/components/context/hooks";
-import { CustomFieldsEntryData, FrontCustomFieldData } from "@src/front/AddToCart/types";
+import { CustomFieldsEntryData } from "@src/front/AddToCart/types";
 import { __ } from "@src/utils";
 import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import { Portal } from 'react-portal';
 import Button from "../Button/Button";
-import { isValueEmpty } from '../Options/components/CustomFields/utils';
 import './AddToCartButton.scss';
 
 const AddToCartButton = (props: {
@@ -42,46 +41,6 @@ const AddToCartButton = (props: {
         });
 
         document.body.dispatchEvent(new Event('wc_fragments_refreshed'));
-    };
-
-    /**
-     * Converts customFields from UID keys to label keys for server submission
-     * Filters out empty fields so they are not sent to the server
-     */
-    const convertCustomFieldsToLabels = (customFieldsData: CustomFieldsEntryData | undefined): CustomFieldsEntryData | undefined => {
-        if (!customFieldsData || !hasCustomFields) {
-            return customFieldsData;
-        }
-
-        const converted: CustomFieldsEntryData = {};
-
-        // Create maps for quick lookup
-        const uidToLabelMap = new Map<string, string>();
-        const uidToFieldMap = new Map<string, FrontCustomFieldData>();
-        customFields.forEach(field => {
-            uidToLabelMap.set(field.uid, field.label);
-            uidToFieldMap.set(field.uid, field);
-        });
-
-        // Convert UID keys to label keys and filter out empty values
-        Object.keys(customFieldsData).forEach((uid) => {
-            const value = customFieldsData[uid];
-            const field = uidToFieldMap.get(uid);
-            
-            // Skip empty values
-            if (isValueEmpty(value, field)) {
-                return;
-            }
-
-            const label = uidToLabelMap.get(uid);
-
-            if (label) {
-                converted[label] = value;
-            }
-        });
-
-        // Return undefined if no fields remain after filtering
-        return Object.keys(converted).length > 0 ? converted : undefined;
     };
 
     const getSelectedSeatsData = () => {
@@ -118,19 +77,10 @@ const AddToCartButton = (props: {
                 return;
             }
 
-            let seatDiscount = '';
-
-            if (hasDiscounts && seatData.discount) {
-                seatDiscount = discountMap.has(seatData.discount) ? seatData.discount : '';
-            }
-
-            // Convert customFields from UID keys to Label keys before submission
-            const customFieldsForSubmission = convertCustomFieldsToLabels(seatData.customFields);
-
             selectedSeatsData.push({
                 seatId: seatData.seatId,
-                discountId: seatDiscount,
-                customFields: customFieldsForSubmission
+                discountId: '',
+                customFields: {}
             });
         });
 
