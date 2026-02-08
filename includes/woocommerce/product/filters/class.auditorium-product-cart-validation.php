@@ -143,43 +143,6 @@ class Auditorium_Product_Cart_Validation {
                 );
             }
 
-            if ($product->is_cut_off_time_passed($selected_date)) {
-                wc_add_notice(
-                    sprintf(
-                        // translators: %1$s: selected date
-                        // translators: %2$s: product name
-                        esc_html__('The date "%1$s" for "%2$s" is no longer available', 'stachethemes-seat-planner-lite'),
-                        esc_html(Utils::get_formatted_date_time($selected_date)),
-                        esc_html($product->get_name()),
-                    ),
-                    'error'
-                );
-            }
-
-            if (!$product->validate_cart_item_discount($cart_item)) {
-                wc_add_notice(
-                    sprintf(
-                        // translators: %s: seat id
-                        esc_html__('Discount for seat %s is not valid. Please remove it from your cart and select a different discount.', 'stachethemes-seat-planner-lite'),
-                        esc_html($seat_id)
-                    ),
-                    'error'
-                );
-            }
-
-            $custom_fields                   = isset($cart_item['seat_custom_fields']) ? $cart_item['seat_custom_fields'] : null;
-            $custom_fields_validation_result = $product->validate_custom_fields($custom_fields);
-
-            if (is_array($custom_fields_validation_result) && isset($custom_fields_validation_result['error'])) {
-                wc_add_notice(
-                    sprintf(
-                        // translators: %s: seat id
-                        esc_html__('Seat options for seat %s are not valid. Please remove it from your cart.', 'stachethemes-seat-planner-lite'),
-                        esc_html($seat_id)
-                    ),
-                    'error'
-                );
-            }
         }
 
         foreach ($seats_by_product as $product_id => $dates_map) {
@@ -200,82 +163,6 @@ class Auditorium_Product_Cart_Validation {
                     continue;
                 }
 
-                $min_seats_per_purchase = (int) $product->get_meta('_stachesepl_min_seats_per_purchase', true);
-                $max_seats_per_purchase = (int) $product->get_meta('_stachesepl_max_seats_per_purchase', true);
-                $unique_seats_in_cart   = count($seat_ids_map);
-                $product_name           = $product->get_name();
-
-                if ($min_seats_per_purchase > 0 && $unique_seats_in_cart < $min_seats_per_purchase) {
-
-                    if ($selected_date) {
-                        wc_add_notice(
-                            sprintf(
-                                // translators: %1$d: minimum seats per purchasem %2$s: product name, %3$s: selected date
-                                _n(
-                                    'You need to purchase at least %1$d seat per order for “%2$s” on %3$s.',
-                                    'You need to purchase at least %1$d seats per order for “%2$s” on %3$s.',
-                                    $min_seats_per_purchase,
-                                    'stachethemes-seat-planner-lite'
-                                ),
-                                $min_seats_per_purchase,
-                                $product_name,
-                                esc_html(Utils::get_formatted_date_time($selected_date))
-                            ),
-                            'error'
-                        );
-                    } else {
-                        wc_add_notice(
-                            sprintf(
-                                // translators: %1$d: minimum seats per purchase, %2$s: product name
-                                _n(
-                                    'You need to purchase at least %1$d seat per order for “%2$s”.',
-                                    'You need to purchase at least %1$d seats per order for “%2$s”.',
-                                    $min_seats_per_purchase,
-                                    'stachethemes-seat-planner-lite'
-                                ),
-                                $min_seats_per_purchase,
-                                $product_name
-                            ),
-                            'error'
-                        );
-                    }
-                }
-
-                if ($max_seats_per_purchase > 0 && $unique_seats_in_cart > $max_seats_per_purchase) {
-
-                    if ($selected_date) {
-                        wc_add_notice(
-                            sprintf(
-                                // translators: %1$d: maximum seats per purchase, %2$s: product name, %3$s: selected date
-                                _n(
-                                    'You can only purchase up to %1$d seat per order for “%2$s” on %3$s.',
-                                    'You can only purchase up to %1$d seats per order for “%2$s” on %3$s.',
-                                    $max_seats_per_purchase,
-                                    'stachethemes-seat-planner-lite'
-                                ),
-                                $max_seats_per_purchase,
-                                $product_name,
-                                esc_html(Utils::get_formatted_date_time($selected_date))
-                            ),
-                            'error'
-                        );
-                    } else {
-                        wc_add_notice(
-                            sprintf(
-                                // translators: %1$d: maximum seats per purchase, %2$s: product name
-                                _n(
-                                    'You can only purchase up to %1$d seat per order for “%2$s”.',
-                                    'You can only purchase up to %1$d seats per order for “%2$s”.',
-                                    $max_seats_per_purchase,
-                                    'stachethemes-seat-planner-lite'
-                                ),
-                                $max_seats_per_purchase,
-                                $product_name,
-                            ),
-                            'error'
-                        );
-                    }
-                }
             }
         }
     }

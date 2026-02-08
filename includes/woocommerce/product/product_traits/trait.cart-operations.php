@@ -119,56 +119,7 @@ trait Cart_Operations {
      * @return bool
      */
     public function validate_cart_item_discount($cart_item): bool {
-        $cart_item_discount = $cart_item['seat_discount'] ?? false;
-
-        // If no discount in cart item, it's valid
-        if (!$cart_item_discount) {
-            return true;
-        }
-
-        // Get the current discount data from product
-        $discount = $this->get_discount_by_name($cart_item_discount['name']);
-
-        // If discount no longer exists, cart item is invalid
-        if (!$discount) {
-            return false;
-        }
-
-        // Validate that discount details match
-        if (
-            $cart_item_discount['value'] !== $discount['value'] ||
-            $cart_item_discount['type'] !== $discount['type'] ||
-            $cart_item_discount['group'] !== $discount['group']
-        ) {
-            return false;
-        }
-
-        // Check if this discount has a role and if it matches the current user's role
-        $discount_role = $discount['role'] ?? null;
-
-        if ($discount_role !== null) {
-
-            if (empty($discount_role)) { // Assumes role is "Any"
-                return true;
-            }
-
-            $current_user_roles = wp_get_current_user()->roles;
-
-            if (!in_array($discount_role, $current_user_roles, true)) {
-                return false;
-            }
-        }
-
-        // If no discount group specified, no further validation needed
-        if (empty($cart_item_discount['group'])) {
-            return true;
-        }
-
-        // Validate that seat belongs to the correct discount group
-        $seat_data = \StachethemesSeatPlannerLite\Utils::normalize_seat_data_meta($cart_item['seat_data'] ?? null);
-        $seat_group = $seat_data['group'] ?? '';
-
-        return $cart_item_discount['group'] === $seat_group;
+        return true;
     }
 
     /**

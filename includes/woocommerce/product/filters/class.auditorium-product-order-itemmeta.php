@@ -34,13 +34,6 @@ class Auditorium_Product_Order_Itemmeta {
             return $item_data;
         }
 
-        if (isset($cart_item['selected_date']) && $cart_item['selected_date']) {
-            $item_data[] = [
-                'name'  => esc_html__('Date', 'stachethemes-seat-planner-lite'),
-                'value' => esc_html(Utils::get_formatted_date_time($cart_item['selected_date'])),
-            ];
-        }
-
         $seat_data = Utils::normalize_seat_data_meta($cart_item['seat_data']);
 
         $item_data[] = [
@@ -50,62 +43,6 @@ class Auditorium_Product_Order_Itemmeta {
                 esc_html($seat_data['seatId'] ?? '')
             ),
         ];
-
-        if (isset($cart_item['seat_discount']) && is_array($cart_item['seat_discount'])) {
-            $discount_data  = $cart_item['seat_discount'];
-            $discount_value = (float) $discount_data['value'];
-            $discount_type  = $discount_data['type'];
-
-            if ($discount_value) {
-                $discount_display_value = $discount_value;
-
-                if ($discount_type === 'percentage') {
-                    $discount_display_value .= '%';
-                } else {
-                    $discount_display_value = wc_price($discount_value);
-                }
-
-                $item_data[] = [
-                    'name'  => esc_html__('Discount', 'stachethemes-seat-planner-lite'),
-                    'value' => sprintf(
-                        '%s ( %s )',
-                        esc_html($discount_data['name']),
-                        ($discount_display_value)
-                    ),
-                ];
-            }
-        }
-
-
-        if (isset($cart_item['seat_custom_fields']) && is_object($cart_item['seat_custom_fields'])) {
-
-            $product_id = $cart_item['product_id'];
-            $product = wc_get_product($product_id);
-
-            if ($product && $product->is_type('auditorium')) {
-
-                /** @var Auditorium_Product $product */
-                $admin_custom_fields = $product->get_custom_fields_data([
-                    'visible_only' => true
-                ]);
-
-                $admin_custom_fields_names = array_column($admin_custom_fields, 'label');
-
-                foreach ((array) $cart_item['seat_custom_fields'] as $custom_field_name => $custom_field_value) {
-
-                    $should_display = in_array($custom_field_name, $admin_custom_fields_names);
-
-                    if (!$should_display) {
-                        continue;
-                    }
-
-                    $item_data[] = [
-                        'name'  => esc_html($custom_field_name),
-                        'value' => esc_html($custom_field_value)
-                    ];
-                }
-            }
-        }
 
         return $item_data;
     }
@@ -122,9 +59,6 @@ class Auditorium_Product_Order_Itemmeta {
         echo '<div><strong>' . esc_html__('Seat ID', 'stachethemes-seat-planner-lite') . ':</strong> ' . esc_html($seat_data['seatId'] ?? '') . '</div>';
 
         $was_scanned = $seat_data['qr_code_scanned'] ?? false;
-
-        self::discount_meta_html($item);
-        self::custom_fields_meta_html($item);
 
         if ($was_scanned) {
             $scan_author = QRCode::get_qr_code_scan_author($seat_data['qr_code_scanned_author'] ?? 0);
@@ -164,11 +98,7 @@ class Auditorium_Product_Order_Itemmeta {
             return;
         }
 
-        self::selected_date_meta_html($item);
-
         echo '<div><strong>' . esc_html__('Seat ID', 'stachethemes-seat-planner-lite') . ':</strong> ' . esc_html($seat_data['seatId'] ?? '') . '</div>';
-        self::discount_meta_html($item);
-        self::custom_fields_meta_html($item, 'order_item_meta_end');
 
         if ($order->get_status() !== 'completed') {
             return;
@@ -207,67 +137,4 @@ class Auditorium_Product_Order_Itemmeta {
         echo '<div><strong>' . esc_html__('Date', 'stachethemes-seat-planner-lite') . ':</strong> ' . esc_html($date_time_formatted) . '</div>';
     }
 
-    private static function discount_meta_html($item) {
-        $seat_discount = $item->get_meta('seat_discount');
-
-        if (empty($seat_discount) || !isset($seat_discount['value'], $seat_discount['type'], $seat_discount['name'])) {
-            return;
-        }
-
-        $discount_value = (float) $seat_discount['value'];
-        $discount_type  = $seat_discount['type'];
-
-        if ($discount_value <= 0) {
-            return;
-        }
-
-        $discount_display_value = null;
-        if ($discount_type === 'percentage') {
-            $discount_display_value = $discount_value . '%';
-        } elseif ($discount_type === 'fixed') {
-            $discount_display_value = wc_price($discount_value);
-        }
-
-        if (!$discount_display_value) {
-            return;
-        }
-
-        // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-        echo '<div><strong>' . esc_html__('Discount', 'stachethemes-seat-planner-lite') . ':</strong> ' . esc_html($seat_discount['name']) . ' ( ' . ($discount_display_value) . ' )</div>';
-    }
-
-    private static function custom_fields_meta_html($item, $context = '') {
-
-        $seat_data = Utils::normalize_seat_data_meta($item->get_meta('seat_data'));
-
-        if (empty($seat_data) || !isset($seat_data['customFields']) || empty($seat_data['customFields'])) {
-            return;
-        }
-
-        $product_id = $item->get_product_id();
-        $product    = wc_get_product($product_id);
-        
-        if (!$product || !$product->is_type('auditorium')) {
-            return;
-        }
-
-        /** @var Auditorium_Product $product */
-
-        $admin_custom_fields = $product->get_custom_fields_data([
-            'visible_only' => $context === 'order_item_meta_end'
-        ]);
-
-        $admin_custom_fields_names = array_column($admin_custom_fields, 'label');
-
-        foreach ($seat_data['customFields'] as $custom_field_name => $custom_field_value) {
-
-            $should_display = in_array($custom_field_name, $admin_custom_fields_names);
-
-            if (!$should_display) {
-                continue;
-            }
-
-            echo '<div><strong>' . esc_html($custom_field_name) . ':</strong> ' . esc_html($custom_field_value) . '</div>';
-        }
-    }
 }

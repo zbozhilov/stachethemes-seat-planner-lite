@@ -43,29 +43,7 @@ trait Seat_Availability {
      * @return bool
      */
     public function is_cut_off_time_passed(string $selected_date = ''): bool {
-
-        if (! $selected_date) {
-            return false;
-        }
-
-        $cut_off_minutes = (int) $this->get_stop_selling_tickets_before();
-
-        if ($cut_off_minutes < 0) {
-            $cut_off_minutes = 0;
-        }
-
-        $server_timezone      = wp_timezone();
-        $now                  = current_datetime();
-        $selected_date_object = \DateTime::createFromFormat('Y-m-d\TH:i', $selected_date, $server_timezone);
-
-        if (! $selected_date_object) {
-            return false;
-        }
-
-        $cut_off_time = clone $selected_date_object;
-        $cut_off_time->sub(new \DateInterval('PT' . $cut_off_minutes . 'M'));
-
-        return $now >= $cut_off_time;
+        return false;
     }
 
     /**
