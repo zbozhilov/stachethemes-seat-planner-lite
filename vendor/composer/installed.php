@@ -1,9 +1,9 @@
 <?php return array(
     'root' => array(
-        'name' => 'stachethemes/seat-planner-lite',
-        'pretty_version' => '1.5.0.x-dev',
-        'version' => '1.5.0.9999999-dev',
-        'reference' => '0e495821bde73ce69bbd1684f299a490f7aa8166',
+        'name' => 'stachethemes/seat-planner',
+        'pretty_version' => '1.5.2.x-dev',
+        'version' => '1.5.2.9999999-dev',
+        'reference' => '83147d6fd2eaf7aeea9218e247d0240a0d1b2dc1',
         'type' => 'wordpress-plugin',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -289,10 +289,10 @@
             'aliases' => array(),
             'dev_requirement' => true,
         ),
-        'stachethemes/seat-planner-lite' => array(
-            'pretty_version' => '1.5.0.x-dev',
-            'version' => '1.5.0.9999999-dev',
-            'reference' => '0e495821bde73ce69bbd1684f299a490f7aa8166',
+        'stachethemes/seat-planner' => array(
+            'pretty_version' => '1.5.2.x-dev',
+            'version' => '1.5.2.9999999-dev',
+            'reference' => '83147d6fd2eaf7aeea9218e247d0240a0d1b2dc1',
             'type' => 'wordpress-plugin',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),

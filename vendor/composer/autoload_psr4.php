@@ -7,6 +7,9 @@ $baseDir = dirname($vendorDir);
 
 return array(
     'SzepeViktor\\PHPStan\\WordPress\\' => array($vendorDir . '/szepeviktor/phpstan-wordpress/src'),
+    'StachethemesSeatPlannerLite\\Tests\\' => array($baseDir . '/tests'),
+    'StachethemesSeatPlannerLite\\Product_Traits\\' => array($baseDir . '/includes/woocommerce/product/product_traits'),
+    'StachethemesSeatPlannerLite\\' => array($baseDir . '/includes'),
     'PhpParser\\' => array($vendorDir . '/nikic/php-parser/lib/PhpParser'),
     'PHPStan\\ExtensionInstaller\\' => array($vendorDir . '/phpstan/extension-installer/src'),
     'Doctrine\\Instantiator\\' => array($vendorDir . '/doctrine/instantiator/src/Doctrine/Instantiator'),

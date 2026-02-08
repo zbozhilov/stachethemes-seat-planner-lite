@@ -16,6 +16,9 @@ class ComposerStaticInit0d4ea85d42bd716960b040da3cc0536e
         'S' => 
         array (
             'SzepeViktor\\PHPStan\\WordPress\\' => 30,
+            'StachethemesSeatPlannerLite\\Tests\\' => 34,
+            'StachethemesSeatPlannerLite\\Product_Traits\\' => 43,
+            'StachethemesSeatPlannerLite\\' => 28,
         ),
         'P' => 
         array (
@@ -33,6 +36,18 @@ class ComposerStaticInit0d4ea85d42bd716960b040da3cc0536e
         'SzepeViktor\\PHPStan\\WordPress\\' => 
         array (
             0 => __DIR__ . '/..' . '/szepeviktor/phpstan-wordpress/src',
+        ),
+        'StachethemesSeatPlannerLite\\Tests\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/tests',
+        ),
+        'StachethemesSeatPlannerLite\\Product_Traits\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/includes/woocommerce/product/product_traits',
+        ),
+        'StachethemesSeatPlannerLite\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/includes',
         ),
         'PhpParser\\' => 
         array (

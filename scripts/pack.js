@@ -36,15 +36,15 @@ async function pack() {
 
     console.log('\n🧪 Running PHP tests...');
     
-    // try {
-    //     execSync('composer test', { 
-    //         cwd: ROOT_DIR, 
-    //         stdio: 'inherit' 
-    //     });
-    // } catch (error) {
-    //     console.error('❌ PHP tests failed!');
-    //     process.exit(1);
-    // }
+    try {
+        execSync('composer test', { 
+            cwd: ROOT_DIR, 
+            stdio: 'inherit' 
+        });
+    } catch (error) {
+        console.error('❌ PHP tests failed!');
+        process.exit(1);
+    }
 
     console.log('\n🧪 Running JavaScript tests...');
     
