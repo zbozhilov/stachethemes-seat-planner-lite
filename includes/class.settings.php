@@ -37,11 +37,11 @@ class Settings {
             'stachesepl_accent_color'                   => get_option('stachesepl_accent_color', '#7F54B3'),
 
             'stachesepl_qr_code_enabled'                => get_option('stachesepl_qr_code_enabled', 'yes'),
-            'stachesepl_pdf_attachments'                => get_option('stachesepl_pdf_attachments', 'yes'),
-            'stachesepl_pdf_attachment_name'            => get_option('stachesepl_pdf_attachment_name', ''),
+            'stachesepl_pdf_attachments'                => 'no',
+            'stachesepl_pdf_attachment_name'            => '',
             'stachesepl_auto_confirm_paid_orders'       => get_option('stachesepl_auto_confirm_paid_orders', 'no'),
-            'stachesepl_app_enabled'                    => get_option('stachesepl_app_enabled', 'yes'),
-            'stachesepl_app_secret_key'                 => get_option('stachesepl_app_secret_key', ''),
+            'stachesepl_app_enabled'                    => 'no',
+            'stachesepl_app_secret_key'                 => '',
         ];
 
 

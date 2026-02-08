@@ -1,4 +1,5 @@
 import { useState, useRef } from 'react'
+import toast from 'react-hot-toast'
 import Toggle from '@src/admin/Dashboard/layout/Toggle'
 import Container from '../../../../layout/Container/Container'
 import Divider from '@src/admin/Dashboard/layout/Divider/Divider'
@@ -27,7 +28,6 @@ const generateSecretKey = (length: number = 32): string => {
 }
 
 const MobileApp = () => {
-    const androidApkUrl = 'https://stachethemes.com/plugins/wp-content/uploads/android/stachethemes-seat-planner.apk'
     const restBaseUrl = window.stachesepl_rest_url.rest_url;
 
     const { settings, updateSetting } = useSettings()
@@ -38,6 +38,11 @@ const MobileApp = () => {
         updateSetting('stachesepl_app_secret_key', generateSecretKey(32))
     }
 
+    const handleDownloadClick = (e: React.MouseEvent) => {
+        e.preventDefault()
+        toast.error(__('MOBILE_APP_NOT_SUPPORTED_IN_LITE'))
+    }
+
     const handleCopyRestUrl = async () => {
         try {
             await navigator.clipboard.writeText(restBaseUrl)
@@ -45,6 +50,14 @@ const MobileApp = () => {
             setTimeout(() => setCopyButtonText(__('COPY')), 1500)
         } catch {
             // Clipboard API not available or permission denied
+        }
+    }
+
+    const handleAppToggleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        if (e.target.checked) {
+            toast.error(__('MOBILE_APP_NOT_SUPPORTED_IN_LITE'))
+        } else {
+            updateSetting('stachesepl_app_enabled', 'no')
         }
     }
 
@@ -58,10 +71,9 @@ const MobileApp = () => {
                     {__('ANDROID_APP_DESC')}
                 </p>
                 <a
-                    href={androidApkUrl}
+                    href="#"
                     className="stachesepl-mobile-app-download-link"
-                    target="_self"
-                    rel="noopener"
+                    onClick={handleDownloadClick}
                 >
                     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                         <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
@@ -78,7 +90,7 @@ const MobileApp = () => {
                 label={__('ENABLE_APP_ACCESS')}
                 description={__('ENABLE_APP_ACCESS_DESC')}
                 checked={settings.stachesepl_app_enabled === 'yes'}
-                onChange={(e) => updateSetting('stachesepl_app_enabled', e.target.checked ? 'yes' : 'no')}
+                onChange={handleAppToggleChange}
             />
 
             {settings.stachesepl_app_enabled === 'yes' && <>
