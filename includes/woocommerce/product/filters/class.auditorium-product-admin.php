@@ -328,7 +328,7 @@ class Auditorium_Product_Admin {
                     id="stachesepl-export-bookings-product-id"
                     type="hidden"
                     name="stachesepl_export_bookings_product_id"
-                    value="<?php echo esc_attr((string) (get_the_ID() ?? '' )); ?>">
+                    value="<?php echo esc_attr((string) (get_the_ID() ?? '')); ?>">
                 <input
                     id="stachesepl-export-bookings-dates-data"
                     type="hidden"
@@ -418,6 +418,23 @@ class Auditorium_Product_Admin {
         $seats = array_filter($objects, function ($object) {
             return $object->type === 'seat';
         });
+
+        $min_max_price = array_reduce($seats, function ($carry, $seat) {
+            $price = $seat->price;
+            if ($price <= 0) {
+                return $carry;
+            }
+            if ($price < $carry['min']) {
+                $carry['min'] = $price;
+            }
+            if ($price > $carry['max']) {
+                $carry['max'] = $price;
+            }
+            return $carry;
+        }, ['min' => INF, 'max' => 0]);
+
+        $product->update_meta_data('_stachesepl_price_min', $min_max_price['min']);
+        $product->update_meta_data('_stachesepl_price_max', $min_max_price['max']);
 
         $saved = $product->save();
 
