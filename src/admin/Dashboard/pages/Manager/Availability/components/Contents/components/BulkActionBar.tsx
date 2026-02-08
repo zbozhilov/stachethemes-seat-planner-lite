@@ -1,11 +1,3 @@
-import { useEffect, useMemo, useState } from 'react';
-import { useParams } from 'react-router';
-import { __ } from '@src/utils';
-import type { SeatStatus } from '../../../../types';
-import './BulkActionBar.scss';
-import Checkbox from '@src/admin/Dashboard/layout/Checkbox';
-import Input from '@src/admin/Dashboard/layout/Input';
-import Select from '@src/admin/Dashboard/layout/Select';
 import {
     AddShoppingCart,
     ArrowForward,
@@ -17,16 +9,14 @@ import {
     RestartAlt,
     Storefront,
 } from '@mui/icons-material';
+import Checkbox from '@src/admin/Dashboard/layout/Checkbox';
+import Input from '@src/admin/Dashboard/layout/Input';
+import Select from '@src/admin/Dashboard/layout/Select';
+import { __ } from '@src/utils';
+import { useState } from 'react';
 import toast from 'react-hot-toast';
-import type { ManagerCustomFieldData, ManagerDiscountData } from '../../../../types';
-import CustomFieldInputs from '../../../../EditSeat/components/SeatOrderForm/CustomFieldInputs';
-import {
-    buildValuesByUid,
-    EDITABLE_FIELD_TYPES,
-    isFieldVisible,
-    isHiddenByMutualExclusivity,
-} from '@src/admin/Dashboard/common/customFieldVisibility';
-import { useBulkCreateOrder, type BulkCreateOrderSeatData } from '../../../../hooks';
+import type { ManagerCustomFieldData, ManagerDiscountData, SeatStatus } from '../../../../types';
+import './BulkActionBar.scss';
 
 type BulkSelectionBarProps = {
     selectedCount: number;
@@ -59,20 +49,12 @@ const formatDateTimeForInput = (dateTime: string | undefined): string => {
 const BulkSelectionBar = ({
     selectedCount,
     selectedSeatIds,
-    discounts,
-    customFields,
-    onStatusChange,
     onCancel,
-    loading = false,
     hasDates = false,
     currentDateTime,
     onMoveToDate,
     movingToDate = false,
-    onSuccess,
 }: BulkSelectionBarProps) => {
-    const { productId } = useParams<{ productId?: string }>();
-    const productIdNum = productId ? parseInt(productId, 10) : undefined;
-    const { bulkCreateOrder, loading: creatingOrder } = useBulkCreateOrder();
 
     const [showMovePanel, setShowMovePanel] = useState(false);
     const [targetDateTime, setTargetDateTime] = useState('');
@@ -86,36 +68,7 @@ const BulkSelectionBar = ({
     const [sendOrderEmails, setSendOrderEmails] = useState(true);
 
     // Per-seat fields
-    const [selectedDiscountNameBySeatId, setSelectedDiscountNameBySeatId] = useState<Record<string, string>>({});
-    const [customFieldValuesBySeatId, setCustomFieldValuesBySeatId] = useState<
-        Record<string, Record<string, string | number | boolean>>
-    >({});
-
-    const isBusy = loading || movingToDate || creatingOrder;
-
-    const editableCustomFields = useMemo(() => {
-        const fields = customFields || [];
-        return fields.filter((f) => (EDITABLE_FIELD_TYPES as readonly string[]).includes(f.type));
-    }, [customFields]);
-
-    // Prune per-seat UI state when selection changes
-    useEffect(() => {
-        const allowed = new Set(selectedSeatIds);
-        setSelectedDiscountNameBySeatId((prev) => {
-            const next: Record<string, string> = {};
-            for (const [seatId, value] of Object.entries(prev)) {
-                if (allowed.has(seatId)) next[seatId] = value;
-            }
-            return next;
-        });
-        setCustomFieldValuesBySeatId((prev) => {
-            const next: Record<string, Record<string, string | number | boolean>> = {};
-            for (const [seatId, value] of Object.entries(prev)) {
-                if (allowed.has(seatId)) next[seatId] = value;
-            }
-            return next;
-        });
-    }, [selectedSeatIds]);
+    const isBusy = false;
 
     const handleStatusClick = () => {
         toast.error(__('BULK_ACTIONS_NOT_SUPPORTED_IN_LITE'));
@@ -154,68 +107,6 @@ const BulkSelectionBar = ({
         setCustomerPhone('');
         setOrderStatus('completed');
         setSendOrderEmails(true);
-        setSelectedDiscountNameBySeatId({});
-        setCustomFieldValuesBySeatId({});
-    };
-
-    const selectedDiscountBySeatId = useMemo(() => {
-        const list = discounts || [];
-        const map: Record<string, ManagerDiscountData | null> = {};
-        for (const seatId of selectedSeatIds) {
-            const name = selectedDiscountNameBySeatId[seatId];
-            map[seatId] = name ? list.find((d) => d.name === name) || null : null;
-        }
-        return map;
-    }, [discounts, selectedSeatIds, selectedDiscountNameBySeatId]);
-
-    const getSeatCustomFieldValue = (seatId: string, field: ManagerCustomFieldData): string | number | boolean => {
-        const seatValues = customFieldValuesBySeatId[seatId] || {};
-        const v = seatValues[field.label];
-        if (v !== undefined && v !== '') return v;
-        if (field.type === 'checkbox') return false;
-        if (field.type === 'number') return '';
-        return '';
-    };
-
-    const setSeatCustomFieldValue = (seatId: string, label: string, value: string | number | boolean) => {
-        setCustomFieldValuesBySeatId((prev) => {
-            const seatPrev = prev[seatId] || {};
-            const nextSeat = { ...seatPrev, [label]: value };
-
-            const field = editableCustomFields.find((f) => f.label === label);
-            if (!field) return { ...prev, [seatId]: nextSeat };
-
-            const isEmpty =
-                value === '' ||
-                value === undefined ||
-                (typeof value === 'string' && !value.trim()) ||
-                (field.type === 'checkbox' && (value === false || value === ''));
-            if (isEmpty) return { ...prev, [seatId]: nextSeat };
-
-            const uidsToClear = new Set<string>();
-            const thisUid = field.uid ?? field.label;
-            if (field.mutuallyExclusiveWith) field.mutuallyExclusiveWith.forEach((uid) => uidsToClear.add(uid));
-            editableCustomFields.forEach((f) => {
-                if ((f.uid ?? f.label) !== thisUid && f.mutuallyExclusiveWith?.includes(thisUid))
-                    uidsToClear.add(f.uid ?? f.label);
-            });
-            uidsToClear.forEach((uid) => {
-                const other = editableCustomFields.find((f) => (f.uid ?? f.label) === uid);
-                if (other && other.label in nextSeat) delete nextSeat[other.label];
-            });
-
-            return { ...prev, [seatId]: nextSeat };
-        });
-    };
-
-    const getVisibleCustomFieldsForSeat = (seatId: string): ManagerCustomFieldData[] => {
-        if (!editableCustomFields.length) return [];
-        const seatValues = customFieldValuesBySeatId[seatId] || {};
-        const valuesByUid = buildValuesByUid(seatValues, editableCustomFields);
-        const byConditions = editableCustomFields.filter((_, index) =>
-            isFieldVisible(index, editableCustomFields, valuesByUid)
-        );
-        return byConditions.filter((field) => !isHiddenByMutualExclusivity(field, byConditions, seatValues));
     };
 
     const handleConfirmBulkCreateOrder = async () => {
@@ -417,14 +308,11 @@ const BulkSelectionBar = ({
                             <div className="stachesepl-bulk-bar-order-section-title">
                                 <span>{__('SEAT_CONFIGURATION')}</span>
                                 <span>{
-                                    selectedCount > 1 ? __('SEATS_PLURAL')?.replace('%d', selectedCount.toString()) : __('SEAT_SINGULAR')?.replace('%d', selectedCount.toString())                                 
+                                    selectedCount > 1 ? __('SEATS_PLURAL')?.replace('%d', selectedCount.toString()) : __('SEAT_SINGULAR')?.replace('%d', selectedCount.toString())
                                 }</span>
                             </div>
                             <div className="stachesepl-bulk-bar-seat-list">
                                 {selectedSeatIds.map((seatId) => {
-                                    const visibleFields = getVisibleCustomFieldsForSeat(seatId);
-                                    const hasDiscounts = !!discounts?.length;
-                                    const hasCustomFields = visibleFields.length > 0;
                                     const openByDefault = selectedSeatIds.length === 1;
 
                                     return (
@@ -432,51 +320,13 @@ const BulkSelectionBar = ({
                                             <summary className="stachesepl-bulk-bar-seat-summary">
                                                 <span className="stachesepl-bulk-bar-seat-id">{seatId}</span>
                                                 <span className="stachesepl-bulk-bar-seat-meta">
-                                                    {(hasDiscounts || hasCustomFields) && __('SEAT_OPTIONS')}
                                                 </span>
                                             </summary>
 
                                             <div className="stachesepl-bulk-bar-seat-body">
-                                                {hasDiscounts && (
-                                                    <Select
-                                                        label={__('DISCOUNT')}
-                                                        value={selectedDiscountNameBySeatId[seatId] || ''}
-                                                        onChange={(e) =>
-                                                            setSelectedDiscountNameBySeatId((prev) => ({
-                                                                ...prev,
-                                                                [seatId]: e.target.value,
-                                                            }))
-                                                        }
-                                                        options={[
-                                                            { value: '', label: __('NO_DISCOUNT') },
-                                                            ...(discounts || []).map((d) => ({
-                                                                value: d.name,
-                                                                label:
-                                                                    d.type === 'percentage'
-                                                                        ? `${d.name} (${d.value}%)`
-                                                                        : `${d.name} (${d.value})`,
-                                                            })),
-                                                        ]}
-                                                        disabled={isBusy}
-                                                    />
-                                                )}
-
-                                                {editableCustomFields.length > 0 && (
-                                                    <CustomFieldInputs
-                                                        fields={visibleFields}
-                                                        getValue={(field) => getSeatCustomFieldValue(seatId, field)}
-                                                        onChange={(label, value) => setSeatCustomFieldValue(seatId, label, value)}
-                                                        disabled={isBusy}
-                                                    />
-                                                )}
-
-                                                {
-                                                    !hasDiscounts && !hasCustomFields && (
-                                                        <div className="stachesepl-bulk-bar-seat-empty">
-                                                            {__('NO_SEAT_OPTIONS')}
-                                                        </div>
-                                                    )
-                                                }
+                                                <div className="stachesepl-bulk-bar-seat-empty">
+                                                    {__('NO_SEAT_OPTIONS')}
+                                                </div>
                                             </div>
                                         </details>
                                     );

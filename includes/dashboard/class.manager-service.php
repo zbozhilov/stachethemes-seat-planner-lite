@@ -92,43 +92,7 @@ class Manager_Service {
         string $selected_date,
         array $seat_discount
     ): void {
-        $name = isset($seat_discount['name']) ? trim((string) $seat_discount['name']) : '';
-        if ($name === '') {
-            throw new \Exception(esc_html__('Invalid discount: name is required.', 'stachethemes-seat-planner-lite'));
-        }
-
-        $discount = $product->get_discount_by_name($name);
-        if (!$discount) {
-            throw new \Exception(
-                sprintf(
-                    /* translators: %s: discount name */
-                    esc_html__('Discount %s is not available for this product.', 'stachethemes-seat-planner-lite'),
-                    esc_html($name)
-                )
-            );
-        }
-
-        $discount_group = isset($discount['group']) ? trim((string) $discount['group']) : '';
-        if ($discount_group === '') {
-            return;
-        }
-
-        $seat_obj = $product->get_seat_data($seat_id, '', 'apply_seat_object_overrides', $selected_date);
-        if (!$seat_obj) {
-            throw new \Exception(esc_html__('Seat not found.', 'stachethemes-seat-planner-lite'));
-        }
-
-        $seat_group = isset($seat_obj->group) ? trim((string) $seat_obj->group) : '';
-        if ($discount_group !== $seat_group) {
-            throw new \Exception(
-                sprintf(
-                    /* translators: %1$s: discount name, %2$s: seat group (or "none") */
-                    esc_html__('Discount "%1$s" is not available for this seat (group: %2$s).', 'stachethemes-seat-planner-lite'),
-                    esc_html($name),
-                    $seat_group === '' ? esc_html__('none', 'stachethemes-seat-planner-lite') : esc_html($seat_group)
-                )
-            );
-        }
+        return;
     }
 
     /**
@@ -498,7 +462,6 @@ class Manager_Service {
             foreach ($updates as $update) {
                 $item_id       = isset($update['item_id']) ? (int) $update['item_id'] : 0;
                 $seat_data     = isset($update['seat_data']) ? $update['seat_data'] : null;
-                $seat_discount = isset($update['seat_discount']) ? $update['seat_discount'] : null;
 
                 if (!$item_id || !$seat_data) {
                     continue;
@@ -548,41 +511,6 @@ class Manager_Service {
                     }
                 }
 
-                if (isset($seat_data['selectedDate'])) {
-                    $sanitized_seat_data['selectedDate'] = sanitize_text_field($seat_data['selectedDate']);
-
-                    // Validate date if product has dates
-                    if ($product->has_dates()) {
-                        // Don't allow empty date for products with dates
-                        if (empty($sanitized_seat_data['selectedDate'])) {
-                            throw new \Exception(__('Date cannot be empty for this product.', 'stachethemes-seat-planner-lite'));
-                        }
-
-                        // Validate that the date exists in product's dates
-                        if (!$product->date_exists($sanitized_seat_data['selectedDate'])) {
-                            throw new \Exception(
-                                sprintf(
-                                    // translators: %s - date
-                                    __('Date %s does not exist for this product.', 'stachethemes-seat-planner-lite'),
-                                    esc_html($sanitized_seat_data['selectedDate'])
-                                )
-                            );
-                        }
-                    }
-                }
-
-                if (isset($seat_data['customFields']) && is_array($seat_data['customFields'])) {
-                    $sanitized_custom_fields = [];
-                    foreach ($seat_data['customFields'] as $key => $value) {
-                        $sanitized_key   = sanitize_text_field($key);
-                        $sanitized_value = sanitize_text_field($value);
-                        if (trim((string) $sanitized_value) !== '') {
-                            $sanitized_custom_fields[$sanitized_key] = $sanitized_value;
-                        }
-                    }
-                    $sanitized_seat_data['customFields'] = $sanitized_custom_fields;
-                }
-
                 $new_seat_id       = isset($sanitized_seat_data['seatId']) ? $sanitized_seat_data['seatId'] : $old_seat_id;
                 $new_selected_date = isset($sanitized_seat_data['selectedDate']) ? $sanitized_seat_data['selectedDate'] : $old_selected_date;
 
@@ -597,23 +525,6 @@ class Manager_Service {
 
                 // Sanitize seat_discount if provided
                 $sanitized_seat_discount = null;
-                if ($seat_discount !== null) {
-                    if (is_array($seat_discount) && !empty($seat_discount)) {
-                        $discount_value = (float) ($seat_discount['value'] ?? 0);
-                        if ($discount_value > 0) {
-                            $sanitized_seat_discount = [
-                                'name'  => sanitize_text_field($seat_discount['name'] ?? ''),
-                                'type'  => in_array($seat_discount['type'] ?? '', ['percentage', 'fixed'], true) ? $seat_discount['type'] : 'percentage',
-                                'value' => $discount_value,
-                            ];
-                        } else {
-                            $sanitized_seat_discount = '';
-                        }
-                    } else {
-                        // Empty array or non-array value - clear discount
-                        $sanitized_seat_discount = '';
-                    }
-                }
 
                 // Store processed data for second pass
                 $processed_updates[] = [
@@ -631,47 +542,6 @@ class Manager_Service {
                 ];
             }
 
-            // Validation pass: check discount and custom fields before any modifications
-            foreach ($processed_updates as $processed) {
-                $item                    = $processed['item'];
-                $product                 = $processed['product'];
-                $sanitized_seat_data     = $processed['sanitized_seat_data'];
-                $sanitized_seat_discount = $processed['sanitized_seat_discount'];
-                $new_seat_id             = $processed['new_seat_id'];
-                $new_selected_date       = $processed['new_selected_date'];
-
-                $effective_discount = null;
-
-                if ($sanitized_seat_discount === '') {
-                    $effective_discount = null;
-                } elseif ($sanitized_seat_discount !== null) {
-                    $effective_discount = $sanitized_seat_discount;
-                } else {
-                    $existing_discount = $item->get_meta('seat_discount');
-                    if (is_array($existing_discount) && (float) ($existing_discount['value'] ?? 0) > 0) {
-                        $effective_discount = $existing_discount;
-                    }
-                }
-
-                if ($effective_discount !== null) {
-                    $disc_val = (float) ($effective_discount['value'] ?? 0);
-                    if ($disc_val > 0) {
-                        self::validate_discount_for_seat($product, $new_seat_id, $new_selected_date, $effective_discount);
-                    }
-                }
-
-                // Validate custom fields (required fields, visibility, mutual exclusivity)
-                $editable_custom_fields = $product->get_custom_fields_data(['editable_only' => true]);
-                if (!empty($editable_custom_fields)) {
-                    $custom_fields = $sanitized_seat_data['customFields'] ?? [];
-                    $cf_object     = (object) array_map('strval', is_array($custom_fields) ? $custom_fields : []);
-                    $validation_result = $product->validate_custom_fields($cf_object);
-                    if ($validation_result !== null && is_array($validation_result) && isset($validation_result['error'])) {
-                        throw new \Exception($validation_result['error']);
-                    }
-                }
-            }
-
             // Second pass: apply seat changes and process updates
             foreach ($processed_updates as $processed) {
                 $item                    = $processed['item'];
@@ -685,20 +555,6 @@ class Manager_Service {
                 $new_selected_date       = $processed['new_selected_date'];
                 $seat_id_changed         = $processed['seat_id_changed'];
                 $date_changed            = $processed['date_changed'];
-
-                // Determine effective discount for price calculation
-                $effective_discount = null;
-                if ($sanitized_seat_discount !== null && is_array($sanitized_seat_discount)) {
-                    // New discount was provided
-                    $effective_discount = $sanitized_seat_discount;
-                } elseif ($sanitized_seat_discount === null) {
-                    // No discount change requested - use existing discount
-                    $existing_discount = $item->get_meta('seat_discount');
-                    if (is_array($existing_discount) && (float) ($existing_discount['value'] ?? 0) > 0) {
-                        $effective_discount = $existing_discount;
-                    }
-                }
-                // else: $sanitized_seat_discount is empty string - discount was explicitly removed, keep $effective_discount as null
 
                 // Handle seat ID or date change - release old seat and take new seat
                 if ($should_update_taken_seats && ($seat_id_changed || $date_changed)) {
@@ -725,33 +581,8 @@ class Manager_Service {
                     $product->save_meta_data();
                 }
 
-                // Filter out conditionally hidden custom fields before saving.
-                // This ensures that field values from conditionally-shown fields are not
-                // persisted when those fields are no longer visible.
-                if (isset($sanitized_seat_data['customFields']) && is_array($sanitized_seat_data['customFields'])) {
-                    $cf_object = (object) $sanitized_seat_data['customFields'];
-                    $sanitized_cf = $product->sanitize_custom_fields($cf_object);
-                    $sanitized_seat_data['customFields'] = (array) $sanitized_cf;
-                }
-
-                // Attach read-only Meta type custom fields (same as create order / add-to-cart).
-                if (!isset($sanitized_seat_data['customFields']) || !is_array($sanitized_seat_data['customFields'])) {
-                    $sanitized_seat_data['customFields'] = [];
-                }
-                $meta_fields = $product->get_custom_fields_data(['meta_only' => true]);
-                foreach ($meta_fields as $meta_field) {
-                    /** @var \stdClass $meta_field */
-                    $label = isset($meta_field->label) ? trim((string) $meta_field->label) : '';
-                    if ($label !== '' && isset($meta_field->value)) {
-                        $sanitized_seat_data['customFields'][$label] = $meta_field->value;
-                    }
-                }
 
                 $item->update_meta_data('seat_data', $sanitized_seat_data);
-
-                if ($sanitized_seat_discount !== null) {
-                    $item->update_meta_data('seat_discount', $sanitized_seat_discount);
-                }
 
                 $item->save_meta_data();
 
@@ -766,20 +597,7 @@ class Manager_Service {
                     ? (float) $seat_obj->price
                     : (float) $product->get_price();
 
-                $discount_to_apply = $effective_discount;
-
-                if ($discount_to_apply) {
-                    $seat_price = Auditorium_Product_Price_Adjustment::apply_discount($seat_price, $discount_to_apply);
-                }
-
                 $seat_price = max(0.0, $seat_price);
-
-                $custom_fields = $sanitized_seat_data['customFields'] ?? [];
-                if (!empty($custom_fields)) {
-                    $cf_object = (object) array_map('strval', $custom_fields);
-                    $surcharge = Auditorium_Product_Price_Adjustment::calculate_custom_fields_surcharge($product, $cf_object);
-                    $seat_price = max(0.0, $seat_price + $surcharge);
-                }
 
                 $item->set_subtotal((string) $seat_price);
                 $item->set_total((string) $seat_price);
