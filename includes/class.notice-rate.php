@@ -77,7 +77,7 @@ class Notice_Rate {
             return;
         }
 
-        if (get_transient('stachesepl_notice_rate_timer')) {
+        if (get_transient('stacheseplite_notice_rate_timer')) {
             return;
         }
 
