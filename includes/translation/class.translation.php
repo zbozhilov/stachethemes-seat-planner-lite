@@ -549,6 +549,30 @@ class Translation {
             'THE_PAGE_YOU_ARE_LOOKING_FOR_DOES_NOT_EXIST'   => esc_html__('The page you are looking for does not exist.', 'stachethemes-seat-planner-lite'),
             'GO_HOME'                                       => esc_html__('Go Home', 'stachethemes-seat-planner-lite'),
 
+
+            // Pro features
+            'PRO_FEATURES'                    => esc_html__('Pro Features', 'stachethemes-seat-planner-lite'),
+            'PRO_FEATURES_DESC'               => esc_html__('Upgrade to the Pro version to access these features.', 'stachethemes-seat-planner-lite'),
+            'PROF_NO_OBJECTS_CAP'             => esc_html__('No Seats Limit', 'stachethemes-seat-planner-lite'),
+            'PROF_NO_OBJECTS_CAP_DESC'        => esc_html__('You can create unlimited seats in the Pro version', 'stachethemes-seat-planner-lite'),
+            'PROF_DATES'                      => esc_html__('Dates', 'stachethemes-seat-planner-lite'),
+            'PROF_DATES_DESC'                 => esc_html__('You can select dates and times for each product in the Pro version', 'stachethemes-seat-planner-lite'),
+            'PROF_DISCOUNTS'                  => esc_html__('Discounts', 'stachethemes-seat-planner-lite'),
+            'PROF_DISCOUNTS_DESC'             => esc_html__('You can offer discounts to your customers in the Pro version', 'stachethemes-seat-planner-lite'),
+            'PROF_CUSTOM_FIELDS'              => esc_html__('Custom Fields', 'stachethemes-seat-planner-lite'),
+            'PROF_CUSTOM_FIELDS_DESC'         => esc_html__('You can add custom fields to your products in the Pro version', 'stachethemes-seat-planner-lite'),
+            'PROF_ATTACHMENTS'                => esc_html__('Attachments', 'stachethemes-seat-planner-lite'),
+            'PROF_ATTACHMENTS_DESC'           => esc_html__('You can attach PDF tickets to the order confirmation email in the Pro version', 'stachethemes-seat-planner-lite'),
+            'PROF_CSV_IMPORT_EXPORT'          => esc_html__('CSV Import/Export', 'stachethemes-seat-planner-lite'),
+            'PROF_CSV_IMPORT_EXPORT_DESC'     => esc_html__('You can import and export your data in CSV format in the Pro version', 'stachethemes-seat-planner-lite'),
+            'PROF_APP'                        => esc_html__('Mobile App', 'stachethemes-seat-planner-lite'),
+            'PROF_APP_DESC'                   => esc_html__('Scan QR codes to verify and check-in guests at your venue from your phone.', 'stachethemes-seat-planner-lite'),
+            'GET_PRO_VERSION'                 => esc_html__('Get Pro Version', 'stachethemes-seat-planner-lite'),
+            'PRO_CTA_TEXT'                    => esc_html__('Upgrade to the Pro version to access these features.', 'stachethemes-seat-planner-lite'),
+            'PROF_SUPPORT'                    => esc_html__('Support', 'stachethemes-seat-planner-lite'),
+            'PROF_SUPPORT_DESC'               => esc_html__('Free customer support & updates.', 'stachethemes-seat-planner-lite'),
+
+
             // Overview page
             'OVERVIEW_TITLE'                                => esc_html__('Overview', 'stachethemes-seat-planner-lite'),
             'OVERVIEW_DESCRIPTION'                          => esc_html__('Welcome to your Seat Planner dashboard. Get a quick overview of your venue bookings.', 'stachethemes-seat-planner-lite'),
